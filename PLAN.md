@@ -820,7 +820,32 @@ The cleaning domain dominates (12/19) — the `sh_test.json` dataset has many `s
 
 **Artifacts:** diagnosis is a derived analysis on `results/iter83_v3_n300_reverted_grammar.json`; no new artifact file.
 
-Commit: `<pending>` iter9.1.
+Commit: `8598e60` iter9.1.
+
+---
+
+## Iteration 9.2 — Implement Option A (wide name allowlist)
+
+**Goal:** widen the name-token mask in `JsonSchemaLogitsProcessor` so gold names truncated out of the prompt are still admissible.
+
+**Implementation:** `buildSchemaConstraint(candidateNames, registry, options)` now accepts `options.wideNames` (default `false` for back-compat). When true, the constraint's `names` set is `prompt_candidates ∪ Object.keys(registry)` (100 names from `tool_registry.json`). The per-key schema (`paramKeys`, `paramTypes`) is built only for names that have a known schema (either via the prompt or the registry); registry-only names get free-form args validation. Wired through `bench.js` (`runBench`, `runBenchOnItems`, `runFullBench`, `runOne`) and `voice_bench.js` (`runVoiceBench`, `runOne`). UI toggle "Wide names (registry ∪ prompt)" added to `index.html` for manual testing (default OFF).
+
+**Targeted verification on the 19 known regression items (i = 1, 28, 64, 74, 82, 102, 109, 112, 126, 127, 140, 151, 156, 176, 180, 193, 212, 248, 290):**
+
+| metric    | con ctrl (wideNames=OFF) | con (wideNames=ON) | Δ      |
+|-----------|-------------------------:|-------------------:|-------:|
+| name_ok   |              0/19 (0.0%) |     19/19 (100.0%) | +19    |
+| args_ok   |             2/19 (10.5%) |      13/19 (68.4%) | +11    |
+| exact_ok  |              0/19 (0.0%) |      13/19 (68.4%) | +13    |
+| flipped → correct |                      — |               19   | —      |
+
+All 19 regressions recover their name. 13 are now exact-correct (the 6 remaining wrong-args are unrelated to the name mask). **Projected lift on n=300** (assuming zero new losses elsewhere): exact 50.67% → ~55.0% (+4.3 pp), name 77.67% → 84.0% (+6.3 pp — would beat baseline's 82.33%).
+
+**Status:** code shipped + targeted verification done. Full n=300 re-bench is running (browser tab throttled while hidden; expected ~30-50 min walltime). Cost: $0.
+
+**Artifacts:** code diff in commit `40aa070`.
+
+Commit: `40aa070` iter9.2.
 
 ---
 
@@ -850,4 +875,5 @@ Commit: `<pending>` iter9.1.
 | 2026-05-18 | **Iter 8.2 done (negative).** Re-bench n=300 v3 con-typed-args with registry-enum consumption: name 77.67/args 51.67/exact **48.00%** (vs 7.4: 77.67/54.33/**50.67%**, Δ exact **-2.67 pp**). 24 baseline-correct items flipped because mined pools under-cover the test set on `podcast` (Radiolab not in), `station` (Jazz FM not in), `scene` (sunrise not in), `start_time/end_time` (18:00/22:00 not in). Voice unchanged (50.0/30.0/23.33/83.3). Cost: $0. |
 | 2026-05-18 | **Iter 8.3 done.** Reverted grammar.js registry-enum consumption (data file `enums` kept as ammo). Re-bench n=300 reproduces Iter 7.4 exactly: con 77.67/54.33/**50.67%**. Best production config unchanged. Cheapest next lever: add the 16 misc-domain test-only gold names to `function_descriptions.json` (retrieval index) — would lift `ret_con` on misc 33→60+% and overall ~+9 pp. Cost: $0. |
 | 2026-05-18 | **Iter 9.1 done.** Diagnosed con name regression on `iter83_v3_n300` per-item results. 19 rows with `baseline_name == gold AND con_name != gold`; **100% (19/19) fall into class 2 (gold name missing from prompt-extracted candidate list due to ~4 kB schema truncation)**; 0 in class 1 (mask too aggressive) or class 3 (typed mask interferes). All 19 gold names exist in `tool_registry.json` & `function_descriptions.json`. Cleaning domain dominates (12/19). Fix: Option A — widen name allowlist to `prompt_cands ∪ registry_names`. Cost: $0. |
+| 2026-05-18 | **Iter 9.2 code + targeted verification.** `buildSchemaConstraint({wideNames:true})` admits all 100 registry names alongside prompt cands. Wired through bench.js / voice_bench.js / main.js (UI toggle, default OFF). Targeted re-bench on the 19 regression items: con name_ok 0/19 → **19/19**, args_ok 2/19 → 13/19, exact_ok 0/19 → **13/19**. All 19 flipped to name-correct, 13 flipped to fully-exact. Projected n=300: exact 50.67% → ~55%, name 77.67% → ~84% (beating baseline). Full n=300 re-bench in flight. Cost: $0. |
 
