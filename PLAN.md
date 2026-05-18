@@ -793,6 +793,37 @@ Commit: `<see git log>` iter8.3.
 
 ---
 
+## Iteration 9.1 — Diagnose con name regression
+
+**Goal:** identify the cause of con's -4.66 pp name-acc regression vs baseline (Iter 7.4). Hypothesis classes per plan: (1) name mask too aggressive, (2) prompt truncation drops gold names from candidate list, (3) typed-value masking interferes with name-state.
+
+**Method:** loaded `results/iter83_v3_n300_reverted_grammar.json` (per-item results from Iter 8.3 — the bit-exact reproduction of Iter 7.4's `con` config). Filtered rows where `baseline_name == gold_name AND con_name != gold_name`. For each, re-ran `extractCandidateNames(prompt)` from `grammar.js` and tested whether `gold_name` ∈ candidate list.
+
+**Result:** 19 diff items (19/300 ≈ 6.3 pp gap — matches the -4.66 pp once you account for con's small set of compensating wins).
+
+| class | meaning                                          | count | share |
+|:-----:|--------------------------------------------------|------:|------:|
+|   1   | gold IS in cands list, mask still blocks it      |    0  |   0%  |
+| **2** | gold NOT in cands due to prompt truncation       | **19**| **100%** |
+|   3   | typed-value mask interferes w/ name state        |    0  |   0%  |
+| other | something else                                   |    0  |   0%  |
+
+**All 19 prompts had `cands.length` 3-4** (extracted candidate count). All 19 gold names are present in both `tool_registry.json` (100 names) and `function_descriptions.json` (107 names) — they exist in the global registry but the SYSTEM tool list was cut at ~4 kB during dataset prep, so the prompt parser doesn't see them.
+
+**Diff items (i / gold_name → con_name):** 1 query_vacuum_battery→start_vacuum, 28 query_air_quality→start_vacuum, 64 turn_on_air_purifier→start_vacuum, 74 query_light_state→set_light_scene, 82 stop_music→set_volume, 102/156/176/193 start_mop→start_vacuum, 109/212 turn_on_air_purifier→start_vacuum, 112 set_fan_speed→set_ac_mode, 126 stop_mop→stop_vacuum, 127/180 query_air_quality→start_vacuum, 140 set_blinds_position→raise_blinds, 151/248 turn_off_air_purifier→stop_vacuum, 290 set_mop_water_level→schedule_vacuum.
+
+The cleaning domain dominates (12/19) — the `sh_test.json` dataset has many `start_vacuum / stop_vacuum / schedule_vacuum` schema-heavy prompts that push siblings (mop, air-purifier) out of the truncated tool list.
+
+**Decision:** dominant class is #2. **Option A (wider name allowlist)** from PLAN.md is exactly the right fix: build name allowlist as `prompt_candidates ∪ registry_names` so the mask blocks hallucinations (`release_door` etc) but allows truncated-out gold names that the model knows from training.
+
+**Status:** done. Cost: $0.
+
+**Artifacts:** diagnosis is a derived analysis on `results/iter83_v3_n300_reverted_grammar.json`; no new artifact file.
+
+Commit: `<pending>` iter9.1.
+
+---
+
 ## Progress log
 
 | Date (UTC) | Event |
@@ -818,4 +849,5 @@ Commit: `<see git log>` iter8.3.
 | 2026-05-18 | **Iter 8.1 done.** Mined value sets per param-name globally (cap 30, freq>=2). 102 enums across 74 funcs added to `tool_registry.json` under new `enums` field. Pool sizes: time 24, room 21, color 18, scene 12, door 11, area 9, day 9, podcast 8, mode 8, ... (`song` 36 dropped open-vocab). Grammar.js wired to consume registry enums when prompt didn't carry. Cost: $0. |
 | 2026-05-18 | **Iter 8.2 done (negative).** Re-bench n=300 v3 con-typed-args with registry-enum consumption: name 77.67/args 51.67/exact **48.00%** (vs 7.4: 77.67/54.33/**50.67%**, Δ exact **-2.67 pp**). 24 baseline-correct items flipped because mined pools under-cover the test set on `podcast` (Radiolab not in), `station` (Jazz FM not in), `scene` (sunrise not in), `start_time/end_time` (18:00/22:00 not in). Voice unchanged (50.0/30.0/23.33/83.3). Cost: $0. |
 | 2026-05-18 | **Iter 8.3 done.** Reverted grammar.js registry-enum consumption (data file `enums` kept as ammo). Re-bench n=300 reproduces Iter 7.4 exactly: con 77.67/54.33/**50.67%**. Best production config unchanged. Cheapest next lever: add the 16 misc-domain test-only gold names to `function_descriptions.json` (retrieval index) — would lift `ret_con` on misc 33→60+% and overall ~+9 pp. Cost: $0. |
+| 2026-05-18 | **Iter 9.1 done.** Diagnosed con name regression on `iter83_v3_n300` per-item results. 19 rows with `baseline_name == gold AND con_name != gold`; **100% (19/19) fall into class 2 (gold name missing from prompt-extracted candidate list due to ~4 kB schema truncation)**; 0 in class 1 (mask too aggressive) or class 3 (typed mask interferes). All 19 gold names exist in `tool_registry.json` & `function_descriptions.json`. Cleaning domain dominates (12/19). Fix: Option A — widen name allowlist to `prompt_cands ∪ registry_names`. Cost: $0. |
 
