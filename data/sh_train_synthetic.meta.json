@@ -1,0 +1,22 @@
+{
+  "model": "meta-llama/Llama-3.3-70B-Instruct",
+  "attempts": 3004,
+  "kept": 3000,
+  "accept_rate": 0.9986684420772304,
+  "bucket_counts": {
+    "multi_key": 1000,
+    "numeric": 800,
+    "twin": 600,
+    "generic": 600
+  },
+  "drop_reasons": {
+    "unknown_key:function": 3,
+    "unparseable": 1
+  },
+  "target_split": {
+    "multi_key": 1000,
+    "numeric": 800,
+    "twin": 600,
+    "generic": 600
+  }
+}
