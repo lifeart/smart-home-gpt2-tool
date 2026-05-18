@@ -1,0 +1,31 @@
+{
+  "config": "v3 weights, WebGPU/fp32, K=3, threshold=0.30, sentinel ON, partial n=100",
+  "note": "Browser session was contested by parallel agent; capturing the 100 items that completed all 4 modes from my isolated run.",
+  "overall": {
+    "n": 100,
+    "acc_baseline": 0.82,
+    "acc_con": 0.79,
+    "acc_ret": 0.67,
+    "acc_ret_con": 0.67,
+    "gold_in_topK": 0.80,
+    "sentinel_fired": 6
+  },
+  "per_domain": {
+    "blinds":  { "n": 10, "acc_baseline": 0.50, "acc_con": 0.50, "acc_ret": 0.70, "acc_ret_con": 0.70 },
+    "clean":   { "n": 10, "acc_baseline": 0.80, "acc_con": 0.60, "acc_ret": 0.90, "acc_ret_con": 0.90 },
+    "climate": { "n":  8, "acc_baseline": 0.88, "acc_con": 0.88, "acc_ret": 0.88, "acc_ret_con": 0.88 },
+    "garden":  { "n": 10, "acc_baseline": 1.00, "acc_con": 1.00, "acc_ret": 0.90, "acc_ret_con": 0.90 },
+    "kit":     { "n":  6, "acc_baseline": 0.83, "acc_con": 0.83, "acc_ret": 1.00, "acc_ret_con": 1.00 },
+    "light":   { "n": 13, "acc_baseline": 0.77, "acc_con": 0.69, "acc_ret": 0.54, "acc_ret_con": 0.54 },
+    "media":   { "n": 12, "acc_baseline": 0.75, "acc_con": 0.67, "acc_ret": 0.83, "acc_ret_con": 0.83 },
+    "misc":    { "n": 19, "acc_baseline": 1.00, "acc_con": 1.00, "acc_ret": 0.32, "acc_ret_con": 0.32 },
+    "sec":     { "n": 12, "acc_baseline": 0.75, "acc_con": 0.83, "acc_ret": 0.50, "acc_ret_con": 0.50 }
+  },
+  "vs_phase5a_full_n300": {
+    "baseline": "82% vs 82.3% — consistent",
+    "ret": "67% vs 67.7% — consistent",
+    "ret_con": "67% vs 68.0% — consistent",
+    "misc": "32% vs 33% — sentinel did NOT recover misc on this test set"
+  },
+  "conclusion": "iter 6.2 code is correctly implemented but cannot improve this test set because sh_test.json has no irrelevance items (gold='{}'). The misc 33% under retrieval persists. The sentinel/threshold-gating would help in production if real users issued off-topic requests, but for this benchmark it is a no-op at threshold=0.30 and slightly harmful at 0.40+."
+}

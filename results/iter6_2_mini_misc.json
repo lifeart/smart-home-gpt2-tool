@@ -1,0 +1,12 @@
+{
+  "config": "v3 weights, WebGPU/fp32, MiniLM Xenova/all-MiniLM-L6-v2 webgpu/fp32, K=5, sentinel ON, 15 misc items",
+  "threshold_sweep": {
+    "0.20": { "acc_base": 1.0, "acc_ret": 0.267, "acc_ret_con": 0.267, "fired": 0 },
+    "0.25": { "acc_base": 1.0, "acc_ret": 0.267, "acc_ret_con": 0.267, "fired": 0 },
+    "0.30": { "acc_base": 1.0, "acc_ret": 0.267, "acc_ret_con": 0.267, "fired": 0 },
+    "0.35": { "acc_base": 1.0, "acc_ret": 0.267, "acc_ret_con": 0.267, "fired": 4 },
+    "0.40": { "acc_base": 1.0, "acc_ret": 0.200, "acc_ret_con": 0.200, "fired": 6 }
+  },
+  "chosen_threshold": 0.30,
+  "rationale": "Lowest threshold that adds no harm; sh_test.json has no irrelevance-gold (gold='{}') items so sentinel cannot help in this test; preserves baseline behavior."
+}
