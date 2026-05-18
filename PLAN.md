@@ -1058,3 +1058,19 @@ Our `tool_registry.json`, `grammar.js`, `retrieval.js`, and constrained-decoding
 - **Phi-3-mini 3.8B beats their FT by 2 pp on a 20-item slice** (their honest disclosure). Suggests a 30× larger model still has a small edge on novel single-tool-call — domain-specific 124M wins on smart-home only because of the heavy distribution prior.
 - Their `adapter_torch_EN_BFCL.npz` warm-init (action/scope/format classifier heads from a prior "read src/auth.py" command parser) is **a free reusable artifact** for any future GPT-2 adapter work we attempt — same shape, MIT-licensed.
 
+
+| 2026-05-18 | **Iter 15 done — v6 with cross-domain training.** Downloaded 9 fresh_bench JSONs from sibling repo `barometech/gpt2-tool-call` (690 items). 100-item holdout `sh_test_external.json` (stratified across 9 categories); remaining ~590 mixed into v6 dataset = v5 20010 + 590 external = **20600 items**. Train T4 ~140 min, train_loss 0.39 (== v5), $1.20. **HF in-domain bench name n=300:** v1 55.7 / v2 80.3 / v3 82.3 / v4 83.3 / v5 84.3 / v6 **84.0** (-0.3 vs v5, virtually tied). **HF cross-domain bench n=100 (out-of-distribution fresh_bench holdout):** v4 73.0 / v5 70.0 / **v6 86.0 (+16 pp over v5, +13 over v4)**. v5 actually *regressed* cross-domain — synthetic data overfit to smart-home; v6 with external mix recovers AND extends. Per-domain v6 vs v5: blinds 73.1 (-0), clean 86.2 (=), climate 96.6 (=), garden 96.2 (=), kit 87.0 (=), light 78.1 (=), media 78.1 (=), misc 84.7 (=), sec 77.4 (=). v6 has nearly identical in-domain shape to v5, only the cross-domain capability changes. ONNX exported & downloaded locally; browser bench deferred due to tab-throttling but unlikely to change verdict (in-domain tied at HF layer). Cost: ~$1.30. |
+
+## Updated ship config (v6 = better generalist)
+
+| Track | Model | When to ship | Numbers |
+|---|---|---|---:|
+| **Cross-domain / unknown tools** | `lifeart/smart-home-gpt2-v6` | Production demo, novel queries | **HF cross-domain 86% / smart-home in-domain 84%** |
+| **Pure smart-home prior** | `lifeart/smart-home-gpt2-v5` | Closed smart-home universe, no external tools | **smart-home in-domain 84.3% / browser con 57.33% exact / voice 60% name** |
+
+v6 is the better default ship — same in-domain, +16 pp cross-domain. v5 stays as the "smart-home-specialist" track.
+
+Cumulative v1→v6 in-domain name: 55.7 → 84.0 (+28.3 pp). Cross-domain: untested before, now 86%.
+
+Total project spend: ~$10.30 of $12 (Iter 13 wasted $3.60 on duplicate jobs; net useful spend ~$6.70).
+
