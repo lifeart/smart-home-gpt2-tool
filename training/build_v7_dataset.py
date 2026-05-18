@@ -553,9 +553,19 @@ def adapt_glaive(cap: int) -> list[dict]:
 # -------------------- Merge -------------------- #
 
 
+# Patterns for secrets that GitHub push-protection blocks. Drop any row containing one
+# (ToolACE has at least one synthetic GitHub PAT in its prompts, etc.).
+SECRET_RE = re.compile(
+    r"gh[pousr]_[A-Za-z0-9_]{30,}|sk-[A-Za-z0-9]{40,}|AKIA[A-Z0-9]{12,}"
+)
+
+
 def dedupe_rows(rows: list[dict], seen: set[tuple[str, str]]) -> list[dict]:
     kept: list[dict] = []
     for r in rows:
+        text = r.get("prompt", "") + " " + r.get("gold", "")
+        if SECRET_RE.search(text):
+            continue
         q = extract_user_query(r["prompt"]).lower()[:200]
         key = (r.get("gold_name", ""), q)
         if key in seen:
