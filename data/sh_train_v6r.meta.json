@@ -1,0 +1,352 @@
+{
+  "input": "data/sh_train_v6.json",
+  "input_count": 20600,
+  "processed": 20600,
+  "kept_after_refine": 19084,
+  "buckets": {
+    "KEEP": 14595,
+    "FIX": 2406,
+    "DROP": 3599,
+    "SKIP": 0
+  },
+  "percentages": {
+    "KEEP": 70.85,
+    "FIX": 11.68,
+    "DROP": 17.47,
+    "SKIP": 0.0
+  },
+  "elapsed_sec": 2297,
+  "model": "meta-llama/Llama-3.3-70B-Instruct",
+  "concurrency": 15,
+  "seed": 42,
+  "applied_actions": {
+    "keep": 14595,
+    "drop_applied": 1516,
+    "drop_softened_to_keep": 2083,
+    "fix_disabled": 1849,
+    "fix_keys_diverge": 550,
+    "fix_no_json": 7
+  },
+  "fix_samples": [
+    {
+      "user_query": "Set the angle in the bedroom to degrees.",
+      "cand_names": [
+        "retract_awning",
+        "open_curtains",
+        "set_blinds_angle"
+      ],
+      "gold_name": "set_blinds_angle",
+      "old_args": {
+        "room": "bedroom",
+        "angle": 70
+      },
+      "new_args": {
+        "room": "bedroom",
+        "angle": "degrees"
+      },
+      "reason": "The query mentions \"degrees\" as the angle, but the annotator's argument value is a specific number \"70\".",
+      "applied": "fix_disabled"
+    },
+    {
+      "user_query": "1 hour timer for half an hour",
+      "cand_names": [
+        "query_oven_state",
+        "start_dishwasher",
+        "set_oven_timer"
+      ],
+      "gold_name": "set_oven_timer",
+      "old_args": {
+        "minutes": 30
+      },
+      "new_args": {
+        "minutes": 60
+      },
+      "reason": "User asked for \"1 hour timer\" but annotator's minutes argument is 30.",
+      "applied": "fix_disabled"
+    },
+    {
+      "user_query": "Set the bathroom to seventy-six degrees Fahrenheit.",
+      "cand_names": [
+        "set_thermostat",
+        "query_temperature",
+        "set_fan_speed"
+      ],
+      "gold_name": "set_thermostat",
+      "old_args": {
+        "room": "bathroom",
+        "temperature_c": 24.4
+      },
+      "new_args": {
+        "room": "bathroom",
+        "temperature_c": 24.4
+      },
+      "reason": "Temperature in Fahrenheit is given as 76, which is equivalent to 24.4 Celsius, the annotator's argument is correct but the reason for checking is the unit conversion.",
+      "applied": "fix_disabled"
+    },
+    {
+      "user_query": "I need auto-complete suggestions for the query 'Apple Inc.' and the latest news articles for the stock symbol 'AAPL'.",
+      "cand_names": [
+        "spac_price_targets",
+        "coins_get_fullsize_chart",
+        "market_auto_complete",
+        "news_v2_list_by_symbol",
+        "short_ticker"
+      ],
+      "gold_name": "market_auto_complete",
+      "old_args": {
+        "query": "Apple Inc."
+      },
+      "new_args": {
+        "query": "AAPL"
+      },
+      "reason": "The annotator's argument value for 'query' does not match the stock symbol mentioned in the user's query.",
+      "applied": "fix_disabled"
+    },
+    {
+      "user_query": "Thermostat: 72 fahrenheit, bathroom.",
+      "cand_names": [
+        "query_humidity",
+        "set_ac_mode",
+        "set_thermostat"
+      ],
+      "gold_name": "set_thermostat",
+      "old_args": {
+        "room": "bathroom",
+        "temperature_c": 22.2
+      },
+      "new_args": {
+        "room": "bathroom",
+        "temperature_c": 22.222
+      },
+      "reason": "Temperature in Fahrenheit was given as 72, which is equivalent to 22.222 Celsius.",
+      "applied": "fix_disabled"
+    },
+    {
+      "user_query": "Popcorn in a minute.",
+      "cand_names": [
+        "preheat_oven",
+        "start_microwave",
+        "set_coffee_strength",
+        "set_kitchen_lights"
+      ],
+      "gold_name": "start_microwave",
+      "old_args": {
+        "seconds": 180,
+        "power": 9
+      },
+      "new_args": {
+        "seconds": 60,
+        "power": 9
+      },
+      "reason": "The query \"Popcorn in a minute\" implies a shorter time than 180 seconds.",
+      "applied": "fix_disabled"
+    },
+    {
+      "user_query": "Set the timer to 1.",
+      "cand_names": [
+        "set_timer",
+        "set_alarm",
+        "set_reminder"
+      ],
+      "gold_name": "set_timer",
+      "old_args": {
+        "duration_minutes": 120
+      },
+      "new_args": {
+        "duration_minutes": 1
+      },
+      "reason": "The user query specifies \"Set the timer to 1\", which implies a duration of 1 minute, contradicting the annotator's argument value of 120 minutes.",
+      "applied": "fix_disabled"
+    },
+    {
+      "user_query": "I don't like this song, let it go to the living room.",
+      "cand_names": [
+        "turn_on_tv",
+        "skip_track",
+        "set_tv_channel",
+        "play_music"
+      ],
+      "gold_name": "skip_track",
+      "old_args": {
+        "room": "living room"
+      },
+      "new_args": {},
+      "reason": "The annotator's argument \"room\" is not relevant to the \"skip_track\" function.",
+      "applied": "fix_keys_diverge"
+    },
+    {
+      "user_query": "Set the timer for a minute.",
+      "cand_names": [
+        "set_timer",
+        "set_alarm",
+        "set_reminder"
+      ],
+      "gold_name": "set_timer",
+      "old_args": {
+        "duration_minutes": 25
+      },
+      "new_args": {
+        "duration_minutes": 1
+      },
+      "reason": "The annotator's argument value for duration_minutes does not match the user's query.",
+      "applied": "fix_disabled"
+    },
+    {
+      "user_query": "Can you provide the details of the theme with ID 12345 and list the vehicle brands for motorcycles?",
+      "cand_names": [
+        "theme_detail",
+        "veiculo_tipo",
+        "get_by_origin",
+        "detail_info"
+      ],
+      "gold_name": "theme_detail",
+      "old_args": {
+        "dtid": 12345
+      },
+      "new_args": {
+        "dtid": 12345,
+        "vehicle_type": "motorcycles"
+      },
+      "reason": "The annotator's function name and arguments do not fully match the user's query, which also asks for vehicle brands for motorcycles.",
+      "applied": "fix_keys_diverge"
+    }
+  ],
+  "drop_samples": [
+    {
+      "user_query": "Can you make the kitchen warmer? About 23 degrees.",
+      "cand_names": [
+        "toggle_dehumidifier",
+        "set_humidity_target",
+        "set_radiator_valve"
+      ],
+      "gold_name": "set_thermostat",
+      "gold_args": {
+        "room": "kitchen",
+        "temperature_c": 23,
+        "mode": "heat"
+      },
+      "reason": "The annotator picked 'set_thermostat' which is not in the candidate functions, and the query doesn't match any of the provided candidates."
+    },
+    {
+      "user_query": "I want orange light in the garden.",
+      "cand_names": [
+        "dim_light",
+        "turn_on_light",
+        "toggle_outlet"
+      ],
+      "gold_name": "set_light_color",
+      "gold_args": {
+        "room": "garden",
+        "color": "orange",
+        "brightness_pct": 90
+      },
+      "reason": "The annotator picked a function 'set_light_color' which is not in the candidate functions, and the query doesn't match any of the provided candidate functions."
+    },
+    {
+      "user_query": "Engage the back door unlock.",
+      "cand_names": [
+        "start_camera_recording",
+        "lock_door",
+        "set_camera_motion_sensitivity"
+      ],
+      "gold_name": "unlock_door",
+      "gold_args": {
+        "door": "back door"
+      },
+      "reason": "The query \"Engage the back door unlock\" does not match any of the provided candidate functions, which are \"start_camera_recording\", \"lock_door\", and \"set_camera_motion_sensitivity\"."
+    },
+    {
+      "user_query": "I'm going to sleep, turning off the air purifier in the bedroom.",
+      "cand_names": [
+        "start_vacuum",
+        "stop_vacuum",
+        "schedule_vacuum"
+      ],
+      "gold_name": "turn_off_air_purifier",
+      "gold_args": {
+        "area": "bedroom"
+      },
+      "reason": "The query is about turning off an air purifier, which does not match any of the provided candidate functions related to vacuuming."
+    },
+    {
+      "user_query": "start baby monitor recording.",
+      "cand_names": [
+        "stop_camera_recording",
+        "arm_alarm_system",
+        "disarm_alarm_system"
+      ],
+      "gold_name": "start_camera_recording",
+      "gold_args": {
+        "camera": "baby monitor"
+      },
+      "reason": "The query \"start baby monitor recording\" does not match any of the provided candidate functions."
+    },
+    {
+      "user_query": "Pull the living room window open.",
+      "cand_names": [
+        "open_curtains",
+        "set_blinds_position",
+        "close_window"
+      ],
+      "gold_name": "open_window",
+      "gold_args": {
+        "room": "living room"
+      },
+      "reason": "The query \"Pull the living room window open\" does not match any of the provided candidate functions, which are \"open_curtains\", \"set_blinds_position\", and \"close_window\"."
+    },
+    {
+      "user_query": "The power of coffee-making in the living room.",
+      "cand_names": [
+        "set_light_color",
+        "set_motion_sensitivity",
+        "turn_off_light"
+      ],
+      "gold_name": "toggle_outlet",
+      "gold_args": {
+        "room": "living room",
+        "outlet_name": "coffee maker",
+        "state": "on"
+      },
+      "reason": "The query \"The power of coffee-making in the living room\" does not match any of the provided candidate functions."
+    },
+    {
+      "user_query": "Put the kitchen TV on.",
+      "cand_names": [
+        "play_music",
+        "set_volume",
+        "queue_song"
+      ],
+      "gold_name": "set_tv_volume",
+      "gold_args": {
+        "room": "kitchen",
+        "volume_pct": 50
+      },
+      "reason": "The query \"Put the kitchen TV on\" does not match any of the candidate functions, which are related to music, volume, or queuing a song."
+    },
+    {
+      "user_query": "Stop the mopping robot.",
+      "cand_names": [
+        "start_vacuum",
+        "stop_vacuum",
+        "schedule_vacuum"
+      ],
+      "gold_name": "stop_mop",
+      "gold_args": {},
+      "reason": "The query is about stopping a mopping robot, which does not match any of the provided candidate functions related to vacuuming."
+    },
+    {
+      "user_query": "Open the door.",
+      "cand_names": [
+        "set_alarm_pin",
+        "set_camera_motion_sensitivity",
+        "trigger_panic_alarm",
+        "arm_alarm_system"
+      ],
+      "gold_name": "unlock_door",
+      "gold_args": {
+        "door": "front door"
+      },
+      "reason": "The query \"Open the door\" does not match any of the provided candidate functions."
+    }
+  ]
+}
