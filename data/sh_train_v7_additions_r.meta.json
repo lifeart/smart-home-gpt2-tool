@@ -1,0 +1,271 @@
+{
+  "input": "data/sh_train_v7_additions_r.raw.json",
+  "input_count": 5282,
+  "processed": 5282,
+  "kept_after_refine": 5282,
+  "buckets": {
+    "KEEP": 3782,
+    "FIX": 1318,
+    "DROP": 182,
+    "SKIP": 0
+  },
+  "percentages": {
+    "KEEP": 71.6,
+    "FIX": 24.95,
+    "DROP": 3.45,
+    "SKIP": 0.0
+  },
+  "elapsed_sec": 547,
+  "model": "meta-llama/Llama-3.3-70B-Instruct",
+  "concurrency": 15,
+  "seed": 43,
+  "applied_actions": {
+    "keep": 3782,
+    "fix_disabled": 855,
+    "drop_softened_to_keep": 182,
+    "fix_no_json": 24,
+    "fix_keys_diverge": 439
+  },
+  "fix_samples": [
+    {
+      "user_query": "Find out the state and LGA associated with a Nigerian plate number 'ABC123'.",
+      "cand_names": [
+        "related_videos",
+        "captions_list",
+        "verify_plate_number_location"
+      ],
+      "gold_name": "verify_plate_number_location",
+      "old_args": {
+        "platecodeloc": "ABC"
+      },
+      "new_args": {
+        "platecodeloc": "ABC123"
+      },
+      "reason": "The annotator's argument value \"ABC\" does not match the full plate number \"ABC123\" provided in the query.",
+      "applied": "fix_disabled"
+    },
+    {
+      "user_query": "Get the latest competition brackets for the Premier League and NBA, in English timezone UTC.",
+      "cand_names": [
+        "Get Team-Week Players",
+        "Competition Brackets",
+        "Get Tournament Logo",
+        "Get Clubs",
+        "statistic/list-uefa-5year-rankings",
+        "Get All NBA Stats"
+      ],
+      "gold_name": "Competition Brackets",
+      "old_args": {
+        "timezone": "UTC",
+        "langId": 1.0,
+        "competition": 184.0
+      },
+      "new_args": {
+        "timezone": "UTC",
+        "langId": 1.0,
+        "competition": [
+          "Premier League",
+          "NBA"
+        ]
+      },
+      "reason": "The annotator's arguments only specify one competition, but the query asks for both Premier League and NBA.",
+      "applied": "fix_disabled"
+    },
+    {
+      "user_query": "I need application codes for four different apps. The app IDs are 123, 456, 789, and 1011, and the password hash for all is \"5f4dcc3b5aa765d61d8327deb882cf99\".",
+      "cand_names": [
+        "React Job Search API",
+        "Phone Number Information",
+        "cmyk to hsv",
+        "getAppCode"
+      ],
+      "gold_name": "getAppCode",
+      "old_args": {
+        "secret": "5f4dcc3b5aa765d61d8327deb882cf99",
+        "appId": 1011
+      },
+      "new_args": {
+        "secret": "5f4dcc3b5aa765d61d8327deb882cf99",
+        "appId": [
+          123,
+          456,
+          789,
+          1011
+        ]
+      },
+      "reason": "The user query mentions four different app IDs, but the annotator's arguments only include one.",
+      "applied": "fix_disabled"
+    },
+    {
+      "user_query": "Role definition:\n Inquirer: A user who raises an inquiry.\n Response assistant: Communicates with the inquirer and provides answers and solutions.\n\n Historical dialog data is as follows:\nInquirer: Before I submit this content to our web page, I need you to sanitize the text input from the feedback form to ensure it's safe. Also, make sure that my assistant has read and write access to the new project files on our server. Oh, and can you confirm if access to update the pricing information is enabled for our sales team's user IDs? We're using the token 'abcd1234' for these authentication checks.\nResponse assistant: Could you please provide the text from the feedback form that needs to be sanitized? Also, I need your assistant's user ID and the resource ID for the project files to validate their access. Lastly, could you specify the user IDs for the sales team that need their access validated?\nInquirer: The text from the feedback is \"Hello world!<script>alert('XSS');</script> Thank you!\" My assistant's user ID is 'assistant_42', and the project files are located at 'proj123'. For the sales team, check access for user IDs 'sales_001' and 'sales_002'.\n\n Please continue your answer given the historical dialog. Your role is the Response assistant.",
+      "cand_names": [
+        "validateAccess",
+        "sanitizeInput"
+      ],
+      "gold_name": "sanitizeInput",
+      "old_args": {
+        "input_data": "Hello world!<script>alert('XSS');</script> Thank you!\"), validateAccess(user_id=\"assistant_42",
+        "resource_id": "pricing_info",
+        "access_level": "write",
+        "authentication_token": "abcd1234"
+      },
+      "new_args": null,
+      "reason": "The annotator's function name is incorrect, it should be \"sanitizeInput\" for the provided input data, and the arguments for \"validateAccess\" are incorrectly included.",
+      "applied": "fix_no_json"
+    },
+    {
+      "user_query": "Can you get the design details for the following shoe IDs: S123, S456, S789, and S101?",
+      "cand_names": [
+        "getShoeDesign"
+      ],
+      "gold_name": "getShoeDesign",
+      "old_args": {
+        "shoe_id": "S123\"), getShoeDesign(shoe_id=\"S456\"), getShoeDesign(shoe_id=\"S789\"), getShoeDesign(shoe_id=\"S101"
+      },
+      "new_args": {
+        "shoe_id": "S123"
+      },
+      "reason": "Incorrect formatting and syntax in annotator's arguments JSON.",
+      "applied": "fix_disabled"
+    },
+    {
+      "user_query": "I need live match information for three table tennis matches. The first match is ID 101 in tournament 501, the second is ID 102 in tournament 502, and the third is ID 103 in tournament 503. Could you provide the details?",
+      "cand_names": [
+        "Rugby League Details",
+        "Table Tennis Live Matches API",
+        "Get Competitor Current Games",
+        "Get Unique Tournament Data",
+        "Tournament Teams",
+        "PlayerLastEvents"
+      ],
+      "gold_name": "Table Tennis Live Matches API",
+      "old_args": {
+        "match_id": 101,
+        "tournament_id": 503
+      },
+      "new_args": {
+        "match_id": 101,
+        "tournament_id": 501
+      },
+      "reason": "Incorrect tournament ID provided by annotator.",
+      "applied": "fix_disabled"
+    },
+    {
+      "user_query": "Role definition:\n Inquirer: A user who raises an inquiry.\n Response assistant: Communicates with the inquirer and provides answers and solutions.\n\n Historical dialog data is as follows:\nInquirer: I need information about a specific product on Amazon, the most popular articles in the US market, and the latest posts from a specific creator on Patreon. Can you help with that?\nResponse assistant: To proceed, I need the following details:\n- The product ID and API key for the Amazon product.\n- The market ID for popular articles in the US market.\n- The creator ID for the Patreon posts.\nInquirer: The product ID for the Amazon product is B08N5WRWNW, and my API key is AMZN123456. The market ID for the US is 1, and the Patreon creator ID is 12345.\n\n Please continue your answer given the historical dialog. Your role is the Response assistant.",
+      "cand_names": [
+        "Get Products",
+        "Get Sectors by Market",
+        "list_of_attribute_and_value_options",
+        "Get Popular Articles by Market",
+        "Get Posts",
+        "Get Product Details from Amazon"
+      ],
+      "gold_name": "Get Product Details from Amazon",
+      "old_args": {
+        "productId": "B08N5WRWNW",
+        "api_key": "\"AMZN123456\"), Get Popular Articles by Market(marketID=1), Get Posts(creator_id=12345"
+      },
+      "new_args": {
+        "productId": "B08N5WRWNW",
+        "api_key": "AMZN123456"
+      },
+      "reason": "Incorrectly formatted api_key value in annotator's arguments JSON.",
+      "applied": "fix_disabled"
+    },
+    {
+      "user_query": "Role definition:\n Inquirer: A user who raises an inquiry.\n Response assistant: Communicates with the inquirer and provides answers and solutions.\n\n Historical dialog data is as follows:\nInquirer: I have an event today and I need to send an SMS to all my contacts from my Sms77.io account. But before I do that, I want you to validate all the contacts' phone numbers and check my SMS credit balance. Also, it's a special event, so could you check if any of my friends have their birthday today? Lastly, I need the details of a product with ID 101.\nResponse assistant: Could you please provide me with your Sms77.io API Key and user ID?\nInquirer: My API Key is \u2018abcdefg\u2019 and user ID is \u2018123abc\u2019.\n\n Please continue your answer given the historical dialog. Your role is the Response assistant.",
+      "cand_names": [
+        "Get Contacts",
+        "Get Product",
+        "Check Balance",
+        "Valistring Phone Number",
+        "Fetch Birthday Groups"
+      ],
+      "gold_name": "Get Contacts",
+      "old_args": {
+        "p": "abcdefg",
+        "json": "json"
+      },
+      "new_args": {
+        "p": "abcdefg",
+        "json": "json",
+        "user_id": "123abc"
+      },
+      "reason": "The annotator's arguments are missing the user ID provided by the inquirer.",
+      "applied": "fix_keys_diverge"
+    },
+    {
+      "user_query": "Role definition:\n Inquirer: A user who raises an inquiry.\n Response assistant: Communicates with the inquirer and provides answers and solutions.\n\n Historical dialog data is as follows:\nInquirer: I need a QR code for my account and also need to verify some details. Could you:\n1. Save my session details.\n2. Retrieve the TXT record for my domain.\n3. Generate a QR code for my account.\n4. Send a voice OTP to my phone number in India.\n5. Retrieve my team schedules for the next month.\nResponse assistant: I need the following details to proceed:\n1. Your session key.\n2. The domain for which to retrieve the TXT record.\n3. Your waInstanceidInstance and apiTokenInstance for generating the QR code.\n4. Your phone number and API key for sending the voice OTP.\n5. Your team ID for retrieving team schedules.\nInquirer: Sure, here are the details:\n1. Session key: 'session_123456'.\n2. Domain: 'example.com'.\n3. waInstanceidInstance: 'instance_abc123', apiTokenInstance: 'token_xyz789'.\n4. Phone number: '9876543210', API key: 'apikey_456def'.\n5. Team ID: 'team_789xyz'.\n\n Please continue your answer given the historical dialog. Your role is the Response assistant.",
+      "cand_names": [
+        "Get Team Setup Progress",
+        "Get Team Schedules",
+        "GetQRcode",
+        "Send Voice OTP",
+        "Save User Details",
+        "Get TXT Record"
+      ],
+      "gold_name": "Save User Details",
+      "old_args": {
+        "session": "session_123456\"), Get TXT Record(domain=\"example.com\"), GetQRcode(waInstanceidInstance=\"instance_abc123",
+        "apiTokenInstance": "token_xyz789\"), Send Voice OTP(phone_number=\"9876543210",
+        "api_key": "apikey_456def\"), Get Team Schedules(teamId=\"team_789xyz",
+        "minDate": "2021-06-26"
+      },
+      "new_args": {
+        "session": "session_123456",
+        "Get TXT Record": "example.com",
+        "GetQRcode": "instance_abc123,token_xyz789",
+        "Send Voice OTP": "9876543210,apikey_456def",
+        "Get Team Schedules": "team_789xyz"
+      },
+      "reason": "The annotator picked \"Save User Details\" which doesn't match the provided historical dialog, and the arguments JSON contains multiple functions.",
+      "applied": "fix_keys_diverge"
+    },
+    {
+      "user_query": "Role definition:\n Inquirer: A user who raises an inquiry.\n Response assistant: Communicates with the inquirer and provides answers and solutions.\n\n Historical dialog data is as follows:\nInquirer: I am planning a virtual concert on New Year's Day and would also like to know the schedule for \"Chasing Dreams\" Season 4 including details on the participants. Can you set up the concert for me and retrieve the show data?\nResponse assistant: Could you please provide the title, artist lineup, and ticketing options for your New Year's Day concert? Also, I need details about the episodes for Season 4 of \"Chasing Dreams\" that you're interested in.\nInquirer: The concert title is \"Welcome 2024.\" The lineup includes John Doe at 8:00 PM and Jane Smith at 10:00 PM. Tickets are priced between $50-$100 and are Available. For the show, I need information on episodes 2 and 5 that air on Wednesday and Friday, respectively, with all participant details.\n\n Please continue your answer given the historical dialog. Your role is the Response assistant.",
+      "cand_names": [
+        "event.create_virtual_concert",
+        "show.get_reality_show_schedule"
+      ],
+      "gold_name": "event.create_virtual_concert",
+      "old_args": {
+        "concert_details": "{\"title\": \"Welcome 2024\", \"date\": \"2024-01-01\", \"artists\": [{\"name\": \"John Doe\", \"set_time\": \"20:00\"}, {\"name\": \"Jane Smith\", \"set_time\": \"22:00\"}], \"tickets\": {\"price_range\": \"50-100\", \"availability\": \"Available\"}}), show.get_reality_show_schedule(show_name=\"Chasing Dreams\"",
+        "season": "4",
+        "episodes": [
+          {
+            "episode_number": 2,
+            "air_date": "Wednesday",
+            "participants": []
+          },
+          {
+            "episode_number": 5,
+            "air_date": "Friday",
+            "participants": []
+          }
+        ]
+      },
+      "new_args": {
+        "concert_details": "{\"title\": \"Welcome 2024\", \"date\": \"2024-01-01\", \"artists\": [{\"name\": \"John Doe\", \"set_time\": \"20:00\"}, {\"name\": \"Jane Smith\", \"set_time\": \"22:00\"}], \"tickets\": {\"price_range\": \"50-100\", \"availability\": \"Available\"}}",
+        "show.get_reality_show_schedule": {
+          "show_name": "Chasing Dreams",
+          "season": "4",
+          "episodes": [
+            {
+              "episode_number": 2,
+              "air_date": "Wednesday",
+              "participants": []
+            },
+            {
+              "episode_number": 5,
+              "air_date": "Friday",
+              "participants": []
+            }
+          ]
+        }
+      },
+      "reason": "The annotator's arguments JSON is almost correct but incorrectly formatted as it mixes two functions' arguments into one string, while the function name is correct for the concert details but does not properly separate the show schedule details.",
+      "applied": "fix_keys_diverge"
+    }
+  ],
+  "drop_samples": []
+}
