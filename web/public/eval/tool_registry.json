@@ -7,7 +7,20 @@
     "required": [
       "room",
       "kelvin"
-    ]
+    ],
+    "enums": {
+      "room": [
+        "attic",
+        "basement",
+        "dining room",
+        "garage",
+        "garden",
+        "hallway",
+        "living room",
+        "nursery",
+        "porch"
+      ]
+    }
   },
   "dim_light": {
     "params": {
@@ -17,7 +30,24 @@
     "required": [
       "room",
       "brightness_pct"
-    ]
+    ],
+    "enums": {
+      "room": [
+        "living room",
+        "porch",
+        "attic",
+        "basement",
+        "bedroom",
+        "dining room",
+        "garden",
+        "hallway",
+        "kids room",
+        "kitchen",
+        "master bedroom",
+        "nursery",
+        "office"
+      ]
+    }
   },
   "turn_on_light": {
     "params": {
@@ -26,7 +56,21 @@
     },
     "required": [
       "room"
-    ]
+    ],
+    "enums": {
+      "room": [
+        "attic",
+        "basement",
+        "bedroom",
+        "dining room",
+        "garage",
+        "garden",
+        "kids room",
+        "living room",
+        "master bedroom",
+        "office"
+      ]
+    }
   },
   "set_light_color": {
     "params": {
@@ -37,7 +81,41 @@
     "required": [
       "room",
       "color"
-    ]
+    ],
+    "enums": {
+      "room": [
+        "kids room",
+        "dining room",
+        "basement",
+        "garage",
+        "garden",
+        "kitchen",
+        "attic",
+        "bathroom",
+        "bedroom",
+        "hallway",
+        "living room",
+        "master bedroom",
+        "nursery",
+        "office",
+        "porch"
+      ],
+      "color": [
+        "warm white",
+        "amber",
+        "blue",
+        "daylight",
+        "green",
+        "orange",
+        "pink",
+        "purple",
+        "cool white",
+        "cyan",
+        "magenta",
+        "red",
+        "soft yellow"
+      ]
+    }
   },
   "blink_light": {
     "params": {
@@ -46,7 +124,18 @@
     },
     "required": [
       "room"
-    ]
+    ],
+    "enums": {
+      "room": [
+        "bedroom",
+        "living room",
+        "dining room",
+        "kitchen",
+        "master bedroom",
+        "nursery",
+        "porch"
+      ]
+    }
   },
   "set_light_scene": {
     "params": {
@@ -56,7 +145,37 @@
     "required": [
       "room",
       "scene"
-    ]
+    ],
+    "enums": {
+      "room": [
+        "bedroom",
+        "basement",
+        "living room",
+        "bathroom",
+        "dining room",
+        "garage",
+        "garden",
+        "kids room",
+        "kitchen",
+        "master bedroom",
+        "office",
+        "porch"
+      ],
+      "scene": [
+        "movie",
+        "sleep",
+        "focus",
+        "dinner",
+        "game night",
+        "kids bedtime",
+        "meditation",
+        "party",
+        "relax",
+        "study",
+        "sunset",
+        "wake up"
+      ]
+    }
   },
   "turn_off_light": {
     "params": {
@@ -64,7 +183,23 @@
     },
     "required": [
       "room"
-    ]
+    ],
+    "enums": {
+      "room": [
+        "attic",
+        "basement",
+        "bathroom",
+        "dining room",
+        "garage",
+        "garden",
+        "hallway",
+        "kitchen",
+        "living room",
+        "nursery",
+        "office",
+        "porch"
+      ]
+    }
   },
   "toggle_outlet": {
     "params": {
@@ -76,7 +211,32 @@
       "room",
       "outlet_name",
       "state"
-    ]
+    ],
+    "enums": {
+      "room": [
+        "basement",
+        "bathroom",
+        "garden",
+        "hallway",
+        "living room",
+        "nursery",
+        "office",
+        "porch"
+      ],
+      "outlet_name": [
+        "coffee maker",
+        "Christmas tree",
+        "fan",
+        "floor lamp",
+        "heater",
+        "router",
+        "TV"
+      ],
+      "state": [
+        "on",
+        "off"
+      ]
+    }
   },
   "query_light_state": {
     "params": {
@@ -84,7 +244,15 @@
     },
     "required": [
       "room"
-    ]
+    ],
+    "enums": {
+      "room": [
+        "attic",
+        "dining room",
+        "kids room",
+        "nursery"
+      ]
+    }
   },
   "set_motion_sensitivity": {
     "params": {
@@ -94,7 +262,22 @@
     "required": [
       "room",
       "level"
-    ]
+    ],
+    "enums": {
+      "room": [
+        "bedroom",
+        "garage",
+        "hallway",
+        "kitchen",
+        "master bedroom",
+        "office"
+      ],
+      "level": [
+        "low",
+        "medium",
+        "high"
+      ]
+    }
   },
   "set_thermostat": {
     "params": {
@@ -105,7 +288,26 @@
     "required": [
       "room",
       "temperature_c"
-    ]
+    ],
+    "enums": {
+      "room": [
+        "bathroom",
+        "sunroom",
+        "kitchen",
+        "basement",
+        "hallway",
+        "attic",
+        "bedroom",
+        "master bedroom",
+        "nursery",
+        "living room",
+        "office"
+      ],
+      "mode": [
+        "heat",
+        "cool"
+      ]
+    }
   },
   "set_fan_speed": {
     "params": {
@@ -115,7 +317,28 @@
     "required": [
       "room",
       "speed"
-    ]
+    ],
+    "enums": {
+      "room": [
+        "attic",
+        "hallway",
+        "nursery",
+        "sunroom",
+        "basement",
+        "bathroom",
+        "bedroom",
+        "kitchen",
+        "living room",
+        "master bedroom",
+        "office"
+      ],
+      "speed": [
+        "low",
+        "high",
+        "medium",
+        "auto"
+      ]
+    }
   },
   "query_humidity": {
     "params": {
@@ -123,7 +346,20 @@
     },
     "required": [
       "room"
-    ]
+    ],
+    "enums": {
+      "room": [
+        "nursery",
+        "basement",
+        "bathroom",
+        "bedroom",
+        "attic",
+        "hallway",
+        "kitchen",
+        "laundry_room",
+        "sunroom"
+      ]
+    }
   },
   "toggle_humidifier": {
     "params": {
@@ -133,7 +369,19 @@
     "required": [
       "room",
       "state"
-    ]
+    ],
+    "enums": {
+      "room": [
+        "bathroom",
+        "basement",
+        "bedroom",
+        "living room"
+      ],
+      "state": [
+        "on",
+        "off"
+      ]
+    }
   },
   "set_ac_mode": {
     "params": {
@@ -143,7 +391,25 @@
     "required": [
       "room",
       "mode"
-    ]
+    ],
+    "enums": {
+      "room": [
+        "master bedroom",
+        "basement",
+        "attic",
+        "bathroom",
+        "kitchen",
+        "living room",
+        "nursery",
+        "sunroom"
+      ],
+      "mode": [
+        "eco",
+        "off",
+        "cool",
+        "heat"
+      ]
+    }
   },
   "set_radiator_valve": {
     "params": {
@@ -153,7 +419,16 @@
     "required": [
       "room",
       "level"
-    ]
+    ],
+    "enums": {
+      "room": [
+        "hallway",
+        "bathroom",
+        "bedroom",
+        "master bedroom",
+        "nursery"
+      ]
+    }
   },
   "schedule_climate_program": {
     "params": {
@@ -165,7 +440,43 @@
     "required": [
       "room",
       "program"
-    ]
+    ],
+    "enums": {
+      "room": [
+        "basement",
+        "bedroom",
+        "master bedroom",
+        "nursery",
+        "attic",
+        "hallway",
+        "kitchen",
+        "living room",
+        "office",
+        "sunroom"
+      ],
+      "program": [
+        "eco",
+        "night",
+        "morning",
+        "away",
+        "comfort"
+      ],
+      "start_time": [
+        "00:00",
+        "22:00",
+        "06:00",
+        "09:00",
+        "19:00"
+      ],
+      "end_time": [
+        "06:00",
+        "07:00",
+        "08:00",
+        "17:00",
+        "09:00",
+        "23:00"
+      ]
+    }
   },
   "toggle_dehumidifier": {
     "params": {
@@ -175,7 +486,18 @@
     "required": [
       "room",
       "state"
-    ]
+    ],
+    "enums": {
+      "room": [
+        "hallway",
+        "attic",
+        "basement"
+      ],
+      "state": [
+        "on",
+        "off"
+      ]
+    }
   },
   "set_humidity_target": {
     "params": {
@@ -185,7 +507,20 @@
     "required": [
       "room",
       "humidity_pct"
-    ]
+    ],
+    "enums": {
+      "room": [
+        "master bedroom",
+        "nursery",
+        "office",
+        "attic",
+        "basement",
+        "hallway",
+        "kitchen",
+        "living room",
+        "sunroom"
+      ]
+    }
   },
   "query_temperature": {
     "params": {
@@ -193,7 +528,24 @@
     },
     "required": [
       "room"
-    ]
+    ],
+    "enums": {
+      "room": [
+        "bedroom",
+        "dining_room",
+        "kitchen",
+        "office",
+        "attic",
+        "basement",
+        "bathroom",
+        "garage",
+        "guest_room",
+        "hallway",
+        "living room",
+        "living_room",
+        "nursery"
+      ]
+    }
   },
   "query_alarm_status": {
     "params": {},
@@ -205,7 +557,16 @@
     },
     "required": [
       "camera"
-    ]
+    ],
+    "enums": {
+      "camera": [
+        "backyard cam",
+        "front door cam",
+        "baby monitor",
+        "driveway cam",
+        "living room cam"
+      ]
+    }
   },
   "lock_door": {
     "params": {
@@ -213,7 +574,17 @@
     },
     "required": [
       "door"
-    ]
+    ],
+    "enums": {
+      "door": [
+        "garage door",
+        "back door",
+        "front door",
+        "patio door",
+        "basement door",
+        "side door"
+      ]
+    }
   },
   "set_camera_motion_sensitivity": {
     "params": {
@@ -223,7 +594,20 @@
     "required": [
       "camera",
       "level"
-    ]
+    ],
+    "enums": {
+      "camera": [
+        "backyard cam",
+        "baby monitor",
+        "front door cam",
+        "driveway cam"
+      ],
+      "level": [
+        "high",
+        "medium",
+        "low"
+      ]
+    }
   },
   "unlock_door": {
     "params": {
@@ -231,7 +615,17 @@
     },
     "required": [
       "door"
-    ]
+    ],
+    "enums": {
+      "door": [
+        "side door",
+        "front door",
+        "back door",
+        "basement door",
+        "garage door",
+        "patio door"
+      ]
+    }
   },
   "arm_alarm_system": {
     "params": {
@@ -239,7 +633,15 @@
     },
     "required": [
       "mode"
-    ]
+    ],
+    "enums": {
+      "mode": [
+        "stay",
+        "away",
+        "night",
+        "vacation"
+      ]
+    }
   },
   "stop_camera_recording": {
     "params": {
@@ -247,7 +649,16 @@
     },
     "required": [
       "camera"
-    ]
+    ],
+    "enums": {
+      "camera": [
+        "driveway cam",
+        "living room cam",
+        "baby monitor",
+        "backyard cam",
+        "front door cam"
+      ]
+    }
   },
   "view_camera_stream": {
     "params": {
@@ -255,7 +666,16 @@
     },
     "required": [
       "camera"
-    ]
+    ],
+    "enums": {
+      "camera": [
+        "backyard cam",
+        "driveway cam",
+        "baby monitor",
+        "front door cam",
+        "living room cam"
+      ]
+    }
   },
   "set_alarm_pin": {
     "params": {
@@ -263,7 +683,18 @@
     },
     "required": [
       "new_pin"
-    ]
+    ],
+    "enums": {
+      "new_pin": [
+        "0000",
+        "1234",
+        "4296",
+        "4821",
+        "5566",
+        "7777",
+        "9081"
+      ]
+    }
   },
   "trigger_panic_alarm": {
     "params": {},
@@ -275,7 +706,22 @@
     },
     "required": [
       "door"
-    ]
+    ],
+    "enums": {
+      "door": [
+        "front_door",
+        "patio_door",
+        "back door",
+        "back_door",
+        "front door",
+        "garage door",
+        "patio door",
+        "side door",
+        "basement door",
+        "basement_door",
+        "side_door"
+      ]
+    }
   },
   "disarm_alarm_system": {
     "params": {},
@@ -290,7 +736,19 @@
     "required": [
       "song",
       "room"
-    ]
+    ],
+    "enums": {
+      "room": [
+        "living room",
+        "office",
+        "basement gym",
+        "bedroom",
+        "dining room",
+        "garage",
+        "kitchen",
+        "master bedroom"
+      ]
+    }
   },
   "set_tv_input": {
     "params": {
@@ -300,7 +758,23 @@
     "required": [
       "room",
       "input"
-    ]
+    ],
+    "enums": {
+      "room": [
+        "living room",
+        "basement gym",
+        "bedroom",
+        "kitchen"
+      ],
+      "input": [
+        "antenna",
+        "AppleTV",
+        "HDMI 1",
+        "HDMI 2",
+        "PlayStation",
+        "Xbox"
+      ]
+    }
   },
   "turn_off_tv": {
     "params": {
@@ -308,7 +782,14 @@
     },
     "required": [
       "room"
-    ]
+    ],
+    "enums": {
+      "room": [
+        "kitchen",
+        "living room",
+        "master bedroom"
+      ]
+    }
   },
   "stop_music": {
     "params": {
@@ -316,7 +797,16 @@
     },
     "required": [
       "room"
-    ]
+    ],
+    "enums": {
+      "room": [
+        "basement gym",
+        "bedroom",
+        "dining room",
+        "kitchen",
+        "office"
+      ]
+    }
   },
   "turn_on_tv": {
     "params": {
@@ -324,7 +814,14 @@
     },
     "required": [
       "room"
-    ]
+    ],
+    "enums": {
+      "room": [
+        "basement gym",
+        "bedroom",
+        "living room"
+      ]
+    }
   },
   "pause_music": {
     "params": {
@@ -332,7 +829,15 @@
     },
     "required": [
       "room"
-    ]
+    ],
+    "enums": {
+      "room": [
+        "living room",
+        "bedroom",
+        "kitchen",
+        "master bedroom"
+      ]
+    }
   },
   "mute_audio": {
     "params": {
@@ -340,7 +845,15 @@
     },
     "required": [
       "room"
-    ]
+    ],
+    "enums": {
+      "room": [
+        "bedroom",
+        "dining room",
+        "kitchen",
+        "living room"
+      ]
+    }
   },
   "switch_speaker_room": {
     "params": {
@@ -350,7 +863,23 @@
     "required": [
       "from_room",
       "to_room"
-    ]
+    ],
+    "enums": {
+      "from_room": [
+        "bedroom",
+        "kitchen",
+        "garage",
+        "living room"
+      ],
+      "to_room": [
+        "basement gym",
+        "dining room",
+        "garage",
+        "living room",
+        "master bedroom",
+        "office"
+      ]
+    }
   },
   "skip_track": {
     "params": {
@@ -358,7 +887,18 @@
     },
     "required": [
       "room"
-    ]
+    ],
+    "enums": {
+      "room": [
+        "basement gym",
+        "bedroom",
+        "dining room",
+        "garage",
+        "kitchen",
+        "living room",
+        "office"
+      ]
+    }
   },
   "play_podcast": {
     "params": {
@@ -369,7 +909,26 @@
     "required": [
       "podcast",
       "room"
-    ]
+    ],
+    "enums": {
+      "podcast": [
+        "99% Invisible",
+        "Hardcore History",
+        "Joe Rogan Experience",
+        "Planet Money",
+        "Serial",
+        "Stuff You Should Know",
+        "The Daily",
+        "This American Life"
+      ],
+      "room": [
+        "bedroom",
+        "garage",
+        "kitchen",
+        "basement gym",
+        "office"
+      ]
+    }
   },
   "set_tv_volume": {
     "params": {
@@ -379,7 +938,15 @@
     "required": [
       "room",
       "volume_pct"
-    ]
+    ],
+    "enums": {
+      "room": [
+        "living room",
+        "bedroom",
+        "kitchen",
+        "master bedroom"
+      ]
+    }
   },
   "play_radio_station": {
     "params": {
@@ -390,7 +957,24 @@
     "required": [
       "station",
       "room"
-    ]
+    ],
+    "enums": {
+      "station": [
+        "BBC Radio 1",
+        "Classic Rock 101",
+        "Hot 97",
+        "KEXP",
+        "NPR",
+        "Radio Paradise"
+      ],
+      "room": [
+        "kitchen",
+        "living room",
+        "basement gym",
+        "garage",
+        "office"
+      ]
+    }
   },
   "set_tv_channel": {
     "params": {
@@ -400,7 +984,24 @@
     "required": [
       "room",
       "channel"
-    ]
+    ],
+    "enums": {
+      "room": [
+        "bedroom",
+        "kitchen",
+        "living room",
+        "master bedroom"
+      ],
+      "channel": [
+        "Cartoon Network",
+        "Channel 4",
+        "CNN",
+        "Discovery",
+        "Fox News",
+        "HBO",
+        "National Geographic"
+      ]
+    }
   },
   "queue_song": {
     "params": {
@@ -410,7 +1011,27 @@
     "required": [
       "song",
       "room"
-    ]
+    ],
+    "enums": {
+      "song": [
+        "Billie Jean",
+        "Clair de Lune",
+        "garage door grooves",
+        "Hey Jude",
+        "Hotel California",
+        "Lose Yourself",
+        "Take Five",
+        "vinyl crackle session"
+      ],
+      "room": [
+        "bedroom",
+        "living room",
+        "basement gym",
+        "dining room",
+        "garage",
+        "office"
+      ]
+    }
   },
   "set_volume": {
     "params": {
@@ -420,7 +1041,18 @@
     "required": [
       "room",
       "volume_pct"
-    ]
+    ],
+    "enums": {
+      "room": [
+        "kitchen",
+        "bedroom",
+        "garage",
+        "living room",
+        "basement gym",
+        "dining room",
+        "office"
+      ]
+    }
   },
   "set_fridge_temperature": {
     "params": {},
@@ -481,7 +1113,19 @@
     },
     "required": [
       "zone"
-    ]
+    ],
+    "enums": {
+      "zone": [
+        "rose bed",
+        "back lawn",
+        "front lawn",
+        "hedge row",
+        "vegetable garden",
+        "citrus trees",
+        "driveway strip",
+        "succulent corner"
+      ]
+    }
   },
   "stop_irrigation_zone": {
     "params": {
@@ -489,7 +1133,17 @@
     },
     "required": [
       "zone"
-    ]
+    ],
+    "enums": {
+      "zone": [
+        "rose bed",
+        "back lawn",
+        "citrus trees",
+        "front lawn",
+        "succulent corner",
+        "vegetable garden"
+      ]
+    }
   },
   "turn_on_outdoor_light": {
     "params": {
@@ -497,7 +1151,20 @@
     },
     "required": [
       "location"
-    ]
+    ],
+    "enums": {
+      "location": [
+        "back patio",
+        "backyard",
+        "driveway",
+        "garden path",
+        "gazebo",
+        "patio",
+        "pool deck",
+        "pool path",
+        "side yard"
+      ]
+    }
   },
   "turn_off_outdoor_light": {
     "params": {
@@ -505,7 +1172,18 @@
     },
     "required": [
       "location"
-    ]
+    ],
+    "enums": {
+      "location": [
+        "deck",
+        "driveway",
+        "garden path",
+        "gazebo",
+        "pool deck",
+        "porch",
+        "side yard"
+      ]
+    }
   },
   "set_pool_heater": {
     "params": {
@@ -523,7 +1201,14 @@
     },
     "required": [
       "on"
-    ]
+    ],
+    "enums": {
+      "speed": [
+        "high",
+        "low",
+        "medium"
+      ]
+    }
   },
   "turn_on_pool_cover": {
     "params": {},
@@ -539,7 +1224,18 @@
     },
     "required": [
       "zone"
-    ]
+    ],
+    "enums": {
+      "zone": [
+        "citrus trees",
+        "vegetable garden",
+        "back lawn",
+        "front lawn",
+        "hedge row",
+        "rose bed",
+        "succulent corner"
+      ]
+    }
   },
   "query_pool_temperature": {
     "params": {},
@@ -553,7 +1249,32 @@
     "required": [
       "location",
       "color"
-    ]
+    ],
+    "enums": {
+      "location": [
+        "patio",
+        "backyard",
+        "pool deck",
+        "driveway",
+        "front yard",
+        "garden",
+        "porch"
+      ],
+      "color": [
+        "amber",
+        "aqua green",
+        "blue",
+        "cyan",
+        "deep navy",
+        "deep red",
+        "ocean blue",
+        "orange",
+        "pink",
+        "purple",
+        "red",
+        "yellow"
+      ]
+    }
   },
   "set_garden_lawnmower": {
     "params": {
@@ -562,7 +1283,14 @@
     },
     "required": [
       "on"
-    ]
+    ],
+    "enums": {
+      "zone": [
+        "front lawn",
+        "back lawn",
+        "hedge row"
+      ]
+    }
   },
   "set_outdoor_speaker": {
     "params": {
@@ -582,7 +1310,31 @@
     "required": [
       "zone",
       "time"
-    ]
+    ],
+    "enums": {
+      "zone": [
+        "vegetable garden",
+        "citrus trees",
+        "rose bed",
+        "back lawn",
+        "driveway strip",
+        "front lawn",
+        "succulent corner"
+      ],
+      "time": [
+        "daily 05:00 starting tomorrow",
+        "every other day 05:30",
+        "Friday 05:45",
+        "Monday 06:00",
+        "Sunday 06:30",
+        "Sunday 07:00",
+        "today 20:00",
+        "tomorrow 06:00",
+        "tonight 21:00",
+        "weekdays 04:30",
+        "weekdays 06:00 next week"
+      ]
+    }
   },
   "open_skylight": {
     "params": {
@@ -590,7 +1342,15 @@
     },
     "required": [
       "room"
-    ]
+    ],
+    "enums": {
+      "room": [
+        "sunroom",
+        "bathroom",
+        "bedroom",
+        "nursery"
+      ]
+    }
   },
   "lock_window": {
     "params": {
@@ -598,7 +1358,14 @@
     },
     "required": [
       "room"
-    ]
+    ],
+    "enums": {
+      "room": [
+        "sunroom",
+        "hallway",
+        "nursery"
+      ]
+    }
   },
   "close_window": {
     "params": {
@@ -606,7 +1373,16 @@
     },
     "required": [
       "room"
-    ]
+    ],
+    "enums": {
+      "room": [
+        "bathroom",
+        "nursery",
+        "dining room",
+        "living room",
+        "office"
+      ]
+    }
   },
   "retract_awning": {
     "params": {
@@ -614,7 +1390,16 @@
     },
     "required": [
       "room"
-    ]
+    ],
+    "enums": {
+      "room": [
+        "living room",
+        "office",
+        "bathroom",
+        "hallway",
+        "master bedroom"
+      ]
+    }
   },
   "raise_blinds": {
     "params": {
@@ -622,7 +1407,16 @@
     },
     "required": [
       "room"
-    ]
+    ],
+    "enums": {
+      "room": [
+        "bedroom",
+        "dining room",
+        "kitchen",
+        "office",
+        "sunroom"
+      ]
+    }
   },
   "close_skylight": {
     "params": {
@@ -630,7 +1424,16 @@
     },
     "required": [
       "room"
-    ]
+    ],
+    "enums": {
+      "room": [
+        "bathroom",
+        "bedroom",
+        "hallway",
+        "kitchen",
+        "nursery"
+      ]
+    }
   },
   "close_curtains": {
     "params": {
@@ -638,7 +1441,14 @@
     },
     "required": [
       "room"
-    ]
+    ],
+    "enums": {
+      "room": [
+        "bathroom",
+        "bedroom",
+        "kitchen"
+      ]
+    }
   },
   "set_blinds_angle": {
     "params": {
@@ -648,7 +1458,21 @@
     "required": [
       "room",
       "angle"
-    ]
+    ],
+    "enums": {
+      "room": [
+        "sunroom",
+        "nursery",
+        "living room",
+        "kitchen",
+        "bedroom",
+        "master bedroom",
+        "office",
+        "bathroom",
+        "dining room",
+        "hallway"
+      ]
+    }
   },
   "set_blinds_position": {
     "params": {
@@ -658,7 +1482,21 @@
     "required": [
       "room",
       "position"
-    ]
+    ],
+    "enums": {
+      "room": [
+        "living room",
+        "bathroom",
+        "office",
+        "bedroom",
+        "hallway",
+        "master bedroom",
+        "nursery",
+        "sunroom",
+        "dining room",
+        "kitchen"
+      ]
+    }
   },
   "open_window": {
     "params": {
@@ -666,7 +1504,18 @@
     },
     "required": [
       "room"
-    ]
+    ],
+    "enums": {
+      "room": [
+        "bathroom",
+        "kitchen",
+        "nursery",
+        "sunroom",
+        "dining room",
+        "living room",
+        "master bedroom"
+      ]
+    }
   },
   "open_curtains": {
     "params": {
@@ -674,7 +1523,16 @@
     },
     "required": [
       "room"
-    ]
+    ],
+    "enums": {
+      "room": [
+        "bathroom",
+        "dining room",
+        "kitchen",
+        "living room",
+        "sunroom"
+      ]
+    }
   },
   "extend_awning": {
     "params": {
@@ -682,7 +1540,14 @@
     },
     "required": [
       "room"
-    ]
+    ],
+    "enums": {
+      "room": [
+        "bedroom",
+        "dining room",
+        "master bedroom"
+      ]
+    }
   },
   "lower_blinds": {
     "params": {
@@ -690,7 +1555,15 @@
     },
     "required": [
       "room"
-    ]
+    ],
+    "enums": {
+      "room": [
+        "master bedroom",
+        "sunroom",
+        "kitchen",
+        "living room"
+      ]
+    }
   },
   "start_vacuum": {
     "params": {
@@ -699,7 +1572,26 @@
     },
     "required": [
       "area"
-    ]
+    ],
+    "enums": {
+      "area": [
+        "dining room",
+        "kids room",
+        "bedroom",
+        "hallway",
+        "living room",
+        "office",
+        "whole house",
+        "bathroom",
+        "kitchen"
+      ],
+      "intensity": [
+        "deep",
+        "eco",
+        "quick",
+        "normal"
+      ]
+    }
   },
   "stop_vacuum": {
     "params": {},
@@ -714,7 +1606,48 @@
     },
     "required": [
       "time"
-    ]
+    ],
+    "enums": {
+      "time": [
+        "11:00",
+        "15:00",
+        "07:00",
+        "08:00",
+        "09:00",
+        "10:00",
+        "14:00",
+        "17:00",
+        "18:00",
+        "20:00",
+        "21:00",
+        "22:00",
+        "23:00"
+      ],
+      "day": [
+        "daily",
+        "Sunday",
+        "today",
+        "weekdays",
+        "Friday",
+        "Monday",
+        "tomorrow",
+        "Tuesday",
+        "Wednesday"
+      ],
+      "area": [
+        "bedroom",
+        "hallway",
+        "kitchen",
+        "living room",
+        "bathroom",
+        "dining room",
+        "office"
+      ],
+      "intensity": [
+        "eco",
+        "deep"
+      ]
+    }
   },
   "dock_vacuum": {
     "params": {},
@@ -727,7 +1660,25 @@
     },
     "required": [
       "area"
-    ]
+    ],
+    "enums": {
+      "area": [
+        "kitchen",
+        "bathroom",
+        "dining room",
+        "hallway",
+        "whole house",
+        "bedroom",
+        "kids room",
+        "living room",
+        "office"
+      ],
+      "water_level": [
+        "high",
+        "low",
+        "medium"
+      ]
+    }
   },
   "stop_mop": {
     "params": {},
@@ -739,7 +1690,14 @@
     },
     "required": [
       "water_level"
-    ]
+    ],
+    "enums": {
+      "water_level": [
+        "low",
+        "high",
+        "medium"
+      ]
+    }
   },
   "turn_on_air_purifier": {
     "params": {
@@ -748,7 +1706,23 @@
     },
     "required": [
       "area"
-    ]
+    ],
+    "enums": {
+      "area": [
+        "bedroom",
+        "living room",
+        "office",
+        "kids room",
+        "kitchen",
+        "hallway"
+      ],
+      "speed": [
+        "high",
+        "auto",
+        "low",
+        "medium"
+      ]
+    }
   },
   "turn_off_air_purifier": {
     "params": {
@@ -756,7 +1730,15 @@
     },
     "required": [
       "area"
-    ]
+    ],
+    "enums": {
+      "area": [
+        "bedroom",
+        "kids room",
+        "kitchen",
+        "office"
+      ]
+    }
   },
   "set_air_purifier_speed": {
     "params": {
@@ -765,13 +1747,32 @@
     },
     "required": [
       "speed"
-    ]
+    ],
+    "enums": {
+      "area": [
+        "kids room",
+        "office"
+      ],
+      "speed": [
+        "auto",
+        "high"
+      ]
+    }
   },
   "query_air_quality": {
     "params": {
       "area": "string"
     },
-    "required": []
+    "required": [],
+    "enums": {
+      "area": [
+        "bedroom",
+        "kids room",
+        "kitchen",
+        "living room",
+        "office"
+      ]
+    }
   },
   "empty_vacuum_bin": {
     "params": {},
