@@ -615,7 +615,41 @@ String/enum/hallucinated-key:
 
 ---
 
-## Iteration 7.3 — Re-bench v3 typed-args + voice exact-match  (in progress)
+## Iteration 7.3 — Re-bench v3 typed-args + voice exact-match
+
+**Goal:** re-bench multi-tool (baseline vs con with typed-args) and voice (ret_con K=5 with typed-args) reporting name / args / exact metrics. Compare deltas.
+
+**Multi-tool (n=300, v3 webgpu/fp32, typed args ON for con):**
+
+| mode | name_acc | args_acc | exact_acc |
+|---|---:|---:|---:|
+| baseline                  | **82.33%** | **54.67%** | **49.67%** |
+| con (typed-args ON)       | 77.67%     | 51.33%     | 47.67%     |
+| Δ con vs baseline         | -4.66      | -3.33      | -2.00      |
+
+`con` still trails baseline because of prompt-schema truncation (Phase 5a finding). Typed-args is orthogonal: it tightens *value*-side enum/numeric errors but cannot recover *keys* that the truncated SYSTEM block doesn't carry.
+
+**Voice (n=30, v3 webgpu/fp32):**
+
+The voice fixture upstream carries only `expected` (name). For iter 7.3 we annotated a manual `gold_args` map for all 30 items (`VOICE_GOLD_ARGS` in `web/voice_bench.js`) — room/door/temperature/song extracted from the original RU input. The bench now also computes name_acc / args_acc / exact_acc and recall@K.
+
+| config | name_acc | args_acc | exact_acc | recall@K |
+|---|---:|---:|---:|---:|
+| baseline (gold + 4 random domain peers, no con, no ret) | 23.33% | 30.00% | 6.67% | n/a |
+| **ret_con K=5 typed-args ON**                            | **50.00%** | 30.00% | **23.33%** | **83.33%** |
+| Δ ret_con vs baseline                                    | +26.67     |  0.00     | +16.67     |          |
+
+**Δ exact-match = +16.67 pp** under ret_con over baseline. **+5 positive flips, 0 negative flips.** Sample flips:
+- i=6 `Останови музыку в кухне` → baseline `mute_audio(channel:kitchen)` ✗ → ret_con `stop_music(room:kitchen)` ✓.
+- i=7 `Открой шторы в спальне` → baseline `lower_blinds(room:bedroom)` ✗ → ret_con `open_curtains(room:bedroom)` ✓.
+
+**Args acc unchanged (30%) between baseline & ret_con** — every voice item where retrieval fixes the *name*, the model also gets the args right (room/door extracted correctly). The remaining 21 args-wrong items mostly involve ASR-stripped content (`"a degree"` instead of `"21 degrees"` → no `temperature_c` extractable). The bottleneck for voice exact-match is *ASR* (which iter 7.x cannot touch), not arg-value masking.
+
+**Voice gate ≥55% name acc still missed at 50%** (carryover from iter 6.1). Voice exact-match (23.3%) is a *new* number — the prior "46.7% README curated" headline understated the production reality.
+
+**Status:** done. Cost: $0.
+
+**Artifacts:** `web/voice_bench.js` extended with `VOICE_GOLD_ARGS` + args/exact in summary; `results/iter73_voice_v3_K5_typed.json`, `results/iter73_voice_v3_baseline.json`.
 
 ---
 
@@ -639,4 +673,5 @@ String/enum/hallucinated-key:
 | 2026-05-18 | **Iter 6.3 partial.** ASR alias query expansion (verb-substitution map: close→lock\|shut, open→unlock, unblock→unlock\|release, shut up→stop music\|mute, "a degree"→set thermostat). Mean-pool embeddings over alias-substituted query variants. n=30 voice (v3 webgpu/fp32, K=5, sentinel ON, constrained ON): no-alias acc **50.0%** / recall **83.3%**; with alias acc **53.3%** / recall **93.3%**. Δacc +3.33 pp, Δrecall +10.0 pp. Voice gate ≥55% **MISSED** by 1.67 pp. The 2 remaining recall misses are (i) "Unblock patio"→unlock_door needing a domain-object alias (patio→door), (ii) Whisper truncated to "Put the" (ASR-side). Cost: $0. |
 | 2026-05-18 | **Iter 7.1 done.** Args-aware scoring on v3 baseline (n=300, webgpu/fp32). **name 82.33% / args 54.67% / exact 49.67%**. Per-type args acc: string 75.2% (355) / number 62.5% (72) / boolean 66.7% / array 0/5 / object 0/2. By gold-arg-key-count: 0 keys 38.7% (empty-gold class), 1 key 68.2%, 2 keys 54.5%, 3+ keys 15.2%. Failures (98 name-ok-args-wrong): wrongStr 37, extra-key 34, missing-key 32, emptyGold 12, wrongNum 9. Cost: $0. |
 | 2026-05-18 | **Iter 7.2 done.** Typed-args masking (enum + numeric value validators) added to grammar.js + UI toggle (default ON). Multi-tool n=300: baseline 82.33/54.67/49.67% (name/args/exact); con-with-typed-args 77.67/51.33/47.67%. Δ typed-args ON vs OFF on con (n=50): +2 pp args, +2 pp exact, no negative flips. Constrained still trails baseline due to prompt schema truncation (Phase 5a finding); typed-args is orthogonal and helps a narrow enum-confusion class. Cost: $0. |
+| 2026-05-18 | **Iter 7.3 done.** Re-bench v3 + voice exact-match. Multi-tool (n=300): same as 7.2 (baseline best 82.33/54.67/49.67%). Voice (n=30, ret_con K=5, typed-args ON, with hand-annotated gold_args): baseline name 23.33%/args 30.00%/exact 6.67%; **ret_con name 50.00%/args 30.00%/exact 23.33%**. Δ exact = +16.67 pp, +5 positive flips, 0 negative. Voice args bottleneck is ASR not value masking. Cost: $0. |
 

@@ -27,6 +27,103 @@ const VOICE_URL = '/eval/voice_pipeline_results.json';
 const TEST_URL = '/eval/sh_test.json';
 const REGISTRY_URL = '/eval/tool_registry.json';
 
+// Manual gold-args map for the 30 voice fixture items, keyed by i (0..29).
+// Derived from the RU input — the canonical argument values a correct system
+// should extract. Used by iter 7.3 to compute voice exact-match accuracy.
+// (The voice fixture upstream only carries `expected` name, no expected_args.)
+const VOICE_GOLD_ARGS = [
+  /*  0 */ { room: 'living room' },
+  /*  1 */ { room: 'kitchen' },
+  /*  2 */ { room: 'bedroom', temperature_c: 22 },
+  /*  3 */ { door: 'front door' },
+  /*  4 */ { door: 'back door' },
+  /*  5 */ { song: 'jazz', room: 'living room' },
+  /*  6 */ { room: 'kitchen' },
+  /*  7 */ { room: 'bedroom' },
+  /*  8 */ { room: 'office' },
+  /*  9 */ { area: 'living room' },
+  /* 10 */ { time: '07:00' },
+  /* 11 */ { room: 'bedroom' },
+  /* 12 */ { room: 'kids room' },
+  /* 13 */ { room: 'garage' },
+  /* 14 */ { room: 'living room', temperature_c: 21 },
+  /* 15 */ { door: 'garage door' },
+  /* 16 */ { door: 'patio door' },
+  /* 17 */ { song: 'classical', room: 'bedroom' },
+  /* 18 */ { room: 'kitchen' },
+  /* 19 */ { room: 'kitchen' },
+  /* 20 */ { room: 'living room' },
+  /* 21 */ { area: 'kitchen' },
+  /* 22 */ { time: '06:30' },
+  /* 23 */ { room: 'bathroom' },
+  /* 24 */ { room: 'hallway' },
+  /* 25 */ { room: 'kids room', temperature_c: 23 },
+  /* 26 */ { door: 'front door' },
+  /* 27 */ { song: 'rock', room: 'office' },
+  /* 28 */ { room: 'kitchen' },
+  /* 29 */ { area: 'bedroom' },
+];
+
+// Tolerant args matcher (matches bench.js logic — kept inline so voice_bench
+// has no extra cross-module dep). Same rules: same set of keys; numbers compared
+// after string-to-number coercion; strings compared case-insensitive after trim.
+function _voiceArgsMatch(predArgs, goldArgs) {
+  const a = (predArgs && typeof predArgs === 'object') ? predArgs : {};
+  const b = (goldArgs && typeof goldArgs === 'object') ? goldArgs : {};
+  const ak = Object.keys(a).filter(k => a[k] !== undefined);
+  const bk = Object.keys(b).filter(k => b[k] !== undefined);
+  if (ak.length !== bk.length) return false;
+  const aks = ak.slice().sort(), bks = bk.slice().sort();
+  for (let i = 0; i < aks.length; i++) if (aks[i] !== bks[i]) return false;
+  function norm(v) {
+    if (v === null || v === undefined) return null;
+    if (typeof v === 'number' || typeof v === 'boolean') return v;
+    if (typeof v === 'string') {
+      const t = v.trim();
+      if (t !== '' && /^-?\d+(\.\d+)?$/.test(t)) return Number(t);
+      return t.toLowerCase();
+    }
+    return v;
+  }
+  for (const k of aks) {
+    const an = norm(a[k]), bn = norm(b[k]);
+    if (an === null && bn === null) continue;
+    if (an === null || bn === null) return false;
+    if (typeof an === 'number' && typeof bn === 'number') {
+      if (an !== bn) return false;
+    } else if (String(an) !== String(bn)) return false;
+  }
+  return true;
+}
+
+// Extract the predicted JSON arguments from raw model text.
+function _extractPredArgs(rawText) {
+  if (!rawText) return {};
+  const start = rawText.indexOf('{');
+  if (start === -1) return {};
+  let depth = 0, inStr = false;
+  for (let i = start; i < rawText.length; i++) {
+    const c = rawText[i];
+    if (inStr) {
+      if (c === '\\') { i++; continue; }
+      if (c === '"') inStr = false;
+      continue;
+    }
+    if (c === '"') { inStr = true; continue; }
+    if (c === '{') depth++;
+    else if (c === '}') {
+      depth--;
+      if (depth === 0) {
+        try {
+          const obj = JSON.parse(rawText.slice(start, i + 1));
+          return (obj && obj.arguments && typeof obj.arguments === 'object') ? obj.arguments : {};
+        } catch { return {}; }
+      }
+    }
+  }
+  return {};
+}
+
 let _voice = null;
 let _registry = null;
 let _fnDomainMap = null; // gold_name -> domain
@@ -300,13 +397,22 @@ async function runVoiceBench(opts = {}) {
     }
     const pred = extractPredName(res.text);
     const ok = pred === gold;
+    const predArgs = _extractPredArgs(res.text);
+    const goldArgs = VOICE_GOLD_ARGS[i] || {};
+    const argsOk = _voiceArgsMatch(predArgs, goldArgs);
+    const exactOk = ok && argsOk;
     const row = {
       i,
       ru: it.ru_input,
       en: query,
       gold,
       pred,
-      ok,
+      ok,                // legacy: name-only
+      name_ok: ok,
+      args_ok: argsOk,
+      exact_ok: exactOk,
+      gold_args: goldArgs,
+      pred_args: predArgs,
       candidates,
       goldInTopK,
       ms: res.ms,
@@ -324,15 +430,19 @@ async function runVoiceBench(opts = {}) {
   }
 
   const results = window._voiceResults;
-  const acc = results.filter(r => r.ok).length / results.length;
+  const ni = results.length;
+  const acc = results.filter(r => r.ok).length / ni;
+  const name_acc = acc;
+  const args_acc = results.filter(r => r.args_ok).length / ni;
+  const exact_acc = results.filter(r => r.exact_ok).length / ni;
   const recall = useRetrieval
-    ? results.filter(r => r.goldInTopK).length / results.length
+    ? results.filter(r => r.goldInTopK).length / ni
     : null;
-  const meanMs = results.reduce((a, r) => a + r.ms, 0) / results.length;
+  const meanMs = results.reduce((a, r) => a + r.ms, 0) / ni;
 
-  const summary = { configKey, acc, recall, meanMs, n: results.length, results };
+  const summary = { configKey, acc, name_acc, args_acc, exact_acc, recall, meanMs, n: ni, results };
   if (verbose) {
-    console.log(`[voice ${configKey}] DONE acc=${(acc * 100).toFixed(1)}% recall=${recall !== null ? (recall * 100).toFixed(1) + '%' : 'n/a'} mean_ms=${meanMs.toFixed(0)}`);
+    console.log(`[voice ${configKey}] DONE name=${(name_acc * 100).toFixed(1)}% args=${(args_acc * 100).toFixed(1)}% exact=${(exact_acc * 100).toFixed(1)}% recall=${recall !== null ? (recall * 100).toFixed(1) + '%' : 'n/a'} mean_ms=${meanMs.toFixed(0)}`);
   }
   return summary;
 }
