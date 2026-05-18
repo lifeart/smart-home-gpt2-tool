@@ -10,15 +10,27 @@
     ],
     "enums": {
       "room": [
-        "attic",
+        "living room",
+        "bedroom",
+        "kitchen",
+        "bathroom",
+        "nursery",
+        "office",
+        "master bedroom",
+        "sunroom",
+        "hallway",
         "basement",
         "dining room",
+        "attic",
         "garage",
+        "basement gym",
         "garden",
-        "hallway",
-        "living room",
-        "nursery",
-        "porch"
+        "kids room",
+        "porch",
+        "dining_room",
+        "guest_room",
+        "laundry_room",
+        "living_room"
       ]
     }
   },
@@ -34,18 +46,26 @@
     "enums": {
       "room": [
         "living room",
-        "porch",
-        "attic",
-        "basement",
         "bedroom",
-        "dining room",
-        "garden",
-        "hallway",
-        "kids room",
         "kitchen",
-        "master bedroom",
+        "bathroom",
         "nursery",
-        "office"
+        "office",
+        "master bedroom",
+        "sunroom",
+        "hallway",
+        "basement",
+        "dining room",
+        "attic",
+        "garage",
+        "basement gym",
+        "garden",
+        "kids room",
+        "porch",
+        "dining_room",
+        "guest_room",
+        "laundry_room",
+        "living_room"
       ]
     }
   },
@@ -59,16 +79,27 @@
     ],
     "enums": {
       "room": [
-        "attic",
-        "basement",
+        "living room",
         "bedroom",
+        "kitchen",
+        "bathroom",
+        "nursery",
+        "office",
+        "master bedroom",
+        "sunroom",
+        "hallway",
+        "basement",
         "dining room",
+        "attic",
         "garage",
+        "basement gym",
         "garden",
         "kids room",
-        "living room",
-        "master bedroom",
-        "office"
+        "porch",
+        "dining_room",
+        "guest_room",
+        "laundry_room",
+        "living_room"
       ]
     }
   },
@@ -84,36 +115,47 @@
     ],
     "enums": {
       "room": [
-        "kids room",
-        "dining room",
-        "basement",
-        "garage",
-        "garden",
-        "kitchen",
-        "attic",
-        "bathroom",
-        "bedroom",
-        "hallway",
         "living room",
-        "master bedroom",
+        "bedroom",
+        "kitchen",
+        "bathroom",
         "nursery",
         "office",
-        "porch"
+        "master bedroom",
+        "sunroom",
+        "hallway",
+        "basement",
+        "dining room",
+        "attic",
+        "garage",
+        "basement gym",
+        "garden",
+        "kids room",
+        "porch",
+        "dining_room",
+        "guest_room",
+        "laundry_room",
+        "living_room"
       ],
       "color": [
         "warm white",
         "amber",
         "blue",
-        "daylight",
-        "green",
         "orange",
         "pink",
         "purple",
-        "cool white",
         "cyan",
-        "magenta",
+        "daylight",
+        "green",
         "red",
-        "soft yellow"
+        "aqua green",
+        "cool white",
+        "deep navy",
+        "deep red",
+        "magenta",
+        "ocean blue",
+        "soft yellow",
+        "yellow"
       ]
     }
   },
@@ -127,13 +169,27 @@
     ],
     "enums": {
       "room": [
-        "bedroom",
         "living room",
-        "dining room",
+        "bedroom",
         "kitchen",
-        "master bedroom",
+        "bathroom",
         "nursery",
-        "porch"
+        "office",
+        "master bedroom",
+        "sunroom",
+        "hallway",
+        "basement",
+        "dining room",
+        "attic",
+        "garage",
+        "basement gym",
+        "garden",
+        "kids room",
+        "porch",
+        "dining_room",
+        "guest_room",
+        "laundry_room",
+        "living_room"
       ]
     }
   },
@@ -148,18 +204,27 @@
     ],
     "enums": {
       "room": [
-        "bedroom",
-        "basement",
         "living room",
+        "bedroom",
+        "kitchen",
         "bathroom",
+        "nursery",
+        "office",
+        "master bedroom",
+        "sunroom",
+        "hallway",
+        "basement",
         "dining room",
+        "attic",
         "garage",
+        "basement gym",
         "garden",
         "kids room",
-        "kitchen",
-        "master bedroom",
-        "office",
-        "porch"
+        "porch",
+        "dining_room",
+        "guest_room",
+        "laundry_room",
+        "living_room"
       ],
       "scene": [
         "movie",
@@ -186,18 +251,27 @@
     ],
     "enums": {
       "room": [
-        "attic",
-        "basement",
-        "bathroom",
-        "dining room",
-        "garage",
-        "garden",
-        "hallway",
-        "kitchen",
         "living room",
+        "bedroom",
+        "kitchen",
+        "bathroom",
         "nursery",
         "office",
-        "porch"
+        "master bedroom",
+        "sunroom",
+        "hallway",
+        "basement",
+        "dining room",
+        "attic",
+        "garage",
+        "basement gym",
+        "garden",
+        "kids room",
+        "porch",
+        "dining_room",
+        "guest_room",
+        "laundry_room",
+        "living_room"
       ]
     }
   },
@@ -214,14 +288,27 @@
     ],
     "enums": {
       "room": [
-        "basement",
-        "bathroom",
-        "garden",
-        "hallway",
         "living room",
+        "bedroom",
+        "kitchen",
+        "bathroom",
         "nursery",
         "office",
-        "porch"
+        "master bedroom",
+        "sunroom",
+        "hallway",
+        "basement",
+        "dining room",
+        "attic",
+        "garage",
+        "basement gym",
+        "garden",
+        "kids room",
+        "porch",
+        "dining_room",
+        "guest_room",
+        "laundry_room",
+        "living_room"
       ],
       "outlet_name": [
         "coffee maker",
@@ -247,10 +334,27 @@
     ],
     "enums": {
       "room": [
-        "attic",
+        "living room",
+        "bedroom",
+        "kitchen",
+        "bathroom",
+        "nursery",
+        "office",
+        "master bedroom",
+        "sunroom",
+        "hallway",
+        "basement",
         "dining room",
+        "attic",
+        "garage",
+        "basement gym",
+        "garden",
         "kids room",
-        "nursery"
+        "porch",
+        "dining_room",
+        "guest_room",
+        "laundry_room",
+        "living_room"
       ]
     }
   },
@@ -265,17 +369,32 @@
     ],
     "enums": {
       "room": [
+        "living room",
         "bedroom",
-        "garage",
-        "hallway",
         "kitchen",
+        "bathroom",
+        "nursery",
+        "office",
         "master bedroom",
-        "office"
+        "sunroom",
+        "hallway",
+        "basement",
+        "dining room",
+        "attic",
+        "garage",
+        "basement gym",
+        "garden",
+        "kids room",
+        "porch",
+        "dining_room",
+        "guest_room",
+        "laundry_room",
+        "living_room"
       ],
       "level": [
-        "low",
+        "high",
         "medium",
-        "high"
+        "low"
       ]
     }
   },
@@ -291,21 +410,37 @@
     ],
     "enums": {
       "room": [
-        "bathroom",
-        "sunroom",
-        "kitchen",
-        "basement",
-        "hallway",
-        "attic",
-        "bedroom",
-        "master bedroom",
-        "nursery",
         "living room",
-        "office"
+        "bedroom",
+        "kitchen",
+        "bathroom",
+        "nursery",
+        "office",
+        "master bedroom",
+        "sunroom",
+        "hallway",
+        "basement",
+        "dining room",
+        "attic",
+        "garage",
+        "basement gym",
+        "garden",
+        "kids room",
+        "porch",
+        "dining_room",
+        "guest_room",
+        "laundry_room",
+        "living_room"
       ],
       "mode": [
         "heat",
-        "cool"
+        "cool",
+        "eco",
+        "stay",
+        "away",
+        "night",
+        "off",
+        "vacation"
       ]
     }
   },
@@ -320,23 +455,33 @@
     ],
     "enums": {
       "room": [
-        "attic",
-        "hallway",
-        "nursery",
-        "sunroom",
-        "basement",
-        "bathroom",
+        "living room",
         "bedroom",
         "kitchen",
-        "living room",
+        "bathroom",
+        "nursery",
+        "office",
         "master bedroom",
-        "office"
+        "sunroom",
+        "hallway",
+        "basement",
+        "dining room",
+        "attic",
+        "garage",
+        "basement gym",
+        "garden",
+        "kids room",
+        "porch",
+        "dining_room",
+        "guest_room",
+        "laundry_room",
+        "living_room"
       ],
       "speed": [
-        "low",
         "high",
-        "medium",
-        "auto"
+        "low",
+        "auto",
+        "medium"
       ]
     }
   },
@@ -349,15 +494,27 @@
     ],
     "enums": {
       "room": [
-        "nursery",
-        "basement",
-        "bathroom",
+        "living room",
         "bedroom",
-        "attic",
-        "hallway",
         "kitchen",
+        "bathroom",
+        "nursery",
+        "office",
+        "master bedroom",
+        "sunroom",
+        "hallway",
+        "basement",
+        "dining room",
+        "attic",
+        "garage",
+        "basement gym",
+        "garden",
+        "kids room",
+        "porch",
+        "dining_room",
+        "guest_room",
         "laundry_room",
-        "sunroom"
+        "living_room"
       ]
     }
   },
@@ -372,10 +529,27 @@
     ],
     "enums": {
       "room": [
-        "bathroom",
-        "basement",
+        "living room",
         "bedroom",
-        "living room"
+        "kitchen",
+        "bathroom",
+        "nursery",
+        "office",
+        "master bedroom",
+        "sunroom",
+        "hallway",
+        "basement",
+        "dining room",
+        "attic",
+        "garage",
+        "basement gym",
+        "garden",
+        "kids room",
+        "porch",
+        "dining_room",
+        "guest_room",
+        "laundry_room",
+        "living_room"
       ],
       "state": [
         "on",
@@ -394,20 +568,37 @@
     ],
     "enums": {
       "room": [
-        "master bedroom",
-        "basement",
-        "attic",
-        "bathroom",
-        "kitchen",
         "living room",
+        "bedroom",
+        "kitchen",
+        "bathroom",
         "nursery",
-        "sunroom"
+        "office",
+        "master bedroom",
+        "sunroom",
+        "hallway",
+        "basement",
+        "dining room",
+        "attic",
+        "garage",
+        "basement gym",
+        "garden",
+        "kids room",
+        "porch",
+        "dining_room",
+        "guest_room",
+        "laundry_room",
+        "living_room"
       ],
       "mode": [
-        "eco",
-        "off",
+        "heat",
         "cool",
-        "heat"
+        "eco",
+        "stay",
+        "away",
+        "night",
+        "off",
+        "vacation"
       ]
     }
   },
@@ -422,11 +613,27 @@
     ],
     "enums": {
       "room": [
-        "hallway",
-        "bathroom",
+        "living room",
         "bedroom",
+        "kitchen",
+        "bathroom",
+        "nursery",
+        "office",
         "master bedroom",
-        "nursery"
+        "sunroom",
+        "hallway",
+        "basement",
+        "dining room",
+        "attic",
+        "garage",
+        "basement gym",
+        "garden",
+        "kids room",
+        "porch",
+        "dining_room",
+        "guest_room",
+        "laundry_room",
+        "living_room"
       ]
     }
   },
@@ -443,16 +650,27 @@
     ],
     "enums": {
       "room": [
-        "basement",
-        "bedroom",
-        "master bedroom",
-        "nursery",
-        "attic",
-        "hallway",
-        "kitchen",
         "living room",
+        "bedroom",
+        "kitchen",
+        "bathroom",
+        "nursery",
         "office",
-        "sunroom"
+        "master bedroom",
+        "sunroom",
+        "hallway",
+        "basement",
+        "dining room",
+        "attic",
+        "garage",
+        "basement gym",
+        "garden",
+        "kids room",
+        "porch",
+        "dining_room",
+        "guest_room",
+        "laundry_room",
+        "living_room"
       ],
       "program": [
         "eco",
@@ -489,9 +707,27 @@
     ],
     "enums": {
       "room": [
+        "living room",
+        "bedroom",
+        "kitchen",
+        "bathroom",
+        "nursery",
+        "office",
+        "master bedroom",
+        "sunroom",
         "hallway",
+        "basement",
+        "dining room",
         "attic",
-        "basement"
+        "garage",
+        "basement gym",
+        "garden",
+        "kids room",
+        "porch",
+        "dining_room",
+        "guest_room",
+        "laundry_room",
+        "living_room"
       ],
       "state": [
         "on",
@@ -510,15 +746,27 @@
     ],
     "enums": {
       "room": [
-        "master bedroom",
+        "living room",
+        "bedroom",
+        "kitchen",
+        "bathroom",
         "nursery",
         "office",
-        "attic",
-        "basement",
+        "master bedroom",
+        "sunroom",
         "hallway",
-        "kitchen",
-        "living room",
-        "sunroom"
+        "basement",
+        "dining room",
+        "attic",
+        "garage",
+        "basement gym",
+        "garden",
+        "kids room",
+        "porch",
+        "dining_room",
+        "guest_room",
+        "laundry_room",
+        "living_room"
       ]
     }
   },
@@ -531,19 +779,27 @@
     ],
     "enums": {
       "room": [
-        "bedroom",
-        "dining_room",
-        "kitchen",
-        "office",
-        "attic",
-        "basement",
-        "bathroom",
-        "garage",
-        "guest_room",
-        "hallway",
         "living room",
-        "living_room",
-        "nursery"
+        "bedroom",
+        "kitchen",
+        "bathroom",
+        "nursery",
+        "office",
+        "master bedroom",
+        "sunroom",
+        "hallway",
+        "basement",
+        "dining room",
+        "attic",
+        "garage",
+        "basement gym",
+        "garden",
+        "kids room",
+        "porch",
+        "dining_room",
+        "guest_room",
+        "laundry_room",
+        "living_room"
       ]
     }
   },
@@ -561,9 +817,9 @@
     "enums": {
       "camera": [
         "backyard cam",
-        "front door cam",
-        "baby monitor",
         "driveway cam",
+        "baby monitor",
+        "front door cam",
         "living room cam"
       ]
     }
@@ -577,12 +833,17 @@
     ],
     "enums": {
       "door": [
-        "garage door",
-        "back door",
         "front door",
+        "side door",
+        "back door",
+        "garage door",
         "patio door",
         "basement door",
-        "side door"
+        "front_door",
+        "patio_door",
+        "back_door",
+        "basement_door",
+        "side_door"
       ]
     }
   },
@@ -598,9 +859,10 @@
     "enums": {
       "camera": [
         "backyard cam",
+        "driveway cam",
         "baby monitor",
         "front door cam",
-        "driveway cam"
+        "living room cam"
       ],
       "level": [
         "high",
@@ -618,12 +880,17 @@
     ],
     "enums": {
       "door": [
-        "side door",
         "front door",
+        "side door",
         "back door",
-        "basement door",
         "garage door",
-        "patio door"
+        "patio door",
+        "basement door",
+        "front_door",
+        "patio_door",
+        "back_door",
+        "basement_door",
+        "side_door"
       ]
     }
   },
@@ -636,9 +903,13 @@
     ],
     "enums": {
       "mode": [
+        "heat",
+        "cool",
+        "eco",
         "stay",
         "away",
         "night",
+        "off",
         "vacation"
       ]
     }
@@ -652,11 +923,11 @@
     ],
     "enums": {
       "camera": [
-        "driveway cam",
-        "living room cam",
-        "baby monitor",
         "backyard cam",
-        "front door cam"
+        "driveway cam",
+        "baby monitor",
+        "front door cam",
+        "living room cam"
       ]
     }
   },
@@ -709,15 +980,15 @@
     ],
     "enums": {
       "door": [
-        "front_door",
-        "patio_door",
-        "back door",
-        "back_door",
         "front door",
+        "side door",
+        "back door",
         "garage door",
         "patio door",
-        "side door",
         "basement door",
+        "front_door",
+        "patio_door",
+        "back_door",
         "basement_door",
         "side_door"
       ]
@@ -740,13 +1011,26 @@
     "enums": {
       "room": [
         "living room",
-        "office",
-        "basement gym",
         "bedroom",
-        "dining room",
-        "garage",
         "kitchen",
-        "master bedroom"
+        "bathroom",
+        "nursery",
+        "office",
+        "master bedroom",
+        "sunroom",
+        "hallway",
+        "basement",
+        "dining room",
+        "attic",
+        "garage",
+        "basement gym",
+        "garden",
+        "kids room",
+        "porch",
+        "dining_room",
+        "guest_room",
+        "laundry_room",
+        "living_room"
       ]
     }
   },
@@ -762,9 +1046,26 @@
     "enums": {
       "room": [
         "living room",
-        "basement gym",
         "bedroom",
-        "kitchen"
+        "kitchen",
+        "bathroom",
+        "nursery",
+        "office",
+        "master bedroom",
+        "sunroom",
+        "hallway",
+        "basement",
+        "dining room",
+        "attic",
+        "garage",
+        "basement gym",
+        "garden",
+        "kids room",
+        "porch",
+        "dining_room",
+        "guest_room",
+        "laundry_room",
+        "living_room"
       ],
       "input": [
         "antenna",
@@ -785,9 +1086,27 @@
     ],
     "enums": {
       "room": [
-        "kitchen",
         "living room",
-        "master bedroom"
+        "bedroom",
+        "kitchen",
+        "bathroom",
+        "nursery",
+        "office",
+        "master bedroom",
+        "sunroom",
+        "hallway",
+        "basement",
+        "dining room",
+        "attic",
+        "garage",
+        "basement gym",
+        "garden",
+        "kids room",
+        "porch",
+        "dining_room",
+        "guest_room",
+        "laundry_room",
+        "living_room"
       ]
     }
   },
@@ -800,11 +1119,27 @@
     ],
     "enums": {
       "room": [
-        "basement gym",
+        "living room",
         "bedroom",
-        "dining room",
         "kitchen",
-        "office"
+        "bathroom",
+        "nursery",
+        "office",
+        "master bedroom",
+        "sunroom",
+        "hallway",
+        "basement",
+        "dining room",
+        "attic",
+        "garage",
+        "basement gym",
+        "garden",
+        "kids room",
+        "porch",
+        "dining_room",
+        "guest_room",
+        "laundry_room",
+        "living_room"
       ]
     }
   },
@@ -817,9 +1152,27 @@
     ],
     "enums": {
       "room": [
-        "basement gym",
+        "living room",
         "bedroom",
-        "living room"
+        "kitchen",
+        "bathroom",
+        "nursery",
+        "office",
+        "master bedroom",
+        "sunroom",
+        "hallway",
+        "basement",
+        "dining room",
+        "attic",
+        "garage",
+        "basement gym",
+        "garden",
+        "kids room",
+        "porch",
+        "dining_room",
+        "guest_room",
+        "laundry_room",
+        "living_room"
       ]
     }
   },
@@ -835,7 +1188,24 @@
         "living room",
         "bedroom",
         "kitchen",
-        "master bedroom"
+        "bathroom",
+        "nursery",
+        "office",
+        "master bedroom",
+        "sunroom",
+        "hallway",
+        "basement",
+        "dining room",
+        "attic",
+        "garage",
+        "basement gym",
+        "garden",
+        "kids room",
+        "porch",
+        "dining_room",
+        "guest_room",
+        "laundry_room",
+        "living_room"
       ]
     }
   },
@@ -848,10 +1218,27 @@
     ],
     "enums": {
       "room": [
+        "living room",
         "bedroom",
-        "dining room",
         "kitchen",
-        "living room"
+        "bathroom",
+        "nursery",
+        "office",
+        "master bedroom",
+        "sunroom",
+        "hallway",
+        "basement",
+        "dining room",
+        "attic",
+        "garage",
+        "basement gym",
+        "garden",
+        "kids room",
+        "porch",
+        "dining_room",
+        "guest_room",
+        "laundry_room",
+        "living_room"
       ]
     }
   },
@@ -890,13 +1277,27 @@
     ],
     "enums": {
       "room": [
-        "basement gym",
-        "bedroom",
-        "dining room",
-        "garage",
-        "kitchen",
         "living room",
-        "office"
+        "bedroom",
+        "kitchen",
+        "bathroom",
+        "nursery",
+        "office",
+        "master bedroom",
+        "sunroom",
+        "hallway",
+        "basement",
+        "dining room",
+        "attic",
+        "garage",
+        "basement gym",
+        "garden",
+        "kids room",
+        "porch",
+        "dining_room",
+        "guest_room",
+        "laundry_room",
+        "living_room"
       ]
     }
   },
@@ -922,11 +1323,27 @@
         "This American Life"
       ],
       "room": [
+        "living room",
         "bedroom",
-        "garage",
         "kitchen",
+        "bathroom",
+        "nursery",
+        "office",
+        "master bedroom",
+        "sunroom",
+        "hallway",
+        "basement",
+        "dining room",
+        "attic",
+        "garage",
         "basement gym",
-        "office"
+        "garden",
+        "kids room",
+        "porch",
+        "dining_room",
+        "guest_room",
+        "laundry_room",
+        "living_room"
       ]
     }
   },
@@ -944,7 +1361,24 @@
         "living room",
         "bedroom",
         "kitchen",
-        "master bedroom"
+        "bathroom",
+        "nursery",
+        "office",
+        "master bedroom",
+        "sunroom",
+        "hallway",
+        "basement",
+        "dining room",
+        "attic",
+        "garage",
+        "basement gym",
+        "garden",
+        "kids room",
+        "porch",
+        "dining_room",
+        "guest_room",
+        "laundry_room",
+        "living_room"
       ]
     }
   },
@@ -968,11 +1402,27 @@
         "Radio Paradise"
       ],
       "room": [
-        "kitchen",
         "living room",
-        "basement gym",
+        "bedroom",
+        "kitchen",
+        "bathroom",
+        "nursery",
+        "office",
+        "master bedroom",
+        "sunroom",
+        "hallway",
+        "basement",
+        "dining room",
+        "attic",
         "garage",
-        "office"
+        "basement gym",
+        "garden",
+        "kids room",
+        "porch",
+        "dining_room",
+        "guest_room",
+        "laundry_room",
+        "living_room"
       ]
     }
   },
@@ -987,10 +1437,27 @@
     ],
     "enums": {
       "room": [
+        "living room",
         "bedroom",
         "kitchen",
-        "living room",
-        "master bedroom"
+        "bathroom",
+        "nursery",
+        "office",
+        "master bedroom",
+        "sunroom",
+        "hallway",
+        "basement",
+        "dining room",
+        "attic",
+        "garage",
+        "basement gym",
+        "garden",
+        "kids room",
+        "porch",
+        "dining_room",
+        "guest_room",
+        "laundry_room",
+        "living_room"
       ],
       "channel": [
         "Cartoon Network",
@@ -1013,23 +1480,28 @@
       "room"
     ],
     "enums": {
-      "song": [
-        "Billie Jean",
-        "Clair de Lune",
-        "garage door grooves",
-        "Hey Jude",
-        "Hotel California",
-        "Lose Yourself",
-        "Take Five",
-        "vinyl crackle session"
-      ],
       "room": [
-        "bedroom",
         "living room",
-        "basement gym",
+        "bedroom",
+        "kitchen",
+        "bathroom",
+        "nursery",
+        "office",
+        "master bedroom",
+        "sunroom",
+        "hallway",
+        "basement",
         "dining room",
+        "attic",
         "garage",
-        "office"
+        "basement gym",
+        "garden",
+        "kids room",
+        "porch",
+        "dining_room",
+        "guest_room",
+        "laundry_room",
+        "living_room"
       ]
     }
   },
@@ -1044,13 +1516,27 @@
     ],
     "enums": {
       "room": [
-        "kitchen",
-        "bedroom",
-        "garage",
         "living room",
-        "basement gym",
+        "bedroom",
+        "kitchen",
+        "bathroom",
+        "nursery",
+        "office",
+        "master bedroom",
+        "sunroom",
+        "hallway",
+        "basement",
         "dining room",
-        "office"
+        "attic",
+        "garage",
+        "basement gym",
+        "garden",
+        "kids room",
+        "porch",
+        "dining_room",
+        "guest_room",
+        "laundry_room",
+        "living_room"
       ]
     }
   },
@@ -1116,14 +1602,14 @@
     ],
     "enums": {
       "zone": [
+        "front lawn",
         "rose bed",
         "back lawn",
-        "front lawn",
-        "hedge row",
         "vegetable garden",
         "citrus trees",
-        "driveway strip",
-        "succulent corner"
+        "hedge row",
+        "succulent corner",
+        "driveway strip"
       ]
     }
   },
@@ -1136,12 +1622,14 @@
     ],
     "enums": {
       "zone": [
+        "front lawn",
         "rose bed",
         "back lawn",
+        "vegetable garden",
         "citrus trees",
-        "front lawn",
+        "hedge row",
         "succulent corner",
-        "vegetable garden"
+        "driveway strip"
       ]
     }
   },
@@ -1154,15 +1642,19 @@
     ],
     "enums": {
       "location": [
-        "back patio",
+        "patio",
+        "pool deck",
         "backyard",
         "driveway",
         "garden path",
         "gazebo",
-        "patio",
-        "pool deck",
-        "pool path",
-        "side yard"
+        "porch",
+        "side yard",
+        "back patio",
+        "deck",
+        "front yard",
+        "garden",
+        "pool path"
       ]
     }
   },
@@ -1175,13 +1667,19 @@
     ],
     "enums": {
       "location": [
-        "deck",
+        "patio",
+        "pool deck",
+        "backyard",
         "driveway",
         "garden path",
         "gazebo",
-        "pool deck",
         "porch",
-        "side yard"
+        "side yard",
+        "back patio",
+        "deck",
+        "front yard",
+        "garden",
+        "pool path"
       ]
     }
   },
@@ -1206,6 +1704,7 @@
       "speed": [
         "high",
         "low",
+        "auto",
         "medium"
       ]
     }
@@ -1227,13 +1726,14 @@
     ],
     "enums": {
       "zone": [
-        "citrus trees",
-        "vegetable garden",
-        "back lawn",
         "front lawn",
-        "hedge row",
         "rose bed",
-        "succulent corner"
+        "back lawn",
+        "vegetable garden",
+        "citrus trees",
+        "hedge row",
+        "succulent corner",
+        "driveway strip"
       ]
     }
   },
@@ -1253,25 +1753,37 @@
     "enums": {
       "location": [
         "patio",
-        "backyard",
         "pool deck",
+        "backyard",
         "driveway",
+        "garden path",
+        "gazebo",
+        "porch",
+        "side yard",
+        "back patio",
+        "deck",
         "front yard",
         "garden",
-        "porch"
+        "pool path"
       ],
       "color": [
+        "warm white",
         "amber",
-        "aqua green",
         "blue",
-        "cyan",
-        "deep navy",
-        "deep red",
-        "ocean blue",
         "orange",
         "pink",
         "purple",
+        "cyan",
+        "daylight",
+        "green",
         "red",
+        "aqua green",
+        "cool white",
+        "deep navy",
+        "deep red",
+        "magenta",
+        "ocean blue",
+        "soft yellow",
         "yellow"
       ]
     }
@@ -1287,8 +1799,13 @@
     "enums": {
       "zone": [
         "front lawn",
+        "rose bed",
         "back lawn",
-        "hedge row"
+        "vegetable garden",
+        "citrus trees",
+        "hedge row",
+        "succulent corner",
+        "driveway strip"
       ]
     }
   },
@@ -1313,15 +1830,29 @@
     ],
     "enums": {
       "zone": [
-        "vegetable garden",
-        "citrus trees",
+        "front lawn",
         "rose bed",
         "back lawn",
-        "driveway strip",
-        "front lawn",
-        "succulent corner"
+        "vegetable garden",
+        "citrus trees",
+        "hedge row",
+        "succulent corner",
+        "driveway strip"
       ],
       "time": [
+        "11:00",
+        "15:00",
+        "07:00",
+        "08:00",
+        "09:00",
+        "10:00",
+        "14:00",
+        "17:00",
+        "18:00",
+        "20:00",
+        "21:00",
+        "22:00",
+        "23:00",
         "daily 05:00 starting tomorrow",
         "every other day 05:30",
         "Friday 05:45",
@@ -1345,10 +1876,27 @@
     ],
     "enums": {
       "room": [
-        "sunroom",
-        "bathroom",
+        "living room",
         "bedroom",
-        "nursery"
+        "kitchen",
+        "bathroom",
+        "nursery",
+        "office",
+        "master bedroom",
+        "sunroom",
+        "hallway",
+        "basement",
+        "dining room",
+        "attic",
+        "garage",
+        "basement gym",
+        "garden",
+        "kids room",
+        "porch",
+        "dining_room",
+        "guest_room",
+        "laundry_room",
+        "living_room"
       ]
     }
   },
@@ -1361,9 +1909,27 @@
     ],
     "enums": {
       "room": [
+        "living room",
+        "bedroom",
+        "kitchen",
+        "bathroom",
+        "nursery",
+        "office",
+        "master bedroom",
         "sunroom",
         "hallway",
-        "nursery"
+        "basement",
+        "dining room",
+        "attic",
+        "garage",
+        "basement gym",
+        "garden",
+        "kids room",
+        "porch",
+        "dining_room",
+        "guest_room",
+        "laundry_room",
+        "living_room"
       ]
     }
   },
@@ -1376,11 +1942,27 @@
     ],
     "enums": {
       "room": [
+        "living room",
+        "bedroom",
+        "kitchen",
         "bathroom",
         "nursery",
+        "office",
+        "master bedroom",
+        "sunroom",
+        "hallway",
+        "basement",
         "dining room",
-        "living room",
-        "office"
+        "attic",
+        "garage",
+        "basement gym",
+        "garden",
+        "kids room",
+        "porch",
+        "dining_room",
+        "guest_room",
+        "laundry_room",
+        "living_room"
       ]
     }
   },
@@ -1394,10 +1976,26 @@
     "enums": {
       "room": [
         "living room",
-        "office",
+        "bedroom",
+        "kitchen",
         "bathroom",
+        "nursery",
+        "office",
+        "master bedroom",
+        "sunroom",
         "hallway",
-        "master bedroom"
+        "basement",
+        "dining room",
+        "attic",
+        "garage",
+        "basement gym",
+        "garden",
+        "kids room",
+        "porch",
+        "dining_room",
+        "guest_room",
+        "laundry_room",
+        "living_room"
       ]
     }
   },
@@ -1410,11 +2008,27 @@
     ],
     "enums": {
       "room": [
+        "living room",
         "bedroom",
-        "dining room",
         "kitchen",
+        "bathroom",
+        "nursery",
         "office",
-        "sunroom"
+        "master bedroom",
+        "sunroom",
+        "hallway",
+        "basement",
+        "dining room",
+        "attic",
+        "garage",
+        "basement gym",
+        "garden",
+        "kids room",
+        "porch",
+        "dining_room",
+        "guest_room",
+        "laundry_room",
+        "living_room"
       ]
     }
   },
@@ -1427,11 +2041,27 @@
     ],
     "enums": {
       "room": [
-        "bathroom",
+        "living room",
         "bedroom",
-        "hallway",
         "kitchen",
-        "nursery"
+        "bathroom",
+        "nursery",
+        "office",
+        "master bedroom",
+        "sunroom",
+        "hallway",
+        "basement",
+        "dining room",
+        "attic",
+        "garage",
+        "basement gym",
+        "garden",
+        "kids room",
+        "porch",
+        "dining_room",
+        "guest_room",
+        "laundry_room",
+        "living_room"
       ]
     }
   },
@@ -1444,9 +2074,27 @@
     ],
     "enums": {
       "room": [
-        "bathroom",
+        "living room",
         "bedroom",
-        "kitchen"
+        "kitchen",
+        "bathroom",
+        "nursery",
+        "office",
+        "master bedroom",
+        "sunroom",
+        "hallway",
+        "basement",
+        "dining room",
+        "attic",
+        "garage",
+        "basement gym",
+        "garden",
+        "kids room",
+        "porch",
+        "dining_room",
+        "guest_room",
+        "laundry_room",
+        "living_room"
       ]
     }
   },
@@ -1461,16 +2109,27 @@
     ],
     "enums": {
       "room": [
-        "sunroom",
-        "nursery",
         "living room",
-        "kitchen",
         "bedroom",
-        "master bedroom",
-        "office",
+        "kitchen",
         "bathroom",
+        "nursery",
+        "office",
+        "master bedroom",
+        "sunroom",
+        "hallway",
+        "basement",
         "dining room",
-        "hallway"
+        "attic",
+        "garage",
+        "basement gym",
+        "garden",
+        "kids room",
+        "porch",
+        "dining_room",
+        "guest_room",
+        "laundry_room",
+        "living_room"
       ]
     }
   },
@@ -1486,15 +2145,26 @@
     "enums": {
       "room": [
         "living room",
-        "bathroom",
-        "office",
         "bedroom",
-        "hallway",
-        "master bedroom",
+        "kitchen",
+        "bathroom",
         "nursery",
+        "office",
+        "master bedroom",
         "sunroom",
+        "hallway",
+        "basement",
         "dining room",
-        "kitchen"
+        "attic",
+        "garage",
+        "basement gym",
+        "garden",
+        "kids room",
+        "porch",
+        "dining_room",
+        "guest_room",
+        "laundry_room",
+        "living_room"
       ]
     }
   },
@@ -1507,13 +2177,27 @@
     ],
     "enums": {
       "room": [
-        "bathroom",
-        "kitchen",
-        "nursery",
-        "sunroom",
-        "dining room",
         "living room",
-        "master bedroom"
+        "bedroom",
+        "kitchen",
+        "bathroom",
+        "nursery",
+        "office",
+        "master bedroom",
+        "sunroom",
+        "hallway",
+        "basement",
+        "dining room",
+        "attic",
+        "garage",
+        "basement gym",
+        "garden",
+        "kids room",
+        "porch",
+        "dining_room",
+        "guest_room",
+        "laundry_room",
+        "living_room"
       ]
     }
   },
@@ -1526,11 +2210,27 @@
     ],
     "enums": {
       "room": [
-        "bathroom",
-        "dining room",
-        "kitchen",
         "living room",
-        "sunroom"
+        "bedroom",
+        "kitchen",
+        "bathroom",
+        "nursery",
+        "office",
+        "master bedroom",
+        "sunroom",
+        "hallway",
+        "basement",
+        "dining room",
+        "attic",
+        "garage",
+        "basement gym",
+        "garden",
+        "kids room",
+        "porch",
+        "dining_room",
+        "guest_room",
+        "laundry_room",
+        "living_room"
       ]
     }
   },
@@ -1543,9 +2243,27 @@
     ],
     "enums": {
       "room": [
+        "living room",
         "bedroom",
+        "kitchen",
+        "bathroom",
+        "nursery",
+        "office",
+        "master bedroom",
+        "sunroom",
+        "hallway",
+        "basement",
         "dining room",
-        "master bedroom"
+        "attic",
+        "garage",
+        "basement gym",
+        "garden",
+        "kids room",
+        "porch",
+        "dining_room",
+        "guest_room",
+        "laundry_room",
+        "living_room"
       ]
     }
   },
@@ -1558,10 +2276,27 @@
     ],
     "enums": {
       "room": [
+        "living room",
+        "bedroom",
+        "kitchen",
+        "bathroom",
+        "nursery",
+        "office",
         "master bedroom",
         "sunroom",
-        "kitchen",
-        "living room"
+        "hallway",
+        "basement",
+        "dining room",
+        "attic",
+        "garage",
+        "basement gym",
+        "garden",
+        "kids room",
+        "porch",
+        "dining_room",
+        "guest_room",
+        "laundry_room",
+        "living_room"
       ]
     }
   },
@@ -1575,15 +2310,15 @@
     ],
     "enums": {
       "area": [
-        "dining room",
-        "kids room",
+        "kitchen",
         "bedroom",
-        "hallway",
-        "living room",
         "office",
-        "whole house",
+        "kids room",
+        "living room",
+        "dining room",
+        "hallway",
         "bathroom",
-        "kitchen"
+        "whole house"
       ],
       "intensity": [
         "deep",
@@ -1608,6 +2343,23 @@
       "time"
     ],
     "enums": {
+      "area": [
+        "kitchen",
+        "bedroom",
+        "office",
+        "kids room",
+        "living room",
+        "dining room",
+        "hallway",
+        "bathroom",
+        "whole house"
+      ],
+      "intensity": [
+        "deep",
+        "eco",
+        "quick",
+        "normal"
+      ],
       "time": [
         "11:00",
         "15:00",
@@ -1621,7 +2373,18 @@
         "20:00",
         "21:00",
         "22:00",
-        "23:00"
+        "23:00",
+        "daily 05:00 starting tomorrow",
+        "every other day 05:30",
+        "Friday 05:45",
+        "Monday 06:00",
+        "Sunday 06:30",
+        "Sunday 07:00",
+        "today 20:00",
+        "tomorrow 06:00",
+        "tonight 21:00",
+        "weekdays 04:30",
+        "weekdays 06:00 next week"
       ],
       "day": [
         "daily",
@@ -1633,19 +2396,6 @@
         "tomorrow",
         "Tuesday",
         "Wednesday"
-      ],
-      "area": [
-        "bedroom",
-        "hallway",
-        "kitchen",
-        "living room",
-        "bathroom",
-        "dining room",
-        "office"
-      ],
-      "intensity": [
-        "eco",
-        "deep"
       ]
     }
   },
@@ -1664,18 +2414,18 @@
     "enums": {
       "area": [
         "kitchen",
-        "bathroom",
-        "dining room",
-        "hallway",
-        "whole house",
         "bedroom",
+        "office",
         "kids room",
         "living room",
-        "office"
+        "dining room",
+        "hallway",
+        "bathroom",
+        "whole house"
       ],
       "water_level": [
-        "high",
         "low",
+        "high",
         "medium"
       ]
     }
@@ -1709,17 +2459,20 @@
     ],
     "enums": {
       "area": [
+        "kitchen",
         "bedroom",
-        "living room",
         "office",
         "kids room",
-        "kitchen",
-        "hallway"
+        "living room",
+        "dining room",
+        "hallway",
+        "bathroom",
+        "whole house"
       ],
       "speed": [
         "high",
-        "auto",
         "low",
+        "auto",
         "medium"
       ]
     }
@@ -1733,10 +2486,15 @@
     ],
     "enums": {
       "area": [
-        "bedroom",
-        "kids room",
         "kitchen",
-        "office"
+        "bedroom",
+        "office",
+        "kids room",
+        "living room",
+        "dining room",
+        "hallway",
+        "bathroom",
+        "whole house"
       ]
     }
   },
@@ -1750,12 +2508,21 @@
     ],
     "enums": {
       "area": [
+        "kitchen",
+        "bedroom",
+        "office",
         "kids room",
-        "office"
+        "living room",
+        "dining room",
+        "hallway",
+        "bathroom",
+        "whole house"
       ],
       "speed": [
+        "high",
+        "low",
         "auto",
-        "high"
+        "medium"
       ]
     }
   },
@@ -1766,11 +2533,15 @@
     "required": [],
     "enums": {
       "area": [
-        "bedroom",
-        "kids room",
         "kitchen",
+        "bedroom",
+        "office",
+        "kids room",
         "living room",
-        "office"
+        "dining room",
+        "hallway",
+        "bathroom",
+        "whole house"
       ]
     }
   },

@@ -1,0 +1,870 @@
+{
+  "iter": "8.2",
+  "config": "ret_con K=5 typed-args ON + global-pool enums",
+  "model": "v3 webgpu/fp32",
+  "summary": {
+    "configKey": "ret_con",
+    "acc": 0.5,
+    "name_acc": 0.5,
+    "args_acc": 0.3,
+    "exact_acc": 0.23333333333333334,
+    "recall": 0.8333333333333334,
+    "meanMs": 398.35566666647793,
+    "n": 30,
+    "results": [
+      {
+        "i": 0,
+        "ru": "Включи свет в гостиной",
+        "en": "Turn on the light in the living room.",
+        "gold": "turn_on_light",
+        "pred": "turn_on_light",
+        "ok": true,
+        "name_ok": true,
+        "args_ok": false,
+        "exact_ok": false,
+        "gold_args": {
+          "room": "living room"
+        },
+        "pred_args": {
+          "room": "living_room"
+        },
+        "candidates": [
+          "turn_on_light",
+          "turn_off_light",
+          "turn_on_tv",
+          "set_light_scene",
+          "toggle_humidifier"
+        ],
+        "goldInTopK": true,
+        "ms": 642.5,
+        "text": "{\"name\":\"turn_on_light\",\"arguments\":{\"room\":\"living_room\"}}",
+        "expandedQueries": null
+      },
+      {
+        "i": 1,
+        "ru": "Выключи свет на кухне",
+        "en": "Turn off the light in the kitchen.",
+        "gold": "turn_off_light",
+        "pred": "set_light_scene",
+        "ok": false,
+        "name_ok": false,
+        "args_ok": true,
+        "exact_ok": false,
+        "gold_args": {
+          "room": "kitchen"
+        },
+        "pred_args": {
+          "room": "kitchen"
+        },
+        "candidates": [
+          "set_kitchen_lights",
+          "turn_off_light",
+          "turn_on_light",
+          "set_light_scene",
+          "turn_off_air_purifier"
+        ],
+        "goldInTopK": true,
+        "ms": 409.29999999701977,
+        "text": "{\"name\":\"set_light_scene\",\"arguments\":{\"room\":\"kitchen\"}}",
+        "expandedQueries": null
+      },
+      {
+        "i": 2,
+        "ru": "Установи температуру в спальне на 22 градуса",
+        "en": "Set the temperature in the bedroom to a degree.",
+        "gold": "set_thermostat",
+        "pred": "set_thermostat",
+        "ok": true,
+        "name_ok": true,
+        "args_ok": false,
+        "exact_ok": false,
+        "gold_args": {
+          "room": "bedroom",
+          "temperature_c": 22
+        },
+        "pred_args": {
+          "room": "bedroom",
+          "temperature_c": 23,
+          "mode": "heat"
+        },
+        "candidates": [
+          "set_thermostat",
+          "set_radiator_valve",
+          "set_ac_mode",
+          "set_fridge_temperature",
+          "set_fan_speed"
+        ],
+        "goldInTopK": true,
+        "ms": 554.2550000026822,
+        "text": "{\"name\":\"set_thermostat\",\"arguments\":{\"room\":\"bedroom\",\"temperature_c\":23,\"mode\":\"heat\"}}",
+        "expandedQueries": null
+      },
+      {
+        "i": 3,
+        "ru": "Запри входную дверь",
+        "en": "Close the entrance door.",
+        "gold": "lock_door",
+        "pred": "close_window",
+        "ok": false,
+        "name_ok": false,
+        "args_ok": false,
+        "exact_ok": false,
+        "gold_args": {
+          "door": "front door"
+        },
+        "pred_args": {
+          "room": "hallway"
+        },
+        "candidates": [
+          "close_window",
+          "open_window",
+          "close_skylight",
+          "open_curtains",
+          "unlock_door"
+        ],
+        "goldInTopK": false,
+        "ms": 337.44999999552965,
+        "text": "{\"name\":\"close_window\",\"arguments\":{\"room\":\"hallway\"}}",
+        "expandedQueries": null
+      },
+      {
+        "i": 4,
+        "ru": "Открой заднюю дверь",
+        "en": "Open the back door.",
+        "gold": "unlock_door",
+        "pred": "unlock_door",
+        "ok": true,
+        "name_ok": true,
+        "args_ok": false,
+        "exact_ok": false,
+        "gold_args": {
+          "door": "back door"
+        },
+        "pred_args": {
+          "door": "back_door"
+        },
+        "candidates": [
+          "unlock_door",
+          "lock_door",
+          "open_window",
+          "query_door_status",
+          "open_skylight"
+        ],
+        "goldInTopK": true,
+        "ms": 374.16499999910593,
+        "text": "{\"name\":\"unlock_door\",\"arguments\":{\"door\":\"back_door\"}}",
+        "expandedQueries": null
+      },
+      {
+        "i": 5,
+        "ru": "Поставь джазовый плейлист в гостиной",
+        "en": "Put a jazz playlist in the living room.",
+        "gold": "play_music",
+        "pred": "play_music",
+        "ok": true,
+        "name_ok": true,
+        "args_ok": false,
+        "exact_ok": false,
+        "gold_args": {
+          "song": "jazz",
+          "room": "living room"
+        },
+        "pred_args": {
+          "room": "living_room"
+        },
+        "candidates": [
+          "play_music",
+          "play_radio_station",
+          "play_podcast",
+          "switch_speaker_room",
+          "queue_song"
+        ],
+        "goldInTopK": true,
+        "ms": 357.89000000059605,
+        "text": "{\"name\":\"play_music\",\"arguments\":{\"room\":\"living_room\"}}",
+        "expandedQueries": null
+      },
+      {
+        "i": 6,
+        "ru": "Останови музыку в кухне",
+        "en": "Stop the music in the kitchen!",
+        "gold": "stop_music",
+        "pred": "stop_music",
+        "ok": true,
+        "name_ok": true,
+        "args_ok": true,
+        "exact_ok": true,
+        "gold_args": {
+          "room": "kitchen"
+        },
+        "pred_args": {
+          "room": "kitchen"
+        },
+        "candidates": [
+          "stop_music",
+          "pause_music",
+          "skip_track",
+          "stop_microwave",
+          "mute_audio"
+        ],
+        "goldInTopK": true,
+        "ms": 344.11500000208616,
+        "text": "{\"name\":\"stop_music\",\"arguments\":{\"room\":\"kitchen\"}}",
+        "expandedQueries": null
+      },
+      {
+        "i": 7,
+        "ru": "Открой шторы в спальне",
+        "en": "Open the curtains in the bedroom.",
+        "gold": "open_curtains",
+        "pred": "open_curtains",
+        "ok": true,
+        "name_ok": true,
+        "args_ok": true,
+        "exact_ok": true,
+        "gold_args": {
+          "room": "bedroom"
+        },
+        "pred_args": {
+          "room": "bedroom"
+        },
+        "candidates": [
+          "open_curtains",
+          "close_curtains",
+          "open_window",
+          "raise_blinds",
+          "close_window"
+        ],
+        "goldInTopK": true,
+        "ms": 389.3449999988079,
+        "text": "{\"name\":\"open_curtains\",\"arguments\":{\"room\":\"bedroom\"}}",
+        "expandedQueries": null
+      },
+      {
+        "i": 8,
+        "ru": "Закрой шторы в офисе",
+        "en": "Close the curtains in the office.",
+        "gold": "close_curtains",
+        "pred": "close_curtains",
+        "ok": true,
+        "name_ok": true,
+        "args_ok": true,
+        "exact_ok": true,
+        "gold_args": {
+          "room": "office"
+        },
+        "pred_args": {
+          "room": "office"
+        },
+        "candidates": [
+          "close_curtains",
+          "open_curtains",
+          "close_window",
+          "close_skylight",
+          "open_window"
+        ],
+        "goldInTopK": true,
+        "ms": 361.625,
+        "text": "{\"name\":\"close_curtains\",\"arguments\":{\"room\":\"office\"}}",
+        "expandedQueries": null
+      },
+      {
+        "i": 9,
+        "ru": "Запусти робот-пылесос в гостиной",
+        "en": "Start the robot vacuum cleaner in the living room.",
+        "gold": "start_vacuum",
+        "pred": "start_mop",
+        "ok": false,
+        "name_ok": false,
+        "args_ok": false,
+        "exact_ok": false,
+        "gold_args": {
+          "area": "living room"
+        },
+        "pred_args": {},
+        "candidates": [
+          "start_vacuum",
+          "empty_vacuum_bin",
+          "stop_vacuum",
+          "start_mop",
+          "dock_vacuum"
+        ],
+        "goldInTopK": true,
+        "ms": 351.179999999702,
+        "text": "{\"name\":\"start_mop\",\"arguments\":{\"room\":\"living_room\"",
+        "expandedQueries": null
+      },
+      {
+        "i": 10,
+        "ru": "Поставь будильник на семь утра",
+        "en": "Set the alarm for 7 a.m.",
+        "gold": "set_alarm",
+        "pred": "set_alarm",
+        "ok": true,
+        "name_ok": true,
+        "args_ok": false,
+        "exact_ok": false,
+        "gold_args": {
+          "time": "07:00"
+        },
+        "pred_args": {
+          "time": "07:00",
+          "days": [
+            "mon",
+            "tue",
+            "wed",
+            "thu",
+            "fri"
+          ]
+        },
+        "candidates": [
+          "set_alarm",
+          "set_alarm_pin",
+          "arm_alarm_system",
+          "set_reminder",
+          "disarm_alarm_system"
+        ],
+        "goldInTopK": true,
+        "ms": 668.4200000017881,
+        "text": "{\"name\":\"set_alarm\",\"arguments\":{\"time\":\"07:00\",\"days\":[\"mon\",\"tue\",\"wed\",\"thu\",\"fri\"]}}",
+        "expandedQueries": null
+      },
+      {
+        "i": 11,
+        "ru": "Какая температура в спальне",
+        "en": "What is the temperature in the bedroom?",
+        "gold": "query_temperature",
+        "pred": "query_temperature",
+        "ok": true,
+        "name_ok": true,
+        "args_ok": true,
+        "exact_ok": true,
+        "gold_args": {
+          "room": "bedroom"
+        },
+        "pred_args": {
+          "room": "bedroom"
+        },
+        "candidates": [
+          "query_temperature",
+          "set_thermostat",
+          "set_light_temperature_k",
+          "set_fridge_temperature",
+          "set_radiator_valve"
+        ],
+        "goldInTopK": true,
+        "ms": 346.25,
+        "text": "{\"name\":\"query_temperature\",\"arguments\":{\"room\":\"bedroom\"}}",
+        "expandedQueries": null
+      },
+      {
+        "i": 12,
+        "ru": "Включи лампу в детской",
+        "en": "Turn on the lamp in the children's room.",
+        "gold": "turn_on_light",
+        "pred": "blink_light",
+        "ok": false,
+        "name_ok": false,
+        "args_ok": false,
+        "exact_ok": false,
+        "gold_args": {
+          "room": "kids room"
+        },
+        "pred_args": {
+          "room": "nursery"
+        },
+        "candidates": [
+          "blink_light",
+          "turn_on_light",
+          "set_light_scene",
+          "turn_on_tv",
+          "turn_off_light"
+        ],
+        "goldInTopK": true,
+        "ms": 392.07999999821186,
+        "text": "{\"name\":\"blink_light\",\"arguments\":{\"room\":\"nursery\"}}",
+        "expandedQueries": null
+      },
+      {
+        "i": 13,
+        "ru": "Выключи освещение в гараже",
+        "en": "Turn off the lighting in the garage.",
+        "gold": "turn_off_light",
+        "pred": "turn_off_light",
+        "ok": true,
+        "name_ok": true,
+        "args_ok": true,
+        "exact_ok": true,
+        "gold_args": {
+          "room": "garage"
+        },
+        "pred_args": {
+          "room": "garage"
+        },
+        "candidates": [
+          "turn_off_outdoor_light",
+          "set_light_color",
+          "set_kitchen_lights",
+          "set_light_temperature_k",
+          "turn_off_light"
+        ],
+        "goldInTopK": true,
+        "ms": 379.32500000298023,
+        "text": "{\"name\":\"turn_off_light\",\"arguments\":{\"room\":\"garage\"}}",
+        "expandedQueries": null
+      },
+      {
+        "i": 14,
+        "ru": "Сделай в комнате 21 градус",
+        "en": "Make a degree in the room.",
+        "gold": "set_thermostat",
+        "pred": "mute_audio",
+        "ok": false,
+        "name_ok": false,
+        "args_ok": false,
+        "exact_ok": false,
+        "gold_args": {
+          "room": "living room",
+          "temperature_c": 21
+        },
+        "pred_args": {
+          "room": "master bedroom"
+        },
+        "candidates": [
+          "mute_audio",
+          "stop_music",
+          "set_ac_mode",
+          "pause_music",
+          "turn_off_tv"
+        ],
+        "goldInTopK": false,
+        "ms": 350.51500000059605,
+        "text": "{\"name\":\"mute_audio\",\"arguments\":{\"room\":\"master bedroom\"}}",
+        "expandedQueries": null
+      },
+      {
+        "i": 15,
+        "ru": "Закрой гаражную дверь",
+        "en": "Close the garage door.",
+        "gold": "lock_door",
+        "pred": "unlock_door",
+        "ok": false,
+        "name_ok": false,
+        "args_ok": true,
+        "exact_ok": false,
+        "gold_args": {
+          "door": "garage door"
+        },
+        "pred_args": {
+          "door": "garage door"
+        },
+        "candidates": [
+          "unlock_door",
+          "close_skylight",
+          "close_window",
+          "lock_door",
+          "stop_camera_recording"
+        ],
+        "goldInTopK": true,
+        "ms": 378.92500000447035,
+        "text": "{\"name\":\"unlock_door\",\"arguments\":{\"door\":\"garage door\"}}",
+        "expandedQueries": null
+      },
+      {
+        "i": 16,
+        "ru": "Разблокируй патио",
+        "en": "Unblock patio.",
+        "gold": "unlock_door",
+        "pred": "turn_off_outdoor_light",
+        "ok": false,
+        "name_ok": false,
+        "args_ok": false,
+        "exact_ok": false,
+        "gold_args": {
+          "door": "patio door"
+        },
+        "pred_args": {
+          "location": "patio"
+        },
+        "candidates": [
+          "turn_off_outdoor_light",
+          "set_outdoor_speaker",
+          "turn_on_outdoor_light",
+          "set_outdoor_light_color",
+          "retract_awning"
+        ],
+        "goldInTopK": false,
+        "ms": 437.7850000038743,
+        "text": "{\"name\":\"turn_off_outdoor_light\",\"arguments\":{\"location\":\"patio\"}}",
+        "expandedQueries": null
+      },
+      {
+        "i": 17,
+        "ru": "Включи классическую музыку в спальне",
+        "en": "Turn on classical music in the bedroom.",
+        "gold": "play_music",
+        "pred": "pause_music",
+        "ok": false,
+        "name_ok": false,
+        "args_ok": false,
+        "exact_ok": false,
+        "gold_args": {
+          "song": "classical",
+          "room": "bedroom"
+        },
+        "pred_args": {
+          "room": "bedroom"
+        },
+        "candidates": [
+          "pause_music",
+          "stop_music",
+          "play_music",
+          "mute_audio",
+          "switch_speaker_room"
+        ],
+        "goldInTopK": true,
+        "ms": 317.25999999791384,
+        "text": "{\"name\":\"pause_music\",\"arguments\":{\"room\":\"bedroom\"}}",
+        "expandedQueries": null
+      },
+      {
+        "i": 18,
+        "ru": "Замолчи на кухне",
+        "en": "Shut up in the kitchen!",
+        "gold": "stop_music",
+        "pred": "stop_oven",
+        "ok": false,
+        "name_ok": false,
+        "args_ok": false,
+        "exact_ok": false,
+        "gold_args": {
+          "room": "kitchen"
+        },
+        "pred_args": {},
+        "candidates": [
+          "stop_oven",
+          "set_kitchen_lights",
+          "close_window",
+          "mute_audio",
+          "stop_microwave"
+        ],
+        "goldInTopK": false,
+        "ms": 266.57999999821186,
+        "text": "{\"name\":\"stop_oven\",\"arguments\":{}}",
+        "expandedQueries": null
+      },
+      {
+        "i": 19,
+        "ru": "Подними жалюзи на кухне",
+        "en": "Pick up the jellies in the kitchen.",
+        "gold": "open_curtains",
+        "pred": "set_kitchen_lights",
+        "ok": false,
+        "name_ok": false,
+        "args_ok": false,
+        "exact_ok": false,
+        "gold_args": {
+          "room": "kitchen"
+        },
+        "pred_args": {},
+        "candidates": [
+          "set_kitchen_lights",
+          "stop_oven",
+          "switch_speaker_room",
+          "turn_on_light",
+          "open_curtains"
+        ],
+        "goldInTopK": true,
+        "ms": 340.445000000298,
+        "text": "{\"name\":\"set_kitchen_lights\",\"arguments\":{}}",
+        "expandedQueries": null
+      },
+      {
+        "i": 20,
+        "ru": "Опусти жалюзи в гостиной",
+        "en": "Put the",
+        "gold": "close_curtains",
+        "pred": "skip_track",
+        "ok": false,
+        "name_ok": false,
+        "args_ok": false,
+        "exact_ok": false,
+        "gold_args": {
+          "room": "living room"
+        },
+        "pred_args": {
+          "room": "kitchen"
+        },
+        "candidates": [
+          "skip_track",
+          "set_tv_channel",
+          "switch_speaker_room",
+          "stop_microwave",
+          "play_music"
+        ],
+        "goldInTopK": false,
+        "ms": 335.054999999702,
+        "text": "{\"name\":\"skip_track\",\"arguments\":{\"room\":\"kitchen\"}}",
+        "expandedQueries": null
+      },
+      {
+        "i": 21,
+        "ru": "Запусти уборку на кухне",
+        "en": "Start cleaning in the kitchen",
+        "gold": "start_vacuum",
+        "pred": "start_mop",
+        "ok": false,
+        "name_ok": false,
+        "args_ok": false,
+        "exact_ok": false,
+        "gold_args": {
+          "area": "kitchen"
+        },
+        "pred_args": {},
+        "candidates": [
+          "start_mop",
+          "start_dishwasher",
+          "pause_dishwasher",
+          "start_vacuum",
+          "set_kitchen_lights"
+        ],
+        "goldInTopK": true,
+        "ms": 318.17499999701977,
+        "text": "{\"name\":\"start_mop\",\"arguments\":{\"room\":\"kitchen\"",
+        "expandedQueries": null
+      },
+      {
+        "i": 22,
+        "ru": "Разбуди меня в шесть тридцать",
+        "en": "Wake me up at 6.30.",
+        "gold": "set_alarm",
+        "pred": "set_alarm",
+        "ok": true,
+        "name_ok": true,
+        "args_ok": false,
+        "exact_ok": false,
+        "gold_args": {
+          "time": "06:30"
+        },
+        "pred_args": {
+          "time": "06:30",
+          "days": [
+            "mon",
+            "tue",
+            "wed",
+            "thu",
+            "fri"
+          ]
+        },
+        "candidates": [
+          "set_alarm",
+          "set_reminder",
+          "arm_alarm_system",
+          "schedule_climate_program",
+          "open_skylight"
+        ],
+        "goldInTopK": true,
+        "ms": 651.3350000008941,
+        "text": "{\"name\":\"set_alarm\",\"arguments\":{\"time\":\"06:30\",\"days\":[\"mon\",\"tue\",\"wed\",\"thu\",\"fri\"]}}",
+        "expandedQueries": null
+      },
+      {
+        "i": 23,
+        "ru": "Скажи температуру в ванной",
+        "en": "Tell me the temperature in the bathroom.",
+        "gold": "query_temperature",
+        "pred": "query_temperature",
+        "ok": true,
+        "name_ok": true,
+        "args_ok": true,
+        "exact_ok": true,
+        "gold_args": {
+          "room": "bathroom"
+        },
+        "pred_args": {
+          "room": "bathroom"
+        },
+        "candidates": [
+          "query_temperature",
+          "set_light_temperature_k",
+          "query_pool_temperature",
+          "set_thermostat",
+          "set_radiator_valve"
+        ],
+        "goldInTopK": true,
+        "ms": 363.07499999552965,
+        "text": "{\"name\":\"query_temperature\",\"arguments\":{\"room\":\"bathroom\"}}",
+        "expandedQueries": null
+      },
+      {
+        "i": 24,
+        "ru": "Свет включи в коридоре",
+        "en": "Turn on the light in the corridor.",
+        "gold": "turn_on_light",
+        "pred": "set_light_scene",
+        "ok": false,
+        "name_ok": false,
+        "args_ok": false,
+        "exact_ok": false,
+        "gold_args": {
+          "room": "hallway"
+        },
+        "pred_args": {
+          "scene": "dinner"
+        },
+        "candidates": [
+          "set_light_scene",
+          "turn_on_light",
+          "turn_off_light",
+          "blink_light",
+          "set_light_color"
+        ],
+        "goldInTopK": true,
+        "ms": 399.179999999702,
+        "text": "{\"name\":\"set_light_scene\",\"arguments\":{\"scene\":\"dinner\"}}",
+        "expandedQueries": null
+      },
+      {
+        "i": 25,
+        "ru": "Тепло сделай в детской двадцать три градуса",
+        "en": "Make the heat in the children's 23 degrees.",
+        "gold": "set_thermostat",
+        "pred": "set_thermostat",
+        "ok": true,
+        "name_ok": true,
+        "args_ok": false,
+        "exact_ok": false,
+        "gold_args": {
+          "room": "kids room",
+          "temperature_c": 23
+        },
+        "pred_args": {
+          "temperature_c": 23,
+          "mode": "heat"
+        },
+        "candidates": [
+          "set_thermostat",
+          "set_pool_heater",
+          "set_fridge_temperature",
+          "schedule_climate_program",
+          "set_radiator_valve"
+        ],
+        "goldInTopK": true,
+        "ms": 491.304999999702,
+        "text": "{\"name\":\"set_thermostat\",\"arguments\":{\"temperature_c\":23,\"mode\":\"heat\"}}",
+        "expandedQueries": null
+      },
+      {
+        "i": 26,
+        "ru": "Дверь входная заблокировать",
+        "en": "The entrance door is blocked.",
+        "gold": "lock_door",
+        "pred": "unlock_door",
+        "ok": false,
+        "name_ok": false,
+        "args_ok": false,
+        "exact_ok": false,
+        "gold_args": {
+          "door": "front door"
+        },
+        "pred_args": {
+          "door": "front_door"
+        },
+        "candidates": [
+          "unlock_door",
+          "lock_door",
+          "query_door_status",
+          "lock_window",
+          "open_window"
+        ],
+        "goldInTopK": true,
+        "ms": 366.7800000011921,
+        "text": "{\"name\":\"unlock_door\",\"arguments\":{\"door\":\"front_door\"}}",
+        "expandedQueries": null
+      },
+      {
+        "i": 27,
+        "ru": "Музыку поставь рок в офисе",
+        "en": "Play some rock music in the office.",
+        "gold": "play_music",
+        "pred": "play_music",
+        "ok": true,
+        "name_ok": true,
+        "args_ok": false,
+        "exact_ok": false,
+        "gold_args": {
+          "song": "rock",
+          "room": "office"
+        },
+        "pred_args": {
+          "song": "rock music"
+        },
+        "candidates": [
+          "play_podcast",
+          "play_music",
+          "switch_speaker_room",
+          "stop_music",
+          "play_radio_station"
+        ],
+        "goldInTopK": true,
+        "ms": 351.94999999552965,
+        "text": "{\"name\":\"play_music\",\"arguments\":{\"song\":\"rock music\"}}",
+        "expandedQueries": null
+      },
+      {
+        "i": 28,
+        "ru": "Шторы открой в кухне",
+        "en": "Open the curtains in the kitchen",
+        "gold": "open_curtains",
+        "pred": "open_curtains",
+        "ok": true,
+        "name_ok": true,
+        "args_ok": true,
+        "exact_ok": true,
+        "gold_args": {
+          "room": "kitchen"
+        },
+        "pred_args": {
+          "room": "kitchen"
+        },
+        "candidates": [
+          "open_curtains",
+          "close_curtains",
+          "open_window",
+          "raise_blinds",
+          "close_window"
+        ],
+        "goldInTopK": true,
+        "ms": 371.679999999702,
+        "text": "{\"name\":\"open_curtains\",\"arguments\":{\"room\":\"kitchen\"}}",
+        "expandedQueries": null
+      },
+      {
+        "i": 29,
+        "ru": "Пылесос запусти в спальне",
+        "en": "Start vacuum cleaner in the bedroom",
+        "gold": "start_vacuum",
+        "pred": "start_mop",
+        "ok": false,
+        "name_ok": false,
+        "args_ok": false,
+        "exact_ok": false,
+        "gold_args": {
+          "area": "bedroom"
+        },
+        "pred_args": {},
+        "candidates": [
+          "start_vacuum",
+          "stop_vacuum",
+          "start_mop",
+          "empty_vacuum_bin",
+          "dock_vacuum"
+        ],
+        "goldInTopK": true,
+        "ms": 302.7250000014901,
+        "text": "{\"name\":\"start_mop\",\"arguments\":{\"room\":\"bedroom\"",
+        "expandedQueries": null
+      }
+    ]
+  }
+}
