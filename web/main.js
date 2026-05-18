@@ -349,18 +349,20 @@ function attachToggleHelp() {
 }
 attachToggleHelp();
 
-// Bench legend (under the bench <pre>).
+// Bench legend (under the bench <pre>). Collapsible — default expanded.
 function renderBenchLegend() {
   const benchSection = benchEl ? benchEl.parentElement : null;
   if (!benchSection) return;
   if (document.getElementById('bench-legend')) return;
-  const legend = document.createElement('div');
+  const legend = document.createElement('details');
   legend.id = 'bench-legend';
   legend.className = 'info-card legend-card';
-  const rows = BENCH_LEGEND.map(
-    ([k, v]) => `<div><code>${k}</code> — ${v}</div>`,
-  ).join('');
-  legend.innerHTML = `<strong>What each bench line means</strong>${rows}`;
+  legend.open = true;
+  const rows = BENCH_LEGEND.map(([k, v, good]) => {
+    const goodSpan = good ? ` <span class="legend-good">(${good})</span>` : '';
+    return `<div><code>${k}</code> — ${v}${goodSpan}</div>`;
+  }).join('');
+  legend.innerHTML = `<summary><strong>What each bench line means</strong> <span class="legend-hint">(click to collapse)</span></summary>${rows}`;
   benchSection.appendChild(legend);
 }
 renderBenchLegend();

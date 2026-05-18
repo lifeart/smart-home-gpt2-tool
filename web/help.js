@@ -119,16 +119,17 @@ export const TOGGLE_HELP = {
 };
 
 // Below-bench legend explaining each printed metric.
+// Format: [key, description, good-range].
 export const BENCH_LEGEND = [
-  ['prompt tokens', 'BPE tokens fed in. Typical SH prompt is 60-90 tokens; over 1024 wraps GPT-2`s ctx.'],
-  ['new tokens',    'Tokens generated this run. Capped by the "max new tokens" input. A valid functioncall is usually 20-60.'],
-  ['time-to-first', 'Latency from generate-start to first decoded token. <1 s on WebGPU/fp32, 3-8 s on WASM.'],
-  ['total',         'End-to-end wall time including first-token + streaming + finalization.'],
-  ['throughput',    'tokens/sec after first token. >100 tok/s is normal for GPT-2 124M on WebGPU/fp32 on M-series. <30 tok/s indicates WASM fallback.'],
-  ['backend',       'Selected device + dtype. WebGPU/fp32 is the bench reference; WASM/q8 is the compatibility floor.'],
-  ['retrieval',     'OFF, or "top-K = [...]" with cosine score and "orig-cands-in-topK" recall sanity.'],
-  ['constrained',   'OFF, or "N candidates (a, b, c…)" showing which names the grammar admits.'],
-  ['grammar steps', 'Constrained-decoding overhead. ~1-2 ms/step on M-series; spikes mean the FSM is exploring many branches.'],
+  ['prompt tokens', 'BPE tokens fed in. Typical SH prompt is 60-90 tokens; over 1024 wraps GPT-2`s ctx.', 'good: 60-300'],
+  ['new tokens',    'Tokens generated this run. Capped by the "max new tokens" input. A valid functioncall is usually 20-60.', 'good: 20-60'],
+  ['time-to-first', 'Latency from generate-start to first decoded token.', 'good: <1 s WebGPU · 3-8 s WASM'],
+  ['total',         'End-to-end wall time including first-token + streaming + finalization.', ''],
+  ['throughput',    'tokens/sec after first token. WebGPU/fp32 on M-series ~160 tok/s; q4 ~200 tok/s.', 'good: >100 · bad: <30 (WASM fallback)'],
+  ['backend',       'Selected device + dtype. WebGPU/fp32 is the bench reference; WASM/q8 is the compatibility floor.', ''],
+  ['retrieval',     '"OFF" or "top-K = [...]" with cosine score and "orig-cands-in-topK" recall sanity.', 'recall@3 = 89.67% on n=300 v3'],
+  ['constrained',   '"OFF" or "N candidates (a, b, c…)" — which names the grammar admits this step.', ''],
+  ['grammar steps', 'FSM steps taken + per-step overhead. Spikes mean many branches explored.', 'good: ~1-2 ms/step on M-series'],
 ];
 
 // Footer copy.
