@@ -36,6 +36,14 @@ export const MODEL_CARDS = {
       'On-disk: ~1.7 GB once exported. Falls back to v3 if not downloaded.',
     ],
   },
+  'local:smart-home-gpt2-v6': {
+    title: 'v6 SFT (local) — fresh_bench mix [Iter 15]',
+    body: [
+      'Trained on 20600 items: v5 (20010) + 590 fresh_bench items (universal tool-call, 9 categories).',
+      'Target: cross-domain generalisation + irrelevance refusal. Compared to v5 best ship-config.',
+      'On-disk: ~1.7 GB once exported. Falls back to v5 if not downloaded.',
+    ],
+  },
   'lifeart/smart-home-gpt2': {
     title: 'v1 SFT (HF Hub) — streamed download',
     body: [
