@@ -1018,3 +1018,42 @@ Commits: `cab97c1` (10.1 audit), `2966223` (10.2 fixes), `b62fbf7` (10.3 bench),
 
 Multi-tool exact lifted from **49.67% (v3 baseline) → 55.33% (v4 + polish)**, a **+5.66 pp** gain on the strict (name+args) metric. v1 → v4 cumulative name lift: **55.7 → 84.00 (+28.3 pp)**. Voice E2E ceiling under ASR noise sits at 50% name / 23% exact; further lift requires either Whisper upgrade or a polarity-aware retrieval head.
 
+## Iter 14 — Research: gpt2-tool-call sibling (read-only, $0)
+
+**One-line:** `barometech/gpt2-tool-call` is the same author's universal-tool-call GPT-2 124M repo — same base, identical SFT template, MIT — but weights are LFS-pointer stubs (same budget-exhaustion as ours) and training data is external-path-gated (BFCL/Glaive/xLAM).
+
+### Comparison
+
+| Attribute | smart-home-gpt2 (v3/v4) | gpt2-tool-call |
+|---|---|---|
+| Base model | openai-community/gpt2 (124M) | openai-community/gpt2 (124M) — SAME |
+| SFT items | 1200 (v3) / 18532 (v4) | 1500 (500 BFCL + 500 Glaive + 500 xLAM) |
+| Tool-call format | `SYSTEM:...USER:...ASSISTANT: <functioncall> {"name":...,"arguments":{...}}` | IDENTICAL (verified in `train_ft.py` build_*_pairs and README inference example) |
+| Bench acc claimed | 82.3% name (v3) / 84.0% (v4) on smart-home n=300 | 92.0% on fresh 690 (full FT), 50.0% BFCL v4 (adapter); 98.2% on fresh simple n=450 |
+| Weights on HF Hub | yes (`lifeart/smart-home-gpt2-v3/v4`) | NONE (no `barometech/*` HF account) |
+| Weights via LFS | budget exhausted | `gpt2_ft_final.pt` = **134-byte LFS pointer** in repo (same fate); `adapter_h13_bfcl_ep1.pt` = 132 B pointer; only `adapter_torch_EN_BFCL.npz` (707 KB warm-init) is real |
+| License | (likely MIT, project ships open) | **MIT** (explicit) |
+| Domain | smart-home (10 cats) | universal (BFCL + Glaive + xLAM mixture) |
+| Repo size / stars | — | 830 KB, 9 stars, last pushed 2026-05-14 |
+
+### Format-compatibility verdict
+Our `tool_registry.json`, `grammar.js`, `retrieval.js`, and constrained-decoding stack would work **as-is** on its outputs. Identical prompt template (`SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n{spec}\n\n\nUSER: ...\n\n\nASSISTANT: <functioncall> `) and identical gold shape (`{"name":..., "arguments":{...}}`). Their adapter checkpoint also reuses the same 8-classifier-head action/scope/format topology our prior experiments derive from. No grammar/retrieval changes needed.
+
+### Recommendation: **Mix fresh-bench data, skip weights, skip full base-switch**
+
+1. **Skip "switch base"** — their full-FT weights are unobtainable (LFS pointers, no HF mirror), and even if pulled, switching to a universal model would *cost* us the smart-home specificity that drives v4's 84% name accuracy. Their fresh-bench was simple single-tool-call; our hard cases (twin-confusion, ASR noise, args-exact) are downstream of domain priors they don't have.
+2. **Mix fresh-bench JSONs into v5 — YES.** The 690 items in `bench/fresh_bench_*.json` are **plain JSON, not LFS**, fully downloadable via `gh api repos/barometech/gpt2-tool-call/contents/bench/...`. Format is `{function, prompt, gold_name, gold_args, difficulty}` — directly droppable into our SFT builder with one transform (wrap into our `<functioncall>` template, strip difficulty). 690 universal items would broaden generalisation without diluting domain mass (18532 → 19222, +3.7%). Especially valuable: `fresh_bench_irrelevance.json` (~80 items) — strengthens our refusal class, where v4 doesn't have a dedicated bench yet.
+3. **Skip** would be wrong only because (2) is essentially free.
+
+### Concrete next-steps for Iter 15 (data-mix experiment)
+- Download 9 JSONs: `for f in bio culture industrial irrelevance materials multiple nichetech opus parallel; do gh api repos/barometech/gpt2-tool-call/contents/bench/fresh_bench_$f.json --jq .content | base64 -d > training/external_data/fresh_$f.json; done`
+- New builder `training/build_sft_fresh.py`: read each file → emit our row format (system+func_spec, user, gold `<functioncall>{json}`). For `fresh_bench_irrelevance` emit `{"name":"none","arguments":{}}` gold per their convention.
+- Mix into v5 alongside existing 18532, then HF Jobs train (~$1.20 T4, same recipe as v4).
+- A/B: v5 vs v4 on n=300 smart-home AND on a held-out 100-item slice of fresh_bench (don't include the held-out slice in train). Verify no regression on smart-home, expect generalisation lift on universal slice.
+
+### Sharp findings
+- **Same author's LFS budget is also dead.** Their flagship 475 MB weight is a 134-byte pointer in the repo. Confirms the LFS-budget pattern is a barometech-account-wide issue, not a smart-home-gpt2 one. Pull requires their account having LFS quota — currently doesn't.
+- **Their "92% fresh bench" is single-tool simple-class**. Their own table shows multiple=62.5%, parallel=88.8%, irrelevance=90% — overall 92% is dominated by the 450-item simple class at 98.2%. Direct apples-to-apples with our v4 84% would require running v4 on their fresh_bench. Cheap follow-up: HF Jobs eval-only on v4 against their 690 items (~$0.30 T4).
+- **Phi-3-mini 3.8B beats their FT by 2 pp on a 20-item slice** (their honest disclosure). Suggests a 30× larger model still has a small edge on novel single-tool-call — domain-specific 124M wins on smart-home only because of the heavy distribution prior.
+- Their `adapter_torch_EN_BFCL.npz` warm-init (action/scope/format classifier heads from a prior "read src/auth.py" command parser) is **a free reusable artifact** for any future GPT-2 adapter work we attempt — same shape, MIT-licensed.
+
