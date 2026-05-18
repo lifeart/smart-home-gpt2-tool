@@ -50,14 +50,17 @@
           <label>Preset
             <select id="preset">
               <option value="" disabled selected>— pick a preset —</option>
-              <option value="lighting">Lighting · "turn on the kitchen light"</option>
-              <option value="climate">Climate · "set bedroom temperature to 22"</option>
-              <option value="media">Media · "play classical music in living room"</option>
-              <option value="security">Security · "lock the front door"</option>
-              <option value="kitchen">Kitchen · "reheat 2 minutes in microwave"</option>
-              <option value="blinds">Blinds · "close the blinds in bedroom"</option>
-              <option value="sensors">Sensors · "is anyone in the office?"</option>
-              <option value="mixed">Mixed (10 fns, generic) · "goodnight, lock up + thermostat 19"</option>
+              <option value="lighting">Lighting · "dim the bedroom light to 30 percent"</option>
+              <option value="climate">Climate · "set the sunroom thermostat to 21°"</option>
+              <option value="media">Media · "play Kind of Blue at 30 percent"</option>
+              <option value="security">Security · "make sure the patio door is locked"</option>
+              <option value="kitchen">Kitchen · "run the microwave for 60 seconds"</option>
+              <option value="blinds">Blinds · "lower the bedroom blinds to halfway"</option>
+              <option value="clean">Clean · "start vacuuming the living room"</option>
+              <option value="garden">Garden · "water the front lawn for 15 minutes"</option>
+              <option value="sensors">Sensors · "is anyone moving around in the office?"</option>
+              <option value="timers">Timers · "wake me at 7am on weekdays"</option>
+              <option value="mixed">Mixed (10 fns) · "activate goodnight scene + thermostat 19"</option>
             </select>
           </label>
           <span style="font-size:0.75rem;opacity:0.7;align-self:end;padding-bottom:0.5rem">↑ pick a preset, or edit the prompt below directly. With Retrieval ON, the function list is auto-replaced by MiniLM top-K — the prompt's list is only used when retrieval is off.</span>
@@ -67,13 +70,13 @@
 [
   "turn_on_light",
   "turn_off_light",
-  "set_light_color",
   "dim_light",
+  "set_light_color",
   "set_light_scene"
 ]
 
 
-USER: Turn on the kitchen light.
+USER: Dim the bedroom light to 30 percent.
 
 
 ASSISTANT: &lt;functioncall&gt; </textarea>
