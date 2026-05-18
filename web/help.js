@@ -137,10 +137,11 @@ export const FOOTER = {
   blurb:
     'Browser demo of GPT-2 124M fine-tuned for smart-home tool-calling. Runs fully in-tab via WebGPU + transformers.js — no server inference.',
   links: [
-    { label: 'GitHub repo',     href: 'https://github.com/lifeart/smart-home-gpt2-tool' },
-    { label: 'HF · v3 (best)',  href: 'https://huggingface.co/lifeart/smart-home-gpt2-v3' },
-    { label: 'HF · v2',         href: 'https://huggingface.co/lifeart/smart-home-gpt2-v2' },
-    { label: 'HF · v1',         href: 'https://huggingface.co/lifeart/smart-home-gpt2' },
-    { label: 'HF · v4 (Iter 11, may 404)', href: 'https://huggingface.co/lifeart/smart-home-gpt2-v4' },
+    { label: 'GitHub repo',     href: 'https://github.com/lifeart/smart-home-gpt2-tool', kind: 'code' },
+    { label: 'HF · v3 (best)',  href: 'https://huggingface.co/lifeart/smart-home-gpt2-v3', kind: 'model' },
+    { label: 'HF · v2',         href: 'https://huggingface.co/lifeart/smart-home-gpt2-v2', kind: 'model' },
+    { label: 'HF · v1',         href: 'https://huggingface.co/lifeart/smart-home-gpt2', kind: 'model' },
+    { label: 'HF · v4 (Iter 11)', href: 'https://huggingface.co/lifeart/smart-home-gpt2-v4', kind: 'model', probe: true },
   ],
+  meta: 'GPT-2 124M · ONNX fp32/fp16/q8/q4 · transformers.js v3 · MIT license on code; Apache-2.0 on model weights.',
 };

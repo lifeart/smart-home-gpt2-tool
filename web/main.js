@@ -373,10 +373,43 @@ function renderFooter() {
   const footer = document.createElement('footer');
   footer.id = 'site-footer';
   const links = FOOTER.links
-    .map((l) => `<a href="${l.href}" target="_blank" rel="noopener">${l.label}</a>`)
+    .map(
+      (l) =>
+        `<a href="${l.href}" target="_blank" rel="noopener" data-kind="${l.kind}"${l.probe ? ' data-probe="1"' : ''}>${l.label}</a>`,
+    )
     .join(' · ');
-  footer.innerHTML = `<p>${FOOTER.blurb}</p><p class="links">${links}</p>`;
+  footer.innerHTML = `
+    <p>${FOOTER.blurb}</p>
+    <p class="links">${links}</p>
+    <p class="meta">${FOOTER.meta}</p>
+  `;
   document.querySelector('main').appendChild(footer);
+
+  // Optimistically probe any link flagged `probe: true` (e.g. v4 which may
+  // not be uploaded to HF yet). If the HEAD request fails / 404s, append a
+  // "· not yet published" hint next to the link. Pure UX — never blocks.
+  for (const a of footer.querySelectorAll('a[data-probe="1"]')) {
+    fetch(a.href, { method: 'HEAD', mode: 'no-cors' })
+      .then((resp) => {
+        // `no-cors` returns opaque responses — we can't read status. Best
+        // we can do is treat a non-error as "probably exists". Network
+        // errors throw, caught below.
+        if (resp.type === 'opaque' || resp.ok) {
+          // assume exists
+        } else if (resp.status === 404) {
+          a.after(document.createTextNode(' (not yet on HF)'));
+          a.style.opacity = '0.6';
+        }
+      })
+      .catch(() => {
+        const note = document.createElement('span');
+        note.textContent = ' (offline or not yet on HF)';
+        note.style.opacity = '0.6';
+        note.style.fontSize = '0.9em';
+        a.after(note);
+        a.style.opacity = '0.6';
+      });
+  }
 }
 renderFooter();
 

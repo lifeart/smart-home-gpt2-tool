@@ -141,6 +141,7 @@ pre {
 #site-footer p { margin: 0.25rem 0; }
 #site-footer .links a { margin-right: 0.5rem; }
 #site-footer a { color: inherit; }
+#site-footer .meta { opacity: 0.6; font-size: 0.7rem; }
 
 @media (max-width: 640px) {
   body { padding: 1rem; }
