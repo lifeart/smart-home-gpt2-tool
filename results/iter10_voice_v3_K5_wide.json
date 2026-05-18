@@ -1,0 +1,38 @@
+{
+  "meta": {
+    "iter": "10.3-voice",
+    "model": "smart-home-gpt2-v3",
+    "device": "webgpu",
+    "dtype": "fp32",
+    "K": 5,
+    "useAliases": true,
+    "useRetrieval": true,
+    "useConstrained": true,
+    "typedArgs": true,
+    "wideNames": true,
+    "n": 30,
+    "fixes": "iter10.2: +16 misc descriptions in function_descriptions.json, +23 registry entries"
+  },
+  "summary": {
+    "name_acc": 0.5,
+    "args_acc": 0.3,
+    "exact_acc": 0.23333333333333334,
+    "recall": 0.8,
+    "meanMs": 398.17
+  },
+  "regressed_recall_items": [
+    {"i": 3,  "ru": "Запри входную дверь",          "en": "Close the entrance door.",        "gold": "lock_door",      "reason": "english phrasing 'close' surfaces close_window/skylight"},
+    {"i": 14, "ru": "Сделай в комнате 21 градус",   "en": "Make a degree in the room.",       "gold": "set_thermostat", "reason": "ASR-mangled; audio funcs dominate top-5"},
+    {"i": 16, "ru": "Разблокируй патио",            "en": "Unblock patio.",                   "gold": "unlock_door",    "reason": "patio→outdoor funcs"},
+    {"i": 18, "ru": "Замолчи на кухне",             "en": "Shut up in the kitchen!",          "gold": "stop_music",     "reason": "'shut up' surfaces stop_oven/microwave; stop_music dropped"},
+    {"i": 19, "ru": "Подними жалюзи на кухне",      "en": "Pick up the jellies in the kitchen.","gold": "open_curtains",  "reason": "ASR 'jellies' breaks blinds/curtain signal; schedule_routine (NEW) in top-5"},
+    {"i": 20, "ru": "Опусти жалюзи в гостиной",     "en": "Put the",                          "gold": "close_curtains", "reason": "ASR truncated; close_curtains lost"}
+  ],
+  "delta_vs_iter9_3": {
+    "name_acc":  -0.0333,
+    "args_acc":  -0.0333,
+    "exact_acc":  0.0,
+    "recall":    -0.1333,
+    "note": "Voice regressed -3.33 pp name / -13.33 pp recall vs Iter 9.3. Cause: the 16 new descriptions broaden the index — 4 ASR-mangled queries (i=14,18,19,20) that previously got lucky with a smaller index now find unrelated funcs in top-5. Multi-tool n=300 was UNAFFECTED (con args +1 / exact +1 vs 9.3)."
+  }
+}

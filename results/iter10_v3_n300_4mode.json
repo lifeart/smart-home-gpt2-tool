@@ -1,0 +1,50 @@
+{
+  "meta": {
+    "iter": "10.3",
+    "model": "smart-home-gpt2-v3",
+    "device": "webgpu",
+    "dtype": "fp32",
+    "modes": ["baseline", "con", "ret", "ret_con"],
+    "typedArgs": true,
+    "wideNames": true,
+    "K": 3,
+    "n": 300,
+    "fixes": "iter10.2: +16 misc descriptions in function_descriptions.json, +23 registry entries (16 misc + 7 desc-only)"
+  },
+  "summary": {
+    "items": 300,
+    "modes": ["baseline", "con", "ret", "ret_con"],
+    "name_acc_baseline": 0.8233333333333334,
+    "args_acc_baseline": 0.5466666666666666,
+    "exact_acc_baseline": 0.49666666666666665,
+    "json_baseline": 0.9966666666666667,
+    "mean_ms_baseline": 718.7,
+    "name_acc_con": 0.83,
+    "args_acc_con": 0.58,
+    "exact_acc_con": 0.55,
+    "json_con": 0.9933333333333333,
+    "mean_ms_con": 745.7,
+    "name_acc_ret": 0.7433333333333333,
+    "args_acc_ret": 0.2833333333333333,
+    "exact_acc_ret": 0.22,
+    "json_ret": 1.0,
+    "mean_ms_ret": 383.1,
+    "name_acc_ret_con": 0.75,
+    "args_acc_ret_con": 0.4066666666666667,
+    "exact_acc_ret_con": 0.36,
+    "json_ret_con": 0.98,
+    "mean_ms_ret_con": 400.2,
+    "gold_in_topK": 0.8966666666666666
+  },
+  "per_domain": {
+    "blinds":  {"n": 26, "name_acc_baseline": 0.692, "exact_acc_baseline": 0.577, "name_acc_con": 0.692, "exact_acc_con": 0.615, "name_acc_ret": 0.769, "exact_acc_ret": 0.654, "name_acc_ret_con": 0.769, "exact_acc_ret_con": 0.692},
+    "clean":   {"n": 29, "name_acc_baseline": 0.828, "exact_acc_baseline": 0.414, "name_acc_con": 0.828, "exact_acc_con": 0.448, "name_acc_ret": 0.828, "exact_acc_ret": 0.000, "name_acc_ret_con": 0.828, "exact_acc_ret_con": 0.345},
+    "climate": {"n": 29, "name_acc_baseline": 0.966, "exact_acc_baseline": 0.379, "name_acc_con": 0.966, "exact_acc_con": 0.483, "name_acc_ret": 0.897, "exact_acc_ret": 0.276, "name_acc_ret_con": 0.897, "exact_acc_ret_con": 0.310},
+    "garden":  {"n": 26, "name_acc_baseline": 0.962, "exact_acc_baseline": 0.615, "name_acc_con": 0.962, "exact_acc_con": 0.654, "name_acc_ret": 0.885, "exact_acc_ret": 0.038, "name_acc_ret_con": 0.885, "exact_acc_ret_con": 0.269},
+    "kit":     {"n": 23, "name_acc_baseline": 0.826, "exact_acc_baseline": 0.435, "name_acc_con": 0.826, "exact_acc_con": 0.522, "name_acc_ret": 0.957, "exact_acc_ret": 0.087, "name_acc_ret_con": 0.957, "exact_acc_ret_con": 0.304},
+    "light":   {"n": 32, "name_acc_baseline": 0.688, "exact_acc_baseline": 0.469, "name_acc_con": 0.688, "exact_acc_con": 0.500, "name_acc_ret": 0.438, "exact_acc_ret": 0.125, "name_acc_ret_con": 0.438, "exact_acc_ret_con": 0.219},
+    "media":   {"n": 32, "name_acc_baseline": 0.813, "exact_acc_baseline": 0.625, "name_acc_con": 0.813, "exact_acc_con": 0.625, "name_acc_ret": 0.844, "exact_acc_ret": 0.188, "name_acc_ret_con": 0.875, "exact_acc_ret_con": 0.344},
+    "misc":    {"n": 72, "name_acc_baseline": 0.833, "exact_acc_baseline": 0.431, "name_acc_con": 0.847, "exact_acc_con": 0.458, "name_acc_ret": 0.653, "exact_acc_ret": 0.292, "name_acc_ret_con": 0.667, "exact_acc_ret_con": 0.375},
+    "sec":     {"n": 31, "name_acc_baseline": 0.806, "exact_acc_baseline": 0.613, "name_acc_con": 0.839, "exact_acc_con": 0.774, "name_acc_ret": 0.645, "exact_acc_ret": 0.226, "name_acc_ret_con": 0.645, "exact_acc_ret_con": 0.387}
+  }
+}
