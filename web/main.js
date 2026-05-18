@@ -285,8 +285,35 @@ if (modelEl) {
 
 // Per-toggle info: attach a (i) icon next to each toggle that expands a help <div>.
 function attachToggleHelp() {
-  const toggleRow = document.querySelector('section .row');
+  // Find the toggle row by anchoring on the constrained checkbox.
+  const anchor = $('constrained');
+  const toggleRow = anchor ? anchor.closest('.row') : null;
   if (!toggleRow) return;
+
+  // Master "Show all help" / "Hide all help" link above the row.
+  if (!document.getElementById('help-master')) {
+    const wrap = document.createElement('div');
+    wrap.id = 'help-master';
+    const link = document.createElement('button');
+    link.type = 'button';
+    link.className = 'help-master-btn';
+    link.textContent = 'ⓘ Show option help';
+    let shown = false;
+    link.addEventListener('click', (e) => {
+      e.preventDefault();
+      shown = !shown;
+      for (const panel of document.querySelectorAll('.toggle-help')) {
+        panel.hidden = !shown;
+      }
+      for (const b of document.querySelectorAll('.help-toggle')) {
+        b.setAttribute('aria-expanded', String(shown));
+      }
+      link.textContent = shown ? 'ⓘ Hide option help' : 'ⓘ Show option help';
+    });
+    wrap.appendChild(link);
+    toggleRow.before(wrap);
+  }
+
   for (const [id, help] of Object.entries(TOGGLE_HELP)) {
     const input = $(id);
     if (!input) continue;
@@ -298,7 +325,8 @@ function attachToggleHelp() {
     btn.className = 'help-toggle';
     btn.setAttribute('aria-expanded', 'false');
     btn.setAttribute('aria-label', `Help for: ${help.label}`);
-    btn.textContent = 'i';
+    btn.title = `Click for help: ${help.label}`;
+    btn.textContent = 'ⓘ';
     parentLabel.appendChild(btn);
     const panel = document.createElement('div');
     panel.className = 'toggle-help';
@@ -310,11 +338,13 @@ function attachToggleHelp() {
     `;
     // Insert after the toggle row's parent section so it can span full width.
     parentLabel.after(panel);
-    btn.addEventListener('click', (e) => {
-      e.preventDefault();
+    const togglePanel = (e) => {
+      // Prevent the click bubbling to the parent <label> from toggling the checkbox.
+      if (e) { e.preventDefault(); e.stopPropagation(); }
       panel.hidden = !panel.hidden;
       btn.setAttribute('aria-expanded', String(!panel.hidden));
-    });
+    };
+    btn.addEventListener('click', togglePanel);
   }
 }
 attachToggleHelp();
