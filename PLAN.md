@@ -1188,3 +1188,69 @@ All five are **generic for any small LM**. Porting to Qwen2.5-0.5B with the same
 
 DPO arg-correctness pairs is next if curriculum saturates <65%. Functional tokens is the path past 70% but is major surgery — defer.
 
+
+## Iter 17 — Label refinement v8 (in flight)
+
+**Hypothesis**: v6's bottleneck is args accuracy (60%) rather than name (84%). Using
+Llama-3.3-70B-Instruct (HF router, free Groq backend) as a verifier on each training
+row, mark KEEP/FIX/DROP and rebuild a cleaner SFT set. If args are noisy in source
+data (1200 SH Opus, 2500 xLAM-irrelevance, 3000 Iter 13 Llama synthetic, 590 external),
+cleaning lifts args → lifts exact-match.
+
+### Iter 17.1 — Pilot (200 items)
+- KEEP 67.5% / FIX 14.5% / DROP 18% on stratified sample
+- **Manual review of 10 FIX items: only 2-3 actually correct.** Llama-70B's arg fixes
+  hallucinate value swaps on ambiguous queries (e.g. "Red room, please." → room='living room'),
+  invent new keys ("function_name", "h2/s2/l2"), or refuse to admit no-op needed.
+- Conservative apply policy adopted:
+  - DROP applied only when gold name is *not in candidate list* (genuine unrecoverable
+    training noise — model literally cannot emit a name absent from prompt)
+  - FIX disabled by default (--enable-fix opt-in). Llama-70B's value corrections are too
+    unreliable to apply blindly.
+  - KEEP and softened-DROP pass through unchanged.
+
+### Iter 17.2 — Full refinement v6 → v6r
+- 20600 → 19084 rows (-7.36%, -1516 drops). Within 19000-20500 smell-test band.
+- Final: KEEP 14595, FIX-disabled 1849, FIX-keys-diverge 550, drop-applied 1516,
+  drop-softened-to-keep 2083.
+- 38 min wall, $0 (Llama-70B free via Groq routing). Uploaded to
+  `lifeart/smart-home-sft-v2/sh_train_v6r.json`.
+
+### Iter 17.3 — v7r = v6r + refined(v7 − v6 additions)
+- 5282 v7-only rows refined: KEEP 3782, all 182 DROP-proposed softened to KEEP
+  (Iter 16's ToolACE/xLAM/Glaive additions are well-curated — every gold name is in
+  the candidate list).
+- v7r = 19084 + 5282 = **24366 rows**. Uploaded as `sh_train_v7r.json` and
+  `sh_train_v8.json` (train input alias).
+
+### Iter 17.4 — v8 train (in flight at report time)
+- Job `6a0b83d0e7940de6ee6cf08d` on l40sx1, bf16, batch 8, epochs 2, lr 1e-5 (same
+  hyperparams as v7). Target repo `lifeart/smart-home-gpt2-v8`. Cost ~$0.75-1.00.
+
+### Iter 17.5-17.7 — bench + ONNX + verdict (deferred to subsequent run)
+- Will need: HF in-domain `bench_hf.py` with MODEL_REPOS=v6,v7,v8; cross-domain
+  `bench_external_hf.py`; ONNX export; browser 4-mode args@n=300.
+- Already known: **v7 cross-domain bench = 84%** (-2 pp vs v6's 86%) — Iter 16's
+  ToolACE/xLAM/Glaive additions hurt OOD generalization slightly. v7 in-domain
+  bench still RUNNING at report time.
+
+### Hypothesis status
+Refinement methodology built and the bottleneck-targeting argument-fix path was
+**tested and rejected** during the pilot: Llama-70B's arg "corrections" are noisy
+enough that applying them risks regression. Net delivered value is **noise floor
+removal** (1516 unrecoverable rows dropped, ~7%) rather than args lift.
+
+Smell-test expectations: v8 args@n=300 likely flat or +1-2pp vs v6's 60%, since
+nothing pushed args themselves upward — only removed unfixable name-mismatch rows.
+Name accuracy may lift +1-3pp from cleaner training signal. Exact-match unlikely
+to cross 60% from this lever alone. **Granite curriculum (PLAN Iter 18 plan)
+remains the recommended next args lift.**
+
+### Cost
+- Pilot Llama (200): $0
+- Full v6 refine (20600): $0
+- v7 deltas refine (5282): $0
+- v8 train L40s 2h timeout: ~$1 (will finalize when complete)
+- v8 bench/external/export: ~$0.10
+- **Total iter 17 spend: ~$1.10. Cumulative project: ~$11.40 of $12 ceiling.**
+
