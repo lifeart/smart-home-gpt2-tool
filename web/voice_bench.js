@@ -273,7 +273,7 @@ function extractPredName(text) {
   return m ? m[1] : null;
 }
 
-async function runOne(model, tokenizer, prompt, { useConstrained, registry, max_new_tokens = 64, typedArgs = true }) {
+async function runOne(model, tokenizer, prompt, { useConstrained, registry, max_new_tokens = 64, typedArgs = true, wideNames = false }) {
   const inputs = await tokenizer(prompt, { return_tensors: 'pt' });
   const promptLength = inputs.input_ids.dims[1];
 
@@ -282,7 +282,7 @@ async function runOne(model, tokenizer, prompt, { useConstrained, registry, max_
     const cands = extractCandidateNames(prompt);
     if (cands.length > 0) {
       const promptSchemas = extractPromptSchemas(prompt);
-      const constraint = buildSchemaConstraint(cands, registry, { promptSchemas, typedArgs });
+      const constraint = buildSchemaConstraint(cands, registry, { promptSchemas, typedArgs, wideNames });
       const eosTokenId =
         tokenizer.eos_token_id ??
         (model.generation_config && model.generation_config.eos_token_id);
@@ -332,6 +332,7 @@ async function runVoiceBench(opts = {}) {
     n = null,
     useAliasExpansion = false,
     typedArgs = true,
+    wideNames = false,
   } = opts;
 
   const configKey = `${useRetrieval ? 'ret' : 'no_ret'}_${useConstrained ? 'con' : 'no_con'}${useAliasExpansion ? '_alias' : ''}`;
@@ -390,7 +391,7 @@ async function runVoiceBench(opts = {}) {
     const prompt = buildPrompt(query, candidates);
     let res;
     try {
-      res = await runOne(model, tokenizer, prompt, { useConstrained, registry, max_new_tokens, typedArgs });
+      res = await runOne(model, tokenizer, prompt, { useConstrained, registry, max_new_tokens, typedArgs, wideNames });
     } catch (e) {
       console.error(`[voice-bench] item ${i} failed:`, e);
       res = { text: '', ms: 0, error: String(e) };

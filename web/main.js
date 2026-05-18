@@ -164,7 +164,8 @@ async function generate() {
       const registry = await getRegistry();
       const promptSchemas = extractPromptSchemas(prompt);
       const typedArgs = $('typedargs') ? $('typedargs').checked : true;
-      const constraint = buildSchemaConstraint(cands, registry, { promptSchemas, typedArgs });
+      const wideNames = $('widenames') ? $('widenames').checked : false;
+      const constraint = buildSchemaConstraint(cands, registry, { promptSchemas, typedArgs, wideNames });
       const eosTokenId =
         tokenizer.eos_token_id ??
         (model.generation_config && model.generation_config.eos_token_id);

@@ -206,7 +206,7 @@ function isValidJson(rawText) {
   return false;
 }
 
-async function runOne(model, tokenizer, prompt, { constrained, registry, max_new_tokens = 64, typedArgs = true }) {
+async function runOne(model, tokenizer, prompt, { constrained, registry, max_new_tokens = 64, typedArgs = true, wideNames = false }) {
   const inputs = await tokenizer(prompt, { return_tensors: 'pt' });
   const promptLength = inputs.input_ids.dims[1];
 
@@ -218,7 +218,7 @@ async function runOne(model, tokenizer, prompt, { constrained, registry, max_new
       processor = null;
     } else {
       const promptSchemas = extractPromptSchemas(prompt);
-      const constraint = buildSchemaConstraint(cands, registry, { promptSchemas, typedArgs });
+      const constraint = buildSchemaConstraint(cands, registry, { promptSchemas, typedArgs, wideNames });
       const eosTokenId =
         tokenizer.eos_token_id ??
         (model.generation_config && model.generation_config.eos_token_id);
@@ -305,7 +305,7 @@ function gradePrediction(predName, item) {
 }
 
 // Run a single item across modes and return the row.
-async function runOneItem(item, idx, { modes, registry, max_new_tokens, topK, verbose, useSentinel, threshold, typedArgs = true }) {
+async function runOneItem(item, idx, { modes, registry, max_new_tokens, topK, verbose, useSentinel, threshold, typedArgs = true, wideNames = false }) {
   const model = window._bench_model;
   const tokenizer = window._bench_tokenizer;
   const goldCall = parseGoldCall(item.gold);
@@ -345,7 +345,7 @@ async function runOneItem(item, idx, { modes, registry, max_new_tokens, topK, ve
     const promptForMode = useRet ? (retPrompt || item.prompt) : item.prompt;
     try {
       const out = await runOne(model, tokenizer, promptForMode, {
-        constrained: useCon, registry, max_new_tokens, typedArgs,
+        constrained: useCon, registry, max_new_tokens, typedArgs, wideNames,
       });
       const name = extractPredictedName(out.text);
       const predCall = parsePredictedCall(out.text);
@@ -397,6 +397,7 @@ async function runBenchOnItems(items, {
   useSentinel = true,
   threshold = 0.30,
   typedArgs = true,
+  wideNames = false,
 } = {}) {
   const model = window._bench_model;
   const tokenizer = window._bench_tokenizer;
@@ -412,7 +413,7 @@ async function runBenchOnItems(items, {
   }
   const results = [];
   for (let i = 0; i < items.length; i++) {
-    const row = await runOneItem(items[i], i, { modes, registry, max_new_tokens, topK, verbose, useSentinel, threshold, typedArgs });
+    const row = await runOneItem(items[i], i, { modes, registry, max_new_tokens, topK, verbose, useSentinel, threshold, typedArgs, wideNames });
     results.push(row);
   }
   return { results };
@@ -540,6 +541,7 @@ async function runBench({
   useSentinel = true,
   threshold = 0.30,
   typedArgs = true,
+  wideNames = false,
 } = {}) {
   modes = modes || ALL_MODES;
   const { sample, registry } = await loadFixtures();
@@ -561,7 +563,7 @@ async function runBench({
   for (let i = 0; i < items.length; i++) {
     const item = items[i];
     if (verbose) console.log(`[${i + 1}/${items.length}] ${item.domain} | ${item.gold_name}`);
-    const row = await runOneItem(item, i, { modes, registry, max_new_tokens, topK, verbose, useSentinel, threshold, typedArgs });
+    const row = await runOneItem(item, i, { modes, registry, max_new_tokens, topK, verbose, useSentinel, threshold, typedArgs, wideNames });
     results.push(row);
     window._partialBench.push(row);
   }
@@ -594,6 +596,7 @@ async function runFullBench({
   useSentinel = true,
   threshold = 0.30,
   typedArgs = true,
+  wideNames = false,
 } = {}) {
   const { sample: all, registry } = await loadFixtures(url);
   window._fullProgress = { done: 0, total: all.length, started: Date.now() };
@@ -605,7 +608,7 @@ async function runFullBench({
   for (let off = 0; off < all.length; off += chunkSize) {
     const slice = all.slice(off, off + chunkSize);
     const { results } = await runBenchOnItems(slice, {
-      modes, max_new_tokens, topK, verbose: false, registry, useSentinel, threshold, typedArgs,
+      modes, max_new_tokens, topK, verbose: false, registry, useSentinel, threshold, typedArgs, wideNames,
     });
     // Re-index items so .i is global, not per-chunk.
     for (let k = 0; k < results.length; k++) {

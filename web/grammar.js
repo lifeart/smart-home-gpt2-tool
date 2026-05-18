@@ -253,18 +253,40 @@ export function extractPromptSchemas(prompt) {
  * masker can refuse type-incompatible values (e.g. quote-opening when key
  * expects a number).
  *
+ * Iter 9.2: optional `wideNames` flag widens the *name-token mask* to
+ * `prompt_candidates ∪ registry_names`. Iter 9.1 diagnosis found that 19/19
+ * of con's name regressions vs baseline were class-2 (gold name missing
+ * from prompt-extracted candidate list due to ~4 kB SYSTEM-tool-list
+ * truncation). Widening to registry names lets the mask still reject
+ * hallucinations (`release_door`, ...) while admitting the truncated-out
+ * golds. The per-key schema (paramKeys, paramTypes) is NOT widened — keys
+ * are only enforced for names that have a known schema either via the
+ * prompt or the registry, so registry-only names get free-form args
+ * validation. Default OFF for backwards compat with Iter 7.4 / 8.3 con.
+ *
  * @param {string[]} candidateNames
  * @param {Record<string, {params: Record<string,string>, required: string[]}>} registry
  * @param {{ promptSchemas?: Map<string, {keys: string[], types: Map<string, {type, enum?}>}>,
- *           typedArgs?: boolean }} [options]
+ *           typedArgs?: boolean,
+ *           wideNames?: boolean }} [options]
  * @returns {{names, paramKeys: Map<string,string[]>, paramTypes: Map<string, Map<string, {type, enum?}>>, typedArgs: boolean }}
  */
 export function buildSchemaConstraint(candidateNames, registry, options = {}) {
   const promptSchemas = options.promptSchemas || null;
   const typedArgs = options.typedArgs !== false; // default ON
+  const wideNames = options.wideNames === true;
+  // Effective name set: prompt_candidates ∪ (registry_names if wideNames).
+  let names;
+  if (wideNames && registry) {
+    const set = new Set(candidateNames);
+    for (const n of Object.keys(registry)) set.add(n);
+    names = Array.from(set);
+  } else {
+    names = candidateNames.slice();
+  }
   const paramKeys = new Map();
   const paramTypes = new Map();
-  for (const n of candidateNames) {
+  for (const n of names) {
     // Prefer prompt-derived schema (richer: includes enums); fall back to registry.
     let keys = null;
     const typesMap = new Map();
@@ -321,7 +343,7 @@ export function buildSchemaConstraint(candidateNames, registry, options = {}) {
     paramKeys.set(n, keys);
     paramTypes.set(n, typesMap);
   }
-  return { names: candidateNames, paramKeys, paramTypes, typedArgs };
+  return { names, paramKeys, paramTypes, typedArgs };
 }
 
 // ---------- prefix validator ----------
