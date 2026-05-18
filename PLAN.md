@@ -359,6 +359,44 @@ sec/unlock_door:
 
 ---
 
+## Iteration 6.1 — voice retrieval K=5  ⚠️ PARTIAL (acc lift +3.33 pp; voice gate ≥55% still missed)
+
+**Goal:** raise voice recall@K (and therefore acc) by widening the retrieval top-K from 3 to 5. The hypothesis is that K=5 lifts recall from 70% closer to 90%, taking voice acc above 55%.
+
+**Setup:** identical to Phase 5b. v3 weights, WebGPU/fp32, MiniLM `Xenova/all-MiniLM-L6-v2` WebGPU/fp32, ret_con (retrieval + constrained both ON), 30 RU→Whisper noisy EN items. Only K changes.
+
+| K | acc | recall@K | mean ms/item |
+|---:|---:|---:|---:|
+| 3 | 46.67% (14/30) | 70.0% | 386 |
+| **5** | **50.00%** (15/30) | **83.3%** | 398 |
+
+**Δ K=5 vs K=3:** acc +3.33 pp, recall +13.3 pp. K=5 wins by exactly the 3-pp threshold; we set default voice K=5 going forward.
+
+**Remaining recall misses under K=5 (5 of 30):**
+- `Запри входную дверь` → ASR "Close the entrance door." gold=`lock_door`. Top-5: [close_window, open_window, close_skylight, open_curtains, unlock_door]. ASR drops `lock`; need alias.
+- `Сделай в комнате 21 градус` → ASR "Make a degree in the room." gold=`set_thermostat`. ASR drops the temperature concept entirely.
+- `Разблокируй патио` → ASR "Unblock patio." gold=`unlock_door`. ASR drops `door`.
+- `Замолчи на кухне` → ASR "Shut up in the kitchen!" gold=`stop_music`. No mention of music/audio.
+- `Опусти жалюзи в спальне` → ASR variant. (5th miss.)
+
+**Gate check:** Voice ≥55% → **MISSED** (50.0% < 55%). +3.33 pp lift puts us closer but does not close. Next: ASR alias query expansion (iter 6.3) targets the `close`⇄`lock` class.
+
+**Notes:**
+- `index.html` already exposes K as the `#topk` numeric input (defaulting to 3); we leave the UI default at 3 (multi-tool case where K=3 is fine) but document K=5 as the voice-optimal value.
+- mean ms/item barely moves (+12 ms) — retrieval cost is dominated by the encoder forward, not the cosine-rank size.
+
+**HF spend:** $0.
+
+---
+
+## Iteration 6.2 — retrieval irrelevance sentinel + score-threshold gating  (in progress)
+
+---
+
+## Iteration 6.3 — ASR alias query expansion (voice)  (in progress)
+
+---
+
 ## Progress log
 
 | Date (UTC) | Event |
@@ -374,4 +412,5 @@ sec/unlock_door:
 | 2026-05-18 | **Phase 5b partial.** Voice E2E (n=30, v3, browser). baseline 23.3%, +con 23.3%, +ret 46.7%, ret_con 46.7%. Δ ret_con vs baseline = +23.34 pp. Matches README's 46.7% (curated) — retrieval recovers the curated effect under ASR noise. Recall@3 voice = 70% (ASR substitutions cost 30 pp recall). |
 | 2026-05-18 | **Phase 4 done.** MiniLM retrieval pre-rank in browser. A/B on v1 webgpu/fp32, n=30, K=3: baseline **56.67% → ret_con 73.33% (+16.67 pp)** (and ~45% faster prefill). Recall@3 = 100% after enriching the 100-entry registry with 7 test-only gold labels in the index. Cost: $0. |
 | 2026-05-18 | **Phase 5b done.** Voice E2E on v3 + retrieval + constrained in browser. 4-config A/B on v3 webgpu/fp32, n=30, K=3: baseline (gold+4 random domain peers) **23.33% → ret/ret_con 46.67% (+23.34 pp)**. Recall@3 = 70% under noisy Whisper EN. Cost: $0. Voice gate (≥55%) **missed** — retrieval recovers exactly the README's 46.7% curated-candidate effect (and dominates the HF Jobs voice bench's 33.3% gold+4-random number) but cannot close to 55% because 30% of ASR transcripts (e.g. "Запри"/lock → "Close") lose the gold's lexical signal entirely. |
+| 2026-05-18 | **Iter 6.1 partial.** Voice K=5 vs K=3 (v3 webgpu/fp32, ret_con). K=3 acc 46.67% / recall 70%; K=5 acc **50.00%** / recall **83.3%**. Δacc +3.33 pp (gate-meeting threshold), Δrecall +13.3 pp. Voice gate ≥55% still missed. Cost: $0. |
 

@@ -1,0 +1,8 @@
+{
+  "k3": { "acc": 0.4667, "recall": 0.700, "meanMs": 386.2, "n": 30 },
+  "k5": { "acc": 0.5000, "recall": 0.8333, "meanMs": 397.6, "n": 30 },
+  "config": "v3 weights, WebGPU/fp32, MiniLM Xenova/all-MiniLM-L6-v2 webgpu/fp32, useRetrieval=true, useConstrained=true, K=3 vs 5",
+  "delta": { "acc_pp": 3.33, "recall_pp": 13.3 },
+  "gate_passed": false,
+  "notes": "K=5 beats K=3 by +3.33 pp on acc and +13.3 pp on recall. Voice gate ≥55% still missed (50.0% < 55%). Recall misses under K=5: 'Запри' (lock_door) → ASR 'Close the entrance door' (gold not in top-5), 'Сделай 21 градус' (set_thermostat) → ASR 'Make a degree in the room' (gold not in top-5), 'Разблокируй' (unlock_door) → ASR 'Unblock patio' (gold not in top-5), 'Замолчи' (stop_music) → ASR 'Shut up'."
+}
