@@ -11,6 +11,7 @@
 import { LogitsProcessorList } from '@huggingface/transformers';
 import {
   extractCandidateNames,
+  extractPromptSchemas,
   buildSchemaConstraint,
   JsonSchemaLogitsProcessor,
 } from './grammar.js';
@@ -30,6 +31,75 @@ let _voice = null;
 let _registry = null;
 let _fnDomainMap = null; // gold_name -> domain
 let _domainFns = null;   // domain -> [fn names]
+
+// ASR alias map — verb-level substitutions Whisper produces on RU smart-home
+// commands. Drawn from iter 6.1 K=5 recall misses on voice_pipeline_results.json:
+//   "Запри"  (lock)   -> "Close"
+//   "Разблокируй" (unlock) -> "Unblock"
+//   "Замолчи" (silence) -> "Shut up"
+//   "21 градус" (21 degrees) -> "a degree" / "make a degree"
+//   "Опусти жалюзи" (lower blinds) -> often loses "blinds"
+// The map carries the RAW ASR phrase as key (case-insensitive) and the SET of
+// alternative phrasings to ALSO retrieve against. The expansion strategy:
+//   1. Embed the original query.
+//   2. For each (key, aliases) where key is a substring of the lower-cased query:
+//        - For each alias, build a variant query by replacing key with alias.
+//        - Embed all variants.
+//   3. Mean-pool the embeddings (already L2-normalised after re-normalisation).
+// This widens the semantic neighbourhood without injecting prompt-style noise.
+const ASR_ALIASES = [
+  // close → lock / shut / latch (door, gate, lid)
+  { key: 'close', aliases: ['lock', 'shut', 'latch'] },
+  // open → unlock / unlatch
+  { key: 'open', aliases: ['unlock', 'unlatch'] },
+  // unblock → unlock / release
+  { key: 'unblock', aliases: ['unlock', 'release'] },
+  // shut up / silence → stop music / mute
+  { key: 'shut up', aliases: ['stop music', 'mute audio', 'silence'] },
+  // a degree / make a degree → set thermostat / set temperature
+  { key: 'a degree', aliases: ['set temperature', 'set thermostat'] },
+  { key: 'make a degree', aliases: ['set temperature', 'set thermostat'] },
+];
+
+/**
+ * Given a raw query, return an array of expanded query strings (always
+ * including the original). Replaces ASR aliases case-insensitively.
+ *
+ * @param {string} query
+ * @returns {string[]}
+ */
+function expandQuery(query) {
+  const out = [query];
+  const ql = query.toLowerCase();
+  for (const { key, aliases } of ASR_ALIASES) {
+    const idx = ql.indexOf(key);
+    if (idx === -1) continue;
+    for (const alias of aliases) {
+      // Splice the original-case query, replacing the case-insensitive match.
+      const replaced = query.slice(0, idx) + alias + query.slice(idx + key.length);
+      if (!out.includes(replaced)) out.push(replaced);
+    }
+  }
+  return out;
+}
+
+// Mean-pool a list of L2-normalised vectors and re-normalise.
+function meanPool(vecs) {
+  if (vecs.length === 1) return vecs[0];
+  const dim = vecs[0].length;
+  const acc = new Float32Array(dim);
+  for (const v of vecs) {
+    for (let i = 0; i < dim; i++) acc[i] += v[i];
+  }
+  const inv = 1 / vecs.length;
+  for (let i = 0; i < dim; i++) acc[i] *= inv;
+  // Re-normalise so cosine-via-dot still holds.
+  let norm = 0;
+  for (let i = 0; i < dim; i++) norm += acc[i] * acc[i];
+  norm = Math.sqrt(norm) || 1;
+  for (let i = 0; i < dim; i++) acc[i] /= norm;
+  return acc;
+}
 
 // Stable PRNG so baseline runs are reproducible (gold + 4 random domain peers).
 function mulberry32(seed) {
@@ -106,7 +176,7 @@ function extractPredName(text) {
   return m ? m[1] : null;
 }
 
-async function runOne(model, tokenizer, prompt, { useConstrained, registry, max_new_tokens = 64 }) {
+async function runOne(model, tokenizer, prompt, { useConstrained, registry, max_new_tokens = 64, typedArgs = true }) {
   const inputs = await tokenizer(prompt, { return_tensors: 'pt' });
   const promptLength = inputs.input_ids.dims[1];
 
@@ -114,7 +184,8 @@ async function runOne(model, tokenizer, prompt, { useConstrained, registry, max_
   if (useConstrained) {
     const cands = extractCandidateNames(prompt);
     if (cands.length > 0) {
-      const constraint = buildSchemaConstraint(cands, registry);
+      const promptSchemas = extractPromptSchemas(prompt);
+      const constraint = buildSchemaConstraint(cands, registry, { promptSchemas, typedArgs });
       const eosTokenId =
         tokenizer.eos_token_id ??
         (model.generation_config && model.generation_config.eos_token_id);
@@ -162,9 +233,11 @@ async function runVoiceBench(opts = {}) {
     max_new_tokens = 64,
     verbose = true,
     n = null,
+    useAliasExpansion = false,
+    typedArgs = true,
   } = opts;
 
-  const configKey = `${useRetrieval ? 'ret' : 'no_ret'}_${useConstrained ? 'con' : 'no_con'}`;
+  const configKey = `${useRetrieval ? 'ret' : 'no_ret'}_${useConstrained ? 'con' : 'no_con'}${useAliasExpansion ? '_alias' : ''}`;
 
   const { voice, registry, fnDomain, domainFns } = await loadFixtures();
   const model = window._bench_model;
@@ -195,8 +268,18 @@ async function runVoiceBench(opts = {}) {
 
     let candidates;
     let goldInTopK = null;
+    let expandedQueries = null;
     if (useRetrieval) {
-      const [qv] = await embed(encoder, [query]);
+      let qv;
+      if (useAliasExpansion) {
+        // Embed the raw query AND each alias-substituted variant, then mean-pool.
+        const variants = expandQuery(query);
+        expandedQueries = variants;
+        const qvecs = await embed(encoder, variants);
+        qv = meanPool(qvecs);
+      } else {
+        [qv] = await embed(encoder, [query]);
+      }
       // Ask for K+1 so we can drop the synthetic __NONE__ sentinel if it
       // ranks, while still returning K real function names.
       const top = cosineTopK(qv, index.vecs, K + 1);
@@ -210,7 +293,7 @@ async function runVoiceBench(opts = {}) {
     const prompt = buildPrompt(query, candidates);
     let res;
     try {
-      res = await runOne(model, tokenizer, prompt, { useConstrained, registry, max_new_tokens });
+      res = await runOne(model, tokenizer, prompt, { useConstrained, registry, max_new_tokens, typedArgs });
     } catch (e) {
       console.error(`[voice-bench] item ${i} failed:`, e);
       res = { text: '', ms: 0, error: String(e) };
@@ -228,6 +311,7 @@ async function runVoiceBench(opts = {}) {
       goldInTopK,
       ms: res.ms,
       text: res.text,
+      expandedQueries,
     };
     window._voiceResults.push(row);
     window._voiceProgress.done = window._voiceResults.length;

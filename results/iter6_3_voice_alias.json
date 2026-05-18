@@ -1,0 +1,37 @@
+{
+  "config": "v3 weights, WebGPU/fp32, MiniLM Xenova/all-MiniLM-L6-v2 webgpu/fp32, K=5, sentinel ON, alias expansion via mean-pool over alias-substituted query variants",
+  "n": 30,
+  "configs": {
+    "k5_noalias": { "acc": 0.5000, "recall": 0.8333, "meanMs": 397.8 },
+    "k5_alias":   { "acc": 0.5333, "recall": 0.9333, "meanMs": 440.7 }
+  },
+  "delta_alias_vs_noalias": { "acc_pp": 3.33, "recall_pp": 10.0, "meanMs_added": 42.9 },
+  "alias_map": {
+    "close": ["lock", "shut", "latch"],
+    "open": ["unlock", "unlatch"],
+    "unblock": ["unlock", "release"],
+    "shut up": ["stop music", "mute audio", "silence"],
+    "a degree": ["set temperature", "set thermostat"],
+    "make a degree": ["set temperature", "set thermostat"]
+  },
+  "remaining_recall_misses_under_alias_k5": [
+    {
+      "ru": "Разблокируй патио",
+      "en_whisper": "Unblock patio.",
+      "expanded": ["Unblock patio.", "unlock patio.", "release patio."],
+      "gold": "unlock_door",
+      "top5": ["turn_off_outdoor_light", "set_outdoor_speaker", "set_outdoor_light_color", "turn_on_outdoor_light", "lock_window"],
+      "diagnosis": "even after unblock->unlock alias, MiniLM ranks 'outdoor light' fns above 'unlock_door' because the query mentions 'patio' (outdoor concept) but never 'door'; need a 'patio'->'door' object alias, but that's domain-specific and not in the verb-substitution class"
+    },
+    {
+      "ru": "Опусти жалюзи в гостиной",
+      "en_whisper": "Put the",
+      "gold": "close_curtains",
+      "top5": ["skip_track", "set_tv_channel", "switch_speaker_room", "stop_microwave", "play_music"],
+      "diagnosis": "Whisper output is truncated to 'Put the' — no usable semantic content, no aliases applicable. ASR-side problem, not retrieval-side."
+    }
+  ],
+  "gate_passed": false,
+  "voice_gate_target_pct": 55,
+  "achieved_pct": 53.33
+}
