@@ -17,6 +17,7 @@ import {
   getOrBuildIndex,
 } from './retrieval.js';
 import { PRESETS } from './presets.js';
+import { MODEL_CARDS, TOGGLE_HELP, BENCH_LEGEND, FOOTER } from './help.js';
 import './bench.js';
 import './voice_bench.js';
 
@@ -263,5 +264,88 @@ if (presetEl) {
     if (p) $('prompt').value = p;
   });
 }
+
+// Model dropdown — render a 2-3 line card under the config row on change.
+const modelEl = $('model');
+const modelInfoEl = $('model-info');
+function renderModelInfo() {
+  if (!modelInfoEl || !modelEl) return;
+  const card = MODEL_CARDS[modelEl.value];
+  if (!card) {
+    modelInfoEl.innerHTML = '';
+    return;
+  }
+  const body = card.body.map((line) => `<li>${line}</li>`).join('');
+  modelInfoEl.innerHTML = `<strong>${card.title}</strong><ul>${body}</ul>`;
+}
+if (modelEl) {
+  modelEl.addEventListener('change', renderModelInfo);
+  renderModelInfo();
+}
+
+// Per-toggle info: attach a (i) icon next to each toggle that expands a help <div>.
+function attachToggleHelp() {
+  const toggleRow = document.querySelector('section .row');
+  if (!toggleRow) return;
+  for (const [id, help] of Object.entries(TOGGLE_HELP)) {
+    const input = $(id);
+    if (!input) continue;
+    const parentLabel = input.closest('label');
+    if (!parentLabel) continue;
+    if (parentLabel.querySelector('.help-toggle')) continue; // idempotent
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'help-toggle';
+    btn.setAttribute('aria-expanded', 'false');
+    btn.setAttribute('aria-label', `Help for: ${help.label}`);
+    btn.textContent = 'i';
+    parentLabel.appendChild(btn);
+    const panel = document.createElement('div');
+    panel.className = 'toggle-help';
+    panel.hidden = true;
+    panel.innerHTML = `
+      <div><span class="th-tag">What</span> ${help.what}</div>
+      <div><span class="th-tag">When</span> ${help.when}</div>
+      <div><span class="th-tag">Effect</span> ${help.effect}</div>
+    `;
+    // Insert after the toggle row's parent section so it can span full width.
+    parentLabel.after(panel);
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      panel.hidden = !panel.hidden;
+      btn.setAttribute('aria-expanded', String(!panel.hidden));
+    });
+  }
+}
+attachToggleHelp();
+
+// Bench legend (under the bench <pre>).
+function renderBenchLegend() {
+  const benchSection = benchEl ? benchEl.parentElement : null;
+  if (!benchSection) return;
+  if (document.getElementById('bench-legend')) return;
+  const legend = document.createElement('div');
+  legend.id = 'bench-legend';
+  legend.className = 'info-card legend-card';
+  const rows = BENCH_LEGEND.map(
+    ([k, v]) => `<div><code>${k}</code> — ${v}</div>`,
+  ).join('');
+  legend.innerHTML = `<strong>What each bench line means</strong>${rows}`;
+  benchSection.appendChild(legend);
+}
+renderBenchLegend();
+
+// Footer with project + HF Hub links.
+function renderFooter() {
+  if (document.getElementById('site-footer')) return;
+  const footer = document.createElement('footer');
+  footer.id = 'site-footer';
+  const links = FOOTER.links
+    .map((l) => `<a href="${l.href}" target="_blank" rel="noopener">${l.label}</a>`)
+    .join(' · ');
+  footer.innerHTML = `<p>${FOOTER.blurb}</p><p class="links">${links}</p>`;
+  document.querySelector('main').appendChild(footer);
+}
+renderFooter();
 
 setStatus(detectWebGPU() ? 'WebGPU available · click Load' : 'WebGPU NOT available · WASM only');

@@ -37,3 +37,90 @@ pre {
   word-break: break-word;
   margin: 0;
 }
+
+/* --- UX polish (Iter 12): info cards, toggle help, footer --- */
+
+.info-card {
+  flex-basis: 100%;
+  margin-top: 0.5rem;
+  padding: 0.55rem 0.7rem;
+  border: 1px solid rgba(127, 127, 127, 0.35);
+  border-radius: 4px;
+  background: rgba(127, 127, 127, 0.06);
+  font-size: 0.78rem;
+  line-height: 1.45;
+}
+.info-card strong { display: block; margin-bottom: 0.25rem; }
+.info-card ul { margin: 0; padding-left: 1rem; }
+.info-card ul li { margin: 0.1rem 0; }
+.info-card:empty { display: none; }
+
+.legend-card { margin-top: 0.5rem; }
+.legend-card div { margin: 0.1rem 0; }
+.legend-card code {
+  background: rgba(127, 127, 127, 0.18);
+  padding: 0 0.25rem;
+  border-radius: 2px;
+  font-size: 0.85em;
+}
+
+.help-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.1rem;
+  height: 1.1rem;
+  margin-left: 0.35rem;
+  padding: 0;
+  border-radius: 50%;
+  border: 1px solid rgba(127, 127, 127, 0.55);
+  background: transparent;
+  color: inherit;
+  font-size: 0.7rem;
+  font-style: italic;
+  font-weight: 700;
+  line-height: 1;
+  opacity: 0.7;
+  cursor: help;
+}
+.help-toggle:hover { opacity: 1; }
+.help-toggle[aria-expanded="true"] { background: rgba(127, 127, 127, 0.25); opacity: 1; }
+
+.toggle-help {
+  flex-basis: 100%;
+  margin: 0.3rem 0 0.2rem;
+  padding: 0.5rem 0.7rem;
+  border-left: 3px solid rgba(127, 127, 127, 0.45);
+  background: rgba(127, 127, 127, 0.06);
+  font-size: 0.76rem;
+  line-height: 1.45;
+  border-radius: 0 4px 4px 0;
+}
+.toggle-help > div { margin: 0.15rem 0; }
+.th-tag {
+  display: inline-block;
+  min-width: 3.5rem;
+  margin-right: 0.4rem;
+  font-weight: 700;
+  opacity: 0.75;
+  text-transform: uppercase;
+  font-size: 0.65rem;
+  letter-spacing: 0.04em;
+}
+
+#site-footer {
+  margin: 2rem 0 0;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(127, 127, 127, 0.3);
+  font-size: 0.75rem;
+  opacity: 0.85;
+}
+#site-footer p { margin: 0.25rem 0; }
+#site-footer .links a { margin-right: 0.5rem; }
+#site-footer a { color: inherit; }
+
+@media (max-width: 640px) {
+  body { padding: 1rem; }
+  .config, .row { gap: 0.5rem; }
+  .toggle-help { font-size: 0.72rem; }
+}

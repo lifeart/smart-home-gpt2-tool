@@ -14,10 +14,14 @@
         <label>
           Model
           <select id="model">
-            <option value="local:smart-home-gpt2">smart-home-gpt2 · FT (local)</option>
-            <option value="local:smart-home-gpt2-v3">smart-home-gpt2-v3 · FT (local)</option>
-            <option value="lifeart/smart-home-gpt2">lifeart/smart-home-gpt2 · FT (HF)</option>
-            <option value="Xenova/gpt2">Xenova/gpt2 · base (HF)</option>
+            <option value="local:smart-home-gpt2-v3">smart-home-gpt2-v3 · FT (local) · best</option>
+            <option value="local:smart-home-gpt2-v4">smart-home-gpt2-v4 · FT (local) · Iter 11 (may not exist)</option>
+            <option value="local:smart-home-gpt2-v2">smart-home-gpt2-v2 · FT (local) · may not be downloaded</option>
+            <option value="local:smart-home-gpt2">smart-home-gpt2 · FT (local) · v1</option>
+            <option value="lifeart/smart-home-gpt2-v3">lifeart/smart-home-gpt2-v3 · FT (HF Hub)</option>
+            <option value="lifeart/smart-home-gpt2-v2">lifeart/smart-home-gpt2-v2 · FT (HF Hub)</option>
+            <option value="lifeart/smart-home-gpt2">lifeart/smart-home-gpt2 · FT (HF Hub) · v1</option>
+            <option value="Xenova/gpt2">Xenova/gpt2 · base (HF) · no FT</option>
           </select>
         </label>
         <label>
@@ -38,6 +42,7 @@
         </label>
         <button id="load">Load model</button>
         <span id="status">idle</span>
+        <div id="model-info" class="info-card" role="status" aria-live="polite"></div>
       </section>
 
       <section>
