@@ -1178,5 +1178,198 @@
       "Bread timer 35 minutes.",
       "Oven timer 25 minutes."
     ]
+  },
+  "activate_scene": {
+    "description": "Activate a previously defined whole-home scene by name.",
+    "params": [
+      "scene"
+    ],
+    "examples": [
+      "Use the focus scene.",
+      "Activate the away scene.",
+      "Time to focus, activate focus scene.",
+      "I need to concentrate on work."
+    ]
+  },
+  "save_current_scene": {
+    "description": "Save the current device/light state as a named scene for later recall.",
+    "params": [
+      "scene_name"
+    ],
+    "examples": [
+      "Save current settings as cozy.",
+      "Save this as my game night scene.",
+      "Save these lights as my movie scene."
+    ]
+  },
+  "schedule_routine": {
+    "description": "Schedule a recurring routine: activate a scene at a given time on selected days, with optional follow-up actions.",
+    "params": [
+      "scene",
+      "time",
+      "days",
+      "trigger",
+      "followup",
+      "pre_reminder"
+    ],
+    "examples": [
+      "Every Friday at 6 PM run dinner party scene and remind me 15 minutes earlier to start cooking.",
+      "Every Sunday at 10 PM activate bedtime scene and set an alarm for 6 AM Monday.",
+      "Dinner party scene every Saturday at 7 PM.",
+      "Schedule wake up scene every weekday at 6:30."
+    ]
+  },
+  "cancel_alarm": {
+    "description": "Cancel one or more alarms, by time, label, day, or all.",
+    "params": [
+      "time",
+      "label",
+      "day",
+      "days",
+      "from",
+      "to",
+      "all"
+    ],
+    "examples": [
+      "Cancel my weekend alarm.",
+      "Cancel alarm at 8 AM.",
+      "Cancel all alarms between 5 and 7 AM tomorrow.",
+      "Cancel my morning alarm."
+    ]
+  },
+  "snooze_alarm": {
+    "description": "Snooze the currently ringing alarm by a duration.",
+    "params": [
+      "duration_minutes"
+    ],
+    "examples": [
+      "Snooze alarm for 5 more minutes.",
+      "Snooze the alarm.",
+      "Snooze for 10 minutes."
+    ]
+  },
+  "query_alarms": {
+    "description": "List or query currently set alarms, optionally filtered by day or time range.",
+    "params": [
+      "day",
+      "days",
+      "before",
+      "after"
+    ],
+    "examples": [
+      "What alarms do I have set?",
+      "Do I have any alarms tomorrow?",
+      "List alarms set for any weekday before 8 AM."
+    ]
+  },
+  "cancel_timer": {
+    "description": "Cancel an active countdown timer by label, or all timers.",
+    "params": [
+      "label"
+    ],
+    "examples": [
+      "Kill the timer.",
+      "Cancel my pasta timer.",
+      "Cancel the timer."
+    ]
+  },
+  "query_timers": {
+    "description": "Query active countdown timers, optionally by label or finishing window.",
+    "params": [
+      "label",
+      "finishing_within_minutes"
+    ],
+    "examples": [
+      "Show active timers.",
+      "Which of my timers will finish in the next 5 minutes?",
+      "How long until my oven timer goes off?"
+    ]
+  },
+  "cancel_reminder": {
+    "description": "Cancel a previously set reminder by message, day, or cancel all.",
+    "params": [
+      "message",
+      "day",
+      "all",
+      "contains",
+      "range"
+    ],
+    "examples": [
+      "Cancel all my reminders.",
+      "Cancel my reminder about the dentist tomorrow.",
+      "Cancel my reminder about groceries."
+    ]
+  },
+  "query_motion_sensor": {
+    "description": "Query whether a motion sensor has detected movement in a room.",
+    "params": [
+      "room"
+    ],
+    "examples": [
+      "Is anyone moving around in the office area?",
+      "Hallway motion sensor.",
+      "Did the perimeter motion catch anything outside?",
+      "Any motion in the basement?"
+    ]
+  },
+  "query_smoke_alarm": {
+    "description": "Check the status of smoke alarms in the home.",
+    "params": [
+      "room"
+    ],
+    "examples": [
+      "Smoke alarm working?",
+      "Check smoke detector.",
+      "Are all smoke alarms in the house currently operational?"
+    ]
+  },
+  "query_water_leak": {
+    "description": "Check water-leak sensors for moisture detection, optionally per room.",
+    "params": [
+      "room"
+    ],
+    "examples": [
+      "Water leak status?",
+      "Any moisture being detected in the basement walls?",
+      "Anything tripping the floor sensors near the boiler?"
+    ]
+  },
+  "query_garage_door": {
+    "description": "Query whether the garage door is currently open or closed.",
+    "params": [],
+    "examples": [
+      "Check garage door.",
+      "Garage door status?",
+      "Did the garage door close after I drove off this morning?"
+    ]
+  },
+  "query_solar_production": {
+    "description": "Query solar panel energy production for a given period (now, today, month, etc).",
+    "params": [
+      "period"
+    ],
+    "examples": [
+      "Check this month's solar yield so far.",
+      "How many watts are the panels pushing out right now?",
+      "Where do we stand on energy generation from the solar array this period?"
+    ]
+  },
+  "list_active_devices": {
+    "description": "List devices that are currently on, drawing power, or otherwise reporting active.",
+    "params": [],
+    "examples": [
+      "List active devices.",
+      "What's still drawing or reporting?",
+      "Which devices are running right now?"
+    ]
+  },
+  "generate_status_report": {
+    "description": "Produce a snapshot summary of the entire home's device and sensor state.",
+    "params": [],
+    "examples": [
+      "Could you put together a snapshot of the whole house status?",
+      "Give me a status report.",
+      "Full home status report please."
+    ]
   }
 }

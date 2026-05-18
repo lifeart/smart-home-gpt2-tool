@@ -2552,5 +2552,518 @@
   "query_vacuum_battery": {
     "params": {},
     "required": []
+  },
+  "activate_scene": {
+    "params": {
+      "scene": "string"
+    },
+    "required": [
+      "scene"
+    ],
+    "enums": {
+      "scene": [
+        "away",
+        "bedtime",
+        "chill",
+        "cozy",
+        "dinner",
+        "dinner party",
+        "focus",
+        "game night",
+        "good night",
+        "kids bedtime",
+        "meditation",
+        "morning",
+        "movie",
+        "movie night",
+        "party",
+        "party prep",
+        "reading",
+        "relax",
+        "romantic",
+        "sleep",
+        "study",
+        "sunset",
+        "vacation",
+        "wake up",
+        "workout"
+      ]
+    }
+  },
+  "save_current_scene": {
+    "params": {
+      "scene_name": "string"
+    },
+    "required": [
+      "scene_name"
+    ],
+    "enums": {}
+  },
+  "schedule_routine": {
+    "params": {
+      "scene": "string",
+      "time": "string",
+      "days": "array",
+      "trigger": "string",
+      "followup": "object",
+      "pre_reminder": "object",
+      "end": "string",
+      "steps": "array",
+      "after_time": "string",
+      "end_time": "string",
+      "start": "string"
+    },
+    "required": [],
+    "enums": {
+      "scene": [
+        "away",
+        "bedtime",
+        "chill",
+        "cozy",
+        "dinner",
+        "dinner party",
+        "focus",
+        "game night",
+        "good night",
+        "kids bedtime",
+        "meditation",
+        "morning",
+        "movie",
+        "movie night",
+        "party",
+        "party prep",
+        "reading",
+        "relax",
+        "romantic",
+        "sleep",
+        "study",
+        "sunset",
+        "vacation",
+        "wake up",
+        "workout"
+      ],
+      "days": [
+        "today",
+        "tomorrow",
+        "mon",
+        "tue",
+        "wed",
+        "thu",
+        "fri",
+        "sat",
+        "sun"
+      ]
+    }
+  },
+  "cancel_alarm": {
+    "params": {
+      "time": "string",
+      "label": "string",
+      "day": "string",
+      "days": "array",
+      "from": "string",
+      "to": "string",
+      "all": "boolean"
+    },
+    "required": [],
+    "enums": {
+      "day": [
+        "today",
+        "tomorrow",
+        "mon",
+        "tue",
+        "wed",
+        "thu",
+        "fri",
+        "sat",
+        "sun"
+      ],
+      "days": [
+        "today",
+        "tomorrow",
+        "mon",
+        "tue",
+        "wed",
+        "thu",
+        "fri",
+        "sat",
+        "sun"
+      ]
+    }
+  },
+  "snooze_alarm": {
+    "params": {
+      "duration_minutes": "integer",
+      "range_hours": "integer",
+      "all": "boolean"
+    },
+    "required": [],
+    "enums": {}
+  },
+  "query_alarms": {
+    "params": {
+      "day": "string",
+      "days": "array",
+      "before": "string",
+      "after": "string"
+    },
+    "required": [],
+    "enums": {
+      "day": [
+        "today",
+        "tomorrow",
+        "mon",
+        "tue",
+        "wed",
+        "thu",
+        "fri",
+        "sat",
+        "sun"
+      ],
+      "days": [
+        "today",
+        "tomorrow",
+        "mon",
+        "tue",
+        "wed",
+        "thu",
+        "fri",
+        "sat",
+        "sun"
+      ]
+    }
+  },
+  "cancel_timer": {
+    "params": {
+      "label": "string"
+    },
+    "required": [],
+    "enums": {}
+  },
+  "query_timers": {
+    "params": {
+      "label": "string",
+      "finishing_within_minutes": "integer"
+    },
+    "required": [],
+    "enums": {}
+  },
+  "cancel_reminder": {
+    "params": {
+      "message": "string",
+      "day": "string",
+      "all": "boolean",
+      "contains": "string",
+      "range": "string"
+    },
+    "required": [],
+    "enums": {
+      "day": [
+        "today",
+        "tomorrow",
+        "mon",
+        "tue",
+        "wed",
+        "thu",
+        "fri",
+        "sat",
+        "sun"
+      ]
+    }
+  },
+  "query_motion_sensor": {
+    "params": {
+      "room": "string"
+    },
+    "required": [],
+    "enums": {
+      "room": [
+        "attic",
+        "basement",
+        "basement gym",
+        "bathroom",
+        "bedroom",
+        "dining room",
+        "dining_room",
+        "garage",
+        "garden",
+        "guest_room",
+        "hallway",
+        "kids room",
+        "kitchen",
+        "laundry_room",
+        "living room",
+        "living_room",
+        "master bedroom",
+        "nursery",
+        "office",
+        "patio",
+        "porch",
+        "sunroom"
+      ]
+    }
+  },
+  "query_smoke_alarm": {
+    "params": {
+      "room": "string"
+    },
+    "required": [],
+    "enums": {
+      "room": [
+        "attic",
+        "basement",
+        "basement gym",
+        "bathroom",
+        "bedroom",
+        "dining room",
+        "dining_room",
+        "garage",
+        "garden",
+        "guest_room",
+        "hallway",
+        "kids room",
+        "kitchen",
+        "laundry_room",
+        "living room",
+        "living_room",
+        "master bedroom",
+        "nursery",
+        "office",
+        "patio",
+        "porch",
+        "sunroom"
+      ]
+    }
+  },
+  "query_water_leak": {
+    "params": {
+      "room": "string"
+    },
+    "required": [],
+    "enums": {
+      "room": [
+        "attic",
+        "basement",
+        "basement gym",
+        "bathroom",
+        "bedroom",
+        "dining room",
+        "dining_room",
+        "garage",
+        "garden",
+        "guest_room",
+        "hallway",
+        "kids room",
+        "kitchen",
+        "laundry_room",
+        "living room",
+        "living_room",
+        "master bedroom",
+        "nursery",
+        "office",
+        "patio",
+        "porch",
+        "sunroom"
+      ]
+    }
+  },
+  "query_garage_door": {
+    "params": {},
+    "required": [],
+    "enums": {}
+  },
+  "query_solar_production": {
+    "params": {
+      "period": "string"
+    },
+    "required": [],
+    "enums": {
+      "period": [
+        "now",
+        "today",
+        "yesterday",
+        "hour",
+        "morning",
+        "afternoon",
+        "evening",
+        "night",
+        "week",
+        "month",
+        "year"
+      ]
+    }
+  },
+  "list_active_devices": {
+    "params": {},
+    "required": [],
+    "enums": {}
+  },
+  "generate_status_report": {
+    "params": {},
+    "required": [],
+    "enums": {}
+  },
+  "set_alarm": {
+    "params": {
+      "time": "string",
+      "day": "string",
+      "days": "array",
+      "label": "string",
+      "schedules": "array",
+      "condition": "string"
+    },
+    "required": [],
+    "enums": {
+      "day": [
+        "today",
+        "tomorrow",
+        "mon",
+        "tue",
+        "wed",
+        "thu",
+        "fri",
+        "sat",
+        "sun"
+      ],
+      "days": [
+        "today",
+        "tomorrow",
+        "mon",
+        "tue",
+        "wed",
+        "thu",
+        "fri",
+        "sat",
+        "sun"
+      ]
+    }
+  },
+  "set_timer": {
+    "params": {
+      "duration_minutes": "integer",
+      "label": "string",
+      "timers": "array"
+    },
+    "required": [],
+    "enums": {}
+  },
+  "set_reminder": {
+    "params": {
+      "message": "string",
+      "time": "string",
+      "in_minutes": "integer",
+      "days": "array",
+      "day": "string",
+      "offset_minutes": "integer",
+      "relative_to": "string",
+      "schedule": "string"
+    },
+    "required": [],
+    "enums": {
+      "day": [
+        "today",
+        "tomorrow",
+        "mon",
+        "tue",
+        "wed",
+        "thu",
+        "fri",
+        "sat",
+        "sun"
+      ],
+      "days": [
+        "today",
+        "tomorrow",
+        "mon",
+        "tue",
+        "wed",
+        "thu",
+        "fri",
+        "sat",
+        "sun"
+      ]
+    }
+  },
+  "query_battery_level": {
+    "params": {
+      "device": "string"
+    },
+    "required": [],
+    "enums": {}
+  },
+  "query_power_usage": {
+    "params": {
+      "period": "string",
+      "device": "string"
+    },
+    "required": [],
+    "enums": {
+      "period": [
+        "now",
+        "today",
+        "yesterday",
+        "hour",
+        "morning",
+        "afternoon",
+        "evening",
+        "night",
+        "week",
+        "month",
+        "year"
+      ]
+    }
+  },
+  "query_water_meter": {
+    "params": {
+      "period": "string"
+    },
+    "required": [],
+    "enums": {
+      "period": [
+        "now",
+        "today",
+        "yesterday",
+        "hour",
+        "morning",
+        "afternoon",
+        "evening",
+        "night",
+        "week",
+        "month",
+        "year"
+      ]
+    }
+  },
+  "query_window_status": {
+    "params": {
+      "room": "string"
+    },
+    "required": [],
+    "enums": {
+      "room": [
+        "attic",
+        "basement",
+        "basement gym",
+        "bathroom",
+        "bedroom",
+        "dining room",
+        "dining_room",
+        "garage",
+        "garden",
+        "guest_room",
+        "hallway",
+        "kids room",
+        "kitchen",
+        "laundry_room",
+        "living room",
+        "living_room",
+        "master bedroom",
+        "nursery",
+        "office",
+        "patio",
+        "porch",
+        "sunroom"
+      ]
+    }
   }
 }
