@@ -19,6 +19,8 @@ import {
   topKForQuery,
   rewriteCandidateList,
   getOrBuildIndex,
+  retrieveTopK,
+  NONE_SENTINEL,
 } from './retrieval.js';
 
 const SAMPLE_URL = '/eval/sh_test_sample.json';
@@ -131,34 +133,74 @@ async function runOne(model, tokenizer, prompt, { constrained, registry, max_new
 }
 
 // Apply retrieval to a prompt (returns rewritten prompt + topK metadata).
-async function retrievalRewrite(prompt, topK) {
+// If useSentinel is true (default), uses the gated retriever (retrieveTopK)
+// that returns gold_none=true when the top-1 score is below `threshold` or
+// the top-1 hit is the __NONE__ sentinel — in that case we rewrite the
+// candidate list to ["__NONE__"] so the model is asked to decline.
+async function retrievalRewrite(prompt, topK, { useSentinel = true, threshold = 0.30 } = {}) {
   const userQuery = extractUserQuery(prompt);
-  if (!userQuery) return { prompt, topNames: null, topScores: null };
-  const { topNames, topScores } = await topKForQuery(userQuery, topK);
-  const newPrompt = rewriteCandidateList(prompt, topNames);
-  return { prompt: newPrompt, topNames, topScores };
+  if (!userQuery) return { prompt, topNames: null, topScores: null, gold_none: false };
+  if (!useSentinel) {
+    const { topNames, topScores } = await topKForQuery(userQuery, topK);
+    const newPrompt = rewriteCandidateList(prompt, topNames);
+    return { prompt: newPrompt, topNames, topScores, gold_none: false };
+  }
+  const idx = await getOrBuildIndex();
+  const r = await retrieveTopK(userQuery, idx.vecs, idx.names, topK, threshold);
+  if (r.gold_none) {
+    // Rewrite candidate list to a single-element [__NONE__]. The model is now
+    // asked to decline; if `gold_name` is empty (irrelevance class) and pred
+    // is __NONE__ the row will be graded correct.
+    const newPrompt = rewriteCandidateList(prompt, [NONE_SENTINEL]);
+    return { prompt: newPrompt, topNames: [NONE_SENTINEL], topScores: r.topScores, gold_none: true };
+  }
+  const newPrompt = rewriteCandidateList(prompt, r.names);
+  return { prompt: newPrompt, topNames: r.names, topScores: r.topScores, gold_none: false };
 }
 
 const ALL_MODES = ['baseline', 'con', 'ret', 'ret_con'];
 
+// "decline class" — gold is missing / empty / __NONE__ ⇒ correct pred is __NONE__.
+function isDeclineGold(item) {
+  const gn = item.gold_name;
+  const g = item.gold;
+  if (gn === '' || gn === null || gn === undefined) return true;
+  if (gn === NONE_SENTINEL) return true;
+  if (g === '' || g === '{}' || g === null || g === undefined) return true;
+  return false;
+}
+
+function gradePrediction(predName, item) {
+  if (isDeclineGold(item)) return predName === NONE_SENTINEL;
+  return predName === item.gold_name;
+}
+
 // Run a single item across modes and return the row.
-async function runOneItem(item, idx, { modes, registry, max_new_tokens, topK, verbose }) {
+async function runOneItem(item, idx, { modes, registry, max_new_tokens, topK, verbose, useSentinel, threshold }) {
   const model = window._bench_model;
   const tokenizer = window._bench_tokenizer;
   const row = {
     i: idx, domain: item.domain, gold_name: item.gold_name,
   };
 
-  let retPrompt = null, retTopNames = null, retTopScores = null;
+  let retPrompt = null, retTopNames = null, retTopScores = null, retGoldNone = false;
   if (modes.includes('ret') || modes.includes('ret_con')) {
     try {
-      const r = await retrievalRewrite(item.prompt, topK);
+      const r = await retrievalRewrite(item.prompt, topK, { useSentinel, threshold });
       retPrompt = r.prompt;
       retTopNames = r.topNames;
       retTopScores = r.topScores;
+      retGoldNone = r.gold_none;
       row.ret_topK = retTopNames;
       row.ret_top1_score = retTopScores ? retTopScores[0] : null;
-      row.gold_in_topK = retTopNames ? retTopNames.includes(item.gold_name) : null;
+      row.ret_gold_none = retGoldNone;
+      // gold_in_topK: under sentinel-fired path, gold can still be "in" the
+      // 1-element [__NONE__] list iff this is an irrelevance gold.
+      if (retGoldNone) {
+        row.gold_in_topK = isDeclineGold(item);
+      } else {
+        row.gold_in_topK = retTopNames ? retTopNames.includes(item.gold_name) : null;
+      }
     } catch (e) {
       console.error('retrieval rewrite failed:', e);
       row.ret_error = String(e);
@@ -175,7 +217,10 @@ async function runOneItem(item, idx, { modes, registry, max_new_tokens, topK, ve
       });
       const name = extractPredictedName(out.text);
       row[`${mode}_name`] = name;
-      row[`${mode}_ok`] = name === item.gold_name;
+      // Under retrieval+sentinel: if the candidate list was rewritten to
+      // [__NONE__] and the model emitted that name, this is the decline class.
+      // Grade against gold_name with decline-aware comparison.
+      row[`${mode}_ok`] = useRet ? gradePrediction(name, item) : (name === item.gold_name);
       row[`${mode}_json_ok`] = isValidJson(out.text);
       row[`${mode}_ms`] = out.ms;
       row[`${mode}_tokens`] = out.newTokens;
@@ -206,6 +251,8 @@ async function runBenchOnItems(items, {
   topK = 3,
   verbose = false,
   registry = null,
+  useSentinel = true,
+  threshold = 0.30,
 } = {}) {
   const model = window._bench_model;
   const tokenizer = window._bench_tokenizer;
@@ -221,7 +268,7 @@ async function runBenchOnItems(items, {
   }
   const results = [];
   for (let i = 0; i < items.length; i++) {
-    const row = await runOneItem(items[i], i, { modes, registry, max_new_tokens, topK, verbose });
+    const row = await runOneItem(items[i], i, { modes, registry, max_new_tokens, topK, verbose, useSentinel, threshold });
     results.push(row);
   }
   return { results };
@@ -266,6 +313,8 @@ async function runBench({
   verbose = true,
   modes = null,
   topK = 3,
+  useSentinel = true,
+  threshold = 0.30,
 } = {}) {
   modes = modes || ALL_MODES;
   const { sample, registry } = await loadFixtures();
@@ -287,7 +336,7 @@ async function runBench({
   for (let i = 0; i < items.length; i++) {
     const item = items[i];
     if (verbose) console.log(`[${i + 1}/${items.length}] ${item.domain} | ${item.gold_name}`);
-    const row = await runOneItem(item, i, { modes, registry, max_new_tokens, topK, verbose });
+    const row = await runOneItem(item, i, { modes, registry, max_new_tokens, topK, verbose, useSentinel, threshold });
     results.push(row);
     window._partialBench.push(row);
   }
@@ -317,6 +366,8 @@ async function runFullBench({
   max_new_tokens = 64,
   topK = 3,
   url = FULL_URL,
+  useSentinel = true,
+  threshold = 0.30,
 } = {}) {
   const { sample: all, registry } = await loadFixtures(url);
   window._fullProgress = { done: 0, total: all.length, started: Date.now() };
@@ -328,7 +379,7 @@ async function runFullBench({
   for (let off = 0; off < all.length; off += chunkSize) {
     const slice = all.slice(off, off + chunkSize);
     const { results } = await runBenchOnItems(slice, {
-      modes, max_new_tokens, topK, verbose: false, registry,
+      modes, max_new_tokens, topK, verbose: false, registry, useSentinel, threshold,
     });
     // Re-index items so .i is global, not per-chunk.
     for (let k = 0; k < results.length; k++) {

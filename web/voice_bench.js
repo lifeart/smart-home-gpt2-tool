@@ -19,6 +19,7 @@ import {
   loadEncoder,
   embed,
   cosineTopK,
+  NONE_SENTINEL,
 } from './retrieval.js';
 
 const VOICE_URL = '/eval/voice_pipeline_results.json';
@@ -196,8 +197,11 @@ async function runVoiceBench(opts = {}) {
     let goldInTopK = null;
     if (useRetrieval) {
       const [qv] = await embed(encoder, [query]);
-      const top = cosineTopK(qv, index.vecs, K);
-      candidates = top.map(t => index.names[t.idx]);
+      // Ask for K+1 so we can drop the synthetic __NONE__ sentinel if it
+      // ranks, while still returning K real function names.
+      const top = cosineTopK(qv, index.vecs, K + 1);
+      const all = top.map(t => index.names[t.idx]).filter(n => n !== NONE_SENTINEL);
+      candidates = all.slice(0, K);
       goldInTopK = candidates.includes(gold);
     } else {
       candidates = buildBaselineCandidates(gold, fnDomain, domainFns, rng);

@@ -151,9 +151,19 @@ export function cosineTopK(queryVec, indexVecs, k = 3) {
 
 let _indexCache = null; // { names, texts, vecs }
 
+// Synthetic sentinel for "no function applies" (irrelevance) cases. Added at
+// the end of the index so its embedding sits alongside the real functions and
+// can win top-1 when the user's query is off-topic.
+export const NONE_SENTINEL = '__NONE__';
+const NONE_SENTINEL_TEXT =
+  '__NONE__ — no function applies, decline the request, the user asks something off-topic or wants no action';
+
 /**
  * Build the function index (names+texts), and on first call also embed all
  * function texts. Subsequent calls return the cached index.
+ *
+ * Includes a synthetic "__NONE__" sentinel entry as the LAST row of the index
+ * so retrieval can rank "decline the request" against real functions.
  *
  * @returns {Promise<{names:string[], texts:string[], vecs:Float32Array[]}>}
  */
@@ -164,11 +174,14 @@ export async function getOrBuildIndex() {
     fetch('/eval/tool_registry.json').then(r => r.json()),
   ]);
   const { names, texts } = buildFunctionIndex(descriptions, registry);
+  // Append the synthetic NONE sentinel.
+  names.push(NONE_SENTINEL);
+  texts.push(NONE_SENTINEL_TEXT);
   const encoder = await loadEncoder();
   const t0 = performance.now();
   const vecs = await embed(encoder, texts);
   const dt = performance.now() - t0;
-  console.log(`[retrieval] embedded ${vecs.length} function texts in ${dt.toFixed(0)} ms (device=${_encoderDevice})`);
+  console.log(`[retrieval] embedded ${vecs.length} function texts (incl. __NONE__ sentinel) in ${dt.toFixed(0)} ms (device=${_encoderDevice})`);
   _indexCache = { names, texts, vecs };
   return _indexCache;
 }
@@ -206,12 +219,58 @@ export async function topKForQuery(query, k = 3) {
   const idx = await getOrBuildIndex();
   const encoder = await loadEncoder();
   const [qvec] = await embed(encoder, [query]);
-  const top = cosineTopK(qvec, idx.vecs, k);
+  // Ask for k+1 so we can drop the sentinel if it ranks but still return k real names.
+  const top = cosineTopK(qvec, idx.vecs, k + 1);
+  const names = top.map(t => idx.names[t.idx]);
+  const scores = top.map(t => t.score);
+  // Filter out the synthetic sentinel — Phase 4 callers expect only real fn names.
+  const keepIdx = [];
+  for (let i = 0; i < names.length && keepIdx.length < k; i++) {
+    if (names[i] !== NONE_SENTINEL) keepIdx.push(i);
+  }
   return {
-    topNames: top.map(t => idx.names[t.idx]),
-    topScores: top.map(t => t.score),
+    topNames: keepIdx.map(i => names[i]),
+    topScores: keepIdx.map(i => scores[i]),
     allNames: idx.names,
   };
+}
+
+/**
+ * Gated retrieval: returns {names, gold_none} with two abstain conditions:
+ *   1. top-1 hit is the __NONE__ sentinel ⇒ gold_none=true
+ *   2. top-1 score is below `threshold` ⇒ gold_none=true
+ *
+ * When gold_none=true the caller should rewrite the prompt's candidate list
+ * to ["__NONE__"] so the model is asked to decline.
+ *
+ * NB: this function is used only by bench / main when the new sentinel flow
+ * is opted-in. The default `topKForQuery` keeps Phase 4's exact behavior so
+ * the baseline metric stays comparable.
+ *
+ * @param {string} query
+ * @param {Float32Array[]} indexVecs
+ * @param {string[]} names
+ * @param {number} k
+ * @param {number} threshold
+ * @returns {Promise<{names:string[], gold_none:boolean, topScores:number[]}>}
+ */
+export async function retrieveTopK(query, indexVecs, names, k = 5, threshold = 0.30) {
+  const encoder = await loadEncoder();
+  const [qvec] = await embed(encoder, [query]);
+  const top = cosineTopK(qvec, indexVecs, Math.max(k, 1));
+  const topNames = top.map(t => names[t.idx]);
+  const topScores = top.map(t => t.score);
+  const topScore = topScores.length ? topScores[0] : 0;
+  const noneIdx = topNames.indexOf(NONE_SENTINEL);
+  // Abstain if top-1 is __NONE__, OR if top-1 score is below threshold.
+  const gold_none = (noneIdx === 0) || (topScore < threshold);
+  if (gold_none) {
+    return { names: [], gold_none: true, topScores };
+  }
+  // Otherwise drop the sentinel from the returned list (if it slipped in
+  // anywhere below top-1) and keep up to k real names.
+  const filtered = topNames.filter(n => n !== NONE_SENTINEL).slice(0, k);
+  return { names: filtered, gold_none: false, topScores };
 }
 
 /**
