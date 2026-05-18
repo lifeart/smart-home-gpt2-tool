@@ -53,6 +53,133 @@ function extractPredictedName(rawText) {
   return m ? m[1] : null;
 }
 
+// Extract the predicted JSON object as a string (the {...} starting at first '{').
+function extractPredictedJsonString(rawText) {
+  const start = rawText.indexOf('{');
+  if (start === -1) return null;
+  let depth = 0;
+  let inStr = false;
+  for (let i = start; i < rawText.length; i++) {
+    const c = rawText[i];
+    if (inStr) {
+      if (c === '\\') { i++; continue; }
+      if (c === '"') inStr = false;
+      continue;
+    }
+    if (c === '"') { inStr = true; continue; }
+    if (c === '{') depth++;
+    else if (c === '}') {
+      depth--;
+      if (depth === 0) return rawText.slice(start, i + 1);
+    }
+  }
+  return null;
+}
+
+// Parse the predicted JSON. Returns {name, arguments} or null if unparseable.
+function parsePredictedCall(rawText) {
+  const js = extractPredictedJsonString(rawText);
+  if (!js) return null;
+  try {
+    const obj = JSON.parse(js);
+    if (typeof obj !== 'object' || obj === null) return null;
+    return {
+      name: typeof obj.name === 'string' ? obj.name : null,
+      arguments: (obj.arguments && typeof obj.arguments === 'object') ? obj.arguments : {},
+    };
+  } catch {
+    return null;
+  }
+}
+
+// Parse gold (already a JSON string). Returns {name, arguments}.
+function parseGoldCall(goldStr) {
+  if (!goldStr || typeof goldStr !== 'string') return { name: null, arguments: {} };
+  try {
+    const obj = JSON.parse(goldStr);
+    return {
+      name: typeof obj.name === 'string' ? obj.name : null,
+      arguments: (obj.arguments && typeof obj.arguments === 'object') ? obj.arguments : {},
+    };
+  } catch {
+    return { name: null, arguments: {} };
+  }
+}
+
+// Normalize a single value for tolerant comparison.
+function normalizeScalar(v) {
+  if (v === null || v === undefined) return null;
+  if (typeof v === 'number') return v;
+  if (typeof v === 'boolean') return v;
+  if (typeof v === 'string') {
+    const t = v.trim();
+    if (t !== '' && /^-?\d+(\.\d+)?$/.test(t)) return Number(t);
+    return t.toLowerCase();
+  }
+  return v;
+}
+
+// Compare two argument objects. Rules:
+//  - Same set of keys (filter undefined).
+//  - For each key: number → ==-with-coercion; string → case-insensitive trimmed eq;
+//                  list → set equality; object → recurse.
+//  - Empty == empty.
+function argsMatch(predArgs, goldArgs) {
+  const a = (predArgs && typeof predArgs === 'object') ? predArgs : {};
+  const b = (goldArgs && typeof goldArgs === 'object') ? goldArgs : {};
+  const ak = Object.keys(a).filter(k => a[k] !== undefined);
+  const bk = Object.keys(b).filter(k => b[k] !== undefined);
+  if (ak.length !== bk.length) return false;
+  const aks = ak.slice().sort();
+  const bks = bk.slice().sort();
+  for (let i = 0; i < aks.length; i++) if (aks[i] !== bks[i]) return false;
+  for (const k of aks) {
+    const av = a[k];
+    const bv = b[k];
+    if (Array.isArray(bv)) {
+      if (!Array.isArray(av)) return false;
+      if (av.length !== bv.length) return false;
+      const as = av.map(normalizeScalar).slice().sort();
+      const bs = bv.map(normalizeScalar).slice().sort();
+      for (let i = 0; i < as.length; i++) {
+        if (JSON.stringify(as[i]) !== JSON.stringify(bs[i])) return false;
+      }
+    } else if (bv !== null && typeof bv === 'object') {
+      if (av === null || typeof av !== 'object' || Array.isArray(av)) return false;
+      if (!argsMatch(av, bv)) return false;
+    } else {
+      const an = normalizeScalar(av);
+      const bn = normalizeScalar(bv);
+      if (an === null && bn === null) continue;
+      if (an === null || bn === null) return false;
+      if (typeof an === 'number' && typeof bn === 'number') {
+        if (an !== bn) return false;
+      } else {
+        if (String(an) !== String(bn)) return false;
+      }
+    }
+  }
+  return true;
+}
+
+// Per-arg-type bucket.
+function argValueType(key, value, fnSchema) {
+  if (fnSchema && fnSchema.params && fnSchema.params[key]) {
+    const declared = String(fnSchema.params[key]).toLowerCase();
+    if (declared === 'integer' || declared === 'int') return 'number';
+    if (declared === 'number' || declared === 'float') return 'number';
+    if (declared === 'boolean' || declared === 'bool') return 'boolean';
+    if (declared === 'string') return 'string';
+    if (declared.includes('|') || declared.startsWith('enum')) return 'enum';
+    return declared;
+  }
+  if (typeof value === 'number') return 'number';
+  if (typeof value === 'boolean') return 'boolean';
+  if (Array.isArray(value)) return 'array';
+  if (typeof value === 'object' && value !== null) return 'object';
+  return 'string';
+}
+
 function isValidJson(rawText) {
   const start = rawText.indexOf('{');
   if (start === -1) return false;
@@ -179,8 +306,11 @@ function gradePrediction(predName, item) {
 async function runOneItem(item, idx, { modes, registry, max_new_tokens, topK, verbose, useSentinel, threshold }) {
   const model = window._bench_model;
   const tokenizer = window._bench_tokenizer;
+  const goldCall = parseGoldCall(item.gold);
   const row = {
     i: idx, domain: item.domain, gold_name: item.gold_name,
+    gold_args: goldCall.arguments,
+    gold_arg_keys: Object.keys(goldCall.arguments || {}),
   };
 
   let retPrompt = null, retTopNames = null, retTopScores = null, retGoldNone = false;
@@ -216,11 +346,19 @@ async function runOneItem(item, idx, { modes, registry, max_new_tokens, topK, ve
         constrained: useCon, registry, max_new_tokens,
       });
       const name = extractPredictedName(out.text);
+      const predCall = parsePredictedCall(out.text);
+      const predArgs = predCall ? predCall.arguments : {};
       row[`${mode}_name`] = name;
+      row[`${mode}_pred_args`] = predArgs;
       // Under retrieval+sentinel: if the candidate list was rewritten to
       // [__NONE__] and the model emitted that name, this is the decline class.
       // Grade against gold_name with decline-aware comparison.
-      row[`${mode}_ok`] = useRet ? gradePrediction(name, item) : (name === item.gold_name);
+      const nameOk = useRet ? gradePrediction(name, item) : (name === item.gold_name);
+      row[`${mode}_ok`] = nameOk;                    // name-only (legacy metric)
+      row[`${mode}_name_ok`] = nameOk;               // explicit alias
+      const argsOk = argsMatch(predArgs, goldCall.arguments);
+      row[`${mode}_args_ok`] = argsOk;
+      row[`${mode}_exact_ok`] = nameOk && argsOk;
       row[`${mode}_json_ok`] = isValidJson(out.text);
       row[`${mode}_ms`] = out.ms;
       row[`${mode}_tokens`] = out.newTokens;
@@ -232,6 +370,9 @@ async function runOneItem(item, idx, { modes, registry, max_new_tokens, topK, ve
       console.error(`mode ${mode} failed:`, e);
       row[`${mode}_error`] = String(e);
       row[`${mode}_ok`] = false;
+      row[`${mode}_name_ok`] = false;
+      row[`${mode}_args_ok`] = false;
+      row[`${mode}_exact_ok`] = false;
       row[`${mode}_json_ok`] = false;
       row[`${mode}_ms`] = 0;
     }
@@ -281,7 +422,10 @@ function aggregateResults(results, modes = ALL_MODES) {
 
   const summary = { items: n_items, modes };
   for (const m of modes) {
-    summary[`acc_${m}`] = cnt(r => r[`${m}_ok`]) / n_items;
+    summary[`acc_${m}`] = cnt(r => r[`${m}_ok`]) / n_items;          // name-only acc (legacy)
+    summary[`name_acc_${m}`] = cnt(r => r[`${m}_name_ok`]) / n_items;
+    summary[`args_acc_${m}`] = cnt(r => r[`${m}_args_ok`]) / n_items;
+    summary[`exact_acc_${m}`] = cnt(r => r[`${m}_exact_ok`]) / n_items;
     summary[`json_${m}`] = cnt(r => r[`${m}_json_ok`]) / n_items;
     summary[`mean_ms_${m}`] = sum(`${m}_ms`) / n_items;
   }
@@ -300,11 +444,88 @@ function aggregateResults(results, modes = ALL_MODES) {
     const row = { n: sub.length };
     for (const m of modes) {
       row[`acc_${m}`] = sub.filter(r => r[`${m}_ok`]).length / sub.length;
+      row[`name_acc_${m}`] = sub.filter(r => r[`${m}_name_ok`]).length / sub.length;
+      row[`args_acc_${m}`] = sub.filter(r => r[`${m}_args_ok`]).length / sub.length;
+      row[`exact_acc_${m}`] = sub.filter(r => r[`${m}_exact_ok`]).length / sub.length;
     }
     perDomain[d] = row;
   }
   summary.per_domain = perDomain;
   return summary;
+}
+
+/**
+ * Aggregate args-level stats. Returns per-mode metrics including:
+ *   - name_acc, args_acc, exact_acc
+ *   - args_acc_by_type: per-arg-value bucket (type -> {ok, n, acc})
+ *   - args_acc_by_key_count: per-item bucket by # of gold-arg keys
+ *   - per_domain_args: { domain: { exact_acc, args_acc, name_acc } }
+ *
+ * @param {Array<Object>} results
+ * @param {Object} registry  parsed tool_registry.json
+ * @param {string[]} modes
+ */
+function aggregateArgs(results, registry = null, modes = ALL_MODES) {
+  const out = { items: results.length, modes: {} };
+
+  for (const m of modes) {
+    const mode = {
+      name_acc: 0, args_acc: 0, exact_acc: 0,
+      args_acc_by_type: {},
+      args_acc_by_key_count: { '0': { ok: 0, n: 0 }, '1': { ok: 0, n: 0 }, '2': { ok: 0, n: 0 }, '3+': { ok: 0, n: 0 } },
+      per_domain_args: {},
+    };
+    const n = results.length || 1;
+    mode.name_acc = results.filter(r => r[`${m}_name_ok`]).length / n;
+    mode.args_acc = results.filter(r => r[`${m}_args_ok`]).length / n;
+    mode.exact_acc = results.filter(r => r[`${m}_exact_ok`]).length / n;
+
+    // Per-arg-value-type accuracy.
+    for (const r of results) {
+      const goldArgs = r.gold_args || {};
+      const predArgs = r[`${m}_pred_args`] || {};
+      const fnSchema = (registry && registry[r.gold_name]) || null;
+      for (const k of Object.keys(goldArgs)) {
+        const t = argValueType(k, goldArgs[k], fnSchema);
+        if (!mode.args_acc_by_type[t]) mode.args_acc_by_type[t] = { ok: 0, n: 0 };
+        mode.args_acc_by_type[t].n++;
+        if (Object.prototype.hasOwnProperty.call(predArgs, k)) {
+          const single = argsMatch({ [k]: predArgs[k] }, { [k]: goldArgs[k] });
+          if (single) mode.args_acc_by_type[t].ok++;
+        }
+      }
+    }
+    for (const t of Object.keys(mode.args_acc_by_type)) {
+      const b = mode.args_acc_by_type[t];
+      b.acc = b.n ? b.ok / b.n : 0;
+    }
+
+    // Args acc by gold key-count (whole-args-match, per-item).
+    for (const r of results) {
+      const kc = (r.gold_arg_keys || []).length;
+      const bucket = kc >= 3 ? '3+' : String(kc);
+      mode.args_acc_by_key_count[bucket].n++;
+      if (r[`${m}_args_ok`]) mode.args_acc_by_key_count[bucket].ok++;
+    }
+    for (const b of Object.keys(mode.args_acc_by_key_count)) {
+      const x = mode.args_acc_by_key_count[b];
+      x.acc = x.n ? x.ok / x.n : 0;
+    }
+
+    // Per-domain.
+    const domains = Array.from(new Set(results.map(r => r.domain))).sort();
+    for (const d of domains) {
+      const sub = results.filter(r => r.domain === d);
+      mode.per_domain_args[d] = {
+        n: sub.length,
+        name_acc: sub.filter(r => r[`${m}_name_ok`]).length / sub.length,
+        args_acc: sub.filter(r => r[`${m}_args_ok`]).length / sub.length,
+        exact_acc: sub.filter(r => r[`${m}_exact_ok`]).length / sub.length,
+      };
+    }
+    out.modes[m] = mode;
+  }
+  return out;
 }
 
 async function runBench({
@@ -390,7 +611,10 @@ async function runFullBench({
     console.log(`[fullbench] ${window._fullProgress.done}/${window._fullProgress.total} done`);
   }
   const summary = aggregateResults(window._fullResults, modes);
+  const argsSummary = aggregateArgs(window._fullResults, registry, modes);
+  summary.args = argsSummary;
   window._fullSummary = summary;
+  window._fullArgsSummary = argsSummary;
   return summary;
 }
 
@@ -398,5 +622,9 @@ window.runBench = runBench;
 window.runBenchOnItems = runBenchOnItems;
 window.runFullBench = runFullBench;
 window.aggregateFullBench = (results, modes = ALL_MODES) => aggregateResults(results, modes);
-window._bench = { extractCandidateNames, buildSchemaConstraint };
+window.aggregateArgs = (results, registry = null, modes = ALL_MODES) => aggregateArgs(results, registry, modes);
+window._bench = {
+  extractCandidateNames, buildSchemaConstraint,
+  parsePredictedCall, parseGoldCall, argsMatch, argValueType, aggregateArgs,
+};
 console.log('[bench] window.runBench / window.runFullBench ready.');

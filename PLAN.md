@@ -397,6 +397,79 @@ sec/unlock_door:
 
 ---
 
+## Iteration 7.1 — Args-aware scoring (name / args / exact-match)
+
+**Goal:** the published 82.3% accuracy on v3 was name-only. For real smart-home use, `set_thermostat({"temp":20})` vs `({"temp":24})` vs `({})` are very different outcomes. Extend the bench to measure (1) `args_correct` (key set + value match under tolerant rules), and (2) `exact_match = name_correct && args_correct`. Reveal where extraction breaks (number vs string vs enum vs hallucinated-key).
+
+**Setup:** `web/bench.js` extended with `parsePredictedCall` / `argsMatch` / `argValueType` and a new aggregator `aggregateArgs(results, registry, modes)` returning `{name_acc, args_acc, exact_acc, args_acc_by_type, args_acc_by_key_count, per_domain_args}`. Match rules: same key set (set equality), per-key tolerant compare (`"20"` ≡ `20`; case-insensitive trimmed strings; arrays as sets; nested objects recurse).
+
+Run: `await runFullBench({chunkSize:50, modes:['baseline'], url:'/eval/sh_test.json'})` on v3 webgpu/fp32. n=300, ~6 min.
+
+**Results (n=300, v3 baseline, no retrieval, no constrained):**
+
+| metric | value |
+|---|---:|
+| **name_acc**  | **82.33%** (matches Phase 5a's 82.3%) |
+| **args_acc**  | **54.67%** |
+| **exact_acc** | **49.67%** |
+| json validity | 99.67% |
+| mean ms/item  | 1333 |
+
+**Per-arg-value-type accuracy (denom = total gold args of that type, 443 args across 300 items):**
+
+| type    | n   | acc    |
+|---|---:|---:|
+| string  | 355 | 75.21% |
+| number  |  72 | 62.50% |
+| boolean |   9 | 66.67% |
+| object  |   2 |  0.00% |
+| array   |   5 |  0.00% |
+
+**Args accuracy by # of gold-arg keys (per-item):**
+
+| keys | n   | args_acc |
+|---:|---:|---:|
+| 0  | 31  | 38.71% |
+| 1  | 135 | 68.15% |
+| 2  | 101 | 54.46% |
+| 3+ | 33  | 15.15% |
+
+**Failure decomposition** (98 items where name is right but args wrong):
+- `wrongStr` (37): string value wrong — enum confusion (`mode:warm→broil`), wrong identifier (`camera:front door cam→patio door`).
+- `extra` (34): pred has key gold lacks (hallucination). Often paired with `missing`: e.g. gold `{"day":"Saturday","intensity":"deep"}` → pred `{"area":"deep","day":"weekdays"}` (key swap).
+- `missing` (32): pred lacks a required gold key (e.g. boolean `"on":true` missed).
+- `emptyGold` (12): gold args are `{}` (irrelevance / stop_X / query_Y class) but pred adds args anyway.
+- `wrongNum` (9): same key, numeric value off (scale: `temperature_c:24.4→75`; position: `95→50`).
+- `emptyPred` (0): never the case — pred always emits something when gold has args.
+
+**Sample 10 args-wrong examples (pred vs gold):**
+
+Number/scale:
+1. `set_blinds_position`: gold `position:95`, pred `position:50` (default-ish guess).
+2. `set_thermostat`: gold `temperature_c:24.4`, pred `temperature_c:75` (Fahrenheit confusion).
+3. `schedule_irrigation`: gold `duration_min:12`, pred different value.
+4. `play_radio_station`: gold `station:"SomaFM Groove Salad"`, pred `"Soma FM"` (truncation; volume + room match).
+
+String/enum/hallucinated-key:
+5. `toggle_outlet`: gold `outlet_name:"heater"`, pred `outlet_name:"thermostat"`.
+6. `start_camera_recording`: gold `camera:"front door cam"`, pred `camera:"patio door"` (cross-domain leak).
+7. `preheat_oven`: gold `mode:"warm"`, pred `mode:"broil"` (enum value swap; oven mode is enum but registry only declares "string").
+8. `schedule_vacuum`: gold `{time,day:"Saturday",intensity:"deep"}`, pred `{area:"deep",time,day:"weekdays"}` (intensity→area key swap, weekdays hallucinated).
+9. `set_alarm`: gold `day:"tomorrow"`, pred `days:["tomorrow"]` (plural / array shape hallucinated).
+10. `set_pool_heater`: gold `{temperature_c:29.5,on:true}`, pred `{temperature_c:29.5}` (boolean dropped).
+
+**Diagnosis going into 7.2:** the biggest classes are **wrongStr (37) + extra (34) + missing (32)**, which are all structural — gold key is an enum / boolean / required-but-dropped. The numeric class (9) is the smallest. The single largest fixable lever is enum value masking (a sizeable chunk of `wrongStr`) and empty-args enforcement when the schema declares no params (a chunk of `emptyGold`). Hallucinated keys (`extra=34`) suggest the current grammar's `paramKeys=null` free-form path (when registry lacks an entry) is too permissive — and the model invents schema-incompatible keys (`days` vs `day`).
+
+**Status:** done. Cost: $0. Headline: **name 82.33%, args 54.67%, exact 49.67%**.
+
+**Artifacts:** `web/bench.js` extended; `results/iter71_baseline_v3_n300.json` (full per-item dump with args metrics, 78 kB).
+
+---
+
+## Iteration 7.2 — Typed args masking (enum + numeric value constraints)  (in progress)
+
+---
+
 ## Progress log
 
 | Date (UTC) | Event |
@@ -413,4 +486,5 @@ sec/unlock_door:
 | 2026-05-18 | **Phase 4 done.** MiniLM retrieval pre-rank in browser. A/B on v1 webgpu/fp32, n=30, K=3: baseline **56.67% → ret_con 73.33% (+16.67 pp)** (and ~45% faster prefill). Recall@3 = 100% after enriching the 100-entry registry with 7 test-only gold labels in the index. Cost: $0. |
 | 2026-05-18 | **Phase 5b done.** Voice E2E on v3 + retrieval + constrained in browser. 4-config A/B on v3 webgpu/fp32, n=30, K=3: baseline (gold+4 random domain peers) **23.33% → ret/ret_con 46.67% (+23.34 pp)**. Recall@3 = 70% under noisy Whisper EN. Cost: $0. Voice gate (≥55%) **missed** — retrieval recovers exactly the README's 46.7% curated-candidate effect (and dominates the HF Jobs voice bench's 33.3% gold+4-random number) but cannot close to 55% because 30% of ASR transcripts (e.g. "Запри"/lock → "Close") lose the gold's lexical signal entirely. |
 | 2026-05-18 | **Iter 6.1 partial.** Voice K=5 vs K=3 (v3 webgpu/fp32, ret_con). K=3 acc 46.67% / recall 70%; K=5 acc **50.00%** / recall **83.3%**. Δacc +3.33 pp (gate-meeting threshold), Δrecall +13.3 pp. Voice gate ≥55% still missed. Cost: $0. |
+| 2026-05-18 | **Iter 7.1 done.** Args-aware scoring on v3 baseline (n=300, webgpu/fp32). **name 82.33% / args 54.67% / exact 49.67%**. Per-type args acc: string 75.2% (355) / number 62.5% (72) / boolean 66.7% / array 0/5 / object 0/2. By gold-arg-key-count: 0 keys 38.7% (empty-gold class), 1 key 68.2%, 2 keys 54.5%, 3+ keys 15.2%. Failures (98 name-ok-args-wrong): wrongStr 37, extra-key 34, missing-key 32, emptyGold 12, wrongNum 9. Cost: $0. |
 
