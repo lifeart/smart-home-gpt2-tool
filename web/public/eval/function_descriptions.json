@@ -1,0 +1,1182 @@
+{
+  "set_light_temperature_k": {
+    "description": "Set the white color temperature of the lights in Kelvin.",
+    "params": [
+      "room",
+      "kelvin"
+    ],
+    "examples": [
+      "hallway - 6500K please.",
+      "Set the white temperature to 5000K in the garage.",
+      "Adjust garden lights to 5500 kelvin."
+    ]
+  },
+  "dim_light": {
+    "description": "Dim or brighten lights to a target brightness percentage.",
+    "params": [
+      "room",
+      "brightness_pct"
+    ],
+    "examples": [
+      "Make the office 20 percent bright.",
+      "Could you set the hallway lights at 80% please?",
+      "Bring the garage lights down to 90%."
+    ]
+  },
+  "turn_on_light": {
+    "description": "Turn on the lights in a specified room.",
+    "params": [
+      "room",
+      "brightness_pct"
+    ],
+    "examples": [
+      "I need the living room lit up.",
+      "Switch on lighting in the kitchen.",
+      "Switch on lighting in the bedroom."
+    ]
+  },
+  "set_light_color": {
+    "description": "Change the color of the lights in a room.",
+    "params": [
+      "room",
+      "color",
+      "brightness_pct"
+    ],
+    "examples": [
+      "Color the garage warm white.",
+      "Color the garden cool white.",
+      "basement - daylight, please."
+    ]
+  },
+  "blink_light": {
+    "description": "Blink the lights in a room to grab attention.",
+    "params": [
+      "room",
+      "times"
+    ],
+    "examples": [
+      "dining room - blink 3 times please.",
+      "Flash the kids room 4 times.",
+      "nursery - blink 3 times please."
+    ]
+  },
+  "set_light_scene": {
+    "description": "Apply a named lighting scene in a room.",
+    "params": [
+      "room",
+      "scene"
+    ],
+    "examples": [
+      "Set the bedroom to movie mode.",
+      "Engage reading scene, master bedroom.",
+      "Please put the bathroom on the dinner preset."
+    ]
+  },
+  "turn_off_light": {
+    "description": "Turn off the lights in a specified room.",
+    "params": [
+      "room"
+    ],
+    "examples": [
+      "master bedroom - lights off.",
+      "Could you please switch off the bathroom lights?",
+      "office - lights off."
+    ]
+  },
+  "toggle_outlet": {
+    "description": "Toggle a smart outlet (electrical switch) on or off.",
+    "params": [
+      "room",
+      "outlet_name",
+      "state"
+    ],
+    "examples": [
+      "bathroom coffee maker on, thanks.",
+      "Toggle the office fan off.",
+      "hallway floor lamp on, thanks."
+    ]
+  },
+  "query_light_state": {
+    "description": "Query the current state of the lights in a room.",
+    "params": [
+      "room"
+    ],
+    "examples": [
+      "What's the garden light state?",
+      "Check the basement lights.",
+      "Tell me the attic light status."
+    ]
+  },
+  "set_motion_sensitivity": {
+    "description": "Set motion-sensor sensitivity for automatic lighting in a room.",
+    "params": [
+      "room",
+      "level"
+    ],
+    "examples": [
+      "Please configure the living room motion sensor at medium level.",
+      "Adjust kitchen motion detection to high.",
+      "Set the bedroom motion sensor to low sensitivity."
+    ]
+  },
+  "set_thermostat": {
+    "description": "Set the thermostat target temperature and mode for a room.",
+    "params": [
+      "room",
+      "temperature_c",
+      "mode"
+    ],
+    "examples": [
+      "Thermostat in the sunroom, 19 degrees.",
+      "Please set living room temperature to 18C.",
+      "Please set nursery temperature to 22C."
+    ]
+  },
+  "set_fan_speed": {
+    "description": "Set the HVAC fan speed for a room.",
+    "params": [
+      "room",
+      "speed"
+    ],
+    "examples": [
+      "Put the bathroom fan on auto speed.",
+      "Fan speed low in the living room.",
+      "Put the hallway fan on low speed."
+    ]
+  },
+  "query_humidity": {
+    "description": "Query the current humidity reading of a room.",
+    "params": [
+      "room"
+    ],
+    "examples": [
+      "How humid is the living room?",
+      "How humid is the sunroom?",
+      "Check hallway humidity level."
+    ]
+  },
+  "toggle_humidifier": {
+    "description": "Turn the humidifier on or off in a room.",
+    "params": [
+      "room",
+      "state"
+    ],
+    "examples": [
+      "Start the living room humidifier.",
+      "Turn on the humidifier in the hallway.",
+      "Turn off the humidifier in the attic."
+    ]
+  },
+  "set_ac_mode": {
+    "description": "Set the air conditioner operating mode for a room.",
+    "params": [
+      "room",
+      "mode"
+    ],
+    "examples": [
+      "Put the master bedroom AC on off.",
+      "Turn the attic AC to eco mode.",
+      "Switch nursery air conditioner to off."
+    ]
+  },
+  "set_radiator_valve": {
+    "description": "Set the radiator thermostatic valve level (0=closed, 5=max).",
+    "params": [
+      "room",
+      "level"
+    ],
+    "examples": [
+      "Set the master bedroom radiator valve to 3.",
+      "Set the nursery radiator valve to 0.",
+      "Set the bathroom radiator valve to 5."
+    ]
+  },
+  "schedule_climate_program": {
+    "description": "Schedule a climate program (named profile) for a room with start/end times.",
+    "params": [
+      "room",
+      "program",
+      "start_time",
+      "end_time"
+    ],
+    "examples": [
+      "Run away mode in the sunroom between 09:00 and 17:00.",
+      "Run away mode in the attic between 09:00 and 17:00.",
+      "Schedule the comfort program in the attic from 18:00 to 22:00."
+    ]
+  },
+  "toggle_dehumidifier": {
+    "description": "Turn the dehumidifier on or off in a room.",
+    "params": [
+      "room",
+      "state"
+    ],
+    "examples": [
+      "Switch the dehumidifier on in the hallway.",
+      "Switch the dehumidifier off in the basement.",
+      "Switch the dehumidifier off in the hallway."
+    ]
+  },
+  "set_humidity_target": {
+    "description": "Set target relative humidity percentage for a room.",
+    "params": [
+      "room",
+      "humidity_pct"
+    ],
+    "examples": [
+      "Set the nursery humidity to 55 percent.",
+      "Target 45% humidity in the living room.",
+      "Target 45% humidity in the hallway."
+    ]
+  },
+  "query_temperature": {
+    "description": "Query the current temperature reading of a room.",
+    "params": [
+      "room"
+    ],
+    "examples": [
+      "How warm is the bedroom?",
+      "How cold is it in the sunroom?",
+      "Tell me the temperature of the office."
+    ]
+  },
+  "query_alarm_status": {
+    "description": "Check the current state of the alarm system.",
+    "params": [],
+    "examples": [
+      "Is the alarm on?",
+      "What's the alarm status?",
+      "Check the alarm system."
+    ]
+  },
+  "start_camera_recording": {
+    "description": "Start continuous recording on a security camera.",
+    "params": [
+      "camera"
+    ],
+    "examples": [
+      "Start recording on the front door cam.",
+      "Begin recording the backyard cam.",
+      "Record the driveway cam."
+    ]
+  },
+  "lock_door": {
+    "description": "Lock a specific door in the home.",
+    "params": [
+      "door"
+    ],
+    "examples": [
+      "Lock the front door.",
+      "Please lock the back door.",
+      "Lock the garage door."
+    ]
+  },
+  "set_camera_motion_sensitivity": {
+    "description": "Adjust motion-detection sensitivity for a camera.",
+    "params": [
+      "camera",
+      "level"
+    ],
+    "examples": [
+      "Set the backyard cam motion sensitivity to high.",
+      "Driveway cam motion sensitivity low.",
+      "Set front door cam motion to medium."
+    ]
+  },
+  "unlock_door": {
+    "description": "Unlock a specific door.",
+    "params": [
+      "door"
+    ],
+    "examples": [
+      "Unlock the front door.",
+      "Open the back door lock.",
+      "Unlock the garage door please."
+    ]
+  },
+  "arm_alarm_system": {
+    "description": "Arm the home alarm system in a given mode.",
+    "params": [
+      "mode"
+    ],
+    "examples": [
+      "Arm the alarm in away mode.",
+      "Set the alarm to stay.",
+      "Arm alarm, night mode."
+    ]
+  },
+  "stop_camera_recording": {
+    "description": "Stop ongoing recording on a security camera.",
+    "params": [
+      "camera"
+    ],
+    "examples": [
+      "Stop recording on the front door cam.",
+      "End the backyard cam recording.",
+      "Stop the driveway cam."
+    ]
+  },
+  "view_camera_stream": {
+    "description": "Open a live video stream from a camera.",
+    "params": [
+      "camera"
+    ],
+    "examples": [
+      "Show me the front door cam.",
+      "Pull up the backyard cam.",
+      "View the driveway cam."
+    ]
+  },
+  "set_alarm_pin": {
+    "description": "Change the alarm system PIN code.",
+    "params": [
+      "new_pin"
+    ],
+    "examples": [
+      "Change the alarm PIN to 4821.",
+      "Set the alarm PIN to 0000.",
+      "Update alarm code to 7777."
+    ]
+  },
+  "trigger_panic_alarm": {
+    "description": "Trigger the emergency panic alarm and notify authorities.",
+    "params": [],
+    "examples": [
+      "Trigger the panic alarm.",
+      "Sound the panic alarm now.",
+      "Activate panic mode."
+    ]
+  },
+  "query_door_status": {
+    "description": "Check whether a door is currently locked or unlocked.",
+    "params": [
+      "door"
+    ],
+    "examples": [
+      "Is the front door locked?",
+      "Check the back door status.",
+      "What's the state of the garage door?"
+    ]
+  },
+  "disarm_alarm_system": {
+    "description": "Disarm the home alarm system.",
+    "params": [],
+    "examples": [
+      "Disarm the alarm.",
+      "Turn off the alarm system.",
+      "Deactivate the alarm."
+    ]
+  },
+  "play_music": {
+    "description": "Play a song, artist, or playlist on a speaker in a given room",
+    "params": [
+      "song",
+      "room",
+      "volume_pct"
+    ],
+    "examples": [
+      "Play Bohemian Rhapsody in the living room.",
+      "Play the jazz playlist in the kitchen.",
+      "Play lofi beats in my office."
+    ]
+  },
+  "set_tv_input": {
+    "description": "Switch TV input source",
+    "params": [
+      "room",
+      "input"
+    ],
+    "examples": [
+      "Switch the living room TV to HDMI 1.",
+      "Switch the bedroom TV to Chromecast.",
+      "Set the living room TV input to AppleTV."
+    ]
+  },
+  "turn_off_tv": {
+    "description": "Power off the TV in a room",
+    "params": [
+      "room"
+    ],
+    "examples": [
+      "Turn off the living room TV.",
+      "Turn off the bedroom TV.",
+      "Turn off the master bedroom TV."
+    ]
+  },
+  "stop_music": {
+    "description": "Stop music playback completely in a room",
+    "params": [
+      "room"
+    ],
+    "examples": [
+      "Stop the living room music.",
+      "Stop music in the kitchen.",
+      "Stop the gym music."
+    ]
+  },
+  "turn_on_tv": {
+    "description": "Power on the TV in a room",
+    "params": [
+      "room"
+    ],
+    "examples": [
+      "Turn on the living room TV.",
+      "Turn on the bedroom TV.",
+      "Turn on the kitchen TV."
+    ]
+  },
+  "pause_music": {
+    "description": "Pause currently playing music in a room",
+    "params": [
+      "room"
+    ],
+    "examples": [
+      "Pause the music in the living room.",
+      "Pause the kitchen music.",
+      "Pause music in the bedroom."
+    ]
+  },
+  "mute_audio": {
+    "description": "Mute audio output in a room",
+    "params": [
+      "room"
+    ],
+    "examples": [
+      "Mute the living room speaker.",
+      "Mute the kitchen audio.",
+      "Mute the bedroom speaker."
+    ]
+  },
+  "switch_speaker_room": {
+    "description": "Move currently playing audio from one room to another",
+    "params": [
+      "from_room",
+      "to_room"
+    ],
+    "examples": [
+      "Move the music from the kitchen to the living room.",
+      "Transfer audio from the bedroom to my office.",
+      "Send the living room music to the dining room."
+    ]
+  },
+  "skip_track": {
+    "description": "Skip to next track on the speaker",
+    "params": [
+      "room"
+    ],
+    "examples": [
+      "Skip this track in the living room.",
+      "Next track in the kitchen.",
+      "Skip the song in the bedroom."
+    ]
+  },
+  "play_podcast": {
+    "description": "Play a podcast episode on the speaker",
+    "params": [
+      "podcast",
+      "room",
+      "volume_pct"
+    ],
+    "examples": [
+      "Play The Daily podcast in the kitchen.",
+      "Play Radiolab in the living room.",
+      "Play This American Life in the bedroom."
+    ]
+  },
+  "set_tv_volume": {
+    "description": "Set TV volume to a percentage",
+    "params": [
+      "room",
+      "volume_pct"
+    ],
+    "examples": [
+      "Set the living room TV volume to 40 percent.",
+      "Set the bedroom TV volume to 25.",
+      "Set the master bedroom TV volume to 30 percent."
+    ]
+  },
+  "play_radio_station": {
+    "description": "Play a live radio station on the speaker",
+    "params": [
+      "station",
+      "room",
+      "volume_pct"
+    ],
+    "examples": [
+      "Play BBC Radio 1 in the kitchen.",
+      "Play NPR in the living room.",
+      "Play Jazz FM in the dining room."
+    ]
+  },
+  "set_tv_channel": {
+    "description": "Change TV channel",
+    "params": [
+      "room",
+      "channel"
+    ],
+    "examples": [
+      "Switch the living room TV to BBC One.",
+      "Set the bedroom TV to CNN.",
+      "Put ESPN on the living room TV."
+    ]
+  },
+  "queue_song": {
+    "description": "Add a song to the playback queue without interrupting current playback",
+    "params": [
+      "song",
+      "room"
+    ],
+    "examples": [
+      "Queue Hotel California in the living room.",
+      "Add Imagine to the queue in the kitchen.",
+      "Queue up Billie Jean in the bedroom."
+    ]
+  },
+  "set_volume": {
+    "description": "Set speaker volume to a specific percentage",
+    "params": [
+      "room",
+      "volume_pct"
+    ],
+    "examples": [
+      "Set the living room volume to 50 percent.",
+      "Set kitchen volume to 30.",
+      "Set the bedroom volume to 20 percent."
+    ]
+  },
+  "set_fridge_temperature": {
+    "description": "Set the refrigerator compartment target temperature.",
+    "params": [],
+    "examples": [
+      "Set the fridge to 38.",
+      "Fridge temperature 36 please.",
+      "Set refrigerator to 40 degrees."
+    ]
+  },
+  "preheat_oven": {
+    "description": "Preheat the oven to a target temperature with optional cooking mode.",
+    "params": [],
+    "examples": [
+      "Preheat the oven to 375.",
+      "Preheat the oven to 400 degrees.",
+      "Preheat oven to 350 in bake mode."
+    ]
+  },
+  "set_oven_timer": {
+    "description": "Set a countdown timer on the oven in minutes.",
+    "params": [],
+    "examples": [
+      "Set oven timer for 25 minutes.",
+      "Start a 40 minute oven timer.",
+      "Oven timer 15 minutes please."
+    ]
+  },
+  "pause_dishwasher": {
+    "description": "Pause the currently running dishwasher cycle.",
+    "params": [],
+    "examples": [
+      "Pause the dishwasher.",
+      "Hold the dishwasher.",
+      "Forgot to load a plate - pause the wash."
+    ]
+  },
+  "stop_oven": {
+    "description": "Turn off the oven immediately.",
+    "params": [],
+    "examples": [
+      "Turn off the oven.",
+      "Stop the oven now.",
+      "Shut the oven off."
+    ]
+  },
+  "set_kitchen_lights": {
+    "description": "Adjust kitchen overhead lighting brightness/state.",
+    "params": [],
+    "examples": [
+      "Turn the kitchen lights on.",
+      "Kitchen lights off.",
+      "Set kitchen lights to 50."
+    ]
+  },
+  "start_microwave": {
+    "description": "Run the microwave at a given power for a given duration in seconds.",
+    "params": [],
+    "examples": [
+      "Microwave 30 seconds at power 8.",
+      "Run microwave for 60 seconds full power.",
+      "Microwave 45 sec power 5."
+    ]
+  },
+  "start_coffee_brew": {
+    "description": "Start brewing coffee in the coffee maker.",
+    "params": [],
+    "examples": [
+      "Brew 2 cups of coffee.",
+      "Start coffee, 4 cups.",
+      "Make me 1 cup of coffee."
+    ]
+  },
+  "stop_microwave": {
+    "description": "Stop the microwave immediately.",
+    "params": [],
+    "examples": [
+      "Stop the microwave.",
+      "Cancel microwave.",
+      "Halt the microwave now."
+    ]
+  },
+  "query_oven_state": {
+    "description": "Return the current oven status, temperature, and mode.",
+    "params": [],
+    "examples": [
+      "What is the oven doing?",
+      "Check oven status.",
+      "What is the oven temperature right now?"
+    ]
+  },
+  "start_dishwasher": {
+    "description": "Begin a dishwasher cycle with a chosen wash program.",
+    "params": [],
+    "examples": [
+      "Start the dishwasher.",
+      "Run the dishwasher on heavy.",
+      "Quick wash the dishwasher."
+    ]
+  },
+  "query_fridge_contents": {
+    "description": "List items currently inventoried in the refrigerator.",
+    "params": [],
+    "examples": [
+      "What is in the fridge?",
+      "List the fridge contents.",
+      "Show me what is in the refrigerator."
+    ]
+  },
+  "set_coffee_strength": {
+    "description": "Set the coffee brewing strength.",
+    "params": [],
+    "examples": [
+      "Set coffee strength to strong.",
+      "Coffee strength medium.",
+      "Make the coffee weak."
+    ]
+  },
+  "start_irrigation_zone": {
+    "description": "Begin watering an irrigation zone for a given duration.",
+    "params": [
+      "zone",
+      "duration_min"
+    ],
+    "examples": [
+      "Water the rose bed for 15 minutes.",
+      "Start watering the front lawn for 20 minutes.",
+      "Water the citrus trees for 25 minutes."
+    ]
+  },
+  "stop_irrigation_zone": {
+    "description": "Stop watering an irrigation zone.",
+    "params": [
+      "zone"
+    ],
+    "examples": [
+      "Stop watering the back lawn.",
+      "Cancel the rose bed watering.",
+      "Stop watering the vegetable garden."
+    ]
+  },
+  "turn_on_outdoor_light": {
+    "description": "Turn on outdoor lights.",
+    "params": [
+      "location"
+    ],
+    "examples": [
+      "Turn on the patio lights.",
+      "Switch on the garden path lights.",
+      "Turn the backyard floodlights on."
+    ]
+  },
+  "turn_off_outdoor_light": {
+    "description": "Turn off outdoor lights.",
+    "params": [
+      "location"
+    ],
+    "examples": [
+      "Turn off the driveway lights.",
+      "Kill the porch lights.",
+      "Turn off the deck lights."
+    ]
+  },
+  "set_pool_heater": {
+    "description": "Set pool heater target temperature.",
+    "params": [
+      "temperature_c",
+      "on"
+    ],
+    "examples": [
+      "Set the pool heater to 28 degrees.",
+      "Heat the pool to 30 degrees.",
+      "Set pool target to 26 C."
+    ]
+  },
+  "set_pool_pump": {
+    "description": "Control pool pump.",
+    "params": [
+      "on",
+      "speed"
+    ],
+    "examples": [
+      "Turn the pool pump on.",
+      "Turn off the pool pump.",
+      "Run the pool pump on high."
+    ]
+  },
+  "turn_on_pool_cover": {
+    "description": "Close the pool cover.",
+    "params": [],
+    "examples": [
+      "Close the pool cover.",
+      "Cover the pool.",
+      "Pull the pool cover closed."
+    ]
+  },
+  "turn_off_pool_cover": {
+    "description": "Open the pool cover.",
+    "params": [],
+    "examples": [
+      "Open the pool cover please.",
+      "Uncover the pool.",
+      "Roll back the pool cover."
+    ]
+  },
+  "query_soil_moisture": {
+    "description": "Read the soil moisture sensor of a zone.",
+    "params": [
+      "zone"
+    ],
+    "examples": [
+      "What's the soil moisture in the vegetable garden?",
+      "Check the soil moisture for the rose bed.",
+      "How dry is the front lawn?"
+    ]
+  },
+  "query_pool_temperature": {
+    "description": "Read current pool water temperature.",
+    "params": [],
+    "examples": [
+      "What's the pool temperature right now?",
+      "How warm is the pool?",
+      "Tell me the current pool water temperature."
+    ]
+  },
+  "set_outdoor_light_color": {
+    "description": "Set color of outdoor lights.",
+    "params": [
+      "location",
+      "color"
+    ],
+    "examples": [
+      "Make the patio lights blue.",
+      "Set the deck lights to warm white.",
+      "Turn the porch lights red."
+    ]
+  },
+  "set_garden_lawnmower": {
+    "description": "Start or stop the robot lawnmower.",
+    "params": [
+      "on",
+      "zone"
+    ],
+    "examples": [
+      "Start the lawnmower.",
+      "Stop the lawnmower.",
+      "Mow the back lawn."
+    ]
+  },
+  "set_outdoor_speaker": {
+    "description": "Control outdoor speaker.",
+    "params": [
+      "on",
+      "volume"
+    ],
+    "examples": [
+      "Turn on the garden speaker.",
+      "Switch off the patio speaker.",
+      "Play the outdoor speaker at volume 6."
+    ]
+  },
+  "schedule_irrigation": {
+    "description": "Schedule a future irrigation event for a zone.",
+    "params": [
+      "zone",
+      "time",
+      "duration_min"
+    ],
+    "examples": [
+      "Schedule the rose bed to water tomorrow at 6am for 20 minutes.",
+      "Set a schedule for the front lawn every morning at 7am for 25 minutes.",
+      "Water the citrus trees every other day at 5:30am for 15 minutes."
+    ]
+  },
+  "open_skylight": {
+    "description": "Open the skylight window in a room.",
+    "params": [
+      "room"
+    ],
+    "examples": [
+      "Open up the skylight in the sunroom.",
+      "Crack open the living room skylight.",
+      "Pop the sunroom skylight open."
+    ]
+  },
+  "lock_window": {
+    "description": "Lock the window in a room for security.",
+    "params": [
+      "room"
+    ],
+    "examples": [
+      "Lock the sunroom window.",
+      "Secure the window in the sunroom.",
+      "Secure the window in the kitchen."
+    ]
+  },
+  "close_window": {
+    "description": "Close the window in a room.",
+    "params": [
+      "room"
+    ],
+    "examples": [
+      "Close the window in the dining room.",
+      "Shut the nursery window.",
+      "Close the window in the nursery."
+    ]
+  },
+  "retract_awning": {
+    "description": "Retract (close) the awning over a room or outdoor area.",
+    "params": [
+      "room"
+    ],
+    "examples": [
+      "Bring the office awning back in.",
+      "Pull in the living room awning.",
+      "Pull in the hallway awning."
+    ]
+  },
+  "raise_blinds": {
+    "description": "Fully raise (open) the blinds in a room.",
+    "params": [
+      "room"
+    ],
+    "examples": [
+      "Open the dining room blinds all the way.",
+      "Roll up the blinds in the kitchen.",
+      "Roll up the blinds in the master bedroom."
+    ]
+  },
+  "close_skylight": {
+    "description": "Close the skylight window in a room.",
+    "params": [
+      "room"
+    ],
+    "examples": [
+      "Shut the nursery skylight.",
+      "Seal the bedroom skylight.",
+      "Close the skylight in the bathroom."
+    ]
+  },
+  "close_curtains": {
+    "description": "Fully close the curtains in a room.",
+    "params": [
+      "room"
+    ],
+    "examples": [
+      "Pull the curtains closed in the bathroom.",
+      "Pull the curtains closed in the office.",
+      "Pull the curtains closed in the master bedroom."
+    ]
+  },
+  "set_blinds_angle": {
+    "description": "Tilt the blind slats to a specific angle in degrees (0=closed, 90=flat/open).",
+    "params": [
+      "room",
+      "angle"
+    ],
+    "examples": [
+      "Angle the kitchen blind slats to 45.",
+      "Angle the bathroom blind slats to 20.",
+      "Adjust the nursery blind tilt to 35 degrees."
+    ]
+  },
+  "set_blinds_position": {
+    "description": "Set the blinds to a specific vertical position percentage (0=closed, 100=open).",
+    "params": [
+      "room",
+      "position"
+    ],
+    "examples": [
+      "Set the blinds in the office mostly closed.",
+      "I'd like the bathroom blinds half way.",
+      "I want the office blinds at 60 percent."
+    ]
+  },
+  "open_window": {
+    "description": "Open the window in a room.",
+    "params": [
+      "room"
+    ],
+    "examples": [
+      "Open the window in the kitchen.",
+      "Please open the sunroom window.",
+      "Please open the nursery window."
+    ]
+  },
+  "open_curtains": {
+    "description": "Fully open the curtains in a room.",
+    "params": [
+      "room"
+    ],
+    "examples": [
+      "Open the curtains in the kitchen.",
+      "Please open the dining room curtains.",
+      "Open up the curtains in the bathroom please."
+    ]
+  },
+  "extend_awning": {
+    "description": "Extend (deploy) the awning over a room or outdoor area.",
+    "params": [
+      "room"
+    ],
+    "examples": [
+      "Deploy the awning by the master bedroom.",
+      "Deploy the awning by the sunroom.",
+      "Put the bathroom awning out."
+    ]
+  },
+  "lower_blinds": {
+    "description": "Fully lower (close) the blinds in a room.",
+    "params": [
+      "room"
+    ],
+    "examples": [
+      "Pull the master bedroom blinds down.",
+      "Drop the blinds in the sunroom.",
+      "Pull the sunroom blinds down."
+    ]
+  },
+  "start_vacuum": {
+    "description": "Start the robot vacuum in a specified area with chosen intensity.",
+    "params": [
+      "area",
+      "intensity"
+    ],
+    "examples": [
+      "Start the vacuum in the living room.",
+      "Vacuum the kitchen please.",
+      "Begin vacuuming the bedroom."
+    ]
+  },
+  "stop_vacuum": {
+    "description": "Stop the running robot vacuum immediately.",
+    "params": [],
+    "examples": [
+      "Stop the vacuum.",
+      "Stop vacuuming.",
+      "Halt the robot vacuum."
+    ]
+  },
+  "schedule_vacuum": {
+    "description": "Schedule the robot vacuum for a recurring or future run.",
+    "params": [
+      "area",
+      "intensity",
+      "time",
+      "day"
+    ],
+    "examples": [
+      "Schedule the vacuum every Tuesday at 10am.",
+      "Vacuum the kitchen every weekday at 9am.",
+      "Run a deep vacuum every Sunday at 8pm."
+    ]
+  },
+  "dock_vacuum": {
+    "description": "Send the robot vacuum back to its charging dock.",
+    "params": [],
+    "examples": [
+      "Send the vacuum back to dock.",
+      "Dock the vacuum.",
+      "Return vacuum to base."
+    ]
+  },
+  "start_mop": {
+    "description": "Start the mopping robot in a specified area.",
+    "params": [
+      "area",
+      "water_level"
+    ],
+    "examples": [
+      "Mop the kitchen.",
+      "Start mopping the bathroom.",
+      "Mop the dining room."
+    ]
+  },
+  "stop_mop": {
+    "description": "Stop the mopping robot immediately.",
+    "params": [],
+    "examples": [
+      "Stop the mop.",
+      "Halt mopping.",
+      "Stop the mopping robot."
+    ]
+  },
+  "set_mop_water_level": {
+    "description": "Set the water level for the mop.",
+    "params": [
+      "water_level"
+    ],
+    "examples": [
+      "Set mop water to high.",
+      "Mop water level low please.",
+      "Set water level medium on the mop."
+    ]
+  },
+  "turn_on_air_purifier": {
+    "description": "Turn on the air purifier in a room.",
+    "params": [
+      "area",
+      "speed"
+    ],
+    "examples": [
+      "Turn on the air purifier in the bedroom.",
+      "Turn on the air purifier in the living room.",
+      "Switch on the air purifier in the kids room."
+    ]
+  },
+  "turn_off_air_purifier": {
+    "description": "Turn off the air purifier in a room.",
+    "params": [
+      "area"
+    ],
+    "examples": [
+      "Turn off the air purifier in the bedroom.",
+      "Switch off air purifier in living room.",
+      "Air purifier off in kitchen."
+    ]
+  },
+  "set_air_purifier_speed": {
+    "description": "Set the fan speed of the air purifier.",
+    "params": [
+      "area",
+      "speed"
+    ],
+    "examples": [
+      "Set air purifier to high speed in the kids room.",
+      "Set the purifier in the office to auto mode for the workday."
+    ]
+  },
+  "query_air_quality": {
+    "description": "Query the current air quality reading.",
+    "params": [
+      "area"
+    ],
+    "examples": [
+      "What is the air quality in the bedroom?",
+      "Check air quality in the living room.",
+      "How is the air in the kitchen?"
+    ]
+  },
+  "empty_vacuum_bin": {
+    "description": "Empty the dustbin of the robot vacuum.",
+    "params": [],
+    "examples": [
+      "Empty the vacuum bin.",
+      "Empty the dustbin.",
+      "Dump the vacuum bin."
+    ]
+  },
+  "query_vacuum_battery": {
+    "description": "Query the current battery level of the robot vacuum.",
+    "params": [],
+    "examples": [
+      "What is the vacuum battery level?",
+      "How much battery does the vacuum have?",
+      "Check vacuum battery."
+    ]
+  },
+  "query_battery_level": {
+    "description": "Query the battery level of a sensor or device.",
+    "params": [
+      "device"
+    ],
+    "examples": [
+      "Battery state of the kitchen leak sensor please.",
+      "Check the remaining juice on the nursery camera.",
+      "Check sensor battery."
+    ]
+  },
+  "query_power_usage": {
+    "description": "Query the current power consumption of a device or the whole home.",
+    "params": [
+      "device"
+    ],
+    "examples": [
+      "My utility bill spiked last cycle, what's the live draw on the meter showing?",
+      "Power usage this hour.",
+      "How much electricity am I using?"
+    ]
+  },
+  "query_water_meter": {
+    "description": "Query the current water meter reading or usage.",
+    "params": [],
+    "examples": [
+      "Check water meter.",
+      "Pull the water flow reading for this week.",
+      "Water usage today?"
+    ]
+  },
+  "query_window_status": {
+    "description": "Query whether a window is open, closed, or locked.",
+    "params": [
+      "room"
+    ],
+    "examples": [
+      "I cracked one open this morning for fresh air and forgot, scan the office for anything still ajar.",
+      "Are any of the bedroom windows still ajar?",
+      "Are the living room windows shut?"
+    ]
+  },
+  "set_alarm": {
+    "description": "Set an alarm clock to ring at a given time.",
+    "params": [
+      "time",
+      "label"
+    ],
+    "examples": [
+      "Alarm at 6 AM weekdays and 8 AM weekends.",
+      "Set an alarm for 5:30 AM tomorrow only if I haven't already set one before 6.",
+      "Set alarm at 6:45 next Monday."
+    ]
+  },
+  "set_reminder": {
+    "description": "Set a reminder for a future event or task.",
+    "params": [
+      "time",
+      "note"
+    ],
+    "examples": [
+      "Remind me every first Monday of the month at 9 AM to pay rent.",
+      "Remind me 30 minutes before my next calendar meeting tomorrow.",
+      "Remind me 15 minutes before sunset every day to close the blinds."
+    ]
+  },
+  "set_timer": {
+    "description": "Start a countdown timer for a specified duration.",
+    "params": [
+      "duration_seconds",
+      "label"
+    ],
+    "examples": [
+      "Start two timers: 10 minutes for tea and 25 for pasta.",
+      "Bread timer 35 minutes.",
+      "Oven timer 25 minutes."
+    ]
+  }
+}

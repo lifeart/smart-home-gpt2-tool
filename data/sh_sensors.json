@@ -1,0 +1,2194 @@
+[
+  {
+    "id": 1,
+    "function": [
+      "query_motion_sensor",
+      "query_garage_door",
+      "query_air_quality",
+      "query_temperature",
+      "query_humidity"
+    ],
+    "prompt": "How warm is the bedroom?",
+    "gold_name": "query_temperature",
+    "gold_args": {
+      "room": "bedroom"
+    },
+    "difficulty": "easy"
+  },
+  {
+    "id": 2,
+    "function": [
+      "query_power_usage",
+      "query_air_quality",
+      "query_temperature",
+      "query_garage_door",
+      "query_solar_production"
+    ],
+    "prompt": "What's the temperature in the kitchen?",
+    "gold_name": "query_temperature",
+    "gold_args": {
+      "room": "kitchen"
+    },
+    "difficulty": "easy"
+  },
+  {
+    "id": 3,
+    "function": [
+      "query_power_usage",
+      "query_window_status",
+      "query_temperature"
+    ],
+    "prompt": "Living room temp?",
+    "gold_name": "query_temperature",
+    "gold_args": {
+      "room": "living_room"
+    },
+    "difficulty": "easy"
+  },
+  {
+    "id": 4,
+    "function": [
+      "query_window_status",
+      "query_water_meter",
+      "query_temperature",
+      "query_garage_door",
+      "query_power_usage"
+    ],
+    "prompt": "How hot is the attic?",
+    "gold_name": "query_temperature",
+    "gold_args": {
+      "room": "attic"
+    },
+    "difficulty": "easy"
+  },
+  {
+    "id": 5,
+    "function": [
+      "query_temperature",
+      "generate_status_report",
+      "list_active_devices"
+    ],
+    "prompt": "Check temperature in the office.",
+    "gold_name": "query_temperature",
+    "gold_args": {
+      "room": "office"
+    },
+    "difficulty": "easy"
+  },
+  {
+    "id": 6,
+    "function": [
+      "query_door_status",
+      "query_temperature",
+      "query_motion_sensor",
+      "query_window_status"
+    ],
+    "prompt": "Bathroom temperature please.",
+    "gold_name": "query_temperature",
+    "gold_args": {
+      "room": "bathroom"
+    },
+    "difficulty": "easy"
+  },
+  {
+    "id": 7,
+    "function": [
+      "query_temperature",
+      "query_water_leak",
+      "query_air_quality",
+      "list_active_devices"
+    ],
+    "prompt": "How cold is the basement?",
+    "gold_name": "query_temperature",
+    "gold_args": {
+      "room": "basement"
+    },
+    "difficulty": "easy"
+  },
+  {
+    "id": 8,
+    "function": [
+      "query_smoke_alarm",
+      "query_air_quality",
+      "query_power_usage",
+      "query_temperature",
+      "generate_status_report"
+    ],
+    "prompt": "Temp in garage?",
+    "gold_name": "query_temperature",
+    "gold_args": {
+      "room": "garage"
+    },
+    "difficulty": "easy"
+  },
+  {
+    "id": 9,
+    "function": [
+      "query_temperature",
+      "query_humidity",
+      "query_window_status",
+      "query_air_quality",
+      "query_water_meter"
+    ],
+    "prompt": "What's the humidity in the bathroom?",
+    "gold_name": "query_humidity",
+    "gold_args": {
+      "room": "bathroom"
+    },
+    "difficulty": "easy"
+  },
+  {
+    "id": 10,
+    "function": [
+      "query_humidity",
+      "query_battery_level",
+      "query_motion_sensor",
+      "query_water_meter"
+    ],
+    "prompt": "How humid is the basement?",
+    "gold_name": "query_humidity",
+    "gold_args": {
+      "room": "basement"
+    },
+    "difficulty": "easy"
+  },
+  {
+    "id": 11,
+    "function": [
+      "query_water_meter",
+      "query_humidity",
+      "query_motion_sensor",
+      "query_window_status"
+    ],
+    "prompt": "Humidity in nursery?",
+    "gold_name": "query_humidity",
+    "gold_args": {
+      "room": "nursery"
+    },
+    "difficulty": "easy"
+  },
+  {
+    "id": 12,
+    "function": [
+      "query_window_status",
+      "query_garage_door",
+      "query_humidity",
+      "query_door_status",
+      "query_battery_level"
+    ],
+    "prompt": "Check bedroom humidity.",
+    "gold_name": "query_humidity",
+    "gold_args": {
+      "room": "bedroom"
+    },
+    "difficulty": "easy"
+  },
+  {
+    "id": 13,
+    "function": [
+      "query_humidity",
+      "query_window_status",
+      "list_active_devices",
+      "query_temperature",
+      "query_water_leak"
+    ],
+    "prompt": "How damp is the laundry room?",
+    "gold_name": "query_humidity",
+    "gold_args": {
+      "room": "laundry_room"
+    },
+    "difficulty": "easy"
+  },
+  {
+    "id": 14,
+    "function": [
+      "query_window_status",
+      "query_solar_production",
+      "query_humidity"
+    ],
+    "prompt": "Living room humidity level?",
+    "gold_name": "query_humidity",
+    "gold_args": {
+      "room": "living_room"
+    },
+    "difficulty": "easy"
+  },
+  {
+    "id": 15,
+    "function": [
+      "query_water_meter",
+      "query_air_quality",
+      "query_battery_level"
+    ],
+    "prompt": "How's the air quality in the living room?",
+    "gold_name": "query_air_quality",
+    "gold_args": {
+      "room": "living_room"
+    },
+    "difficulty": "easy"
+  },
+  {
+    "id": 16,
+    "function": [
+      "query_air_quality",
+      "query_door_status",
+      "query_motion_sensor"
+    ],
+    "prompt": "Check air quality in the bedroom.",
+    "gold_name": "query_air_quality",
+    "gold_args": {
+      "room": "bedroom"
+    },
+    "difficulty": "easy"
+  },
+  {
+    "id": 17,
+    "function": [
+      "query_air_quality",
+      "list_active_devices",
+      "query_solar_production",
+      "query_smoke_alarm",
+      "generate_status_report"
+    ],
+    "prompt": "Office air quality?",
+    "gold_name": "query_air_quality",
+    "gold_args": {
+      "room": "office"
+    },
+    "difficulty": "easy"
+  },
+  {
+    "id": 18,
+    "function": [
+      "query_temperature",
+      "query_air_quality",
+      "list_active_devices"
+    ],
+    "prompt": "Is the air clean in the nursery?",
+    "gold_name": "query_air_quality",
+    "gold_args": {
+      "room": "nursery"
+    },
+    "difficulty": "easy"
+  },
+  {
+    "id": 19,
+    "function": [
+      "query_smoke_alarm",
+      "query_water_meter",
+      "list_active_devices",
+      "query_door_status",
+      "query_air_quality"
+    ],
+    "prompt": "Air quality kitchen.",
+    "gold_name": "query_air_quality",
+    "gold_args": {
+      "room": "kitchen"
+    },
+    "difficulty": "easy"
+  },
+  {
+    "id": 20,
+    "function": [
+      "list_active_devices",
+      "query_power_usage",
+      "query_motion_sensor",
+      "query_door_status",
+      "query_battery_level"
+    ],
+    "prompt": "Is the front door locked?",
+    "gold_name": "query_door_status",
+    "gold_args": {
+      "door": "front_door"
+    },
+    "difficulty": "easy"
+  },
+  {
+    "id": 21,
+    "function": [
+      "query_motion_sensor",
+      "query_door_status",
+      "query_water_leak",
+      "query_smoke_alarm",
+      "query_humidity"
+    ],
+    "prompt": "Front door status?",
+    "gold_name": "query_door_status",
+    "gold_args": {
+      "door": "front_door"
+    },
+    "difficulty": "easy"
+  },
+  {
+    "id": 22,
+    "function": [
+      "query_door_status",
+      "query_humidity",
+      "list_active_devices",
+      "query_air_quality",
+      "query_power_usage"
+    ],
+    "prompt": "Is the back door closed?",
+    "gold_name": "query_door_status",
+    "gold_args": {
+      "door": "back_door"
+    },
+    "difficulty": "easy"
+  },
+  {
+    "id": 23,
+    "function": [
+      "list_active_devices",
+      "query_power_usage",
+      "query_door_status"
+    ],
+    "prompt": "Check the side door.",
+    "gold_name": "query_door_status",
+    "gold_args": {
+      "door": "side_door"
+    },
+    "difficulty": "easy"
+  },
+  {
+    "id": 24,
+    "function": [
+      "query_battery_level",
+      "query_humidity",
+      "query_water_leak",
+      "query_door_status",
+      "query_temperature"
+    ],
+    "prompt": "Is the patio door open?",
+    "gold_name": "query_door_status",
+    "gold_args": {
+      "door": "patio_door"
+    },
+    "difficulty": "easy"
+  },
+  {
+    "id": 25,
+    "function": [
+      "query_door_status",
+      "query_humidity",
+      "query_solar_production"
+    ],
+    "prompt": "Status of front door.",
+    "gold_name": "query_door_status",
+    "gold_args": {
+      "door": "front_door"
+    },
+    "difficulty": "easy"
+  },
+  {
+    "id": 26,
+    "function": [
+      "query_power_usage",
+      "query_window_status",
+      "list_active_devices"
+    ],
+    "prompt": "Is the bedroom window open?",
+    "gold_name": "query_window_status",
+    "gold_args": {
+      "room": "bedroom"
+    },
+    "difficulty": "easy"
+  },
+  {
+    "id": 27,
+    "function": [
+      "query_power_usage",
+      "query_air_quality",
+      "query_battery_level",
+      "query_motion_sensor",
+      "query_window_status"
+    ],
+    "prompt": "Kitchen window status?",
+    "gold_name": "query_window_status",
+    "gold_args": {
+      "room": "kitchen"
+    },
+    "difficulty": "easy"
+  },
+  {
+    "id": 28,
+    "function": [
+      "query_motion_sensor",
+      "query_smoke_alarm",
+      "query_window_status",
+      "query_garage_door",
+      "query_water_meter"
+    ],
+    "prompt": "Are the living room windows shut?",
+    "gold_name": "query_window_status",
+    "gold_args": {
+      "room": "living_room"
+    },
+    "difficulty": "easy"
+  },
+  {
+    "id": 29,
+    "function": [
+      "query_window_status",
+      "generate_status_report",
+      "query_door_status"
+    ],
+    "prompt": "Check the office window.",
+    "gold_name": "query_window_status",
+    "gold_args": {
+      "room": "office"
+    },
+    "difficulty": "easy"
+  },
+  {
+    "id": 30,
+    "function": [
+      "query_power_usage",
+      "query_window_status",
+      "query_solar_production"
+    ],
+    "prompt": "Bathroom window open or closed?",
+    "gold_name": "query_window_status",
+    "gold_args": {
+      "room": "bathroom"
+    },
+    "difficulty": "easy"
+  },
+  {
+    "id": 31,
+    "function": [
+      "query_garage_door",
+      "query_humidity",
+      "query_motion_sensor"
+    ],
+    "prompt": "Any motion in the hallway?",
+    "gold_name": "query_motion_sensor",
+    "gold_args": {
+      "room": "hallway"
+    },
+    "difficulty": "easy"
+  },
+  {
+    "id": 32,
+    "function": [
+      "query_motion_sensor",
+      "query_humidity",
+      "query_temperature"
+    ],
+    "prompt": "Detect motion in the living room.",
+    "gold_name": "query_motion_sensor",
+    "gold_args": {
+      "room": "living_room"
+    },
+    "difficulty": "easy"
+  },
+  {
+    "id": 33,
+    "function": [
+      "query_door_status",
+      "query_battery_level",
+      "query_water_meter",
+      "query_motion_sensor",
+      "query_window_status"
+    ],
+    "prompt": "Hallway motion sensor.",
+    "gold_name": "query_motion_sensor",
+    "gold_args": {
+      "room": "hallway"
+    },
+    "difficulty": "easy"
+  },
+  {
+    "id": 34,
+    "function": [
+      "query_motion_sensor",
+      "list_active_devices",
+      "query_battery_level"
+    ],
+    "prompt": "Movement in basement?",
+    "gold_name": "query_motion_sensor",
+    "gold_args": {
+      "room": "basement"
+    },
+    "difficulty": "easy"
+  },
+  {
+    "id": 35,
+    "function": [
+      "query_humidity",
+      "query_motion_sensor",
+      "query_water_meter"
+    ],
+    "prompt": "Is anyone moving in the office?",
+    "gold_name": "query_motion_sensor",
+    "gold_args": {
+      "room": "office"
+    },
+    "difficulty": "easy"
+  },
+  {
+    "id": 36,
+    "function": [
+      "query_battery_level",
+      "query_water_leak",
+      "query_garage_door",
+      "query_smoke_alarm"
+    ],
+    "prompt": "Any leaks?",
+    "gold_name": "query_water_leak",
+    "gold_args": {},
+    "difficulty": "easy"
+  },
+  {
+    "id": 37,
+    "function": [
+      "query_water_leak",
+      "query_smoke_alarm",
+      "query_garage_door"
+    ],
+    "prompt": "Check for water leaks.",
+    "gold_name": "query_water_leak",
+    "gold_args": {},
+    "difficulty": "easy"
+  },
+  {
+    "id": 38,
+    "function": [
+      "query_door_status",
+      "generate_status_report",
+      "query_water_leak"
+    ],
+    "prompt": "Water leak status?",
+    "gold_name": "query_water_leak",
+    "gold_args": {},
+    "difficulty": "easy"
+  },
+  {
+    "id": 39,
+    "function": [
+      "query_smoke_alarm",
+      "query_water_leak",
+      "query_air_quality"
+    ],
+    "prompt": "Are there any leaks in the basement?",
+    "gold_name": "query_water_leak",
+    "gold_args": {
+      "room": "basement"
+    },
+    "difficulty": "easy"
+  },
+  {
+    "id": 40,
+    "function": [
+      "query_water_leak",
+      "generate_status_report",
+      "query_humidity"
+    ],
+    "prompt": "Kitchen water leak?",
+    "gold_name": "query_water_leak",
+    "gold_args": {
+      "room": "kitchen"
+    },
+    "difficulty": "easy"
+  },
+  {
+    "id": 41,
+    "function": [
+      "query_power_usage",
+      "query_smoke_alarm",
+      "query_water_meter"
+    ],
+    "prompt": "Smoke alarm working?",
+    "gold_name": "query_smoke_alarm",
+    "gold_args": {},
+    "difficulty": "easy"
+  },
+  {
+    "id": 42,
+    "function": [
+      "query_air_quality",
+      "query_smoke_alarm",
+      "query_water_leak"
+    ],
+    "prompt": "Check smoke detector.",
+    "gold_name": "query_smoke_alarm",
+    "gold_args": {},
+    "difficulty": "easy"
+  },
+  {
+    "id": 43,
+    "function": [
+      "query_water_leak",
+      "query_smoke_alarm",
+      "generate_status_report"
+    ],
+    "prompt": "Is the kitchen smoke alarm on?",
+    "gold_name": "query_smoke_alarm",
+    "gold_args": {
+      "room": "kitchen"
+    },
+    "difficulty": "easy"
+  },
+  {
+    "id": 44,
+    "function": [
+      "query_temperature",
+      "query_window_status",
+      "query_water_leak",
+      "query_smoke_alarm"
+    ],
+    "prompt": "Smoke alarm status bedroom.",
+    "gold_name": "query_smoke_alarm",
+    "gold_args": {
+      "room": "bedroom"
+    },
+    "difficulty": "easy"
+  },
+  {
+    "id": 45,
+    "function": [
+      "query_power_usage",
+      "query_battery_level",
+      "query_garage_door",
+      "list_active_devices",
+      "query_water_meter"
+    ],
+    "prompt": "Battery level of bedroom sensor.",
+    "gold_name": "query_battery_level",
+    "gold_args": {
+      "device": "bedroom_sensor"
+    },
+    "difficulty": "easy"
+  },
+  {
+    "id": 46,
+    "function": [
+      "query_solar_production",
+      "query_temperature",
+      "query_battery_level"
+    ],
+    "prompt": "How much battery left?",
+    "gold_name": "query_battery_level",
+    "gold_args": {},
+    "difficulty": "easy"
+  },
+  {
+    "id": 47,
+    "function": [
+      "query_battery_level",
+      "list_active_devices",
+      "query_motion_sensor",
+      "query_temperature",
+      "query_solar_production"
+    ],
+    "prompt": "Check sensor battery.",
+    "gold_name": "query_battery_level",
+    "gold_args": {},
+    "difficulty": "easy"
+  },
+  {
+    "id": 48,
+    "function": [
+      "query_solar_production",
+      "query_battery_level",
+      "query_humidity"
+    ],
+    "prompt": "Front door sensor battery?",
+    "gold_name": "query_battery_level",
+    "gold_args": {
+      "device": "front_door_sensor"
+    },
+    "difficulty": "easy"
+  },
+  {
+    "id": 49,
+    "function": [
+      "query_solar_production",
+      "query_battery_level",
+      "query_door_status",
+      "query_humidity"
+    ],
+    "prompt": "Battery of motion sensor.",
+    "gold_name": "query_battery_level",
+    "gold_args": {
+      "device": "motion_sensor"
+    },
+    "difficulty": "easy"
+  },
+  {
+    "id": 50,
+    "function": [
+      "query_power_usage",
+      "query_water_meter",
+      "query_solar_production",
+      "list_active_devices"
+    ],
+    "prompt": "Power usage today?",
+    "gold_name": "query_power_usage",
+    "gold_args": {
+      "period": "today"
+    },
+    "difficulty": "easy"
+  },
+  {
+    "id": 51,
+    "function": [
+      "query_garage_door",
+      "query_power_usage",
+      "query_door_status",
+      "query_motion_sensor",
+      "query_window_status"
+    ],
+    "prompt": "How much electricity am I using?",
+    "gold_name": "query_power_usage",
+    "gold_args": {
+      "period": "now"
+    },
+    "difficulty": "easy"
+  },
+  {
+    "id": 52,
+    "function": [
+      "query_humidity",
+      "query_power_usage",
+      "list_active_devices",
+      "query_motion_sensor"
+    ],
+    "prompt": "Current power draw?",
+    "gold_name": "query_power_usage",
+    "gold_args": {
+      "period": "now"
+    },
+    "difficulty": "easy"
+  },
+  {
+    "id": 53,
+    "function": [
+      "query_battery_level",
+      "query_door_status",
+      "query_power_usage"
+    ],
+    "prompt": "Energy consumption today.",
+    "gold_name": "query_power_usage",
+    "gold_args": {
+      "period": "today"
+    },
+    "difficulty": "easy"
+  },
+  {
+    "id": 54,
+    "function": [
+      "query_power_usage",
+      "query_humidity",
+      "query_motion_sensor"
+    ],
+    "prompt": "Power usage this hour.",
+    "gold_name": "query_power_usage",
+    "gold_args": {
+      "period": "hour"
+    },
+    "difficulty": "easy"
+  },
+  {
+    "id": 55,
+    "function": [
+      "query_smoke_alarm",
+      "query_air_quality",
+      "query_solar_production",
+      "query_battery_level"
+    ],
+    "prompt": "How much solar today?",
+    "gold_name": "query_solar_production",
+    "gold_args": {
+      "period": "today"
+    },
+    "difficulty": "easy"
+  },
+  {
+    "id": 56,
+    "function": [
+      "query_window_status",
+      "query_solar_production",
+      "query_water_meter",
+      "query_battery_level",
+      "generate_status_report"
+    ],
+    "prompt": "Solar production now?",
+    "gold_name": "query_solar_production",
+    "gold_args": {
+      "period": "now"
+    },
+    "difficulty": "easy"
+  },
+  {
+    "id": 57,
+    "function": [
+      "query_solar_production",
+      "query_battery_level",
+      "query_garage_door"
+    ],
+    "prompt": "Check solar panels.",
+    "gold_name": "query_solar_production",
+    "gold_args": {
+      "period": "now"
+    },
+    "difficulty": "easy"
+  },
+  {
+    "id": 58,
+    "function": [
+      "query_solar_production",
+      "query_door_status",
+      "query_power_usage",
+      "query_garage_door"
+    ],
+    "prompt": "Solar output today.",
+    "gold_name": "query_solar_production",
+    "gold_args": {
+      "period": "today"
+    },
+    "difficulty": "easy"
+  },
+  {
+    "id": 59,
+    "function": [
+      "query_window_status",
+      "query_water_meter",
+      "query_smoke_alarm",
+      "query_temperature",
+      "query_humidity"
+    ],
+    "prompt": "Water usage today?",
+    "gold_name": "query_water_meter",
+    "gold_args": {
+      "period": "today"
+    },
+    "difficulty": "easy"
+  },
+  {
+    "id": 60,
+    "function": [
+      "query_water_meter",
+      "query_air_quality",
+      "list_active_devices",
+      "query_solar_production"
+    ],
+    "prompt": "How much water did we use?",
+    "gold_name": "query_water_meter",
+    "gold_args": {
+      "period": "today"
+    },
+    "difficulty": "easy"
+  },
+  {
+    "id": 61,
+    "function": [
+      "query_water_leak",
+      "query_temperature",
+      "query_battery_level",
+      "query_water_meter",
+      "query_garage_door"
+    ],
+    "prompt": "Check water meter.",
+    "gold_name": "query_water_meter",
+    "gold_args": {
+      "period": "now"
+    },
+    "difficulty": "easy"
+  },
+  {
+    "id": 62,
+    "function": [
+      "query_garage_door",
+      "query_power_usage",
+      "query_temperature",
+      "query_battery_level",
+      "query_motion_sensor"
+    ],
+    "prompt": "Is the garage door open?",
+    "gold_name": "query_garage_door",
+    "gold_args": {},
+    "difficulty": "easy"
+  },
+  {
+    "id": 63,
+    "function": [
+      "list_active_devices",
+      "query_garage_door",
+      "query_motion_sensor",
+      "query_temperature"
+    ],
+    "prompt": "Garage door status?",
+    "gold_name": "query_garage_door",
+    "gold_args": {},
+    "difficulty": "easy"
+  },
+  {
+    "id": 64,
+    "function": [
+      "query_water_leak",
+      "query_battery_level",
+      "query_humidity",
+      "query_motion_sensor",
+      "query_garage_door"
+    ],
+    "prompt": "Check garage door.",
+    "gold_name": "query_garage_door",
+    "gold_args": {},
+    "difficulty": "easy"
+  },
+  {
+    "id": 65,
+    "function": [
+      "query_garage_door",
+      "query_temperature",
+      "query_water_leak"
+    ],
+    "prompt": "Did I leave the garage open?",
+    "gold_name": "query_garage_door",
+    "gold_args": {},
+    "difficulty": "easy"
+  },
+  {
+    "id": 66,
+    "function": [
+      "query_water_meter",
+      "query_garage_door",
+      "list_active_devices",
+      "query_solar_production"
+    ],
+    "prompt": "What devices are on?",
+    "gold_name": "list_active_devices",
+    "gold_args": {},
+    "difficulty": "easy"
+  },
+  {
+    "id": 67,
+    "function": [
+      "query_humidity",
+      "query_temperature",
+      "query_smoke_alarm",
+      "list_active_devices",
+      "query_water_leak"
+    ],
+    "prompt": "List active devices.",
+    "gold_name": "list_active_devices",
+    "gold_args": {},
+    "difficulty": "easy"
+  },
+  {
+    "id": 68,
+    "function": [
+      "list_active_devices",
+      "query_door_status",
+      "generate_status_report",
+      "query_garage_door"
+    ],
+    "prompt": "Show me what's running.",
+    "gold_name": "list_active_devices",
+    "gold_args": {},
+    "difficulty": "easy"
+  },
+  {
+    "id": 69,
+    "function": [
+      "query_motion_sensor",
+      "generate_status_report",
+      "query_window_status",
+      "query_humidity"
+    ],
+    "prompt": "Give me a status report.",
+    "gold_name": "generate_status_report",
+    "gold_args": {},
+    "difficulty": "easy"
+  },
+  {
+    "id": 70,
+    "function": [
+      "query_temperature",
+      "query_battery_level",
+      "generate_status_report",
+      "query_motion_sensor",
+      "list_active_devices"
+    ],
+    "prompt": "Generate house status report.",
+    "gold_name": "generate_status_report",
+    "gold_args": {},
+    "difficulty": "easy"
+  },
+  {
+    "id": 71,
+    "function": [
+      "query_air_quality",
+      "query_temperature",
+      "query_solar_production"
+    ],
+    "prompt": "It feels chilly in here, what's the office reading right now?",
+    "gold_name": "query_temperature",
+    "gold_args": {
+      "room": "office"
+    },
+    "difficulty": "medium"
+  },
+  {
+    "id": 72,
+    "function": [
+      "query_smoke_alarm",
+      "query_solar_production",
+      "query_water_leak",
+      "list_active_devices",
+      "query_temperature"
+    ],
+    "prompt": "Can you tell me the current temperature inside the nursery?",
+    "gold_name": "query_temperature",
+    "gold_args": {
+      "room": "nursery"
+    },
+    "difficulty": "medium"
+  },
+  {
+    "id": 73,
+    "function": [
+      "query_garage_door",
+      "query_temperature",
+      "query_smoke_alarm",
+      "query_humidity"
+    ],
+    "prompt": "I'd like to know how warm the dining room is at the moment.",
+    "gold_name": "query_temperature",
+    "gold_args": {
+      "room": "dining_room"
+    },
+    "difficulty": "medium"
+  },
+  {
+    "id": 74,
+    "function": [
+      "query_smoke_alarm",
+      "query_air_quality",
+      "query_temperature",
+      "query_water_meter"
+    ],
+    "prompt": "Could you pull the temperature reading from the guest room?",
+    "gold_name": "query_temperature",
+    "gold_args": {
+      "room": "guest_room"
+    },
+    "difficulty": "medium"
+  },
+  {
+    "id": 75,
+    "function": [
+      "generate_status_report",
+      "query_air_quality",
+      "query_motion_sensor",
+      "query_garage_door",
+      "query_temperature"
+    ],
+    "prompt": "What does the thermostat in the hallway say?",
+    "gold_name": "query_temperature",
+    "gold_args": {
+      "room": "hallway"
+    },
+    "difficulty": "medium"
+  },
+  {
+    "id": 76,
+    "function": [
+      "query_motion_sensor",
+      "query_temperature",
+      "query_smoke_alarm",
+      "query_garage_door"
+    ],
+    "prompt": "Check the master bedroom temp for me please.",
+    "gold_name": "query_temperature",
+    "gold_args": {
+      "room": "bedroom"
+    },
+    "difficulty": "medium"
+  },
+  {
+    "id": 77,
+    "function": [
+      "query_door_status",
+      "query_smoke_alarm",
+      "query_water_meter",
+      "query_garage_door",
+      "query_humidity"
+    ],
+    "prompt": "Is the moisture level in the bathroom too high right now?",
+    "gold_name": "query_humidity",
+    "gold_args": {
+      "room": "bathroom"
+    },
+    "difficulty": "medium"
+  },
+  {
+    "id": 78,
+    "function": [
+      "query_motion_sensor",
+      "query_humidity",
+      "query_window_status",
+      "query_smoke_alarm"
+    ],
+    "prompt": "I'm worried about mold, what's the humidity in the attic?",
+    "gold_name": "query_humidity",
+    "gold_args": {
+      "room": "attic"
+    },
+    "difficulty": "medium"
+  },
+  {
+    "id": 79,
+    "function": [
+      "query_window_status",
+      "query_water_meter",
+      "query_power_usage",
+      "query_humidity"
+    ],
+    "prompt": "Could you pull the dampness reading in the kitchen?",
+    "gold_name": "query_humidity",
+    "gold_args": {
+      "room": "kitchen"
+    },
+    "difficulty": "medium"
+  },
+  {
+    "id": 80,
+    "function": [
+      "query_motion_sensor",
+      "query_water_meter",
+      "query_air_quality",
+      "query_power_usage",
+      "query_humidity"
+    ],
+    "prompt": "Tell me how humid it is in the guest room.",
+    "gold_name": "query_humidity",
+    "gold_args": {
+      "room": "guest_room"
+    },
+    "difficulty": "medium"
+  },
+  {
+    "id": 81,
+    "function": [
+      "list_active_devices",
+      "query_window_status",
+      "query_door_status",
+      "query_air_quality",
+      "query_motion_sensor"
+    ],
+    "prompt": "Is the air healthy to breathe in the nursery right now?",
+    "gold_name": "query_air_quality",
+    "gold_args": {
+      "room": "nursery"
+    },
+    "difficulty": "medium"
+  },
+  {
+    "id": 82,
+    "function": [
+      "generate_status_report",
+      "query_air_quality",
+      "query_humidity",
+      "list_active_devices",
+      "query_battery_level"
+    ],
+    "prompt": "Check VOC and particulate levels in the office.",
+    "gold_name": "query_air_quality",
+    "gold_args": {
+      "room": "office"
+    },
+    "difficulty": "medium"
+  },
+  {
+    "id": 83,
+    "function": [
+      "query_door_status",
+      "query_window_status",
+      "query_air_quality",
+      "query_smoke_alarm"
+    ],
+    "prompt": "How polluted is the air in the basement currently?",
+    "gold_name": "query_air_quality",
+    "gold_args": {
+      "room": "basement"
+    },
+    "difficulty": "medium"
+  },
+  {
+    "id": 84,
+    "function": [
+      "query_door_status",
+      "list_active_devices",
+      "query_air_quality"
+    ],
+    "prompt": "Are the air conditions safe in the kitchen after cooking?",
+    "gold_name": "query_air_quality",
+    "gold_args": {
+      "room": "kitchen"
+    },
+    "difficulty": "medium"
+  },
+  {
+    "id": 85,
+    "function": [
+      "query_door_status",
+      "query_window_status",
+      "query_power_usage"
+    ],
+    "prompt": "Did I forget to lock the back door before leaving?",
+    "gold_name": "query_door_status",
+    "gold_args": {
+      "door": "back_door"
+    },
+    "difficulty": "medium"
+  },
+  {
+    "id": 86,
+    "function": [
+      "list_active_devices",
+      "query_battery_level",
+      "query_door_status"
+    ],
+    "prompt": "Could you check whether the side entrance is secured?",
+    "gold_name": "query_door_status",
+    "gold_args": {
+      "door": "side_door"
+    },
+    "difficulty": "medium"
+  },
+  {
+    "id": 87,
+    "function": [
+      "query_solar_production",
+      "query_garage_door",
+      "query_power_usage",
+      "query_door_status"
+    ],
+    "prompt": "Is my front entry currently latched and locked?",
+    "gold_name": "query_door_status",
+    "gold_args": {
+      "door": "front_door"
+    },
+    "difficulty": "medium"
+  },
+  {
+    "id": 88,
+    "function": [
+      "query_garage_door",
+      "query_door_status",
+      "query_battery_level"
+    ],
+    "prompt": "Tell me if the patio sliding door is shut.",
+    "gold_name": "query_door_status",
+    "gold_args": {
+      "door": "patio_door"
+    },
+    "difficulty": "medium"
+  },
+  {
+    "id": 89,
+    "function": [
+      "generate_status_report",
+      "query_door_status",
+      "query_water_meter"
+    ],
+    "prompt": "What's the lock state of the basement door?",
+    "gold_name": "query_door_status",
+    "gold_args": {
+      "door": "basement_door"
+    },
+    "difficulty": "medium"
+  },
+  {
+    "id": 90,
+    "function": [
+      "query_door_status",
+      "query_window_status",
+      "query_humidity",
+      "query_motion_sensor",
+      "query_battery_level"
+    ],
+    "prompt": "Are any of the bedroom windows still ajar?",
+    "gold_name": "query_window_status",
+    "gold_args": {
+      "room": "bedroom"
+    },
+    "difficulty": "medium"
+  },
+  {
+    "id": 91,
+    "function": [
+      "query_air_quality",
+      "query_window_status",
+      "query_power_usage",
+      "query_humidity"
+    ],
+    "prompt": "Check if I left the kitchen windows open before the rain.",
+    "gold_name": "query_window_status",
+    "gold_args": {
+      "room": "kitchen"
+    },
+    "difficulty": "medium"
+  },
+  {
+    "id": 92,
+    "function": [
+      "query_air_quality",
+      "query_door_status",
+      "query_garage_door",
+      "query_window_status",
+      "query_humidity"
+    ],
+    "prompt": "Status of the upstairs office window please.",
+    "gold_name": "query_window_status",
+    "gold_args": {
+      "room": "office"
+    },
+    "difficulty": "medium"
+  },
+  {
+    "id": 93,
+    "function": [
+      "query_door_status",
+      "query_temperature",
+      "query_smoke_alarm",
+      "query_window_status"
+    ],
+    "prompt": "Is the dining room window cracked open right now?",
+    "gold_name": "query_window_status",
+    "gold_args": {
+      "room": "dining_room"
+    },
+    "difficulty": "medium"
+  },
+  {
+    "id": 94,
+    "function": [
+      "query_window_status",
+      "query_smoke_alarm",
+      "query_battery_level",
+      "query_water_leak",
+      "query_temperature"
+    ],
+    "prompt": "Tell me whether the attic window got closed.",
+    "gold_name": "query_window_status",
+    "gold_args": {
+      "room": "attic"
+    },
+    "difficulty": "medium"
+  },
+  {
+    "id": 95,
+    "function": [
+      "query_smoke_alarm",
+      "query_window_status",
+      "query_door_status",
+      "query_motion_sensor"
+    ],
+    "prompt": "Has the hallway motion sensor triggered in the last hour?",
+    "gold_name": "query_motion_sensor",
+    "gold_args": {
+      "room": "hallway"
+    },
+    "difficulty": "medium"
+  },
+  {
+    "id": 96,
+    "function": [
+      "query_smoke_alarm",
+      "query_water_meter",
+      "query_motion_sensor",
+      "generate_status_report"
+    ],
+    "prompt": "Detecting any presence in the basement right now?",
+    "gold_name": "query_motion_sensor",
+    "gold_args": {
+      "room": "basement"
+    },
+    "difficulty": "medium"
+  },
+  {
+    "id": 97,
+    "function": [
+      "query_smoke_alarm",
+      "query_temperature",
+      "query_solar_production",
+      "query_power_usage",
+      "query_motion_sensor"
+    ],
+    "prompt": "Is anyone moving around in the office area?",
+    "gold_name": "query_motion_sensor",
+    "gold_args": {
+      "room": "office"
+    },
+    "difficulty": "medium"
+  },
+  {
+    "id": 98,
+    "function": [
+      "query_battery_level",
+      "query_motion_sensor",
+      "generate_status_report"
+    ],
+    "prompt": "Check the nursery motion detector for activity.",
+    "gold_name": "query_motion_sensor",
+    "gold_args": {
+      "room": "nursery"
+    },
+    "difficulty": "medium"
+  },
+  {
+    "id": 99,
+    "function": [
+      "query_smoke_alarm",
+      "query_door_status",
+      "query_water_leak",
+      "query_motion_sensor"
+    ],
+    "prompt": "Has anybody walked past the garage sensor recently?",
+    "gold_name": "query_motion_sensor",
+    "gold_args": {
+      "room": "garage"
+    },
+    "difficulty": "medium"
+  },
+  {
+    "id": 100,
+    "function": [
+      "query_water_leak",
+      "list_active_devices",
+      "query_window_status",
+      "query_smoke_alarm"
+    ],
+    "prompt": "I'm hearing dripping, can you scan for leaks under the sink?",
+    "gold_name": "query_water_leak",
+    "gold_args": {
+      "room": "kitchen"
+    },
+    "difficulty": "medium"
+  },
+  {
+    "id": 101,
+    "function": [
+      "query_water_leak",
+      "query_power_usage",
+      "query_garage_door"
+    ],
+    "prompt": "Any moisture being detected in the basement walls?",
+    "gold_name": "query_water_leak",
+    "gold_args": {
+      "room": "basement"
+    },
+    "difficulty": "medium"
+  },
+  {
+    "id": 102,
+    "function": [
+      "query_humidity",
+      "query_water_meter",
+      "query_water_leak"
+    ],
+    "prompt": "Check the bathroom leak sensor near the toilet.",
+    "gold_name": "query_water_leak",
+    "gold_args": {
+      "room": "bathroom"
+    },
+    "difficulty": "medium"
+  },
+  {
+    "id": 103,
+    "function": [
+      "generate_status_report",
+      "query_water_leak",
+      "query_door_status"
+    ],
+    "prompt": "Are the laundry room sensors showing any water?",
+    "gold_name": "query_water_leak",
+    "gold_args": {
+      "room": "laundry_room"
+    },
+    "difficulty": "medium"
+  },
+  {
+    "id": 104,
+    "function": [
+      "query_battery_level",
+      "query_air_quality",
+      "query_water_leak"
+    ],
+    "prompt": "Pull the leak detector reading from the utility area.",
+    "gold_name": "query_water_leak",
+    "gold_args": {
+      "room": "basement"
+    },
+    "difficulty": "medium"
+  },
+  {
+    "id": 105,
+    "function": [
+      "query_window_status",
+      "query_door_status",
+      "query_smoke_alarm",
+      "query_battery_level",
+      "query_garage_door"
+    ],
+    "prompt": "Are all smoke alarms in the house currently operational?",
+    "gold_name": "query_smoke_alarm",
+    "gold_args": {},
+    "difficulty": "medium"
+  },
+  {
+    "id": 106,
+    "function": [
+      "query_humidity",
+      "query_window_status",
+      "query_smoke_alarm"
+    ],
+    "prompt": "Check the kitchen smoke detector after the cooking earlier.",
+    "gold_name": "query_smoke_alarm",
+    "gold_args": {
+      "room": "kitchen"
+    },
+    "difficulty": "medium"
+  },
+  {
+    "id": 107,
+    "function": [
+      "query_water_meter",
+      "query_solar_production",
+      "query_water_leak",
+      "query_smoke_alarm"
+    ],
+    "prompt": "Is the upstairs hallway smoke alarm armed?",
+    "gold_name": "query_smoke_alarm",
+    "gold_args": {
+      "room": "hallway"
+    },
+    "difficulty": "medium"
+  },
+  {
+    "id": 108,
+    "function": [
+      "query_garage_door",
+      "query_solar_production",
+      "query_smoke_alarm"
+    ],
+    "prompt": "Verify the bedroom smoke sensor is functioning.",
+    "gold_name": "query_smoke_alarm",
+    "gold_args": {
+      "room": "bedroom"
+    },
+    "difficulty": "medium"
+  },
+  {
+    "id": 109,
+    "function": [
+      "query_battery_level",
+      "query_garage_door",
+      "list_active_devices"
+    ],
+    "prompt": "Tell me the battery percent on the back door sensor.",
+    "gold_name": "query_battery_level",
+    "gold_args": {
+      "device": "back_door_sensor"
+    },
+    "difficulty": "medium"
+  },
+  {
+    "id": 110,
+    "function": [
+      "query_battery_level",
+      "query_temperature",
+      "list_active_devices",
+      "query_motion_sensor",
+      "query_power_usage"
+    ],
+    "prompt": "Which devices need recharging soon based on battery?",
+    "gold_name": "query_battery_level",
+    "gold_args": {},
+    "difficulty": "medium"
+  },
+  {
+    "id": 111,
+    "function": [
+      "query_battery_level",
+      "generate_status_report",
+      "query_water_leak"
+    ],
+    "prompt": "Check the remaining juice on the nursery camera.",
+    "gold_name": "query_battery_level",
+    "gold_args": {
+      "device": "nursery_camera"
+    },
+    "difficulty": "medium"
+  },
+  {
+    "id": 112,
+    "function": [
+      "query_smoke_alarm",
+      "query_motion_sensor",
+      "query_battery_level",
+      "query_water_meter"
+    ],
+    "prompt": "Battery state of the kitchen leak sensor please.",
+    "gold_name": "query_battery_level",
+    "gold_args": {
+      "device": "kitchen_leak_sensor"
+    },
+    "difficulty": "medium"
+  },
+  {
+    "id": 113,
+    "function": [
+      "query_battery_level",
+      "query_window_status",
+      "query_water_meter",
+      "query_solar_production",
+      "query_power_usage"
+    ],
+    "prompt": "How many kilowatt-hours did we burn through this morning?",
+    "gold_name": "query_power_usage",
+    "gold_args": {
+      "period": "morning"
+    },
+    "difficulty": "medium"
+  },
+  {
+    "id": 114,
+    "function": [
+      "query_door_status",
+      "query_power_usage",
+      "query_window_status",
+      "query_motion_sensor",
+      "query_solar_production"
+    ],
+    "prompt": "What was our electricity consumption yesterday?",
+    "gold_name": "query_power_usage",
+    "gold_args": {
+      "period": "yesterday"
+    },
+    "difficulty": "medium"
+  },
+  {
+    "id": 115,
+    "function": [
+      "query_water_meter",
+      "query_solar_production",
+      "generate_status_report",
+      "query_power_usage"
+    ],
+    "prompt": "Tell me the household power draw over the last hour.",
+    "gold_name": "query_power_usage",
+    "gold_args": {
+      "period": "hour"
+    },
+    "difficulty": "medium"
+  },
+  {
+    "id": 116,
+    "function": [
+      "query_air_quality",
+      "query_motion_sensor",
+      "generate_status_report",
+      "query_power_usage"
+    ],
+    "prompt": "How much energy have we used since midnight?",
+    "gold_name": "query_power_usage",
+    "gold_args": {
+      "period": "today"
+    },
+    "difficulty": "medium"
+  },
+  {
+    "id": 117,
+    "function": [
+      "query_window_status",
+      "query_motion_sensor",
+      "query_power_usage",
+      "query_solar_production"
+    ],
+    "prompt": "Check this week's total electrical consumption.",
+    "gold_name": "query_power_usage",
+    "gold_args": {
+      "period": "week"
+    },
+    "difficulty": "medium"
+  },
+  {
+    "id": 118,
+    "function": [
+      "query_door_status",
+      "query_solar_production",
+      "generate_status_report",
+      "query_humidity",
+      "query_water_leak"
+    ],
+    "prompt": "How many watts are the panels pushing out right now?",
+    "gold_name": "query_solar_production",
+    "gold_args": {
+      "period": "now"
+    },
+    "difficulty": "medium"
+  },
+  {
+    "id": 119,
+    "function": [
+      "query_temperature",
+      "query_smoke_alarm",
+      "query_solar_production",
+      "list_active_devices",
+      "query_garage_door"
+    ],
+    "prompt": "Tell me the solar generation total for yesterday.",
+    "gold_name": "query_solar_production",
+    "gold_args": {
+      "period": "yesterday"
+    },
+    "difficulty": "medium"
+  },
+  {
+    "id": 120,
+    "function": [
+      "query_door_status",
+      "query_window_status",
+      "query_solar_production",
+      "query_power_usage",
+      "query_water_meter"
+    ],
+    "prompt": "What did the panels produce this morning before noon?",
+    "gold_name": "query_solar_production",
+    "gold_args": {
+      "period": "morning"
+    },
+    "difficulty": "medium"
+  },
+  {
+    "id": 121,
+    "function": [
+      "query_garage_door",
+      "query_battery_level",
+      "query_solar_production",
+      "query_motion_sensor"
+    ],
+    "prompt": "Check this month's solar yield so far.",
+    "gold_name": "query_solar_production",
+    "gold_args": {
+      "period": "month"
+    },
+    "difficulty": "medium"
+  },
+  {
+    "id": 122,
+    "function": [
+      "generate_status_report",
+      "query_water_meter",
+      "query_door_status",
+      "query_window_status"
+    ],
+    "prompt": "How many gallons did the household consume yesterday?",
+    "gold_name": "query_water_meter",
+    "gold_args": {
+      "period": "yesterday"
+    },
+    "difficulty": "medium"
+  },
+  {
+    "id": 123,
+    "function": [
+      "query_water_meter",
+      "query_battery_level",
+      "query_humidity",
+      "query_garage_door"
+    ],
+    "prompt": "Pull the water flow reading for this week.",
+    "gold_name": "query_water_meter",
+    "gold_args": {
+      "period": "week"
+    },
+    "difficulty": "medium"
+  },
+  {
+    "id": 124,
+    "function": [
+      "query_window_status",
+      "query_power_usage",
+      "query_smoke_alarm",
+      "query_garage_door",
+      "query_water_meter"
+    ],
+    "prompt": "Tell me current water usage this hour.",
+    "gold_name": "query_water_meter",
+    "gold_args": {
+      "period": "hour"
+    },
+    "difficulty": "medium"
+  },
+  {
+    "id": 125,
+    "function": [
+      "query_motion_sensor",
+      "query_garage_door",
+      "query_door_status",
+      "query_air_quality"
+    ],
+    "prompt": "Did the garage door close after I drove off this morning?",
+    "gold_name": "query_garage_door",
+    "gold_args": {},
+    "difficulty": "medium"
+  },
+  {
+    "id": 126,
+    "function": [
+      "generate_status_report",
+      "query_temperature",
+      "query_garage_door",
+      "query_battery_level"
+    ],
+    "prompt": "Tell me whether the garage is currently open or shut.",
+    "gold_name": "query_garage_door",
+    "gold_args": {},
+    "difficulty": "medium"
+  },
+  {
+    "id": 127,
+    "function": [
+      "query_garage_door",
+      "query_humidity",
+      "list_active_devices",
+      "query_smoke_alarm",
+      "generate_status_report"
+    ],
+    "prompt": "I forgot if I closed the garage, can you check?",
+    "gold_name": "query_garage_door",
+    "gold_args": {},
+    "difficulty": "medium"
+  },
+  {
+    "id": 128,
+    "function": [
+      "list_active_devices",
+      "query_motion_sensor",
+      "query_air_quality",
+      "query_temperature"
+    ],
+    "prompt": "Show me everything that's currently turned on in the house.",
+    "gold_name": "list_active_devices",
+    "gold_args": {},
+    "difficulty": "medium"
+  },
+  {
+    "id": 129,
+    "function": [
+      "query_smoke_alarm",
+      "list_active_devices",
+      "query_water_leak"
+    ],
+    "prompt": "Which sensors and devices are reporting active right now?",
+    "gold_name": "list_active_devices",
+    "gold_args": {},
+    "difficulty": "medium"
+  },
+  {
+    "id": 130,
+    "function": [
+      "query_air_quality",
+      "query_garage_door",
+      "generate_status_report"
+    ],
+    "prompt": "Could you put together a snapshot of the whole house status?",
+    "gold_name": "generate_status_report",
+    "gold_args": {},
+    "difficulty": "medium"
+  },
+  {
+    "id": 131,
+    "function": [
+      "query_window_status",
+      "query_air_quality",
+      "query_humidity"
+    ],
+    "prompt": "It's been muggy upstairs all day, can you confirm what the bedroom sensor thinks?",
+    "gold_name": "query_humidity",
+    "gold_args": {
+      "room": "bedroom"
+    },
+    "difficulty": "hard"
+  },
+  {
+    "id": 132,
+    "function": [
+      "query_solar_production",
+      "generate_status_report",
+      "list_active_devices",
+      "query_window_status",
+      "query_air_quality"
+    ],
+    "prompt": "My allergies are flaring up — what are the particulates in the living area saying?",
+    "gold_name": "query_air_quality",
+    "gold_args": {
+      "room": "living_room"
+    },
+    "difficulty": "hard"
+  },
+  {
+    "id": 133,
+    "function": [
+      "query_solar_production",
+      "generate_status_report",
+      "query_smoke_alarm",
+      "query_water_leak"
+    ],
+    "prompt": "I'm pretty sure I heard a beeping in the kitchen — confirm the CO/smoke unit is alive.",
+    "gold_name": "query_smoke_alarm",
+    "gold_args": {
+      "room": "kitchen"
+    },
+    "difficulty": "hard"
+  },
+  {
+    "id": 134,
+    "function": [
+      "query_motion_sensor",
+      "query_garage_door",
+      "query_water_meter",
+      "query_door_status",
+      "query_humidity"
+    ],
+    "prompt": "The dog's been barking at the back gate, did the perimeter motion catch anything outside?",
+    "gold_name": "query_motion_sensor",
+    "gold_args": {
+      "room": "patio"
+    },
+    "difficulty": "hard"
+  },
+  {
+    "id": 135,
+    "function": [
+      "query_air_quality",
+      "query_window_status",
+      "query_door_status"
+    ],
+    "prompt": "I left for work in a rush — pretty sure the big door to the yard wasn't latched.",
+    "gold_name": "query_door_status",
+    "gold_args": {
+      "door": "back_door"
+    },
+    "difficulty": "hard"
+  },
+  {
+    "id": 136,
+    "function": [
+      "query_temperature",
+      "query_power_usage",
+      "query_water_leak"
+    ],
+    "prompt": "My utility bill spiked last cycle, what's the live draw on the meter showing?",
+    "gold_name": "query_power_usage",
+    "gold_args": {
+      "period": "now"
+    },
+    "difficulty": "hard"
+  },
+  {
+    "id": 137,
+    "function": [
+      "query_temperature",
+      "query_door_status",
+      "query_solar_production",
+      "query_window_status"
+    ],
+    "prompt": "Cloudy day, curious whether the rooftop panels are doing anything useful right now.",
+    "gold_name": "query_solar_production",
+    "gold_args": {
+      "period": "now"
+    },
+    "difficulty": "hard"
+  },
+  {
+    "id": 138,
+    "function": [
+      "query_battery_level",
+      "query_water_meter",
+      "query_door_status"
+    ],
+    "prompt": "I think the upstairs sensor in the crib room is dying — what does it say about its cell?",
+    "gold_name": "query_battery_level",
+    "gold_args": {
+      "device": "nursery_sensor"
+    },
+    "difficulty": "hard"
+  },
+  {
+    "id": 139,
+    "function": [
+      "query_window_status",
+      "query_humidity",
+      "query_door_status",
+      "query_power_usage"
+    ],
+    "prompt": "My partner asked if the slider to the deck is closed, can you verify for them?",
+    "gold_name": "query_door_status",
+    "gold_args": {
+      "door": "patio_door"
+    },
+    "difficulty": "hard"
+  },
+  {
+    "id": 140,
+    "function": [
+      "query_temperature",
+      "query_water_leak",
+      "query_air_quality"
+    ],
+    "prompt": "Smelled something musty near the boiler — anything tripping the floor sensors down there?",
+    "gold_name": "query_water_leak",
+    "gold_args": {
+      "room": "basement"
+    },
+    "difficulty": "hard"
+  },
+  {
+    "id": 141,
+    "function": [
+      "query_humidity",
+      "query_smoke_alarm",
+      "generate_status_report",
+      "query_water_meter"
+    ],
+    "prompt": "Plumber's coming tomorrow, give me a full house overview so I can show him what's logged.",
+    "gold_name": "generate_status_report",
+    "gold_args": {},
+    "difficulty": "hard"
+  },
+  {
+    "id": 142,
+    "function": [
+      "generate_status_report",
+      "query_smoke_alarm",
+      "query_battery_level",
+      "list_active_devices"
+    ],
+    "prompt": "The kids said they shut everything before bed — what's still drawing or reporting?",
+    "gold_name": "list_active_devices",
+    "gold_args": {},
+    "difficulty": "hard"
+  },
+  {
+    "id": 143,
+    "function": [
+      "query_water_leak",
+      "query_humidity",
+      "query_garage_door",
+      "query_solar_production"
+    ],
+    "prompt": "Long shower this morning steamed the place up, what's the bath dampness reading now?",
+    "gold_name": "query_humidity",
+    "gold_args": {
+      "room": "bathroom"
+    },
+    "difficulty": "hard"
+  },
+  {
+    "id": 144,
+    "function": [
+      "query_solar_production",
+      "query_water_meter",
+      "query_motion_sensor"
+    ],
+    "prompt": "Driveway sensor pinged my phone twice while I was out, any actual movement in the entry hall?",
+    "gold_name": "query_motion_sensor",
+    "gold_args": {
+      "room": "hallway"
+    },
+    "difficulty": "hard"
+  },
+  {
+    "id": 145,
+    "function": [
+      "generate_status_report",
+      "query_water_meter",
+      "query_power_usage",
+      "query_temperature",
+      "query_window_status"
+    ],
+    "prompt": "Garden sprinklers ran longer than usual — did the meter pick up the extra flow today?",
+    "gold_name": "query_water_meter",
+    "gold_args": {
+      "period": "today"
+    },
+    "difficulty": "hard"
+  },
+  {
+    "id": 146,
+    "function": [
+      "query_water_leak",
+      "query_power_usage",
+      "query_air_quality",
+      "query_garage_door"
+    ],
+    "prompt": "Pretty sure I pressed the button but never heard the rumble stop — confirm the big roll-up is sealed.",
+    "gold_name": "query_garage_door",
+    "gold_args": {},
+    "difficulty": "hard"
+  },
+  {
+    "id": 147,
+    "function": [
+      "list_active_devices",
+      "query_water_leak",
+      "query_temperature",
+      "query_smoke_alarm"
+    ],
+    "prompt": "Heater's been cycling weirdly, can you tell me what the dining area is reading on temp?",
+    "gold_name": "query_temperature",
+    "gold_args": {
+      "room": "dining_room"
+    },
+    "difficulty": "hard"
+  },
+  {
+    "id": 148,
+    "function": [
+      "query_battery_level",
+      "query_garage_door",
+      "query_motion_sensor",
+      "query_window_status"
+    ],
+    "prompt": "I cracked one open this morning for fresh air and forgot, scan the office for anything still ajar.",
+    "gold_name": "query_window_status",
+    "gold_args": {
+      "room": "office"
+    },
+    "difficulty": "hard"
+  },
+  {
+    "id": 149,
+    "function": [
+      "query_battery_level",
+      "query_motion_sensor",
+      "query_humidity",
+      "query_window_status"
+    ],
+    "prompt": "Battery indicator is yellow on the app dashboard — which exact unit is the culprit?",
+    "gold_name": "query_battery_level",
+    "gold_args": {},
+    "difficulty": "hard"
+  },
+  {
+    "id": 150,
+    "function": [
+      "query_temperature",
+      "query_water_meter",
+      "generate_status_report",
+      "query_solar_production",
+      "query_battery_level"
+    ],
+    "prompt": "End of month review: where do we stand on energy generation from the solar array this period?",
+    "gold_name": "query_solar_production",
+    "gold_args": {
+      "period": "month"
+    },
+    "difficulty": "hard"
+  }
+]

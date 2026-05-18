@@ -1,0 +1,784 @@
+{
+  "set_light_temperature_k": {
+    "params": {
+      "room": "string",
+      "kelvin": "integer"
+    },
+    "required": [
+      "room",
+      "kelvin"
+    ]
+  },
+  "dim_light": {
+    "params": {
+      "room": "string",
+      "brightness_pct": "integer"
+    },
+    "required": [
+      "room",
+      "brightness_pct"
+    ]
+  },
+  "turn_on_light": {
+    "params": {
+      "room": "string",
+      "brightness_pct": "integer"
+    },
+    "required": [
+      "room"
+    ]
+  },
+  "set_light_color": {
+    "params": {
+      "room": "string",
+      "color": "string",
+      "brightness_pct": "integer"
+    },
+    "required": [
+      "room",
+      "color"
+    ]
+  },
+  "blink_light": {
+    "params": {
+      "room": "string",
+      "times": "integer"
+    },
+    "required": [
+      "room"
+    ]
+  },
+  "set_light_scene": {
+    "params": {
+      "room": "string",
+      "scene": "string"
+    },
+    "required": [
+      "room",
+      "scene"
+    ]
+  },
+  "turn_off_light": {
+    "params": {
+      "room": "string"
+    },
+    "required": [
+      "room"
+    ]
+  },
+  "toggle_outlet": {
+    "params": {
+      "room": "string",
+      "outlet_name": "string",
+      "state": "string"
+    },
+    "required": [
+      "room",
+      "outlet_name",
+      "state"
+    ]
+  },
+  "query_light_state": {
+    "params": {
+      "room": "string"
+    },
+    "required": [
+      "room"
+    ]
+  },
+  "set_motion_sensitivity": {
+    "params": {
+      "room": "string",
+      "level": "string"
+    },
+    "required": [
+      "room",
+      "level"
+    ]
+  },
+  "set_thermostat": {
+    "params": {
+      "room": "string",
+      "temperature_c": "number",
+      "mode": "string"
+    },
+    "required": [
+      "room",
+      "temperature_c"
+    ]
+  },
+  "set_fan_speed": {
+    "params": {
+      "room": "string",
+      "speed": "string"
+    },
+    "required": [
+      "room",
+      "speed"
+    ]
+  },
+  "query_humidity": {
+    "params": {
+      "room": "string"
+    },
+    "required": [
+      "room"
+    ]
+  },
+  "toggle_humidifier": {
+    "params": {
+      "room": "string",
+      "state": "string"
+    },
+    "required": [
+      "room",
+      "state"
+    ]
+  },
+  "set_ac_mode": {
+    "params": {
+      "room": "string",
+      "mode": "string"
+    },
+    "required": [
+      "room",
+      "mode"
+    ]
+  },
+  "set_radiator_valve": {
+    "params": {
+      "room": "string",
+      "level": "integer"
+    },
+    "required": [
+      "room",
+      "level"
+    ]
+  },
+  "schedule_climate_program": {
+    "params": {
+      "room": "string",
+      "program": "string",
+      "start_time": "string",
+      "end_time": "string"
+    },
+    "required": [
+      "room",
+      "program"
+    ]
+  },
+  "toggle_dehumidifier": {
+    "params": {
+      "room": "string",
+      "state": "string"
+    },
+    "required": [
+      "room",
+      "state"
+    ]
+  },
+  "set_humidity_target": {
+    "params": {
+      "room": "string",
+      "humidity_pct": "integer"
+    },
+    "required": [
+      "room",
+      "humidity_pct"
+    ]
+  },
+  "query_temperature": {
+    "params": {
+      "room": "string"
+    },
+    "required": [
+      "room"
+    ]
+  },
+  "query_alarm_status": {
+    "params": {},
+    "required": []
+  },
+  "start_camera_recording": {
+    "params": {
+      "camera": "string"
+    },
+    "required": [
+      "camera"
+    ]
+  },
+  "lock_door": {
+    "params": {
+      "door": "string"
+    },
+    "required": [
+      "door"
+    ]
+  },
+  "set_camera_motion_sensitivity": {
+    "params": {
+      "camera": "string",
+      "level": "string"
+    },
+    "required": [
+      "camera",
+      "level"
+    ]
+  },
+  "unlock_door": {
+    "params": {
+      "door": "string"
+    },
+    "required": [
+      "door"
+    ]
+  },
+  "arm_alarm_system": {
+    "params": {
+      "mode": "string"
+    },
+    "required": [
+      "mode"
+    ]
+  },
+  "stop_camera_recording": {
+    "params": {
+      "camera": "string"
+    },
+    "required": [
+      "camera"
+    ]
+  },
+  "view_camera_stream": {
+    "params": {
+      "camera": "string"
+    },
+    "required": [
+      "camera"
+    ]
+  },
+  "set_alarm_pin": {
+    "params": {
+      "new_pin": "string"
+    },
+    "required": [
+      "new_pin"
+    ]
+  },
+  "trigger_panic_alarm": {
+    "params": {},
+    "required": []
+  },
+  "query_door_status": {
+    "params": {
+      "door": "string"
+    },
+    "required": [
+      "door"
+    ]
+  },
+  "disarm_alarm_system": {
+    "params": {},
+    "required": []
+  },
+  "play_music": {
+    "params": {
+      "song": "string",
+      "room": "string",
+      "volume_pct": "integer"
+    },
+    "required": [
+      "song",
+      "room"
+    ]
+  },
+  "set_tv_input": {
+    "params": {
+      "room": "string",
+      "input": "string"
+    },
+    "required": [
+      "room",
+      "input"
+    ]
+  },
+  "turn_off_tv": {
+    "params": {
+      "room": "string"
+    },
+    "required": [
+      "room"
+    ]
+  },
+  "stop_music": {
+    "params": {
+      "room": "string"
+    },
+    "required": [
+      "room"
+    ]
+  },
+  "turn_on_tv": {
+    "params": {
+      "room": "string"
+    },
+    "required": [
+      "room"
+    ]
+  },
+  "pause_music": {
+    "params": {
+      "room": "string"
+    },
+    "required": [
+      "room"
+    ]
+  },
+  "mute_audio": {
+    "params": {
+      "room": "string"
+    },
+    "required": [
+      "room"
+    ]
+  },
+  "switch_speaker_room": {
+    "params": {
+      "from_room": "string",
+      "to_room": "string"
+    },
+    "required": [
+      "from_room",
+      "to_room"
+    ]
+  },
+  "skip_track": {
+    "params": {
+      "room": "string"
+    },
+    "required": [
+      "room"
+    ]
+  },
+  "play_podcast": {
+    "params": {
+      "podcast": "string",
+      "room": "string",
+      "volume_pct": "integer"
+    },
+    "required": [
+      "podcast",
+      "room"
+    ]
+  },
+  "set_tv_volume": {
+    "params": {
+      "room": "string",
+      "volume_pct": "integer"
+    },
+    "required": [
+      "room",
+      "volume_pct"
+    ]
+  },
+  "play_radio_station": {
+    "params": {
+      "station": "string",
+      "room": "string",
+      "volume_pct": "integer"
+    },
+    "required": [
+      "station",
+      "room"
+    ]
+  },
+  "set_tv_channel": {
+    "params": {
+      "room": "string",
+      "channel": "string"
+    },
+    "required": [
+      "room",
+      "channel"
+    ]
+  },
+  "queue_song": {
+    "params": {
+      "song": "string",
+      "room": "string"
+    },
+    "required": [
+      "song",
+      "room"
+    ]
+  },
+  "set_volume": {
+    "params": {
+      "room": "string",
+      "volume_pct": "integer"
+    },
+    "required": [
+      "room",
+      "volume_pct"
+    ]
+  },
+  "set_fridge_temperature": {
+    "params": {},
+    "required": []
+  },
+  "preheat_oven": {
+    "params": {},
+    "required": []
+  },
+  "set_oven_timer": {
+    "params": {},
+    "required": []
+  },
+  "pause_dishwasher": {
+    "params": {},
+    "required": []
+  },
+  "stop_oven": {
+    "params": {},
+    "required": []
+  },
+  "set_kitchen_lights": {
+    "params": {},
+    "required": []
+  },
+  "start_microwave": {
+    "params": {},
+    "required": []
+  },
+  "start_coffee_brew": {
+    "params": {},
+    "required": []
+  },
+  "stop_microwave": {
+    "params": {},
+    "required": []
+  },
+  "query_oven_state": {
+    "params": {},
+    "required": []
+  },
+  "start_dishwasher": {
+    "params": {},
+    "required": []
+  },
+  "query_fridge_contents": {
+    "params": {},
+    "required": []
+  },
+  "set_coffee_strength": {
+    "params": {},
+    "required": []
+  },
+  "start_irrigation_zone": {
+    "params": {
+      "zone": "string",
+      "duration_min": "integer"
+    },
+    "required": [
+      "zone"
+    ]
+  },
+  "stop_irrigation_zone": {
+    "params": {
+      "zone": "string"
+    },
+    "required": [
+      "zone"
+    ]
+  },
+  "turn_on_outdoor_light": {
+    "params": {
+      "location": "string"
+    },
+    "required": [
+      "location"
+    ]
+  },
+  "turn_off_outdoor_light": {
+    "params": {
+      "location": "string"
+    },
+    "required": [
+      "location"
+    ]
+  },
+  "set_pool_heater": {
+    "params": {
+      "temperature_c": "number",
+      "on": "boolean"
+    },
+    "required": [
+      "temperature_c"
+    ]
+  },
+  "set_pool_pump": {
+    "params": {
+      "on": "boolean",
+      "speed": "string"
+    },
+    "required": [
+      "on"
+    ]
+  },
+  "turn_on_pool_cover": {
+    "params": {},
+    "required": []
+  },
+  "turn_off_pool_cover": {
+    "params": {},
+    "required": []
+  },
+  "query_soil_moisture": {
+    "params": {
+      "zone": "string"
+    },
+    "required": [
+      "zone"
+    ]
+  },
+  "query_pool_temperature": {
+    "params": {},
+    "required": []
+  },
+  "set_outdoor_light_color": {
+    "params": {
+      "location": "string",
+      "color": "string"
+    },
+    "required": [
+      "location",
+      "color"
+    ]
+  },
+  "set_garden_lawnmower": {
+    "params": {
+      "on": "boolean",
+      "zone": "string"
+    },
+    "required": [
+      "on"
+    ]
+  },
+  "set_outdoor_speaker": {
+    "params": {
+      "on": "boolean",
+      "volume": "integer"
+    },
+    "required": [
+      "on"
+    ]
+  },
+  "schedule_irrigation": {
+    "params": {
+      "zone": "string",
+      "time": "string",
+      "duration_min": "integer"
+    },
+    "required": [
+      "zone",
+      "time"
+    ]
+  },
+  "open_skylight": {
+    "params": {
+      "room": "string"
+    },
+    "required": [
+      "room"
+    ]
+  },
+  "lock_window": {
+    "params": {
+      "room": "string"
+    },
+    "required": [
+      "room"
+    ]
+  },
+  "close_window": {
+    "params": {
+      "room": "string"
+    },
+    "required": [
+      "room"
+    ]
+  },
+  "retract_awning": {
+    "params": {
+      "room": "string"
+    },
+    "required": [
+      "room"
+    ]
+  },
+  "raise_blinds": {
+    "params": {
+      "room": "string"
+    },
+    "required": [
+      "room"
+    ]
+  },
+  "close_skylight": {
+    "params": {
+      "room": "string"
+    },
+    "required": [
+      "room"
+    ]
+  },
+  "close_curtains": {
+    "params": {
+      "room": "string"
+    },
+    "required": [
+      "room"
+    ]
+  },
+  "set_blinds_angle": {
+    "params": {
+      "room": "string",
+      "angle": "integer"
+    },
+    "required": [
+      "room",
+      "angle"
+    ]
+  },
+  "set_blinds_position": {
+    "params": {
+      "room": "string",
+      "position": "integer"
+    },
+    "required": [
+      "room",
+      "position"
+    ]
+  },
+  "open_window": {
+    "params": {
+      "room": "string"
+    },
+    "required": [
+      "room"
+    ]
+  },
+  "open_curtains": {
+    "params": {
+      "room": "string"
+    },
+    "required": [
+      "room"
+    ]
+  },
+  "extend_awning": {
+    "params": {
+      "room": "string"
+    },
+    "required": [
+      "room"
+    ]
+  },
+  "lower_blinds": {
+    "params": {
+      "room": "string"
+    },
+    "required": [
+      "room"
+    ]
+  },
+  "start_vacuum": {
+    "params": {
+      "area": "string",
+      "intensity": "string"
+    },
+    "required": [
+      "area"
+    ]
+  },
+  "stop_vacuum": {
+    "params": {},
+    "required": []
+  },
+  "schedule_vacuum": {
+    "params": {
+      "area": "string",
+      "intensity": "string",
+      "time": "string",
+      "day": "string"
+    },
+    "required": [
+      "time"
+    ]
+  },
+  "dock_vacuum": {
+    "params": {},
+    "required": []
+  },
+  "start_mop": {
+    "params": {
+      "area": "string",
+      "water_level": "string"
+    },
+    "required": [
+      "area"
+    ]
+  },
+  "stop_mop": {
+    "params": {},
+    "required": []
+  },
+  "set_mop_water_level": {
+    "params": {
+      "water_level": "string"
+    },
+    "required": [
+      "water_level"
+    ]
+  },
+  "turn_on_air_purifier": {
+    "params": {
+      "area": "string",
+      "speed": "string"
+    },
+    "required": [
+      "area"
+    ]
+  },
+  "turn_off_air_purifier": {
+    "params": {
+      "area": "string"
+    },
+    "required": [
+      "area"
+    ]
+  },
+  "set_air_purifier_speed": {
+    "params": {
+      "area": "string",
+      "speed": "string"
+    },
+    "required": [
+      "speed"
+    ]
+  },
+  "query_air_quality": {
+    "params": {
+      "area": "string"
+    },
+    "required": []
+  },
+  "empty_vacuum_bin": {
+    "params": {},
+    "required": []
+  },
+  "query_vacuum_battery": {
+    "params": {},
+    "required": []
+  }
+}

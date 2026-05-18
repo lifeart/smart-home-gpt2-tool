@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Smart-Home GPT-2 · WebGPU</title>
+    <link rel="stylesheet" href="/style.css" />
+  </head>
+  <body>
+    <main>
+      <h1>Smart-Home GPT-2 · WebGPU</h1>
+
+      <section class="config">
+        <label>
+          Model
+          <select id="model">
+            <option value="local:smart-home-gpt2">smart-home-gpt2 · FT (local)</option>
+            <option value="local:smart-home-gpt2-v3">smart-home-gpt2-v3 · FT (local)</option>
+            <option value="lifeart/smart-home-gpt2">lifeart/smart-home-gpt2 · FT (HF)</option>
+            <option value="Xenova/gpt2">Xenova/gpt2 · base (HF)</option>
+          </select>
+        </label>
+        <label>
+          Backend
+          <select id="device">
+            <option value="webgpu">WebGPU</option>
+            <option value="wasm">WASM (CPU)</option>
+          </select>
+        </label>
+        <label>
+          Dtype
+          <select id="dtype">
+            <option value="fp32">fp32</option>
+            <option value="fp16">fp16 (WebGPU)</option>
+            <option value="q8">q8 (int8)</option>
+            <option value="q4">q4 (int4)</option>
+          </select>
+        </label>
+        <button id="load">Load model</button>
+        <span id="status">idle</span>
+      </section>
+
+      <section>
+        <label for="prompt">User command (English)</label>
+        <textarea id="prompt" rows="4">SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -
+[
+  "turn_on_light",
+  "turn_off_light",
+  "set_light_color"
+]
+
+
+USER: Turn on the kitchen light.
+
+
+ASSISTANT: &lt;functioncall&gt; </textarea>
+        <div class="row">
+          <label>max new tokens <input id="max" type="number" value="80" min="8" max="256" /></label>
+          <label>temperature <input id="temp" type="number" value="0.0" step="0.1" min="0" max="2" /></label>
+          <label title="Restrict generated tokens to a JSON schema derived from the prompt's candidate list">
+            <input id="constrained" type="checkbox" checked /> Constrained decoding (JSON schema)
+          </label>
+          <label title="Re-rank the prompt's candidate list using MiniLM cosine similarity, keep top-K">
+            <input id="retrieval" type="checkbox" checked /> Retrieval pre-rank (MiniLM, top-K)
+          </label>
+          <label title="Number of functions kept after retrieval">
+            K <input id="topk" type="number" value="3" min="1" max="10" style="width:3em" />
+          </label>
+          <button id="run" disabled>Generate</button>
+        </div>
+      </section>
+
+      <section>
+        <h2>Output</h2>
+        <pre id="out"></pre>
+        <h2>Bench</h2>
+        <pre id="bench"></pre>
+      </section>
+    </main>
+    <script type="module" src="/main.js"></script>
+  </body>
+</html>

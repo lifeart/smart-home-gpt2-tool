@@ -1,0 +1,23 @@
+# Original (upstream)
+__pycache__/
+*.pyc
+*.log
+.venv/
+*.wav
+*.tmp
+.DS_Store
+
+# Local model weights (~3.5 GB; hosted on HF Hub)
+web/public/models/
+weights/*.pt
+weights/base_gpt2/*.safetensors
+weights/base_gpt2/*.bin
+weights/base_gpt2/tf_model.h5
+
+# Node
+web/node_modules/
+web/dist/
+
+# HF download caches
+data/_hf_tmp/
+**/.cache/huggingface/

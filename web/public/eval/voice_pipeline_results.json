@@ -1,0 +1,492 @@
+{
+  "acc": 0.4666666666666667,
+  "n": 30,
+  "correct": 14,
+  "results": [
+    {
+      "ru_input": "Включи свет в гостиной",
+      "en_from_whisper": "Turn on the light in the living room.",
+      "gpt2_raw": "{\"name\":\"turn_on_light\",\"arguments\":{\"room\":\"living room\"}}</function>",
+      "pred_name_raw": "turn_on_light",
+      "pred_name": "turn_on_light",
+      "pred_args": {
+        "room": "living room"
+      },
+      "expected": "turn_on_light",
+      "ok": true,
+      "time_tts": 3.08833646774292,
+      "time_stt": 6.016147613525391,
+      "time_gpt": 26.27281618118286,
+      "time_total": 35.377304792404175
+    },
+    {
+      "ru_input": "Выключи свет на кухне",
+      "en_from_whisper": "Turn off the light in the kitchen.",
+      "gpt2_raw": "{\"name\":\"turn_on_light\",\"arguments\":{\"room\":\"kitchen\"}}</function>",
+      "pred_name_raw": "turn_on_light",
+      "pred_name": "turn_on_light",
+      "pred_args": {
+        "room": "kitchen"
+      },
+      "expected": "turn_off_light",
+      "ok": false,
+      "time_tts": 2.3423542976379395,
+      "time_stt": 5.4743077754974365,
+      "time_gpt": 26.373446464538574,
+      "time_total": 34.19012236595154
+    },
+    {
+      "ru_input": "Установи температуру в спальне на 22 градуса",
+      "en_from_whisper": "Set the temperature in the bedroom to a degree.",
+      "gpt2_raw": "{\"name\":\"set_thermostat\",\"arguments\":{\"room\":\"bedroom\",\"temperature_c\":22}}</function>",
+      "pred_name_raw": "set_thermostat",
+      "pred_name": "set_thermostat",
+      "pred_args": {
+        "room": "bedroom",
+        "temperature_c": 22
+      },
+      "expected": "set_thermostat",
+      "ok": true,
+      "time_tts": 0.8894245624542236,
+      "time_stt": 5.628057956695557,
+      "time_gpt": 30.547136545181274,
+      "time_total": 37.064621925354004
+    },
+    {
+      "ru_input": "Запри входную дверь",
+      "en_from_whisper": "Close the entrance door.",
+      "gpt2_raw": "{\"name\":\"unlock_door\",\"arguments\":{\"door\":\"door_door\"}}</function>",
+      "pred_name_raw": "unlock_door",
+      "pred_name": "unlock_door",
+      "pred_args": {
+        "door": "door_door"
+      },
+      "expected": "lock_door",
+      "ok": false,
+      "time_tts": 0.07518887519836426,
+      "time_stt": 5.373231887817383,
+      "time_gpt": 25.479577779769897,
+      "time_total": 30.928001403808594
+    },
+    {
+      "ru_input": "Открой заднюю дверь",
+      "en_from_whisper": "Open the back door.",
+      "gpt2_raw": "{\"name\":\"open_door\",\"arguments\":{\"door\":\"back door\"}}</function>",
+      "pred_name_raw": "open_door",
+      "pred_name": "lock_door",
+      "pred_args": {
+        "door": "back door"
+      },
+      "expected": "unlock_door",
+      "ok": false,
+      "time_tts": 0.6773529052734375,
+      "time_stt": 5.345355749130249,
+      "time_gpt": 24.267215251922607,
+      "time_total": 30.2899272441864
+    },
+    {
+      "ru_input": "Поставь джазовый плейлист в гостиной",
+      "en_from_whisper": "Put a jazz playlist in the living room.",
+      "gpt2_raw": "{\"name\":\"set_thermostat\",\"arguments\":{\"room\":\"living room\",\"temperature_c\":15}}</function>",
+      "pred_name_raw": "set_thermostat",
+      "pred_name": "set_thermostat",
+      "pred_args": {
+        "room": "living room",
+        "temperature_c": 15
+      },
+      "expected": "play_music",
+      "ok": false,
+      "time_tts": 0.7740190029144287,
+      "time_stt": 5.4799535274505615,
+      "time_gpt": 33.79322838783264,
+      "time_total": 40.04720425605774
+    },
+    {
+      "ru_input": "Останови музыку в кухне",
+      "en_from_whisper": "Stop the music in the kitchen!",
+      "gpt2_raw": "{\"name\":\"stop_music\",\"arguments\":{\"room\":\"kitchen\"}}</function>",
+      "pred_name_raw": "stop_music",
+      "pred_name": "stop_music",
+      "pred_args": {
+        "room": "kitchen"
+      },
+      "expected": "stop_music",
+      "ok": true,
+      "time_tts": 0.8157260417938232,
+      "time_stt": 5.44488787651062,
+      "time_gpt": 23.853083610534668,
+      "time_total": 30.113701581954956
+    },
+    {
+      "ru_input": "Открой шторы в спальне",
+      "en_from_whisper": "Open the curtains in the bedroom.",
+      "gpt2_raw": "{\"name\":\"open_circles\",\"arguments\":{\"room\":\"bedroom\"}}</function>",
+      "pred_name_raw": "open_circles",
+      "pred_name": "open_curtains",
+      "pred_args": {
+        "room": "bedroom"
+      },
+      "expected": "open_curtains",
+      "ok": true,
+      "time_tts": 0.5018467903137207,
+      "time_stt": 5.524291276931763,
+      "time_gpt": 21.68789529800415,
+      "time_total": 27.714035272598267
+    },
+    {
+      "ru_input": "Закрой шторы в офисе",
+      "en_from_whisper": "Close the curtains in the office.",
+      "gpt2_raw": "{\"name\":\"close_circles\",\"arguments\":{\"room\":\"office\"}}</function>",
+      "pred_name_raw": "close_circles",
+      "pred_name": "close_curtains",
+      "pred_args": {
+        "room": "office"
+      },
+      "expected": "close_curtains",
+      "ok": true,
+      "time_tts": 0.498288631439209,
+      "time_stt": 8.268970012664795,
+      "time_gpt": 21.819886207580566,
+      "time_total": 30.58714771270752
+    },
+    {
+      "ru_input": "Запусти робот-пылесос в гостиной",
+      "en_from_whisper": "Start the robot vacuum cleaner in the living room.",
+      "gpt2_raw": "{\"name\":\"start_robot_vacuum_cleaner\",\"arguments\":{\"room\":\"living room\"}}</function>",
+      "pred_name_raw": "start_robot_vacuum_cleaner",
+      "pred_name": "start_vacuum",
+      "pred_args": {
+        "room": "living room"
+      },
+      "expected": "start_vacuum",
+      "ok": true,
+      "time_tts": 0.12511110305786133,
+      "time_stt": 8.431696653366089,
+      "time_gpt": 29.033445358276367,
+      "time_total": 37.59025502204895
+    },
+    {
+      "ru_input": "Поставь будильник на семь утра",
+      "en_from_whisper": "Set the alarm for 7 a.m.",
+      "gpt2_raw": "{\"name\":\"set_thermostat\",\"arguments\":{\"room\":\"room\",\"temperature_c\":7}}</function>\",\"auto_set_alarm\":true,\"auto_set_alar",
+      "pred_name_raw": "set_thermostat",
+      "pred_name": "set_thermostat",
+      "pred_args": {
+        "room": "room",
+        "temperature_c": 7
+      },
+      "expected": "set_alarm",
+      "ok": false,
+      "time_tts": 0.9413678646087646,
+      "time_stt": 8.44916558265686,
+      "time_gpt": 74.35759258270264,
+      "time_total": 83.74813032150269
+    },
+    {
+      "ru_input": "Какая температура в спальне",
+      "en_from_whisper": "What is the temperature in the bedroom?",
+      "gpt2_raw": "{\"name\":\"set_thermostat\",\"arguments\":{\"room\":\"bedroom\"}}</function>",
+      "pred_name_raw": "set_thermostat",
+      "pred_name": "set_thermostat",
+      "pred_args": {
+        "room": "bedroom"
+      },
+      "expected": "query_temperature",
+      "ok": false,
+      "time_tts": 0.09677743911743164,
+      "time_stt": 5.351600885391235,
+      "time_gpt": 25.77386164665222,
+      "time_total": 31.222242832183838
+    },
+    {
+      "ru_input": "Включи лампу в детской",
+      "en_from_whisper": "Turn on the lamp in the children's room.",
+      "gpt2_raw": "{\"name\":\"turn_on_light\",\"arguments\":{\"room\":\"children's room\",\"room_id\":\"children's room\"}}</function>",
+      "pred_name_raw": "turn_on_light",
+      "pred_name": "turn_on_light",
+      "pred_args": {
+        "room": "children's room",
+        "room_id": "children's room"
+      },
+      "expected": "turn_on_light",
+      "ok": true,
+      "time_tts": 0.5342633724212646,
+      "time_stt": 5.529738903045654,
+      "time_gpt": 37.30100965499878,
+      "time_total": 43.365015506744385
+    },
+    {
+      "ru_input": "Выключи освещение в гараже",
+      "en_from_whisper": "Turn off the lighting in the garage.",
+      "gpt2_raw": "{\"name\":\"turn_on_light\",\"arguments\":{\"room\":\"garage\"}}</function>",
+      "pred_name_raw": "turn_on_light",
+      "pred_name": "turn_on_light",
+      "pred_args": {
+        "room": "garage"
+      },
+      "expected": "turn_off_light",
+      "ok": false,
+      "time_tts": 0.6713078022003174,
+      "time_stt": 5.362858057022095,
+      "time_gpt": 25.560744524002075,
+      "time_total": 31.594913005828857
+    },
+    {
+      "ru_input": "Сделай в комнате 21 градус",
+      "en_from_whisper": "Make a degree in the room.",
+      "gpt2_raw": "{\"name\":\"turn_on_light\",\"arguments\":{\"room\":\"room\"}}</function>",
+      "pred_name_raw": "turn_on_light",
+      "pred_name": "turn_on_light",
+      "pred_args": {
+        "room": "room"
+      },
+      "expected": "set_thermostat",
+      "ok": false,
+      "time_tts": 0.0888214111328125,
+      "time_stt": 5.338237285614014,
+      "time_gpt": 25.885102033615112,
+      "time_total": 31.312163829803467
+    },
+    {
+      "ru_input": "Закрой гаражную дверь",
+      "en_from_whisper": "Close the garage door.",
+      "gpt2_raw": "{\"name\":\"unlock_door\",\"arguments\":{\"door\":\"garage door\"}}</function>",
+      "pred_name_raw": "unlock_door",
+      "pred_name": "unlock_door",
+      "pred_args": {
+        "door": "garage door"
+      },
+      "expected": "lock_door",
+      "ok": false,
+      "time_tts": 0.08545494079589844,
+      "time_stt": 5.267307281494141,
+      "time_gpt": 26.97021484375,
+      "time_total": 32.322981119155884
+    },
+    {
+      "ru_input": "Разблокируй патио",
+      "en_from_whisper": "Unblock patio.",
+      "gpt2_raw": "{\"name\":\"unblock_patio\",\"arguments\":{\"room\":\"patio\"}}</function>",
+      "pred_name_raw": "unblock_patio",
+      "pred_name": "unlock_door",
+      "pred_args": {
+        "room": "patio"
+      },
+      "expected": "unlock_door",
+      "ok": true,
+      "time_tts": 0.44976091384887695,
+      "time_stt": 5.301791429519653,
+      "time_gpt": 23.84517216682434,
+      "time_total": 29.596726894378662
+    },
+    {
+      "ru_input": "Включи классическую музыку в спальне",
+      "en_from_whisper": "Turn on classical music in the bedroom.",
+      "gpt2_raw": "{\"name\":\"turn_on_music\",\"arguments\":{\"room\":\"bedroom\"}}</function>",
+      "pred_name_raw": "turn_on_music",
+      "pred_name": "stop_music",
+      "pred_args": {
+        "room": "bedroom"
+      },
+      "expected": "play_music",
+      "ok": false,
+      "time_tts": 3.7300424575805664,
+      "time_stt": 5.43264102935791,
+      "time_gpt": 22.70722484588623,
+      "time_total": 31.869911193847656
+    },
+    {
+      "ru_input": "Замолчи на кухне",
+      "en_from_whisper": "Shut up in the kitchen!",
+      "gpt2_raw": "{\"name\":\"turn_on_light\",\"arguments\":{\"room\":\"kitchen\"}}</function>",
+      "pred_name_raw": "turn_on_light",
+      "pred_name": "turn_on_light",
+      "pred_args": {
+        "room": "kitchen"
+      },
+      "expected": "stop_music",
+      "ok": false,
+      "time_tts": 0.40239953994750977,
+      "time_stt": 8.205456018447876,
+      "time_gpt": 23.545676469802856,
+      "time_total": 32.15353584289551
+    },
+    {
+      "ru_input": "Подними жалюзи на кухне",
+      "en_from_whisper": "Pick up the jellies in the kitchen.",
+      "gpt2_raw": "{\"name\":\"turn_on_light\",\"arguments\":{\"room\":\"kitchen\"}}</function>",
+      "pred_name_raw": "turn_on_light",
+      "pred_name": "turn_on_light",
+      "pred_args": {
+        "room": "kitchen"
+      },
+      "expected": "open_curtains",
+      "ok": false,
+      "time_tts": 0.05144953727722168,
+      "time_stt": 5.4542083740234375,
+      "time_gpt": 26.67173147201538,
+      "time_total": 32.17739272117615
+    },
+    {
+      "ru_input": "Опусти жалюзи в гостиной",
+      "en_from_whisper": "Put the",
+      "gpt2_raw": "{\"name\":\"set_thermostat\",\"arguments\":{\"room\":\"thermostat\"}}</function>\",\"one_turn\":true,\"all_turns\":true,\"all_time_in_da",
+      "pred_name_raw": "set_thermostat",
+      "pred_name": "set_thermostat",
+      "pred_args": {
+        "room": "thermostat"
+      },
+      "expected": "close_curtains",
+      "ok": false,
+      "time_tts": 0.8473610877990723,
+      "time_stt": 17.335108995437622,
+      "time_gpt": 69.83914279937744,
+      "time_total": 88.02161693572998
+    },
+    {
+      "ru_input": "Запусти уборку на кухне",
+      "en_from_whisper": "Start cleaning in the kitchen",
+      "gpt2_raw": "{\"name\":\"start_cleaning\",\"arguments\":{\"room\":\"kitchen\"}}</function>",
+      "pred_name_raw": "start_cleaning",
+      "pred_name": "start_vacuum",
+      "pred_args": {
+        "room": "kitchen"
+      },
+      "expected": "start_vacuum",
+      "ok": true,
+      "time_tts": 0.614741325378418,
+      "time_stt": 5.626976251602173,
+      "time_gpt": 26.251919269561768,
+      "time_total": 32.49363923072815
+    },
+    {
+      "ru_input": "Разбуди меня в шесть тридцать",
+      "en_from_whisper": "Wake me up at 6.30.",
+      "gpt2_raw": "{\"name\":\"wake_up\",\"arguments\":{\"room\":\"wake_up\"}}</arguments>",
+      "pred_name_raw": "wake_up",
+      "pred_name": "wake_up",
+      "pred_args": {
+        "room": "wake_up"
+      },
+      "expected": "set_alarm",
+      "ok": false,
+      "time_tts": 0.5894229412078857,
+      "time_stt": 5.417504549026489,
+      "time_gpt": 27.62974500656128,
+      "time_total": 33.636674642562866
+    },
+    {
+      "ru_input": "Скажи температуру в ванной",
+      "en_from_whisper": "Tell me the temperature in the bathroom.",
+      "gpt2_raw": "{\"name\":\"set_thermostat\",\"arguments\":{\"room\":\"bathroom\"}}</function>",
+      "pred_name_raw": "set_thermostat",
+      "pred_name": "set_thermostat",
+      "pred_args": {
+        "room": "bathroom"
+      },
+      "expected": "query_temperature",
+      "ok": false,
+      "time_tts": 0.046732187271118164,
+      "time_stt": 5.898085594177246,
+      "time_gpt": 24.220070362091064,
+      "time_total": 30.164891958236694
+    },
+    {
+      "ru_input": "Свет включи в коридоре",
+      "en_from_whisper": "Turn on the light in the corridor.",
+      "gpt2_raw": "{\"name\":\"turn_on_light\",\"arguments\":{\"room\":\"corridor\"}}</function>",
+      "pred_name_raw": "turn_on_light",
+      "pred_name": "turn_on_light",
+      "pred_args": {
+        "room": "corridor"
+      },
+      "expected": "turn_on_light",
+      "ok": true,
+      "time_tts": 0.04020524024963379,
+      "time_stt": 6.951879024505615,
+      "time_gpt": 23.974635124206543,
+      "time_total": 30.96672248840332
+    },
+    {
+      "ru_input": "Тепло сделай в детской двадцать три градуса",
+      "en_from_whisper": "Make the heat in the children's 23 degrees.",
+      "gpt2_raw": "{\"name\":\"set_thermostat\",\"arguments\":{\"room\":\"children's room\",\"temperature_c\":23}}</function>",
+      "pred_name_raw": "set_thermostat",
+      "pred_name": "set_thermostat",
+      "pred_args": {
+        "room": "children's room",
+        "temperature_c": 23
+      },
+      "expected": "set_thermostat",
+      "ok": true,
+      "time_tts": 0.14207696914672852,
+      "time_stt": 8.753437995910645,
+      "time_gpt": 32.59025001525879,
+      "time_total": 41.48576784133911
+    },
+    {
+      "ru_input": "Дверь входная заблокировать",
+      "en_from_whisper": "The entrance door is blocked.",
+      "gpt2_raw": "{\"name\":\"turn_on_light\",\"arguments\":{\"room\":\"door\"}}</function>",
+      "pred_name_raw": "turn_on_light",
+      "pred_name": "turn_on_light",
+      "pred_args": {
+        "room": "door"
+      },
+      "expected": "lock_door",
+      "ok": false,
+      "time_tts": 0.1072072982788086,
+      "time_stt": 5.380475997924805,
+      "time_gpt": 21.54463219642639,
+      "time_total": 27.03231930732727
+    },
+    {
+      "ru_input": "Музыку поставь рок в офисе",
+      "en_from_whisper": "Play some rock music in the office.",
+      "gpt2_raw": "{\"name\":\"play_rock_music\",\"arguments\":{\"room\":\"office\"}}</function>",
+      "pred_name_raw": "play_rock_music",
+      "pred_name": "play_music",
+      "pred_args": {
+        "room": "office"
+      },
+      "expected": "play_music",
+      "ok": true,
+      "time_tts": 0.14354729652404785,
+      "time_stt": 8.320104598999023,
+      "time_gpt": 21.640154600143433,
+      "time_total": 30.103809118270874
+    },
+    {
+      "ru_input": "Шторы открой в кухне",
+      "en_from_whisper": "Open the curtains in the kitchen",
+      "gpt2_raw": "{\"name\":\"open_circles\",\"arguments\":{\"room\":\"circles\"}}</function>",
+      "pred_name_raw": "open_circles",
+      "pred_name": "open_curtains",
+      "pred_args": {
+        "room": "circles"
+      },
+      "expected": "open_curtains",
+      "ok": true,
+      "time_tts": 0.07880043983459473,
+      "time_stt": 5.286984443664551,
+      "time_gpt": 25.647813081741333,
+      "time_total": 31.013600826263428
+    },
+    {
+      "ru_input": "Пылесос запусти в спальне",
+      "en_from_whisper": "Start vacuum cleaner in the bedroom",
+      "gpt2_raw": "{\"name\":\"start_vacuum_cleaner\",\"arguments\":{\"room\":\"bedroom\"}}</function>",
+      "pred_name_raw": "start_vacuum_cleaner",
+      "pred_name": "start_vacuum",
+      "pred_args": {
+        "room": "bedroom"
+      },
+      "expected": "start_vacuum",
+      "ok": true,
+      "time_tts": 0.10431790351867676,
+      "time_stt": 5.420469045639038,
+      "time_gpt": 29.671712636947632,
+      "time_total": 35.19650316238403
+    }
+  ]
+}

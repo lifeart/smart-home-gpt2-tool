@@ -1,0 +1,5550 @@
+[
+  {
+    "id": "kit_001",
+    "function": [
+      {
+        "name": "set_fridge_temperature",
+        "description": "Set the refrigerator compartment target temperature.",
+        "parameters": {
+          "temperature_f": "int"
+        }
+      },
+      {
+        "name": "preheat_oven",
+        "description": "Preheat the oven to a target temperature with optional cooking mode.",
+        "parameters": {
+          "temperature_f": "int",
+          "mode": "bake|broil|convection|roast|warm"
+        }
+      },
+      {
+        "name": "set_oven_timer",
+        "description": "Set a countdown timer on the oven in minutes.",
+        "parameters": {
+          "minutes": "int"
+        }
+      },
+      {
+        "name": "pause_dishwasher",
+        "description": "Pause the currently running dishwasher cycle.",
+        "parameters": {}
+      },
+      {
+        "name": "stop_oven",
+        "description": "Turn off the oven immediately.",
+        "parameters": {}
+      }
+    ],
+    "prompt": "Preheat the oven to 375.",
+    "gold_name": "preheat_oven",
+    "gold_args": {
+      "temperature_f": 375,
+      "mode": "bake"
+    },
+    "difficulty": "easy"
+  },
+  {
+    "id": "kit_002",
+    "function": [
+      {
+        "name": "set_kitchen_lights",
+        "description": "Adjust kitchen overhead lighting brightness/state.",
+        "parameters": {
+          "brightness": "int 0-100",
+          "state": "on|off"
+        }
+      },
+      {
+        "name": "start_microwave",
+        "description": "Run the microwave at a given power for a given duration in seconds.",
+        "parameters": {
+          "seconds": "int",
+          "power": "int 1-10"
+        }
+      },
+      {
+        "name": "stop_oven",
+        "description": "Turn off the oven immediately.",
+        "parameters": {}
+      },
+      {
+        "name": "start_coffee_brew",
+        "description": "Start brewing coffee in the coffee maker.",
+        "parameters": {
+          "cups": "int"
+        }
+      },
+      {
+        "name": "preheat_oven",
+        "description": "Preheat the oven to a target temperature with optional cooking mode.",
+        "parameters": {
+          "temperature_f": "int",
+          "mode": "bake|broil|convection|roast|warm"
+        }
+      }
+    ],
+    "prompt": "Preheat the oven to 400 degrees.",
+    "gold_name": "preheat_oven",
+    "gold_args": {
+      "temperature_f": 400,
+      "mode": "bake"
+    },
+    "difficulty": "easy"
+  },
+  {
+    "id": "kit_003",
+    "function": [
+      {
+        "name": "start_microwave",
+        "description": "Run the microwave at a given power for a given duration in seconds.",
+        "parameters": {
+          "seconds": "int",
+          "power": "int 1-10"
+        }
+      },
+      {
+        "name": "stop_microwave",
+        "description": "Stop the microwave immediately.",
+        "parameters": {}
+      },
+      {
+        "name": "preheat_oven",
+        "description": "Preheat the oven to a target temperature with optional cooking mode.",
+        "parameters": {
+          "temperature_f": "int",
+          "mode": "bake|broil|convection|roast|warm"
+        }
+      }
+    ],
+    "prompt": "Preheat oven to 350 in bake mode.",
+    "gold_name": "preheat_oven",
+    "gold_args": {
+      "temperature_f": 350,
+      "mode": "bake"
+    },
+    "difficulty": "easy"
+  },
+  {
+    "id": "kit_004",
+    "function": [
+      {
+        "name": "query_oven_state",
+        "description": "Return the current oven status, temperature, and mode.",
+        "parameters": {}
+      },
+      {
+        "name": "pause_dishwasher",
+        "description": "Pause the currently running dishwasher cycle.",
+        "parameters": {}
+      },
+      {
+        "name": "preheat_oven",
+        "description": "Preheat the oven to a target temperature with optional cooking mode.",
+        "parameters": {
+          "temperature_f": "int",
+          "mode": "bake|broil|convection|roast|warm"
+        }
+      },
+      {
+        "name": "start_microwave",
+        "description": "Run the microwave at a given power for a given duration in seconds.",
+        "parameters": {
+          "seconds": "int",
+          "power": "int 1-10"
+        }
+      },
+      {
+        "name": "start_coffee_brew",
+        "description": "Start brewing coffee in the coffee maker.",
+        "parameters": {
+          "cups": "int"
+        }
+      }
+    ],
+    "prompt": "Preheat the oven to 425 for the pizza.",
+    "gold_name": "preheat_oven",
+    "gold_args": {
+      "temperature_f": 425,
+      "mode": "bake"
+    },
+    "difficulty": "easy"
+  },
+  {
+    "id": "kit_005",
+    "function": [
+      {
+        "name": "start_dishwasher",
+        "description": "Begin a dishwasher cycle with a chosen wash program.",
+        "parameters": {
+          "cycle": "normal|heavy|quick|eco|rinse"
+        }
+      },
+      {
+        "name": "set_fridge_temperature",
+        "description": "Set the refrigerator compartment target temperature.",
+        "parameters": {
+          "temperature_f": "int"
+        }
+      },
+      {
+        "name": "preheat_oven",
+        "description": "Preheat the oven to a target temperature with optional cooking mode.",
+        "parameters": {
+          "temperature_f": "int",
+          "mode": "bake|broil|convection|roast|warm"
+        }
+      },
+      {
+        "name": "query_fridge_contents",
+        "description": "List items currently inventoried in the refrigerator.",
+        "parameters": {}
+      },
+      {
+        "name": "start_coffee_brew",
+        "description": "Start brewing coffee in the coffee maker.",
+        "parameters": {
+          "cups": "int"
+        }
+      }
+    ],
+    "prompt": "Heat the oven up to 450 broil.",
+    "gold_name": "preheat_oven",
+    "gold_args": {
+      "temperature_f": 450,
+      "mode": "broil"
+    },
+    "difficulty": "easy"
+  },
+  {
+    "id": "kit_006",
+    "function": [
+      {
+        "name": "query_oven_state",
+        "description": "Return the current oven status, temperature, and mode.",
+        "parameters": {}
+      },
+      {
+        "name": "stop_oven",
+        "description": "Turn off the oven immediately.",
+        "parameters": {}
+      },
+      {
+        "name": "preheat_oven",
+        "description": "Preheat the oven to a target temperature with optional cooking mode.",
+        "parameters": {
+          "temperature_f": "int",
+          "mode": "bake|broil|convection|roast|warm"
+        }
+      },
+      {
+        "name": "query_fridge_contents",
+        "description": "List items currently inventoried in the refrigerator.",
+        "parameters": {}
+      }
+    ],
+    "prompt": "Set oven to convection 375.",
+    "gold_name": "preheat_oven",
+    "gold_args": {
+      "temperature_f": 375,
+      "mode": "convection"
+    },
+    "difficulty": "easy"
+  },
+  {
+    "id": "kit_007",
+    "function": [
+      {
+        "name": "stop_oven",
+        "description": "Turn off the oven immediately.",
+        "parameters": {}
+      },
+      {
+        "name": "preheat_oven",
+        "description": "Preheat the oven to a target temperature with optional cooking mode.",
+        "parameters": {
+          "temperature_f": "int",
+          "mode": "bake|broil|convection|roast|warm"
+        }
+      },
+      {
+        "name": "set_kitchen_lights",
+        "description": "Adjust kitchen overhead lighting brightness/state.",
+        "parameters": {
+          "brightness": "int 0-100",
+          "state": "on|off"
+        }
+      },
+      {
+        "name": "start_microwave",
+        "description": "Run the microwave at a given power for a given duration in seconds.",
+        "parameters": {
+          "seconds": "int",
+          "power": "int 1-10"
+        }
+      },
+      {
+        "name": "start_coffee_brew",
+        "description": "Start brewing coffee in the coffee maker.",
+        "parameters": {
+          "cups": "int"
+        }
+      }
+    ],
+    "prompt": "Preheat oven 325 for the cookies.",
+    "gold_name": "preheat_oven",
+    "gold_args": {
+      "temperature_f": 325,
+      "mode": "bake"
+    },
+    "difficulty": "easy"
+  },
+  {
+    "id": "kit_008",
+    "function": [
+      {
+        "name": "set_oven_timer",
+        "description": "Set a countdown timer on the oven in minutes.",
+        "parameters": {
+          "minutes": "int"
+        }
+      },
+      {
+        "name": "pause_dishwasher",
+        "description": "Pause the currently running dishwasher cycle.",
+        "parameters": {}
+      },
+      {
+        "name": "set_fridge_temperature",
+        "description": "Set the refrigerator compartment target temperature.",
+        "parameters": {
+          "temperature_f": "int"
+        }
+      },
+      {
+        "name": "stop_oven",
+        "description": "Turn off the oven immediately.",
+        "parameters": {}
+      },
+      {
+        "name": "preheat_oven",
+        "description": "Preheat the oven to a target temperature with optional cooking mode.",
+        "parameters": {
+          "temperature_f": "int",
+          "mode": "bake|broil|convection|roast|warm"
+        }
+      }
+    ],
+    "prompt": "Warm the oven to 200.",
+    "gold_name": "preheat_oven",
+    "gold_args": {
+      "temperature_f": 200,
+      "mode": "warm"
+    },
+    "difficulty": "easy"
+  },
+  {
+    "id": "kit_009",
+    "function": [
+      {
+        "name": "preheat_oven",
+        "description": "Preheat the oven to a target temperature with optional cooking mode.",
+        "parameters": {
+          "temperature_f": "int",
+          "mode": "bake|broil|convection|roast|warm"
+        }
+      },
+      {
+        "name": "query_oven_state",
+        "description": "Return the current oven status, temperature, and mode.",
+        "parameters": {}
+      },
+      {
+        "name": "query_fridge_contents",
+        "description": "List items currently inventoried in the refrigerator.",
+        "parameters": {}
+      },
+      {
+        "name": "set_coffee_strength",
+        "description": "Set the coffee brewing strength.",
+        "parameters": {
+          "strength": "weak|medium|strong"
+        }
+      }
+    ],
+    "prompt": "Preheat the oven to 475 for bread.",
+    "gold_name": "preheat_oven",
+    "gold_args": {
+      "temperature_f": 475,
+      "mode": "bake"
+    },
+    "difficulty": "easy"
+  },
+  {
+    "id": "kit_010",
+    "function": [
+      {
+        "name": "query_oven_state",
+        "description": "Return the current oven status, temperature, and mode.",
+        "parameters": {}
+      },
+      {
+        "name": "preheat_oven",
+        "description": "Preheat the oven to a target temperature with optional cooking mode.",
+        "parameters": {
+          "temperature_f": "int",
+          "mode": "bake|broil|convection|roast|warm"
+        }
+      },
+      {
+        "name": "set_fridge_temperature",
+        "description": "Set the refrigerator compartment target temperature.",
+        "parameters": {
+          "temperature_f": "int"
+        }
+      }
+    ],
+    "prompt": "Set the oven to roast at 425.",
+    "gold_name": "preheat_oven",
+    "gold_args": {
+      "temperature_f": 425,
+      "mode": "roast"
+    },
+    "difficulty": "easy"
+  },
+  {
+    "id": "kit_011",
+    "function": [
+      {
+        "name": "set_oven_timer",
+        "description": "Set a countdown timer on the oven in minutes.",
+        "parameters": {
+          "minutes": "int"
+        }
+      },
+      {
+        "name": "start_dishwasher",
+        "description": "Begin a dishwasher cycle with a chosen wash program.",
+        "parameters": {
+          "cycle": "normal|heavy|quick|eco|rinse"
+        }
+      },
+      {
+        "name": "pause_dishwasher",
+        "description": "Pause the currently running dishwasher cycle.",
+        "parameters": {}
+      },
+      {
+        "name": "start_microwave",
+        "description": "Run the microwave at a given power for a given duration in seconds.",
+        "parameters": {
+          "seconds": "int",
+          "power": "int 1-10"
+        }
+      },
+      {
+        "name": "query_oven_state",
+        "description": "Return the current oven status, temperature, and mode.",
+        "parameters": {}
+      }
+    ],
+    "prompt": "Set oven timer for 25 minutes.",
+    "gold_name": "set_oven_timer",
+    "gold_args": {
+      "minutes": 25
+    },
+    "difficulty": "easy"
+  },
+  {
+    "id": "kit_012",
+    "function": [
+      {
+        "name": "start_microwave",
+        "description": "Run the microwave at a given power for a given duration in seconds.",
+        "parameters": {
+          "seconds": "int",
+          "power": "int 1-10"
+        }
+      },
+      {
+        "name": "pause_dishwasher",
+        "description": "Pause the currently running dishwasher cycle.",
+        "parameters": {}
+      },
+      {
+        "name": "query_fridge_contents",
+        "description": "List items currently inventoried in the refrigerator.",
+        "parameters": {}
+      },
+      {
+        "name": "set_kitchen_lights",
+        "description": "Adjust kitchen overhead lighting brightness/state.",
+        "parameters": {
+          "brightness": "int 0-100",
+          "state": "on|off"
+        }
+      },
+      {
+        "name": "set_oven_timer",
+        "description": "Set a countdown timer on the oven in minutes.",
+        "parameters": {
+          "minutes": "int"
+        }
+      }
+    ],
+    "prompt": "Start a 40 minute oven timer.",
+    "gold_name": "set_oven_timer",
+    "gold_args": {
+      "minutes": 40
+    },
+    "difficulty": "easy"
+  },
+  {
+    "id": "kit_013",
+    "function": [
+      {
+        "name": "pause_dishwasher",
+        "description": "Pause the currently running dishwasher cycle.",
+        "parameters": {}
+      },
+      {
+        "name": "set_fridge_temperature",
+        "description": "Set the refrigerator compartment target temperature.",
+        "parameters": {
+          "temperature_f": "int"
+        }
+      },
+      {
+        "name": "set_oven_timer",
+        "description": "Set a countdown timer on the oven in minutes.",
+        "parameters": {
+          "minutes": "int"
+        }
+      },
+      {
+        "name": "stop_oven",
+        "description": "Turn off the oven immediately.",
+        "parameters": {}
+      }
+    ],
+    "prompt": "Oven timer 15 minutes please.",
+    "gold_name": "set_oven_timer",
+    "gold_args": {
+      "minutes": 15
+    },
+    "difficulty": "easy"
+  },
+  {
+    "id": "kit_014",
+    "function": [
+      {
+        "name": "query_oven_state",
+        "description": "Return the current oven status, temperature, and mode.",
+        "parameters": {}
+      },
+      {
+        "name": "start_dishwasher",
+        "description": "Begin a dishwasher cycle with a chosen wash program.",
+        "parameters": {
+          "cycle": "normal|heavy|quick|eco|rinse"
+        }
+      },
+      {
+        "name": "set_oven_timer",
+        "description": "Set a countdown timer on the oven in minutes.",
+        "parameters": {
+          "minutes": "int"
+        }
+      },
+      {
+        "name": "set_coffee_strength",
+        "description": "Set the coffee brewing strength.",
+        "parameters": {
+          "strength": "weak|medium|strong"
+        }
+      }
+    ],
+    "prompt": "Set the oven timer to 60.",
+    "gold_name": "set_oven_timer",
+    "gold_args": {
+      "minutes": 60
+    },
+    "difficulty": "easy"
+  },
+  {
+    "id": "kit_015",
+    "function": [
+      {
+        "name": "set_kitchen_lights",
+        "description": "Adjust kitchen overhead lighting brightness/state.",
+        "parameters": {
+          "brightness": "int 0-100",
+          "state": "on|off"
+        }
+      },
+      {
+        "name": "set_oven_timer",
+        "description": "Set a countdown timer on the oven in minutes.",
+        "parameters": {
+          "minutes": "int"
+        }
+      },
+      {
+        "name": "start_microwave",
+        "description": "Run the microwave at a given power for a given duration in seconds.",
+        "parameters": {
+          "seconds": "int",
+          "power": "int 1-10"
+        }
+      },
+      {
+        "name": "set_fridge_temperature",
+        "description": "Set the refrigerator compartment target temperature.",
+        "parameters": {
+          "temperature_f": "int"
+        }
+      },
+      {
+        "name": "start_coffee_brew",
+        "description": "Start brewing coffee in the coffee maker.",
+        "parameters": {
+          "cups": "int"
+        }
+      }
+    ],
+    "prompt": "Give me a 10 minute oven timer.",
+    "gold_name": "set_oven_timer",
+    "gold_args": {
+      "minutes": 10
+    },
+    "difficulty": "easy"
+  },
+  {
+    "id": "kit_016",
+    "function": [
+      {
+        "name": "start_microwave",
+        "description": "Run the microwave at a given power for a given duration in seconds.",
+        "parameters": {
+          "seconds": "int",
+          "power": "int 1-10"
+        }
+      },
+      {
+        "name": "set_coffee_strength",
+        "description": "Set the coffee brewing strength.",
+        "parameters": {
+          "strength": "weak|medium|strong"
+        }
+      },
+      {
+        "name": "set_oven_timer",
+        "description": "Set a countdown timer on the oven in minutes.",
+        "parameters": {
+          "minutes": "int"
+        }
+      }
+    ],
+    "prompt": "Set oven timer 35 min.",
+    "gold_name": "set_oven_timer",
+    "gold_args": {
+      "minutes": 35
+    },
+    "difficulty": "easy"
+  },
+  {
+    "id": "kit_017",
+    "function": [
+      {
+        "name": "query_oven_state",
+        "description": "Return the current oven status, temperature, and mode.",
+        "parameters": {}
+      },
+      {
+        "name": "start_dishwasher",
+        "description": "Begin a dishwasher cycle with a chosen wash program.",
+        "parameters": {
+          "cycle": "normal|heavy|quick|eco|rinse"
+        }
+      },
+      {
+        "name": "set_oven_timer",
+        "description": "Set a countdown timer on the oven in minutes.",
+        "parameters": {
+          "minutes": "int"
+        }
+      }
+    ],
+    "prompt": "Oven timer for half an hour.",
+    "gold_name": "set_oven_timer",
+    "gold_args": {
+      "minutes": 30
+    },
+    "difficulty": "easy"
+  },
+  {
+    "id": "kit_018",
+    "function": [
+      {
+        "name": "stop_oven",
+        "description": "Turn off the oven immediately.",
+        "parameters": {}
+      },
+      {
+        "name": "set_oven_timer",
+        "description": "Set a countdown timer on the oven in minutes.",
+        "parameters": {
+          "minutes": "int"
+        }
+      },
+      {
+        "name": "query_oven_state",
+        "description": "Return the current oven status, temperature, and mode.",
+        "parameters": {}
+      },
+      {
+        "name": "start_coffee_brew",
+        "description": "Start brewing coffee in the coffee maker.",
+        "parameters": {
+          "cups": "int"
+        }
+      },
+      {
+        "name": "set_coffee_strength",
+        "description": "Set the coffee brewing strength.",
+        "parameters": {
+          "strength": "weak|medium|strong"
+        }
+      }
+    ],
+    "prompt": "Run a 45 minute timer on the oven.",
+    "gold_name": "set_oven_timer",
+    "gold_args": {
+      "minutes": 45
+    },
+    "difficulty": "easy"
+  },
+  {
+    "id": "kit_019",
+    "function": [
+      {
+        "name": "start_microwave",
+        "description": "Run the microwave at a given power for a given duration in seconds.",
+        "parameters": {
+          "seconds": "int",
+          "power": "int 1-10"
+        }
+      },
+      {
+        "name": "set_fridge_temperature",
+        "description": "Set the refrigerator compartment target temperature.",
+        "parameters": {
+          "temperature_f": "int"
+        }
+      },
+      {
+        "name": "set_kitchen_lights",
+        "description": "Adjust kitchen overhead lighting brightness/state.",
+        "parameters": {
+          "brightness": "int 0-100",
+          "state": "on|off"
+        }
+      },
+      {
+        "name": "stop_oven",
+        "description": "Turn off the oven immediately.",
+        "parameters": {}
+      },
+      {
+        "name": "set_oven_timer",
+        "description": "Set a countdown timer on the oven in minutes.",
+        "parameters": {
+          "minutes": "int"
+        }
+      }
+    ],
+    "prompt": "Turn off the oven.",
+    "gold_name": "stop_oven",
+    "gold_args": {},
+    "difficulty": "easy"
+  },
+  {
+    "id": "kit_020",
+    "function": [
+      {
+        "name": "stop_oven",
+        "description": "Turn off the oven immediately.",
+        "parameters": {}
+      },
+      {
+        "name": "set_coffee_strength",
+        "description": "Set the coffee brewing strength.",
+        "parameters": {
+          "strength": "weak|medium|strong"
+        }
+      },
+      {
+        "name": "preheat_oven",
+        "description": "Preheat the oven to a target temperature with optional cooking mode.",
+        "parameters": {
+          "temperature_f": "int",
+          "mode": "bake|broil|convection|roast|warm"
+        }
+      }
+    ],
+    "prompt": "Stop the oven now.",
+    "gold_name": "stop_oven",
+    "gold_args": {},
+    "difficulty": "easy"
+  },
+  {
+    "id": "kit_021",
+    "function": [
+      {
+        "name": "start_microwave",
+        "description": "Run the microwave at a given power for a given duration in seconds.",
+        "parameters": {
+          "seconds": "int",
+          "power": "int 1-10"
+        }
+      },
+      {
+        "name": "set_oven_timer",
+        "description": "Set a countdown timer on the oven in minutes.",
+        "parameters": {
+          "minutes": "int"
+        }
+      },
+      {
+        "name": "stop_oven",
+        "description": "Turn off the oven immediately.",
+        "parameters": {}
+      },
+      {
+        "name": "start_dishwasher",
+        "description": "Begin a dishwasher cycle with a chosen wash program.",
+        "parameters": {
+          "cycle": "normal|heavy|quick|eco|rinse"
+        }
+      },
+      {
+        "name": "set_fridge_temperature",
+        "description": "Set the refrigerator compartment target temperature.",
+        "parameters": {
+          "temperature_f": "int"
+        }
+      }
+    ],
+    "prompt": "Shut the oven off.",
+    "gold_name": "stop_oven",
+    "gold_args": {},
+    "difficulty": "easy"
+  },
+  {
+    "id": "kit_022",
+    "function": [
+      {
+        "name": "set_kitchen_lights",
+        "description": "Adjust kitchen overhead lighting brightness/state.",
+        "parameters": {
+          "brightness": "int 0-100",
+          "state": "on|off"
+        }
+      },
+      {
+        "name": "start_microwave",
+        "description": "Run the microwave at a given power for a given duration in seconds.",
+        "parameters": {
+          "seconds": "int",
+          "power": "int 1-10"
+        }
+      },
+      {
+        "name": "stop_oven",
+        "description": "Turn off the oven immediately.",
+        "parameters": {}
+      }
+    ],
+    "prompt": "Kill the oven.",
+    "gold_name": "stop_oven",
+    "gold_args": {},
+    "difficulty": "easy"
+  },
+  {
+    "id": "kit_023",
+    "function": [
+      {
+        "name": "preheat_oven",
+        "description": "Preheat the oven to a target temperature with optional cooking mode.",
+        "parameters": {
+          "temperature_f": "int",
+          "mode": "bake|broil|convection|roast|warm"
+        }
+      },
+      {
+        "name": "query_fridge_contents",
+        "description": "List items currently inventoried in the refrigerator.",
+        "parameters": {}
+      },
+      {
+        "name": "start_dishwasher",
+        "description": "Begin a dishwasher cycle with a chosen wash program.",
+        "parameters": {
+          "cycle": "normal|heavy|quick|eco|rinse"
+        }
+      },
+      {
+        "name": "set_oven_timer",
+        "description": "Set a countdown timer on the oven in minutes.",
+        "parameters": {
+          "minutes": "int"
+        }
+      }
+    ],
+    "prompt": "Start the dishwasher.",
+    "gold_name": "start_dishwasher",
+    "gold_args": {
+      "cycle": "normal"
+    },
+    "difficulty": "easy"
+  },
+  {
+    "id": "kit_024",
+    "function": [
+      {
+        "name": "set_oven_timer",
+        "description": "Set a countdown timer on the oven in minutes.",
+        "parameters": {
+          "minutes": "int"
+        }
+      },
+      {
+        "name": "stop_microwave",
+        "description": "Stop the microwave immediately.",
+        "parameters": {}
+      },
+      {
+        "name": "start_dishwasher",
+        "description": "Begin a dishwasher cycle with a chosen wash program.",
+        "parameters": {
+          "cycle": "normal|heavy|quick|eco|rinse"
+        }
+      }
+    ],
+    "prompt": "Run the dishwasher on heavy.",
+    "gold_name": "start_dishwasher",
+    "gold_args": {
+      "cycle": "heavy"
+    },
+    "difficulty": "easy"
+  },
+  {
+    "id": "kit_025",
+    "function": [
+      {
+        "name": "stop_oven",
+        "description": "Turn off the oven immediately.",
+        "parameters": {}
+      },
+      {
+        "name": "start_microwave",
+        "description": "Run the microwave at a given power for a given duration in seconds.",
+        "parameters": {
+          "seconds": "int",
+          "power": "int 1-10"
+        }
+      },
+      {
+        "name": "start_dishwasher",
+        "description": "Begin a dishwasher cycle with a chosen wash program.",
+        "parameters": {
+          "cycle": "normal|heavy|quick|eco|rinse"
+        }
+      }
+    ],
+    "prompt": "Quick wash the dishwasher.",
+    "gold_name": "start_dishwasher",
+    "gold_args": {
+      "cycle": "quick"
+    },
+    "difficulty": "easy"
+  },
+  {
+    "id": "kit_026",
+    "function": [
+      {
+        "name": "start_dishwasher",
+        "description": "Begin a dishwasher cycle with a chosen wash program.",
+        "parameters": {
+          "cycle": "normal|heavy|quick|eco|rinse"
+        }
+      },
+      {
+        "name": "start_microwave",
+        "description": "Run the microwave at a given power for a given duration in seconds.",
+        "parameters": {
+          "seconds": "int",
+          "power": "int 1-10"
+        }
+      },
+      {
+        "name": "set_fridge_temperature",
+        "description": "Set the refrigerator compartment target temperature.",
+        "parameters": {
+          "temperature_f": "int"
+        }
+      },
+      {
+        "name": "start_coffee_brew",
+        "description": "Start brewing coffee in the coffee maker.",
+        "parameters": {
+          "cups": "int"
+        }
+      },
+      {
+        "name": "stop_oven",
+        "description": "Turn off the oven immediately.",
+        "parameters": {}
+      }
+    ],
+    "prompt": "Eco cycle on the dishwasher please.",
+    "gold_name": "start_dishwasher",
+    "gold_args": {
+      "cycle": "eco"
+    },
+    "difficulty": "easy"
+  },
+  {
+    "id": "kit_027",
+    "function": [
+      {
+        "name": "start_dishwasher",
+        "description": "Begin a dishwasher cycle with a chosen wash program.",
+        "parameters": {
+          "cycle": "normal|heavy|quick|eco|rinse"
+        }
+      },
+      {
+        "name": "query_oven_state",
+        "description": "Return the current oven status, temperature, and mode.",
+        "parameters": {}
+      },
+      {
+        "name": "set_kitchen_lights",
+        "description": "Adjust kitchen overhead lighting brightness/state.",
+        "parameters": {
+          "brightness": "int 0-100",
+          "state": "on|off"
+        }
+      },
+      {
+        "name": "query_fridge_contents",
+        "description": "List items currently inventoried in the refrigerator.",
+        "parameters": {}
+      }
+    ],
+    "prompt": "Dishwasher rinse only.",
+    "gold_name": "start_dishwasher",
+    "gold_args": {
+      "cycle": "rinse"
+    },
+    "difficulty": "easy"
+  },
+  {
+    "id": "kit_028",
+    "function": [
+      {
+        "name": "set_kitchen_lights",
+        "description": "Adjust kitchen overhead lighting brightness/state.",
+        "parameters": {
+          "brightness": "int 0-100",
+          "state": "on|off"
+        }
+      },
+      {
+        "name": "pause_dishwasher",
+        "description": "Pause the currently running dishwasher cycle.",
+        "parameters": {}
+      },
+      {
+        "name": "start_dishwasher",
+        "description": "Begin a dishwasher cycle with a chosen wash program.",
+        "parameters": {
+          "cycle": "normal|heavy|quick|eco|rinse"
+        }
+      }
+    ],
+    "prompt": "Start dishwasher normal cycle.",
+    "gold_name": "start_dishwasher",
+    "gold_args": {
+      "cycle": "normal"
+    },
+    "difficulty": "easy"
+  },
+  {
+    "id": "kit_029",
+    "function": [
+      {
+        "name": "stop_microwave",
+        "description": "Stop the microwave immediately.",
+        "parameters": {}
+      },
+      {
+        "name": "start_microwave",
+        "description": "Run the microwave at a given power for a given duration in seconds.",
+        "parameters": {
+          "seconds": "int",
+          "power": "int 1-10"
+        }
+      },
+      {
+        "name": "start_dishwasher",
+        "description": "Begin a dishwasher cycle with a chosen wash program.",
+        "parameters": {
+          "cycle": "normal|heavy|quick|eco|rinse"
+        }
+      }
+    ],
+    "prompt": "Begin a heavy dishwasher load.",
+    "gold_name": "start_dishwasher",
+    "gold_args": {
+      "cycle": "heavy"
+    },
+    "difficulty": "easy"
+  },
+  {
+    "id": "kit_030",
+    "function": [
+      {
+        "name": "set_oven_timer",
+        "description": "Set a countdown timer on the oven in minutes.",
+        "parameters": {
+          "minutes": "int"
+        }
+      },
+      {
+        "name": "query_oven_state",
+        "description": "Return the current oven status, temperature, and mode.",
+        "parameters": {}
+      },
+      {
+        "name": "pause_dishwasher",
+        "description": "Pause the currently running dishwasher cycle.",
+        "parameters": {}
+      }
+    ],
+    "prompt": "Pause the dishwasher.",
+    "gold_name": "pause_dishwasher",
+    "gold_args": {},
+    "difficulty": "easy"
+  },
+  {
+    "id": "kit_031",
+    "function": [
+      {
+        "name": "preheat_oven",
+        "description": "Preheat the oven to a target temperature with optional cooking mode.",
+        "parameters": {
+          "temperature_f": "int",
+          "mode": "bake|broil|convection|roast|warm"
+        }
+      },
+      {
+        "name": "query_fridge_contents",
+        "description": "List items currently inventoried in the refrigerator.",
+        "parameters": {}
+      },
+      {
+        "name": "pause_dishwasher",
+        "description": "Pause the currently running dishwasher cycle.",
+        "parameters": {}
+      }
+    ],
+    "prompt": "Hold the dishwasher.",
+    "gold_name": "pause_dishwasher",
+    "gold_args": {},
+    "difficulty": "easy"
+  },
+  {
+    "id": "kit_032",
+    "function": [
+      {
+        "name": "set_fridge_temperature",
+        "description": "Set the refrigerator compartment target temperature.",
+        "parameters": {
+          "temperature_f": "int"
+        }
+      },
+      {
+        "name": "start_dishwasher",
+        "description": "Begin a dishwasher cycle with a chosen wash program.",
+        "parameters": {
+          "cycle": "normal|heavy|quick|eco|rinse"
+        }
+      },
+      {
+        "name": "set_coffee_strength",
+        "description": "Set the coffee brewing strength.",
+        "parameters": {
+          "strength": "weak|medium|strong"
+        }
+      },
+      {
+        "name": "query_oven_state",
+        "description": "Return the current oven status, temperature, and mode.",
+        "parameters": {}
+      }
+    ],
+    "prompt": "Set the fridge to 38.",
+    "gold_name": "set_fridge_temperature",
+    "gold_args": {
+      "temperature_f": 38
+    },
+    "difficulty": "easy"
+  },
+  {
+    "id": "kit_033",
+    "function": [
+      {
+        "name": "set_coffee_strength",
+        "description": "Set the coffee brewing strength.",
+        "parameters": {
+          "strength": "weak|medium|strong"
+        }
+      },
+      {
+        "name": "start_coffee_brew",
+        "description": "Start brewing coffee in the coffee maker.",
+        "parameters": {
+          "cups": "int"
+        }
+      },
+      {
+        "name": "set_fridge_temperature",
+        "description": "Set the refrigerator compartment target temperature.",
+        "parameters": {
+          "temperature_f": "int"
+        }
+      }
+    ],
+    "prompt": "Fridge temperature 36 please.",
+    "gold_name": "set_fridge_temperature",
+    "gold_args": {
+      "temperature_f": 36
+    },
+    "difficulty": "easy"
+  },
+  {
+    "id": "kit_034",
+    "function": [
+      {
+        "name": "set_fridge_temperature",
+        "description": "Set the refrigerator compartment target temperature.",
+        "parameters": {
+          "temperature_f": "int"
+        }
+      },
+      {
+        "name": "start_coffee_brew",
+        "description": "Start brewing coffee in the coffee maker.",
+        "parameters": {
+          "cups": "int"
+        }
+      },
+      {
+        "name": "query_oven_state",
+        "description": "Return the current oven status, temperature, and mode.",
+        "parameters": {}
+      }
+    ],
+    "prompt": "Set refrigerator to 40 degrees.",
+    "gold_name": "set_fridge_temperature",
+    "gold_args": {
+      "temperature_f": 40
+    },
+    "difficulty": "easy"
+  },
+  {
+    "id": "kit_035",
+    "function": [
+      {
+        "name": "set_oven_timer",
+        "description": "Set a countdown timer on the oven in minutes.",
+        "parameters": {
+          "minutes": "int"
+        }
+      },
+      {
+        "name": "preheat_oven",
+        "description": "Preheat the oven to a target temperature with optional cooking mode.",
+        "parameters": {
+          "temperature_f": "int",
+          "mode": "bake|broil|convection|roast|warm"
+        }
+      },
+      {
+        "name": "set_coffee_strength",
+        "description": "Set the coffee brewing strength.",
+        "parameters": {
+          "strength": "weak|medium|strong"
+        }
+      },
+      {
+        "name": "set_fridge_temperature",
+        "description": "Set the refrigerator compartment target temperature.",
+        "parameters": {
+          "temperature_f": "int"
+        }
+      }
+    ],
+    "prompt": "Make the fridge 37.",
+    "gold_name": "set_fridge_temperature",
+    "gold_args": {
+      "temperature_f": 37
+    },
+    "difficulty": "easy"
+  },
+  {
+    "id": "kit_036",
+    "function": [
+      {
+        "name": "set_kitchen_lights",
+        "description": "Adjust kitchen overhead lighting brightness/state.",
+        "parameters": {
+          "brightness": "int 0-100",
+          "state": "on|off"
+        }
+      },
+      {
+        "name": "start_dishwasher",
+        "description": "Begin a dishwasher cycle with a chosen wash program.",
+        "parameters": {
+          "cycle": "normal|heavy|quick|eco|rinse"
+        }
+      },
+      {
+        "name": "set_fridge_temperature",
+        "description": "Set the refrigerator compartment target temperature.",
+        "parameters": {
+          "temperature_f": "int"
+        }
+      }
+    ],
+    "prompt": "Drop the fridge to 34.",
+    "gold_name": "set_fridge_temperature",
+    "gold_args": {
+      "temperature_f": 34
+    },
+    "difficulty": "easy"
+  },
+  {
+    "id": "kit_037",
+    "function": [
+      {
+        "name": "set_fridge_temperature",
+        "description": "Set the refrigerator compartment target temperature.",
+        "parameters": {
+          "temperature_f": "int"
+        }
+      },
+      {
+        "name": "stop_oven",
+        "description": "Turn off the oven immediately.",
+        "parameters": {}
+      },
+      {
+        "name": "start_coffee_brew",
+        "description": "Start brewing coffee in the coffee maker.",
+        "parameters": {
+          "cups": "int"
+        }
+      }
+    ],
+    "prompt": "Set fridge temp 39.",
+    "gold_name": "set_fridge_temperature",
+    "gold_args": {
+      "temperature_f": 39
+    },
+    "difficulty": "easy"
+  },
+  {
+    "id": "kit_038",
+    "function": [
+      {
+        "name": "set_oven_timer",
+        "description": "Set a countdown timer on the oven in minutes.",
+        "parameters": {
+          "minutes": "int"
+        }
+      },
+      {
+        "name": "query_fridge_contents",
+        "description": "List items currently inventoried in the refrigerator.",
+        "parameters": {}
+      },
+      {
+        "name": "set_coffee_strength",
+        "description": "Set the coffee brewing strength.",
+        "parameters": {
+          "strength": "weak|medium|strong"
+        }
+      }
+    ],
+    "prompt": "What is in the fridge?",
+    "gold_name": "query_fridge_contents",
+    "gold_args": {},
+    "difficulty": "easy"
+  },
+  {
+    "id": "kit_039",
+    "function": [
+      {
+        "name": "query_oven_state",
+        "description": "Return the current oven status, temperature, and mode.",
+        "parameters": {}
+      },
+      {
+        "name": "start_microwave",
+        "description": "Run the microwave at a given power for a given duration in seconds.",
+        "parameters": {
+          "seconds": "int",
+          "power": "int 1-10"
+        }
+      },
+      {
+        "name": "query_fridge_contents",
+        "description": "List items currently inventoried in the refrigerator.",
+        "parameters": {}
+      }
+    ],
+    "prompt": "List the fridge contents.",
+    "gold_name": "query_fridge_contents",
+    "gold_args": {},
+    "difficulty": "easy"
+  },
+  {
+    "id": "kit_040",
+    "function": [
+      {
+        "name": "query_fridge_contents",
+        "description": "List items currently inventoried in the refrigerator.",
+        "parameters": {}
+      },
+      {
+        "name": "start_coffee_brew",
+        "description": "Start brewing coffee in the coffee maker.",
+        "parameters": {
+          "cups": "int"
+        }
+      },
+      {
+        "name": "stop_oven",
+        "description": "Turn off the oven immediately.",
+        "parameters": {}
+      }
+    ],
+    "prompt": "Show me what is in the refrigerator.",
+    "gold_name": "query_fridge_contents",
+    "gold_args": {},
+    "difficulty": "easy"
+  },
+  {
+    "id": "kit_041",
+    "function": [
+      {
+        "name": "preheat_oven",
+        "description": "Preheat the oven to a target temperature with optional cooking mode.",
+        "parameters": {
+          "temperature_f": "int",
+          "mode": "bake|broil|convection|roast|warm"
+        }
+      },
+      {
+        "name": "start_coffee_brew",
+        "description": "Start brewing coffee in the coffee maker.",
+        "parameters": {
+          "cups": "int"
+        }
+      },
+      {
+        "name": "query_fridge_contents",
+        "description": "List items currently inventoried in the refrigerator.",
+        "parameters": {}
+      }
+    ],
+    "prompt": "What food do we have in the fridge?",
+    "gold_name": "query_fridge_contents",
+    "gold_args": {},
+    "difficulty": "easy"
+  },
+  {
+    "id": "kit_042",
+    "function": [
+      {
+        "name": "query_fridge_contents",
+        "description": "List items currently inventoried in the refrigerator.",
+        "parameters": {}
+      },
+      {
+        "name": "pause_dishwasher",
+        "description": "Pause the currently running dishwasher cycle.",
+        "parameters": {}
+      },
+      {
+        "name": "start_coffee_brew",
+        "description": "Start brewing coffee in the coffee maker.",
+        "parameters": {
+          "cups": "int"
+        }
+      }
+    ],
+    "prompt": "Read fridge inventory.",
+    "gold_name": "query_fridge_contents",
+    "gold_args": {},
+    "difficulty": "easy"
+  },
+  {
+    "id": "kit_043",
+    "function": [
+      {
+        "name": "start_microwave",
+        "description": "Run the microwave at a given power for a given duration in seconds.",
+        "parameters": {
+          "seconds": "int",
+          "power": "int 1-10"
+        }
+      },
+      {
+        "name": "set_coffee_strength",
+        "description": "Set the coffee brewing strength.",
+        "parameters": {
+          "strength": "weak|medium|strong"
+        }
+      },
+      {
+        "name": "start_coffee_brew",
+        "description": "Start brewing coffee in the coffee maker.",
+        "parameters": {
+          "cups": "int"
+        }
+      },
+      {
+        "name": "set_kitchen_lights",
+        "description": "Adjust kitchen overhead lighting brightness/state.",
+        "parameters": {
+          "brightness": "int 0-100",
+          "state": "on|off"
+        }
+      }
+    ],
+    "prompt": "Brew 2 cups of coffee.",
+    "gold_name": "start_coffee_brew",
+    "gold_args": {
+      "cups": 2
+    },
+    "difficulty": "easy"
+  },
+  {
+    "id": "kit_044",
+    "function": [
+      {
+        "name": "preheat_oven",
+        "description": "Preheat the oven to a target temperature with optional cooking mode.",
+        "parameters": {
+          "temperature_f": "int",
+          "mode": "bake|broil|convection|roast|warm"
+        }
+      },
+      {
+        "name": "start_coffee_brew",
+        "description": "Start brewing coffee in the coffee maker.",
+        "parameters": {
+          "cups": "int"
+        }
+      },
+      {
+        "name": "stop_microwave",
+        "description": "Stop the microwave immediately.",
+        "parameters": {}
+      }
+    ],
+    "prompt": "Start coffee, 4 cups.",
+    "gold_name": "start_coffee_brew",
+    "gold_args": {
+      "cups": 4
+    },
+    "difficulty": "easy"
+  },
+  {
+    "id": "kit_045",
+    "function": [
+      {
+        "name": "query_oven_state",
+        "description": "Return the current oven status, temperature, and mode.",
+        "parameters": {}
+      },
+      {
+        "name": "preheat_oven",
+        "description": "Preheat the oven to a target temperature with optional cooking mode.",
+        "parameters": {
+          "temperature_f": "int",
+          "mode": "bake|broil|convection|roast|warm"
+        }
+      },
+      {
+        "name": "start_coffee_brew",
+        "description": "Start brewing coffee in the coffee maker.",
+        "parameters": {
+          "cups": "int"
+        }
+      },
+      {
+        "name": "set_fridge_temperature",
+        "description": "Set the refrigerator compartment target temperature.",
+        "parameters": {
+          "temperature_f": "int"
+        }
+      },
+      {
+        "name": "set_coffee_strength",
+        "description": "Set the coffee brewing strength.",
+        "parameters": {
+          "strength": "weak|medium|strong"
+        }
+      }
+    ],
+    "prompt": "Make me 1 cup of coffee.",
+    "gold_name": "start_coffee_brew",
+    "gold_args": {
+      "cups": 1
+    },
+    "difficulty": "easy"
+  },
+  {
+    "id": "kit_046",
+    "function": [
+      {
+        "name": "set_oven_timer",
+        "description": "Set a countdown timer on the oven in minutes.",
+        "parameters": {
+          "minutes": "int"
+        }
+      },
+      {
+        "name": "stop_microwave",
+        "description": "Stop the microwave immediately.",
+        "parameters": {}
+      },
+      {
+        "name": "start_coffee_brew",
+        "description": "Start brewing coffee in the coffee maker.",
+        "parameters": {
+          "cups": "int"
+        }
+      }
+    ],
+    "prompt": "Brew coffee, 6 cups.",
+    "gold_name": "start_coffee_brew",
+    "gold_args": {
+      "cups": 6
+    },
+    "difficulty": "easy"
+  },
+  {
+    "id": "kit_047",
+    "function": [
+      {
+        "name": "set_oven_timer",
+        "description": "Set a countdown timer on the oven in minutes.",
+        "parameters": {
+          "minutes": "int"
+        }
+      },
+      {
+        "name": "start_dishwasher",
+        "description": "Begin a dishwasher cycle with a chosen wash program.",
+        "parameters": {
+          "cycle": "normal|heavy|quick|eco|rinse"
+        }
+      },
+      {
+        "name": "stop_microwave",
+        "description": "Stop the microwave immediately.",
+        "parameters": {}
+      },
+      {
+        "name": "start_coffee_brew",
+        "description": "Start brewing coffee in the coffee maker.",
+        "parameters": {
+          "cups": "int"
+        }
+      }
+    ],
+    "prompt": "Start a pot of coffee, 8 cups.",
+    "gold_name": "start_coffee_brew",
+    "gold_args": {
+      "cups": 8
+    },
+    "difficulty": "easy"
+  },
+  {
+    "id": "kit_048",
+    "function": [
+      {
+        "name": "set_kitchen_lights",
+        "description": "Adjust kitchen overhead lighting brightness/state.",
+        "parameters": {
+          "brightness": "int 0-100",
+          "state": "on|off"
+        }
+      },
+      {
+        "name": "start_coffee_brew",
+        "description": "Start brewing coffee in the coffee maker.",
+        "parameters": {
+          "cups": "int"
+        }
+      },
+      {
+        "name": "query_oven_state",
+        "description": "Return the current oven status, temperature, and mode.",
+        "parameters": {}
+      },
+      {
+        "name": "stop_microwave",
+        "description": "Stop the microwave immediately.",
+        "parameters": {}
+      }
+    ],
+    "prompt": "3 cups of coffee please.",
+    "gold_name": "start_coffee_brew",
+    "gold_args": {
+      "cups": 3
+    },
+    "difficulty": "easy"
+  },
+  {
+    "id": "kit_049",
+    "function": [
+      {
+        "name": "set_coffee_strength",
+        "description": "Set the coffee brewing strength.",
+        "parameters": {
+          "strength": "weak|medium|strong"
+        }
+      },
+      {
+        "name": "pause_dishwasher",
+        "description": "Pause the currently running dishwasher cycle.",
+        "parameters": {}
+      },
+      {
+        "name": "set_fridge_temperature",
+        "description": "Set the refrigerator compartment target temperature.",
+        "parameters": {
+          "temperature_f": "int"
+        }
+      },
+      {
+        "name": "set_kitchen_lights",
+        "description": "Adjust kitchen overhead lighting brightness/state.",
+        "parameters": {
+          "brightness": "int 0-100",
+          "state": "on|off"
+        }
+      },
+      {
+        "name": "start_dishwasher",
+        "description": "Begin a dishwasher cycle with a chosen wash program.",
+        "parameters": {
+          "cycle": "normal|heavy|quick|eco|rinse"
+        }
+      }
+    ],
+    "prompt": "Set coffee strength to strong.",
+    "gold_name": "set_coffee_strength",
+    "gold_args": {
+      "strength": "strong"
+    },
+    "difficulty": "easy"
+  },
+  {
+    "id": "kit_050",
+    "function": [
+      {
+        "name": "set_fridge_temperature",
+        "description": "Set the refrigerator compartment target temperature.",
+        "parameters": {
+          "temperature_f": "int"
+        }
+      },
+      {
+        "name": "set_coffee_strength",
+        "description": "Set the coffee brewing strength.",
+        "parameters": {
+          "strength": "weak|medium|strong"
+        }
+      },
+      {
+        "name": "set_oven_timer",
+        "description": "Set a countdown timer on the oven in minutes.",
+        "parameters": {
+          "minutes": "int"
+        }
+      },
+      {
+        "name": "preheat_oven",
+        "description": "Preheat the oven to a target temperature with optional cooking mode.",
+        "parameters": {
+          "temperature_f": "int",
+          "mode": "bake|broil|convection|roast|warm"
+        }
+      }
+    ],
+    "prompt": "Coffee strength medium.",
+    "gold_name": "set_coffee_strength",
+    "gold_args": {
+      "strength": "medium"
+    },
+    "difficulty": "easy"
+  },
+  {
+    "id": "kit_051",
+    "function": [
+      {
+        "name": "set_coffee_strength",
+        "description": "Set the coffee brewing strength.",
+        "parameters": {
+          "strength": "weak|medium|strong"
+        }
+      },
+      {
+        "name": "start_microwave",
+        "description": "Run the microwave at a given power for a given duration in seconds.",
+        "parameters": {
+          "seconds": "int",
+          "power": "int 1-10"
+        }
+      },
+      {
+        "name": "start_dishwasher",
+        "description": "Begin a dishwasher cycle with a chosen wash program.",
+        "parameters": {
+          "cycle": "normal|heavy|quick|eco|rinse"
+        }
+      }
+    ],
+    "prompt": "Make the coffee weak.",
+    "gold_name": "set_coffee_strength",
+    "gold_args": {
+      "strength": "weak"
+    },
+    "difficulty": "easy"
+  },
+  {
+    "id": "kit_052",
+    "function": [
+      {
+        "name": "set_oven_timer",
+        "description": "Set a countdown timer on the oven in minutes.",
+        "parameters": {
+          "minutes": "int"
+        }
+      },
+      {
+        "name": "set_fridge_temperature",
+        "description": "Set the refrigerator compartment target temperature.",
+        "parameters": {
+          "temperature_f": "int"
+        }
+      },
+      {
+        "name": "set_coffee_strength",
+        "description": "Set the coffee brewing strength.",
+        "parameters": {
+          "strength": "weak|medium|strong"
+        }
+      }
+    ],
+    "prompt": "Strong coffee setting.",
+    "gold_name": "set_coffee_strength",
+    "gold_args": {
+      "strength": "strong"
+    },
+    "difficulty": "easy"
+  },
+  {
+    "id": "kit_053",
+    "function": [
+      {
+        "name": "stop_oven",
+        "description": "Turn off the oven immediately.",
+        "parameters": {}
+      },
+      {
+        "name": "set_coffee_strength",
+        "description": "Set the coffee brewing strength.",
+        "parameters": {
+          "strength": "weak|medium|strong"
+        }
+      },
+      {
+        "name": "start_microwave",
+        "description": "Run the microwave at a given power for a given duration in seconds.",
+        "parameters": {
+          "seconds": "int",
+          "power": "int 1-10"
+        }
+      },
+      {
+        "name": "start_coffee_brew",
+        "description": "Start brewing coffee in the coffee maker.",
+        "parameters": {
+          "cups": "int"
+        }
+      }
+    ],
+    "prompt": "Set strength to medium on coffee maker.",
+    "gold_name": "set_coffee_strength",
+    "gold_args": {
+      "strength": "medium"
+    },
+    "difficulty": "easy"
+  },
+  {
+    "id": "kit_054",
+    "function": [
+      {
+        "name": "set_coffee_strength",
+        "description": "Set the coffee brewing strength.",
+        "parameters": {
+          "strength": "weak|medium|strong"
+        }
+      },
+      {
+        "name": "stop_oven",
+        "description": "Turn off the oven immediately.",
+        "parameters": {}
+      },
+      {
+        "name": "set_oven_timer",
+        "description": "Set a countdown timer on the oven in minutes.",
+        "parameters": {
+          "minutes": "int"
+        }
+      },
+      {
+        "name": "start_microwave",
+        "description": "Run the microwave at a given power for a given duration in seconds.",
+        "parameters": {
+          "seconds": "int",
+          "power": "int 1-10"
+        }
+      },
+      {
+        "name": "pause_dishwasher",
+        "description": "Pause the currently running dishwasher cycle.",
+        "parameters": {}
+      }
+    ],
+    "prompt": "Microwave 30 seconds at power 8.",
+    "gold_name": "start_microwave",
+    "gold_args": {
+      "seconds": 30,
+      "power": 8
+    },
+    "difficulty": "easy"
+  },
+  {
+    "id": "kit_055",
+    "function": [
+      {
+        "name": "start_dishwasher",
+        "description": "Begin a dishwasher cycle with a chosen wash program.",
+        "parameters": {
+          "cycle": "normal|heavy|quick|eco|rinse"
+        }
+      },
+      {
+        "name": "pause_dishwasher",
+        "description": "Pause the currently running dishwasher cycle.",
+        "parameters": {}
+      },
+      {
+        "name": "start_microwave",
+        "description": "Run the microwave at a given power for a given duration in seconds.",
+        "parameters": {
+          "seconds": "int",
+          "power": "int 1-10"
+        }
+      },
+      {
+        "name": "stop_microwave",
+        "description": "Stop the microwave immediately.",
+        "parameters": {}
+      }
+    ],
+    "prompt": "Run microwave for 60 seconds full power.",
+    "gold_name": "start_microwave",
+    "gold_args": {
+      "seconds": 60,
+      "power": 10
+    },
+    "difficulty": "easy"
+  },
+  {
+    "id": "kit_056",
+    "function": [
+      {
+        "name": "start_coffee_brew",
+        "description": "Start brewing coffee in the coffee maker.",
+        "parameters": {
+          "cups": "int"
+        }
+      },
+      {
+        "name": "set_oven_timer",
+        "description": "Set a countdown timer on the oven in minutes.",
+        "parameters": {
+          "minutes": "int"
+        }
+      },
+      {
+        "name": "start_microwave",
+        "description": "Run the microwave at a given power for a given duration in seconds.",
+        "parameters": {
+          "seconds": "int",
+          "power": "int 1-10"
+        }
+      },
+      {
+        "name": "pause_dishwasher",
+        "description": "Pause the currently running dishwasher cycle.",
+        "parameters": {}
+      },
+      {
+        "name": "preheat_oven",
+        "description": "Preheat the oven to a target temperature with optional cooking mode.",
+        "parameters": {
+          "temperature_f": "int",
+          "mode": "bake|broil|convection|roast|warm"
+        }
+      }
+    ],
+    "prompt": "Microwave 45 sec power 5.",
+    "gold_name": "start_microwave",
+    "gold_args": {
+      "seconds": 45,
+      "power": 5
+    },
+    "difficulty": "easy"
+  },
+  {
+    "id": "kit_057",
+    "function": [
+      {
+        "name": "start_microwave",
+        "description": "Run the microwave at a given power for a given duration in seconds.",
+        "parameters": {
+          "seconds": "int",
+          "power": "int 1-10"
+        }
+      },
+      {
+        "name": "pause_dishwasher",
+        "description": "Pause the currently running dishwasher cycle.",
+        "parameters": {}
+      },
+      {
+        "name": "query_oven_state",
+        "description": "Return the current oven status, temperature, and mode.",
+        "parameters": {}
+      },
+      {
+        "name": "stop_oven",
+        "description": "Turn off the oven immediately.",
+        "parameters": {}
+      }
+    ],
+    "prompt": "Start microwave 90 seconds power 7.",
+    "gold_name": "start_microwave",
+    "gold_args": {
+      "seconds": 90,
+      "power": 7
+    },
+    "difficulty": "easy"
+  },
+  {
+    "id": "kit_058",
+    "function": [
+      {
+        "name": "set_kitchen_lights",
+        "description": "Adjust kitchen overhead lighting brightness/state.",
+        "parameters": {
+          "brightness": "int 0-100",
+          "state": "on|off"
+        }
+      },
+      {
+        "name": "set_coffee_strength",
+        "description": "Set the coffee brewing strength.",
+        "parameters": {
+          "strength": "weak|medium|strong"
+        }
+      },
+      {
+        "name": "query_fridge_contents",
+        "description": "List items currently inventoried in the refrigerator.",
+        "parameters": {}
+      },
+      {
+        "name": "preheat_oven",
+        "description": "Preheat the oven to a target temperature with optional cooking mode.",
+        "parameters": {
+          "temperature_f": "int",
+          "mode": "bake|broil|convection|roast|warm"
+        }
+      },
+      {
+        "name": "start_microwave",
+        "description": "Run the microwave at a given power for a given duration in seconds.",
+        "parameters": {
+          "seconds": "int",
+          "power": "int 1-10"
+        }
+      }
+    ],
+    "prompt": "Microwave for 2 minutes at power 6.",
+    "gold_name": "start_microwave",
+    "gold_args": {
+      "seconds": 120,
+      "power": 6
+    },
+    "difficulty": "easy"
+  },
+  {
+    "id": "kit_059",
+    "function": [
+      {
+        "name": "set_coffee_strength",
+        "description": "Set the coffee brewing strength.",
+        "parameters": {
+          "strength": "weak|medium|strong"
+        }
+      },
+      {
+        "name": "set_fridge_temperature",
+        "description": "Set the refrigerator compartment target temperature.",
+        "parameters": {
+          "temperature_f": "int"
+        }
+      },
+      {
+        "name": "start_microwave",
+        "description": "Run the microwave at a given power for a given duration in seconds.",
+        "parameters": {
+          "seconds": "int",
+          "power": "int 1-10"
+        }
+      },
+      {
+        "name": "stop_microwave",
+        "description": "Stop the microwave immediately.",
+        "parameters": {}
+      },
+      {
+        "name": "preheat_oven",
+        "description": "Preheat the oven to a target temperature with optional cooking mode.",
+        "parameters": {
+          "temperature_f": "int",
+          "mode": "bake|broil|convection|roast|warm"
+        }
+      }
+    ],
+    "prompt": "Microwave 15 seconds power 10.",
+    "gold_name": "start_microwave",
+    "gold_args": {
+      "seconds": 15,
+      "power": 10
+    },
+    "difficulty": "easy"
+  },
+  {
+    "id": "kit_060",
+    "function": [
+      {
+        "name": "set_kitchen_lights",
+        "description": "Adjust kitchen overhead lighting brightness/state.",
+        "parameters": {
+          "brightness": "int 0-100",
+          "state": "on|off"
+        }
+      },
+      {
+        "name": "stop_microwave",
+        "description": "Stop the microwave immediately.",
+        "parameters": {}
+      },
+      {
+        "name": "preheat_oven",
+        "description": "Preheat the oven to a target temperature with optional cooking mode.",
+        "parameters": {
+          "temperature_f": "int",
+          "mode": "bake|broil|convection|roast|warm"
+        }
+      },
+      {
+        "name": "set_fridge_temperature",
+        "description": "Set the refrigerator compartment target temperature.",
+        "parameters": {
+          "temperature_f": "int"
+        }
+      }
+    ],
+    "prompt": "Stop the microwave.",
+    "gold_name": "stop_microwave",
+    "gold_args": {},
+    "difficulty": "easy"
+  },
+  {
+    "id": "kit_061",
+    "function": [
+      {
+        "name": "set_coffee_strength",
+        "description": "Set the coffee brewing strength.",
+        "parameters": {
+          "strength": "weak|medium|strong"
+        }
+      },
+      {
+        "name": "set_fridge_temperature",
+        "description": "Set the refrigerator compartment target temperature.",
+        "parameters": {
+          "temperature_f": "int"
+        }
+      },
+      {
+        "name": "stop_microwave",
+        "description": "Stop the microwave immediately.",
+        "parameters": {}
+      },
+      {
+        "name": "set_oven_timer",
+        "description": "Set a countdown timer on the oven in minutes.",
+        "parameters": {
+          "minutes": "int"
+        }
+      },
+      {
+        "name": "query_fridge_contents",
+        "description": "List items currently inventoried in the refrigerator.",
+        "parameters": {}
+      }
+    ],
+    "prompt": "Cancel microwave.",
+    "gold_name": "stop_microwave",
+    "gold_args": {},
+    "difficulty": "easy"
+  },
+  {
+    "id": "kit_062",
+    "function": [
+      {
+        "name": "preheat_oven",
+        "description": "Preheat the oven to a target temperature with optional cooking mode.",
+        "parameters": {
+          "temperature_f": "int",
+          "mode": "bake|broil|convection|roast|warm"
+        }
+      },
+      {
+        "name": "query_fridge_contents",
+        "description": "List items currently inventoried in the refrigerator.",
+        "parameters": {}
+      },
+      {
+        "name": "stop_microwave",
+        "description": "Stop the microwave immediately.",
+        "parameters": {}
+      }
+    ],
+    "prompt": "Halt the microwave now.",
+    "gold_name": "stop_microwave",
+    "gold_args": {},
+    "difficulty": "easy"
+  },
+  {
+    "id": "kit_063",
+    "function": [
+      {
+        "name": "pause_dishwasher",
+        "description": "Pause the currently running dishwasher cycle.",
+        "parameters": {}
+      },
+      {
+        "name": "query_oven_state",
+        "description": "Return the current oven status, temperature, and mode.",
+        "parameters": {}
+      },
+      {
+        "name": "start_dishwasher",
+        "description": "Begin a dishwasher cycle with a chosen wash program.",
+        "parameters": {
+          "cycle": "normal|heavy|quick|eco|rinse"
+        }
+      },
+      {
+        "name": "stop_microwave",
+        "description": "Stop the microwave immediately.",
+        "parameters": {}
+      }
+    ],
+    "prompt": "What is the oven doing?",
+    "gold_name": "query_oven_state",
+    "gold_args": {},
+    "difficulty": "easy"
+  },
+  {
+    "id": "kit_064",
+    "function": [
+      {
+        "name": "query_oven_state",
+        "description": "Return the current oven status, temperature, and mode.",
+        "parameters": {}
+      },
+      {
+        "name": "start_coffee_brew",
+        "description": "Start brewing coffee in the coffee maker.",
+        "parameters": {
+          "cups": "int"
+        }
+      },
+      {
+        "name": "start_dishwasher",
+        "description": "Begin a dishwasher cycle with a chosen wash program.",
+        "parameters": {
+          "cycle": "normal|heavy|quick|eco|rinse"
+        }
+      },
+      {
+        "name": "preheat_oven",
+        "description": "Preheat the oven to a target temperature with optional cooking mode.",
+        "parameters": {
+          "temperature_f": "int",
+          "mode": "bake|broil|convection|roast|warm"
+        }
+      }
+    ],
+    "prompt": "Check oven status.",
+    "gold_name": "query_oven_state",
+    "gold_args": {},
+    "difficulty": "easy"
+  },
+  {
+    "id": "kit_065",
+    "function": [
+      {
+        "name": "query_oven_state",
+        "description": "Return the current oven status, temperature, and mode.",
+        "parameters": {}
+      },
+      {
+        "name": "set_kitchen_lights",
+        "description": "Adjust kitchen overhead lighting brightness/state.",
+        "parameters": {
+          "brightness": "int 0-100",
+          "state": "on|off"
+        }
+      },
+      {
+        "name": "preheat_oven",
+        "description": "Preheat the oven to a target temperature with optional cooking mode.",
+        "parameters": {
+          "temperature_f": "int",
+          "mode": "bake|broil|convection|roast|warm"
+        }
+      },
+      {
+        "name": "start_dishwasher",
+        "description": "Begin a dishwasher cycle with a chosen wash program.",
+        "parameters": {
+          "cycle": "normal|heavy|quick|eco|rinse"
+        }
+      }
+    ],
+    "prompt": "What is the oven temperature right now?",
+    "gold_name": "query_oven_state",
+    "gold_args": {},
+    "difficulty": "easy"
+  },
+  {
+    "id": "kit_066",
+    "function": [
+      {
+        "name": "query_oven_state",
+        "description": "Return the current oven status, temperature, and mode.",
+        "parameters": {}
+      },
+      {
+        "name": "set_oven_timer",
+        "description": "Set a countdown timer on the oven in minutes.",
+        "parameters": {
+          "minutes": "int"
+        }
+      },
+      {
+        "name": "pause_dishwasher",
+        "description": "Pause the currently running dishwasher cycle.",
+        "parameters": {}
+      },
+      {
+        "name": "set_fridge_temperature",
+        "description": "Set the refrigerator compartment target temperature.",
+        "parameters": {
+          "temperature_f": "int"
+        }
+      }
+    ],
+    "prompt": "Is the oven on?",
+    "gold_name": "query_oven_state",
+    "gold_args": {},
+    "difficulty": "easy"
+  },
+  {
+    "id": "kit_067",
+    "function": [
+      {
+        "name": "pause_dishwasher",
+        "description": "Pause the currently running dishwasher cycle.",
+        "parameters": {}
+      },
+      {
+        "name": "set_oven_timer",
+        "description": "Set a countdown timer on the oven in minutes.",
+        "parameters": {
+          "minutes": "int"
+        }
+      },
+      {
+        "name": "query_oven_state",
+        "description": "Return the current oven status, temperature, and mode.",
+        "parameters": {}
+      }
+    ],
+    "prompt": "Show oven state.",
+    "gold_name": "query_oven_state",
+    "gold_args": {},
+    "difficulty": "easy"
+  },
+  {
+    "id": "kit_068",
+    "function": [
+      {
+        "name": "set_kitchen_lights",
+        "description": "Adjust kitchen overhead lighting brightness/state.",
+        "parameters": {
+          "brightness": "int 0-100",
+          "state": "on|off"
+        }
+      },
+      {
+        "name": "start_microwave",
+        "description": "Run the microwave at a given power for a given duration in seconds.",
+        "parameters": {
+          "seconds": "int",
+          "power": "int 1-10"
+        }
+      },
+      {
+        "name": "set_oven_timer",
+        "description": "Set a countdown timer on the oven in minutes.",
+        "parameters": {
+          "minutes": "int"
+        }
+      }
+    ],
+    "prompt": "Turn the kitchen lights on.",
+    "gold_name": "set_kitchen_lights",
+    "gold_args": {
+      "brightness": 100,
+      "state": "on"
+    },
+    "difficulty": "easy"
+  },
+  {
+    "id": "kit_069",
+    "function": [
+      {
+        "name": "set_fridge_temperature",
+        "description": "Set the refrigerator compartment target temperature.",
+        "parameters": {
+          "temperature_f": "int"
+        }
+      },
+      {
+        "name": "set_coffee_strength",
+        "description": "Set the coffee brewing strength.",
+        "parameters": {
+          "strength": "weak|medium|strong"
+        }
+      },
+      {
+        "name": "query_fridge_contents",
+        "description": "List items currently inventoried in the refrigerator.",
+        "parameters": {}
+      },
+      {
+        "name": "start_microwave",
+        "description": "Run the microwave at a given power for a given duration in seconds.",
+        "parameters": {
+          "seconds": "int",
+          "power": "int 1-10"
+        }
+      },
+      {
+        "name": "set_kitchen_lights",
+        "description": "Adjust kitchen overhead lighting brightness/state.",
+        "parameters": {
+          "brightness": "int 0-100",
+          "state": "on|off"
+        }
+      }
+    ],
+    "prompt": "Kitchen lights off.",
+    "gold_name": "set_kitchen_lights",
+    "gold_args": {
+      "brightness": 0,
+      "state": "off"
+    },
+    "difficulty": "easy"
+  },
+  {
+    "id": "kit_070",
+    "function": [
+      {
+        "name": "set_kitchen_lights",
+        "description": "Adjust kitchen overhead lighting brightness/state.",
+        "parameters": {
+          "brightness": "int 0-100",
+          "state": "on|off"
+        }
+      },
+      {
+        "name": "query_fridge_contents",
+        "description": "List items currently inventoried in the refrigerator.",
+        "parameters": {}
+      },
+      {
+        "name": "query_oven_state",
+        "description": "Return the current oven status, temperature, and mode.",
+        "parameters": {}
+      },
+      {
+        "name": "preheat_oven",
+        "description": "Preheat the oven to a target temperature with optional cooking mode.",
+        "parameters": {
+          "temperature_f": "int",
+          "mode": "bake|broil|convection|roast|warm"
+        }
+      }
+    ],
+    "prompt": "Set kitchen lights to 50.",
+    "gold_name": "set_kitchen_lights",
+    "gold_args": {
+      "brightness": 50,
+      "state": "on"
+    },
+    "difficulty": "easy"
+  },
+  {
+    "id": "kit_071",
+    "function": [
+      {
+        "name": "preheat_oven",
+        "description": "Preheat the oven to a target temperature with optional cooking mode.",
+        "parameters": {
+          "temperature_f": "int",
+          "mode": "bake|broil|convection|roast|warm"
+        }
+      },
+      {
+        "name": "query_oven_state",
+        "description": "Return the current oven status, temperature, and mode.",
+        "parameters": {}
+      },
+      {
+        "name": "query_fridge_contents",
+        "description": "List items currently inventoried in the refrigerator.",
+        "parameters": {}
+      }
+    ],
+    "prompt": "Preheat the oven to 200 Celsius for the lasagna.",
+    "gold_name": "preheat_oven",
+    "gold_args": {
+      "temperature_f": 392,
+      "mode": "bake"
+    },
+    "difficulty": "medium"
+  },
+  {
+    "id": "kit_072",
+    "function": [
+      {
+        "name": "preheat_oven",
+        "description": "Preheat the oven to a target temperature with optional cooking mode.",
+        "parameters": {
+          "temperature_f": "int",
+          "mode": "bake|broil|convection|roast|warm"
+        }
+      },
+      {
+        "name": "query_oven_state",
+        "description": "Return the current oven status, temperature, and mode.",
+        "parameters": {}
+      },
+      {
+        "name": "stop_oven",
+        "description": "Turn off the oven immediately.",
+        "parameters": {}
+      },
+      {
+        "name": "set_fridge_temperature",
+        "description": "Set the refrigerator compartment target temperature.",
+        "parameters": {
+          "temperature_f": "int"
+        }
+      },
+      {
+        "name": "start_microwave",
+        "description": "Run the microwave at a given power for a given duration in seconds.",
+        "parameters": {
+          "seconds": "int",
+          "power": "int 1-10"
+        }
+      }
+    ],
+    "prompt": "Set oven to 180 C convection for the chicken.",
+    "gold_name": "preheat_oven",
+    "gold_args": {
+      "temperature_f": 356,
+      "mode": "convection"
+    },
+    "difficulty": "medium"
+  },
+  {
+    "id": "kit_073",
+    "function": [
+      {
+        "name": "start_coffee_brew",
+        "description": "Start brewing coffee in the coffee maker.",
+        "parameters": {
+          "cups": "int"
+        }
+      },
+      {
+        "name": "preheat_oven",
+        "description": "Preheat the oven to a target temperature with optional cooking mode.",
+        "parameters": {
+          "temperature_f": "int",
+          "mode": "bake|broil|convection|roast|warm"
+        }
+      },
+      {
+        "name": "stop_microwave",
+        "description": "Stop the microwave immediately.",
+        "parameters": {}
+      },
+      {
+        "name": "pause_dishwasher",
+        "description": "Pause the currently running dishwasher cycle.",
+        "parameters": {}
+      },
+      {
+        "name": "start_dishwasher",
+        "description": "Begin a dishwasher cycle with a chosen wash program.",
+        "parameters": {
+          "cycle": "normal|heavy|quick|eco|rinse"
+        }
+      }
+    ],
+    "prompt": "I want to roast a chicken, get the oven going at 425.",
+    "gold_name": "preheat_oven",
+    "gold_args": {
+      "temperature_f": 425,
+      "mode": "roast"
+    },
+    "difficulty": "medium"
+  },
+  {
+    "id": "kit_074",
+    "function": [
+      {
+        "name": "preheat_oven",
+        "description": "Preheat the oven to a target temperature with optional cooking mode.",
+        "parameters": {
+          "temperature_f": "int",
+          "mode": "bake|broil|convection|roast|warm"
+        }
+      },
+      {
+        "name": "start_coffee_brew",
+        "description": "Start brewing coffee in the coffee maker.",
+        "parameters": {
+          "cups": "int"
+        }
+      },
+      {
+        "name": "set_fridge_temperature",
+        "description": "Set the refrigerator compartment target temperature.",
+        "parameters": {
+          "temperature_f": "int"
+        }
+      },
+      {
+        "name": "pause_dishwasher",
+        "description": "Pause the currently running dishwasher cycle.",
+        "parameters": {}
+      }
+    ],
+    "prompt": "Going to bake bread, preheat to 220 Celsius.",
+    "gold_name": "preheat_oven",
+    "gold_args": {
+      "temperature_f": 428,
+      "mode": "bake"
+    },
+    "difficulty": "medium"
+  },
+  {
+    "id": "kit_075",
+    "function": [
+      {
+        "name": "query_oven_state",
+        "description": "Return the current oven status, temperature, and mode.",
+        "parameters": {}
+      },
+      {
+        "name": "preheat_oven",
+        "description": "Preheat the oven to a target temperature with optional cooking mode.",
+        "parameters": {
+          "temperature_f": "int",
+          "mode": "bake|broil|convection|roast|warm"
+        }
+      },
+      {
+        "name": "pause_dishwasher",
+        "description": "Pause the currently running dishwasher cycle.",
+        "parameters": {}
+      },
+      {
+        "name": "start_microwave",
+        "description": "Run the microwave at a given power for a given duration in seconds.",
+        "parameters": {
+          "seconds": "int",
+          "power": "int 1-10"
+        }
+      }
+    ],
+    "prompt": "Pizza night - oven 500 please.",
+    "gold_name": "preheat_oven",
+    "gold_args": {
+      "temperature_f": 500,
+      "mode": "bake"
+    },
+    "difficulty": "medium"
+  },
+  {
+    "id": "kit_076",
+    "function": [
+      {
+        "name": "query_fridge_contents",
+        "description": "List items currently inventoried in the refrigerator.",
+        "parameters": {}
+      },
+      {
+        "name": "start_microwave",
+        "description": "Run the microwave at a given power for a given duration in seconds.",
+        "parameters": {
+          "seconds": "int",
+          "power": "int 1-10"
+        }
+      },
+      {
+        "name": "set_fridge_temperature",
+        "description": "Set the refrigerator compartment target temperature.",
+        "parameters": {
+          "temperature_f": "int"
+        }
+      },
+      {
+        "name": "stop_oven",
+        "description": "Turn off the oven immediately.",
+        "parameters": {}
+      },
+      {
+        "name": "preheat_oven",
+        "description": "Preheat the oven to a target temperature with optional cooking mode.",
+        "parameters": {
+          "temperature_f": "int",
+          "mode": "bake|broil|convection|roast|warm"
+        }
+      }
+    ],
+    "prompt": "Broil the fish, oven to 500.",
+    "gold_name": "preheat_oven",
+    "gold_args": {
+      "temperature_f": 500,
+      "mode": "broil"
+    },
+    "difficulty": "medium"
+  },
+  {
+    "id": "kit_077",
+    "function": [
+      {
+        "name": "pause_dishwasher",
+        "description": "Pause the currently running dishwasher cycle.",
+        "parameters": {}
+      },
+      {
+        "name": "start_dishwasher",
+        "description": "Begin a dishwasher cycle with a chosen wash program.",
+        "parameters": {
+          "cycle": "normal|heavy|quick|eco|rinse"
+        }
+      },
+      {
+        "name": "preheat_oven",
+        "description": "Preheat the oven to a target temperature with optional cooking mode.",
+        "parameters": {
+          "temperature_f": "int",
+          "mode": "bake|broil|convection|roast|warm"
+        }
+      }
+    ],
+    "prompt": "Cookies need 350 to bake.",
+    "gold_name": "preheat_oven",
+    "gold_args": {
+      "temperature_f": 350,
+      "mode": "bake"
+    },
+    "difficulty": "medium"
+  },
+  {
+    "id": "kit_078",
+    "function": [
+      {
+        "name": "stop_microwave",
+        "description": "Stop the microwave immediately.",
+        "parameters": {}
+      },
+      {
+        "name": "set_coffee_strength",
+        "description": "Set the coffee brewing strength.",
+        "parameters": {
+          "strength": "weak|medium|strong"
+        }
+      },
+      {
+        "name": "preheat_oven",
+        "description": "Preheat the oven to a target temperature with optional cooking mode.",
+        "parameters": {
+          "temperature_f": "int",
+          "mode": "bake|broil|convection|roast|warm"
+        }
+      }
+    ],
+    "prompt": "Vegetables roasting at 400 convection.",
+    "gold_name": "preheat_oven",
+    "gold_args": {
+      "temperature_f": 400,
+      "mode": "convection"
+    },
+    "difficulty": "medium"
+  },
+  {
+    "id": "kit_079",
+    "function": [
+      {
+        "name": "preheat_oven",
+        "description": "Preheat the oven to a target temperature with optional cooking mode.",
+        "parameters": {
+          "temperature_f": "int",
+          "mode": "bake|broil|convection|roast|warm"
+        }
+      },
+      {
+        "name": "stop_microwave",
+        "description": "Stop the microwave immediately.",
+        "parameters": {}
+      },
+      {
+        "name": "query_oven_state",
+        "description": "Return the current oven status, temperature, and mode.",
+        "parameters": {}
+      },
+      {
+        "name": "pause_dishwasher",
+        "description": "Pause the currently running dishwasher cycle.",
+        "parameters": {}
+      }
+    ],
+    "prompt": "Need the oven hotter, push it to 475.",
+    "gold_name": "preheat_oven",
+    "gold_args": {
+      "temperature_f": 475,
+      "mode": "bake"
+    },
+    "difficulty": "medium"
+  },
+  {
+    "id": "kit_080",
+    "function": [
+      {
+        "name": "start_dishwasher",
+        "description": "Begin a dishwasher cycle with a chosen wash program.",
+        "parameters": {
+          "cycle": "normal|heavy|quick|eco|rinse"
+        }
+      },
+      {
+        "name": "preheat_oven",
+        "description": "Preheat the oven to a target temperature with optional cooking mode.",
+        "parameters": {
+          "temperature_f": "int",
+          "mode": "bake|broil|convection|roast|warm"
+        }
+      },
+      {
+        "name": "query_oven_state",
+        "description": "Return the current oven status, temperature, and mode.",
+        "parameters": {}
+      }
+    ],
+    "prompt": "Drop the oven temp to 300 to keep things warm.",
+    "gold_name": "preheat_oven",
+    "gold_args": {
+      "temperature_f": 300,
+      "mode": "warm"
+    },
+    "difficulty": "medium"
+  },
+  {
+    "id": "kit_081",
+    "function": [
+      {
+        "name": "pause_dishwasher",
+        "description": "Pause the currently running dishwasher cycle.",
+        "parameters": {}
+      },
+      {
+        "name": "start_coffee_brew",
+        "description": "Start brewing coffee in the coffee maker.",
+        "parameters": {
+          "cups": "int"
+        }
+      },
+      {
+        "name": "set_oven_timer",
+        "description": "Set a countdown timer on the oven in minutes.",
+        "parameters": {
+          "minutes": "int"
+        }
+      }
+    ],
+    "prompt": "The lasagna needs 45 more minutes - set a timer.",
+    "gold_name": "set_oven_timer",
+    "gold_args": {
+      "minutes": 45
+    },
+    "difficulty": "medium"
+  },
+  {
+    "id": "kit_082",
+    "function": [
+      {
+        "name": "pause_dishwasher",
+        "description": "Pause the currently running dishwasher cycle.",
+        "parameters": {}
+      },
+      {
+        "name": "start_microwave",
+        "description": "Run the microwave at a given power for a given duration in seconds.",
+        "parameters": {
+          "seconds": "int",
+          "power": "int 1-10"
+        }
+      },
+      {
+        "name": "set_oven_timer",
+        "description": "Set a countdown timer on the oven in minutes.",
+        "parameters": {
+          "minutes": "int"
+        }
+      }
+    ],
+    "prompt": "Cookies for 12 minutes.",
+    "gold_name": "set_oven_timer",
+    "gold_args": {
+      "minutes": 12
+    },
+    "difficulty": "medium"
+  },
+  {
+    "id": "kit_083",
+    "function": [
+      {
+        "name": "set_oven_timer",
+        "description": "Set a countdown timer on the oven in minutes.",
+        "parameters": {
+          "minutes": "int"
+        }
+      },
+      {
+        "name": "set_coffee_strength",
+        "description": "Set the coffee brewing strength.",
+        "parameters": {
+          "strength": "weak|medium|strong"
+        }
+      },
+      {
+        "name": "query_oven_state",
+        "description": "Return the current oven status, temperature, and mode.",
+        "parameters": {}
+      }
+    ],
+    "prompt": "Pizza timer 18 minutes.",
+    "gold_name": "set_oven_timer",
+    "gold_args": {
+      "minutes": 18
+    },
+    "difficulty": "medium"
+  },
+  {
+    "id": "kit_084",
+    "function": [
+      {
+        "name": "start_microwave",
+        "description": "Run the microwave at a given power for a given duration in seconds.",
+        "parameters": {
+          "seconds": "int",
+          "power": "int 1-10"
+        }
+      },
+      {
+        "name": "stop_microwave",
+        "description": "Stop the microwave immediately.",
+        "parameters": {}
+      },
+      {
+        "name": "set_oven_timer",
+        "description": "Set a countdown timer on the oven in minutes.",
+        "parameters": {
+          "minutes": "int"
+        }
+      },
+      {
+        "name": "start_coffee_brew",
+        "description": "Start brewing coffee in the coffee maker.",
+        "parameters": {
+          "cups": "int"
+        }
+      }
+    ],
+    "prompt": "Bread for an hour fifteen.",
+    "gold_name": "set_oven_timer",
+    "gold_args": {
+      "minutes": 75
+    },
+    "difficulty": "medium"
+  },
+  {
+    "id": "kit_085",
+    "function": [
+      {
+        "name": "set_fridge_temperature",
+        "description": "Set the refrigerator compartment target temperature.",
+        "parameters": {
+          "temperature_f": "int"
+        }
+      },
+      {
+        "name": "set_oven_timer",
+        "description": "Set a countdown timer on the oven in minutes.",
+        "parameters": {
+          "minutes": "int"
+        }
+      },
+      {
+        "name": "pause_dishwasher",
+        "description": "Pause the currently running dishwasher cycle.",
+        "parameters": {}
+      },
+      {
+        "name": "set_kitchen_lights",
+        "description": "Adjust kitchen overhead lighting brightness/state.",
+        "parameters": {
+          "brightness": "int 0-100",
+          "state": "on|off"
+        }
+      }
+    ],
+    "prompt": "Fish 20 minutes in the oven.",
+    "gold_name": "set_oven_timer",
+    "gold_args": {
+      "minutes": 20
+    },
+    "difficulty": "medium"
+  },
+  {
+    "id": "kit_086",
+    "function": [
+      {
+        "name": "set_oven_timer",
+        "description": "Set a countdown timer on the oven in minutes.",
+        "parameters": {
+          "minutes": "int"
+        }
+      },
+      {
+        "name": "stop_oven",
+        "description": "Turn off the oven immediately.",
+        "parameters": {}
+      },
+      {
+        "name": "set_fridge_temperature",
+        "description": "Set the refrigerator compartment target temperature.",
+        "parameters": {
+          "temperature_f": "int"
+        }
+      },
+      {
+        "name": "set_coffee_strength",
+        "description": "Set the coffee brewing strength.",
+        "parameters": {
+          "strength": "weak|medium|strong"
+        }
+      }
+    ],
+    "prompt": "Roast chicken needs 90 minutes total.",
+    "gold_name": "set_oven_timer",
+    "gold_args": {
+      "minutes": 90
+    },
+    "difficulty": "medium"
+  },
+  {
+    "id": "kit_087",
+    "function": [
+      {
+        "name": "stop_oven",
+        "description": "Turn off the oven immediately.",
+        "parameters": {}
+      },
+      {
+        "name": "start_dishwasher",
+        "description": "Begin a dishwasher cycle with a chosen wash program.",
+        "parameters": {
+          "cycle": "normal|heavy|quick|eco|rinse"
+        }
+      },
+      {
+        "name": "set_oven_timer",
+        "description": "Set a countdown timer on the oven in minutes.",
+        "parameters": {
+          "minutes": "int"
+        }
+      },
+      {
+        "name": "start_microwave",
+        "description": "Run the microwave at a given power for a given duration in seconds.",
+        "parameters": {
+          "seconds": "int",
+          "power": "int 1-10"
+        }
+      }
+    ],
+    "prompt": "Vegetables 25 min timer.",
+    "gold_name": "set_oven_timer",
+    "gold_args": {
+      "minutes": 25
+    },
+    "difficulty": "medium"
+  },
+  {
+    "id": "kit_088",
+    "function": [
+      {
+        "name": "stop_oven",
+        "description": "Turn off the oven immediately.",
+        "parameters": {}
+      },
+      {
+        "name": "start_dishwasher",
+        "description": "Begin a dishwasher cycle with a chosen wash program.",
+        "parameters": {
+          "cycle": "normal|heavy|quick|eco|rinse"
+        }
+      },
+      {
+        "name": "start_coffee_brew",
+        "description": "Start brewing coffee in the coffee maker.",
+        "parameters": {
+          "cups": "int"
+        }
+      },
+      {
+        "name": "pause_dishwasher",
+        "description": "Pause the currently running dishwasher cycle.",
+        "parameters": {}
+      },
+      {
+        "name": "set_oven_timer",
+        "description": "Set a countdown timer on the oven in minutes.",
+        "parameters": {
+          "minutes": "int"
+        }
+      }
+    ],
+    "prompt": "I am done, kill the oven before it burns.",
+    "gold_name": "stop_oven",
+    "gold_args": {},
+    "difficulty": "medium"
+  },
+  {
+    "id": "kit_089",
+    "function": [
+      {
+        "name": "preheat_oven",
+        "description": "Preheat the oven to a target temperature with optional cooking mode.",
+        "parameters": {
+          "temperature_f": "int",
+          "mode": "bake|broil|convection|roast|warm"
+        }
+      },
+      {
+        "name": "stop_oven",
+        "description": "Turn off the oven immediately.",
+        "parameters": {}
+      },
+      {
+        "name": "pause_dishwasher",
+        "description": "Pause the currently running dishwasher cycle.",
+        "parameters": {}
+      },
+      {
+        "name": "start_coffee_brew",
+        "description": "Start brewing coffee in the coffee maker.",
+        "parameters": {
+          "cups": "int"
+        }
+      }
+    ],
+    "prompt": "Oven off, the chicken is ready.",
+    "gold_name": "stop_oven",
+    "gold_args": {},
+    "difficulty": "medium"
+  },
+  {
+    "id": "kit_090",
+    "function": [
+      {
+        "name": "query_fridge_contents",
+        "description": "List items currently inventoried in the refrigerator.",
+        "parameters": {}
+      },
+      {
+        "name": "stop_oven",
+        "description": "Turn off the oven immediately.",
+        "parameters": {}
+      },
+      {
+        "name": "start_coffee_brew",
+        "description": "Start brewing coffee in the coffee maker.",
+        "parameters": {
+          "cups": "int"
+        }
+      },
+      {
+        "name": "preheat_oven",
+        "description": "Preheat the oven to a target temperature with optional cooking mode.",
+        "parameters": {
+          "temperature_f": "int",
+          "mode": "bake|broil|convection|roast|warm"
+        }
+      },
+      {
+        "name": "set_coffee_strength",
+        "description": "Set the coffee brewing strength.",
+        "parameters": {
+          "strength": "weak|medium|strong"
+        }
+      }
+    ],
+    "prompt": "Turn that oven off immediately, smoke alarm went.",
+    "gold_name": "stop_oven",
+    "gold_args": {},
+    "difficulty": "medium"
+  },
+  {
+    "id": "kit_091",
+    "function": [
+      {
+        "name": "set_fridge_temperature",
+        "description": "Set the refrigerator compartment target temperature.",
+        "parameters": {
+          "temperature_f": "int"
+        }
+      },
+      {
+        "name": "pause_dishwasher",
+        "description": "Pause the currently running dishwasher cycle.",
+        "parameters": {}
+      },
+      {
+        "name": "start_dishwasher",
+        "description": "Begin a dishwasher cycle with a chosen wash program.",
+        "parameters": {
+          "cycle": "normal|heavy|quick|eco|rinse"
+        }
+      },
+      {
+        "name": "start_coffee_brew",
+        "description": "Start brewing coffee in the coffee maker.",
+        "parameters": {
+          "cups": "int"
+        }
+      }
+    ],
+    "prompt": "Dishes are caked on, run heavy.",
+    "gold_name": "start_dishwasher",
+    "gold_args": {
+      "cycle": "heavy"
+    },
+    "difficulty": "medium"
+  },
+  {
+    "id": "kit_092",
+    "function": [
+      {
+        "name": "set_kitchen_lights",
+        "description": "Adjust kitchen overhead lighting brightness/state.",
+        "parameters": {
+          "brightness": "int 0-100",
+          "state": "on|off"
+        }
+      },
+      {
+        "name": "start_dishwasher",
+        "description": "Begin a dishwasher cycle with a chosen wash program.",
+        "parameters": {
+          "cycle": "normal|heavy|quick|eco|rinse"
+        }
+      },
+      {
+        "name": "start_coffee_brew",
+        "description": "Start brewing coffee in the coffee maker.",
+        "parameters": {
+          "cups": "int"
+        }
+      },
+      {
+        "name": "query_oven_state",
+        "description": "Return the current oven status, temperature, and mode.",
+        "parameters": {}
+      }
+    ],
+    "prompt": "Just rinse glasses for now.",
+    "gold_name": "start_dishwasher",
+    "gold_args": {
+      "cycle": "rinse"
+    },
+    "difficulty": "medium"
+  },
+  {
+    "id": "kit_093",
+    "function": [
+      {
+        "name": "preheat_oven",
+        "description": "Preheat the oven to a target temperature with optional cooking mode.",
+        "parameters": {
+          "temperature_f": "int",
+          "mode": "bake|broil|convection|roast|warm"
+        }
+      },
+      {
+        "name": "start_microwave",
+        "description": "Run the microwave at a given power for a given duration in seconds.",
+        "parameters": {
+          "seconds": "int",
+          "power": "int 1-10"
+        }
+      },
+      {
+        "name": "query_oven_state",
+        "description": "Return the current oven status, temperature, and mode.",
+        "parameters": {}
+      },
+      {
+        "name": "start_coffee_brew",
+        "description": "Start brewing coffee in the coffee maker.",
+        "parameters": {
+          "cups": "int"
+        }
+      },
+      {
+        "name": "start_dishwasher",
+        "description": "Begin a dishwasher cycle with a chosen wash program.",
+        "parameters": {
+          "cycle": "normal|heavy|quick|eco|rinse"
+        }
+      }
+    ],
+    "prompt": "Quick wash, guests in 30.",
+    "gold_name": "start_dishwasher",
+    "gold_args": {
+      "cycle": "quick"
+    },
+    "difficulty": "medium"
+  },
+  {
+    "id": "kit_094",
+    "function": [
+      {
+        "name": "start_dishwasher",
+        "description": "Begin a dishwasher cycle with a chosen wash program.",
+        "parameters": {
+          "cycle": "normal|heavy|quick|eco|rinse"
+        }
+      },
+      {
+        "name": "set_fridge_temperature",
+        "description": "Set the refrigerator compartment target temperature.",
+        "parameters": {
+          "temperature_f": "int"
+        }
+      },
+      {
+        "name": "preheat_oven",
+        "description": "Preheat the oven to a target temperature with optional cooking mode.",
+        "parameters": {
+          "temperature_f": "int",
+          "mode": "bake|broil|convection|roast|warm"
+        }
+      }
+    ],
+    "prompt": "Energy saver wash overnight.",
+    "gold_name": "start_dishwasher",
+    "gold_args": {
+      "cycle": "eco"
+    },
+    "difficulty": "medium"
+  },
+  {
+    "id": "kit_095",
+    "function": [
+      {
+        "name": "pause_dishwasher",
+        "description": "Pause the currently running dishwasher cycle.",
+        "parameters": {}
+      },
+      {
+        "name": "query_fridge_contents",
+        "description": "List items currently inventoried in the refrigerator.",
+        "parameters": {}
+      },
+      {
+        "name": "set_coffee_strength",
+        "description": "Set the coffee brewing strength.",
+        "parameters": {
+          "strength": "weak|medium|strong"
+        }
+      }
+    ],
+    "prompt": "Forgot to load a plate - pause the wash.",
+    "gold_name": "pause_dishwasher",
+    "gold_args": {},
+    "difficulty": "medium"
+  },
+  {
+    "id": "kit_096",
+    "function": [
+      {
+        "name": "start_coffee_brew",
+        "description": "Start brewing coffee in the coffee maker.",
+        "parameters": {
+          "cups": "int"
+        }
+      },
+      {
+        "name": "set_fridge_temperature",
+        "description": "Set the refrigerator compartment target temperature.",
+        "parameters": {
+          "temperature_f": "int"
+        }
+      },
+      {
+        "name": "pause_dishwasher",
+        "description": "Pause the currently running dishwasher cycle.",
+        "parameters": {}
+      },
+      {
+        "name": "set_oven_timer",
+        "description": "Set a countdown timer on the oven in minutes.",
+        "parameters": {
+          "minutes": "int"
+        }
+      }
+    ],
+    "prompt": "Hold the dishwasher, need to add forks.",
+    "gold_name": "pause_dishwasher",
+    "gold_args": {},
+    "difficulty": "medium"
+  },
+  {
+    "id": "kit_097",
+    "function": [
+      {
+        "name": "start_dishwasher",
+        "description": "Begin a dishwasher cycle with a chosen wash program.",
+        "parameters": {
+          "cycle": "normal|heavy|quick|eco|rinse"
+        }
+      },
+      {
+        "name": "query_oven_state",
+        "description": "Return the current oven status, temperature, and mode.",
+        "parameters": {}
+      },
+      {
+        "name": "set_oven_timer",
+        "description": "Set a countdown timer on the oven in minutes.",
+        "parameters": {
+          "minutes": "int"
+        }
+      },
+      {
+        "name": "set_fridge_temperature",
+        "description": "Set the refrigerator compartment target temperature.",
+        "parameters": {
+          "temperature_f": "int"
+        }
+      }
+    ],
+    "prompt": "Fridge feels warm, drop it to 35.",
+    "gold_name": "set_fridge_temperature",
+    "gold_args": {
+      "temperature_f": 35
+    },
+    "difficulty": "medium"
+  },
+  {
+    "id": "kit_098",
+    "function": [
+      {
+        "name": "preheat_oven",
+        "description": "Preheat the oven to a target temperature with optional cooking mode.",
+        "parameters": {
+          "temperature_f": "int",
+          "mode": "bake|broil|convection|roast|warm"
+        }
+      },
+      {
+        "name": "stop_microwave",
+        "description": "Stop the microwave immediately.",
+        "parameters": {}
+      },
+      {
+        "name": "set_fridge_temperature",
+        "description": "Set the refrigerator compartment target temperature.",
+        "parameters": {
+          "temperature_f": "int"
+        }
+      }
+    ],
+    "prompt": "Set fridge a bit colder, 36.",
+    "gold_name": "set_fridge_temperature",
+    "gold_args": {
+      "temperature_f": 36
+    },
+    "difficulty": "medium"
+  },
+  {
+    "id": "kit_099",
+    "function": [
+      {
+        "name": "set_coffee_strength",
+        "description": "Set the coffee brewing strength.",
+        "parameters": {
+          "strength": "weak|medium|strong"
+        }
+      },
+      {
+        "name": "query_oven_state",
+        "description": "Return the current oven status, temperature, and mode.",
+        "parameters": {}
+      },
+      {
+        "name": "set_fridge_temperature",
+        "description": "Set the refrigerator compartment target temperature.",
+        "parameters": {
+          "temperature_f": "int"
+        }
+      }
+    ],
+    "prompt": "Bring fridge up to 40, freezing the lettuce.",
+    "gold_name": "set_fridge_temperature",
+    "gold_args": {
+      "temperature_f": 40
+    },
+    "difficulty": "medium"
+  },
+  {
+    "id": "kit_100",
+    "function": [
+      {
+        "name": "query_fridge_contents",
+        "description": "List items currently inventoried in the refrigerator.",
+        "parameters": {}
+      },
+      {
+        "name": "set_fridge_temperature",
+        "description": "Set the refrigerator compartment target temperature.",
+        "parameters": {
+          "temperature_f": "int"
+        }
+      },
+      {
+        "name": "pause_dishwasher",
+        "description": "Pause the currently running dishwasher cycle.",
+        "parameters": {}
+      },
+      {
+        "name": "set_kitchen_lights",
+        "description": "Adjust kitchen overhead lighting brightness/state.",
+        "parameters": {
+          "brightness": "int 0-100",
+          "state": "on|off"
+        }
+      }
+    ],
+    "prompt": "Make fridge 38 degrees for storing leftovers.",
+    "gold_name": "set_fridge_temperature",
+    "gold_args": {
+      "temperature_f": 38
+    },
+    "difficulty": "medium"
+  },
+  {
+    "id": "kit_101",
+    "function": [
+      {
+        "name": "pause_dishwasher",
+        "description": "Pause the currently running dishwasher cycle.",
+        "parameters": {}
+      },
+      {
+        "name": "query_fridge_contents",
+        "description": "List items currently inventoried in the refrigerator.",
+        "parameters": {}
+      },
+      {
+        "name": "set_oven_timer",
+        "description": "Set a countdown timer on the oven in minutes.",
+        "parameters": {
+          "minutes": "int"
+        }
+      }
+    ],
+    "prompt": "Do we still have eggs?",
+    "gold_name": "query_fridge_contents",
+    "gold_args": {},
+    "difficulty": "medium"
+  },
+  {
+    "id": "kit_102",
+    "function": [
+      {
+        "name": "stop_microwave",
+        "description": "Stop the microwave immediately.",
+        "parameters": {}
+      },
+      {
+        "name": "query_fridge_contents",
+        "description": "List items currently inventoried in the refrigerator.",
+        "parameters": {}
+      },
+      {
+        "name": "query_oven_state",
+        "description": "Return the current oven status, temperature, and mode.",
+        "parameters": {}
+      },
+      {
+        "name": "start_coffee_brew",
+        "description": "Start brewing coffee in the coffee maker.",
+        "parameters": {
+          "cups": "int"
+        }
+      }
+    ],
+    "prompt": "Check if there is milk left.",
+    "gold_name": "query_fridge_contents",
+    "gold_args": {},
+    "difficulty": "medium"
+  },
+  {
+    "id": "kit_103",
+    "function": [
+      {
+        "name": "stop_microwave",
+        "description": "Stop the microwave immediately.",
+        "parameters": {}
+      },
+      {
+        "name": "query_oven_state",
+        "description": "Return the current oven status, temperature, and mode.",
+        "parameters": {}
+      },
+      {
+        "name": "query_fridge_contents",
+        "description": "List items currently inventoried in the refrigerator.",
+        "parameters": {}
+      }
+    ],
+    "prompt": "What veggies do I have available?",
+    "gold_name": "query_fridge_contents",
+    "gold_args": {},
+    "difficulty": "medium"
+  },
+  {
+    "id": "kit_104",
+    "function": [
+      {
+        "name": "stop_microwave",
+        "description": "Stop the microwave immediately.",
+        "parameters": {}
+      },
+      {
+        "name": "query_oven_state",
+        "description": "Return the current oven status, temperature, and mode.",
+        "parameters": {}
+      },
+      {
+        "name": "pause_dishwasher",
+        "description": "Pause the currently running dishwasher cycle.",
+        "parameters": {}
+      },
+      {
+        "name": "query_fridge_contents",
+        "description": "List items currently inventoried in the refrigerator.",
+        "parameters": {}
+      },
+      {
+        "name": "set_oven_timer",
+        "description": "Set a countdown timer on the oven in minutes.",
+        "parameters": {
+          "minutes": "int"
+        }
+      }
+    ],
+    "prompt": "Need to plan dinner - inventory the fridge.",
+    "gold_name": "query_fridge_contents",
+    "gold_args": {},
+    "difficulty": "medium"
+  },
+  {
+    "id": "kit_105",
+    "function": [
+      {
+        "name": "set_oven_timer",
+        "description": "Set a countdown timer on the oven in minutes.",
+        "parameters": {
+          "minutes": "int"
+        }
+      },
+      {
+        "name": "set_kitchen_lights",
+        "description": "Adjust kitchen overhead lighting brightness/state.",
+        "parameters": {
+          "brightness": "int 0-100",
+          "state": "on|off"
+        }
+      },
+      {
+        "name": "set_fridge_temperature",
+        "description": "Set the refrigerator compartment target temperature.",
+        "parameters": {
+          "temperature_f": "int"
+        }
+      },
+      {
+        "name": "start_microwave",
+        "description": "Run the microwave at a given power for a given duration in seconds.",
+        "parameters": {
+          "seconds": "int",
+          "power": "int 1-10"
+        }
+      },
+      {
+        "name": "start_coffee_brew",
+        "description": "Start brewing coffee in the coffee maker.",
+        "parameters": {
+          "cups": "int"
+        }
+      }
+    ],
+    "prompt": "Brew a full pot, 10 cups.",
+    "gold_name": "start_coffee_brew",
+    "gold_args": {
+      "cups": 10
+    },
+    "difficulty": "medium"
+  },
+  {
+    "id": "kit_106",
+    "function": [
+      {
+        "name": "query_oven_state",
+        "description": "Return the current oven status, temperature, and mode.",
+        "parameters": {}
+      },
+      {
+        "name": "start_coffee_brew",
+        "description": "Start brewing coffee in the coffee maker.",
+        "parameters": {
+          "cups": "int"
+        }
+      },
+      {
+        "name": "set_coffee_strength",
+        "description": "Set the coffee brewing strength.",
+        "parameters": {
+          "strength": "weak|medium|strong"
+        }
+      },
+      {
+        "name": "set_fridge_temperature",
+        "description": "Set the refrigerator compartment target temperature.",
+        "parameters": {
+          "temperature_f": "int"
+        }
+      }
+    ],
+    "prompt": "Coffee for two, 2 cups.",
+    "gold_name": "start_coffee_brew",
+    "gold_args": {
+      "cups": 2
+    },
+    "difficulty": "medium"
+  },
+  {
+    "id": "kit_107",
+    "function": [
+      {
+        "name": "start_coffee_brew",
+        "description": "Start brewing coffee in the coffee maker.",
+        "parameters": {
+          "cups": "int"
+        }
+      },
+      {
+        "name": "query_oven_state",
+        "description": "Return the current oven status, temperature, and mode.",
+        "parameters": {}
+      },
+      {
+        "name": "start_microwave",
+        "description": "Run the microwave at a given power for a given duration in seconds.",
+        "parameters": {
+          "seconds": "int",
+          "power": "int 1-10"
+        }
+      },
+      {
+        "name": "set_kitchen_lights",
+        "description": "Adjust kitchen overhead lighting brightness/state.",
+        "parameters": {
+          "brightness": "int 0-100",
+          "state": "on|off"
+        }
+      },
+      {
+        "name": "pause_dishwasher",
+        "description": "Pause the currently running dishwasher cycle.",
+        "parameters": {}
+      }
+    ],
+    "prompt": "Get me 5 cups, big morning.",
+    "gold_name": "start_coffee_brew",
+    "gold_args": {
+      "cups": 5
+    },
+    "difficulty": "medium"
+  },
+  {
+    "id": "kit_108",
+    "function": [
+      {
+        "name": "set_oven_timer",
+        "description": "Set a countdown timer on the oven in minutes.",
+        "parameters": {
+          "minutes": "int"
+        }
+      },
+      {
+        "name": "start_dishwasher",
+        "description": "Begin a dishwasher cycle with a chosen wash program.",
+        "parameters": {
+          "cycle": "normal|heavy|quick|eco|rinse"
+        }
+      },
+      {
+        "name": "start_coffee_brew",
+        "description": "Start brewing coffee in the coffee maker.",
+        "parameters": {
+          "cups": "int"
+        }
+      },
+      {
+        "name": "pause_dishwasher",
+        "description": "Pause the currently running dishwasher cycle.",
+        "parameters": {}
+      }
+    ],
+    "prompt": "One quick cup before I leave.",
+    "gold_name": "start_coffee_brew",
+    "gold_args": {
+      "cups": 1
+    },
+    "difficulty": "medium"
+  },
+  {
+    "id": "kit_109",
+    "function": [
+      {
+        "name": "query_oven_state",
+        "description": "Return the current oven status, temperature, and mode.",
+        "parameters": {}
+      },
+      {
+        "name": "set_fridge_temperature",
+        "description": "Set the refrigerator compartment target temperature.",
+        "parameters": {
+          "temperature_f": "int"
+        }
+      },
+      {
+        "name": "stop_microwave",
+        "description": "Stop the microwave immediately.",
+        "parameters": {}
+      },
+      {
+        "name": "query_fridge_contents",
+        "description": "List items currently inventoried in the refrigerator.",
+        "parameters": {}
+      },
+      {
+        "name": "start_coffee_brew",
+        "description": "Start brewing coffee in the coffee maker.",
+        "parameters": {
+          "cups": "int"
+        }
+      }
+    ],
+    "prompt": "Brew 4 cups for the meeting.",
+    "gold_name": "start_coffee_brew",
+    "gold_args": {
+      "cups": 4
+    },
+    "difficulty": "medium"
+  },
+  {
+    "id": "kit_110",
+    "function": [
+      {
+        "name": "set_coffee_strength",
+        "description": "Set the coffee brewing strength.",
+        "parameters": {
+          "strength": "weak|medium|strong"
+        }
+      },
+      {
+        "name": "pause_dishwasher",
+        "description": "Pause the currently running dishwasher cycle.",
+        "parameters": {}
+      },
+      {
+        "name": "start_dishwasher",
+        "description": "Begin a dishwasher cycle with a chosen wash program.",
+        "parameters": {
+          "cycle": "normal|heavy|quick|eco|rinse"
+        }
+      },
+      {
+        "name": "set_fridge_temperature",
+        "description": "Set the refrigerator compartment target temperature.",
+        "parameters": {
+          "temperature_f": "int"
+        }
+      }
+    ],
+    "prompt": "Make the coffee stronger today.",
+    "gold_name": "set_coffee_strength",
+    "gold_args": {
+      "strength": "strong"
+    },
+    "difficulty": "medium"
+  },
+  {
+    "id": "kit_111",
+    "function": [
+      {
+        "name": "start_microwave",
+        "description": "Run the microwave at a given power for a given duration in seconds.",
+        "parameters": {
+          "seconds": "int",
+          "power": "int 1-10"
+        }
+      },
+      {
+        "name": "set_coffee_strength",
+        "description": "Set the coffee brewing strength.",
+        "parameters": {
+          "strength": "weak|medium|strong"
+        }
+      },
+      {
+        "name": "set_oven_timer",
+        "description": "Set a countdown timer on the oven in minutes.",
+        "parameters": {
+          "minutes": "int"
+        }
+      },
+      {
+        "name": "start_dishwasher",
+        "description": "Begin a dishwasher cycle with a chosen wash program.",
+        "parameters": {
+          "cycle": "normal|heavy|quick|eco|rinse"
+        }
+      },
+      {
+        "name": "preheat_oven",
+        "description": "Preheat the oven to a target temperature with optional cooking mode.",
+        "parameters": {
+          "temperature_f": "int",
+          "mode": "bake|broil|convection|roast|warm"
+        }
+      }
+    ],
+    "prompt": "I am on a diet - weak coffee please.",
+    "gold_name": "set_coffee_strength",
+    "gold_args": {
+      "strength": "weak"
+    },
+    "difficulty": "medium"
+  },
+  {
+    "id": "kit_112",
+    "function": [
+      {
+        "name": "query_oven_state",
+        "description": "Return the current oven status, temperature, and mode.",
+        "parameters": {}
+      },
+      {
+        "name": "set_kitchen_lights",
+        "description": "Adjust kitchen overhead lighting brightness/state.",
+        "parameters": {
+          "brightness": "int 0-100",
+          "state": "on|off"
+        }
+      },
+      {
+        "name": "start_coffee_brew",
+        "description": "Start brewing coffee in the coffee maker.",
+        "parameters": {
+          "cups": "int"
+        }
+      },
+      {
+        "name": "stop_microwave",
+        "description": "Stop the microwave immediately.",
+        "parameters": {}
+      },
+      {
+        "name": "set_coffee_strength",
+        "description": "Set the coffee brewing strength.",
+        "parameters": {
+          "strength": "weak|medium|strong"
+        }
+      }
+    ],
+    "prompt": "Bump coffee up to strong.",
+    "gold_name": "set_coffee_strength",
+    "gold_args": {
+      "strength": "strong"
+    },
+    "difficulty": "medium"
+  },
+  {
+    "id": "kit_113",
+    "function": [
+      {
+        "name": "set_coffee_strength",
+        "description": "Set the coffee brewing strength.",
+        "parameters": {
+          "strength": "weak|medium|strong"
+        }
+      },
+      {
+        "name": "pause_dishwasher",
+        "description": "Pause the currently running dishwasher cycle.",
+        "parameters": {}
+      },
+      {
+        "name": "set_kitchen_lights",
+        "description": "Adjust kitchen overhead lighting brightness/state.",
+        "parameters": {
+          "brightness": "int 0-100",
+          "state": "on|off"
+        }
+      },
+      {
+        "name": "start_dishwasher",
+        "description": "Begin a dishwasher cycle with a chosen wash program.",
+        "parameters": {
+          "cycle": "normal|heavy|quick|eco|rinse"
+        }
+      }
+    ],
+    "prompt": "Lighter brew today, weak.",
+    "gold_name": "set_coffee_strength",
+    "gold_args": {
+      "strength": "weak"
+    },
+    "difficulty": "medium"
+  },
+  {
+    "id": "kit_114",
+    "function": [
+      {
+        "name": "set_coffee_strength",
+        "description": "Set the coffee brewing strength.",
+        "parameters": {
+          "strength": "weak|medium|strong"
+        }
+      },
+      {
+        "name": "set_kitchen_lights",
+        "description": "Adjust kitchen overhead lighting brightness/state.",
+        "parameters": {
+          "brightness": "int 0-100",
+          "state": "on|off"
+        }
+      },
+      {
+        "name": "set_fridge_temperature",
+        "description": "Set the refrigerator compartment target temperature.",
+        "parameters": {
+          "temperature_f": "int"
+        }
+      },
+      {
+        "name": "start_microwave",
+        "description": "Run the microwave at a given power for a given duration in seconds.",
+        "parameters": {
+          "seconds": "int",
+          "power": "int 1-10"
+        }
+      }
+    ],
+    "prompt": "Default strength medium.",
+    "gold_name": "set_coffee_strength",
+    "gold_args": {
+      "strength": "medium"
+    },
+    "difficulty": "medium"
+  },
+  {
+    "id": "kit_115",
+    "function": [
+      {
+        "name": "pause_dishwasher",
+        "description": "Pause the currently running dishwasher cycle.",
+        "parameters": {}
+      },
+      {
+        "name": "start_dishwasher",
+        "description": "Begin a dishwasher cycle with a chosen wash program.",
+        "parameters": {
+          "cycle": "normal|heavy|quick|eco|rinse"
+        }
+      },
+      {
+        "name": "set_kitchen_lights",
+        "description": "Adjust kitchen overhead lighting brightness/state.",
+        "parameters": {
+          "brightness": "int 0-100",
+          "state": "on|off"
+        }
+      },
+      {
+        "name": "start_microwave",
+        "description": "Run the microwave at a given power for a given duration in seconds.",
+        "parameters": {
+          "seconds": "int",
+          "power": "int 1-10"
+        }
+      }
+    ],
+    "prompt": "Reheat leftovers 90 seconds power 7.",
+    "gold_name": "start_microwave",
+    "gold_args": {
+      "seconds": 90,
+      "power": 7
+    },
+    "difficulty": "medium"
+  },
+  {
+    "id": "kit_116",
+    "function": [
+      {
+        "name": "set_coffee_strength",
+        "description": "Set the coffee brewing strength.",
+        "parameters": {
+          "strength": "weak|medium|strong"
+        }
+      },
+      {
+        "name": "stop_oven",
+        "description": "Turn off the oven immediately.",
+        "parameters": {}
+      },
+      {
+        "name": "start_microwave",
+        "description": "Run the microwave at a given power for a given duration in seconds.",
+        "parameters": {
+          "seconds": "int",
+          "power": "int 1-10"
+        }
+      },
+      {
+        "name": "set_oven_timer",
+        "description": "Set a countdown timer on the oven in minutes.",
+        "parameters": {
+          "minutes": "int"
+        }
+      }
+    ],
+    "prompt": "Microwave the soup 2 min full power.",
+    "gold_name": "start_microwave",
+    "gold_args": {
+      "seconds": 120,
+      "power": 10
+    },
+    "difficulty": "medium"
+  },
+  {
+    "id": "kit_117",
+    "function": [
+      {
+        "name": "set_kitchen_lights",
+        "description": "Adjust kitchen overhead lighting brightness/state.",
+        "parameters": {
+          "brightness": "int 0-100",
+          "state": "on|off"
+        }
+      },
+      {
+        "name": "set_coffee_strength",
+        "description": "Set the coffee brewing strength.",
+        "parameters": {
+          "strength": "weak|medium|strong"
+        }
+      },
+      {
+        "name": "start_microwave",
+        "description": "Run the microwave at a given power for a given duration in seconds.",
+        "parameters": {
+          "seconds": "int",
+          "power": "int 1-10"
+        }
+      },
+      {
+        "name": "stop_microwave",
+        "description": "Stop the microwave immediately.",
+        "parameters": {}
+      }
+    ],
+    "prompt": "Defrost chicken 5 minutes low power.",
+    "gold_name": "start_microwave",
+    "gold_args": {
+      "seconds": 300,
+      "power": 3
+    },
+    "difficulty": "medium"
+  },
+  {
+    "id": "kit_118",
+    "function": [
+      {
+        "name": "start_dishwasher",
+        "description": "Begin a dishwasher cycle with a chosen wash program.",
+        "parameters": {
+          "cycle": "normal|heavy|quick|eco|rinse"
+        }
+      },
+      {
+        "name": "stop_oven",
+        "description": "Turn off the oven immediately.",
+        "parameters": {}
+      },
+      {
+        "name": "start_microwave",
+        "description": "Run the microwave at a given power for a given duration in seconds.",
+        "parameters": {
+          "seconds": "int",
+          "power": "int 1-10"
+        }
+      },
+      {
+        "name": "set_fridge_temperature",
+        "description": "Set the refrigerator compartment target temperature.",
+        "parameters": {
+          "temperature_f": "int"
+        }
+      }
+    ],
+    "prompt": "Warm milk 45 seconds power 5.",
+    "gold_name": "start_microwave",
+    "gold_args": {
+      "seconds": 45,
+      "power": 5
+    },
+    "difficulty": "medium"
+  },
+  {
+    "id": "kit_119",
+    "function": [
+      {
+        "name": "preheat_oven",
+        "description": "Preheat the oven to a target temperature with optional cooking mode.",
+        "parameters": {
+          "temperature_f": "int",
+          "mode": "bake|broil|convection|roast|warm"
+        }
+      },
+      {
+        "name": "start_microwave",
+        "description": "Run the microwave at a given power for a given duration in seconds.",
+        "parameters": {
+          "seconds": "int",
+          "power": "int 1-10"
+        }
+      },
+      {
+        "name": "set_coffee_strength",
+        "description": "Set the coffee brewing strength.",
+        "parameters": {
+          "strength": "weak|medium|strong"
+        }
+      },
+      {
+        "name": "set_kitchen_lights",
+        "description": "Adjust kitchen overhead lighting brightness/state.",
+        "parameters": {
+          "brightness": "int 0-100",
+          "state": "on|off"
+        }
+      }
+    ],
+    "prompt": "Pop popcorn 3 minutes high.",
+    "gold_name": "start_microwave",
+    "gold_args": {
+      "seconds": 180,
+      "power": 9
+    },
+    "difficulty": "medium"
+  },
+  {
+    "id": "kit_120",
+    "function": [
+      {
+        "name": "stop_microwave",
+        "description": "Stop the microwave immediately.",
+        "parameters": {}
+      },
+      {
+        "name": "set_oven_timer",
+        "description": "Set a countdown timer on the oven in minutes.",
+        "parameters": {
+          "minutes": "int"
+        }
+      },
+      {
+        "name": "start_coffee_brew",
+        "description": "Start brewing coffee in the coffee maker.",
+        "parameters": {
+          "cups": "int"
+        }
+      },
+      {
+        "name": "pause_dishwasher",
+        "description": "Pause the currently running dishwasher cycle.",
+        "parameters": {}
+      },
+      {
+        "name": "preheat_oven",
+        "description": "Preheat the oven to a target temperature with optional cooking mode.",
+        "parameters": {
+          "temperature_f": "int",
+          "mode": "bake|broil|convection|roast|warm"
+        }
+      }
+    ],
+    "prompt": "Microwave going too long - stop it.",
+    "gold_name": "stop_microwave",
+    "gold_args": {},
+    "difficulty": "medium"
+  },
+  {
+    "id": "kit_121",
+    "function": [
+      {
+        "name": "pause_dishwasher",
+        "description": "Pause the currently running dishwasher cycle.",
+        "parameters": {}
+      },
+      {
+        "name": "stop_microwave",
+        "description": "Stop the microwave immediately.",
+        "parameters": {}
+      },
+      {
+        "name": "preheat_oven",
+        "description": "Preheat the oven to a target temperature with optional cooking mode.",
+        "parameters": {
+          "temperature_f": "int",
+          "mode": "bake|broil|convection|roast|warm"
+        }
+      }
+    ],
+    "prompt": "I overheard a pop, kill the microwave.",
+    "gold_name": "stop_microwave",
+    "gold_args": {},
+    "difficulty": "medium"
+  },
+  {
+    "id": "kit_122",
+    "function": [
+      {
+        "name": "query_fridge_contents",
+        "description": "List items currently inventoried in the refrigerator.",
+        "parameters": {}
+      },
+      {
+        "name": "start_coffee_brew",
+        "description": "Start brewing coffee in the coffee maker.",
+        "parameters": {
+          "cups": "int"
+        }
+      },
+      {
+        "name": "query_oven_state",
+        "description": "Return the current oven status, temperature, and mode.",
+        "parameters": {}
+      }
+    ],
+    "prompt": "What is cooking in the oven, status?",
+    "gold_name": "query_oven_state",
+    "gold_args": {},
+    "difficulty": "medium"
+  },
+  {
+    "id": "kit_123",
+    "function": [
+      {
+        "name": "start_microwave",
+        "description": "Run the microwave at a given power for a given duration in seconds.",
+        "parameters": {
+          "seconds": "int",
+          "power": "int 1-10"
+        }
+      },
+      {
+        "name": "query_oven_state",
+        "description": "Return the current oven status, temperature, and mode.",
+        "parameters": {}
+      },
+      {
+        "name": "stop_oven",
+        "description": "Turn off the oven immediately.",
+        "parameters": {}
+      }
+    ],
+    "prompt": "Has the oven hit temp yet?",
+    "gold_name": "query_oven_state",
+    "gold_args": {},
+    "difficulty": "medium"
+  },
+  {
+    "id": "kit_124",
+    "function": [
+      {
+        "name": "set_coffee_strength",
+        "description": "Set the coffee brewing strength.",
+        "parameters": {
+          "strength": "weak|medium|strong"
+        }
+      },
+      {
+        "name": "query_oven_state",
+        "description": "Return the current oven status, temperature, and mode.",
+        "parameters": {}
+      },
+      {
+        "name": "set_oven_timer",
+        "description": "Set a countdown timer on the oven in minutes.",
+        "parameters": {
+          "minutes": "int"
+        }
+      }
+    ],
+    "prompt": "Tell me the oven mode and temp.",
+    "gold_name": "query_oven_state",
+    "gold_args": {},
+    "difficulty": "medium"
+  },
+  {
+    "id": "kit_125",
+    "function": [
+      {
+        "name": "start_coffee_brew",
+        "description": "Start brewing coffee in the coffee maker.",
+        "parameters": {
+          "cups": "int"
+        }
+      },
+      {
+        "name": "set_kitchen_lights",
+        "description": "Adjust kitchen overhead lighting brightness/state.",
+        "parameters": {
+          "brightness": "int 0-100",
+          "state": "on|off"
+        }
+      },
+      {
+        "name": "query_fridge_contents",
+        "description": "List items currently inventoried in the refrigerator.",
+        "parameters": {}
+      },
+      {
+        "name": "stop_microwave",
+        "description": "Stop the microwave immediately.",
+        "parameters": {}
+      },
+      {
+        "name": "pause_dishwasher",
+        "description": "Pause the currently running dishwasher cycle.",
+        "parameters": {}
+      }
+    ],
+    "prompt": "Brighten the kitchen up, full lights.",
+    "gold_name": "set_kitchen_lights",
+    "gold_args": {
+      "brightness": 100,
+      "state": "on"
+    },
+    "difficulty": "medium"
+  },
+  {
+    "id": "kit_126",
+    "function": [
+      {
+        "name": "query_oven_state",
+        "description": "Return the current oven status, temperature, and mode.",
+        "parameters": {}
+      },
+      {
+        "name": "start_microwave",
+        "description": "Run the microwave at a given power for a given duration in seconds.",
+        "parameters": {
+          "seconds": "int",
+          "power": "int 1-10"
+        }
+      },
+      {
+        "name": "start_dishwasher",
+        "description": "Begin a dishwasher cycle with a chosen wash program.",
+        "parameters": {
+          "cycle": "normal|heavy|quick|eco|rinse"
+        }
+      },
+      {
+        "name": "set_kitchen_lights",
+        "description": "Adjust kitchen overhead lighting brightness/state.",
+        "parameters": {
+          "brightness": "int 0-100",
+          "state": "on|off"
+        }
+      },
+      {
+        "name": "set_oven_timer",
+        "description": "Set a countdown timer on the oven in minutes.",
+        "parameters": {
+          "minutes": "int"
+        }
+      }
+    ],
+    "prompt": "Lights to 60, ambient for dinner.",
+    "gold_name": "set_kitchen_lights",
+    "gold_args": {
+      "brightness": 60,
+      "state": "on"
+    },
+    "difficulty": "medium"
+  },
+  {
+    "id": "kit_127",
+    "function": [
+      {
+        "name": "set_coffee_strength",
+        "description": "Set the coffee brewing strength.",
+        "parameters": {
+          "strength": "weak|medium|strong"
+        }
+      },
+      {
+        "name": "set_oven_timer",
+        "description": "Set a countdown timer on the oven in minutes.",
+        "parameters": {
+          "minutes": "int"
+        }
+      },
+      {
+        "name": "set_kitchen_lights",
+        "description": "Adjust kitchen overhead lighting brightness/state.",
+        "parameters": {
+          "brightness": "int 0-100",
+          "state": "on|off"
+        }
+      }
+    ],
+    "prompt": "Dim kitchen to 20, late night snack.",
+    "gold_name": "set_kitchen_lights",
+    "gold_args": {
+      "brightness": 20,
+      "state": "on"
+    },
+    "difficulty": "medium"
+  },
+  {
+    "id": "kit_128",
+    "function": [
+      {
+        "name": "start_coffee_brew",
+        "description": "Start brewing coffee in the coffee maker.",
+        "parameters": {
+          "cups": "int"
+        }
+      },
+      {
+        "name": "query_oven_state",
+        "description": "Return the current oven status, temperature, and mode.",
+        "parameters": {}
+      },
+      {
+        "name": "set_kitchen_lights",
+        "description": "Adjust kitchen overhead lighting brightness/state.",
+        "parameters": {
+          "brightness": "int 0-100",
+          "state": "on|off"
+        }
+      },
+      {
+        "name": "start_microwave",
+        "description": "Run the microwave at a given power for a given duration in seconds.",
+        "parameters": {
+          "seconds": "int",
+          "power": "int 1-10"
+        }
+      }
+    ],
+    "prompt": "Kill the kitchen lights, going to bed.",
+    "gold_name": "set_kitchen_lights",
+    "gold_args": {
+      "brightness": 0,
+      "state": "off"
+    },
+    "difficulty": "medium"
+  },
+  {
+    "id": "kit_129",
+    "function": [
+      {
+        "name": "query_oven_state",
+        "description": "Return the current oven status, temperature, and mode.",
+        "parameters": {}
+      },
+      {
+        "name": "start_coffee_brew",
+        "description": "Start brewing coffee in the coffee maker.",
+        "parameters": {
+          "cups": "int"
+        }
+      },
+      {
+        "name": "pause_dishwasher",
+        "description": "Pause the currently running dishwasher cycle.",
+        "parameters": {}
+      },
+      {
+        "name": "set_kitchen_lights",
+        "description": "Adjust kitchen overhead lighting brightness/state.",
+        "parameters": {
+          "brightness": "int 0-100",
+          "state": "on|off"
+        }
+      }
+    ],
+    "prompt": "Kitchen lights to 80 percent.",
+    "gold_name": "set_kitchen_lights",
+    "gold_args": {
+      "brightness": 80,
+      "state": "on"
+    },
+    "difficulty": "medium"
+  },
+  {
+    "id": "kit_130",
+    "function": [
+      {
+        "name": "stop_microwave",
+        "description": "Stop the microwave immediately.",
+        "parameters": {}
+      },
+      {
+        "name": "start_microwave",
+        "description": "Run the microwave at a given power for a given duration in seconds.",
+        "parameters": {
+          "seconds": "int",
+          "power": "int 1-10"
+        }
+      },
+      {
+        "name": "set_kitchen_lights",
+        "description": "Adjust kitchen overhead lighting brightness/state.",
+        "parameters": {
+          "brightness": "int 0-100",
+          "state": "on|off"
+        }
+      },
+      {
+        "name": "start_dishwasher",
+        "description": "Begin a dishwasher cycle with a chosen wash program.",
+        "parameters": {
+          "cycle": "normal|heavy|quick|eco|rinse"
+        }
+      }
+    ],
+    "prompt": "Halfway lights, 50 percent.",
+    "gold_name": "set_kitchen_lights",
+    "gold_args": {
+      "brightness": 50,
+      "state": "on"
+    },
+    "difficulty": "medium"
+  },
+  {
+    "id": "kit_131",
+    "function": [
+      {
+        "name": "stop_oven",
+        "description": "Turn off the oven immediately.",
+        "parameters": {}
+      },
+      {
+        "name": "set_fridge_temperature",
+        "description": "Set the refrigerator compartment target temperature.",
+        "parameters": {
+          "temperature_f": "int"
+        }
+      },
+      {
+        "name": "set_kitchen_lights",
+        "description": "Adjust kitchen overhead lighting brightness/state.",
+        "parameters": {
+          "brightness": "int 0-100",
+          "state": "on|off"
+        }
+      },
+      {
+        "name": "start_dishwasher",
+        "description": "Begin a dishwasher cycle with a chosen wash program.",
+        "parameters": {
+          "cycle": "normal|heavy|quick|eco|rinse"
+        }
+      },
+      {
+        "name": "preheat_oven",
+        "description": "Preheat the oven to a target temperature with optional cooking mode.",
+        "parameters": {
+          "temperature_f": "int",
+          "mode": "bake|broil|convection|roast|warm"
+        }
+      }
+    ],
+    "prompt": "Pizza came out soggy last time, lets crank the oven 25 degrees hotter than 450 with circulating air.",
+    "gold_name": "preheat_oven",
+    "gold_args": {
+      "temperature_f": 475,
+      "mode": "convection"
+    },
+    "difficulty": "hard"
+  },
+  {
+    "id": "kit_132",
+    "function": [
+      {
+        "name": "preheat_oven",
+        "description": "Preheat the oven to a target temperature with optional cooking mode.",
+        "parameters": {
+          "temperature_f": "int",
+          "mode": "bake|broil|convection|roast|warm"
+        }
+      },
+      {
+        "name": "set_coffee_strength",
+        "description": "Set the coffee brewing strength.",
+        "parameters": {
+          "strength": "weak|medium|strong"
+        }
+      },
+      {
+        "name": "stop_oven",
+        "description": "Turn off the oven immediately.",
+        "parameters": {}
+      },
+      {
+        "name": "set_fridge_temperature",
+        "description": "Set the refrigerator compartment target temperature.",
+        "parameters": {
+          "temperature_f": "int"
+        }
+      }
+    ],
+    "prompt": "Recipe says 220 Celsius but I always need 10 below that for my oven.",
+    "gold_name": "preheat_oven",
+    "gold_args": {
+      "temperature_f": 410,
+      "mode": "bake"
+    },
+    "difficulty": "hard"
+  },
+  {
+    "id": "kit_133",
+    "function": [
+      {
+        "name": "preheat_oven",
+        "description": "Preheat the oven to a target temperature with optional cooking mode.",
+        "parameters": {
+          "temperature_f": "int",
+          "mode": "bake|broil|convection|roast|warm"
+        }
+      },
+      {
+        "name": "stop_oven",
+        "description": "Turn off the oven immediately.",
+        "parameters": {}
+      },
+      {
+        "name": "stop_microwave",
+        "description": "Stop the microwave immediately.",
+        "parameters": {}
+      },
+      {
+        "name": "set_oven_timer",
+        "description": "Set a countdown timer on the oven in minutes.",
+        "parameters": {
+          "minutes": "int"
+        }
+      }
+    ],
+    "prompt": "Going to slow-roast the chicken so set the oven low - around 275 in roast mode.",
+    "gold_name": "preheat_oven",
+    "gold_args": {
+      "temperature_f": 275,
+      "mode": "roast"
+    },
+    "difficulty": "hard"
+  },
+  {
+    "id": "kit_134",
+    "function": [
+      {
+        "name": "stop_oven",
+        "description": "Turn off the oven immediately.",
+        "parameters": {}
+      },
+      {
+        "name": "set_fridge_temperature",
+        "description": "Set the refrigerator compartment target temperature.",
+        "parameters": {
+          "temperature_f": "int"
+        }
+      },
+      {
+        "name": "preheat_oven",
+        "description": "Preheat the oven to a target temperature with optional cooking mode.",
+        "parameters": {
+          "temperature_f": "int",
+          "mode": "bake|broil|convection|roast|warm"
+        }
+      },
+      {
+        "name": "set_oven_timer",
+        "description": "Set a countdown timer on the oven in minutes.",
+        "parameters": {
+          "minutes": "int"
+        }
+      },
+      {
+        "name": "pause_dishwasher",
+        "description": "Pause the currently running dishwasher cycle.",
+        "parameters": {}
+      }
+    ],
+    "prompt": "Bread bakes 35 minutes, but the rise is 60, set just the bake portion.",
+    "gold_name": "set_oven_timer",
+    "gold_args": {
+      "minutes": 35
+    },
+    "difficulty": "hard"
+  },
+  {
+    "id": "kit_135",
+    "function": [
+      {
+        "name": "start_microwave",
+        "description": "Run the microwave at a given power for a given duration in seconds.",
+        "parameters": {
+          "seconds": "int",
+          "power": "int 1-10"
+        }
+      },
+      {
+        "name": "preheat_oven",
+        "description": "Preheat the oven to a target temperature with optional cooking mode.",
+        "parameters": {
+          "temperature_f": "int",
+          "mode": "bake|broil|convection|roast|warm"
+        }
+      },
+      {
+        "name": "set_oven_timer",
+        "description": "Set a countdown timer on the oven in minutes.",
+        "parameters": {
+          "minutes": "int"
+        }
+      },
+      {
+        "name": "start_dishwasher",
+        "description": "Begin a dishwasher cycle with a chosen wash program.",
+        "parameters": {
+          "cycle": "normal|heavy|quick|eco|rinse"
+        }
+      },
+      {
+        "name": "set_coffee_strength",
+        "description": "Set the coffee brewing strength.",
+        "parameters": {
+          "strength": "weak|medium|strong"
+        }
+      }
+    ],
+    "prompt": "Cookies were underbaked at 10, give them 3 more.",
+    "gold_name": "set_oven_timer",
+    "gold_args": {
+      "minutes": 13
+    },
+    "difficulty": "hard"
+  },
+  {
+    "id": "kit_136",
+    "function": [
+      {
+        "name": "query_fridge_contents",
+        "description": "List items currently inventoried in the refrigerator.",
+        "parameters": {}
+      },
+      {
+        "name": "stop_oven",
+        "description": "Turn off the oven immediately.",
+        "parameters": {}
+      },
+      {
+        "name": "set_coffee_strength",
+        "description": "Set the coffee brewing strength.",
+        "parameters": {
+          "strength": "weak|medium|strong"
+        }
+      },
+      {
+        "name": "set_oven_timer",
+        "description": "Set a countdown timer on the oven in minutes.",
+        "parameters": {
+          "minutes": "int"
+        }
+      },
+      {
+        "name": "set_kitchen_lights",
+        "description": "Adjust kitchen overhead lighting brightness/state.",
+        "parameters": {
+          "brightness": "int 0-100",
+          "state": "on|off"
+        }
+      }
+    ],
+    "prompt": "Smell something off - shut the oven before anything catches.",
+    "gold_name": "stop_oven",
+    "gold_args": {},
+    "difficulty": "hard"
+  },
+  {
+    "id": "kit_137",
+    "function": [
+      {
+        "name": "pause_dishwasher",
+        "description": "Pause the currently running dishwasher cycle.",
+        "parameters": {}
+      },
+      {
+        "name": "query_fridge_contents",
+        "description": "List items currently inventoried in the refrigerator.",
+        "parameters": {}
+      },
+      {
+        "name": "start_coffee_brew",
+        "description": "Start brewing coffee in the coffee maker.",
+        "parameters": {
+          "cups": "int"
+        }
+      }
+    ],
+    "prompt": "Pots are greasy and I forgot a wine glass - hold the cycle so I can add it.",
+    "gold_name": "pause_dishwasher",
+    "gold_args": {},
+    "difficulty": "hard"
+  },
+  {
+    "id": "kit_138",
+    "function": [
+      {
+        "name": "start_coffee_brew",
+        "description": "Start brewing coffee in the coffee maker.",
+        "parameters": {
+          "cups": "int"
+        }
+      },
+      {
+        "name": "start_microwave",
+        "description": "Run the microwave at a given power for a given duration in seconds.",
+        "parameters": {
+          "seconds": "int",
+          "power": "int 1-10"
+        }
+      },
+      {
+        "name": "query_oven_state",
+        "description": "Return the current oven status, temperature, and mode.",
+        "parameters": {}
+      },
+      {
+        "name": "start_dishwasher",
+        "description": "Begin a dishwasher cycle with a chosen wash program.",
+        "parameters": {
+          "cycle": "normal|heavy|quick|eco|rinse"
+        }
+      }
+    ],
+    "prompt": "Greasy pans piling up since last week, full heavy duty run.",
+    "gold_name": "start_dishwasher",
+    "gold_args": {
+      "cycle": "heavy"
+    },
+    "difficulty": "hard"
+  },
+  {
+    "id": "kit_139",
+    "function": [
+      {
+        "name": "pause_dishwasher",
+        "description": "Pause the currently running dishwasher cycle.",
+        "parameters": {}
+      },
+      {
+        "name": "set_fridge_temperature",
+        "description": "Set the refrigerator compartment target temperature.",
+        "parameters": {
+          "temperature_f": "int"
+        }
+      },
+      {
+        "name": "query_fridge_contents",
+        "description": "List items currently inventoried in the refrigerator.",
+        "parameters": {}
+      },
+      {
+        "name": "set_oven_timer",
+        "description": "Set a countdown timer on the oven in minutes.",
+        "parameters": {
+          "minutes": "int"
+        }
+      }
+    ],
+    "prompt": "Fridge runs warmer than dial says, target 38 means I should set 35.",
+    "gold_name": "set_fridge_temperature",
+    "gold_args": {
+      "temperature_f": 35
+    },
+    "difficulty": "hard"
+  },
+  {
+    "id": "kit_140",
+    "function": [
+      {
+        "name": "query_fridge_contents",
+        "description": "List items currently inventoried in the refrigerator.",
+        "parameters": {}
+      },
+      {
+        "name": "preheat_oven",
+        "description": "Preheat the oven to a target temperature with optional cooking mode.",
+        "parameters": {
+          "temperature_f": "int",
+          "mode": "bake|broil|convection|roast|warm"
+        }
+      },
+      {
+        "name": "start_coffee_brew",
+        "description": "Start brewing coffee in the coffee maker.",
+        "parameters": {
+          "cups": "int"
+        }
+      },
+      {
+        "name": "set_coffee_strength",
+        "description": "Set the coffee brewing strength.",
+        "parameters": {
+          "strength": "weak|medium|strong"
+        }
+      },
+      {
+        "name": "start_microwave",
+        "description": "Run the microwave at a given power for a given duration in seconds.",
+        "parameters": {
+          "seconds": "int",
+          "power": "int 1-10"
+        }
+      }
+    ],
+    "prompt": "Need to figure out dinner - tell me what is actually in there.",
+    "gold_name": "query_fridge_contents",
+    "gold_args": {},
+    "difficulty": "hard"
+  },
+  {
+    "id": "kit_141",
+    "function": [
+      {
+        "name": "start_coffee_brew",
+        "description": "Start brewing coffee in the coffee maker.",
+        "parameters": {
+          "cups": "int"
+        }
+      },
+      {
+        "name": "preheat_oven",
+        "description": "Preheat the oven to a target temperature with optional cooking mode.",
+        "parameters": {
+          "temperature_f": "int",
+          "mode": "bake|broil|convection|roast|warm"
+        }
+      },
+      {
+        "name": "start_dishwasher",
+        "description": "Begin a dishwasher cycle with a chosen wash program.",
+        "parameters": {
+          "cycle": "normal|heavy|quick|eco|rinse"
+        }
+      },
+      {
+        "name": "set_coffee_strength",
+        "description": "Set the coffee brewing strength.",
+        "parameters": {
+          "strength": "weak|medium|strong"
+        }
+      },
+      {
+        "name": "pause_dishwasher",
+        "description": "Pause the currently running dishwasher cycle.",
+        "parameters": {}
+      }
+    ],
+    "prompt": "Hosting six, brew enough for everyone with one refill, call it 8.",
+    "gold_name": "start_coffee_brew",
+    "gold_args": {
+      "cups": 8
+    },
+    "difficulty": "hard"
+  },
+  {
+    "id": "kit_142",
+    "function": [
+      {
+        "name": "start_dishwasher",
+        "description": "Begin a dishwasher cycle with a chosen wash program.",
+        "parameters": {
+          "cycle": "normal|heavy|quick|eco|rinse"
+        }
+      },
+      {
+        "name": "set_coffee_strength",
+        "description": "Set the coffee brewing strength.",
+        "parameters": {
+          "strength": "weak|medium|strong"
+        }
+      },
+      {
+        "name": "preheat_oven",
+        "description": "Preheat the oven to a target temperature with optional cooking mode.",
+        "parameters": {
+          "temperature_f": "int",
+          "mode": "bake|broil|convection|roast|warm"
+        }
+      },
+      {
+        "name": "set_oven_timer",
+        "description": "Set a countdown timer on the oven in minutes.",
+        "parameters": {
+          "minutes": "int"
+        }
+      },
+      {
+        "name": "start_coffee_brew",
+        "description": "Start brewing coffee in the coffee maker.",
+        "parameters": {
+          "cups": "int"
+        }
+      }
+    ],
+    "prompt": "Yesterdays brew was too bitter, dial it back from strong to medium.",
+    "gold_name": "set_coffee_strength",
+    "gold_args": {
+      "strength": "medium"
+    },
+    "difficulty": "hard"
+  },
+  {
+    "id": "kit_143",
+    "function": [
+      {
+        "name": "query_fridge_contents",
+        "description": "List items currently inventoried in the refrigerator.",
+        "parameters": {}
+      },
+      {
+        "name": "query_oven_state",
+        "description": "Return the current oven status, temperature, and mode.",
+        "parameters": {}
+      },
+      {
+        "name": "set_oven_timer",
+        "description": "Set a countdown timer on the oven in minutes.",
+        "parameters": {
+          "minutes": "int"
+        }
+      },
+      {
+        "name": "set_coffee_strength",
+        "description": "Set the coffee brewing strength.",
+        "parameters": {
+          "strength": "weak|medium|strong"
+        }
+      },
+      {
+        "name": "start_dishwasher",
+        "description": "Begin a dishwasher cycle with a chosen wash program.",
+        "parameters": {
+          "cycle": "normal|heavy|quick|eco|rinse"
+        }
+      }
+    ],
+    "prompt": "Husband prefers it bolder than my usual medium - go strong.",
+    "gold_name": "set_coffee_strength",
+    "gold_args": {
+      "strength": "strong"
+    },
+    "difficulty": "hard"
+  },
+  {
+    "id": "kit_144",
+    "function": [
+      {
+        "name": "start_microwave",
+        "description": "Run the microwave at a given power for a given duration in seconds.",
+        "parameters": {
+          "seconds": "int",
+          "power": "int 1-10"
+        }
+      },
+      {
+        "name": "set_coffee_strength",
+        "description": "Set the coffee brewing strength.",
+        "parameters": {
+          "strength": "weak|medium|strong"
+        }
+      },
+      {
+        "name": "set_kitchen_lights",
+        "description": "Adjust kitchen overhead lighting brightness/state.",
+        "parameters": {
+          "brightness": "int 0-100",
+          "state": "on|off"
+        }
+      },
+      {
+        "name": "pause_dishwasher",
+        "description": "Pause the currently running dishwasher cycle.",
+        "parameters": {}
+      }
+    ],
+    "prompt": "Reheat the lasagna - it needs more than 90 seconds, try two and a half minutes around power 6.",
+    "gold_name": "start_microwave",
+    "gold_args": {
+      "seconds": 150,
+      "power": 6
+    },
+    "difficulty": "hard"
+  },
+  {
+    "id": "kit_145",
+    "function": [
+      {
+        "name": "start_coffee_brew",
+        "description": "Start brewing coffee in the coffee maker.",
+        "parameters": {
+          "cups": "int"
+        }
+      },
+      {
+        "name": "start_microwave",
+        "description": "Run the microwave at a given power for a given duration in seconds.",
+        "parameters": {
+          "seconds": "int",
+          "power": "int 1-10"
+        }
+      },
+      {
+        "name": "set_coffee_strength",
+        "description": "Set the coffee brewing strength.",
+        "parameters": {
+          "strength": "weak|medium|strong"
+        }
+      },
+      {
+        "name": "start_dishwasher",
+        "description": "Begin a dishwasher cycle with a chosen wash program.",
+        "parameters": {
+          "cycle": "normal|heavy|quick|eco|rinse"
+        }
+      }
+    ],
+    "prompt": "Defrost-style: 4 minutes at the lowest useful setting, power 2.",
+    "gold_name": "start_microwave",
+    "gold_args": {
+      "seconds": 240,
+      "power": 2
+    },
+    "difficulty": "hard"
+  },
+  {
+    "id": "kit_146",
+    "function": [
+      {
+        "name": "stop_microwave",
+        "description": "Stop the microwave immediately.",
+        "parameters": {}
+      },
+      {
+        "name": "set_coffee_strength",
+        "description": "Set the coffee brewing strength.",
+        "parameters": {
+          "strength": "weak|medium|strong"
+        }
+      },
+      {
+        "name": "pause_dishwasher",
+        "description": "Pause the currently running dishwasher cycle.",
+        "parameters": {}
+      },
+      {
+        "name": "stop_oven",
+        "description": "Turn off the oven immediately.",
+        "parameters": {}
+      },
+      {
+        "name": "set_oven_timer",
+        "description": "Set a countdown timer on the oven in minutes.",
+        "parameters": {
+          "minutes": "int"
+        }
+      }
+    ],
+    "prompt": "Plate is shaking weirdly, abort the microwave.",
+    "gold_name": "stop_microwave",
+    "gold_args": {},
+    "difficulty": "hard"
+  },
+  {
+    "id": "kit_147",
+    "function": [
+      {
+        "name": "query_oven_state",
+        "description": "Return the current oven status, temperature, and mode.",
+        "parameters": {}
+      },
+      {
+        "name": "pause_dishwasher",
+        "description": "Pause the currently running dishwasher cycle.",
+        "parameters": {}
+      },
+      {
+        "name": "set_kitchen_lights",
+        "description": "Adjust kitchen overhead lighting brightness/state.",
+        "parameters": {
+          "brightness": "int 0-100",
+          "state": "on|off"
+        }
+      }
+    ],
+    "prompt": "Did the oven actually preheat or am I waiting for nothing.",
+    "gold_name": "query_oven_state",
+    "gold_args": {},
+    "difficulty": "hard"
+  },
+  {
+    "id": "kit_148",
+    "function": [
+      {
+        "name": "set_kitchen_lights",
+        "description": "Adjust kitchen overhead lighting brightness/state.",
+        "parameters": {
+          "brightness": "int 0-100",
+          "state": "on|off"
+        }
+      },
+      {
+        "name": "set_coffee_strength",
+        "description": "Set the coffee brewing strength.",
+        "parameters": {
+          "strength": "weak|medium|strong"
+        }
+      },
+      {
+        "name": "start_coffee_brew",
+        "description": "Start brewing coffee in the coffee maker.",
+        "parameters": {
+          "cups": "int"
+        }
+      }
+    ],
+    "prompt": "Mood lighting - cut kitchen brightness to a third.",
+    "gold_name": "set_kitchen_lights",
+    "gold_args": {
+      "brightness": 33,
+      "state": "on"
+    },
+    "difficulty": "hard"
+  },
+  {
+    "id": "kit_149",
+    "function": [
+      {
+        "name": "query_oven_state",
+        "description": "Return the current oven status, temperature, and mode.",
+        "parameters": {}
+      },
+      {
+        "name": "set_kitchen_lights",
+        "description": "Adjust kitchen overhead lighting brightness/state.",
+        "parameters": {
+          "brightness": "int 0-100",
+          "state": "on|off"
+        }
+      },
+      {
+        "name": "set_coffee_strength",
+        "description": "Set the coffee brewing strength.",
+        "parameters": {
+          "strength": "weak|medium|strong"
+        }
+      },
+      {
+        "name": "query_fridge_contents",
+        "description": "List items currently inventoried in the refrigerator.",
+        "parameters": {}
+      }
+    ],
+    "prompt": "Movie starting, but I want the kitchen barely visible, 10 percent.",
+    "gold_name": "set_kitchen_lights",
+    "gold_args": {
+      "brightness": 10,
+      "state": "on"
+    },
+    "difficulty": "hard"
+  },
+  {
+    "id": "kit_150",
+    "function": [
+      {
+        "name": "set_kitchen_lights",
+        "description": "Adjust kitchen overhead lighting brightness/state.",
+        "parameters": {
+          "brightness": "int 0-100",
+          "state": "on|off"
+        }
+      },
+      {
+        "name": "stop_microwave",
+        "description": "Stop the microwave immediately.",
+        "parameters": {}
+      },
+      {
+        "name": "pause_dishwasher",
+        "description": "Pause the currently running dishwasher cycle.",
+        "parameters": {}
+      },
+      {
+        "name": "preheat_oven",
+        "description": "Preheat the oven to a target temperature with optional cooking mode.",
+        "parameters": {
+          "temperature_f": "int",
+          "mode": "bake|broil|convection|roast|warm"
+        }
+      },
+      {
+        "name": "start_coffee_brew",
+        "description": "Start brewing coffee in the coffee maker.",
+        "parameters": {
+          "cups": "int"
+        }
+      }
+    ],
+    "prompt": "Set the oven for slow warming - chicken stays hot till guests arrive, 170 warm mode.",
+    "gold_name": "preheat_oven",
+    "gold_args": {
+      "temperature_f": 170,
+      "mode": "warm"
+    },
+    "difficulty": "hard"
+  }
+]
