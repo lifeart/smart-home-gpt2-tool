@@ -1,0 +1,1609 @@
+[
+  {
+    "id": "bio_001",
+    "function": {
+      "name": "catalog_lepidoptera_specimen",
+      "description": "Add a new butterfly or moth specimen to the museum collection database with morphological notes.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "species": {"type": "string", "description": "Latin binomial of the species"},
+          "wingspan_mm": {"type": "float", "description": "Wingspan in millimeters"},
+          "collection_locality": {"type": "string", "description": "Place where specimen was collected"}
+        },
+        "required": ["species", "wingspan_mm", "collection_locality"]
+      }
+    },
+    "prompt": "Log a new Papilio machaon specimen, wingspan 78.4 mm, collected in Carpathian foothills.",
+    "gold_name": "catalog_lepidoptera_specimen",
+    "gold_args": {"species": "Papilio machaon", "wingspan_mm": 78.4, "collection_locality": "Carpathian foothills"},
+    "difficulty": "easy"
+  },
+  {
+    "id": "bio_002",
+    "function": {
+      "name": "tag_amphibian_with_pit",
+      "description": "Insert a Passive Integrated Transponder tag into a captured amphibian for mark-recapture studies.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "individual_id": {"type": "string", "description": "Field individual ID"},
+          "pit_code": {"type": "string", "description": "Unique PIT tag hex code"},
+          "snout_vent_length_mm": {"type": "float", "description": "SVL in millimeters"}
+        },
+        "required": ["individual_id", "pit_code", "snout_vent_length_mm"]
+      }
+    },
+    "prompt": "Tag salamander SAL-22 with PIT code 4E3A91FF, SVL 64.2 mm.",
+    "gold_name": "tag_amphibian_with_pit",
+    "gold_args": {"individual_id": "SAL-22", "pit_code": "4E3A91FF", "snout_vent_length_mm": 64.2},
+    "difficulty": "easy"
+  },
+  {
+    "id": "bio_003",
+    "function": {
+      "name": "assay_lichen_oxygen_uptake",
+      "description": "Measure respiration rate of a lichen thallus using a Clark-type electrode.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "thallus_id": {"type": "string", "description": "Lichen sample identifier"},
+          "temperature_c": {"type": "float", "description": "Chamber temperature in Celsius"},
+          "duration_min": {"type": "int", "description": "Measurement duration"}
+        },
+        "required": ["thallus_id", "temperature_c", "duration_min"]
+      }
+    },
+    "prompt": "Run an oxygen uptake assay on thallus LCH-103 at 15 C for 30 minutes.",
+    "gold_name": "assay_lichen_oxygen_uptake",
+    "gold_args": {"thallus_id": "LCH-103", "temperature_c": 15.0, "duration_min": 30},
+    "difficulty": "easy"
+  },
+  {
+    "id": "bio_004",
+    "function": {
+      "name": "score_coral_bleaching_index",
+      "description": "Assign a CoralWatch color score to a tagged colony.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "colony_id": {"type": "string", "description": "Colony tag ID"},
+          "color_score": {"type": "int", "description": "1-6 bleaching index"}
+        },
+        "required": ["colony_id", "color_score"]
+      }
+    },
+    "prompt": "Record colony AGRP-7 at bleaching score 2.",
+    "gold_name": "score_coral_bleaching_index",
+    "gold_args": {"colony_id": "AGRP-7", "color_score": 2},
+    "difficulty": "easy"
+  },
+  {
+    "id": "bio_005",
+    "function": {
+      "name": "extract_environmental_dna",
+      "description": "Filter and extract eDNA from a water sample for metabarcoding.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "sample_id": {"type": "string", "description": "Water sample ID"},
+          "filter_pore_um": {"type": "float", "description": "Filter pore size in micrometers"},
+          "volume_l": {"type": "float", "description": "Volume filtered in liters"}
+        },
+        "required": ["sample_id", "filter_pore_um", "volume_l"]
+      }
+    },
+    "prompt": "Extract eDNA from pond sample EDN-19 using a 0.45 um filter over 1.5 liters.",
+    "gold_name": "extract_environmental_dna",
+    "gold_args": {"sample_id": "EDN-19", "filter_pore_um": 0.45, "volume_l": 1.5},
+    "difficulty": "easy"
+  },
+  {
+    "id": "bio_006",
+    "function": {
+      "name": "ring_passerine_bird",
+      "description": "Apply a metal numbered ring to a captured songbird at a banding station.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "species_code": {"type": "string", "description": "EURING 5-letter code"},
+          "ring_number": {"type": "string", "description": "Unique ring serial"},
+          "wing_chord_mm": {"type": "float", "description": "Wing chord measurement"}
+        },
+        "required": ["species_code", "ring_number", "wing_chord_mm"]
+      }
+    },
+    "prompt": "Ring a Phylloscopus collybita (code PHYCO) with ring AB12345, wing chord 61 mm.",
+    "gold_name": "ring_passerine_bird",
+    "gold_args": {"species_code": "PHYCO", "ring_number": "AB12345", "wing_chord_mm": 61.0},
+    "difficulty": "easy"
+  },
+  {
+    "id": "bio_007",
+    "function": {
+      "name": "stain_fungal_hyphae",
+      "description": "Apply lactophenol cotton blue or similar stain to a fungal mount for microscopy.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "slide_id": {"type": "string", "description": "Slide ID"},
+          "stain_name": {"type": "string", "description": "Name of staining reagent"},
+          "incubation_min": {"type": "int", "description": "Incubation minutes"}
+        },
+        "required": ["slide_id", "stain_name", "incubation_min"]
+      }
+    },
+    "prompt": "Stain slide FUN-08 with lactophenol cotton blue for 5 minutes.",
+    "gold_name": "stain_fungal_hyphae",
+    "gold_args": {"slide_id": "FUN-08", "stain_name": "lactophenol cotton blue", "incubation_min": 5},
+    "difficulty": "easy"
+  },
+  {
+    "id": "bio_008",
+    "function": {
+      "name": "measure_otolith_growth_rings",
+      "description": "Count daily growth increments on a fish otolith under polarized light.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "otolith_id": {"type": "string", "description": "Otolith sample ID"},
+          "ring_count": {"type": "int", "description": "Number of growth rings"}
+        },
+        "required": ["otolith_id", "ring_count"]
+      }
+    },
+    "prompt": "Record 142 daily rings on otolith OTO-227.",
+    "gold_name": "measure_otolith_growth_rings",
+    "gold_args": {"otolith_id": "OTO-227", "ring_count": 142},
+    "difficulty": "easy"
+  },
+  {
+    "id": "bio_009",
+    "function": {
+      "name": "deploy_pitfall_trap",
+      "description": "Set up a pitfall trap for ground-dwelling arthropods at a vegetation plot.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "plot_id": {"type": "string", "description": "Vegetation plot code"},
+          "trap_count": {"type": "int", "description": "Number of cups deployed"},
+          "preservative": {"type": "string", "description": "Preservation fluid"}
+        },
+        "required": ["plot_id", "trap_count", "preservative"]
+      }
+    },
+    "prompt": "Set 8 pitfall traps in plot VP-04 with propylene glycol.",
+    "gold_name": "deploy_pitfall_trap",
+    "gold_args": {"plot_id": "VP-04", "trap_count": 8, "preservative": "propylene glycol"},
+    "difficulty": "easy"
+  },
+  {
+    "id": "bio_010",
+    "function": {
+      "name": "record_bat_echolocation_call",
+      "description": "Save an acoustic recording of a bat call sequence for species ID.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "recorder_id": {"type": "string", "description": "Detector unit ID"},
+          "peak_frequency_khz": {"type": "float", "description": "Peak frequency kHz"},
+          "duration_ms": {"type": "float", "description": "Call duration ms"}
+        },
+        "required": ["recorder_id", "peak_frequency_khz", "duration_ms"]
+      }
+    },
+    "prompt": "Log bat call on detector ANABAT-2, peak 45 kHz, 6.3 ms duration.",
+    "gold_name": "record_bat_echolocation_call",
+    "gold_args": {"recorder_id": "ANABAT-2", "peak_frequency_khz": 45.0, "duration_ms": 6.3},
+    "difficulty": "easy"
+  },
+  {
+    "id": "bio_011",
+    "function": {
+      "name": "swab_amphibian_for_bd",
+      "description": "Collect a skin swab for Batrachochytrium dendrobatidis qPCR screening.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "individual_id": {"type": "string", "description": "Animal ID"},
+          "swab_strokes": {"type": "int", "description": "Number of strokes per region"}
+        },
+        "required": ["individual_id", "swab_strokes"]
+      }
+    },
+    "prompt": "Swab frog FR-12 for Bd with 30 strokes per region.",
+    "gold_name": "swab_amphibian_for_bd",
+    "gold_args": {"individual_id": "FR-12", "swab_strokes": 30},
+    "difficulty": "easy"
+  },
+  {
+    "id": "bio_012",
+    "function": {
+      "name": "press_herbarium_voucher",
+      "description": "Place a plant specimen in a herbarium press with field metadata.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "taxon": {"type": "string", "description": "Plant Latin name"},
+          "collector": {"type": "string", "description": "Collector full name"},
+          "accession": {"type": "string", "description": "Accession number"}
+        },
+        "required": ["taxon", "collector", "accession"]
+      }
+    },
+    "prompt": "Press a voucher of Sphagnum capillifolium collected by A. Ivanova, accession HER-9921.",
+    "gold_name": "press_herbarium_voucher",
+    "gold_args": {"taxon": "Sphagnum capillifolium", "collector": "A. Ivanova", "accession": "HER-9921"},
+    "difficulty": "easy"
+  },
+  {
+    "id": "bio_013",
+    "function": {
+      "name": "anesthetize_teleost_with_ms222",
+      "description": "Sedate a fish with buffered MS-222 for measurement.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "fish_id": {"type": "string", "description": "Fish tag ID"},
+          "ms222_mg_per_l": {"type": "float", "description": "Concentration mg/L"}
+        },
+        "required": ["fish_id", "ms222_mg_per_l"]
+      }
+    },
+    "prompt": "Anesthetize trout TRT-3 with 100 mg/L MS-222.",
+    "gold_name": "anesthetize_teleost_with_ms222",
+    "gold_args": {"fish_id": "TRT-3", "ms222_mg_per_l": 100.0},
+    "difficulty": "easy"
+  },
+  {
+    "id": "bio_014",
+    "function": {
+      "name": "count_pollen_grains_on_slide",
+      "description": "Manual count of pollen grains in a 1 mm2 grid square.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "slide_id": {"type": "string", "description": "Slide ID"},
+          "grains_counted": {"type": "int", "description": "Grain count"}
+        },
+        "required": ["slide_id", "grains_counted"]
+      }
+    },
+    "prompt": "Counted 287 pollen grains on slide POL-77.",
+    "gold_name": "count_pollen_grains_on_slide",
+    "gold_args": {"slide_id": "POL-77", "grains_counted": 287},
+    "difficulty": "easy"
+  },
+  {
+    "id": "bio_015",
+    "function": {
+      "name": "log_camera_trap_event",
+      "description": "Register a mammal detection event from a remote camera trap.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "camera_id": {"type": "string", "description": "Camera unit ID"},
+          "species": {"type": "string", "description": "Detected species"},
+          "timestamp": {"type": "string", "description": "ISO timestamp"}
+        },
+        "required": ["camera_id", "species", "timestamp"]
+      }
+    },
+    "prompt": "Camera CT-15 captured a Lynx lynx at 2026-04-22T03:14:00.",
+    "gold_name": "log_camera_trap_event",
+    "gold_args": {"camera_id": "CT-15", "species": "Lynx lynx", "timestamp": "2026-04-22T03:14:00"},
+    "difficulty": "easy"
+  },
+  {
+    "id": "bio_016",
+    "function": {
+      "name": "necropsy_marine_mammal",
+      "description": "Open a necropsy record for a stranded cetacean or pinniped.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "carcass_id": {"type": "string", "description": "Stranding case ID"},
+          "species": {"type": "string", "description": "Species name"},
+          "decomp_code": {"type": "int", "description": "Smithsonian decomposition code 1-5"}
+        },
+        "required": ["carcass_id", "species", "decomp_code"]
+      }
+    },
+    "prompt": "Open necropsy for stranded Phocoena phocoena, case STR-441, decomp code 3.",
+    "gold_name": "necropsy_marine_mammal",
+    "gold_args": {"carcass_id": "STR-441", "species": "Phocoena phocoena", "decomp_code": 3},
+    "difficulty": "easy"
+  },
+  {
+    "id": "bio_017",
+    "function": {
+      "name": "weigh_chick_in_nest",
+      "description": "Record nestling body mass during a nest visit.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "nest_id": {"type": "string", "description": "Nest box ID"},
+          "chick_position": {"type": "int", "description": "Hatching order index"},
+          "mass_g": {"type": "float", "description": "Mass in grams"}
+        },
+        "required": ["nest_id", "chick_position", "mass_g"]
+      }
+    },
+    "prompt": "Weigh the second-hatched chick in nest box NBX-22, mass 14.7 g.",
+    "gold_name": "weigh_chick_in_nest",
+    "gold_args": {"nest_id": "NBX-22", "chick_position": 2, "mass_g": 14.7},
+    "difficulty": "easy"
+  },
+  {
+    "id": "bio_018",
+    "function": {
+      "name": "transcribe_field_journal_page",
+      "description": "Transcribe a hand-written field journal page into the database.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "journal_id": {"type": "string", "description": "Journal book ID"},
+          "page_number": {"type": "int", "description": "Page number"},
+          "text": {"type": "string", "description": "Transcribed body text"}
+        },
+        "required": ["journal_id", "page_number", "text"]
+      }
+    },
+    "prompt": "Transcribe page 47 of journal FJ-2025-N03: 'Three Salamandra salamandra observed near brook at dusk.'",
+    "gold_name": "transcribe_field_journal_page",
+    "gold_args": {"journal_id": "FJ-2025-N03", "page_number": 47, "text": "Three Salamandra salamandra observed near brook at dusk."},
+    "difficulty": "easy"
+  },
+  {
+    "id": "bio_019",
+    "function": {
+      "name": "incubate_reptile_egg_clutch",
+      "description": "Initiate incubation for a reptile egg clutch at given temperature regime.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "clutch_id": {"type": "string", "description": "Clutch ID"},
+          "egg_count": {"type": "int", "description": "Eggs in clutch"},
+          "set_temp_c": {"type": "float", "description": "Incubator setpoint C"}
+        },
+        "required": ["clutch_id", "egg_count", "set_temp_c"]
+      }
+    },
+    "prompt": "Incubate clutch GECK-09 of 6 eggs at 28.5 C.",
+    "gold_name": "incubate_reptile_egg_clutch",
+    "gold_args": {"clutch_id": "GECK-09", "egg_count": 6, "set_temp_c": 28.5},
+    "difficulty": "easy"
+  },
+  {
+    "id": "bio_020",
+    "function": {
+      "name": "label_diatom_slide",
+      "description": "Generate a label for a permanent diatom mount slide.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "slide_id": {"type": "string", "description": "Slide identifier"},
+          "mounting_medium": {"type": "string", "description": "Naphrax or similar"}
+        },
+        "required": ["slide_id", "mounting_medium"]
+      }
+    },
+    "prompt": "Label diatom slide DIA-512 mounted in Naphrax.",
+    "gold_name": "label_diatom_slide",
+    "gold_args": {"slide_id": "DIA-512", "mounting_medium": "Naphrax"},
+    "difficulty": "easy"
+  },
+  {
+    "id": "bio_021",
+    "function": {
+      "name": "score_body_condition_ungulate",
+      "description": "Assign a body condition score 1-5 to a captured ungulate.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "animal_id": {"type": "string", "description": "Animal ID"},
+          "bcs": {"type": "int", "description": "Score 1-5"}
+        },
+        "required": ["animal_id", "bcs"]
+      }
+    },
+    "prompt": "Score red deer RD-118 at body condition 4.",
+    "gold_name": "score_body_condition_ungulate",
+    "gold_args": {"animal_id": "RD-118", "bcs": 4},
+    "difficulty": "easy"
+  },
+  {
+    "id": "bio_022",
+    "function": {
+      "name": "snip_tail_for_genotype",
+      "description": "Collect a small tail biopsy from a lizard for genotyping.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "individual_id": {"type": "string", "description": "Lizard ID"},
+          "biopsy_mm": {"type": "float", "description": "Length removed in mm"}
+        },
+        "required": ["individual_id", "biopsy_mm"]
+      }
+    },
+    "prompt": "Take 3 mm tail snip from Lacerta agilis LA-77 for genotyping.",
+    "gold_name": "snip_tail_for_genotype",
+    "gold_args": {"individual_id": "LA-77", "biopsy_mm": 3.0},
+    "difficulty": "easy"
+  },
+  {
+    "id": "bio_023",
+    "function": {
+      "name": "log_phenology_first_flower",
+      "description": "Record the first observed flowering date for a plant population.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "population_id": {"type": "string", "description": "Population code"},
+          "first_flower_date": {"type": "string", "description": "ISO date"}
+        },
+        "required": ["population_id", "first_flower_date"]
+      }
+    },
+    "prompt": "Population ANEM-12 of Anemone nemorosa first flowered on 2026-04-08.",
+    "gold_name": "log_phenology_first_flower",
+    "gold_args": {"population_id": "ANEM-12", "first_flower_date": "2026-04-08"},
+    "difficulty": "easy"
+  },
+  {
+    "id": "bio_024",
+    "function": {
+      "name": "set_mist_net",
+      "description": "Open a mist net for bird capture at a given location.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "site_id": {"type": "string", "description": "Banding site"},
+          "net_length_m": {"type": "float", "description": "Net length meters"},
+          "mesh_mm": {"type": "int", "description": "Mesh size mm"}
+        },
+        "required": ["site_id", "net_length_m", "mesh_mm"]
+      }
+    },
+    "prompt": "Set a 12 m mist net at site KUR-A with 30 mm mesh.",
+    "gold_name": "set_mist_net",
+    "gold_args": {"site_id": "KUR-A", "net_length_m": 12.0, "mesh_mm": 30},
+    "difficulty": "easy"
+  },
+  {
+    "id": "bio_025",
+    "function": {
+      "name": "preserve_invert_in_ethanol",
+      "description": "Transfer an invertebrate specimen into ethanol for storage.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "specimen_id": {"type": "string", "description": "Specimen ID"},
+          "ethanol_pct": {"type": "int", "description": "Ethanol percentage"}
+        },
+        "required": ["specimen_id", "ethanol_pct"]
+      }
+    },
+    "prompt": "Preserve specimen INV-2201 in 96% ethanol.",
+    "gold_name": "preserve_invert_in_ethanol",
+    "gold_args": {"specimen_id": "INV-2201", "ethanol_pct": 96},
+    "difficulty": "easy"
+  },
+  {
+    "id": "bio_026",
+    "function": {
+      "name": "count_aphid_colony_size",
+      "description": "Estimate aphid colony size on a host plant leaf.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "leaf_id": {"type": "string", "description": "Leaf tag"},
+          "aphid_count": {"type": "int", "description": "Number of aphids"}
+        },
+        "required": ["leaf_id", "aphid_count"]
+      }
+    },
+    "prompt": "Counted 412 aphids on leaf APH-014.",
+    "gold_name": "count_aphid_colony_size",
+    "gold_args": {"leaf_id": "APH-014", "aphid_count": 412},
+    "difficulty": "easy"
+  },
+  {
+    "id": "bio_027",
+    "function": {
+      "name": "drop_oxygen_probe_in_pond",
+      "description": "Deploy a dissolved oxygen probe at a given pond depth.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "pond_id": {"type": "string", "description": "Pond ID"},
+          "depth_m": {"type": "float", "description": "Probe depth meters"}
+        },
+        "required": ["pond_id", "depth_m"]
+      }
+    },
+    "prompt": "Drop DO probe in pond P-09 at 1.2 m depth.",
+    "gold_name": "drop_oxygen_probe_in_pond",
+    "gold_args": {"pond_id": "P-09", "depth_m": 1.2},
+    "difficulty": "easy"
+  },
+  {
+    "id": "bio_028",
+    "function": {
+      "name": "isolate_actinomycete_colony",
+      "description": "Pick a soil-derived actinomycete colony from a streaked plate to liquid culture.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "plate_id": {"type": "string", "description": "Source plate ID"},
+          "colony_label": {"type": "string", "description": "Colony letter or number"}
+        },
+        "required": ["plate_id", "colony_label"]
+      }
+    },
+    "prompt": "Isolate colony C3 from plate ACT-08.",
+    "gold_name": "isolate_actinomycete_colony",
+    "gold_args": {"plate_id": "ACT-08", "colony_label": "C3"},
+    "difficulty": "easy"
+  },
+  {
+    "id": "bio_029",
+    "function": {
+      "name": "record_dawn_chorus_minute",
+      "description": "Save a minute of dawn chorus audio at a survey point.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "point_id": {"type": "string", "description": "Point ID"},
+          "minute_offset": {"type": "int", "description": "Minutes since sunrise"}
+        },
+        "required": ["point_id", "minute_offset"]
+      }
+    },
+    "prompt": "Record dawn chorus at point CHO-N3, 4 minutes after sunrise.",
+    "gold_name": "record_dawn_chorus_minute",
+    "gold_args": {"point_id": "CHO-N3", "minute_offset": 4},
+    "difficulty": "easy"
+  },
+  {
+    "id": "bio_030",
+    "function": {
+      "name": "harvest_truffle_under_oak",
+      "description": "Record a hypogeous fungus harvest event under a host tree.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "tree_id": {"type": "string", "description": "Tagged host tree"},
+          "truffle_mass_g": {"type": "float", "description": "Total mass grams"}
+        },
+        "required": ["tree_id", "truffle_mass_g"]
+      }
+    },
+    "prompt": "Harvested 84.5 g of Tuber aestivum under oak TR-OAK-19.",
+    "gold_name": "harvest_truffle_under_oak",
+    "gold_args": {"tree_id": "TR-OAK-19", "truffle_mass_g": 84.5},
+    "difficulty": "easy"
+  },
+  {
+    "id": "bio_031",
+    "function": {
+      "name": "stage_drosophila_egg_chamber",
+      "description": "Assign a developmental stage (1-14) to a Drosophila ovariole egg chamber based on King's morphological criteria.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "chamber_id": {"type": "string", "description": "Chamber ID"},
+          "stage_number": {"type": "int", "description": "King stage 1-14"},
+          "observer": {"type": "string", "description": "Observer initials"}
+        },
+        "required": ["chamber_id", "stage_number", "observer"]
+      }
+    },
+    "prompt": "Tatiana K. examined egg chamber DM-EC-31 and called it stage 10A.",
+    "gold_name": "stage_drosophila_egg_chamber",
+    "gold_args": {"chamber_id": "DM-EC-31", "stage_number": 10, "observer": "TK"},
+    "difficulty": "medium"
+  },
+  {
+    "id": "bio_032",
+    "function": {
+      "name": "quantify_chlorophyll_a_in_extract",
+      "description": "Compute chlorophyll a concentration from a 663/645 nm spectrophotometric reading of acetone extract.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "extract_id": {"type": "string", "description": "Extract sample ID"},
+          "absorbance_663": {"type": "float", "description": "Absorbance at 663 nm"},
+          "absorbance_645": {"type": "float", "description": "Absorbance at 645 nm"},
+          "extract_volume_ml": {"type": "float", "description": "Extract volume in mL"}
+        },
+        "required": ["extract_id", "absorbance_663", "absorbance_645", "extract_volume_ml"]
+      }
+    },
+    "prompt": "Quantify chl a for extract CHL-A-44 with A663=0.812, A645=0.341, extract volume 10 mL.",
+    "gold_name": "quantify_chlorophyll_a_in_extract",
+    "gold_args": {"extract_id": "CHL-A-44", "absorbance_663": 0.812, "absorbance_645": 0.341, "extract_volume_ml": 10.0},
+    "difficulty": "medium"
+  },
+  {
+    "id": "bio_033",
+    "function": {
+      "name": "schedule_acoustic_anabat_survey",
+      "description": "Schedule an automated bat acoustic survey on a passive detector across a date window.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "detector_id": {"type": "string", "description": "Detector ID"},
+          "start_date": {"type": "string", "description": "ISO start date"},
+          "end_date": {"type": "string", "description": "ISO end date"},
+          "trigger_db": {"type": "int", "description": "Trigger threshold dB"}
+        },
+        "required": ["detector_id", "start_date", "end_date", "trigger_db"]
+      }
+    },
+    "prompt": "Schedule Anabat unit AB-NORTH-3 for passive bat acoustic survey from June 1 through June 15, 2026, with trigger threshold 18 dB.",
+    "gold_name": "schedule_acoustic_anabat_survey",
+    "gold_args": {"detector_id": "AB-NORTH-3", "start_date": "2026-06-01", "end_date": "2026-06-15", "trigger_db": 18},
+    "difficulty": "medium"
+  },
+  {
+    "id": "bio_034",
+    "function": {
+      "name": "subsample_zooplankton_tow",
+      "description": "Take a Folsom splitter subsample from a vertical zooplankton tow.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "tow_id": {"type": "string", "description": "Tow sample ID"},
+          "split_fraction": {"type": "float", "description": "Fraction kept e.g. 0.5"},
+          "preservative": {"type": "string", "description": "Preservation fluid"}
+        },
+        "required": ["tow_id", "split_fraction", "preservative"]
+      }
+    },
+    "prompt": "Halve tow ZPL-441 using a Folsom splitter and preserve in 4% formalin.",
+    "gold_name": "subsample_zooplankton_tow",
+    "gold_args": {"tow_id": "ZPL-441", "split_fraction": 0.5, "preservative": "4% formalin"},
+    "difficulty": "medium"
+  },
+  {
+    "id": "bio_035",
+    "function": {
+      "name": "barcode_coi_marker",
+      "description": "Run a COI barcode PCR on extracted invertebrate DNA using LCO1490/HCO2198 primers.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "dna_id": {"type": "string", "description": "DNA sample ID"},
+          "annealing_c": {"type": "float", "description": "Annealing temperature C"},
+          "cycles": {"type": "int", "description": "Number of cycles"}
+        },
+        "required": ["dna_id", "annealing_c", "cycles"]
+      }
+    },
+    "prompt": "Run COI barcode PCR on DNA-INV-512 with annealing 48 C, 35 cycles.",
+    "gold_name": "barcode_coi_marker",
+    "gold_args": {"dna_id": "DNA-INV-512", "annealing_c": 48.0, "cycles": 35},
+    "difficulty": "medium"
+  },
+  {
+    "id": "bio_036",
+    "function": {
+      "name": "calibrate_underwater_hydrophone",
+      "description": "Calibrate a SoundTrap hydrophone against a reference tone before a marine survey.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "hydrophone_sn": {"type": "string", "description": "Serial number"},
+          "reference_db": {"type": "float", "description": "Reference tone level dB re 1 uPa"},
+          "frequency_hz": {"type": "int", "description": "Calibration frequency Hz"}
+        },
+        "required": ["hydrophone_sn", "reference_db", "frequency_hz"]
+      }
+    },
+    "prompt": "Calibrate hydrophone serial ST671523 to 178.4 dB at 250 Hz before tomorrow's cetacean tow.",
+    "gold_name": "calibrate_underwater_hydrophone",
+    "gold_args": {"hydrophone_sn": "ST671523", "reference_db": 178.4, "frequency_hz": 250},
+    "difficulty": "medium"
+  },
+  {
+    "id": "bio_037",
+    "function": {
+      "name": "perform_floral_dissection",
+      "description": "Dissect a flower under a stereomicroscope and document floral formula components.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "specimen_id": {"type": "string", "description": "Specimen ID"},
+          "sepal_count": {"type": "int", "description": "Number of sepals"},
+          "petal_count": {"type": "int", "description": "Number of petals"},
+          "stamen_count": {"type": "int", "description": "Number of stamens"}
+        },
+        "required": ["specimen_id", "sepal_count", "petal_count", "stamen_count"]
+      }
+    },
+    "prompt": "Dissect orchid OR-77: 3 sepals, 3 petals, 1 stamen visible under scope.",
+    "gold_name": "perform_floral_dissection",
+    "gold_args": {"specimen_id": "OR-77", "sepal_count": 3, "petal_count": 3, "stamen_count": 1},
+    "difficulty": "medium"
+  },
+  {
+    "id": "bio_038",
+    "function": {
+      "name": "annotate_owl_pellet_contents",
+      "description": "Catalog small mammal remains recovered from a dissected owl pellet.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "pellet_id": {"type": "string", "description": "Pellet ID"},
+          "prey_species": {"type": "array", "description": "List of prey Latin names"},
+          "skull_count": {"type": "int", "description": "Total skulls recovered"}
+        },
+        "required": ["pellet_id", "prey_species", "skull_count"]
+      }
+    },
+    "prompt": "From barn owl pellet OWL-31 we recovered remains of Microtus arvalis and Sorex araneus, 3 skulls total.",
+    "gold_name": "annotate_owl_pellet_contents",
+    "gold_args": {"pellet_id": "OWL-31", "prey_species": ["Microtus arvalis", "Sorex araneus"], "skull_count": 3},
+    "difficulty": "medium"
+  },
+  {
+    "id": "bio_039",
+    "function": {
+      "name": "phenotype_arabidopsis_rosette",
+      "description": "Measure rosette traits of an Arabidopsis plant from a top-down image.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "plant_id": {"type": "string", "description": "Plant ID"},
+          "rosette_area_cm2": {"type": "float", "description": "Rosette area"},
+          "leaf_count": {"type": "int", "description": "Visible rosette leaves"}
+        },
+        "required": ["plant_id", "rosette_area_cm2", "leaf_count"]
+      }
+    },
+    "prompt": "Plant AT-Col0-44 has rosette area 18.6 cm2 with 14 leaves.",
+    "gold_name": "phenotype_arabidopsis_rosette",
+    "gold_args": {"plant_id": "AT-Col0-44", "rosette_area_cm2": 18.6, "leaf_count": 14},
+    "difficulty": "medium"
+  },
+  {
+    "id": "bio_040",
+    "function": {
+      "name": "count_nematode_gall_density",
+      "description": "Count root-knot nematode galls on a defined length of root for population estimates.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "root_id": {"type": "string", "description": "Root sample ID"},
+          "gall_count": {"type": "int", "description": "Number of galls"},
+          "root_length_cm": {"type": "float", "description": "Inspected root length cm"}
+        },
+        "required": ["root_id", "gall_count", "root_length_cm"]
+      }
+    },
+    "prompt": "Found 47 root-knot galls on root RT-09 along an inspected 12 cm length.",
+    "gold_name": "count_nematode_gall_density",
+    "gold_args": {"root_id": "RT-09", "gall_count": 47, "root_length_cm": 12.0},
+    "difficulty": "medium"
+  },
+  {
+    "id": "bio_041",
+    "function": {
+      "name": "perform_telemetry_triangulation",
+      "description": "Cross-bearing triangulation of a radio-collared animal from three receiver stations.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "collar_freq_mhz": {"type": "float", "description": "Collar frequency MHz"},
+          "bearing_a_deg": {"type": "float", "description": "Bearing from station A"},
+          "bearing_b_deg": {"type": "float", "description": "Bearing from station B"},
+          "bearing_c_deg": {"type": "float", "description": "Bearing from station C"}
+        },
+        "required": ["collar_freq_mhz", "bearing_a_deg", "bearing_b_deg", "bearing_c_deg"]
+      }
+    },
+    "prompt": "Triangulate the collar on frequency 150.330 MHz with bearings 071 from A, 142 from B, and 219 from C.",
+    "gold_name": "perform_telemetry_triangulation",
+    "gold_args": {"collar_freq_mhz": 150.33, "bearing_a_deg": 71.0, "bearing_b_deg": 142.0, "bearing_c_deg": 219.0},
+    "difficulty": "medium"
+  },
+  {
+    "id": "bio_042",
+    "function": {
+      "name": "load_microbiome_16s_run",
+      "description": "Load a multiplexed 16S rRNA sequencing run with barcoded samples for downstream DADA2.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "run_id": {"type": "string", "description": "Sequencing run ID"},
+          "sample_count": {"type": "int", "description": "Number of pooled samples"},
+          "region": {"type": "string", "description": "Targeted V region"}
+        },
+        "required": ["run_id", "sample_count", "region"]
+      }
+    },
+    "prompt": "Load 16S run R-MISEQ-117 with 96 pooled samples, V3-V4 region.",
+    "gold_name": "load_microbiome_16s_run",
+    "gold_args": {"run_id": "R-MISEQ-117", "sample_count": 96, "region": "V3-V4"},
+    "difficulty": "medium"
+  },
+  {
+    "id": "bio_043",
+    "function": {
+      "name": "score_oviposition_site_choice",
+      "description": "Record container choice scores for a female mosquito in an oviposition assay.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "female_id": {"type": "string", "description": "Mosquito ID"},
+          "cup_choices": {"type": "array", "description": "Egg counts per cup index"}
+        },
+        "required": ["female_id", "cup_choices"]
+      }
+    },
+    "prompt": "Aedes aegypti female AA-77 laid 12, 0, 33, 4 eggs across the four oviposition cups.",
+    "gold_name": "score_oviposition_site_choice",
+    "gold_args": {"female_id": "AA-77", "cup_choices": [12, 0, 33, 4]},
+    "difficulty": "medium"
+  },
+  {
+    "id": "bio_044",
+    "function": {
+      "name": "dehydrate_plant_for_sem",
+      "description": "Run a graded ethanol dehydration series on a plant tissue sample for scanning electron microscopy.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "tissue_id": {"type": "string", "description": "Tissue ID"},
+          "ethanol_steps": {"type": "array", "description": "List of ethanol percentages"},
+          "step_minutes": {"type": "int", "description": "Minutes per step"}
+        },
+        "required": ["tissue_id", "ethanol_steps", "step_minutes"]
+      }
+    },
+    "prompt": "Dehydrate trichome sample TR-SEM-9 through 30, 50, 70, 90, 100 percent ethanol, 15 min each.",
+    "gold_name": "dehydrate_plant_for_sem",
+    "gold_args": {"tissue_id": "TR-SEM-9", "ethanol_steps": [30, 50, 70, 90, 100], "step_minutes": 15},
+    "difficulty": "medium"
+  },
+  {
+    "id": "bio_045",
+    "function": {
+      "name": "track_butterfly_flight_path",
+      "description": "Record a GPS-pinged flight path of a tagged butterfly across waypoints.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "tag_id": {"type": "string", "description": "Tag ID"},
+          "waypoints": {"type": "array", "description": "List of [lat, lon] pairs"}
+        },
+        "required": ["tag_id", "waypoints"]
+      }
+    },
+    "prompt": "Tagged monarch MON-23 was logged at (40.71,-74.01), (40.72,-74.00), then (40.74,-73.98).",
+    "gold_name": "track_butterfly_flight_path",
+    "gold_args": {"tag_id": "MON-23", "waypoints": [[40.71, -74.01], [40.72, -74.0], [40.74, -73.98]]},
+    "difficulty": "medium"
+  },
+  {
+    "id": "bio_046",
+    "function": {
+      "name": "score_oak_gall_morphotype",
+      "description": "Assign a morphotype code to a cynipid oak gall and record host oak species.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "gall_id": {"type": "string", "description": "Gall ID"},
+          "morphotype_code": {"type": "string", "description": "Morphotype label"},
+          "host_oak": {"type": "string", "description": "Quercus species"}
+        },
+        "required": ["gall_id", "morphotype_code", "host_oak"]
+      }
+    },
+    "prompt": "Gall OAK-G-181 is morphotype M7-spiny on Quercus robur.",
+    "gold_name": "score_oak_gall_morphotype",
+    "gold_args": {"gall_id": "OAK-G-181", "morphotype_code": "M7-spiny", "host_oak": "Quercus robur"},
+    "difficulty": "medium"
+  },
+  {
+    "id": "bio_047",
+    "function": {
+      "name": "screen_tick_for_borrelia",
+      "description": "Run a multiplex PCR on a tick lysate for Borrelia burgdorferi sensu lato.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "tick_id": {"type": "string", "description": "Tick ID"},
+          "lysate_volume_ul": {"type": "float", "description": "Lysate volume uL"},
+          "primer_set": {"type": "string", "description": "Primer set label"}
+        },
+        "required": ["tick_id", "lysate_volume_ul", "primer_set"]
+      }
+    },
+    "prompt": "Screen Ixodes ricinus tick IR-2024-991 with 5 uL lysate using primer set OspA-flaB.",
+    "gold_name": "screen_tick_for_borrelia",
+    "gold_args": {"tick_id": "IR-2024-991", "lysate_volume_ul": 5.0, "primer_set": "OspA-flaB"},
+    "difficulty": "medium"
+  },
+  {
+    "id": "bio_048",
+    "function": {
+      "name": "log_seabird_diving_event",
+      "description": "Record a single dive event from a TDR (time-depth recorder) on a seabird.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "tdr_id": {"type": "string", "description": "TDR unit ID"},
+          "max_depth_m": {"type": "float", "description": "Max depth meters"},
+          "dive_duration_s": {"type": "float", "description": "Dive duration seconds"}
+        },
+        "required": ["tdr_id", "max_depth_m", "dive_duration_s"]
+      }
+    },
+    "prompt": "Log dive from TDR PUF-7 on a puffin: max 41.8 m, duration 92.4 s.",
+    "gold_name": "log_seabird_diving_event",
+    "gold_args": {"tdr_id": "PUF-7", "max_depth_m": 41.8, "dive_duration_s": 92.4},
+    "difficulty": "medium"
+  },
+  {
+    "id": "bio_049",
+    "function": {
+      "name": "preserve_jellyfish_in_propylene_glycol",
+      "description": "Transfer a gelatinous zooplankton specimen to propylene glycol after formalin pre-fixation.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "specimen_id": {"type": "string", "description": "Specimen ID"},
+          "bell_diameter_mm": {"type": "float", "description": "Bell diameter mm"},
+          "fixation_hours": {"type": "int", "description": "Pre-fixation duration hours"}
+        },
+        "required": ["specimen_id", "bell_diameter_mm", "fixation_hours"]
+      }
+    },
+    "prompt": "Preserve Aurelia aurita specimen JF-77 with bell 88 mm after 6 h formalin pre-fixation.",
+    "gold_name": "preserve_jellyfish_in_propylene_glycol",
+    "gold_args": {"specimen_id": "JF-77", "bell_diameter_mm": 88.0, "fixation_hours": 6},
+    "difficulty": "medium"
+  },
+  {
+    "id": "bio_050",
+    "function": {
+      "name": "set_emergence_trap_on_stream",
+      "description": "Deploy an emergence trap above a stream riffle to sample emerging aquatic insects.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "reach_id": {"type": "string", "description": "Stream reach ID"},
+          "trap_area_m2": {"type": "float", "description": "Trap footprint m2"},
+          "deploy_days": {"type": "int", "description": "Days deployed"}
+        },
+        "required": ["reach_id", "trap_area_m2", "deploy_days"]
+      }
+    },
+    "prompt": "Deploy a 0.5 m2 emergence trap on reach STR-MAY-3 for 7 days.",
+    "gold_name": "set_emergence_trap_on_stream",
+    "gold_args": {"reach_id": "STR-MAY-3", "trap_area_m2": 0.5, "deploy_days": 7},
+    "difficulty": "medium"
+  },
+  {
+    "id": "bio_051",
+    "function": {
+      "name": "annotate_pollinator_visit",
+      "description": "Record a pollinator visit event including handling time and pollen load class.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "flower_id": {"type": "string", "description": "Tagged flower ID"},
+          "visitor_taxon": {"type": "string", "description": "Visitor Latin name"},
+          "handling_time_s": {"type": "float", "description": "Time on flower seconds"},
+          "pollen_load_class": {"type": "int", "description": "Pollen load class 0-3"}
+        },
+        "required": ["flower_id", "visitor_taxon", "handling_time_s", "pollen_load_class"]
+      }
+    },
+    "prompt": "On flower FLW-22 a Bombus terrestris worker stayed 4.7 seconds with heavy load class 3.",
+    "gold_name": "annotate_pollinator_visit",
+    "gold_args": {"flower_id": "FLW-22", "visitor_taxon": "Bombus terrestris", "handling_time_s": 4.7, "pollen_load_class": 3},
+    "difficulty": "medium"
+  },
+  {
+    "id": "bio_052",
+    "function": {
+      "name": "score_paleobotanical_cuticle",
+      "description": "Assign a stomatal index to a Mesozoic plant cuticle from light microscopy.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "cuticle_id": {"type": "string", "description": "Cuticle slide ID"},
+          "stomata_count": {"type": "int", "description": "Stomata in field"},
+          "epidermal_cell_count": {"type": "int", "description": "Epidermal cells in field"}
+        },
+        "required": ["cuticle_id", "stomata_count", "epidermal_cell_count"]
+      }
+    },
+    "prompt": "On Jurassic Ginkgo cuticle JCU-12 I counted 19 stomata against 184 epidermal cells in the same field.",
+    "gold_name": "score_paleobotanical_cuticle",
+    "gold_args": {"cuticle_id": "JCU-12", "stomata_count": 19, "epidermal_cell_count": 184},
+    "difficulty": "medium"
+  },
+  {
+    "id": "bio_053",
+    "function": {
+      "name": "perform_belt_transect_count",
+      "description": "Record total individuals of a target species along a fixed-width belt transect.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "transect_id": {"type": "string", "description": "Transect ID"},
+          "species": {"type": "string", "description": "Target species"},
+          "individuals": {"type": "int", "description": "Number observed"}
+        },
+        "required": ["transect_id", "species", "individuals"]
+      }
+    },
+    "prompt": "Along transect REEF-T7 we counted 23 Acanthurus triostegus.",
+    "gold_name": "perform_belt_transect_count",
+    "gold_args": {"transect_id": "REEF-T7", "species": "Acanthurus triostegus", "individuals": 23},
+    "difficulty": "medium"
+  },
+  {
+    "id": "bio_054",
+    "function": {
+      "name": "monitor_sea_turtle_nest",
+      "description": "Update a sea turtle nest record with monitoring observations.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "nest_id": {"type": "string", "description": "Nest ID"},
+          "days_since_lay": {"type": "int", "description": "Days since egg laying"},
+          "predation_observed": {"type": "bool", "description": "Predation observed flag"}
+        },
+        "required": ["nest_id", "days_since_lay", "predation_observed"]
+      }
+    },
+    "prompt": "Loggerhead nest CC-N-19 is 42 days since laying with no predation observed.",
+    "gold_name": "monitor_sea_turtle_nest",
+    "gold_args": {"nest_id": "CC-N-19", "days_since_lay": 42, "predation_observed": false},
+    "difficulty": "medium"
+  },
+  {
+    "id": "bio_055",
+    "function": {
+      "name": "score_hyena_clan_interaction",
+      "description": "Tally agonistic interactions among clan members observed during a focal scan.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "clan_id": {"type": "string", "description": "Clan ID"},
+          "scan_minutes": {"type": "int", "description": "Scan duration"},
+          "aggressive_acts": {"type": "int", "description": "Count of aggressive acts"}
+        },
+        "required": ["clan_id", "scan_minutes", "aggressive_acts"]
+      }
+    },
+    "prompt": "Over a 30-minute focal scan of clan TALK-W we logged 7 aggressive acts.",
+    "gold_name": "score_hyena_clan_interaction",
+    "gold_args": {"clan_id": "TALK-W", "scan_minutes": 30, "aggressive_acts": 7},
+    "difficulty": "medium"
+  },
+  {
+    "id": "bio_056",
+    "function": {
+      "name": "log_freshwater_mussel_glochidia",
+      "description": "Record glochidia release event from a gravid freshwater mussel.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "mussel_id": {"type": "string", "description": "Mussel ID"},
+          "glochidia_count": {"type": "int", "description": "Glochidia released"},
+          "host_fish": {"type": "string", "description": "Host fish species"}
+        },
+        "required": ["mussel_id", "glochidia_count", "host_fish"]
+      }
+    },
+    "prompt": "Mussel UO-99 (Unio crassus) released 14,200 glochidia onto host Cottus gobio.",
+    "gold_name": "log_freshwater_mussel_glochidia",
+    "gold_args": {"mussel_id": "UO-99", "glochidia_count": 14200, "host_fish": "Cottus gobio"},
+    "difficulty": "medium"
+  },
+  {
+    "id": "bio_057",
+    "function": {
+      "name": "sample_soil_collembola_core",
+      "description": "Take a Tullgren-extracted soil core sample for springtail community analysis.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "core_id": {"type": "string", "description": "Core ID"},
+          "core_depth_cm": {"type": "float", "description": "Depth cm"},
+          "extraction_hours": {"type": "int", "description": "Tullgren extraction hours"}
+        },
+        "required": ["core_id", "core_depth_cm", "extraction_hours"]
+      }
+    },
+    "prompt": "Take soil core CL-44 to 5 cm depth and run Tullgren extraction for 72 hours.",
+    "gold_name": "sample_soil_collembola_core",
+    "gold_args": {"core_id": "CL-44", "core_depth_cm": 5.0, "extraction_hours": 72},
+    "difficulty": "medium"
+  },
+  {
+    "id": "bio_058",
+    "function": {
+      "name": "estimate_population_with_jolly_seber",
+      "description": "Run a Jolly-Seber open population estimate on a capture history matrix.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "study_id": {"type": "string", "description": "Study ID"},
+          "capture_history": {"type": "array", "description": "Captures per occasion"},
+          "occasions": {"type": "int", "description": "Number of sampling occasions"}
+        },
+        "required": ["study_id", "capture_history", "occasions"]
+      }
+    },
+    "prompt": "For shrew study SHRW-21 with 5 sampling occasions and captures [42, 38, 41, 35, 40] run a Jolly-Seber estimate.",
+    "gold_name": "estimate_population_with_jolly_seber",
+    "gold_args": {"study_id": "SHRW-21", "capture_history": [42, 38, 41, 35, 40], "occasions": 5},
+    "difficulty": "medium"
+  },
+  {
+    "id": "bio_059",
+    "function": {
+      "name": "tag_shark_with_satellite",
+      "description": "Attach a pop-up satellite archival tag to a captured shark.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "shark_id": {"type": "string", "description": "Shark ID"},
+          "tag_serial": {"type": "string", "description": "Tag serial"},
+          "pop_up_days": {"type": "int", "description": "Programmed pop-up in days"}
+        },
+        "required": ["shark_id", "tag_serial", "pop_up_days"]
+      }
+    },
+    "prompt": "Attach PSAT tag with serial PSAT-A-1192 to blue shark BSH-04, programmed to pop up in 180 days.",
+    "gold_name": "tag_shark_with_satellite",
+    "gold_args": {"shark_id": "BSH-04", "tag_serial": "PSAT-A-1192", "pop_up_days": 180},
+    "difficulty": "medium"
+  },
+  {
+    "id": "bio_060",
+    "function": {
+      "name": "score_galapagos_finch_beak",
+      "description": "Record beak morphology measurements for a Geospiza individual.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "individual_id": {"type": "string", "description": "Finch ID"},
+          "beak_depth_mm": {"type": "float", "description": "Beak depth mm"},
+          "beak_length_mm": {"type": "float", "description": "Beak length mm"}
+        },
+        "required": ["individual_id", "beak_depth_mm", "beak_length_mm"]
+      }
+    },
+    "prompt": "Measure Geospiza fortis individual GF-217: beak depth 9.4 mm, length 11.1 mm.",
+    "gold_name": "score_galapagos_finch_beak",
+    "gold_args": {"individual_id": "GF-217", "beak_depth_mm": 9.4, "beak_length_mm": 11.1},
+    "difficulty": "medium"
+  },
+  {
+    "id": "bio_076",
+    "function": {
+      "name": "score_coral_recruit_settlement",
+      "description": "Count coral recruits settled on a deployed ceramic tile array and classify by family.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "tile_id": {"type": "string", "description": "Settlement tile ID"},
+          "recruit_counts_by_family": {"type": "array", "description": "[family, count] pairs"},
+          "soak_days": {"type": "int", "description": "Days submerged"}
+        },
+        "required": ["tile_id", "recruit_counts_by_family", "soak_days"]
+      }
+    },
+    "prompt": "Tile REC-T-21 after 90 days soak: 6 Acroporidae, 3 Pocilloporidae, 1 Poritidae recruits.",
+    "gold_name": "score_coral_recruit_settlement",
+    "gold_args": {"tile_id": "REC-T-21", "recruit_counts_by_family": [["Acroporidae", 6], ["Pocilloporidae", 3], ["Poritidae", 1]], "soak_days": 90},
+    "difficulty": "medium"
+  },
+  {
+    "id": "bio_077",
+    "function": {
+      "name": "log_orchid_mycorrhizal_partner",
+      "description": "Record the mycorrhizal fungal partner isolated from an orchid protocorm.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "orchid_id": {"type": "string", "description": "Orchid ID"},
+          "fungal_taxon": {"type": "string", "description": "Mycorrhizal fungus name"},
+          "isolation_method": {"type": "string", "description": "Isolation method"}
+        },
+        "required": ["orchid_id", "fungal_taxon", "isolation_method"]
+      }
+    },
+    "prompt": "Orchid Dactylorhiza fuchsii DAF-19 yielded Tulasnella calospora via pelloton plating.",
+    "gold_name": "log_orchid_mycorrhizal_partner",
+    "gold_args": {"orchid_id": "DAF-19", "fungal_taxon": "Tulasnella calospora", "isolation_method": "pelloton plating"},
+    "difficulty": "medium"
+  },
+  {
+    "id": "bio_078",
+    "function": {
+      "name": "measure_caterpillar_frass_output",
+      "description": "Weigh frass produced by a feeding lepidopteran larva over a fixed period.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "larva_id": {"type": "string", "description": "Larva ID"},
+          "frass_mg": {"type": "float", "description": "Frass mass mg"},
+          "feeding_hours": {"type": "int", "description": "Feeding window hours"}
+        },
+        "required": ["larva_id", "frass_mg", "feeding_hours"]
+      }
+    },
+    "prompt": "Larva LYM-44 produced 312 mg of frass over a 24 h feeding window.",
+    "gold_name": "measure_caterpillar_frass_output",
+    "gold_args": {"larva_id": "LYM-44", "frass_mg": 312.0, "feeding_hours": 24},
+    "difficulty": "medium"
+  },
+  {
+    "id": "bio_079",
+    "function": {
+      "name": "record_woodpecker_drumming_bout",
+      "description": "Log a drumming bout by a male woodpecker including roll rate and bout length.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "individual_id": {"type": "string", "description": "Bird ID"},
+          "rolls_per_second": {"type": "float", "description": "Roll rate Hz"},
+          "bout_duration_s": {"type": "float", "description": "Bout duration s"}
+        },
+        "required": ["individual_id", "rolls_per_second", "bout_duration_s"]
+      }
+    },
+    "prompt": "Male great spotted woodpecker DEN-22 drummed at 16.2 rolls/s for 1.4 seconds.",
+    "gold_name": "record_woodpecker_drumming_bout",
+    "gold_args": {"individual_id": "DEN-22", "rolls_per_second": 16.2, "bout_duration_s": 1.4},
+    "difficulty": "medium"
+  },
+  {
+    "id": "bio_080",
+    "function": {
+      "name": "score_sea_urchin_test_diameter",
+      "description": "Record test diameter of a sea urchin specimen with gonad index.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "urchin_id": {"type": "string", "description": "Urchin ID"},
+          "test_diameter_mm": {"type": "float", "description": "Test diameter mm"},
+          "gonad_index": {"type": "float", "description": "Gonad mass / body mass"}
+        },
+        "required": ["urchin_id", "test_diameter_mm", "gonad_index"]
+      }
+    },
+    "prompt": "Sea urchin URC-77 has test diameter 54.8 mm and gonad index 0.17.",
+    "gold_name": "score_sea_urchin_test_diameter",
+    "gold_args": {"urchin_id": "URC-77", "test_diameter_mm": 54.8, "gonad_index": 0.17},
+    "difficulty": "medium"
+  },
+  {
+    "id": "bio_061",
+    "function": {
+      "name": "ascribe_lichen_substrate_preference",
+      "description": "Given a list of substrate occurrence counts for a lichen species across substrate categories, infer dominant substrate and store ecological notes.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "species": {"type": "string", "description": "Lichen Latin name"},
+          "substrate_counts": {"type": "array", "description": "Array of [substrate, count] pairs"},
+          "ecological_notes": {"type": "string", "description": "Free-text notes"}
+        },
+        "required": ["species", "substrate_counts", "ecological_notes"]
+      }
+    },
+    "prompt": "We surveyed Xanthoria parietina across an urban park: 22 occurrences on Acer bark, 14 on concrete walls, 3 on Tilia twigs. Note that most thalli faced southwest. Save ecological notes accordingly.",
+    "gold_name": "ascribe_lichen_substrate_preference",
+    "gold_args": {"species": "Xanthoria parietina", "substrate_counts": [["Acer bark", 22], ["concrete walls", 14], ["Tilia twigs", 3]], "ecological_notes": "Most thalli faced southwest."},
+    "difficulty": "hard"
+  },
+  {
+    "id": "bio_062",
+    "function": {
+      "name": "fit_growth_curve_to_otolith_series",
+      "description": "Fit a von Bertalanffy growth curve to age-length pairs derived from otolith reads.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "stock_id": {"type": "string", "description": "Fish stock ID"},
+          "ages_years": {"type": "array", "description": "Age in years per fish"},
+          "lengths_cm": {"type": "array", "description": "Total length in cm per fish"},
+          "linf_init_cm": {"type": "float", "description": "Initial guess for L-infinity"}
+        },
+        "required": ["stock_id", "ages_years", "lengths_cm", "linf_init_cm"]
+      }
+    },
+    "prompt": "Fit growth curve for Baltic cod stock BC-NE-2025 with ages 1, 2, 3, 4, 5 years and lengths 18, 32, 44, 53, 60 cm. Use Linf initial guess of 95 cm.",
+    "gold_name": "fit_growth_curve_to_otolith_series",
+    "gold_args": {"stock_id": "BC-NE-2025", "ages_years": [1, 2, 3, 4, 5], "lengths_cm": [18, 32, 44, 53, 60], "linf_init_cm": 95.0},
+    "difficulty": "hard"
+  },
+  {
+    "id": "bio_063",
+    "function": {
+      "name": "synthesize_microbiome_alpha_diversity_report",
+      "description": "Compute Shannon and Chao1 indices on per-sample ASV count vectors and write report.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "project_id": {"type": "string", "description": "Project ID"},
+          "sample_ids": {"type": "array", "description": "Sample identifiers"},
+          "asv_count_vectors": {"type": "array", "description": "Per-sample ASV count arrays"},
+          "rarefaction_depth": {"type": "int", "description": "Rarefaction depth"}
+        },
+        "required": ["project_id", "sample_ids", "asv_count_vectors", "rarefaction_depth"]
+      }
+    },
+    "prompt": "Project GUTMICR-Q2 has two samples: S-A with ASV counts [50, 30, 20, 10] and S-B with [100, 5, 5, 90]. Rarefy to depth 110 and compute alpha diversity report.",
+    "gold_name": "synthesize_microbiome_alpha_diversity_report",
+    "gold_args": {"project_id": "GUTMICR-Q2", "sample_ids": ["S-A", "S-B"], "asv_count_vectors": [[50, 30, 20, 10], [100, 5, 5, 90]], "rarefaction_depth": 110},
+    "difficulty": "hard"
+  },
+  {
+    "id": "bio_064",
+    "function": {
+      "name": "design_translocation_release_plan",
+      "description": "Compose a translocation release plan including soft-release pen schedule and supplementary feeding tapering.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "species": {"type": "string", "description": "Target species"},
+          "source_population": {"type": "string", "description": "Source population code"},
+          "target_site": {"type": "string", "description": "Release site code"},
+          "release_count": {"type": "int", "description": "Number of individuals"},
+          "soft_release_days": {"type": "int", "description": "Days in soft-release pen"},
+          "supplemental_feed_taper_days": {"type": "int", "description": "Tapering window"}
+        },
+        "required": ["species", "source_population", "target_site", "release_count", "soft_release_days", "supplemental_feed_taper_days"]
+      }
+    },
+    "prompt": "Plan translocation of 12 European hamsters (Cricetus cricetus) from source population SRC-RHEN to target site TGT-LIM, with 21 days in soft-release pen and supplemental feed tapered over 45 days.",
+    "gold_name": "design_translocation_release_plan",
+    "gold_args": {"species": "Cricetus cricetus", "source_population": "SRC-RHEN", "target_site": "TGT-LIM", "release_count": 12, "soft_release_days": 21, "supplemental_feed_taper_days": 45},
+    "difficulty": "hard"
+  },
+  {
+    "id": "bio_065",
+    "function": {
+      "name": "estimate_pheromone_plume_dispersion",
+      "description": "Model atmospheric dispersion of a moth sex pheromone plume from a point source under given wind conditions.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "source_id": {"type": "string", "description": "Pheromone source ID"},
+          "wind_speed_m_s": {"type": "float", "description": "Wind speed m/s"},
+          "wind_direction_deg": {"type": "float", "description": "Wind direction degrees from N"},
+          "stability_class": {"type": "string", "description": "Pasquill stability class A-F"},
+          "emission_ng_s": {"type": "float", "description": "Emission rate ng/s"}
+        },
+        "required": ["source_id", "wind_speed_m_s", "wind_direction_deg", "stability_class", "emission_ng_s"]
+      }
+    },
+    "prompt": "Model the moth pheromone plume from source LURE-77 with wind 2.3 m/s from 215 degrees, Pasquill class C, emission 4.8 ng/s.",
+    "gold_name": "estimate_pheromone_plume_dispersion",
+    "gold_args": {"source_id": "LURE-77", "wind_speed_m_s": 2.3, "wind_direction_deg": 215.0, "stability_class": "C", "emission_ng_s": 4.8},
+    "difficulty": "hard"
+  },
+  {
+    "id": "bio_066",
+    "function": {
+      "name": "deconvolute_mixed_amphibian_chorus",
+      "description": "Run a CNN-based deconvolution on overlapping anuran calls to estimate per-species call counts in a clip.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "clip_id": {"type": "string", "description": "Audio clip ID"},
+          "model_version": {"type": "string", "description": "Model version tag"},
+          "expected_species": {"type": "array", "description": "Species names expected at site"},
+          "confidence_threshold": {"type": "float", "description": "Detection threshold 0-1"}
+        },
+        "required": ["clip_id", "model_version", "expected_species", "confidence_threshold"]
+      }
+    },
+    "prompt": "Deconvolute chorus clip CHOR-NORTH-44 using model v2.3.1, expecting Rana arvalis, Bufo bufo and Hyla arborea, with confidence threshold 0.65.",
+    "gold_name": "deconvolute_mixed_amphibian_chorus",
+    "gold_args": {"clip_id": "CHOR-NORTH-44", "model_version": "v2.3.1", "expected_species": ["Rana arvalis", "Bufo bufo", "Hyla arborea"], "confidence_threshold": 0.65},
+    "difficulty": "hard"
+  },
+  {
+    "id": "bio_067",
+    "function": {
+      "name": "reconstruct_phylogeny_from_alignment",
+      "description": "Reconstruct a maximum-likelihood phylogeny from a multi-locus alignment with partitioned models.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "alignment_path": {"type": "string", "description": "Path to nexus/fasta alignment"},
+          "partitions": {"type": "array", "description": "List of partition substitution models"},
+          "bootstrap_replicates": {"type": "int", "description": "Bootstrap replicates"},
+          "outgroup_taxon": {"type": "string", "description": "Outgroup taxon name"}
+        },
+        "required": ["alignment_path", "partitions", "bootstrap_replicates", "outgroup_taxon"]
+      }
+    },
+    "prompt": "Build an ML phylogeny from /data/align/chiropterans.fasta with partitions GTR+G for COI and HKY+I for cytb, 1000 bootstraps, outgroup Pteropus vampyrus.",
+    "gold_name": "reconstruct_phylogeny_from_alignment",
+    "gold_args": {"alignment_path": "/data/align/chiropterans.fasta", "partitions": ["GTR+G", "HKY+I"], "bootstrap_replicates": 1000, "outgroup_taxon": "Pteropus vampyrus"},
+    "difficulty": "hard"
+  },
+  {
+    "id": "bio_068",
+    "function": {
+      "name": "model_predator_prey_lotka_volterra",
+      "description": "Simulate a 2-species predator-prey system with extended Lotka-Volterra parameters.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "prey_growth_r": {"type": "float", "description": "Intrinsic prey growth rate"},
+          "predation_rate_a": {"type": "float", "description": "Predation rate"},
+          "predator_death_m": {"type": "float", "description": "Predator mortality"},
+          "conversion_b": {"type": "float", "description": "Conversion efficiency"},
+          "time_horizon_years": {"type": "float", "description": "Years to simulate"}
+        },
+        "required": ["prey_growth_r", "predation_rate_a", "predator_death_m", "conversion_b", "time_horizon_years"]
+      }
+    },
+    "prompt": "Simulate lynx-hare dynamics with prey r=1.1, predation a=0.4, predator mortality m=0.9, conversion b=0.1, over 50 years.",
+    "gold_name": "model_predator_prey_lotka_volterra",
+    "gold_args": {"prey_growth_r": 1.1, "predation_rate_a": 0.4, "predator_death_m": 0.9, "conversion_b": 0.1, "time_horizon_years": 50.0},
+    "difficulty": "hard"
+  },
+  {
+    "id": "bio_069",
+    "function": {
+      "name": "score_paleo_pollen_assemblage_zone",
+      "description": "Run a CONISS-style zonation on a stratified pollen percentage matrix from a lake core.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "core_id": {"type": "string", "description": "Lake core ID"},
+          "taxon_names": {"type": "array", "description": "Pollen taxa columns"},
+          "depth_pct_matrix": {"type": "array", "description": "List of percentage rows per depth"},
+          "min_zone_count": {"type": "int", "description": "Minimum zones requested"}
+        },
+        "required": ["core_id", "taxon_names", "depth_pct_matrix", "min_zone_count"]
+      }
+    },
+    "prompt": "On lake core LK-NORD-3 with taxa [Pinus, Betula, Quercus] and percentages at three depths [[80,10,10],[60,30,10],[20,40,40]], run CONISS zonation with minimum 2 zones.",
+    "gold_name": "score_paleo_pollen_assemblage_zone",
+    "gold_args": {"core_id": "LK-NORD-3", "taxon_names": ["Pinus", "Betula", "Quercus"], "depth_pct_matrix": [[80, 10, 10], [60, 30, 10], [20, 40, 40]], "min_zone_count": 2},
+    "difficulty": "hard"
+  },
+  {
+    "id": "bio_070",
+    "function": {
+      "name": "annotate_gut_parasite_burden",
+      "description": "Record helminth burden estimates from a small-mammal necropsy with worm counts by genus.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "host_id": {"type": "string", "description": "Host individual ID"},
+          "host_species": {"type": "string", "description": "Host species"},
+          "parasites": {"type": "array", "description": "List of [genus, count] pairs"},
+          "host_mass_g": {"type": "float", "description": "Host body mass g"}
+        },
+        "required": ["host_id", "host_species", "parasites", "host_mass_g"]
+      }
+    },
+    "prompt": "On wood mouse APO-101 (Apodemus sylvaticus, 24.3 g), I counted 18 Heligmosomoides and 4 Syphacia in the gut.",
+    "gold_name": "annotate_gut_parasite_burden",
+    "gold_args": {"host_id": "APO-101", "host_species": "Apodemus sylvaticus", "parasites": [["Heligmosomoides", 18], ["Syphacia", 4]], "host_mass_g": 24.3},
+    "difficulty": "hard"
+  },
+  {
+    "id": "bio_071",
+    "function": {
+      "name": "compose_marxan_conservation_scenario",
+      "description": "Configure a Marxan systematic conservation planning scenario with conservation features and cost surfaces.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "scenario_id": {"type": "string", "description": "Scenario ID"},
+          "feature_targets": {"type": "array", "description": "List of [feature, target_pct] pairs"},
+          "cost_surface_path": {"type": "string", "description": "Cost surface raster path"},
+          "boundary_length_modifier": {"type": "float", "description": "BLM value"}
+        },
+        "required": ["scenario_id", "feature_targets", "cost_surface_path", "boundary_length_modifier"]
+      }
+    },
+    "prompt": "Build Marxan scenario CARP-RES-A with targets 30% for old-growth-beech, 50% for capercaillie-habitat, 20% for bear-corridor; cost surface at /gis/cost/opportunity_cost.tif; BLM 0.7.",
+    "gold_name": "compose_marxan_conservation_scenario",
+    "gold_args": {"scenario_id": "CARP-RES-A", "feature_targets": [["old-growth-beech", 30], ["capercaillie-habitat", 50], ["bear-corridor", 20]], "cost_surface_path": "/gis/cost/opportunity_cost.tif", "boundary_length_modifier": 0.7},
+    "difficulty": "hard"
+  },
+  {
+    "id": "bio_072",
+    "function": {
+      "name": "calibrate_isotope_mixing_model",
+      "description": "Run a Bayesian SIAR-style stable isotope mixing model to estimate diet proportions from consumer and source isotope values.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "consumer_id": {"type": "string", "description": "Consumer sample ID"},
+          "consumer_d13c": {"type": "float", "description": "Consumer d13C"},
+          "consumer_d15n": {"type": "float", "description": "Consumer d15N"},
+          "source_names": {"type": "array", "description": "Diet source names"},
+          "source_means": {"type": "array", "description": "Per-source [d13C, d15N] means"}
+        },
+        "required": ["consumer_id", "consumer_d13c", "consumer_d15n", "source_names", "source_means"]
+      }
+    },
+    "prompt": "Run mixing model on otter sample OTR-44 with d13C=-22.4 and d15N=12.7. Sources: salmon (-19.5, 14.0), crayfish (-25.0, 9.5), frog (-27.2, 10.0).",
+    "gold_name": "calibrate_isotope_mixing_model",
+    "gold_args": {"consumer_id": "OTR-44", "consumer_d13c": -22.4, "consumer_d15n": 12.7, "source_names": ["salmon", "crayfish", "frog"], "source_means": [[-19.5, 14.0], [-25.0, 9.5], [-27.2, 10.0]]},
+    "difficulty": "hard"
+  },
+  {
+    "id": "bio_073",
+    "function": {
+      "name": "score_ant_colony_network_centrality",
+      "description": "Compute betweenness centrality for each ant worker in a contact-network derived from RFID-tagged interactions.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "colony_id": {"type": "string", "description": "Colony ID"},
+          "edges": {"type": "array", "description": "List of [worker_a, worker_b, weight] triples"},
+          "include_queens": {"type": "bool", "description": "Whether to include queens"}
+        },
+        "required": ["colony_id", "edges", "include_queens"]
+      }
+    },
+    "prompt": "Compute betweenness centrality for colony LF-22 using edges [['w1','w2',5], ['w2','w3',2], ['w1','w3',1]], excluding queens.",
+    "gold_name": "score_ant_colony_network_centrality",
+    "gold_args": {"colony_id": "LF-22", "edges": [["w1", "w2", 5], ["w2", "w3", 2], ["w1", "w3", 1]], "include_queens": false},
+    "difficulty": "hard"
+  },
+  {
+    "id": "bio_074",
+    "function": {
+      "name": "simulate_metapopulation_extinction",
+      "description": "Run a stochastic metapopulation simulation with patch-specific carrying capacities and pairwise dispersal probabilities.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "species": {"type": "string", "description": "Species name"},
+          "patch_capacities": {"type": "array", "description": "Carrying capacity per patch"},
+          "dispersal_matrix": {"type": "array", "description": "Row-major dispersal probability matrix"},
+          "years": {"type": "int", "description": "Simulation horizon years"},
+          "replicates": {"type": "int", "description": "Stochastic replicates"}
+        },
+        "required": ["species", "patch_capacities", "dispersal_matrix", "years", "replicates"]
+      }
+    },
+    "prompt": "Simulate 500 stochastic replicates of Eurasian lynx (Lynx lynx) metapopulation over 100 years across three patches with capacities [40, 25, 30] and dispersal matrix [[0,0.05,0.02],[0.04,0,0.06],[0.01,0.05,0]].",
+    "gold_name": "simulate_metapopulation_extinction",
+    "gold_args": {"species": "Lynx lynx", "patch_capacities": [40, 25, 30], "dispersal_matrix": [[0, 0.05, 0.02], [0.04, 0, 0.06], [0.01, 0.05, 0]], "years": 100, "replicates": 500},
+    "difficulty": "hard"
+  },
+  {
+    "id": "bio_075",
+    "function": {
+      "name": "annotate_cryptic_species_complex",
+      "description": "Flag a sample as belonging to a cryptic species complex pending integrative taxonomy, with lines of evidence.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "sample_id": {"type": "string", "description": "Sample ID"},
+          "complex_name": {"type": "string", "description": "Cryptic complex label"},
+          "evidence_types": {"type": "array", "description": "List of evidence categories"},
+          "preliminary_lineage": {"type": "string", "description": "Tentative lineage"}
+        },
+        "required": ["sample_id", "complex_name", "evidence_types", "preliminary_lineage"]
+      }
+    },
+    "prompt": "Flag sample MOSS-318 as part of the Brachythecium rutabulum complex with evidence from morphometrics, ITS sequence and chemotaxonomy, preliminarily lineage B.r.-East.",
+    "gold_name": "annotate_cryptic_species_complex",
+    "gold_args": {"sample_id": "MOSS-318", "complex_name": "Brachythecium rutabulum complex", "evidence_types": ["morphometrics", "ITS sequence", "chemotaxonomy"], "preliminary_lineage": "B.r.-East"},
+    "difficulty": "hard"
+  }
+]

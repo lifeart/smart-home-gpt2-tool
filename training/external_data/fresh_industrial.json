@@ -1,0 +1,1595 @@
+[
+  {
+    "id": "ind_001",
+    "function": {
+      "name": "simulate_basalt_cooling_rate",
+      "description": "Simulate cooling rate of basaltic magma in a volcanic dike given thickness and ambient temperature.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "dike_thickness_m": {"type": "number", "description": "Dike thickness in meters"},
+          "ambient_temp_c": {"type": "number", "description": "Surrounding rock temperature in Celsius"},
+          "initial_magma_temp_c": {"type": "number", "description": "Initial magma temperature in Celsius"}
+        },
+        "required": ["dike_thickness_m", "ambient_temp_c", "initial_magma_temp_c"]
+      }
+    },
+    "prompt": "Run a cooling simulation for a 4-meter basalt dike intruding rock at 25 C with magma at 1180 C.",
+    "gold_name": "simulate_basalt_cooling_rate",
+    "gold_args": {"dike_thickness_m": 4, "ambient_temp_c": 25, "initial_magma_temp_c": 1180},
+    "difficulty": "easy"
+  },
+  {
+    "id": "ind_002",
+    "function": {
+      "name": "chart_sonar_bathymetry_pass",
+      "description": "Chart a single bathymetric pass from a marine sonar over a survey line.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "line_id": {"type": "string", "description": "Survey line identifier"},
+          "frequency_khz": {"type": "number", "description": "Sonar operating frequency in kHz"}
+        },
+        "required": ["line_id", "frequency_khz"]
+      }
+    },
+    "prompt": "Chart the bathymetry pass on line NS-17 using the 200 kHz transducer.",
+    "gold_name": "chart_sonar_bathymetry_pass",
+    "gold_args": {"line_id": "NS-17", "frequency_khz": 200},
+    "difficulty": "easy"
+  },
+  {
+    "id": "ind_003",
+    "function": {
+      "name": "monitor_kraft_pulp_kappa",
+      "description": "Monitor kappa number of kraft pulp during the cooking stage of a pulp digester.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "digester_id": {"type": "string", "description": "Digester unit ID"},
+          "sample_interval_min": {"type": "integer", "description": "Sampling interval in minutes"}
+        },
+        "required": ["digester_id", "sample_interval_min"]
+      }
+    },
+    "prompt": "Start kappa monitoring on digester D-3 sampled every 15 minutes.",
+    "gold_name": "monitor_kraft_pulp_kappa",
+    "gold_args": {"digester_id": "D-3", "sample_interval_min": 15},
+    "difficulty": "easy"
+  },
+  {
+    "id": "ind_004",
+    "function": {
+      "name": "log_foundry_pour_temperature",
+      "description": "Log molten metal pour temperature at the ladle outlet for a foundry casting run.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "ladle_id": {"type": "string", "description": "Ladle identifier"},
+          "alloy": {"type": "string", "description": "Alloy grade poured"},
+          "temp_c": {"type": "number", "description": "Pour temperature in Celsius"}
+        },
+        "required": ["ladle_id", "alloy", "temp_c"]
+      }
+    },
+    "prompt": "Log a ductile iron pour from ladle L-12 at 1432 C.",
+    "gold_name": "log_foundry_pour_temperature",
+    "gold_args": {"ladle_id": "L-12", "alloy": "ductile iron", "temp_c": 1432},
+    "difficulty": "easy"
+  },
+  {
+    "id": "ind_005",
+    "function": {
+      "name": "estimate_glacier_mass_balance",
+      "description": "Estimate annual mass balance of a glacier from accumulation and ablation data.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "glacier_name": {"type": "string", "description": "Name of the glacier"},
+          "year": {"type": "integer", "description": "Hydrological year"}
+        },
+        "required": ["glacier_name", "year"]
+      }
+    },
+    "prompt": "Estimate the 2025 mass balance for Briksdalsbreen.",
+    "gold_name": "estimate_glacier_mass_balance",
+    "gold_args": {"glacier_name": "Briksdalsbreen", "year": 2025},
+    "difficulty": "easy"
+  },
+  {
+    "id": "ind_006",
+    "function": {
+      "name": "schedule_turbine_blade_inspection",
+      "description": "Schedule a borescope inspection for wind turbine blades.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "turbine_id": {"type": "string", "description": "Turbine asset ID"},
+          "inspection_date": {"type": "string", "description": "Date in YYYY-MM-DD"}
+        },
+        "required": ["turbine_id", "inspection_date"]
+      }
+    },
+    "prompt": "Book a blade borescope inspection for turbine WT-44 on 2026-06-12.",
+    "gold_name": "schedule_turbine_blade_inspection",
+    "gold_args": {"turbine_id": "WT-44", "inspection_date": "2026-06-12"},
+    "difficulty": "easy"
+  },
+  {
+    "id": "ind_007",
+    "function": {
+      "name": "probe_bridge_strain_gauge",
+      "description": "Read out a single strain gauge bonded to a bridge structural member.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "bridge_id": {"type": "string", "description": "Bridge identifier"},
+          "gauge_id": {"type": "string", "description": "Strain gauge identifier"}
+        },
+        "required": ["bridge_id", "gauge_id"]
+      }
+    },
+    "prompt": "Pull a strain reading from gauge SG-09 on bridge BR-East-3.",
+    "gold_name": "probe_bridge_strain_gauge",
+    "gold_args": {"bridge_id": "BR-East-3", "gauge_id": "SG-09"},
+    "difficulty": "easy"
+  },
+  {
+    "id": "ind_008",
+    "function": {
+      "name": "tap_smelter_slag_chemistry",
+      "description": "Sample slag chemistry from a smelting furnace tap.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "furnace_id": {"type": "string", "description": "Furnace ID"},
+          "tap_number": {"type": "integer", "description": "Tap sequence number"}
+        },
+        "required": ["furnace_id", "tap_number"]
+      }
+    },
+    "prompt": "Take a slag chemistry sample from furnace F-2 on tap 18.",
+    "gold_name": "tap_smelter_slag_chemistry",
+    "gold_args": {"furnace_id": "F-2", "tap_number": 18},
+    "difficulty": "easy"
+  },
+  {
+    "id": "ind_009",
+    "function": {
+      "name": "trigger_refinery_coker_drum_switch",
+      "description": "Trigger a coke drum switch operation in a delayed coker at an oil refinery.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "unit_id": {"type": "string", "description": "Coker unit ID"},
+          "drum_letter": {"type": "string", "description": "Drum letter A or B"}
+        },
+        "required": ["unit_id", "drum_letter"]
+      }
+    },
+    "prompt": "Switch coker unit COK-1 over to drum B.",
+    "gold_name": "trigger_refinery_coker_drum_switch",
+    "gold_args": {"unit_id": "COK-1", "drum_letter": "B"},
+    "difficulty": "easy"
+  },
+  {
+    "id": "ind_010",
+    "function": {
+      "name": "sample_drillhole_assay",
+      "description": "Submit a drillhole core interval for assay at a mining laboratory.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "hole_id": {"type": "string", "description": "Drillhole ID"},
+          "from_m": {"type": "number", "description": "Interval start depth in meters"},
+          "to_m": {"type": "number", "description": "Interval end depth in meters"}
+        },
+        "required": ["hole_id", "from_m", "to_m"]
+      }
+    },
+    "prompt": "Send interval 142.5 to 145.0 m from drillhole DDH-2025-08 to assay.",
+    "gold_name": "sample_drillhole_assay",
+    "gold_args": {"hole_id": "DDH-2025-08", "from_m": 142.5, "to_m": 145.0},
+    "difficulty": "easy"
+  },
+  {
+    "id": "ind_011",
+    "function": {
+      "name": "register_hydraulic_pump_curve",
+      "description": "Register a measured pump performance curve for a hydraulic engineering installation.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "pump_model": {"type": "string", "description": "Pump model designation"},
+          "site_id": {"type": "string", "description": "Site or station ID"}
+        },
+        "required": ["pump_model", "site_id"]
+      }
+    },
+    "prompt": "Register a pump curve for the KSB Etanorm 80-200 unit at station PS-North.",
+    "gold_name": "register_hydraulic_pump_curve",
+    "gold_args": {"pump_model": "KSB Etanorm 80-200", "site_id": "PS-North"},
+    "difficulty": "easy"
+  },
+  {
+    "id": "ind_012",
+    "function": {
+      "name": "queue_paper_machine_grade_change",
+      "description": "Queue a grade change on a paper machine to a new basis weight.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "machine_id": {"type": "string", "description": "Paper machine ID"},
+          "target_gsm": {"type": "number", "description": "Target grammage in g/m2"}
+        },
+        "required": ["machine_id", "target_gsm"]
+      }
+    },
+    "prompt": "Queue PM-4 to switch over to 90 gsm.",
+    "gold_name": "queue_paper_machine_grade_change",
+    "gold_args": {"machine_id": "PM-4", "target_gsm": 90},
+    "difficulty": "easy"
+  },
+  {
+    "id": "ind_013",
+    "function": {
+      "name": "load_seismic_refraction_profile",
+      "description": "Load a seismic refraction profile from a near-surface geophysical survey.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "profile_id": {"type": "string", "description": "Profile identifier"}
+        },
+        "required": ["profile_id"]
+      }
+    },
+    "prompt": "Pull up refraction profile SRP-2024-East.",
+    "gold_name": "load_seismic_refraction_profile",
+    "gold_args": {"profile_id": "SRP-2024-East"},
+    "difficulty": "easy"
+  },
+  {
+    "id": "ind_014",
+    "function": {
+      "name": "annotate_core_box_photo",
+      "description": "Attach geological annotations to a core box photograph.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "box_id": {"type": "string", "description": "Core box ID"},
+          "note": {"type": "string", "description": "Geological note"}
+        },
+        "required": ["box_id", "note"]
+      }
+    },
+    "prompt": "Annotate core box CB-117 with 'pervasive sericite alteration in andesite'.",
+    "gold_name": "annotate_core_box_photo",
+    "gold_args": {"box_id": "CB-117", "note": "pervasive sericite alteration in andesite"},
+    "difficulty": "easy"
+  },
+  {
+    "id": "ind_015",
+    "function": {
+      "name": "drain_blast_furnace_hearth",
+      "description": "Initiate a controlled hearth drain on a blast furnace.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "furnace_id": {"type": "string", "description": "Blast furnace ID"},
+          "duration_min": {"type": "integer", "description": "Drain duration in minutes"}
+        },
+        "required": ["furnace_id", "duration_min"]
+      }
+    },
+    "prompt": "Drain blast furnace BF-5 for 90 minutes.",
+    "gold_name": "drain_blast_furnace_hearth",
+    "gold_args": {"furnace_id": "BF-5", "duration_min": 90},
+    "difficulty": "easy"
+  },
+  {
+    "id": "ind_016",
+    "function": {
+      "name": "log_rov_dive_observation",
+      "description": "Log an observation made by a remotely operated underwater vehicle during a dive.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "rov_id": {"type": "string", "description": "ROV unit ID"},
+          "depth_m": {"type": "number", "description": "Depth in meters"},
+          "observation": {"type": "string", "description": "Free text observation"}
+        },
+        "required": ["rov_id", "depth_m", "observation"]
+      }
+    },
+    "prompt": "Note from ROV Hercules at 2140 m: 'manganese nodule field, mean diameter 5 cm'.",
+    "gold_name": "log_rov_dive_observation",
+    "gold_args": {"rov_id": "Hercules", "depth_m": 2140, "observation": "manganese nodule field, mean diameter 5 cm"},
+    "difficulty": "easy"
+  },
+  {
+    "id": "ind_017",
+    "function": {
+      "name": "pin_permafrost_borehole_temp",
+      "description": "Pin a permafrost borehole temperature reading at a given depth.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "borehole_id": {"type": "string", "description": "Borehole identifier"},
+          "depth_m": {"type": "number", "description": "Depth in meters"},
+          "temp_c": {"type": "number", "description": "Temperature in Celsius"}
+        },
+        "required": ["borehole_id", "depth_m", "temp_c"]
+      }
+    },
+    "prompt": "Pin borehole PERM-09 at 15 m depth showing -2.7 C.",
+    "gold_name": "pin_permafrost_borehole_temp",
+    "gold_args": {"borehole_id": "PERM-09", "depth_m": 15, "temp_c": -2.7},
+    "difficulty": "easy"
+  },
+  {
+    "id": "ind_018",
+    "function": {
+      "name": "issue_pipeline_pig_run",
+      "description": "Issue an intelligent pig run order along a pipeline segment.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "segment_id": {"type": "string", "description": "Pipeline segment ID"},
+          "pig_type": {"type": "string", "description": "Type of pig: MFL, UT, geometry"}
+        },
+        "required": ["segment_id", "pig_type"]
+      }
+    },
+    "prompt": "Schedule an MFL pig through segment PL-NorthA.",
+    "gold_name": "issue_pipeline_pig_run",
+    "gold_args": {"segment_id": "PL-NorthA", "pig_type": "MFL"},
+    "difficulty": "easy"
+  },
+  {
+    "id": "ind_019",
+    "function": {
+      "name": "request_concrete_slump_test",
+      "description": "Request a slump test for a delivered concrete batch on site.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "truck_id": {"type": "string", "description": "Ready-mix truck ID"},
+          "mix_design": {"type": "string", "description": "Mix design code"}
+        },
+        "required": ["truck_id", "mix_design"]
+      }
+    },
+    "prompt": "Order a slump test for truck RM-204 hauling mix C40-A.",
+    "gold_name": "request_concrete_slump_test",
+    "gold_args": {"truck_id": "RM-204", "mix_design": "C40-A"},
+    "difficulty": "easy"
+  },
+  {
+    "id": "ind_020",
+    "function": {
+      "name": "open_tailings_dam_piezometer",
+      "description": "Open a piezometer reading on a tailings storage facility dam.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "tsf_id": {"type": "string", "description": "Tailings facility ID"},
+          "piezometer_id": {"type": "string", "description": "Piezometer ID"}
+        },
+        "required": ["tsf_id", "piezometer_id"]
+      }
+    },
+    "prompt": "Open piezometer VW-12 on tailings dam TSF-South.",
+    "gold_name": "open_tailings_dam_piezometer",
+    "gold_args": {"tsf_id": "TSF-South", "piezometer_id": "VW-12"},
+    "difficulty": "easy"
+  },
+  {
+    "id": "ind_021",
+    "function": {
+      "name": "stage_pelletizing_disc_feed",
+      "description": "Stage feed rate for an iron ore pelletizing disc.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "disc_id": {"type": "string", "description": "Disc unit ID"},
+          "feed_tph": {"type": "number", "description": "Feed rate in tonnes per hour"}
+        },
+        "required": ["disc_id", "feed_tph"]
+      }
+    },
+    "prompt": "Set pelletizer disc PD-7 feed to 240 tph.",
+    "gold_name": "stage_pelletizing_disc_feed",
+    "gold_args": {"disc_id": "PD-7", "feed_tph": 240},
+    "difficulty": "easy"
+  },
+  {
+    "id": "ind_022",
+    "function": {
+      "name": "punch_cathode_stripping_cell",
+      "description": "Punch a stripping operation on an electrowinning cathode cell.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "tankhouse": {"type": "string", "description": "Tankhouse identifier"},
+          "cell_number": {"type": "integer", "description": "Cell number"}
+        },
+        "required": ["tankhouse", "cell_number"]
+      }
+    },
+    "prompt": "Strip copper cathodes in tankhouse TH-A cell 42.",
+    "gold_name": "punch_cathode_stripping_cell",
+    "gold_args": {"tankhouse": "TH-A", "cell_number": 42},
+    "difficulty": "easy"
+  },
+  {
+    "id": "ind_023",
+    "function": {
+      "name": "checkin_offshore_jacket_inspection",
+      "description": "Check in a diver inspection record for an offshore platform jacket member.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "platform": {"type": "string", "description": "Platform name"},
+          "member_id": {"type": "string", "description": "Jacket member ID"}
+        },
+        "required": ["platform", "member_id"]
+      }
+    },
+    "prompt": "Check in the diver inspection on platform Brent-C member J-204.",
+    "gold_name": "checkin_offshore_jacket_inspection",
+    "gold_args": {"platform": "Brent-C", "member_id": "J-204"},
+    "difficulty": "easy"
+  },
+  {
+    "id": "ind_024",
+    "function": {
+      "name": "spool_well_logging_tool",
+      "description": "Spool a wireline well logging tool into a borehole.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "well_id": {"type": "string", "description": "Well identifier"},
+          "tool_string": {"type": "string", "description": "Tool string designation"}
+        },
+        "required": ["well_id", "tool_string"]
+      }
+    },
+    "prompt": "Spool the triple-combo tool string into well NORTH-12H.",
+    "gold_name": "spool_well_logging_tool",
+    "gold_args": {"well_id": "NORTH-12H", "tool_string": "triple-combo"},
+    "difficulty": "easy"
+  },
+  {
+    "id": "ind_025",
+    "function": {
+      "name": "throttle_wind_farm_curtailment",
+      "description": "Throttle wind farm output for grid curtailment.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "farm_id": {"type": "string", "description": "Wind farm ID"},
+          "limit_mw": {"type": "number", "description": "Output cap in MW"}
+        },
+        "required": ["farm_id", "limit_mw"]
+      }
+    },
+    "prompt": "Cap wind farm WF-Halland at 80 MW.",
+    "gold_name": "throttle_wind_farm_curtailment",
+    "gold_args": {"farm_id": "WF-Halland", "limit_mw": 80},
+    "difficulty": "easy"
+  },
+  {
+    "id": "ind_026",
+    "function": {
+      "name": "stamp_weld_NDT_result",
+      "description": "Stamp a non-destructive test result on a structural weld.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "weld_id": {"type": "string", "description": "Weld identifier"},
+          "method": {"type": "string", "description": "NDT method: RT, UT, MT, PT"},
+          "result": {"type": "string", "description": "Pass or fail"}
+        },
+        "required": ["weld_id", "method", "result"]
+      }
+    },
+    "prompt": "Stamp UT pass on weld W-2207.",
+    "gold_name": "stamp_weld_NDT_result",
+    "gold_args": {"weld_id": "W-2207", "method": "UT", "result": "pass"},
+    "difficulty": "easy"
+  },
+  {
+    "id": "ind_027",
+    "function": {
+      "name": "broadcast_avalanche_bulletin",
+      "description": "Broadcast an avalanche hazard bulletin for an alpine region.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "region": {"type": "string", "description": "Mountain region name"},
+          "danger_level": {"type": "integer", "description": "EAWS danger level 1-5"}
+        },
+        "required": ["region", "danger_level"]
+      }
+    },
+    "prompt": "Issue an avalanche bulletin for Tatra West at danger level 3.",
+    "gold_name": "broadcast_avalanche_bulletin",
+    "gold_args": {"region": "Tatra West", "danger_level": 3},
+    "difficulty": "easy"
+  },
+  {
+    "id": "ind_028",
+    "function": {
+      "name": "burn_kiln_clinker_phase",
+      "description": "Set a phase target for clinker formation in a cement rotary kiln.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "kiln_id": {"type": "string", "description": "Kiln ID"},
+          "phase": {"type": "string", "description": "Target clinker phase: C3S, C2S, C3A, C4AF"}
+        },
+        "required": ["kiln_id", "phase"]
+      }
+    },
+    "prompt": "Bias kiln K-2 toward C3S phase.",
+    "gold_name": "burn_kiln_clinker_phase",
+    "gold_args": {"kiln_id": "K-2", "phase": "C3S"},
+    "difficulty": "easy"
+  },
+  {
+    "id": "ind_029",
+    "function": {
+      "name": "ping_geothermal_reservoir_tracer",
+      "description": "Inject a chemical tracer into a geothermal reservoir injection well.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "well_id": {"type": "string", "description": "Injection well ID"},
+          "tracer": {"type": "string", "description": "Tracer compound name"}
+        },
+        "required": ["well_id", "tracer"]
+      }
+    },
+    "prompt": "Push naphthalene sulfonate down injector INJ-3.",
+    "gold_name": "ping_geothermal_reservoir_tracer",
+    "gold_args": {"well_id": "INJ-3", "tracer": "naphthalene sulfonate"},
+    "difficulty": "easy"
+  },
+  {
+    "id": "ind_030",
+    "function": {
+      "name": "store_lidar_pointcloud_tile",
+      "description": "Store a lidar point cloud tile from an airborne geosciences survey.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "tile_id": {"type": "string", "description": "Tile identifier"},
+          "epsg": {"type": "integer", "description": "EPSG code of the CRS"}
+        },
+        "required": ["tile_id", "epsg"]
+      }
+    },
+    "prompt": "Archive lidar tile T-N4523E0712 in EPSG 25832.",
+    "gold_name": "store_lidar_pointcloud_tile",
+    "gold_args": {"tile_id": "T-N4523E0712", "epsg": 25832},
+    "difficulty": "easy"
+  },
+  {
+    "id": "ind_031",
+    "function": {
+      "name": "calibrate_lng_tank_radar_gauge",
+      "description": "Calibrate a tank radar level gauge on an LNG storage tank against a manual sounding.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "tank_id": {"type": "string", "description": "LNG tank ID"},
+          "manual_level_m": {"type": "number", "description": "Reference level from manual sounding in meters"},
+          "radar_level_m": {"type": "number", "description": "Radar gauge reading in meters"},
+          "operator": {"type": "string", "description": "Operator performing calibration"}
+        },
+        "required": ["tank_id", "manual_level_m", "radar_level_m", "operator"]
+      }
+    },
+    "prompt": "Calibrate tank LNG-T2 radar reading 28.41 m against hand sounding 28.36 m, operator Janssen.",
+    "gold_name": "calibrate_lng_tank_radar_gauge",
+    "gold_args": {"tank_id": "LNG-T2", "manual_level_m": 28.36, "radar_level_m": 28.41, "operator": "Janssen"},
+    "difficulty": "medium"
+  },
+  {
+    "id": "ind_032",
+    "function": {
+      "name": "tune_flotation_cell_reagent",
+      "description": "Tune frother and collector dosing on a mineral flotation cell.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "cell_id": {"type": "string", "description": "Flotation cell ID"},
+          "frother_gpt": {"type": "number", "description": "Frother dosage in grams per tonne"},
+          "collector_gpt": {"type": "number", "description": "Collector dosage in grams per tonne"}
+        },
+        "required": ["cell_id", "frother_gpt", "collector_gpt"]
+      }
+    },
+    "prompt": "Set flotation cell FC-Rougher-4 to 28 g/t MIBC and 45 g/t SIBX.",
+    "gold_name": "tune_flotation_cell_reagent",
+    "gold_args": {"cell_id": "FC-Rougher-4", "frother_gpt": 28, "collector_gpt": 45},
+    "difficulty": "medium"
+  },
+  {
+    "id": "ind_033",
+    "function": {
+      "name": "simulate_dam_overtopping_event",
+      "description": "Run a hydraulic overtopping simulation for an earthfill dam under a flood scenario.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "dam_id": {"type": "string", "description": "Dam identifier"},
+          "inflow_cms": {"type": "number", "description": "Peak inflow in cubic meters per second"},
+          "duration_hr": {"type": "number", "description": "Duration of flood event in hours"}
+        },
+        "required": ["dam_id", "inflow_cms", "duration_hr"]
+      }
+    },
+    "prompt": "Simulate overtopping on dam D-Volta for a 1850 m3/s peak inflow lasting 6.5 hours.",
+    "gold_name": "simulate_dam_overtopping_event",
+    "gold_args": {"dam_id": "D-Volta", "inflow_cms": 1850, "duration_hr": 6.5},
+    "difficulty": "medium"
+  },
+  {
+    "id": "ind_034",
+    "function": {
+      "name": "phase_align_turbine_yaw_motor",
+      "description": "Phase-align the yaw drive motor encoder on a wind turbine nacelle.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "turbine_id": {"type": "string", "description": "Turbine asset ID"},
+          "motor_index": {"type": "integer", "description": "Yaw motor index"},
+          "offset_deg": {"type": "number", "description": "Offset in degrees"}
+        },
+        "required": ["turbine_id", "motor_index", "offset_deg"]
+      }
+    },
+    "prompt": "Align yaw motor 3 on turbine WT-77 with a -1.4 deg offset.",
+    "gold_name": "phase_align_turbine_yaw_motor",
+    "gold_args": {"turbine_id": "WT-77", "motor_index": 3, "offset_deg": -1.4},
+    "difficulty": "medium"
+  },
+  {
+    "id": "ind_035",
+    "function": {
+      "name": "characterize_aquifer_pump_test",
+      "description": "Characterize aquifer transmissivity from a constant-rate pumping test.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "well_id": {"type": "string", "description": "Pumping well ID"},
+          "rate_lps": {"type": "number", "description": "Pumping rate in L/s"},
+          "duration_hr": {"type": "number", "description": "Test duration in hours"}
+        },
+        "required": ["well_id", "rate_lps", "duration_hr"]
+      }
+    },
+    "prompt": "Analyze a 24-hour pump test on well PW-3 at 18.5 L/s.",
+    "gold_name": "characterize_aquifer_pump_test",
+    "gold_args": {"well_id": "PW-3", "rate_lps": 18.5, "duration_hr": 24},
+    "difficulty": "medium"
+  },
+  {
+    "id": "ind_036",
+    "function": {
+      "name": "draft_ore_pass_blast_pattern",
+      "description": "Draft a blast pattern for an underground mining ore pass development round.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "level": {"type": "string", "description": "Mine level"},
+          "round_id": {"type": "string", "description": "Round identifier"},
+          "burden_m": {"type": "number", "description": "Burden in meters"},
+          "spacing_m": {"type": "number", "description": "Spacing in meters"}
+        },
+        "required": ["level", "round_id", "burden_m", "spacing_m"]
+      }
+    },
+    "prompt": "Draft a blast pattern on level 850 round R-22 with 0.9 m burden and 1.1 m spacing.",
+    "gold_name": "draft_ore_pass_blast_pattern",
+    "gold_args": {"level": "850", "round_id": "R-22", "burden_m": 0.9, "spacing_m": 1.1},
+    "difficulty": "medium"
+  },
+  {
+    "id": "ind_037",
+    "function": {
+      "name": "trace_bridge_modal_frequency",
+      "description": "Trace the dominant modal frequency from accelerometer data on a cable-stayed bridge.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "bridge_id": {"type": "string", "description": "Bridge ID"},
+          "accel_channel": {"type": "string", "description": "Accelerometer channel"},
+          "window_s": {"type": "number", "description": "Analysis window in seconds"}
+        },
+        "required": ["bridge_id", "accel_channel", "window_s"]
+      }
+    },
+    "prompt": "Identify the main mode on bridge BR-Sava-2 channel ACC-Pylon-N over a 120 second window.",
+    "gold_name": "trace_bridge_modal_frequency",
+    "gold_args": {"bridge_id": "BR-Sava-2", "accel_channel": "ACC-Pylon-N", "window_s": 120},
+    "difficulty": "medium"
+  },
+  {
+    "id": "ind_038",
+    "function": {
+      "name": "tune_distillation_column_reflux",
+      "description": "Tune reflux ratio on a refinery distillation column.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "column_id": {"type": "string", "description": "Column ID"},
+          "reflux_ratio": {"type": "number", "description": "New reflux ratio"},
+          "feed_bpd": {"type": "number", "description": "Feed rate in barrels per day"}
+        },
+        "required": ["column_id", "reflux_ratio", "feed_bpd"]
+      }
+    },
+    "prompt": "Adjust reflux on crude column CDU-1 to 2.8 with 75000 bpd feed.",
+    "gold_name": "tune_distillation_column_reflux",
+    "gold_args": {"column_id": "CDU-1", "reflux_ratio": 2.8, "feed_bpd": 75000},
+    "difficulty": "medium"
+  },
+  {
+    "id": "ind_039",
+    "function": {
+      "name": "weave_galvanizing_zinc_thickness",
+      "description": "Set zinc coating thickness target for a hot-dip galvanizing line.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "line_id": {"type": "string", "description": "Galvanizing line ID"},
+          "target_um": {"type": "number", "description": "Zinc thickness target in micrometers"},
+          "strip_speed_mpm": {"type": "number", "description": "Strip speed in meters per minute"}
+        },
+        "required": ["line_id", "target_um", "strip_speed_mpm"]
+      }
+    },
+    "prompt": "Target 85 um zinc on line GL-2 at 120 m/min.",
+    "gold_name": "weave_galvanizing_zinc_thickness",
+    "gold_args": {"line_id": "GL-2", "target_um": 85, "strip_speed_mpm": 120},
+    "difficulty": "medium"
+  },
+  {
+    "id": "ind_040",
+    "function": {
+      "name": "track_iceberg_drift_vector",
+      "description": "Track drift speed and bearing for an Antarctic iceberg.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "iceberg_id": {"type": "string", "description": "Iceberg ID"},
+          "speed_knots": {"type": "number", "description": "Drift speed in knots"},
+          "bearing_deg": {"type": "number", "description": "Bearing in degrees true"}
+        },
+        "required": ["iceberg_id", "speed_knots", "bearing_deg"]
+      }
+    },
+    "prompt": "Log iceberg A-76C drifting at 0.32 knots on bearing 287 degrees.",
+    "gold_name": "track_iceberg_drift_vector",
+    "gold_args": {"iceberg_id": "A-76C", "speed_knots": 0.32, "bearing_deg": 287},
+    "difficulty": "medium"
+  },
+  {
+    "id": "ind_041",
+    "function": {
+      "name": "quench_steel_billet_zone",
+      "description": "Set water quench rate per zone for a continuous caster steel billet.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "caster_id": {"type": "string", "description": "Caster strand ID"},
+          "zone": {"type": "integer", "description": "Cooling zone number"},
+          "water_lpm": {"type": "number", "description": "Water flow in L/min"}
+        },
+        "required": ["caster_id", "zone", "water_lpm"]
+      }
+    },
+    "prompt": "Bump zone 4 water on caster CC-3 to 1320 L/min.",
+    "gold_name": "quench_steel_billet_zone",
+    "gold_args": {"caster_id": "CC-3", "zone": 4, "water_lpm": 1320},
+    "difficulty": "medium"
+  },
+  {
+    "id": "ind_042",
+    "function": {
+      "name": "season_sandcasting_mould",
+      "description": "Schedule a baking and seasoning cycle for a green sand casting mould.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "mould_id": {"type": "string", "description": "Mould ID"},
+          "bake_temp_c": {"type": "number", "description": "Bake temperature in Celsius"},
+          "hold_hr": {"type": "number", "description": "Hold duration in hours"}
+        },
+        "required": ["mould_id", "bake_temp_c", "hold_hr"]
+      }
+    },
+    "prompt": "Season mould M-227 at 220 C for 6 hours.",
+    "gold_name": "season_sandcasting_mould",
+    "gold_args": {"mould_id": "M-227", "bake_temp_c": 220, "hold_hr": 6},
+    "difficulty": "medium"
+  },
+  {
+    "id": "ind_043",
+    "function": {
+      "name": "patch_pipeline_corrosion_indication",
+      "description": "Record a planned patch repair for an external corrosion indication on a buried pipeline.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "segment_id": {"type": "string", "description": "Pipeline segment"},
+          "chainage_km": {"type": "number", "description": "Chainage in km from start"},
+          "depth_pct_wt": {"type": "number", "description": "Depth as percent of wall thickness"}
+        },
+        "required": ["segment_id", "chainage_km", "depth_pct_wt"]
+      }
+    },
+    "prompt": "Log a sleeve repair on segment PL-South-B at chainage 14.27 km, 38% wt loss.",
+    "gold_name": "patch_pipeline_corrosion_indication",
+    "gold_args": {"segment_id": "PL-South-B", "chainage_km": 14.27, "depth_pct_wt": 38},
+    "difficulty": "medium"
+  },
+  {
+    "id": "ind_044",
+    "function": {
+      "name": "fingerprint_oil_spill_sample",
+      "description": "Submit an oil spill sample for chemical fingerprinting against a source library.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "sample_id": {"type": "string", "description": "Sample ID"},
+          "method": {"type": "string", "description": "Analytical method, e.g. GC-MS, GCxGC"},
+          "library": {"type": "string", "description": "Reference library name"}
+        },
+        "required": ["sample_id", "method", "library"]
+      }
+    },
+    "prompt": "Run GC-MS fingerprinting on spill sample SPL-2026-11 against the Nordic Crude library.",
+    "gold_name": "fingerprint_oil_spill_sample",
+    "gold_args": {"sample_id": "SPL-2026-11", "method": "GC-MS", "library": "Nordic Crude"},
+    "difficulty": "medium"
+  },
+  {
+    "id": "ind_045",
+    "function": {
+      "name": "elevate_blast_furnace_oxygen_enrichment",
+      "description": "Adjust oxygen enrichment level on the hot blast feed to a blast furnace.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "furnace_id": {"type": "string", "description": "Furnace ID"},
+          "o2_pct": {"type": "number", "description": "Oxygen percent in blast"}
+        },
+        "required": ["furnace_id", "o2_pct"]
+      }
+    },
+    "prompt": "Push oxygen enrichment on BF-4 up to 6.2 percent.",
+    "gold_name": "elevate_blast_furnace_oxygen_enrichment",
+    "gold_args": {"furnace_id": "BF-4", "o2_pct": 6.2},
+    "difficulty": "medium"
+  },
+  {
+    "id": "ind_046",
+    "function": {
+      "name": "trap_geophone_first_break",
+      "description": "Pick the first-break time on a geophone trace from a refraction survey.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "shot_id": {"type": "string", "description": "Shot record ID"},
+          "channel": {"type": "integer", "description": "Geophone channel number"},
+          "time_ms": {"type": "number", "description": "First break time in ms"}
+        },
+        "required": ["shot_id", "channel", "time_ms"]
+      }
+    },
+    "prompt": "On shot S-117 channel 24, pick first break at 38.4 ms.",
+    "gold_name": "trap_geophone_first_break",
+    "gold_args": {"shot_id": "S-117", "channel": 24, "time_ms": 38.4},
+    "difficulty": "medium"
+  },
+  {
+    "id": "ind_047",
+    "function": {
+      "name": "estimate_underground_stope_dilution",
+      "description": "Estimate planned dilution for an underground mining stope.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "stope_id": {"type": "string", "description": "Stope identifier"},
+          "ore_width_m": {"type": "number", "description": "Ore width in meters"},
+          "overbreak_m": {"type": "number", "description": "Expected hangingwall overbreak in meters"}
+        },
+        "required": ["stope_id", "ore_width_m", "overbreak_m"]
+      }
+    },
+    "prompt": "Estimate dilution on stope ST-09 with ore width 3.5 m and 0.45 m overbreak.",
+    "gold_name": "estimate_underground_stope_dilution",
+    "gold_args": {"stope_id": "ST-09", "ore_width_m": 3.5, "overbreak_m": 0.45},
+    "difficulty": "medium"
+  },
+  {
+    "id": "ind_048",
+    "function": {
+      "name": "log_paper_machine_break",
+      "description": "Log a sheet break event on a paper machine with cause code.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "machine_id": {"type": "string", "description": "Paper machine ID"},
+          "section": {"type": "string", "description": "Machine section where break occurred"},
+          "cause_code": {"type": "string", "description": "Cause code"}
+        },
+        "required": ["machine_id", "section", "cause_code"]
+      }
+    },
+    "prompt": "Record a break on PM-6 in the wet press, cause WP-EDGE-CRACK.",
+    "gold_name": "log_paper_machine_break",
+    "gold_args": {"machine_id": "PM-6", "section": "wet press", "cause_code": "WP-EDGE-CRACK"},
+    "difficulty": "medium"
+  },
+  {
+    "id": "ind_049",
+    "function": {
+      "name": "trim_ship_ballast_tank",
+      "description": "Trim a ballast tank load on a bulk carrier to correct trim and heel.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "vessel": {"type": "string", "description": "Vessel name"},
+          "tank": {"type": "string", "description": "Ballast tank designation"},
+          "target_pct": {"type": "number", "description": "Target fill percent"}
+        },
+        "required": ["vessel", "tank", "target_pct"]
+      }
+    },
+    "prompt": "Set tank WBT-3S on MV Northern Hawk to 65 percent.",
+    "gold_name": "trim_ship_ballast_tank",
+    "gold_args": {"vessel": "MV Northern Hawk", "tank": "WBT-3S", "target_pct": 65},
+    "difficulty": "medium"
+  },
+  {
+    "id": "ind_050",
+    "function": {
+      "name": "tag_drillcore_lithology",
+      "description": "Tag a lithology interval in a logged diamond drillcore.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "hole_id": {"type": "string", "description": "Drillhole ID"},
+          "from_m": {"type": "number", "description": "Interval start in meters"},
+          "to_m": {"type": "number", "description": "Interval end in meters"},
+          "litho_code": {"type": "string", "description": "Lithology code"}
+        },
+        "required": ["hole_id", "from_m", "to_m", "litho_code"]
+      }
+    },
+    "prompt": "Tag DDH-2026-04 from 87.20 to 95.60 m as QFP (quartz feldspar porphyry).",
+    "gold_name": "tag_drillcore_lithology",
+    "gold_args": {"hole_id": "DDH-2026-04", "from_m": 87.20, "to_m": 95.60, "litho_code": "QFP"},
+    "difficulty": "medium"
+  },
+  {
+    "id": "ind_051",
+    "function": {
+      "name": "purge_oil_rig_mud_system",
+      "description": "Purge and replace drilling mud across an oil rig mud pit system.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "rig_id": {"type": "string", "description": "Drilling rig ID"},
+          "old_mud_type": {"type": "string", "description": "Old mud type"},
+          "new_mud_type": {"type": "string", "description": "New mud type"}
+        },
+        "required": ["rig_id", "old_mud_type", "new_mud_type"]
+      }
+    },
+    "prompt": "Swap mud on rig RIG-North-7 from WBM to OBM.",
+    "gold_name": "purge_oil_rig_mud_system",
+    "gold_args": {"rig_id": "RIG-North-7", "old_mud_type": "WBM", "new_mud_type": "OBM"},
+    "difficulty": "medium"
+  },
+  {
+    "id": "ind_052",
+    "function": {
+      "name": "vector_uav_powerline_inspection",
+      "description": "Plan a UAV inspection flight along a high-voltage transmission line.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "line_id": {"type": "string", "description": "Transmission line ID"},
+          "start_tower": {"type": "string", "description": "Starting tower ID"},
+          "end_tower": {"type": "string", "description": "Ending tower ID"}
+        },
+        "required": ["line_id", "start_tower", "end_tower"]
+      }
+    },
+    "prompt": "Plan a drone inspection on line L-400kV-A from tower T-118 to tower T-145.",
+    "gold_name": "vector_uav_powerline_inspection",
+    "gold_args": {"line_id": "L-400kV-A", "start_tower": "T-118", "end_tower": "T-145"},
+    "difficulty": "medium"
+  },
+  {
+    "id": "ind_053",
+    "function": {
+      "name": "stage_coke_oven_pushing_schedule",
+      "description": "Stage the pushing schedule for coke ovens in a coke battery.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "battery_id": {"type": "string", "description": "Coke battery ID"},
+          "oven_count": {"type": "integer", "description": "Number of ovens in the run"},
+          "interval_min": {"type": "integer", "description": "Push interval in minutes"}
+        },
+        "required": ["battery_id", "oven_count", "interval_min"]
+      }
+    },
+    "prompt": "Schedule 22 pushes on battery CB-1 every 9 minutes.",
+    "gold_name": "stage_coke_oven_pushing_schedule",
+    "gold_args": {"battery_id": "CB-1", "oven_count": 22, "interval_min": 9},
+    "difficulty": "medium"
+  },
+  {
+    "id": "ind_054",
+    "function": {
+      "name": "post_volcano_ash_advisory",
+      "description": "Post a volcanic ash advisory for aviation routes downwind of an erupting volcano.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "volcano": {"type": "string", "description": "Volcano name"},
+          "plume_alt_ft": {"type": "number", "description": "Plume top in feet"},
+          "vaa_color": {"type": "string", "description": "VAA color code: green, yellow, orange, red"}
+        },
+        "required": ["volcano", "plume_alt_ft", "vaa_color"]
+      }
+    },
+    "prompt": "Issue an orange advisory for Sakurajima with plume to 18000 ft.",
+    "gold_name": "post_volcano_ash_advisory",
+    "gold_args": {"volcano": "Sakurajima", "plume_alt_ft": 18000, "vaa_color": "orange"},
+    "difficulty": "medium"
+  },
+  {
+    "id": "ind_055",
+    "function": {
+      "name": "burnish_rolling_mill_pass",
+      "description": "Set roll gap and tension on a rolling mill pass for steel strip.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "mill_id": {"type": "string", "description": "Rolling mill ID"},
+          "pass_number": {"type": "integer", "description": "Pass number in the schedule"},
+          "gap_mm": {"type": "number", "description": "Roll gap in mm"},
+          "tension_kn": {"type": "number", "description": "Strip tension in kN"}
+        },
+        "required": ["mill_id", "pass_number", "gap_mm", "tension_kn"]
+      }
+    },
+    "prompt": "Configure mill HSM-1 pass 5 at 2.45 mm gap and 320 kN tension.",
+    "gold_name": "burnish_rolling_mill_pass",
+    "gold_args": {"mill_id": "HSM-1", "pass_number": 5, "gap_mm": 2.45, "tension_kn": 320},
+    "difficulty": "medium"
+  },
+  {
+    "id": "ind_056",
+    "function": {
+      "name": "audit_cathodic_protection_potential",
+      "description": "Audit ON and OFF potentials of a cathodic protection rectifier on a buried tank.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "rectifier_id": {"type": "string", "description": "Rectifier ID"},
+          "on_mv": {"type": "number", "description": "Pipe-to-soil ON potential in millivolts"},
+          "off_mv": {"type": "number", "description": "Pipe-to-soil OFF potential in millivolts"}
+        },
+        "required": ["rectifier_id", "on_mv", "off_mv"]
+      }
+    },
+    "prompt": "Audit rectifier R-12: ON -1320 mV, OFF -905 mV.",
+    "gold_name": "audit_cathodic_protection_potential",
+    "gold_args": {"rectifier_id": "R-12", "on_mv": -1320, "off_mv": -905},
+    "difficulty": "medium"
+  },
+  {
+    "id": "ind_057",
+    "function": {
+      "name": "track_rail_track_geometry_car",
+      "description": "Track defects detected by a rail track geometry inspection car.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "line_code": {"type": "string", "description": "Rail line code"},
+          "milepost_start": {"type": "number", "description": "Start milepost"},
+          "milepost_end": {"type": "number", "description": "End milepost"}
+        },
+        "required": ["line_code", "milepost_start", "milepost_end"]
+      }
+    },
+    "prompt": "Pull geometry car defects on line BNSF-3 between mileposts 412.5 and 438.0.",
+    "gold_name": "track_rail_track_geometry_car",
+    "gold_args": {"line_code": "BNSF-3", "milepost_start": 412.5, "milepost_end": 438.0},
+    "difficulty": "medium"
+  },
+  {
+    "id": "ind_058",
+    "function": {
+      "name": "register_hydropower_governor_droop",
+      "description": "Register governor droop setting on a hydropower turbine for grid frequency response.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "unit_id": {"type": "string", "description": "Generating unit ID"},
+          "droop_pct": {"type": "number", "description": "Droop percent"}
+        },
+        "required": ["unit_id", "droop_pct"]
+      }
+    },
+    "prompt": "Register a 5.2 percent droop on hydro unit U-4 at Kemano.",
+    "gold_name": "register_hydropower_governor_droop",
+    "gold_args": {"unit_id": "U-4", "droop_pct": 5.2},
+    "difficulty": "medium"
+  },
+  {
+    "id": "ind_059",
+    "function": {
+      "name": "etch_pcb_metallization_step",
+      "description": "Run an etching step on a PCB fabrication line with bath chemistry parameters.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "panel_id": {"type": "string", "description": "Panel ID"},
+          "bath": {"type": "string", "description": "Etch bath chemistry"},
+          "dwell_s": {"type": "number", "description": "Dwell time in seconds"}
+        },
+        "required": ["panel_id", "bath", "dwell_s"]
+      }
+    },
+    "prompt": "Run panel P-90342 through cupric chloride etch for 72 seconds.",
+    "gold_name": "etch_pcb_metallization_step",
+    "gold_args": {"panel_id": "P-90342", "bath": "cupric chloride", "dwell_s": 72},
+    "difficulty": "medium"
+  },
+  {
+    "id": "ind_060",
+    "function": {
+      "name": "issue_subsea_BOP_function_test",
+      "description": "Issue a function test directive for a subsea blowout preventer stack.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "well_id": {"type": "string", "description": "Well ID"},
+          "ram_type": {"type": "string", "description": "Ram or function tested"},
+          "pressure_psi": {"type": "number", "description": "Test pressure in psi"}
+        },
+        "required": ["well_id", "ram_type", "pressure_psi"]
+      }
+    },
+    "prompt": "Function-test the blind shear ram on subsea BOP for well DW-Atlanta-2 at 5000 psi.",
+    "gold_name": "issue_subsea_BOP_function_test",
+    "gold_args": {"well_id": "DW-Atlanta-2", "ram_type": "blind shear", "pressure_psi": 5000},
+    "difficulty": "medium"
+  },
+  {
+    "id": "ind_061",
+    "function": {
+      "name": "interpolate_orebody_grade_block",
+      "description": "Interpolate a single block grade in an orebody model using ordinary kriging with anisotropic search.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "block_id": {"type": "string", "description": "Block identifier"},
+          "search_x_m": {"type": "number", "description": "Search radius along X axis in meters"},
+          "search_y_m": {"type": "number", "description": "Search radius along Y axis in meters"},
+          "search_z_m": {"type": "number", "description": "Search radius along Z axis in meters"}
+        },
+        "required": ["block_id", "search_x_m", "search_y_m", "search_z_m"]
+      }
+    },
+    "prompt": "Interpolate block BLK-117823 using an anisotropic search of 120 m east, 80 m north and 25 m vertical.",
+    "gold_name": "interpolate_orebody_grade_block",
+    "gold_args": {"block_id": "BLK-117823", "search_x_m": 120, "search_y_m": 80, "search_z_m": 25},
+    "difficulty": "hard"
+  },
+  {
+    "id": "ind_062",
+    "function": {
+      "name": "reconstruct_glacier_basal_sliding",
+      "description": "Reconstruct basal sliding velocity from surface GPS displacement and ice thickness on a temperate glacier.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "glacier": {"type": "string", "description": "Glacier name"},
+          "surface_velocity_m_yr": {"type": "number", "description": "Surface velocity in m/yr"},
+          "ice_thickness_m": {"type": "number", "description": "Ice thickness in meters"},
+          "surface_slope_deg": {"type": "number", "description": "Surface slope in degrees"}
+        },
+        "required": ["glacier", "surface_velocity_m_yr", "ice_thickness_m", "surface_slope_deg"]
+      }
+    },
+    "prompt": "Reconstruct basal sliding for Hardangerjokulen given 22 m/yr surface velocity, 280 m thick ice, slope of 3.4 degrees.",
+    "gold_name": "reconstruct_glacier_basal_sliding",
+    "gold_args": {"glacier": "Hardangerjokulen", "surface_velocity_m_yr": 22, "ice_thickness_m": 280, "surface_slope_deg": 3.4},
+    "difficulty": "hard"
+  },
+  {
+    "id": "ind_063",
+    "function": {
+      "name": "synthesize_basin_thermal_history",
+      "description": "Synthesize a 1D thermal subsidence history for a sedimentary basin column.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "basin": {"type": "string", "description": "Basin name"},
+          "column_id": {"type": "string", "description": "Synthetic column ID"},
+          "rift_age_ma": {"type": "number", "description": "Rifting age in Ma"},
+          "stretching_factor": {"type": "number", "description": "Beta stretching factor"}
+        },
+        "required": ["basin", "column_id", "rift_age_ma", "stretching_factor"]
+      }
+    },
+    "prompt": "Build a thermal history for column C-N4 in the Vøring basin with rifting at 56 Ma and beta of 1.8.",
+    "gold_name": "synthesize_basin_thermal_history",
+    "gold_args": {"basin": "Vøring", "column_id": "C-N4", "rift_age_ma": 56, "stretching_factor": 1.8},
+    "difficulty": "hard"
+  },
+  {
+    "id": "ind_064",
+    "function": {
+      "name": "harmonize_smelter_offgas_balance",
+      "description": "Harmonize an off-gas mass balance across a copper flash smelter with sulfur and oxygen targets.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "smelter_id": {"type": "string", "description": "Smelter ID"},
+          "concentrate_tph": {"type": "number", "description": "Concentrate feed in tph"},
+          "o2_factor": {"type": "number", "description": "Oxygen factor Nm3/t conc"},
+          "matte_grade_pct": {"type": "number", "description": "Target matte grade in percent"}
+        },
+        "required": ["smelter_id", "concentrate_tph", "o2_factor", "matte_grade_pct"]
+      }
+    },
+    "prompt": "Balance offgas on smelter S-FF1 with 145 tph concentrate, 215 Nm3/t oxygen factor, matte grade 67 percent.",
+    "gold_name": "harmonize_smelter_offgas_balance",
+    "gold_args": {"smelter_id": "S-FF1", "concentrate_tph": 145, "o2_factor": 215, "matte_grade_pct": 67},
+    "difficulty": "hard"
+  },
+  {
+    "id": "ind_065",
+    "function": {
+      "name": "fit_bridge_fatigue_SN_curve",
+      "description": "Fit a Wohler S-N fatigue curve to strain-cycle data from instrumented bridge welds.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "bridge_id": {"type": "string", "description": "Bridge ID"},
+          "detail_class": {"type": "string", "description": "Eurocode detail class"},
+          "sample_count": {"type": "integer", "description": "Number of stress range bins"},
+          "endurance_cycles": {"type": "number", "description": "Endurance limit cycles"}
+        },
+        "required": ["bridge_id", "detail_class", "sample_count", "endurance_cycles"]
+      }
+    },
+    "prompt": "Fit an S-N curve for bridge BR-Tay-2, detail class 71, 18 stress bins, endurance at 5e6 cycles.",
+    "gold_name": "fit_bridge_fatigue_SN_curve",
+    "gold_args": {"bridge_id": "BR-Tay-2", "detail_class": "71", "sample_count": 18, "endurance_cycles": 5000000},
+    "difficulty": "hard"
+  },
+  {
+    "id": "ind_066",
+    "function": {
+      "name": "deconvolve_marine_seismic_streamer",
+      "description": "Deconvolve receiver ghosts from a towed marine seismic streamer record.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "line_id": {"type": "string", "description": "Seismic line"},
+          "streamer_depth_m": {"type": "number", "description": "Streamer tow depth in meters"},
+          "ghost_notch_hz": {"type": "number", "description": "Receiver ghost notch in Hz"}
+        },
+        "required": ["line_id", "streamer_depth_m", "ghost_notch_hz"]
+      }
+    },
+    "prompt": "Deconvolve ghosts on line MS-2025-12 with streamer at 9 m and ghost notch at 83 Hz.",
+    "gold_name": "deconvolve_marine_seismic_streamer",
+    "gold_args": {"line_id": "MS-2025-12", "streamer_depth_m": 9, "ghost_notch_hz": 83},
+    "difficulty": "hard"
+  },
+  {
+    "id": "ind_067",
+    "function": {
+      "name": "rebalance_tailings_paste_rheology",
+      "description": "Rebalance binder dosage and solids percent for a paste tailings backfill mix to hit target yield stress.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "stope_id": {"type": "string", "description": "Stope where paste is placed"},
+          "solids_pct": {"type": "number", "description": "Solids percent by mass"},
+          "binder_pct": {"type": "number", "description": "Binder percent by mass"},
+          "target_yield_pa": {"type": "number", "description": "Target yield stress in Pa"}
+        },
+        "required": ["stope_id", "solids_pct", "binder_pct", "target_yield_pa"]
+      }
+    },
+    "prompt": "Rebalance paste for stope ST-44 targeting 220 Pa yield stress at 78 percent solids, 4.5 percent binder.",
+    "gold_name": "rebalance_tailings_paste_rheology",
+    "gold_args": {"stope_id": "ST-44", "solids_pct": 78, "binder_pct": 4.5, "target_yield_pa": 220},
+    "difficulty": "hard"
+  },
+  {
+    "id": "ind_068",
+    "function": {
+      "name": "optimize_kraft_recovery_boiler_load",
+      "description": "Optimize black liquor firing rate and air staging on a kraft recovery boiler to balance steam and reduction efficiency.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "boiler_id": {"type": "string", "description": "Recovery boiler ID"},
+          "liquor_solids_pct": {"type": "number", "description": "Black liquor solids percent"},
+          "primary_air_pct": {"type": "number", "description": "Primary air share percent"},
+          "target_reduction_pct": {"type": "number", "description": "Target reduction efficiency percent"}
+        },
+        "required": ["boiler_id", "liquor_solids_pct", "primary_air_pct", "target_reduction_pct"]
+      }
+    },
+    "prompt": "Optimize recovery boiler RB-2 at 73 percent liquor solids, 35 percent primary air share, targeting 94 percent reduction.",
+    "gold_name": "optimize_kraft_recovery_boiler_load",
+    "gold_args": {"boiler_id": "RB-2", "liquor_solids_pct": 73, "primary_air_pct": 35, "target_reduction_pct": 94},
+    "difficulty": "hard"
+  },
+  {
+    "id": "ind_069",
+    "function": {
+      "name": "project_pile_driving_refusal_depth",
+      "description": "Project the depth at which driven piles will reach refusal based on SPT N-values and pile geometry.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "site_id": {"type": "string", "description": "Site ID"},
+          "pile_diameter_mm": {"type": "number", "description": "Pile diameter in mm"},
+          "hammer_energy_kj": {"type": "number", "description": "Hammer rated energy in kJ"},
+          "target_capacity_kn": {"type": "number", "description": "Target ultimate capacity in kN"}
+        },
+        "required": ["site_id", "pile_diameter_mm", "hammer_energy_kj", "target_capacity_kn"]
+      }
+    },
+    "prompt": "Project refusal depth at site QH-12 for 600 mm piles with 90 kJ hammer for 3500 kN capacity.",
+    "gold_name": "project_pile_driving_refusal_depth",
+    "gold_args": {"site_id": "QH-12", "pile_diameter_mm": 600, "hammer_energy_kj": 90, "target_capacity_kn": 3500},
+    "difficulty": "hard"
+  },
+  {
+    "id": "ind_070",
+    "function": {
+      "name": "calibrate_FCC_riser_kinetics",
+      "description": "Calibrate lumped reaction kinetics in a fluid catalytic cracker riser against plant yields.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "unit_id": {"type": "string", "description": "FCC unit ID"},
+          "feed_api": {"type": "number", "description": "Feed API gravity"},
+          "riser_outlet_c": {"type": "number", "description": "Riser outlet temperature in Celsius"},
+          "cat_oil_ratio": {"type": "number", "description": "Catalyst to oil mass ratio"}
+        },
+        "required": ["unit_id", "feed_api", "riser_outlet_c", "cat_oil_ratio"]
+      }
+    },
+    "prompt": "Calibrate kinetics for FCC unit FCC-2 with 22.4 API feed, riser outlet 535 C, C/O ratio 7.1.",
+    "gold_name": "calibrate_FCC_riser_kinetics",
+    "gold_args": {"unit_id": "FCC-2", "feed_api": 22.4, "riser_outlet_c": 535, "cat_oil_ratio": 7.1},
+    "difficulty": "hard"
+  },
+  {
+    "id": "ind_071",
+    "function": {
+      "name": "invert_magnetotelluric_resistivity",
+      "description": "Run a 1D Occam inversion of magnetotelluric apparent resistivity and phase curves at a sounding site.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "site_id": {"type": "string", "description": "MT site ID"},
+          "period_min_s": {"type": "number", "description": "Minimum period in seconds"},
+          "period_max_s": {"type": "number", "description": "Maximum period in seconds"},
+          "regularization": {"type": "number", "description": "Smoothing regularization weight"}
+        },
+        "required": ["site_id", "period_min_s", "period_max_s", "regularization"]
+      }
+    },
+    "prompt": "Invert MT site MT-Eyja-09 from 0.01 s to 1000 s with regularization 3.0.",
+    "gold_name": "invert_magnetotelluric_resistivity",
+    "gold_args": {"site_id": "MT-Eyja-09", "period_min_s": 0.01, "period_max_s": 1000, "regularization": 3.0},
+    "difficulty": "hard"
+  },
+  {
+    "id": "ind_072",
+    "function": {
+      "name": "model_offshore_wind_wake_loss",
+      "description": "Model annual array wake losses for an offshore wind farm using directional wind rose data.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "farm_id": {"type": "string", "description": "Wind farm ID"},
+          "turbine_count": {"type": "integer", "description": "Number of turbines"},
+          "spacing_d": {"type": "number", "description": "Spacing in rotor diameters"},
+          "mean_ws_ms": {"type": "number", "description": "Mean wind speed in m/s at hub height"}
+        },
+        "required": ["farm_id", "turbine_count", "spacing_d", "mean_ws_ms"]
+      }
+    },
+    "prompt": "Model array losses for WF-DoggerBank-C, 87 turbines, 7D spacing, hub 10.4 m/s.",
+    "gold_name": "model_offshore_wind_wake_loss",
+    "gold_args": {"farm_id": "WF-DoggerBank-C", "turbine_count": 87, "spacing_d": 7, "mean_ws_ms": 10.4},
+    "difficulty": "hard"
+  },
+  {
+    "id": "ind_073",
+    "function": {
+      "name": "forecast_open_pit_slope_displacement",
+      "description": "Forecast open pit wall displacement trajectory from radar monitoring history using an inverse velocity method.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "pit": {"type": "string", "description": "Pit name"},
+          "wall_id": {"type": "string", "description": "Pit wall ID"},
+          "current_velocity_mm_day": {"type": "number", "description": "Current displacement velocity in mm/day"},
+          "history_days": {"type": "integer", "description": "Days of velocity history used"}
+        },
+        "required": ["pit", "wall_id", "current_velocity_mm_day", "history_days"]
+      }
+    },
+    "prompt": "Forecast slope failure on pit Bingham wall NW-12 with current 42 mm/day velocity over 28 days of history.",
+    "gold_name": "forecast_open_pit_slope_displacement",
+    "gold_args": {"pit": "Bingham", "wall_id": "NW-12", "current_velocity_mm_day": 42, "history_days": 28},
+    "difficulty": "hard"
+  },
+  {
+    "id": "ind_074",
+    "function": {
+      "name": "co_optimize_dam_hydropower_dispatch",
+      "description": "Co-optimize reservoir release and hydropower generation against day-ahead market prices for a multi-purpose dam.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "reservoir": {"type": "string", "description": "Reservoir name"},
+          "min_release_cms": {"type": "number", "description": "Minimum release for downstream ecology in cms"},
+          "max_release_cms": {"type": "number", "description": "Maximum release in cms"},
+          "horizon_hr": {"type": "integer", "description": "Optimization horizon in hours"}
+        },
+        "required": ["reservoir", "min_release_cms", "max_release_cms", "horizon_hr"]
+      }
+    },
+    "prompt": "Co-optimize dispatch for the Hartwell reservoir across 24 h with min release 35 cms, max 480 cms.",
+    "gold_name": "co_optimize_dam_hydropower_dispatch",
+    "gold_args": {"reservoir": "Hartwell", "min_release_cms": 35, "max_release_cms": 480, "horizon_hr": 24},
+    "difficulty": "hard"
+  },
+  {
+    "id": "ind_075",
+    "function": {
+      "name": "deduce_borehole_breakout_stress",
+      "description": "Deduce in-situ horizontal stress orientation and magnitude from borehole breakout image logs.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "well_id": {"type": "string", "description": "Well ID"},
+          "depth_top_m": {"type": "number", "description": "Top of analyzed interval in meters MD"},
+          "depth_bot_m": {"type": "number", "description": "Bottom of analyzed interval in meters MD"},
+          "image_tool": {"type": "string", "description": "Image log tool name"}
+        },
+        "required": ["well_id", "depth_top_m", "depth_bot_m", "image_tool"]
+      }
+    },
+    "prompt": "Deduce horizontal stress from FMI breakouts in well DEEP-9 between 3120 and 3540 m MD.",
+    "gold_name": "deduce_borehole_breakout_stress",
+    "gold_args": {"well_id": "DEEP-9", "depth_top_m": 3120, "depth_bot_m": 3540, "image_tool": "FMI"},
+    "difficulty": "hard"
+  },
+  {
+    "id": "ind_076",
+    "function": {
+      "name": "shim_rotor_balance_planes",
+      "description": "Apply balancing shim weights to compressor rotor planes after a vibration trim.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "machine_id": {"type": "string", "description": "Compressor or turbine ID"},
+          "plane": {"type": "integer", "description": "Balance plane number"},
+          "weight_g": {"type": "number", "description": "Trim weight in grams"},
+          "angle_deg": {"type": "number", "description": "Angular position in degrees"}
+        },
+        "required": ["machine_id", "plane", "weight_g", "angle_deg"]
+      }
+    },
+    "prompt": "Add a 12.5 g shim on plane 2 of compressor C-401 at 145 degrees.",
+    "gold_name": "shim_rotor_balance_planes",
+    "gold_args": {"machine_id": "C-401", "plane": 2, "weight_g": 12.5, "angle_deg": 145},
+    "difficulty": "medium"
+  },
+  {
+    "id": "ind_077",
+    "function": {
+      "name": "render_culvert_scour_profile",
+      "description": "Render the predicted scour profile downstream of a highway culvert outlet under a design storm.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "culvert_id": {"type": "string", "description": "Culvert ID"},
+          "discharge_cms": {"type": "number", "description": "Design discharge in cms"},
+          "d50_mm": {"type": "number", "description": "Median bed grain size in mm"}
+        },
+        "required": ["culvert_id", "discharge_cms", "d50_mm"]
+      }
+    },
+    "prompt": "Render the scour profile for culvert CV-37 at 4.8 cms with d50 of 22 mm.",
+    "gold_name": "render_culvert_scour_profile",
+    "gold_args": {"culvert_id": "CV-37", "discharge_cms": 4.8, "d50_mm": 22},
+    "difficulty": "medium"
+  },
+  {
+    "id": "ind_078",
+    "function": {
+      "name": "trigger_argon_oxygen_decarb",
+      "description": "Trigger an AOD blow stage in stainless steel refining with oxygen and argon flow set points.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "converter_id": {"type": "string", "description": "AOD converter ID"},
+          "stage": {"type": "integer", "description": "Blow stage number"},
+          "o2_nm3_min": {"type": "number", "description": "Oxygen flow Nm3/min"},
+          "ar_nm3_min": {"type": "number", "description": "Argon flow Nm3/min"}
+        },
+        "required": ["converter_id", "stage", "o2_nm3_min", "ar_nm3_min"]
+      }
+    },
+    "prompt": "Trigger AOD converter AOD-1 stage 2 with 60 Nm3/min O2 and 30 Nm3/min Ar.",
+    "gold_name": "trigger_argon_oxygen_decarb",
+    "gold_args": {"converter_id": "AOD-1", "stage": 2, "o2_nm3_min": 60, "ar_nm3_min": 30},
+    "difficulty": "medium"
+  },
+  {
+    "id": "ind_079",
+    "function": {
+      "name": "pace_continuous_caster_speed",
+      "description": "Pace casting speed on a continuous slab caster to match downstream rolling mill demand.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "caster_id": {"type": "string", "description": "Caster ID"},
+          "speed_mpm": {"type": "number", "description": "Casting speed in m/min"},
+          "slab_width_mm": {"type": "number", "description": "Slab width in mm"}
+        },
+        "required": ["caster_id", "speed_mpm", "slab_width_mm"]
+      }
+    },
+    "prompt": "Pace slab caster SC-2 to 1.35 m/min on a 1450 mm wide slab.",
+    "gold_name": "pace_continuous_caster_speed",
+    "gold_args": {"caster_id": "SC-2", "speed_mpm": 1.35, "slab_width_mm": 1450},
+    "difficulty": "medium"
+  },
+  {
+    "id": "ind_080",
+    "function": {
+      "name": "tally_underground_ventilation_circuit",
+      "description": "Tally airflow across an underground mine ventilation circuit branch and check Kirchhoff balance.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "mine": {"type": "string", "description": "Mine name"},
+          "branch_id": {"type": "string", "description": "Ventilation branch ID"},
+          "airflow_m3_s": {"type": "number", "description": "Measured airflow in m3/s"}
+        },
+        "required": ["mine", "branch_id", "airflow_m3_s"]
+      }
+    },
+    "prompt": "Tally airflow on Kiruna mine branch B-Decline-Lv1245 at 78.5 m3/s.",
+    "gold_name": "tally_underground_ventilation_circuit",
+    "gold_args": {"mine": "Kiruna", "branch_id": "B-Decline-Lv1245", "airflow_m3_s": 78.5},
+    "difficulty": "medium"
+  }
+]

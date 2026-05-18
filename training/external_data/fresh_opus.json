@@ -1,0 +1,986 @@
+[
+  {
+    "id": "fresh_001",
+    "function": {
+      "name": "catalog_lepidoptera_specimen",
+      "description": "Register a butterfly or moth specimen into the entomology collection database.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "species": {"type": "string", "description": "Latin binomial name of the specimen"},
+          "wingspan_mm": {"type": "number", "description": "Wingspan in millimeters"},
+          "collection_site": {"type": "string", "description": "Geographic location where collected"}
+        },
+        "required": ["species", "wingspan_mm", "collection_site"]
+      }
+    },
+    "prompt": "Please log a new Morpho peleides specimen with a 95mm wingspan that I caught in Monteverde, Costa Rica.",
+    "gold_name": "catalog_lepidoptera_specimen",
+    "gold_args": {"species": "Morpho peleides", "wingspan_mm": 95, "collection_site": "Monteverde, Costa Rica"},
+    "difficulty": "easy"
+  },
+  {
+    "id": "fresh_002",
+    "function": {
+      "name": "simulate_basalt_cooling_rate",
+      "description": "Model the cooling rate of a basalt lava flow given thickness and ambient conditions.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "thickness_m": {"type": "number", "description": "Flow thickness in meters"},
+          "ambient_temp_c": {"type": "number", "description": "Ambient air temperature in Celsius"}
+        },
+        "required": ["thickness_m", "ambient_temp_c"]
+      }
+    },
+    "prompt": "Run a cooling simulation for a 12 meter thick basalt flow in 18C air.",
+    "gold_name": "simulate_basalt_cooling_rate",
+    "gold_args": {"thickness_m": 12, "ambient_temp_c": 18},
+    "difficulty": "easy"
+  },
+  {
+    "id": "fresh_003",
+    "function": {
+      "name": "transcribe_cuneiform_tablet",
+      "description": "Produce a transliteration of a cuneiform clay tablet image.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "tablet_id": {"type": "string", "description": "Museum accession identifier"},
+          "dialect": {"type": "string", "description": "Cuneiform dialect such as Old Babylonian or Sumerian"}
+        },
+        "required": ["tablet_id", "dialect"]
+      }
+    },
+    "prompt": "Transliterate tablet BM-12087 — it's Old Babylonian.",
+    "gold_name": "transcribe_cuneiform_tablet",
+    "gold_args": {"tablet_id": "BM-12087", "dialect": "Old Babylonian"},
+    "difficulty": "easy"
+  },
+  {
+    "id": "fresh_004",
+    "function": {
+      "name": "appraise_chrysoberyl_grade",
+      "description": "Grade a chrysoberyl gemstone for clarity and color shift.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "carat": {"type": "number", "description": "Stone weight in carats"},
+          "color_shift_strength": {"type": "string", "description": "Strength of alexandrite-type color shift: weak, moderate, strong"}
+        },
+        "required": ["carat", "color_shift_strength"]
+      }
+    },
+    "prompt": "Appraise this 2.3 carat chrysoberyl — it has a strong color shift.",
+    "gold_name": "appraise_chrysoberyl_grade",
+    "gold_args": {"carat": 2.3, "color_shift_strength": "strong"},
+    "difficulty": "easy"
+  },
+  {
+    "id": "fresh_005",
+    "function": {
+      "name": "chart_sonar_bathymetry_pass",
+      "description": "Plan a multibeam sonar pass over an underwater survey area.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "area_name": {"type": "string", "description": "Named survey area"},
+          "depth_max_m": {"type": "number", "description": "Maximum expected depth in meters"}
+        },
+        "required": ["area_name", "depth_max_m"]
+      }
+    },
+    "prompt": "Chart a sonar pass over the Cascadia Basin down to 2800m.",
+    "gold_name": "chart_sonar_bathymetry_pass",
+    "gold_args": {"area_name": "Cascadia Basin", "depth_max_m": 2800},
+    "difficulty": "easy"
+  },
+  {
+    "id": "fresh_006",
+    "function": {
+      "name": "identify_lichen_thallus",
+      "description": "Classify a lichen specimen by thallus morphology and substrate.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "thallus_form": {"type": "string", "description": "Form: crustose, foliose, fruticose, squamulose"},
+          "substrate": {"type": "string", "description": "Surface the lichen was growing on"}
+        },
+        "required": ["thallus_form", "substrate"]
+      }
+    },
+    "prompt": "Identify this lichen — it's foliose and was growing on oak bark.",
+    "gold_name": "identify_lichen_thallus",
+    "gold_args": {"thallus_form": "foliose", "substrate": "oak bark"},
+    "difficulty": "easy"
+  },
+  {
+    "id": "fresh_007",
+    "function": {
+      "name": "log_glacier_calving_event",
+      "description": "Record a glacier ice calving event with size estimate.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "glacier_name": {"type": "string", "description": "Glacier identifier"},
+          "iceberg_volume_m3": {"type": "number", "description": "Estimated volume of calved iceberg in cubic meters"}
+        },
+        "required": ["glacier_name", "iceberg_volume_m3"]
+      }
+    },
+    "prompt": "Log a calving event at Jakobshavn Isbrae — roughly 450000 cubic meters broke off.",
+    "gold_name": "log_glacier_calving_event",
+    "gold_args": {"glacier_name": "Jakobshavn Isbrae", "iceberg_volume_m3": 450000},
+    "difficulty": "easy"
+  },
+  {
+    "id": "fresh_008",
+    "function": {
+      "name": "stage_opera_blocking_cue",
+      "description": "Add a blocking cue to an opera staging plan.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "scene": {"type": "string", "description": "Act and scene marker"},
+          "character": {"type": "string", "description": "Character moving on stage"},
+          "destination": {"type": "string", "description": "Where on stage they move to"}
+        },
+        "required": ["scene", "character", "destination"]
+      }
+    },
+    "prompt": "Add a blocking cue: in Act 2 scene 3, Tosca moves to stage left.",
+    "gold_name": "stage_opera_blocking_cue",
+    "gold_args": {"scene": "Act 2 scene 3", "character": "Tosca", "destination": "stage left"},
+    "difficulty": "easy"
+  },
+  {
+    "id": "fresh_009",
+    "function": {
+      "name": "appraise_philatelic_cover",
+      "description": "Appraise a postal cover (envelope) for philatelic value.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "year": {"type": "integer", "description": "Year of postmark"},
+          "country_of_origin": {"type": "string", "description": "Country where the cover was posted"}
+        },
+        "required": ["year", "country_of_origin"]
+      }
+    },
+    "prompt": "Appraise this 1867 cover from British Guiana.",
+    "gold_name": "appraise_philatelic_cover",
+    "gold_args": {"year": 1867, "country_of_origin": "British Guiana"},
+    "difficulty": "easy"
+  },
+  {
+    "id": "fresh_010",
+    "function": {
+      "name": "schedule_koi_pond_treatment",
+      "description": "Schedule a parasite or water quality treatment for a koi pond.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "pond_id": {"type": "string", "description": "Pond identifier"},
+          "treatment_type": {"type": "string", "description": "Type of treatment, e.g. praziquantel, salt bath"}
+        },
+        "required": ["pond_id", "treatment_type"]
+      }
+    },
+    "prompt": "Schedule a praziquantel treatment for pond K-7.",
+    "gold_name": "schedule_koi_pond_treatment",
+    "gold_args": {"pond_id": "K-7", "treatment_type": "praziquantel"},
+    "difficulty": "easy"
+  },
+  {
+    "id": "fresh_011",
+    "function": {
+      "name": "render_portolan_chart_segment",
+      "description": "Render a segment of a medieval portolan-style nautical chart.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "coastline": {"type": "string", "description": "Coastline name to render"},
+          "wind_rose_count": {"type": "integer", "description": "Number of compass roses to place"}
+        },
+        "required": ["coastline"]
+      }
+    },
+    "prompt": "Render a portolan segment of the Ligurian coast.",
+    "gold_name": "render_portolan_chart_segment",
+    "gold_args": {"coastline": "Ligurian coast"},
+    "difficulty": "easy"
+  },
+  {
+    "id": "fresh_012",
+    "function": {
+      "name": "log_foundry_pour",
+      "description": "Record a metal pour event at a foundry.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "alloy": {"type": "string", "description": "Alloy designation, e.g. 356-T6 aluminum"},
+          "mass_kg": {"type": "number", "description": "Mass of poured metal in kilograms"}
+        },
+        "required": ["alloy", "mass_kg"]
+      }
+    },
+    "prompt": "Log a pour of 220 kg of bronze C95400.",
+    "gold_name": "log_foundry_pour",
+    "gold_args": {"alloy": "bronze C95400", "mass_kg": 220},
+    "difficulty": "easy"
+  },
+  {
+    "id": "fresh_013",
+    "function": {
+      "name": "tune_carillon_bell",
+      "description": "Submit a carillon bell tuning adjustment.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "bell_note": {"type": "string", "description": "Nominal pitch of the bell, e.g. C#4"},
+          "cents_offset": {"type": "number", "description": "Cents deviation from target"}
+        },
+        "required": ["bell_note", "cents_offset"]
+      }
+    },
+    "prompt": "Adjust the F#4 carillon bell — it's 6 cents flat.",
+    "gold_name": "tune_carillon_bell",
+    "gold_args": {"bell_note": "F#4", "cents_offset": -6},
+    "difficulty": "easy"
+  },
+  {
+    "id": "fresh_014",
+    "function": {
+      "name": "record_tide_pool_census",
+      "description": "Record a tide pool species census.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "pool_label": {"type": "string", "description": "Pool identifier"},
+          "species_count": {"type": "integer", "description": "Number of distinct species observed"}
+        },
+        "required": ["pool_label", "species_count"]
+      }
+    },
+    "prompt": "Record tide pool TP-14 census: I counted 23 species.",
+    "gold_name": "record_tide_pool_census",
+    "gold_args": {"pool_label": "TP-14", "species_count": 23},
+    "difficulty": "easy"
+  },
+  {
+    "id": "fresh_015",
+    "function": {
+      "name": "submit_falconry_flight_log",
+      "description": "Submit a flight log for a trained falconry bird.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "bird_name": {"type": "string", "description": "Name of the falconry bird"},
+          "flight_duration_min": {"type": "number", "description": "Length of flight in minutes"}
+        },
+        "required": ["bird_name", "flight_duration_min"]
+      }
+    },
+    "prompt": "Log a 42-minute flight for Mira.",
+    "gold_name": "submit_falconry_flight_log",
+    "gold_args": {"bird_name": "Mira", "flight_duration_min": 42},
+    "difficulty": "easy"
+  },
+  {
+    "id": "fresh_016",
+    "function": {
+      "name": "register_meteorite_find",
+      "description": "Register a newly recovered meteorite specimen.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "classification": {"type": "string", "description": "Meteorite class, e.g. L6 chondrite, pallasite"},
+          "mass_g": {"type": "number", "description": "Mass in grams"}
+        },
+        "required": ["classification", "mass_g"]
+      }
+    },
+    "prompt": "Register a new pallasite, 318 grams.",
+    "gold_name": "register_meteorite_find",
+    "gold_args": {"classification": "pallasite", "mass_g": 318},
+    "difficulty": "easy"
+  },
+  {
+    "id": "fresh_017",
+    "function": {
+      "name": "press_intaglio_proof",
+      "description": "Pull a proof print from an intaglio etching plate.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "plate_id": {"type": "string", "description": "Plate identifier"},
+          "ink_color": {"type": "string", "description": "Ink color used for the proof"}
+        },
+        "required": ["plate_id", "ink_color"]
+      }
+    },
+    "prompt": "Pull a proof from plate E-22 in sepia.",
+    "gold_name": "press_intaglio_proof",
+    "gold_args": {"plate_id": "E-22", "ink_color": "sepia"},
+    "difficulty": "easy"
+  },
+  {
+    "id": "fresh_018",
+    "function": {
+      "name": "tag_bryozoan_colony",
+      "description": "Tag a bryozoan colony for long-term monitoring.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "site_code": {"type": "string", "description": "Monitoring site code"},
+          "colony_area_cm2": {"type": "number", "description": "Approximate colony area in square centimeters"}
+        },
+        "required": ["site_code", "colony_area_cm2"]
+      }
+    },
+    "prompt": "Tag a 47 cm2 bryozoan colony at site RF-09.",
+    "gold_name": "tag_bryozoan_colony",
+    "gold_args": {"site_code": "RF-09", "colony_area_cm2": 47},
+    "difficulty": "easy"
+  },
+  {
+    "id": "fresh_019",
+    "function": {
+      "name": "draft_bookbinder_sewing_pattern",
+      "description": "Draft a sewing pattern for hand binding a book.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "signature_count": {"type": "integer", "description": "Number of paper signatures"},
+          "stitch_style": {"type": "string", "description": "Sewing style such as Coptic, kettle, longstitch"}
+        },
+        "required": ["signature_count", "stitch_style"]
+      }
+    },
+    "prompt": "Draft a Coptic sewing pattern for 8 signatures.",
+    "gold_name": "draft_bookbinder_sewing_pattern",
+    "gold_args": {"signature_count": 8, "stitch_style": "Coptic"},
+    "difficulty": "easy"
+  },
+  {
+    "id": "fresh_020",
+    "function": {
+      "name": "log_speleothem_growth_band",
+      "description": "Record an annual growth band measurement from a cave speleothem.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "stalagmite_id": {"type": "string", "description": "Stalagmite identifier"},
+          "band_thickness_um": {"type": "number", "description": "Band thickness in micrometers"}
+        },
+        "required": ["stalagmite_id", "band_thickness_um"]
+      }
+    },
+    "prompt": "Log a 38 micron growth band on stalagmite ST-3.",
+    "gold_name": "log_speleothem_growth_band",
+    "gold_args": {"stalagmite_id": "ST-3", "band_thickness_um": 38},
+    "difficulty": "easy"
+  },
+  {
+    "id": "fresh_021",
+    "function": {
+      "name": "estimate_pipe_organ_voicing_pressure",
+      "description": "Estimate the required wind pressure for a pipe organ rank.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "rank_name": {"type": "string", "description": "Name of the organ stop or rank"},
+          "pipe_length_ft": {"type": "number", "description": "Longest pipe length in feet"},
+          "hall_volume_m3": {"type": "number", "description": "Volume of the hall in cubic meters"}
+        },
+        "required": ["rank_name", "pipe_length_ft", "hall_volume_m3"]
+      }
+    },
+    "prompt": "Estimate voicing pressure for the Principal 8' rank, longest pipe 8 feet, hall volume around 14000 cubic meters.",
+    "gold_name": "estimate_pipe_organ_voicing_pressure",
+    "gold_args": {"rank_name": "Principal 8'", "pipe_length_ft": 8, "hall_volume_m3": 14000},
+    "difficulty": "medium"
+  },
+  {
+    "id": "fresh_022",
+    "function": {
+      "name": "plot_dendrochronology_series",
+      "description": "Generate a tree-ring width plot for cross-dating.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "core_sample_id": {"type": "string", "description": "Tree core sample identifier"},
+          "start_year": {"type": "integer", "description": "First year of the series"},
+          "end_year": {"type": "integer", "description": "Last year of the series"}
+        },
+        "required": ["core_sample_id", "start_year", "end_year"]
+      }
+    },
+    "prompt": "Plot the dendro series for core BCP-22 covering 1742 through 1968.",
+    "gold_name": "plot_dendrochronology_series",
+    "gold_args": {"core_sample_id": "BCP-22", "start_year": 1742, "end_year": 1968},
+    "difficulty": "medium"
+  },
+  {
+    "id": "fresh_023",
+    "function": {
+      "name": "annotate_palimpsest_layer",
+      "description": "Annotate a recovered text layer on a palimpsest manuscript.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "manuscript_shelfmark": {"type": "string", "description": "Library shelfmark of the manuscript"},
+          "layer": {"type": "string", "description": "Which layer: upper or undertext"},
+          "language": {"type": "string", "description": "Language of the layer"}
+        },
+        "required": ["manuscript_shelfmark", "layer", "language"]
+      }
+    },
+    "prompt": "Annotate the undertext of Vat. gr. 1209 — the lower layer is Greek.",
+    "gold_name": "annotate_palimpsest_layer",
+    "gold_args": {"manuscript_shelfmark": "Vat. gr. 1209", "layer": "undertext", "language": "Greek"},
+    "difficulty": "medium"
+  },
+  {
+    "id": "fresh_024",
+    "function": {
+      "name": "simulate_carbonate_compensation_depth",
+      "description": "Simulate the carbonate compensation depth for a given ocean basin profile.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "basin": {"type": "string", "description": "Ocean basin or region"},
+          "co2_ppm": {"type": "number", "description": "Atmospheric CO2 in parts per million"},
+          "surface_temp_c": {"type": "number", "description": "Surface seawater temperature in Celsius"}
+        },
+        "required": ["basin", "co2_ppm", "surface_temp_c"]
+      }
+    },
+    "prompt": "Simulate the CCD for the South Pacific Gyre at 420 ppm CO2 and a surface temperature of 24C.",
+    "gold_name": "simulate_carbonate_compensation_depth",
+    "gold_args": {"basin": "South Pacific Gyre", "co2_ppm": 420, "surface_temp_c": 24},
+    "difficulty": "medium"
+  },
+  {
+    "id": "fresh_025",
+    "function": {
+      "name": "audit_marionette_string_tension",
+      "description": "Audit the string tensions on a marionette before performance.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "marionette_name": {"type": "string", "description": "Name of the puppet"},
+          "string_count": {"type": "integer", "description": "Number of strings on the control bar"}
+        },
+        "required": ["marionette_name", "string_count"]
+      }
+    },
+    "prompt": "Audit string tensions on the Coppelia marionette — she's strung with 9 lines.",
+    "gold_name": "audit_marionette_string_tension",
+    "gold_args": {"marionette_name": "Coppelia", "string_count": 9},
+    "difficulty": "medium"
+  },
+  {
+    "id": "fresh_026",
+    "function": {
+      "name": "submit_horology_escapement_repair",
+      "description": "Submit a repair ticket for a clock escapement mechanism.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "movement_caliber": {"type": "string", "description": "Movement caliber designation"},
+          "escapement_type": {"type": "string", "description": "Escapement type, e.g. lever, deadbeat, verge"},
+          "fault_description": {"type": "string", "description": "Brief fault description"}
+        },
+        "required": ["movement_caliber", "escapement_type", "fault_description"]
+      }
+    },
+    "prompt": "Open a repair ticket for an ETA 6498 movement — it has a lever escapement that is rebanking under heavy wind.",
+    "gold_name": "submit_horology_escapement_repair",
+    "gold_args": {"movement_caliber": "ETA 6498", "escapement_type": "lever", "fault_description": "rebanking under heavy wind"},
+    "difficulty": "medium"
+  },
+  {
+    "id": "fresh_027",
+    "function": {
+      "name": "plot_aurora_substorm_intensity",
+      "description": "Plot expected auroral substorm intensity for a magnetometer station.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "station_code": {"type": "string", "description": "Magnetometer station code"},
+          "kp_index": {"type": "number", "description": "Planetary K-index forecast"}
+        },
+        "required": ["station_code", "kp_index"]
+      }
+    },
+    "prompt": "Plot substorm intensity for the Tromso magnetometer assuming a Kp of 6.7.",
+    "gold_name": "plot_aurora_substorm_intensity",
+    "gold_args": {"station_code": "Tromso", "kp_index": 6.7},
+    "difficulty": "medium"
+  },
+  {
+    "id": "fresh_028",
+    "function": {
+      "name": "log_truffle_orchard_yield",
+      "description": "Record a harvest yield from a truffle orchard.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "orchard_block": {"type": "string", "description": "Orchard block identifier"},
+          "species": {"type": "string", "description": "Truffle species, e.g. Tuber melanosporum"},
+          "weight_g": {"type": "number", "description": "Harvest weight in grams"}
+        },
+        "required": ["orchard_block", "species", "weight_g"]
+      }
+    },
+    "prompt": "Record a harvest of 612 grams of Tuber melanosporum from block B-4.",
+    "gold_name": "log_truffle_orchard_yield",
+    "gold_args": {"orchard_block": "B-4", "species": "Tuber melanosporum", "weight_g": 612},
+    "difficulty": "medium"
+  },
+  {
+    "id": "fresh_029",
+    "function": {
+      "name": "register_taxidermy_mount",
+      "description": "Register a completed taxidermy mount in studio inventory.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "species": {"type": "string", "description": "Mounted species"},
+          "pose": {"type": "string", "description": "Pose description"},
+          "client_id": {"type": "string", "description": "Client identifier"}
+        },
+        "required": ["species", "pose", "client_id"]
+      }
+    },
+    "prompt": "Register a red fox in a stalking pose for client C-118.",
+    "gold_name": "register_taxidermy_mount",
+    "gold_args": {"species": "red fox", "pose": "stalking", "client_id": "C-118"},
+    "difficulty": "medium"
+  },
+  {
+    "id": "fresh_030",
+    "function": {
+      "name": "calibrate_seismograph_drum",
+      "description": "Calibrate a drum-style seismograph for paper recording speed and gain.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "station": {"type": "string", "description": "Seismograph station code"},
+          "drum_speed_mm_min": {"type": "number", "description": "Drum advance speed in millimeters per minute"},
+          "gain_db": {"type": "number", "description": "Signal gain in dB"}
+        },
+        "required": ["station", "drum_speed_mm_min", "gain_db"]
+      }
+    },
+    "prompt": "Calibrate the drum at station HRV — set the advance to 60 mm/min and gain to 54 dB.",
+    "gold_name": "calibrate_seismograph_drum",
+    "gold_args": {"station": "HRV", "drum_speed_mm_min": 60, "gain_db": 54},
+    "difficulty": "medium"
+  },
+  {
+    "id": "fresh_031",
+    "function": {
+      "name": "plan_yurt_assembly_sequence",
+      "description": "Plan the assembly sequence for a traditional Mongolian yurt.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "diameter_m": {"type": "number", "description": "Yurt diameter in meters"},
+          "khana_count": {"type": "integer", "description": "Number of lattice wall sections"}
+        },
+        "required": ["diameter_m", "khana_count"]
+      }
+    },
+    "prompt": "Plan assembly for a 6 meter yurt with 5 khana walls.",
+    "gold_name": "plan_yurt_assembly_sequence",
+    "gold_args": {"diameter_m": 6, "khana_count": 5},
+    "difficulty": "medium"
+  },
+  {
+    "id": "fresh_032",
+    "function": {
+      "name": "evaluate_ikat_dye_lot",
+      "description": "Evaluate consistency of an ikat dye lot used in traditional weaving.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "lot_number": {"type": "string", "description": "Dye lot identifier"},
+          "dye_source": {"type": "string", "description": "Source plant or mineral"},
+          "fiber": {"type": "string", "description": "Fiber type, e.g. silk warp, cotton weft"}
+        },
+        "required": ["lot_number", "dye_source", "fiber"]
+      }
+    },
+    "prompt": "Evaluate dye lot UZ-441, indigo from Indigofera tinctoria, on silk warp.",
+    "gold_name": "evaluate_ikat_dye_lot",
+    "gold_args": {"lot_number": "UZ-441", "dye_source": "Indigofera tinctoria", "fiber": "silk warp"},
+    "difficulty": "medium"
+  },
+  {
+    "id": "fresh_033",
+    "function": {
+      "name": "diagnose_bagpipe_drone_reed",
+      "description": "Diagnose a malfunctioning bagpipe drone reed.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "drone": {"type": "string", "description": "Which drone: bass, tenor1, tenor2"},
+          "symptom": {"type": "string", "description": "Audible symptom"}
+        },
+        "required": ["drone", "symptom"]
+      }
+    },
+    "prompt": "Diagnose my bass drone — it's double-toning whenever I strike in.",
+    "gold_name": "diagnose_bagpipe_drone_reed",
+    "gold_args": {"drone": "bass", "symptom": "double-toning whenever I strike in"},
+    "difficulty": "medium"
+  },
+  {
+    "id": "fresh_034",
+    "function": {
+      "name": "log_apiary_swarm_capture",
+      "description": "Log a captured honeybee swarm at an apiary.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "apiary_id": {"type": "string", "description": "Apiary identifier"},
+          "estimated_population": {"type": "integer", "description": "Estimated bee population"},
+          "queen_seen": {"type": "boolean", "description": "Whether the queen was visually confirmed"}
+        },
+        "required": ["apiary_id", "estimated_population", "queen_seen"]
+      }
+    },
+    "prompt": "Log a swarm capture at apiary A-2, about 18000 bees, and yes I spotted the queen.",
+    "gold_name": "log_apiary_swarm_capture",
+    "gold_args": {"apiary_id": "A-2", "estimated_population": 18000, "queen_seen": true},
+    "difficulty": "medium"
+  },
+  {
+    "id": "fresh_035",
+    "function": {
+      "name": "draft_kintsugi_repair_estimate",
+      "description": "Draft a repair estimate for a kintsugi (gold-lacquer) ceramic repair.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "vessel_type": {"type": "string", "description": "Type of ceramic vessel"},
+          "fragment_count": {"type": "integer", "description": "Number of fragments to rejoin"},
+          "lacquer_finish": {"type": "string", "description": "Finish: gold, silver, or platinum"}
+        },
+        "required": ["vessel_type", "fragment_count", "lacquer_finish"]
+      }
+    },
+    "prompt": "Draft a kintsugi estimate — it's a tea bowl in 7 pieces, finished in gold.",
+    "gold_name": "draft_kintsugi_repair_estimate",
+    "gold_args": {"vessel_type": "tea bowl", "fragment_count": 7, "lacquer_finish": "gold"},
+    "difficulty": "medium"
+  },
+  {
+    "id": "fresh_036",
+    "function": {
+      "name": "schedule_obsidian_hydration_dating",
+      "description": "Submit an obsidian hydration rim dating job to the lab queue.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "artifact_id": {"type": "string", "description": "Artifact catalog number"},
+          "source_quarry": {"type": "string", "description": "Suspected obsidian source quarry"}
+        },
+        "required": ["artifact_id", "source_quarry"]
+      }
+    },
+    "prompt": "Queue up hydration dating for artifact ANZ-558, suspected source Mayor Island.",
+    "gold_name": "schedule_obsidian_hydration_dating",
+    "gold_args": {"artifact_id": "ANZ-558", "source_quarry": "Mayor Island"},
+    "difficulty": "medium"
+  },
+  {
+    "id": "fresh_037",
+    "function": {
+      "name": "compose_carillon_ringing_change",
+      "description": "Compose a change-ringing sequence for a tower carillon.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "method_name": {"type": "string", "description": "Change-ringing method, e.g. Plain Bob, Grandsire"},
+          "bell_count": {"type": "integer", "description": "Number of bells in the ring"}
+        },
+        "required": ["method_name", "bell_count"]
+      }
+    },
+    "prompt": "Compose a Plain Bob sequence on 8 bells.",
+    "gold_name": "compose_carillon_ringing_change",
+    "gold_args": {"method_name": "Plain Bob", "bell_count": 8},
+    "difficulty": "medium"
+  },
+  {
+    "id": "fresh_038",
+    "function": {
+      "name": "register_orchid_hybrid_cross",
+      "description": "Register a new orchid hybrid cross with the registry.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "pod_parent": {"type": "string", "description": "Pod (seed) parent species or grex"},
+          "pollen_parent": {"type": "string", "description": "Pollen parent species or grex"},
+          "grex_name": {"type": "string", "description": "Proposed grex name for the cross"}
+        },
+        "required": ["pod_parent", "pollen_parent", "grex_name"]
+      }
+    },
+    "prompt": "Register a new hybrid: pod parent Cattleya warscewiczii, pollen parent Cattleya dowiana, grex name Empress Augusta.",
+    "gold_name": "register_orchid_hybrid_cross",
+    "gold_args": {"pod_parent": "Cattleya warscewiczii", "pollen_parent": "Cattleya dowiana", "grex_name": "Empress Augusta"},
+    "difficulty": "medium"
+  },
+  {
+    "id": "fresh_039",
+    "function": {
+      "name": "log_glassblower_furnace_charge",
+      "description": "Log a fresh glass batch charge into a glassblowing furnace.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "furnace_id": {"type": "string", "description": "Furnace identifier"},
+          "batch_color": {"type": "string", "description": "Glass color or formulation"},
+          "mass_kg": {"type": "number", "description": "Mass of glass charged in kilograms"}
+        },
+        "required": ["furnace_id", "batch_color", "mass_kg"]
+      }
+    },
+    "prompt": "Log a 35 kg charge of cobalt blue into furnace F-3.",
+    "gold_name": "log_glassblower_furnace_charge",
+    "gold_args": {"furnace_id": "F-3", "batch_color": "cobalt blue", "mass_kg": 35},
+    "difficulty": "medium"
+  },
+  {
+    "id": "fresh_040",
+    "function": {
+      "name": "audit_kelp_forest_canopy_density",
+      "description": "Audit canopy density along a kelp forest transect.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "transect_id": {"type": "string", "description": "Transect identifier"},
+          "stipe_count_per_m2": {"type": "number", "description": "Stipes per square meter"}
+        },
+        "required": ["transect_id", "stipe_count_per_m2"]
+      }
+    },
+    "prompt": "Audit transect MNT-04 — I counted about 7.2 stipes per square meter.",
+    "gold_name": "audit_kelp_forest_canopy_density",
+    "gold_args": {"transect_id": "MNT-04", "stipe_count_per_m2": 7.2},
+    "difficulty": "medium"
+  },
+  {
+    "id": "fresh_041",
+    "function": {
+      "name": "model_pyroclastic_flow_runout",
+      "description": "Model the runout distance of a pyroclastic density current from an eruption.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "volcano": {"type": "string", "description": "Source volcano name"},
+          "column_collapse_height_km": {"type": "number", "description": "Height of collapsing eruption column in km"},
+          "slope_angle_deg": {"type": "number", "description": "Average flank slope angle in degrees"},
+          "particle_density_kg_m3": {"type": "number", "description": "Average density of suspended particles in kg/m3"}
+        },
+        "required": ["volcano", "column_collapse_height_km", "slope_angle_deg", "particle_density_kg_m3"]
+      }
+    },
+    "prompt": "Model a PDC runout for Merapi — column collapse from 14 km, average flank slope around 24 degrees, particle density about 1850 kg/m3.",
+    "gold_name": "model_pyroclastic_flow_runout",
+    "gold_args": {"volcano": "Merapi", "column_collapse_height_km": 14, "slope_angle_deg": 24, "particle_density_kg_m3": 1850},
+    "difficulty": "hard"
+  },
+  {
+    "id": "fresh_042",
+    "function": {
+      "name": "design_castle_machicolation_array",
+      "description": "Design a defensive machicolation arrangement for a medieval castle wall.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "wall_segment_id": {"type": "string", "description": "Wall segment label"},
+          "wall_length_m": {"type": "number", "description": "Length of segment in meters"},
+          "overhang_cm": {"type": "number", "description": "Overhang depth in centimeters"},
+          "embrasure_spacing_m": {"type": "number", "description": "Spacing between machicolation embrasures in meters"}
+        },
+        "required": ["wall_segment_id", "wall_length_m", "overhang_cm", "embrasure_spacing_m"]
+      }
+    },
+    "prompt": "Design machicolation for wall segment NW-2: it's 38 meters long, the corbel overhang should be 95 cm, and embrasures every 1.4 meters.",
+    "gold_name": "design_castle_machicolation_array",
+    "gold_args": {"wall_segment_id": "NW-2", "wall_length_m": 38, "overhang_cm": 95, "embrasure_spacing_m": 1.4},
+    "difficulty": "hard"
+  },
+  {
+    "id": "fresh_043",
+    "function": {
+      "name": "synthesize_perfumers_chypre_accord",
+      "description": "Synthesize a chypre fragrance accord with weighted components.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "bergamot_pct": {"type": "number", "description": "Bergamot percentage of the accord"},
+          "oakmoss_pct": {"type": "number", "description": "Oakmoss percentage of the accord"},
+          "labdanum_pct": {"type": "number", "description": "Labdanum percentage of the accord"},
+          "patchouli_pct": {"type": "number", "description": "Patchouli percentage of the accord"}
+        },
+        "required": ["bergamot_pct", "oakmoss_pct", "labdanum_pct", "patchouli_pct"]
+      }
+    },
+    "prompt": "Mix a chypre accord — 32% bergamot, 22% oakmoss, 28% labdanum, 18% patchouli.",
+    "gold_name": "synthesize_perfumers_chypre_accord",
+    "gold_args": {"bergamot_pct": 32, "oakmoss_pct": 22, "labdanum_pct": 28, "patchouli_pct": 18},
+    "difficulty": "hard"
+  },
+  {
+    "id": "fresh_044",
+    "function": {
+      "name": "schedule_arctic_polynya_drone_survey",
+      "description": "Schedule a UAV survey over a recurring arctic polynya (open-water area).",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "polynya_name": {"type": "string", "description": "Named polynya"},
+          "survey_date": {"type": "string", "description": "ISO date for the survey"},
+          "flight_altitude_m": {"type": "number", "description": "Drone flight altitude in meters AGL"},
+          "sensor_payload": {"type": "string", "description": "Sensor payload, e.g. thermal-IR, multispectral"}
+        },
+        "required": ["polynya_name", "survey_date", "flight_altitude_m", "sensor_payload"]
+      }
+    },
+    "prompt": "Schedule a drone survey over the North Water Polynya on 2026-06-12, fly at 400 meters AGL, thermal-IR payload.",
+    "gold_name": "schedule_arctic_polynya_drone_survey",
+    "gold_args": {"polynya_name": "North Water Polynya", "survey_date": "2026-06-12", "flight_altitude_m": 400, "sensor_payload": "thermal-IR"},
+    "difficulty": "hard"
+  },
+  {
+    "id": "fresh_045",
+    "function": {
+      "name": "project_caravanserai_water_demand",
+      "description": "Project daily water demand for a desert caravanserai given throughput.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "caravanserai_name": {"type": "string", "description": "Caravanserai name"},
+          "camels_per_day": {"type": "integer", "description": "Average camels passing per day"},
+          "humans_per_day": {"type": "integer", "description": "Average human travelers per day"},
+          "season": {"type": "string", "description": "Season: summer, winter, shoulder"}
+        },
+        "required": ["caravanserai_name", "camels_per_day", "humans_per_day", "season"]
+      }
+    },
+    "prompt": "Project water demand for the Sultanhani caravanserai in high summer — expect 140 camels and 90 travelers per day.",
+    "gold_name": "project_caravanserai_water_demand",
+    "gold_args": {"caravanserai_name": "Sultanhani", "camels_per_day": 140, "humans_per_day": 90, "season": "summer"},
+    "difficulty": "hard"
+  },
+  {
+    "id": "fresh_046",
+    "function": {
+      "name": "compile_shipwreck_dendro_provenance",
+      "description": "Compile a dendrochronology-based provenance report for a shipwreck timber set.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "wreck_site": {"type": "string", "description": "Wreck site name"},
+          "timber_samples": {"type": "integer", "description": "Number of timber samples"},
+          "species_mix": {"type": "string", "description": "Description of species mix, e.g. oak/pine"},
+          "candidate_region": {"type": "string", "description": "Proposed source region for the timber"}
+        },
+        "required": ["wreck_site", "timber_samples", "species_mix", "candidate_region"]
+      }
+    },
+    "prompt": "Compile a provenance report for the Mary Rose timbers — 24 oak samples, mostly southern English oak, candidate region Hampshire-Sussex weald.",
+    "gold_name": "compile_shipwreck_dendro_provenance",
+    "gold_args": {"wreck_site": "Mary Rose", "timber_samples": 24, "species_mix": "southern English oak", "candidate_region": "Hampshire-Sussex weald"},
+    "difficulty": "hard"
+  },
+  {
+    "id": "fresh_047",
+    "function": {
+      "name": "optimize_kiln_anagama_firing_schedule",
+      "description": "Optimize a multi-day firing schedule for a wood-fired anagama kiln.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "kiln_id": {"type": "string", "description": "Kiln identifier"},
+          "target_cone": {"type": "string", "description": "Target pyrometric cone, e.g. cone 12"},
+          "wood_species": {"type": "string", "description": "Primary wood species for the firing"},
+          "firing_days": {"type": "integer", "description": "Total firing duration in days"}
+        },
+        "required": ["kiln_id", "target_cone", "wood_species", "firing_days"]
+      }
+    },
+    "prompt": "Optimize the schedule for kiln AN-1 — we are firing to cone 13 using red pine over 6 days.",
+    "gold_name": "optimize_kiln_anagama_firing_schedule",
+    "gold_args": {"kiln_id": "AN-1", "target_cone": "cone 13", "wood_species": "red pine", "firing_days": 6},
+    "difficulty": "hard"
+  },
+  {
+    "id": "fresh_048",
+    "function": {
+      "name": "reconstruct_ostraca_voting_tally",
+      "description": "Reconstruct an ancient Greek ostracism vote tally from inscribed pottery sherds.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "find_site": {"type": "string", "description": "Archaeological site where ostraca were found"},
+          "sherd_count": {"type": "integer", "description": "Number of inscribed sherds analyzed"},
+          "candidate_names": {"type": "array", "items": {"type": "string"}, "description": "List of candidate names appearing on the sherds"}
+        },
+        "required": ["find_site", "sherd_count", "candidate_names"]
+      }
+    },
+    "prompt": "Reconstruct an ostracism tally from the Athenian Agora, 1903 sherds analyzed, with names Themistokles, Aristides, and Kimon appearing.",
+    "gold_name": "reconstruct_ostraca_voting_tally",
+    "gold_args": {"find_site": "Athenian Agora", "sherd_count": 1903, "candidate_names": ["Themistokles", "Aristides", "Kimon"]},
+    "difficulty": "hard"
+  },
+  {
+    "id": "fresh_049",
+    "function": {
+      "name": "balance_ringing_tower_load",
+      "description": "Compute load balancing for a bell tower given asymmetric bell hangings.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "tower_id": {"type": "string", "description": "Tower identifier"},
+          "bell_weights_kg": {"type": "array", "items": {"type": "number"}, "description": "List of bell weights in kilograms, heaviest first"},
+          "frame_material": {"type": "string", "description": "Bellframe material, e.g. oak, cast iron, steel"},
+          "swing_angle_deg": {"type": "number", "description": "Maximum swing angle in degrees"}
+        },
+        "required": ["tower_id", "bell_weights_kg", "frame_material", "swing_angle_deg"]
+      }
+    },
+    "prompt": "Balance the load for tower BT-2 — bells of 1120, 880, 640, and 410 kg, oak frame, swing angle 165 degrees.",
+    "gold_name": "balance_ringing_tower_load",
+    "gold_args": {"tower_id": "BT-2", "bell_weights_kg": [1120, 880, 640, 410], "frame_material": "oak", "swing_angle_deg": 165},
+    "difficulty": "hard"
+  },
+  {
+    "id": "fresh_050",
+    "function": {
+      "name": "draft_illuminated_manuscript_quire_layout",
+      "description": "Draft a quire and folio layout for an illuminated manuscript commission.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "manuscript_title": {"type": "string", "description": "Working title of the manuscript"},
+          "quire_count": {"type": "integer", "description": "Number of quires"},
+          "folios_per_quire": {"type": "integer", "description": "Folios per quire (typically 8 for a quaternion)"},
+          "miniature_count": {"type": "integer", "description": "Number of full-page miniatures planned"}
+        },
+        "required": ["manuscript_title", "quire_count", "folios_per_quire", "miniature_count"]
+      }
+    },
+    "prompt": "Draft a quire layout for the Hours of Saint Adela — 14 quires of 8 folios each, with 22 full-page miniatures.",
+    "gold_name": "draft_illuminated_manuscript_quire_layout",
+    "gold_args": {"manuscript_title": "Hours of Saint Adela", "quire_count": 14, "folios_per_quire": 8, "miniature_count": 22},
+    "difficulty": "hard"
+  }
+]

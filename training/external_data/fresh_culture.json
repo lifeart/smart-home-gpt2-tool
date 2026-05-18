@@ -1,0 +1,1597 @@
+[
+  {
+    "id": "cult_001",
+    "function": {
+      "name": "transcribe_cuneiform_tablet",
+      "description": "Produce a sign-by-sign transcription of a cuneiform tablet from a high-resolution scan.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "tablet_id": {"type": "string", "description": "Museum accession number of the tablet"},
+          "script_variant": {"type": "string", "description": "Cuneiform variant, e.g. Old Babylonian, Neo-Assyrian"}
+        },
+        "required": ["tablet_id", "script_variant"]
+      }
+    },
+    "prompt": "Please transcribe tablet BM-92668 — it's Neo-Assyrian.",
+    "gold_name": "transcribe_cuneiform_tablet",
+    "gold_args": {"tablet_id": "BM-92668", "script_variant": "Neo-Assyrian"},
+    "difficulty": "easy"
+  },
+  {
+    "id": "cult_002",
+    "function": {
+      "name": "catalog_philatelic_overprint",
+      "description": "Register a postage stamp overprint variety in the philatelic catalog.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "base_stamp_scott": {"type": "string", "description": "Scott catalog number of the base stamp"},
+          "overprint_text": {"type": "string", "description": "Exact overprint text"},
+          "color": {"type": "string", "description": "Overprint ink color"}
+        },
+        "required": ["base_stamp_scott", "overprint_text", "color"]
+      }
+    },
+    "prompt": "Catalog the overprint on Scott #C13 — text is 'PROVISIONAL 1928' in red.",
+    "gold_name": "catalog_philatelic_overprint",
+    "gold_args": {"base_stamp_scott": "C13", "overprint_text": "PROVISIONAL 1928", "color": "red"},
+    "difficulty": "easy"
+  },
+  {
+    "id": "cult_003",
+    "function": {
+      "name": "cue_opera_scene_change",
+      "description": "Send a lighting and rigging cue for an opera scene transition.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "act": {"type": "integer", "description": "Act number"},
+          "scene": {"type": "integer", "description": "Scene number"},
+          "cue_label": {"type": "string", "description": "Stage manager's cue label"}
+        },
+        "required": ["act", "scene", "cue_label"]
+      }
+    },
+    "prompt": "Fire cue 'GO-LX-47' for Act 2 Scene 3.",
+    "gold_name": "cue_opera_scene_change",
+    "gold_args": {"act": 2, "scene": 3, "cue_label": "GO-LX-47"},
+    "difficulty": "easy"
+  },
+  {
+    "id": "cult_004",
+    "function": {
+      "name": "date_antique_map_by_watermark",
+      "description": "Estimate the production date of an antique map from its paper watermark.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "watermark_motif": {"type": "string", "description": "Description of the watermark motif"},
+          "papermaker": {"type": "string", "description": "Papermaker name or initials"}
+        },
+        "required": ["watermark_motif", "papermaker"]
+      }
+    },
+    "prompt": "Date this map. The watermark is a foolscap and the papermaker mark is 'J Whatman'.",
+    "gold_name": "date_antique_map_by_watermark",
+    "gold_args": {"watermark_motif": "foolscap", "papermaker": "J Whatman"},
+    "difficulty": "easy"
+  },
+  {
+    "id": "cult_005",
+    "function": {
+      "name": "analyze_manuscript_hand",
+      "description": "Identify the script hand of a medieval manuscript folio.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "shelfmark": {"type": "string", "description": "Library shelfmark"},
+          "folio": {"type": "string", "description": "Folio reference, e.g. 12r"}
+        },
+        "required": ["shelfmark", "folio"]
+      }
+    },
+    "prompt": "Identify the hand on folio 47v of MS Bodley 264.",
+    "gold_name": "analyze_manuscript_hand",
+    "gold_args": {"shelfmark": "MS Bodley 264", "folio": "47v"},
+    "difficulty": "easy"
+  },
+  {
+    "id": "cult_006",
+    "function": {
+      "name": "decode_etruscan_inscription",
+      "description": "Decode an Etruscan inscription from a stone or bronze artifact.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "inscription_text": {"type": "string", "description": "Inscription as transliterated Etruscan"},
+          "find_site": {"type": "string", "description": "Site where the artifact was found"}
+        },
+        "required": ["inscription_text", "find_site"]
+      }
+    },
+    "prompt": "Decode the Etruscan inscription 'mi larthia' found at Cerveteri.",
+    "gold_name": "decode_etruscan_inscription",
+    "gold_args": {"inscription_text": "mi larthia", "find_site": "Cerveteri"},
+    "difficulty": "easy"
+  },
+  {
+    "id": "cult_007",
+    "function": {
+      "name": "log_ethnomusicology_recording",
+      "description": "Log a field recording into the ethnomusicology archive.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "performer_name": {"type": "string", "description": "Name of the performer"},
+          "village": {"type": "string", "description": "Village or locality of recording"},
+          "duration_sec": {"type": "integer", "description": "Duration in seconds"}
+        },
+        "required": ["performer_name", "village", "duration_sec"]
+      }
+    },
+    "prompt": "Log a 312-second recording of Maria Tanase made in the village of Hateg.",
+    "gold_name": "log_ethnomusicology_recording",
+    "gold_args": {"performer_name": "Maria Tanase", "village": "Hateg", "duration_sec": 312},
+    "difficulty": "easy"
+  },
+  {
+    "id": "cult_008",
+    "function": {
+      "name": "schedule_marionette_workshop_build",
+      "description": "Schedule construction of a new marionette in the workshop queue.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "character_name": {"type": "string", "description": "Character to be built"},
+          "wood_type": {"type": "string", "description": "Type of wood for carving"},
+          "string_count": {"type": "integer", "description": "Number of control strings"}
+        },
+        "required": ["character_name", "wood_type", "string_count"]
+      }
+    },
+    "prompt": "Schedule a new Pulcinella marionette in linden, with 9 strings.",
+    "gold_name": "schedule_marionette_workshop_build",
+    "gold_args": {"character_name": "Pulcinella", "wood_type": "linden", "string_count": 9},
+    "difficulty": "easy"
+  },
+  {
+    "id": "cult_009",
+    "function": {
+      "name": "mix_calligraphy_ink",
+      "description": "Prepare a batch of traditional calligraphy ink.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "soot_source": {"type": "string", "description": "Type of soot used"},
+          "binder": {"type": "string", "description": "Binder agent, e.g. animal glue"},
+          "volume_ml": {"type": "integer", "description": "Final volume in milliliters"}
+        },
+        "required": ["soot_source", "binder", "volume_ml"]
+      }
+    },
+    "prompt": "Mix 250 ml of pine-soot ink with hide glue binder.",
+    "gold_name": "mix_calligraphy_ink",
+    "gold_args": {"soot_source": "pine-soot", "binder": "hide glue", "volume_ml": 250},
+    "difficulty": "easy"
+  },
+  {
+    "id": "cult_010",
+    "function": {
+      "name": "register_numismatic_die_pair",
+      "description": "Register an obverse/reverse die pair for a coin issue.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "mint": {"type": "string", "description": "Mint location"},
+          "obverse_die_id": {"type": "string", "description": "Obverse die identifier"},
+          "reverse_die_id": {"type": "string", "description": "Reverse die identifier"}
+        },
+        "required": ["mint", "obverse_die_id", "reverse_die_id"]
+      }
+    },
+    "prompt": "Register die pair O-217 / R-83 from the Lugdunum mint.",
+    "gold_name": "register_numismatic_die_pair",
+    "gold_args": {"mint": "Lugdunum", "obverse_die_id": "O-217", "reverse_die_id": "R-83"},
+    "difficulty": "easy"
+  },
+  {
+    "id": "cult_011",
+    "function": {
+      "name": "translate_linear_b_tablet",
+      "description": "Translate a Linear B Mycenaean tablet.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "tablet_series": {"type": "string", "description": "Tablet series code, e.g. PY Ta"},
+          "tablet_number": {"type": "integer", "description": "Tablet number in the series"}
+        },
+        "required": ["tablet_series", "tablet_number"]
+      }
+    },
+    "prompt": "Translate tablet PY Ta 711.",
+    "gold_name": "translate_linear_b_tablet",
+    "gold_args": {"tablet_series": "PY Ta", "tablet_number": 711},
+    "difficulty": "easy"
+  },
+  {
+    "id": "cult_012",
+    "function": {
+      "name": "label_amphora_typology",
+      "description": "Assign a Dressel typology label to an amphora find.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "rim_diameter_cm": {"type": "number", "description": "Rim diameter in centimeters"},
+          "handle_profile": {"type": "string", "description": "Shape of the handle profile"}
+        },
+        "required": ["rim_diameter_cm", "handle_profile"]
+      }
+    },
+    "prompt": "Classify the amphora with 14.5 cm rim and bifid handle.",
+    "gold_name": "label_amphora_typology",
+    "gold_args": {"rim_diameter_cm": 14.5, "handle_profile": "bifid"},
+    "difficulty": "easy"
+  },
+  {
+    "id": "cult_013",
+    "function": {
+      "name": "record_oral_history_interview",
+      "description": "Record metadata for an oral history interview.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "narrator": {"type": "string", "description": "Name of the narrator"},
+          "interviewer": {"type": "string", "description": "Name of the interviewer"},
+          "language": {"type": "string", "description": "Spoken language"}
+        },
+        "required": ["narrator", "interviewer", "language"]
+      }
+    },
+    "prompt": "Log interview: narrator Aino Kallas, interviewer Lehto, in Finnish.",
+    "gold_name": "record_oral_history_interview",
+    "gold_args": {"narrator": "Aino Kallas", "interviewer": "Lehto", "language": "Finnish"},
+    "difficulty": "easy"
+  },
+  {
+    "id": "cult_014",
+    "function": {
+      "name": "scan_papyrus_fragment",
+      "description": "Run multispectral imaging on a papyrus fragment.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "fragment_id": {"type": "string", "description": "Fragment inventory ID"},
+          "wavelengths_nm": {"type": "string", "description": "Comma-separated wavelengths in nm"}
+        },
+        "required": ["fragment_id", "wavelengths_nm"]
+      }
+    },
+    "prompt": "Scan P.Oxy 4321 at 365,450,940 nm.",
+    "gold_name": "scan_papyrus_fragment",
+    "gold_args": {"fragment_id": "P.Oxy 4321", "wavelengths_nm": "365,450,940"},
+    "difficulty": "easy"
+  },
+  {
+    "id": "cult_015",
+    "function": {
+      "name": "tune_gamelan_instrument",
+      "description": "Set tuning for a single gamelan instrument.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "instrument": {"type": "string", "description": "Gamelan instrument name"},
+          "scale_system": {"type": "string", "description": "Pelog or slendro scale system"}
+        },
+        "required": ["instrument", "scale_system"]
+      }
+    },
+    "prompt": "Tune the saron demung to slendro.",
+    "gold_name": "tune_gamelan_instrument",
+    "gold_args": {"instrument": "saron demung", "scale_system": "slendro"},
+    "difficulty": "easy"
+  },
+  {
+    "id": "cult_016",
+    "function": {
+      "name": "annotate_illuminated_initial",
+      "description": "Annotate a decorated initial letter in an illuminated manuscript.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "shelfmark": {"type": "string", "description": "Manuscript shelfmark"},
+          "folio": {"type": "string", "description": "Folio reference"},
+          "letter": {"type": "string", "description": "The illuminated letter"}
+        },
+        "required": ["shelfmark", "folio", "letter"]
+      }
+    },
+    "prompt": "Annotate the historiated initial 'B' on f.1r of MS Royal 2 B VII.",
+    "gold_name": "annotate_illuminated_initial",
+    "gold_args": {"shelfmark": "MS Royal 2 B VII", "folio": "1r", "letter": "B"},
+    "difficulty": "easy"
+  },
+  {
+    "id": "cult_017",
+    "function": {
+      "name": "log_archaeological_stratum",
+      "description": "Record a new stratigraphic context in an excavation log.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "site_code": {"type": "string", "description": "Site code"},
+          "context_number": {"type": "integer", "description": "Context number"},
+          "soil_type": {"type": "string", "description": "Soil description"}
+        },
+        "required": ["site_code", "context_number", "soil_type"]
+      }
+    },
+    "prompt": "Log context 1042 at site VIN-23, soil is dark loam with charcoal.",
+    "gold_name": "log_archaeological_stratum",
+    "gold_args": {"site_code": "VIN-23", "context_number": 1042, "soil_type": "dark loam with charcoal"},
+    "difficulty": "easy"
+  },
+  {
+    "id": "cult_018",
+    "function": {
+      "name": "request_pigment_xrf_analysis",
+      "description": "Submit a paint pigment sample for XRF analysis.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "artwork_id": {"type": "string", "description": "Artwork inventory ID"},
+          "sample_location": {"type": "string", "description": "Where on the artwork the sample is taken"}
+        },
+        "required": ["artwork_id", "sample_location"]
+      }
+    },
+    "prompt": "Request XRF on painting INV-441, sample from the angel's blue robe.",
+    "gold_name": "request_pigment_xrf_analysis",
+    "gold_args": {"artwork_id": "INV-441", "sample_location": "angel's blue robe"},
+    "difficulty": "easy"
+  },
+  {
+    "id": "cult_019",
+    "function": {
+      "name": "schedule_carillon_recital",
+      "description": "Schedule a carillon recital on a tower bell instrument.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "tower_name": {"type": "string", "description": "Carillon tower name"},
+          "date": {"type": "string", "description": "Date in YYYY-MM-DD"},
+          "carilloneur": {"type": "string", "description": "Performing carilloneur"}
+        },
+        "required": ["tower_name", "date", "carilloneur"]
+      }
+    },
+    "prompt": "Schedule a recital at Mechelen St. Rumbold on 2026-07-12 by Eddy Mariën.",
+    "gold_name": "schedule_carillon_recital",
+    "gold_args": {"tower_name": "Mechelen St. Rumbold", "date": "2026-07-12", "carilloneur": "Eddy Mariën"},
+    "difficulty": "easy"
+  },
+  {
+    "id": "cult_020",
+    "function": {
+      "name": "catalog_kabuki_costume",
+      "description": "Catalog a kabuki theatre costume piece.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "role_type": {"type": "string", "description": "Kabuki role type, e.g. tachiyaku, onnagata"},
+          "fabric": {"type": "string", "description": "Primary fabric"}
+        },
+        "required": ["role_type", "fabric"]
+      }
+    },
+    "prompt": "Catalog an onnagata costume in silk crepe.",
+    "gold_name": "catalog_kabuki_costume",
+    "gold_args": {"role_type": "onnagata", "fabric": "silk crepe"},
+    "difficulty": "easy"
+  },
+  {
+    "id": "cult_021",
+    "function": {
+      "name": "register_runestone_find",
+      "description": "Register a newly discovered runestone in the national registry.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "find_coords": {"type": "string", "description": "Latitude,longitude"},
+          "futhark_variant": {"type": "string", "description": "Younger or Elder Futhark"},
+          "stone_height_cm": {"type": "integer", "description": "Stone height in centimeters"}
+        },
+        "required": ["find_coords", "futhark_variant", "stone_height_cm"]
+      }
+    },
+    "prompt": "Register a 168 cm Younger Futhark runestone at 59.2812,17.7843.",
+    "gold_name": "register_runestone_find",
+    "gold_args": {"find_coords": "59.2812,17.7843", "futhark_variant": "Younger Futhark", "stone_height_cm": 168},
+    "difficulty": "easy"
+  },
+  {
+    "id": "cult_022",
+    "function": {
+      "name": "label_byzantine_icon",
+      "description": "Add an iconographic label to a Byzantine icon.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "subject": {"type": "string", "description": "Iconographic subject"},
+          "school": {"type": "string", "description": "Painting school or workshop"}
+        },
+        "required": ["subject", "school"]
+      }
+    },
+    "prompt": "Label this Hodegetria icon, attributed to the Cretan school.",
+    "gold_name": "label_byzantine_icon",
+    "gold_args": {"subject": "Hodegetria", "school": "Cretan"},
+    "difficulty": "easy"
+  },
+  {
+    "id": "cult_023",
+    "function": {
+      "name": "prepare_vellum_sheet",
+      "description": "Prepare a sheet of vellum for manuscript work.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "animal_source": {"type": "string", "description": "Animal source, e.g. calf, sheep, goat"},
+          "finish": {"type": "string", "description": "Surface finish, e.g. flesh side, hair side"}
+        },
+        "required": ["animal_source", "finish"]
+      }
+    },
+    "prompt": "Prepare a calf-vellum sheet with hair-side finish.",
+    "gold_name": "prepare_vellum_sheet",
+    "gold_args": {"animal_source": "calf", "finish": "hair side"},
+    "difficulty": "easy"
+  },
+  {
+    "id": "cult_024",
+    "function": {
+      "name": "stage_noh_performance",
+      "description": "Schedule and stage a Noh theatre performance.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "play_title": {"type": "string", "description": "Title of the Noh play"},
+          "school": {"type": "string", "description": "Noh school, e.g. Kanze, Hosho"},
+          "date": {"type": "string", "description": "Performance date YYYY-MM-DD"}
+        },
+        "required": ["play_title", "school", "date"]
+      }
+    },
+    "prompt": "Stage 'Hagoromo' in the Kanze school on 2026-09-15.",
+    "gold_name": "stage_noh_performance",
+    "gold_args": {"play_title": "Hagoromo", "school": "Kanze", "date": "2026-09-15"},
+    "difficulty": "easy"
+  },
+  {
+    "id": "cult_025",
+    "function": {
+      "name": "log_petroglyph_panel",
+      "description": "Log a rock-art petroglyph panel in the field database.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "panel_id": {"type": "string", "description": "Panel identifier"},
+          "motif_count": {"type": "integer", "description": "Number of distinct motifs"}
+        },
+        "required": ["panel_id", "motif_count"]
+      }
+    },
+    "prompt": "Log panel TAN-09 with 23 motifs.",
+    "gold_name": "log_petroglyph_panel",
+    "gold_args": {"panel_id": "TAN-09", "motif_count": 23},
+    "difficulty": "easy"
+  },
+  {
+    "id": "cult_026",
+    "function": {
+      "name": "catalog_heraldic_blazon",
+      "description": "Catalog a heraldic coat of arms by blazon.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "family_name": {"type": "string", "description": "Family or armiger name"},
+          "blazon": {"type": "string", "description": "Heraldic blazon text"}
+        },
+        "required": ["family_name", "blazon"]
+      }
+    },
+    "prompt": "Catalog the Visconti arms: 'Argent, a serpent azure crowned or vorant a child gules'.",
+    "gold_name": "catalog_heraldic_blazon",
+    "gold_args": {"family_name": "Visconti", "blazon": "Argent, a serpent azure crowned or vorant a child gules"},
+    "difficulty": "easy"
+  },
+  {
+    "id": "cult_027",
+    "function": {
+      "name": "tag_dead_sea_scroll_fragment",
+      "description": "Add metadata tags to a Dead Sea Scroll fragment.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "fragment_code": {"type": "string", "description": "Fragment identifier, e.g. 4Q394"},
+          "biblical_book": {"type": "string", "description": "Biblical book if applicable"}
+        },
+        "required": ["fragment_code", "biblical_book"]
+      }
+    },
+    "prompt": "Tag fragment 4Q41 with biblical book Deuteronomy.",
+    "gold_name": "tag_dead_sea_scroll_fragment",
+    "gold_args": {"fragment_code": "4Q41", "biblical_book": "Deuteronomy"},
+    "difficulty": "easy"
+  },
+  {
+    "id": "cult_028",
+    "function": {
+      "name": "schedule_kintsugi_repair",
+      "description": "Schedule a kintsugi repair job for ceramic restoration.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "vessel_type": {"type": "string", "description": "Type of vessel"},
+          "fracture_count": {"type": "integer", "description": "Number of fracture lines"},
+          "metal": {"type": "string", "description": "Metal used in the lacquer, e.g. gold, silver"}
+        },
+        "required": ["vessel_type", "fracture_count", "metal"]
+      }
+    },
+    "prompt": "Schedule kintsugi on a chawan with 4 fractures using gold.",
+    "gold_name": "schedule_kintsugi_repair",
+    "gold_args": {"vessel_type": "chawan", "fracture_count": 4, "metal": "gold"},
+    "difficulty": "easy"
+  },
+  {
+    "id": "cult_029",
+    "function": {
+      "name": "annotate_folk_dance_step",
+      "description": "Annotate a step in a folk dance notation file.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "dance_name": {"type": "string", "description": "Name of the dance"},
+          "step_index": {"type": "integer", "description": "Index of the step in the sequence"},
+          "footwork": {"type": "string", "description": "Footwork description"}
+        },
+        "required": ["dance_name", "step_index", "footwork"]
+      }
+    },
+    "prompt": "Annotate step 7 of the Csárdás: a heel-click on the upbeat.",
+    "gold_name": "annotate_folk_dance_step",
+    "gold_args": {"dance_name": "Csárdás", "step_index": 7, "footwork": "heel-click on the upbeat"},
+    "difficulty": "easy"
+  },
+  {
+    "id": "cult_030",
+    "function": {
+      "name": "register_shadow_puppet",
+      "description": "Register a new shadow puppet in the troupe inventory.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "character": {"type": "string", "description": "Character name"},
+          "tradition": {"type": "string", "description": "Tradition, e.g. wayang kulit, karagöz"}
+        },
+        "required": ["character", "tradition"]
+      }
+    },
+    "prompt": "Register a Bima puppet in the wayang kulit tradition.",
+    "gold_name": "register_shadow_puppet",
+    "gold_args": {"character": "Bima", "tradition": "wayang kulit"},
+    "difficulty": "easy"
+  },
+  {
+    "id": "cult_031",
+    "function": {
+      "name": "collate_codex_quires",
+      "description": "Generate a collation diagram of the quires in a manuscript codex.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "shelfmark": {"type": "string", "description": "Manuscript shelfmark"},
+          "total_folios": {"type": "integer", "description": "Total number of folios"},
+          "quire_size": {"type": "integer", "description": "Default leaves per quire"}
+        },
+        "required": ["shelfmark", "total_folios", "quire_size"]
+      }
+    },
+    "prompt": "Collate MS Harley 4431 — 414 folios, quires of 8.",
+    "gold_name": "collate_codex_quires",
+    "gold_args": {"shelfmark": "MS Harley 4431", "total_folios": 414, "quire_size": 8},
+    "difficulty": "medium"
+  },
+  {
+    "id": "cult_032",
+    "function": {
+      "name": "compute_dendro_date",
+      "description": "Compute a dendrochronological date for a wood sample by cross-dating against a reference chronology.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "sample_id": {"type": "string", "description": "Wood sample identifier"},
+          "species": {"type": "string", "description": "Tree species"},
+          "ring_count": {"type": "integer", "description": "Number of countable rings"},
+          "reference_chronology": {"type": "string", "description": "Reference master chronology name"}
+        },
+        "required": ["sample_id", "species", "ring_count", "reference_chronology"]
+      }
+    },
+    "prompt": "Dendro-date sample BL-77, oak, 184 rings, against the South German oak master.",
+    "gold_name": "compute_dendro_date",
+    "gold_args": {"sample_id": "BL-77", "species": "oak", "ring_count": 184, "reference_chronology": "South German oak master"},
+    "difficulty": "medium"
+  },
+  {
+    "id": "cult_033",
+    "function": {
+      "name": "translate_ogham_inscription",
+      "description": "Translate an Ogham inscription from an Irish standing stone.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "stone_macalister_number": {"type": "integer", "description": "Macalister catalog number"},
+          "language": {"type": "string", "description": "Target translation language"}
+        },
+        "required": ["stone_macalister_number", "language"]
+      }
+    },
+    "prompt": "Translate Macalister 145 into English.",
+    "gold_name": "translate_ogham_inscription",
+    "gold_args": {"stone_macalister_number": 145, "language": "English"},
+    "difficulty": "medium"
+  },
+  {
+    "id": "cult_034",
+    "function": {
+      "name": "match_potsherd_to_kiln",
+      "description": "Match a potsherd to its production kiln site via fabric analysis.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "sherd_id": {"type": "string", "description": "Sherd identifier"},
+          "fabric_group": {"type": "string", "description": "Petrographic fabric group"},
+          "region": {"type": "string", "description": "Region of suspected origin"}
+        },
+        "required": ["sherd_id", "fabric_group", "region"]
+      }
+    },
+    "prompt": "Match sherd C-1907 (fabric group F4) to a kiln in southern Etruria.",
+    "gold_name": "match_potsherd_to_kiln",
+    "gold_args": {"sherd_id": "C-1907", "fabric_group": "F4", "region": "southern Etruria"},
+    "difficulty": "medium"
+  },
+  {
+    "id": "cult_035",
+    "function": {
+      "name": "reconstruct_pipe_organ_stop",
+      "description": "Reconstruct a missing pipe organ stop based on historical specification.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "organ_builder": {"type": "string", "description": "Original organ builder"},
+          "stop_name": {"type": "string", "description": "Name of the stop to reconstruct"},
+          "pitch_feet": {"type": "integer", "description": "Pitch in feet"}
+        },
+        "required": ["organ_builder", "stop_name", "pitch_feet"]
+      }
+    },
+    "prompt": "Reconstruct Schnitger's missing 8' Vox Humana.",
+    "gold_name": "reconstruct_pipe_organ_stop",
+    "gold_args": {"organ_builder": "Schnitger", "stop_name": "Vox Humana", "pitch_feet": 8},
+    "difficulty": "medium"
+  },
+  {
+    "id": "cult_036",
+    "function": {
+      "name": "transcribe_neume_notation",
+      "description": "Transcribe medieval neume notation into modern staff notation.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "manuscript": {"type": "string", "description": "Source manuscript"},
+          "chant_incipit": {"type": "string", "description": "Opening words of the chant"},
+          "neume_family": {"type": "string", "description": "Neume family, e.g. St. Gall, Beneventan"}
+        },
+        "required": ["manuscript", "chant_incipit", "neume_family"]
+      }
+    },
+    "prompt": "Transcribe 'Puer natus est' from St. Gall 359 — St. Gall neumes.",
+    "gold_name": "transcribe_neume_notation",
+    "gold_args": {"manuscript": "St. Gall 359", "chant_incipit": "Puer natus est", "neume_family": "St. Gall"},
+    "difficulty": "medium"
+  },
+  {
+    "id": "cult_037",
+    "function": {
+      "name": "deduce_seal_matrix_origin",
+      "description": "Deduce the workshop origin of a wax seal matrix from its iconography.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "iconographic_motif": {"type": "string", "description": "Central motif on the seal"},
+          "legend_language": {"type": "string", "description": "Language of the legend"},
+          "approx_century": {"type": "integer", "description": "Approximate century, e.g. 13"}
+        },
+        "required": ["iconographic_motif", "legend_language", "approx_century"]
+      }
+    },
+    "prompt": "Trace this seal — eagle displayed, Latin legend, about 13th century.",
+    "gold_name": "deduce_seal_matrix_origin",
+    "gold_args": {"iconographic_motif": "eagle displayed", "legend_language": "Latin", "approx_century": 13},
+    "difficulty": "medium"
+  },
+  {
+    "id": "cult_038",
+    "function": {
+      "name": "transliterate_demotic_egyptian",
+      "description": "Transliterate Demotic Egyptian script into Latin characters.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "ostracon_id": {"type": "string", "description": "Ostracon identifier"},
+          "line_range": {"type": "string", "description": "Line range, e.g. 1-7"}
+        },
+        "required": ["ostracon_id", "line_range"]
+      }
+    },
+    "prompt": "Transliterate lines 3-9 of ostracon O.Hor 2.",
+    "gold_name": "transliterate_demotic_egyptian",
+    "gold_args": {"ostracon_id": "O.Hor 2", "line_range": "3-9"},
+    "difficulty": "medium"
+  },
+  {
+    "id": "cult_039",
+    "function": {
+      "name": "rehouse_archival_negative",
+      "description": "Rehouse a photographic negative into a new archival enclosure.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "negative_id": {"type": "string", "description": "Negative inventory ID"},
+          "support_type": {"type": "string", "description": "Support type: glass plate, nitrate, acetate"},
+          "sleeve_material": {"type": "string", "description": "Sleeve material"}
+        },
+        "required": ["negative_id", "support_type", "sleeve_material"]
+      }
+    },
+    "prompt": "Rehouse negative NEG-1923-04 — it's nitrate — into a polyester sleeve.",
+    "gold_name": "rehouse_archival_negative",
+    "gold_args": {"negative_id": "NEG-1923-04", "support_type": "nitrate", "sleeve_material": "polyester"},
+    "difficulty": "medium"
+  },
+  {
+    "id": "cult_040",
+    "function": {
+      "name": "stage_commedia_lazzo",
+      "description": "Stage a comedic lazzo routine within a commedia dell'arte performance.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "lazzo_name": {"type": "string", "description": "Name of the lazzo"},
+          "performing_mask": {"type": "string", "description": "Mask character performing it"},
+          "duration_sec": {"type": "integer", "description": "Approximate duration in seconds"}
+        },
+        "required": ["lazzo_name", "performing_mask", "duration_sec"]
+      }
+    },
+    "prompt": "Stage the lazzo of the fly with Arlecchino, about 75 seconds.",
+    "gold_name": "stage_commedia_lazzo",
+    "gold_args": {"lazzo_name": "lazzo of the fly", "performing_mask": "Arlecchino", "duration_sec": 75},
+    "difficulty": "medium"
+  },
+  {
+    "id": "cult_041",
+    "function": {
+      "name": "annotate_qajar_miniature",
+      "description": "Annotate a Qajar-era Persian miniature painting with iconographic details.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "miniature_id": {"type": "string", "description": "Miniature identifier"},
+          "court_scene": {"type": "string", "description": "Court scene depicted"},
+          "ruler": {"type": "string", "description": "Reigning ruler depicted or commissioning"}
+        },
+        "required": ["miniature_id", "court_scene", "ruler"]
+      }
+    },
+    "prompt": "Annotate miniature QM-0117: an audience scene under Fath-Ali Shah.",
+    "gold_name": "annotate_qajar_miniature",
+    "gold_args": {"miniature_id": "QM-0117", "court_scene": "audience scene", "ruler": "Fath-Ali Shah"},
+    "difficulty": "medium"
+  },
+  {
+    "id": "cult_042",
+    "function": {
+      "name": "compile_dialect_isogloss",
+      "description": "Compile an isogloss line for a dialect feature on a linguistic atlas.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "feature": {"type": "string", "description": "Linguistic feature, e.g. apocope of final -e"},
+          "village_list": {"type": "string", "description": "Comma-separated villages where feature occurs"}
+        },
+        "required": ["feature", "village_list"]
+      }
+    },
+    "prompt": "Draw an isogloss for the rounding of /a:/ in Stenträsk, Vilhelmina, Storuman.",
+    "gold_name": "compile_dialect_isogloss",
+    "gold_args": {"feature": "rounding of /a:/", "village_list": "Stenträsk, Vilhelmina, Storuman"},
+    "difficulty": "medium"
+  },
+  {
+    "id": "cult_043",
+    "function": {
+      "name": "submit_radiocarbon_sample",
+      "description": "Submit an organic sample for AMS radiocarbon dating.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "sample_id": {"type": "string", "description": "Sample identifier"},
+          "material": {"type": "string", "description": "Sample material, e.g. bone collagen, charcoal"},
+          "mass_mg": {"type": "number", "description": "Sample mass in milligrams"},
+          "lab_code": {"type": "string", "description": "Receiving laboratory code"}
+        },
+        "required": ["sample_id", "material", "mass_mg", "lab_code"]
+      }
+    },
+    "prompt": "Submit 4.2 mg of bone collagen sample SK-19 to OxA for dating.",
+    "gold_name": "submit_radiocarbon_sample",
+    "gold_args": {"sample_id": "SK-19", "material": "bone collagen", "mass_mg": 4.2, "lab_code": "OxA"},
+    "difficulty": "medium"
+  },
+  {
+    "id": "cult_044",
+    "function": {
+      "name": "model_textile_warp",
+      "description": "Set up a warp pattern on a historical-reconstruction loom.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "loom_type": {"type": "string", "description": "Loom type, e.g. warp-weighted, treadle"},
+          "thread_count_per_cm": {"type": "integer", "description": "Threads per centimeter"},
+          "fiber": {"type": "string", "description": "Fiber type"}
+        },
+        "required": ["loom_type", "thread_count_per_cm", "fiber"]
+      }
+    },
+    "prompt": "Set up a warp-weighted loom with 14 threads/cm in linen.",
+    "gold_name": "model_textile_warp",
+    "gold_args": {"loom_type": "warp-weighted", "thread_count_per_cm": 14, "fiber": "linen"},
+    "difficulty": "medium"
+  },
+  {
+    "id": "cult_045",
+    "function": {
+      "name": "log_florilegium_entry",
+      "description": "Add an entry to a Renaissance florilegium plant compendium.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "plant_latin": {"type": "string", "description": "Latin plant name"},
+          "illustrator": {"type": "string", "description": "Name of the botanical illustrator"},
+          "plate_number": {"type": "integer", "description": "Plate number"}
+        },
+        "required": ["plant_latin", "illustrator", "plate_number"]
+      }
+    },
+    "prompt": "Log Tulipa gesneriana, illustrated by Daniel Rabel, plate 27.",
+    "gold_name": "log_florilegium_entry",
+    "gold_args": {"plant_latin": "Tulipa gesneriana", "illustrator": "Daniel Rabel", "plate_number": 27},
+    "difficulty": "medium"
+  },
+  {
+    "id": "cult_046",
+    "function": {
+      "name": "decode_maya_glyph_block",
+      "description": "Decode a Maya glyph block from a stela or codex.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "monument": {"type": "string", "description": "Monument or codex reference"},
+          "block_position": {"type": "string", "description": "Position label, e.g. A1, B3"},
+          "long_count_date": {"type": "string", "description": "Long Count date if visible"}
+        },
+        "required": ["monument", "block_position", "long_count_date"]
+      }
+    },
+    "prompt": "Decode block C2 of Tikal Stela 31, Long Count 9.12.6.0.0.",
+    "gold_name": "decode_maya_glyph_block",
+    "gold_args": {"monument": "Tikal Stela 31", "block_position": "C2", "long_count_date": "9.12.6.0.0"},
+    "difficulty": "medium"
+  },
+  {
+    "id": "cult_047",
+    "function": {
+      "name": "convert_julian_to_gregorian",
+      "description": "Convert a Julian calendar date used in early modern documents to a proleptic Gregorian date.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "julian_date": {"type": "string", "description": "Julian date as YYYY-MM-DD"},
+          "regnal_year_note": {"type": "string", "description": "Regnal year context if present"}
+        },
+        "required": ["julian_date", "regnal_year_note"]
+      }
+    },
+    "prompt": "Convert 1654-02-29 Julian, recorded in the 5th year of Alexei Mikhailovich.",
+    "gold_name": "convert_julian_to_gregorian",
+    "gold_args": {"julian_date": "1654-02-29", "regnal_year_note": "5th year of Alexei Mikhailovich"},
+    "difficulty": "medium"
+  },
+  {
+    "id": "cult_048",
+    "function": {
+      "name": "schedule_thangka_consecration",
+      "description": "Schedule a Tibetan thangka consecration ceremony.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "deity": {"type": "string", "description": "Depicted deity"},
+          "monastery": {"type": "string", "description": "Performing monastery"},
+          "lunar_date": {"type": "string", "description": "Tibetan lunar date"}
+        },
+        "required": ["deity", "monastery", "lunar_date"]
+      }
+    },
+    "prompt": "Schedule a Green Tara thangka consecration at Sera Je on the 15th day of the 4th lunar month.",
+    "gold_name": "schedule_thangka_consecration",
+    "gold_args": {"deity": "Green Tara", "monastery": "Sera Je", "lunar_date": "15th day of the 4th lunar month"},
+    "difficulty": "medium"
+  },
+  {
+    "id": "cult_049",
+    "function": {
+      "name": "register_phonograph_cylinder",
+      "description": "Register a wax phonograph cylinder in the sound archive.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "cylinder_id": {"type": "string", "description": "Cylinder ID"},
+          "recording_year": {"type": "integer", "description": "Year of recording"},
+          "speed_rpm": {"type": "integer", "description": "Playback speed in RPM"}
+        },
+        "required": ["cylinder_id", "recording_year", "speed_rpm"]
+      }
+    },
+    "prompt": "Register cylinder WX-441 recorded in 1903, plays at 160 rpm.",
+    "gold_name": "register_phonograph_cylinder",
+    "gold_args": {"cylinder_id": "WX-441", "recording_year": 1903, "speed_rpm": 160},
+    "difficulty": "medium"
+  },
+  {
+    "id": "cult_050",
+    "function": {
+      "name": "compile_grimoire_concordance",
+      "description": "Compile a textual concordance across early modern grimoire manuscripts.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "manuscripts": {"type": "string", "description": "Comma-separated manuscript shelfmarks"},
+          "lemma": {"type": "string", "description": "Headword to concord"}
+        },
+        "required": ["manuscripts", "lemma"]
+      }
+    },
+    "prompt": "Concord 'sigillum' across Sloane 3853, Wellcome 110, BNF Lat 7170.",
+    "gold_name": "compile_grimoire_concordance",
+    "gold_args": {"manuscripts": "Sloane 3853, Wellcome 110, BNF Lat 7170", "lemma": "sigillum"},
+    "difficulty": "medium"
+  },
+  {
+    "id": "cult_051",
+    "function": {
+      "name": "label_ukiyo_e_print",
+      "description": "Label an ukiyo-e woodblock print with artist, series, and state.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "artist": {"type": "string", "description": "Artist name"},
+          "series": {"type": "string", "description": "Series title"},
+          "state": {"type": "string", "description": "Print state, e.g. 1st, 2nd"}
+        },
+        "required": ["artist", "series", "state"]
+      }
+    },
+    "prompt": "Label a 2nd state Hokusai 'Thirty-Six Views of Mount Fuji' print.",
+    "gold_name": "label_ukiyo_e_print",
+    "gold_args": {"artist": "Hokusai", "series": "Thirty-Six Views of Mount Fuji", "state": "2nd"},
+    "difficulty": "medium"
+  },
+  {
+    "id": "cult_052",
+    "function": {
+      "name": "analyze_hagiographic_topos",
+      "description": "Analyze recurring topoi in a hagiographic saint's vita.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "saint": {"type": "string", "description": "Name of the saint"},
+          "vita_redaction": {"type": "string", "description": "Manuscript redaction or recension"},
+          "topos": {"type": "string", "description": "Topos to track, e.g. infant prodigy, fasting"}
+        },
+        "required": ["saint", "vita_redaction", "topos"]
+      }
+    },
+    "prompt": "Track the fasting topos in the Vita Antonii, Coptic recension.",
+    "gold_name": "analyze_hagiographic_topos",
+    "gold_args": {"saint": "Antonii", "vita_redaction": "Coptic recension", "topos": "fasting"},
+    "difficulty": "medium"
+  },
+  {
+    "id": "cult_053",
+    "function": {
+      "name": "register_lithograph_state",
+      "description": "Register a new state of a 19th-century lithograph.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "artist": {"type": "string", "description": "Lithographer"},
+          "title": {"type": "string", "description": "Print title"},
+          "state_number": {"type": "integer", "description": "State number"},
+          "publisher": {"type": "string", "description": "Publisher"}
+        },
+        "required": ["artist", "title", "state_number", "publisher"]
+      }
+    },
+    "prompt": "Register state 3 of Daumier's 'Rue Transnonain' published by Aubert.",
+    "gold_name": "register_lithograph_state",
+    "gold_args": {"artist": "Daumier", "title": "Rue Transnonain", "state_number": 3, "publisher": "Aubert"},
+    "difficulty": "medium"
+  },
+  {
+    "id": "cult_054",
+    "function": {
+      "name": "trace_provenance_chain",
+      "description": "Trace the provenance chain of an artwork through historical ownership.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "artwork_id": {"type": "string", "description": "Artwork inventory ID"},
+          "year_start": {"type": "integer", "description": "Starting year of provenance window"},
+          "year_end": {"type": "integer", "description": "Ending year of provenance window"}
+        },
+        "required": ["artwork_id", "year_start", "year_end"]
+      }
+    },
+    "prompt": "Trace provenance of INV-2008-77 from 1933 to 1947.",
+    "gold_name": "trace_provenance_chain",
+    "gold_args": {"artwork_id": "INV-2008-77", "year_start": 1933, "year_end": 1947},
+    "difficulty": "medium"
+  },
+  {
+    "id": "cult_055",
+    "function": {
+      "name": "schedule_bayreuth_rehearsal",
+      "description": "Schedule a rehearsal slot at the Bayreuth Festspielhaus.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "opera_title": {"type": "string", "description": "Wagner opera title"},
+          "act": {"type": "integer", "description": "Act to rehearse"},
+          "conductor": {"type": "string", "description": "Conductor name"},
+          "date": {"type": "string", "description": "Rehearsal date YYYY-MM-DD"}
+        },
+        "required": ["opera_title", "act", "conductor", "date"]
+      }
+    },
+    "prompt": "Schedule Parsifal Act 2 rehearsal under Thielemann on 2026-06-21.",
+    "gold_name": "schedule_bayreuth_rehearsal",
+    "gold_args": {"opera_title": "Parsifal", "act": 2, "conductor": "Thielemann", "date": "2026-06-21"},
+    "difficulty": "medium"
+  },
+  {
+    "id": "cult_056",
+    "function": {
+      "name": "model_great_house_kiva",
+      "description": "Model the layout of a Chacoan great-house kiva.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "site": {"type": "string", "description": "Chacoan great-house site"},
+          "kiva_diameter_m": {"type": "number", "description": "Kiva diameter in meters"},
+          "pilaster_count": {"type": "integer", "description": "Number of pilasters"}
+        },
+        "required": ["site", "kiva_diameter_m", "pilaster_count"]
+      }
+    },
+    "prompt": "Model a kiva at Pueblo Bonito, 14.6 m across, 8 pilasters.",
+    "gold_name": "model_great_house_kiva",
+    "gold_args": {"site": "Pueblo Bonito", "kiva_diameter_m": 14.6, "pilaster_count": 8},
+    "difficulty": "medium"
+  },
+  {
+    "id": "cult_057",
+    "function": {
+      "name": "annotate_courtly_love_motif",
+      "description": "Annotate a courtly love motif in a troubadour lyric.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "troubadour": {"type": "string", "description": "Troubadour name"},
+          "incipit": {"type": "string", "description": "Lyric incipit"},
+          "motif": {"type": "string", "description": "Motif name"}
+        },
+        "required": ["troubadour", "incipit", "motif"]
+      }
+    },
+    "prompt": "Annotate the alba motif in Giraut de Bornelh's 'Reis glorios'.",
+    "gold_name": "annotate_courtly_love_motif",
+    "gold_args": {"troubadour": "Giraut de Bornelh", "incipit": "Reis glorios", "motif": "alba"},
+    "difficulty": "medium"
+  },
+  {
+    "id": "cult_058",
+    "function": {
+      "name": "catalog_glagolitic_charter",
+      "description": "Catalog a medieval Glagolitic charter document.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "issuer": {"type": "string", "description": "Issuing authority"},
+          "year": {"type": "integer", "description": "Year of issue"},
+          "place": {"type": "string", "description": "Place of issue"}
+        },
+        "required": ["issuer", "year", "place"]
+      }
+    },
+    "prompt": "Catalog a 1248 Glagolitic charter from Bishop Filip issued at Senj.",
+    "gold_name": "catalog_glagolitic_charter",
+    "gold_args": {"issuer": "Bishop Filip", "year": 1248, "place": "Senj"},
+    "difficulty": "medium"
+  },
+  {
+    "id": "cult_059",
+    "function": {
+      "name": "set_oud_maqam",
+      "description": "Set the maqam mode for an oud performance.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "maqam": {"type": "string", "description": "Maqam name"},
+          "tonic": {"type": "string", "description": "Tonic note"}
+        },
+        "required": ["maqam", "tonic"]
+      }
+    },
+    "prompt": "Set maqam Bayati on D.",
+    "gold_name": "set_oud_maqam",
+    "gold_args": {"maqam": "Bayati", "tonic": "D"},
+    "difficulty": "medium"
+  },
+  {
+    "id": "cult_060",
+    "function": {
+      "name": "log_excavation_small_find",
+      "description": "Log a small find such as a bead or fibula at an excavation.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "site_code": {"type": "string", "description": "Site code"},
+          "context_number": {"type": "integer", "description": "Context number"},
+          "object_type": {"type": "string", "description": "Object type"},
+          "material": {"type": "string", "description": "Material"}
+        },
+        "required": ["site_code", "context_number", "object_type", "material"]
+      }
+    },
+    "prompt": "Log a bronze fibula in context 312 at site HAL-04.",
+    "gold_name": "log_excavation_small_find",
+    "gold_args": {"site_code": "HAL-04", "context_number": 312, "object_type": "fibula", "material": "bronze"},
+    "difficulty": "medium"
+  },
+  {
+    "id": "cult_061",
+    "function": {
+      "name": "register_perfume_recipe_codex",
+      "description": "Register a perfume recipe from a historical pharmacopoeia codex.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "codex": {"type": "string", "description": "Source codex"},
+          "folio": {"type": "string", "description": "Folio reference"},
+          "primary_aromatic": {"type": "string", "description": "Primary aromatic ingredient"}
+        },
+        "required": ["codex", "folio", "primary_aromatic"]
+      }
+    },
+    "prompt": "Register a rose-based recipe from f.34v of the Mappae Clavicula.",
+    "gold_name": "register_perfume_recipe_codex",
+    "gold_args": {"codex": "Mappae Clavicula", "folio": "34v", "primary_aromatic": "rose"},
+    "difficulty": "medium"
+  },
+  {
+    "id": "cult_062",
+    "function": {
+      "name": "score_ballet_variation",
+      "description": "Score a ballet variation into Stepanov notation.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "ballet_title": {"type": "string", "description": "Ballet title"},
+          "character": {"type": "string", "description": "Character performing the variation"},
+          "tempo_bpm": {"type": "integer", "description": "Tempo in BPM"}
+        },
+        "required": ["ballet_title", "character", "tempo_bpm"]
+      }
+    },
+    "prompt": "Score Aurora's variation from Sleeping Beauty at 132 bpm.",
+    "gold_name": "score_ballet_variation",
+    "gold_args": {"ballet_title": "Sleeping Beauty", "character": "Aurora", "tempo_bpm": 132},
+    "difficulty": "medium"
+  },
+  {
+    "id": "cult_063",
+    "function": {
+      "name": "match_obsidian_to_quarry",
+      "description": "Match an obsidian artifact to a quarry source using trace element ratios.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "artifact_id": {"type": "string", "description": "Artifact ID"},
+          "zr_rb_ratio": {"type": "number", "description": "Zr/Rb trace element ratio"},
+          "candidate_quarries": {"type": "string", "description": "Comma-separated candidate quarries"}
+        },
+        "required": ["artifact_id", "zr_rb_ratio", "candidate_quarries"]
+      }
+    },
+    "prompt": "Match obsidian blade OB-447 (Zr/Rb = 3.21) — candidates Melos, Giali, Pantelleria.",
+    "gold_name": "match_obsidian_to_quarry",
+    "gold_args": {"artifact_id": "OB-447", "zr_rb_ratio": 3.21, "candidate_quarries": "Melos, Giali, Pantelleria"},
+    "difficulty": "medium"
+  },
+  {
+    "id": "cult_064",
+    "function": {
+      "name": "draft_palaeobotanical_report",
+      "description": "Draft a palaeobotanical macroremains report for an excavation feature.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "feature_id": {"type": "string", "description": "Feature identifier"},
+          "seed_taxa": {"type": "string", "description": "Comma-separated identified seed taxa"},
+          "sample_volume_l": {"type": "number", "description": "Floated sample volume in liters"}
+        },
+        "required": ["feature_id", "seed_taxa", "sample_volume_l"]
+      }
+    },
+    "prompt": "Draft palaeobotanical report for hearth F-117: emmer, barley, lentil; 8.5 L floated.",
+    "gold_name": "draft_palaeobotanical_report",
+    "gold_args": {"feature_id": "F-117", "seed_taxa": "emmer, barley, lentil", "sample_volume_l": 8.5},
+    "difficulty": "medium"
+  },
+  {
+    "id": "cult_065",
+    "function": {
+      "name": "compile_iconclass_index",
+      "description": "Compile an Iconclass index entry for a Northern Renaissance painting.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "artwork_id": {"type": "string", "description": "Artwork ID"},
+          "iconclass_code": {"type": "string", "description": "Iconclass classification code"},
+          "subject_term": {"type": "string", "description": "Iconographic subject term"}
+        },
+        "required": ["artwork_id", "iconclass_code", "subject_term"]
+      }
+    },
+    "prompt": "Index INV-991 under Iconclass 73D14 — Christ blessing the children.",
+    "gold_name": "compile_iconclass_index",
+    "gold_args": {"artwork_id": "INV-991", "iconclass_code": "73D14", "subject_term": "Christ blessing the children"},
+    "difficulty": "medium"
+  },
+  {
+    "id": "cult_066",
+    "function": {
+      "name": "reconstruct_proto_indo_european_root",
+      "description": "Reconstruct a Proto-Indo-European root from attested cognates across daughter languages.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "cognate_set": {"type": "string", "description": "Comma-separated cognates with language tags"},
+          "semantic_gloss": {"type": "string", "description": "Proposed semantic gloss"},
+          "laryngeal_hypothesis": {"type": "string", "description": "Laryngeal-theory hypothesis label"}
+        },
+        "required": ["cognate_set", "semantic_gloss", "laryngeal_hypothesis"]
+      }
+    },
+    "prompt": "Reconstruct a PIE root from Sanskrit pitar, Greek patēr, Latin pater, Old Irish athir, gloss 'father', under standard three-laryngeal theory.",
+    "gold_name": "reconstruct_proto_indo_european_root",
+    "gold_args": {"cognate_set": "Sanskrit pitar, Greek patēr, Latin pater, Old Irish athir", "semantic_gloss": "father", "laryngeal_hypothesis": "standard three-laryngeal theory"},
+    "difficulty": "hard"
+  },
+  {
+    "id": "cult_067",
+    "function": {
+      "name": "calibrate_bayesian_chronology",
+      "description": "Calibrate a Bayesian chronology model over a stratigraphic sequence with multiple radiocarbon priors.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "site_code": {"type": "string", "description": "Site code"},
+          "phase_priors_json": {"type": "string", "description": "JSON-encoded phase priors"},
+          "calibration_curve": {"type": "string", "description": "Calibration curve, e.g. IntCal20, ShCal20"},
+          "iterations": {"type": "integer", "description": "MCMC iterations"}
+        },
+        "required": ["site_code", "phase_priors_json", "calibration_curve", "iterations"]
+      }
+    },
+    "prompt": "Calibrate chronology for site DUR-12 with priors {\"PhaseA\":[\"3200-3000BC\"],\"PhaseB\":[\"3000-2800BC\"]} on IntCal20, 200000 iterations.",
+    "gold_name": "calibrate_bayesian_chronology",
+    "gold_args": {"site_code": "DUR-12", "phase_priors_json": "{\"PhaseA\":[\"3200-3000BC\"],\"PhaseB\":[\"3000-2800BC\"]}", "calibration_curve": "IntCal20", "iterations": 200000},
+    "difficulty": "hard"
+  },
+  {
+    "id": "cult_068",
+    "function": {
+      "name": "reconstruct_lost_paleographic_ligature",
+      "description": "Reconstruct a damaged paleographic ligature using statistical modeling over a Carolingian minuscule corpus.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "manuscript": {"type": "string", "description": "Source manuscript"},
+          "folio": {"type": "string", "description": "Folio reference"},
+          "lacuna_position": {"type": "string", "description": "Position of the lacuna within the line"},
+          "context_window_chars": {"type": "integer", "description": "Surrounding character context window"}
+        },
+        "required": ["manuscript", "folio", "lacuna_position", "context_window_chars"]
+      }
+    },
+    "prompt": "Reconstruct the damaged ligature on f.42r line 11 char 18 of MS Vat lat 3868 using a 60-char window.",
+    "gold_name": "reconstruct_lost_paleographic_ligature",
+    "gold_args": {"manuscript": "MS Vat lat 3868", "folio": "42r", "lacuna_position": "line 11 char 18", "context_window_chars": 60},
+    "difficulty": "hard"
+  },
+  {
+    "id": "cult_069",
+    "function": {
+      "name": "model_textual_stemma",
+      "description": "Build a Lachmannian stemma codicum across witnesses of a classical text using a probabilistic phylogenetic method.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "work_title": {"type": "string", "description": "Title of the work"},
+          "witness_sigla": {"type": "string", "description": "Comma-separated witness sigla"},
+          "method": {"type": "string", "description": "Phylogenetic method, e.g. neighbor-joining, maximum parsimony"},
+          "outgroup": {"type": "string", "description": "Outgroup sigla used to root the tree"}
+        },
+        "required": ["work_title", "witness_sigla", "method", "outgroup"]
+      }
+    },
+    "prompt": "Build a stemma for Lucretius De Rerum Natura with witnesses O, Q, G, V, U, L using maximum parsimony, rooted on L.",
+    "gold_name": "model_textual_stemma",
+    "gold_args": {"work_title": "Lucretius De Rerum Natura", "witness_sigla": "O, Q, G, V, U, L", "method": "maximum parsimony", "outgroup": "L"},
+    "difficulty": "hard"
+  },
+  {
+    "id": "cult_070",
+    "function": {
+      "name": "decipher_indus_script_seal",
+      "description": "Attempt a computational decipherment of an Indus Valley script seal using sign frequency priors and positional models.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "seal_id": {"type": "string", "description": "Seal identifier"},
+          "sign_sequence": {"type": "string", "description": "Mahadevan-coded sign sequence"},
+          "model_corpus": {"type": "string", "description": "Reference corpus for the priors"}
+        },
+        "required": ["seal_id", "sign_sequence", "model_corpus"]
+      }
+    },
+    "prompt": "Decipher seal M-1186 with sign sequence 'M67 M99 M03 M12' using the Mahadevan corpus.",
+    "gold_name": "decipher_indus_script_seal",
+    "gold_args": {"seal_id": "M-1186", "sign_sequence": "M67 M99 M03 M12", "model_corpus": "Mahadevan corpus"},
+    "difficulty": "hard"
+  },
+  {
+    "id": "cult_071",
+    "function": {
+      "name": "simulate_polyphonic_canon_resolution",
+      "description": "Simulate the realization of a Renaissance riddle canon by enumerating contrapuntal voice-entry candidates.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "canon_composer": {"type": "string", "description": "Composer of the canon"},
+          "voices": {"type": "integer", "description": "Number of voices"},
+          "interval_of_imitation": {"type": "string", "description": "Interval of imitation"},
+          "modal_final": {"type": "string", "description": "Modal final"}
+        },
+        "required": ["canon_composer", "voices", "interval_of_imitation", "modal_final"]
+      }
+    },
+    "prompt": "Simulate the resolution of a 4-voice Ockeghem riddle canon at the fifth above, final on D.",
+    "gold_name": "simulate_polyphonic_canon_resolution",
+    "gold_args": {"canon_composer": "Ockeghem", "voices": 4, "interval_of_imitation": "fifth above", "modal_final": "D"},
+    "difficulty": "hard"
+  },
+  {
+    "id": "cult_072",
+    "function": {
+      "name": "estimate_chartreuse_distillation_yield",
+      "description": "Estimate distillation yield for a historical chartreuse-style liqueur reconstruction with 130 botanicals.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "recipe_source": {"type": "string", "description": "Source recipe manuscript"},
+          "mash_volume_l": {"type": "number", "description": "Mash volume in liters"},
+          "still_type": {"type": "string", "description": "Still type, e.g. alembic, pot still"},
+          "abv_target": {"type": "number", "description": "Target ABV percentage"}
+        },
+        "required": ["recipe_source", "mash_volume_l", "still_type", "abv_target"]
+      }
+    },
+    "prompt": "Estimate yield for the Grand Chartreuse 1764 recipe, 220 L mash in an alembic, target 55% ABV.",
+    "gold_name": "estimate_chartreuse_distillation_yield",
+    "gold_args": {"recipe_source": "Grand Chartreuse 1764", "mash_volume_l": 220, "still_type": "alembic", "abv_target": 55},
+    "difficulty": "hard"
+  },
+  {
+    "id": "cult_073",
+    "function": {
+      "name": "georeference_portolan_chart",
+      "description": "Georeference an antique portolan chart by anchoring rhumb-line nodes to modern coordinates.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "chart_id": {"type": "string", "description": "Chart identifier"},
+          "anchor_pairs_json": {"type": "string", "description": "JSON list of anchor pairs"},
+          "projection": {"type": "string", "description": "Target projection"},
+          "rms_threshold_m": {"type": "number", "description": "RMS error threshold in meters"}
+        },
+        "required": ["chart_id", "anchor_pairs_json", "projection", "rms_threshold_m"]
+      }
+    },
+    "prompt": "Georeference portolan PORT-1399 using anchors [[\"Genova\",[44.40,8.94]],[\"Alexandria\",[31.20,29.92]]] in EPSG:3857 with RMS under 2500 m.",
+    "gold_name": "georeference_portolan_chart",
+    "gold_args": {"chart_id": "PORT-1399", "anchor_pairs_json": "[[\"Genova\",[44.40,8.94]],[\"Alexandria\",[31.20,29.92]]]", "projection": "EPSG:3857", "rms_threshold_m": 2500},
+    "difficulty": "hard"
+  },
+  {
+    "id": "cult_074",
+    "function": {
+      "name": "assign_skaldic_meter",
+      "description": "Assign and validate the metrical pattern of an Old Norse skaldic stanza, including hendings and alliteration constraints.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "skald": {"type": "string", "description": "Skald name"},
+          "stanza_text": {"type": "string", "description": "Stanza text in normalized Old Norse"},
+          "meter": {"type": "string", "description": "Meter name, e.g. dróttkvætt"}
+        },
+        "required": ["skald", "stanza_text", "meter"]
+      }
+    },
+    "prompt": "Assign dróttkvætt to Egill Skallagrímsson's stanza 'Þél høggr stórt fyr stáli'.",
+    "gold_name": "assign_skaldic_meter",
+    "gold_args": {"skald": "Egill Skallagrímsson", "stanza_text": "Þél høggr stórt fyr stáli", "meter": "dróttkvætt"},
+    "difficulty": "hard"
+  },
+  {
+    "id": "cult_075",
+    "function": {
+      "name": "reconstruct_aksum_stele_inscription",
+      "description": "Reconstruct a damaged Ge'ez royal stele inscription from Aksum using parallel formulae.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "stele_id": {"type": "string", "description": "Stele identifier"},
+          "surviving_text": {"type": "string", "description": "Surviving Ge'ez text"},
+          "ruler_attribution": {"type": "string", "description": "Attributed ruler"},
+          "parallel_inscriptions": {"type": "string", "description": "Comma-separated parallel inscription IDs"}
+        },
+        "required": ["stele_id", "surviving_text", "ruler_attribution", "parallel_inscriptions"]
+      }
+    },
+    "prompt": "Reconstruct stele DAE-11 with surviving text 'ezana negus aksum' attributed to Ezana, using parallels RIE-185 and RIE-188.",
+    "gold_name": "reconstruct_aksum_stele_inscription",
+    "gold_args": {"stele_id": "DAE-11", "surviving_text": "ezana negus aksum", "ruler_attribution": "Ezana", "parallel_inscriptions": "RIE-185, RIE-188"},
+    "difficulty": "hard"
+  },
+  {
+    "id": "cult_076",
+    "function": {
+      "name": "model_iconographic_diffusion",
+      "description": "Model the spatial diffusion of an iconographic motif across a corpus of dated artifacts using a Bayesian diffusion prior.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "motif": {"type": "string", "description": "Iconographic motif"},
+          "corpus_id": {"type": "string", "description": "Corpus identifier"},
+          "diffusion_prior": {"type": "string", "description": "Diffusion prior model"},
+          "century_range": {"type": "string", "description": "Century range, e.g. 4-7CE"}
+        },
+        "required": ["motif", "corpus_id", "diffusion_prior", "century_range"]
+      }
+    },
+    "prompt": "Model diffusion of the Daniel-in-the-lions'-den motif across corpus EARLYCHRIST-01 with Gaussian random walk prior, 3-6CE.",
+    "gold_name": "model_iconographic_diffusion",
+    "gold_args": {"motif": "Daniel-in-the-lions'-den", "corpus_id": "EARLYCHRIST-01", "diffusion_prior": "Gaussian random walk", "century_range": "3-6CE"},
+    "difficulty": "hard"
+  },
+  {
+    "id": "cult_077",
+    "function": {
+      "name": "synthesize_lost_byzantine_chant",
+      "description": "Synthesize a lost Byzantine chant melody from theta-notation skeletons and surviving cognate hymns.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "hymn_incipit": {"type": "string", "description": "Hymn incipit"},
+          "echos": {"type": "string", "description": "Byzantine echos mode"},
+          "cognate_sources": {"type": "string", "description": "Comma-separated cognate manuscript sources"},
+          "theta_signature": {"type": "string", "description": "Theta-notation signature pattern"}
+        },
+        "required": ["hymn_incipit", "echos", "cognate_sources", "theta_signature"]
+      }
+    },
+    "prompt": "Synthesize 'Ho monogenes' in echos plagal of second, using cognates Sinai Gr 1471 and Lavra Γ 67, theta signature 'θθ-α-ν'.",
+    "gold_name": "synthesize_lost_byzantine_chant",
+    "gold_args": {"hymn_incipit": "Ho monogenes", "echos": "plagal of second", "cognate_sources": "Sinai Gr 1471, Lavra Γ 67", "theta_signature": "θθ-α-ν"},
+    "difficulty": "hard"
+  },
+  {
+    "id": "cult_078",
+    "function": {
+      "name": "decompose_palimpsest_layers",
+      "description": "Decompose a palimpsest into upper-text and under-text layers using multispectral imaging and PCA.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "manuscript": {"type": "string", "description": "Manuscript shelfmark"},
+          "folio": {"type": "string", "description": "Folio reference"},
+          "pca_components": {"type": "integer", "description": "Number of PCA components"},
+          "wavelengths_nm": {"type": "string", "description": "Comma-separated wavelengths in nm"}
+        },
+        "required": ["manuscript", "folio", "pca_components", "wavelengths_nm"]
+      }
+    },
+    "prompt": "Decompose the Archimedes Palimpsest f.81 — 6 PCA components, wavelengths 365,450,505,535,625,940.",
+    "gold_name": "decompose_palimpsest_layers",
+    "gold_args": {"manuscript": "Archimedes Palimpsest", "folio": "81", "pca_components": 6, "wavelengths_nm": "365,450,505,535,625,940"},
+    "difficulty": "hard"
+  },
+  {
+    "id": "cult_079",
+    "function": {
+      "name": "model_caravanserai_water_budget",
+      "description": "Compute the seasonal water budget of a Silk Road caravanserai using cistern volume, evaporation, and caravan flow.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "caravanserai_name": {"type": "string", "description": "Caravanserai name"},
+          "cistern_volume_m3": {"type": "number", "description": "Cistern volume in cubic meters"},
+          "monthly_caravan_count": {"type": "integer", "description": "Monthly caravan arrivals"},
+          "month": {"type": "string", "description": "Month under analysis"}
+        },
+        "required": ["caravanserai_name", "cistern_volume_m3", "monthly_caravan_count", "month"]
+      }
+    },
+    "prompt": "Compute July water budget for Robat-i Sharaf, 1180 m³ cistern, 22 caravans/month.",
+    "gold_name": "model_caravanserai_water_budget",
+    "gold_args": {"caravanserai_name": "Robat-i Sharaf", "cistern_volume_m3": 1180, "monthly_caravan_count": 22, "month": "July"},
+    "difficulty": "hard"
+  },
+  {
+    "id": "cult_080",
+    "function": {
+      "name": "infer_inca_quipu_decimal_structure",
+      "description": "Infer the hierarchical decimal accounting structure of an Inca khipu by analyzing knot positions across pendant and subsidiary cords.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "khipu_id": {"type": "string", "description": "Khipu identifier"},
+          "pendant_count": {"type": "integer", "description": "Number of pendant cords"},
+          "subsidiary_levels": {"type": "integer", "description": "Number of subsidiary cord levels"},
+          "color_palette": {"type": "string", "description": "Comma-separated cord colors"}
+        },
+        "required": ["khipu_id", "pendant_count", "subsidiary_levels", "color_palette"]
+      }
+    },
+    "prompt": "Infer decimal structure of khipu UR-113 with 64 pendants, 3 subsidiary levels, colors crimson, ochre, white.",
+    "gold_name": "infer_inca_quipu_decimal_structure",
+    "gold_args": {"khipu_id": "UR-113", "pendant_count": 64, "subsidiary_levels": 3, "color_palette": "crimson, ochre, white"},
+    "difficulty": "hard"
+  }
+]

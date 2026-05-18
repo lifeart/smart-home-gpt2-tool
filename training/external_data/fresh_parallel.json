@@ -1,0 +1,1214 @@
+[
+  {
+    "id": "fresh_par_001",
+    "function": [
+      {"name": "classify_landform_slope", "description": "Classify a slope based on gradient angle in degrees.", "parameters": {"type": "object", "properties": {"angle_deg": {"type": "number"}}, "required": ["angle_deg"]}},
+      {"name": "estimate_erosion_rate", "description": "Estimate soil erosion rate from rainfall and slope.", "parameters": {"type": "object", "properties": {"rainfall_mm_yr": {"type": "number"}, "slope_pct": {"type": "number"}}, "required": ["rainfall_mm_yr", "slope_pct"]}},
+      {"name": "render_topographic_profile", "description": "Render a topographic cross-section image.", "parameters": {"type": "object", "properties": {"transect_id": {"type": "string"}}, "required": ["transect_id"]}}
+    ],
+    "prompt": "I'm studying a hillslope at 22 degrees with 1200 mm annual rainfall and 18% slope. Classify the slope type and estimate erosion rate.",
+    "gold_calls": [
+      {"name": "classify_landform_slope", "arguments": {"angle_deg": 22}},
+      {"name": "estimate_erosion_rate", "arguments": {"rainfall_mm_yr": 1200, "slope_pct": 18}}
+    ],
+    "difficulty": "easy"
+  },
+  {
+    "id": "fresh_par_002",
+    "function": [
+      {"name": "date_manuscript_radiocarbon", "description": "Carbon-date a parchment sample.", "parameters": {"type": "object", "properties": {"sample_id": {"type": "string"}, "c14_ratio": {"type": "number"}}, "required": ["sample_id", "c14_ratio"]}},
+      {"name": "identify_scribal_hand", "description": "Match handwriting to known scribe.", "parameters": {"type": "object", "properties": {"folio_image": {"type": "string"}}, "required": ["folio_image"]}},
+      {"name": "transcribe_uncial", "description": "Transcribe uncial script to modern Latin.", "parameters": {"type": "object", "properties": {"image_uri": {"type": "string"}}, "required": ["image_uri"]}}
+    ],
+    "prompt": "Codex Sinaiticus folio 42r — please run radiocarbon on sample CSF-42 (c14 ratio 0.78) and identify the scribal hand from image folios/CSF42r.tif.",
+    "gold_calls": [
+      {"name": "date_manuscript_radiocarbon", "arguments": {"sample_id": "CSF-42", "c14_ratio": 0.78}},
+      {"name": "identify_scribal_hand", "arguments": {"folio_image": "folios/CSF42r.tif"}}
+    ],
+    "difficulty": "easy"
+  },
+  {
+    "id": "fresh_par_003",
+    "function": [
+      {"name": "calc_sand_binder_ratio", "description": "Compute sand-to-binder ratio for green sand mold.", "parameters": {"type": "object", "properties": {"sand_kg": {"type": "number"}, "binder_kg": {"type": "number"}}, "required": ["sand_kg", "binder_kg"]}},
+      {"name": "set_pouring_temperature", "description": "Set pouring temperature for given alloy.", "parameters": {"type": "object", "properties": {"alloy": {"type": "string"}, "temp_c": {"type": "number"}}, "required": ["alloy", "temp_c"]}},
+      {"name": "estimate_solidification_time", "description": "Estimate cooling time of a casting.", "parameters": {"type": "object", "properties": {"volume_cm3": {"type": "number"}, "surface_cm2": {"type": "number"}}, "required": ["volume_cm3", "surface_cm2"]}}
+    ],
+    "prompt": "I'm pouring grey cast iron at 1380 C. Set the furnace temperature and estimate solidification time for a casting volume 850 cm3, surface 420 cm2.",
+    "gold_calls": [
+      {"name": "set_pouring_temperature", "arguments": {"alloy": "grey cast iron", "temp_c": 1380}},
+      {"name": "estimate_solidification_time", "arguments": {"volume_cm3": 850, "surface_cm2": 420}}
+    ],
+    "difficulty": "easy"
+  },
+  {
+    "id": "fresh_par_004",
+    "function": [
+      {"name": "log_bird_sighting", "description": "Record a bird observation.", "parameters": {"type": "object", "properties": {"species": {"type": "string"}, "count": {"type": "integer"}, "location": {"type": "string"}}, "required": ["species", "count", "location"]}},
+      {"name": "analyze_birdsong_spectrogram", "description": "Analyze audio recording for vocalization signature.", "parameters": {"type": "object", "properties": {"audio_uri": {"type": "string"}}, "required": ["audio_uri"]}},
+      {"name": "fetch_migration_pattern", "description": "Get migration data for a species.", "parameters": {"type": "object", "properties": {"species": {"type": "string"}}, "required": ["species"]}}
+    ],
+    "prompt": "Saw 7 Bohemian waxwings at Riga Botanical Garden. Log this and pull their typical migration pattern.",
+    "gold_calls": [
+      {"name": "log_bird_sighting", "arguments": {"species": "Bohemian waxwing", "count": 7, "location": "Riga Botanical Garden"}},
+      {"name": "fetch_migration_pattern", "arguments": {"species": "Bohemian waxwing"}}
+    ],
+    "difficulty": "easy"
+  },
+  {
+    "id": "fresh_par_005",
+    "function": [
+      {"name": "measure_water_salinity", "description": "Get salinity at sampling station.", "parameters": {"type": "object", "properties": {"station_id": {"type": "string"}}, "required": ["station_id"]}},
+      {"name": "count_plankton_density", "description": "Count plankton per liter from microscopy.", "parameters": {"type": "object", "properties": {"sample_id": {"type": "string"}}, "required": ["sample_id"]}},
+      {"name": "report_coral_bleaching", "description": "Submit coral bleaching observation.", "parameters": {"type": "object", "properties": {"reef": {"type": "string"}, "severity": {"type": "string"}}, "required": ["reef", "severity"]}}
+    ],
+    "prompt": "Take salinity reading from station GBR-17 and count plankton in sample PLK-441.",
+    "gold_calls": [
+      {"name": "measure_water_salinity", "arguments": {"station_id": "GBR-17"}},
+      {"name": "count_plankton_density", "arguments": {"sample_id": "PLK-441"}}
+    ],
+    "difficulty": "easy"
+  },
+  {
+    "id": "fresh_par_006",
+    "function": [
+      {"name": "appraise_gemstone_carat", "description": "Appraise a gem by carat weight and clarity.", "parameters": {"type": "object", "properties": {"carat": {"type": "number"}, "clarity": {"type": "string"}}, "required": ["carat", "clarity"]}},
+      {"name": "measure_refractive_index", "description": "Measure refractive index of cut stone.", "parameters": {"type": "object", "properties": {"stone_id": {"type": "string"}}, "required": ["stone_id"]}},
+      {"name": "issue_certificate_gia", "description": "Issue a GIA grading certificate.", "parameters": {"type": "object", "properties": {"stone_id": {"type": "string"}, "grade": {"type": "string"}}, "required": ["stone_id", "grade"]}}
+    ],
+    "prompt": "Appraise a 1.8 carat VVS1 diamond and measure refractive index of stone GEM-9921.",
+    "gold_calls": [
+      {"name": "appraise_gemstone_carat", "arguments": {"carat": 1.8, "clarity": "VVS1"}},
+      {"name": "measure_refractive_index", "arguments": {"stone_id": "GEM-9921"}}
+    ],
+    "difficulty": "easy"
+  },
+  {
+    "id": "fresh_par_007",
+    "function": [
+      {"name": "classify_drainage_network", "description": "Classify a drainage pattern (dendritic, trellis, etc).", "parameters": {"type": "object", "properties": {"basin_id": {"type": "string"}}, "required": ["basin_id"]}},
+      {"name": "compute_drainage_density", "description": "Compute total stream length over basin area.", "parameters": {"type": "object", "properties": {"stream_km": {"type": "number"}, "area_km2": {"type": "number"}}, "required": ["stream_km", "area_km2"]}},
+      {"name": "estimate_sediment_yield", "description": "Estimate yearly sediment yield.", "parameters": {"type": "object", "properties": {"basin_id": {"type": "string"}}, "required": ["basin_id"]}}
+    ],
+    "prompt": "For basin TIBR-04 with 312 km of streams over 84 km2: classify the drainage network and compute density.",
+    "gold_calls": [
+      {"name": "classify_drainage_network", "arguments": {"basin_id": "TIBR-04"}},
+      {"name": "compute_drainage_density", "arguments": {"stream_km": 312, "area_km2": 84}}
+    ],
+    "difficulty": "easy"
+  },
+  {
+    "id": "fresh_par_008",
+    "function": [
+      {"name": "decipher_ostracon", "description": "Decipher writing on a potsherd.", "parameters": {"type": "object", "properties": {"sherd_id": {"type": "string"}, "language": {"type": "string"}}, "required": ["sherd_id", "language"]}},
+      {"name": "lookup_palaeographic_register", "description": "Look up palaeographic registry entry.", "parameters": {"type": "object", "properties": {"sherd_id": {"type": "string"}}, "required": ["sherd_id"]}},
+      {"name": "render_3d_scan_sherd", "description": "Render 3D scan of artefact.", "parameters": {"type": "object", "properties": {"sherd_id": {"type": "string"}}, "required": ["sherd_id"]}}
+    ],
+    "prompt": "Decipher ostracon LACH-22 (Old Hebrew) and look up its registry record.",
+    "gold_calls": [
+      {"name": "decipher_ostracon", "arguments": {"sherd_id": "LACH-22", "language": "Old Hebrew"}},
+      {"name": "lookup_palaeographic_register", "arguments": {"sherd_id": "LACH-22"}}
+    ],
+    "difficulty": "easy"
+  },
+  {
+    "id": "fresh_par_009",
+    "function": [
+      {"name": "heat_treat_alloy", "description": "Run heat treatment cycle.", "parameters": {"type": "object", "properties": {"alloy": {"type": "string"}, "soak_c": {"type": "number"}, "hours": {"type": "number"}}, "required": ["alloy", "soak_c", "hours"]}},
+      {"name": "hardness_rockwell", "description": "Measure Rockwell hardness.", "parameters": {"type": "object", "properties": {"specimen_id": {"type": "string"}}, "required": ["specimen_id"]}},
+      {"name": "quench_oil_bath", "description": "Quench in oil bath.", "parameters": {"type": "object", "properties": {"specimen_id": {"type": "string"}}, "required": ["specimen_id"]}}
+    ],
+    "prompt": "Heat-treat 4140 steel at 845 C for 1.5 hours, then quench specimen S4140-08 in oil.",
+    "gold_calls": [
+      {"name": "heat_treat_alloy", "arguments": {"alloy": "4140", "soak_c": 845, "hours": 1.5}},
+      {"name": "quench_oil_bath", "arguments": {"specimen_id": "S4140-08"}}
+    ],
+    "difficulty": "easy"
+  },
+  {
+    "id": "fresh_par_010",
+    "function": [
+      {"name": "identify_feather_morphology", "description": "Identify species from feather morphology.", "parameter": {}, "parameters": {"type": "object", "properties": {"image_uri": {"type": "string"}}, "required": ["image_uri"]}},
+      {"name": "measure_wing_chord", "description": "Measure wing chord in mm.", "parameters": {"type": "object", "properties": {"specimen_id": {"type": "string"}}, "required": ["specimen_id"]}},
+      {"name": "lookup_clutch_size", "description": "Get typical clutch size.", "parameters": {"type": "object", "properties": {"species": {"type": "string"}}, "required": ["species"]}}
+    ],
+    "prompt": "Identify feather from image feathers/F-9912.jpg and measure wing chord on specimen WC-9912.",
+    "gold_calls": [
+      {"name": "identify_feather_morphology", "arguments": {"image_uri": "feathers/F-9912.jpg"}},
+      {"name": "measure_wing_chord", "arguments": {"specimen_id": "WC-9912"}}
+    ],
+    "difficulty": "easy"
+  },
+  {
+    "id": "fresh_par_011",
+    "function": [
+      {"name": "tag_shark_fin", "description": "Tag shark with acoustic tracker.", "parameters": {"type": "object", "properties": {"shark_id": {"type": "string"}, "tag_freq_khz": {"type": "number"}}, "required": ["shark_id", "tag_freq_khz"]}},
+      {"name": "log_dive_depth", "description": "Log dive depth event.", "parameters": {"type": "object", "properties": {"shark_id": {"type": "string"}, "depth_m": {"type": "number"}}, "required": ["shark_id", "depth_m"]}},
+      {"name": "deploy_chum_line", "description": "Deploy chum line.", "parameters": {"type": "object", "properties": {"vessel": {"type": "string"}}, "required": ["vessel"]}}
+    ],
+    "prompt": "Tag tiger shark TS-118 with a 69 kHz tracker and log dive depth 142 m.",
+    "gold_calls": [
+      {"name": "tag_shark_fin", "arguments": {"shark_id": "TS-118", "tag_freq_khz": 69}},
+      {"name": "log_dive_depth", "arguments": {"shark_id": "TS-118", "depth_m": 142}}
+    ],
+    "difficulty": "easy"
+  },
+  {
+    "id": "fresh_par_012",
+    "function": [
+      {"name": "test_mohs_hardness", "description": "Run Mohs hardness scratch test.", "parameters": {"type": "object", "properties": {"stone_id": {"type": "string"}}, "required": ["stone_id"]}},
+      {"name": "uv_fluorescence_scan", "description": "Scan stone under longwave UV.", "parameters": {"type": "object", "properties": {"stone_id": {"type": "string"}}, "required": ["stone_id"]}},
+      {"name": "weigh_carat_balance", "description": "Weigh stone in carats.", "parameters": {"type": "object", "properties": {"stone_id": {"type": "string"}}, "required": ["stone_id"]}}
+    ],
+    "prompt": "Run Mohs test and UV fluorescence on stone OP-417.",
+    "gold_calls": [
+      {"name": "test_mohs_hardness", "arguments": {"stone_id": "OP-417"}},
+      {"name": "uv_fluorescence_scan", "arguments": {"stone_id": "OP-417"}}
+    ],
+    "difficulty": "easy"
+  },
+  {
+    "id": "fresh_par_013",
+    "function": [
+      {"name": "map_alluvial_fan", "description": "Map an alluvial fan deposit.", "parameters": {"type": "object", "properties": {"site": {"type": "string"}}, "required": ["site"]}},
+      {"name": "date_quaternary_layer", "description": "Date Quaternary sediment layer.", "parameters": {"type": "object", "properties": {"sample_id": {"type": "string"}, "method": {"type": "string"}}, "required": ["sample_id", "method"]}},
+      {"name": "compute_grain_size_phi", "description": "Compute mean phi grain size.", "parameters": {"type": "object", "properties": {"sample_id": {"type": "string"}}, "required": ["sample_id"]}}
+    ],
+    "prompt": "Map alluvial fan at Death Valley site DV-NW1, and date sample DV-Q33 with OSL.",
+    "gold_calls": [
+      {"name": "map_alluvial_fan", "arguments": {"site": "DV-NW1"}},
+      {"name": "date_quaternary_layer", "arguments": {"sample_id": "DV-Q33", "method": "OSL"}}
+    ],
+    "difficulty": "easy"
+  },
+  {
+    "id": "fresh_par_014",
+    "function": [
+      {"name": "translate_demotic", "description": "Translate Demotic Egyptian text.", "parameters": {"type": "object", "properties": {"text": {"type": "string"}}, "required": ["text"]}},
+      {"name": "compare_hieratic_variants", "description": "Compare hieratic variant glyphs.", "parameters": {"type": "object", "properties": {"glyph_a": {"type": "string"}, "glyph_b": {"type": "string"}}, "required": ["glyph_a", "glyph_b"]}},
+      {"name": "lookup_papyrus_provenance", "description": "Find papyrus provenance.", "parameters": {"type": "object", "properties": {"papyrus_id": {"type": "string"}}, "required": ["papyrus_id"]}}
+    ],
+    "prompt": "Translate this Demotic line 'pr-aA wDA snb' and look up provenance of papyrus P.Berol.13554.",
+    "gold_calls": [
+      {"name": "translate_demotic", "arguments": {"text": "pr-aA wDA snb"}},
+      {"name": "lookup_papyrus_provenance", "arguments": {"papyrus_id": "P.Berol.13554"}}
+    ],
+    "difficulty": "easy"
+  },
+  {
+    "id": "fresh_par_015",
+    "function": [
+      {"name": "pattern_mold_release", "description": "Apply mold release agent.", "parameters": {"type": "object", "properties": {"mold_id": {"type": "string"}, "agent": {"type": "string"}}, "required": ["mold_id", "agent"]}},
+      {"name": "ladle_pour_metal", "description": "Pour metal from ladle.", "parameters": {"type": "object", "properties": {"mold_id": {"type": "string"}, "kg": {"type": "number"}}, "required": ["mold_id", "kg"]}},
+      {"name": "cool_casting_box", "description": "Cool the casting box.", "parameters": {"type": "object", "properties": {"box_id": {"type": "string"}, "hours": {"type": "number"}}, "required": ["box_id", "hours"]}}
+    ],
+    "prompt": "Apply graphite release to mold M-77 and pour 12 kg of bronze.",
+    "gold_calls": [
+      {"name": "pattern_mold_release", "arguments": {"mold_id": "M-77", "agent": "graphite"}},
+      {"name": "ladle_pour_metal", "arguments": {"mold_id": "M-77", "kg": 12}}
+    ],
+    "difficulty": "easy"
+  },
+  {
+    "id": "fresh_par_016",
+    "function": [
+      {"name": "register_nest_box", "description": "Register a new nest box.", "parameters": {"type": "object", "properties": {"box_id": {"type": "string"}, "habitat": {"type": "string"}}, "required": ["box_id", "habitat"]}},
+      {"name": "count_eggs_incubation", "description": "Record egg count.", "parameters": {"type": "object", "properties": {"box_id": {"type": "string"}, "eggs": {"type": "integer"}}, "required": ["box_id", "eggs"]}},
+      {"name": "predict_fledge_date", "description": "Predict fledging date.", "parameters": {"type": "object", "properties": {"species": {"type": "string"}, "lay_date": {"type": "string"}}, "required": ["species", "lay_date"]}}
+    ],
+    "prompt": "Register nest box NB-203 in beech-oak habitat and record 5 eggs.",
+    "gold_calls": [
+      {"name": "register_nest_box", "arguments": {"box_id": "NB-203", "habitat": "beech-oak"}},
+      {"name": "count_eggs_incubation", "arguments": {"box_id": "NB-203", "eggs": 5}}
+    ],
+    "difficulty": "easy"
+  },
+  {
+    "id": "fresh_par_017",
+    "function": [
+      {"name": "deploy_ctd_profiler", "description": "Deploy CTD oceanographic profiler.", "parameters": {"type": "object", "properties": {"station": {"type": "string"}, "depth_m": {"type": "number"}}, "required": ["station", "depth_m"]}},
+      {"name": "sample_water_column", "description": "Sample water at depth.", "parameters": {"type": "object", "properties": {"station": {"type": "string"}, "depth_m": {"type": "number"}}, "required": ["station", "depth_m"]}},
+      {"name": "log_thermocline_depth", "description": "Log thermocline depth.", "parameters": {"type": "object", "properties": {"station": {"type": "string"}, "depth_m": {"type": "number"}}, "required": ["station", "depth_m"]}}
+    ],
+    "prompt": "Deploy CTD at station P-46 to 1500 m depth and sample at 800 m.",
+    "gold_calls": [
+      {"name": "deploy_ctd_profiler", "arguments": {"station": "P-46", "depth_m": 1500}},
+      {"name": "sample_water_column", "arguments": {"station": "P-46", "depth_m": 800}}
+    ],
+    "difficulty": "easy"
+  },
+  {
+    "id": "fresh_par_018",
+    "function": [
+      {"name": "polish_cabochon", "description": "Polish a cabochon stone.", "parameters": {"type": "object", "properties": {"stone_id": {"type": "string"}, "grit": {"type": "integer"}}, "required": ["stone_id", "grit"]}},
+      {"name": "engrave_stone_initials", "description": "Engrave initials on stone.", "parameters": {"type": "object", "properties": {"stone_id": {"type": "string"}, "initials": {"type": "string"}}, "required": ["stone_id", "initials"]}},
+      {"name": "appraise_market_value", "description": "Appraise market value of finished gem.", "parameters": {"type": "object", "properties": {"stone_id": {"type": "string"}}, "required": ["stone_id"]}}
+    ],
+    "prompt": "Polish cabochon CB-12 with 14000 grit, then appraise its market value.",
+    "gold_calls": [
+      {"name": "polish_cabochon", "arguments": {"stone_id": "CB-12", "grit": 14000}},
+      {"name": "appraise_market_value", "arguments": {"stone_id": "CB-12"}}
+    ],
+    "difficulty": "easy"
+  },
+  {
+    "id": "fresh_par_019",
+    "function": [
+      {"name": "measure_river_meander_ratio", "description": "Compute sinuosity of river meander.", "parameters": {"type": "object", "properties": {"reach_id": {"type": "string"}, "channel_km": {"type": "number"}, "valley_km": {"type": "number"}}, "required": ["reach_id", "channel_km", "valley_km"]}},
+      {"name": "estimate_bankfull_discharge", "description": "Estimate bankfull discharge from cross-section.", "parameters": {"type": "object", "properties": {"reach_id": {"type": "string"}}, "required": ["reach_id"]}},
+      {"name": "classify_river_stage", "description": "Classify river by stage (youthful/mature/old).", "parameters": {"type": "object", "properties": {"reach_id": {"type": "string"}}, "required": ["reach_id"]}}
+    ],
+    "prompt": "Reach VOLG-12 — channel 88 km, valley 36 km. Compute sinuosity and classify the river stage.",
+    "gold_calls": [
+      {"name": "measure_river_meander_ratio", "arguments": {"reach_id": "VOLG-12", "channel_km": 88, "valley_km": 36}},
+      {"name": "classify_river_stage", "arguments": {"reach_id": "VOLG-12"}}
+    ],
+    "difficulty": "easy"
+  },
+  {
+    "id": "fresh_par_020",
+    "function": [
+      {"name": "scan_codex_multispectral", "description": "Multispectral scan of codex page.", "parameters": {"type": "object", "properties": {"page_id": {"type": "string"}, "bands": {"type": "integer"}}, "required": ["page_id", "bands"]}},
+      {"name": "reveal_palimpsest_layer", "description": "Reveal underwritten palimpsest layer.", "parameters": {"type": "object", "properties": {"page_id": {"type": "string"}}, "required": ["page_id"]}},
+      {"name": "ocr_medieval_script", "description": "OCR medieval script.", "parameters": {"type": "object", "properties": {"image_uri": {"type": "string"}}, "required": ["image_uri"]}}
+    ],
+    "prompt": "Scan codex page CDX-89r with 12-band multispectral and reveal the palimpsest layer underneath.",
+    "gold_calls": [
+      {"name": "scan_codex_multispectral", "arguments": {"page_id": "CDX-89r", "bands": 12}},
+      {"name": "reveal_palimpsest_layer", "arguments": {"page_id": "CDX-89r"}}
+    ],
+    "difficulty": "easy"
+  },
+  {
+    "id": "fresh_par_021",
+    "function": [
+      {"name": "design_gating_system", "description": "Design gating system for a casting.", "parameters": {"type": "object", "properties": {"part_id": {"type": "string"}, "weight_kg": {"type": "number"}}, "required": ["part_id", "weight_kg"]}},
+      {"name": "compute_riser_size", "description": "Compute riser dimensions.", "parameters": {"type": "object", "properties": {"part_id": {"type": "string"}}, "required": ["part_id"]}},
+      {"name": "simulate_mold_filling", "description": "Simulate mold filling flow.", "parameters": {"type": "object", "properties": {"part_id": {"type": "string"}}, "required": ["part_id"]}}
+    ],
+    "prompt": "Design gating for part P-981 (22 kg) and compute riser size.",
+    "gold_calls": [
+      {"name": "design_gating_system", "arguments": {"part_id": "P-981", "weight_kg": 22}},
+      {"name": "compute_riser_size", "arguments": {"part_id": "P-981"}}
+    ],
+    "difficulty": "easy"
+  },
+  {
+    "id": "fresh_par_022",
+    "function": [
+      {"name": "band_juvenile_raptor", "description": "Band a juvenile raptor.", "parameters": {"type": "object", "properties": {"species": {"type": "string"}, "band_id": {"type": "string"}}, "required": ["species", "band_id"]}},
+      {"name": "measure_tarsus_length", "description": "Measure tarsus length.", "parameters": {"type": "object", "properties": {"band_id": {"type": "string"}}, "required": ["band_id"]}},
+      {"name": "draw_blood_sample_bird", "description": "Draw blood from brachial vein.", "parameters": {"type": "object", "properties": {"band_id": {"type": "string"}}, "required": ["band_id"]}}
+    ],
+    "prompt": "Band juvenile peregrine falcon with band PF-2226 and measure its tarsus.",
+    "gold_calls": [
+      {"name": "band_juvenile_raptor", "arguments": {"species": "peregrine falcon", "band_id": "PF-2226"}},
+      {"name": "measure_tarsus_length", "arguments": {"band_id": "PF-2226"}}
+    ],
+    "difficulty": "easy"
+  },
+  {
+    "id": "fresh_par_023",
+    "function": [
+      {"name": "report_seagrass_coverage", "description": "Report seagrass percent coverage.", "parameters": {"type": "object", "properties": {"transect_id": {"type": "string"}, "pct": {"type": "number"}}, "required": ["transect_id", "pct"]}},
+      {"name": "log_turtle_sighting", "description": "Log marine turtle sighting.", "parameters": {"type": "object", "properties": {"species": {"type": "string"}, "transect_id": {"type": "string"}}, "required": ["species", "transect_id"]}},
+      {"name": "estimate_grazing_pressure", "description": "Estimate grazing pressure.", "parameters": {"type": "object", "properties": {"transect_id": {"type": "string"}}, "required": ["transect_id"]}}
+    ],
+    "prompt": "Transect T-19 has 62% seagrass coverage and I spotted a green turtle there. Record both.",
+    "gold_calls": [
+      {"name": "report_seagrass_coverage", "arguments": {"transect_id": "T-19", "pct": 62}},
+      {"name": "log_turtle_sighting", "arguments": {"species": "green turtle", "transect_id": "T-19"}}
+    ],
+    "difficulty": "easy"
+  },
+  {
+    "id": "fresh_par_024",
+    "function": [
+      {"name": "test_specific_gravity_gem", "description": "Test specific gravity of gem.", "parameters": {"type": "object", "properties": {"stone_id": {"type": "string"}}, "required": ["stone_id"]}},
+      {"name": "spectroscope_gem_absorption", "description": "Run absorption spectroscopy.", "parameters": {"type": "object", "properties": {"stone_id": {"type": "string"}}, "required": ["stone_id"]}},
+      {"name": "log_origin_burma", "description": "Tag origin as Burma.", "parameters": {"type": "object", "properties": {"stone_id": {"type": "string"}}, "required": ["stone_id"]}}
+    ],
+    "prompt": "Run SG and absorption spectroscopy on ruby R-555.",
+    "gold_calls": [
+      {"name": "test_specific_gravity_gem", "arguments": {"stone_id": "R-555"}},
+      {"name": "spectroscope_gem_absorption", "arguments": {"stone_id": "R-555"}}
+    ],
+    "difficulty": "easy"
+  },
+  {
+    "id": "fresh_par_025",
+    "function": [
+      {"name": "model_glacial_retreat", "description": "Model glacial retreat over years.", "parameters": {"type": "object", "properties": {"glacier_id": {"type": "string"}, "years": {"type": "integer"}}, "required": ["glacier_id", "years"]}},
+      {"name": "measure_moraine_height", "description": "Measure moraine height in meters.", "parameters": {"type": "object", "properties": {"moraine_id": {"type": "string"}}, "required": ["moraine_id"]}},
+      {"name": "fetch_ice_core_record", "description": "Fetch ice core record.", "parameters": {"type": "object", "properties": {"core_id": {"type": "string"}}, "required": ["core_id"]}}
+    ],
+    "prompt": "Project Aletsch glacier retreat over 50 years and measure moraine MR-A4.",
+    "gold_calls": [
+      {"name": "model_glacial_retreat", "arguments": {"glacier_id": "Aletsch", "years": 50}},
+      {"name": "measure_moraine_height", "arguments": {"moraine_id": "MR-A4"}}
+    ],
+    "difficulty": "easy"
+  },
+  {
+    "id": "fresh_par_026",
+    "function": [
+      {"name": "scan_cuneiform_tablet", "description": "RTI scan a cuneiform tablet.", "parameters": {"type": "object", "properties": {"tablet_id": {"type": "string"}}, "required": ["tablet_id"]}},
+      {"name": "transliterate_akkadian", "description": "Transliterate Akkadian signs.", "parameters": {"type": "object", "properties": {"tablet_id": {"type": "string"}}, "required": ["tablet_id"]}},
+      {"name": "lookup_cdli_record", "description": "Look up CDLI record.", "parameters": {"type": "object", "properties": {"tablet_id": {"type": "string"}}, "required": ["tablet_id"]}}
+    ],
+    "prompt": "RTI-scan tablet K.456 and transliterate the Akkadian.",
+    "gold_calls": [
+      {"name": "scan_cuneiform_tablet", "arguments": {"tablet_id": "K.456"}},
+      {"name": "transliterate_akkadian", "arguments": {"tablet_id": "K.456"}}
+    ],
+    "difficulty": "easy"
+  },
+  {
+    "id": "fresh_par_027",
+    "function": [
+      {"name": "anneal_brass_alloy", "description": "Anneal brass alloy.", "parameters": {"type": "object", "properties": {"specimen_id": {"type": "string"}, "temp_c": {"type": "number"}}, "required": ["specimen_id", "temp_c"]}},
+      {"name": "pickle_oxide_layer", "description": "Pickle off oxide layer.", "parameters": {"type": "object", "properties": {"specimen_id": {"type": "string"}, "acid": {"type": "string"}}, "required": ["specimen_id", "acid"]}},
+      {"name": "shot_blast_finish", "description": "Shot-blast the surface.", "parameters": {"type": "object", "properties": {"specimen_id": {"type": "string"}}, "required": ["specimen_id"]}}
+    ],
+    "prompt": "Anneal brass specimen BR-44 at 650 C and pickle with sulfuric acid.",
+    "gold_calls": [
+      {"name": "anneal_brass_alloy", "arguments": {"specimen_id": "BR-44", "temp_c": 650}},
+      {"name": "pickle_oxide_layer", "arguments": {"specimen_id": "BR-44", "acid": "sulfuric"}}
+    ],
+    "difficulty": "easy"
+  },
+  {
+    "id": "fresh_par_028",
+    "function": [
+      {"name": "set_up_mist_net", "description": "Deploy ornithology mist net.", "parameters": {"type": "object", "properties": {"site": {"type": "string"}, "length_m": {"type": "number"}}, "required": ["site", "length_m"]}},
+      {"name": "log_capture_event", "description": "Log captured bird.", "parameters": {"type": "object", "properties": {"site": {"type": "string"}, "species": {"type": "string"}}, "required": ["site", "species"]}},
+      {"name": "release_bird", "description": "Release bird.", "parameters": {"type": "object", "properties": {"band_id": {"type": "string"}}, "required": ["band_id"]}}
+    ],
+    "prompt": "Set up 12 m mist net at Hortobagy and log capture of a great reed warbler there.",
+    "gold_calls": [
+      {"name": "set_up_mist_net", "arguments": {"site": "Hortobagy", "length_m": 12}},
+      {"name": "log_capture_event", "arguments": {"site": "Hortobagy", "species": "great reed warbler"}}
+    ],
+    "difficulty": "easy"
+  },
+  {
+    "id": "fresh_par_029",
+    "function": [
+      {"name": "deploy_drift_buoy", "description": "Deploy a Lagrangian drift buoy.", "parameters": {"type": "object", "properties": {"lat": {"type": "number"}, "lon": {"type": "number"}}, "required": ["lat", "lon"]}},
+      {"name": "compute_current_vector", "description": "Compute surface current vector.", "parameters": {"type": "object", "properties": {"buoy_id": {"type": "string"}}, "required": ["buoy_id"]}},
+      {"name": "estimate_eddy_radius", "description": "Estimate mesoscale eddy radius.", "parameters": {"type": "object", "properties": {"region": {"type": "string"}}, "required": ["region"]}}
+    ],
+    "prompt": "Deploy drift buoy at lat 36.5, lon -75.2 and estimate the eddy radius in the Gulf Stream region.",
+    "gold_calls": [
+      {"name": "deploy_drift_buoy", "arguments": {"lat": 36.5, "lon": -75.2}},
+      {"name": "estimate_eddy_radius", "arguments": {"region": "Gulf Stream"}}
+    ],
+    "difficulty": "easy"
+  },
+  {
+    "id": "fresh_par_030",
+    "function": [
+      {"name": "facet_cut_emerald", "description": "Facet-cut emerald to brilliant.", "parameters": {"type": "object", "properties": {"stone_id": {"type": "string"}, "cut": {"type": "string"}}, "required": ["stone_id", "cut"]}},
+      {"name": "oil_treatment_emerald", "description": "Apply cedar oil treatment.", "parameters": {"type": "object", "properties": {"stone_id": {"type": "string"}}, "required": ["stone_id"]}},
+      {"name": "grade_inclusion_pattern", "description": "Grade inclusion pattern.", "parameters": {"type": "object", "properties": {"stone_id": {"type": "string"}}, "required": ["stone_id"]}}
+    ],
+    "prompt": "Facet-cut emerald EM-7 to step cut and apply cedar oil treatment.",
+    "gold_calls": [
+      {"name": "facet_cut_emerald", "arguments": {"stone_id": "EM-7", "cut": "step"}},
+      {"name": "oil_treatment_emerald", "arguments": {"stone_id": "EM-7"}}
+    ],
+    "difficulty": "easy"
+  },
+  {
+    "id": "fresh_par_031",
+    "function": [
+      {"name": "map_karst_sinkholes", "description": "Map sinkholes in karst terrain.", "parameters": {"type": "object", "properties": {"region": {"type": "string"}, "resolution_m": {"type": "integer"}}, "required": ["region", "resolution_m"]}},
+      {"name": "trace_cave_passage", "description": "Trace a cave passage from survey.", "parameters": {"type": "object", "properties": {"cave_id": {"type": "string"}}, "required": ["cave_id"]}},
+      {"name": "compute_doline_density", "description": "Compute doline density per km2.", "parameters": {"type": "object", "properties": {"region": {"type": "string"}}, "required": ["region"]}},
+      {"name": "fetch_speleothem_chronology", "description": "Fetch dating of speleothems.", "parameters": {"type": "object", "properties": {"cave_id": {"type": "string"}}, "required": ["cave_id"]}}
+    ],
+    "prompt": "Map sinkholes in Postojna karst at 2m resolution, trace cave PJ-Cave-04, and compute doline density.",
+    "gold_calls": [
+      {"name": "map_karst_sinkholes", "arguments": {"region": "Postojna", "resolution_m": 2}},
+      {"name": "trace_cave_passage", "arguments": {"cave_id": "PJ-Cave-04"}},
+      {"name": "compute_doline_density", "arguments": {"region": "Postojna"}}
+    ],
+    "difficulty": "medium"
+  },
+  {
+    "id": "fresh_par_032",
+    "function": [
+      {"name": "ink_composition_xrf", "description": "XRF analysis of ink composition.", "parameters": {"type": "object", "properties": {"folio_id": {"type": "string"}}, "required": ["folio_id"]}},
+      {"name": "vellum_dna_extraction", "description": "Extract DNA from vellum.", "parameters": {"type": "object", "properties": {"folio_id": {"type": "string"}}, "required": ["folio_id"]}},
+      {"name": "match_scribal_corpus", "description": "Match scribal hand to corpus.", "parameters": {"type": "object", "properties": {"folio_id": {"type": "string"}, "corpus": {"type": "string"}}, "required": ["folio_id", "corpus"]}},
+      {"name": "compare_marginalia", "description": "Compare marginalia across folios.", "parameters": {"type": "object", "properties": {"folio_a": {"type": "string"}, "folio_b": {"type": "string"}}, "required": ["folio_a", "folio_b"]}}
+    ],
+    "prompt": "On folio Vat.lat.3225 f.18r, run XRF on the ink, extract DNA from the vellum, and match the scribal hand against the Vatican corpus.",
+    "gold_calls": [
+      {"name": "ink_composition_xrf", "arguments": {"folio_id": "Vat.lat.3225 f.18r"}},
+      {"name": "vellum_dna_extraction", "arguments": {"folio_id": "Vat.lat.3225 f.18r"}},
+      {"name": "match_scribal_corpus", "arguments": {"folio_id": "Vat.lat.3225 f.18r", "corpus": "Vatican"}}
+    ],
+    "difficulty": "medium"
+  },
+  {
+    "id": "fresh_par_033",
+    "function": [
+      {"name": "lost_wax_pour", "description": "Pour lost-wax casting.", "parameters": {"type": "object", "properties": {"mold_id": {"type": "string"}, "alloy": {"type": "string"}}, "required": ["mold_id", "alloy"]}},
+      {"name": "investment_burnout", "description": "Burn out investment material.", "parameters": {"type": "object", "properties": {"mold_id": {"type": "string"}, "temp_c": {"type": "number"}}, "required": ["mold_id", "temp_c"]}},
+      {"name": "tumble_polish_casting", "description": "Tumble polish casting.", "parameters": {"type": "object", "properties": {"part_id": {"type": "string"}, "hours": {"type": "number"}}, "required": ["part_id", "hours"]}},
+      {"name": "xray_internal_defects", "description": "X-ray for casting defects.", "parameters": {"type": "object", "properties": {"part_id": {"type": "string"}}, "required": ["part_id"]}}
+    ],
+    "prompt": "Burn out investment mold LW-12 at 720 C, pour silver, then X-ray the casting.",
+    "gold_calls": [
+      {"name": "investment_burnout", "arguments": {"mold_id": "LW-12", "temp_c": 720}},
+      {"name": "lost_wax_pour", "arguments": {"mold_id": "LW-12", "alloy": "silver"}},
+      {"name": "xray_internal_defects", "arguments": {"part_id": "LW-12"}}
+    ],
+    "difficulty": "medium"
+  },
+  {
+    "id": "fresh_par_034",
+    "function": [
+      {"name": "playback_call_attraction", "description": "Play species call for attraction.", "parameters": {"type": "object", "properties": {"species": {"type": "string"}, "site": {"type": "string"}, "duration_s": {"type": "integer"}}, "required": ["species", "site", "duration_s"]}},
+      {"name": "deploy_audiomoth", "description": "Deploy AudioMoth recorder.", "parameters": {"type": "object", "properties": {"site": {"type": "string"}, "duration_h": {"type": "integer"}}, "required": ["site", "duration_h"]}},
+      {"name": "estimate_territory_size", "description": "Estimate territory size from singing posts.", "parameters": {"type": "object", "properties": {"species": {"type": "string"}, "site": {"type": "string"}}, "required": ["species", "site"]}},
+      {"name": "calc_density_per_hectare", "description": "Compute density of singing males.", "parameters": {"type": "object", "properties": {"site": {"type": "string"}}, "required": ["site"]}}
+    ],
+    "prompt": "Deploy AudioMoth at Bialowieza site for 48 hours, play wood warbler call for 90 s, and estimate the wood warbler territory size.",
+    "gold_calls": [
+      {"name": "deploy_audiomoth", "arguments": {"site": "Bialowieza", "duration_h": 48}},
+      {"name": "playback_call_attraction", "arguments": {"species": "wood warbler", "site": "Bialowieza", "duration_s": 90}},
+      {"name": "estimate_territory_size", "arguments": {"species": "wood warbler", "site": "Bialowieza"}}
+    ],
+    "difficulty": "medium"
+  },
+  {
+    "id": "fresh_par_035",
+    "function": [
+      {"name": "deploy_rov_dive", "description": "Deploy ROV dive.", "parameters": {"type": "object", "properties": {"site": {"type": "string"}, "max_depth_m": {"type": "number"}}, "required": ["site", "max_depth_m"]}},
+      {"name": "collect_hydrothermal_sample", "description": "Collect hydrothermal vent sample.", "parameters": {"type": "object", "properties": {"site": {"type": "string"}, "sample_type": {"type": "string"}}, "required": ["site", "sample_type"]}},
+      {"name": "measure_vent_temperature", "description": "Measure vent fluid temperature.", "parameters": {"type": "object", "properties": {"site": {"type": "string"}}, "required": ["site"]}},
+      {"name": "identify_tube_worm", "description": "Identify tube worm species.", "parameters": {"type": "object", "properties": {"image_uri": {"type": "string"}}, "required": ["image_uri"]}}
+    ],
+    "prompt": "ROV dive at Lost City vent to 3000 m, measure vent temp, and collect a chimney sample.",
+    "gold_calls": [
+      {"name": "deploy_rov_dive", "arguments": {"site": "Lost City", "max_depth_m": 3000}},
+      {"name": "measure_vent_temperature", "arguments": {"site": "Lost City"}},
+      {"name": "collect_hydrothermal_sample", "arguments": {"site": "Lost City", "sample_type": "chimney"}}
+    ],
+    "difficulty": "medium"
+  },
+  {
+    "id": "fresh_par_036",
+    "function": [
+      {"name": "test_diamond_thermal", "description": "Test thermal conductivity of diamond.", "parameters": {"type": "object", "properties": {"stone_id": {"type": "string"}}, "required": ["stone_id"]}},
+      {"name": "scan_diamond_fluorescence", "description": "Scan UV fluorescence pattern.", "parameters": {"type": "object", "properties": {"stone_id": {"type": "string"}, "wavelength_nm": {"type": "integer"}}, "required": ["stone_id", "wavelength_nm"]}},
+      {"name": "grade_clarity_10x", "description": "Grade clarity under 10x loupe.", "parameters": {"type": "object", "properties": {"stone_id": {"type": "string"}}, "required": ["stone_id"]}},
+      {"name": "issue_gia_report", "description": "Issue GIA grading report.", "parameters": {"type": "object", "properties": {"stone_id": {"type": "string"}, "grades": {"type": "object"}}, "required": ["stone_id", "grades"]}}
+    ],
+    "prompt": "Stone D-2025: test thermal conductivity, scan UV fluorescence at 365 nm, and grade clarity under 10x loupe.",
+    "gold_calls": [
+      {"name": "test_diamond_thermal", "arguments": {"stone_id": "D-2025"}},
+      {"name": "scan_diamond_fluorescence", "arguments": {"stone_id": "D-2025", "wavelength_nm": 365}},
+      {"name": "grade_clarity_10x", "arguments": {"stone_id": "D-2025"}}
+    ],
+    "difficulty": "medium"
+  },
+  {
+    "id": "fresh_par_037",
+    "function": [
+      {"name": "model_slope_failure", "description": "Run slope stability model.", "parameters": {"type": "object", "properties": {"slope_id": {"type": "string"}, "rainfall_mm": {"type": "number"}}, "required": ["slope_id", "rainfall_mm"]}},
+      {"name": "compute_factor_of_safety", "description": "Compute factor of safety.", "parameters": {"type": "object", "properties": {"slope_id": {"type": "string"}}, "required": ["slope_id"]}},
+      {"name": "identify_landslide_type", "description": "Identify landslide type (slide, flow, fall).", "parameters": {"type": "object", "properties": {"slope_id": {"type": "string"}}, "required": ["slope_id"]}},
+      {"name": "issue_evacuation_alert", "description": "Issue evacuation alert.", "parameters": {"type": "object", "properties": {"area": {"type": "string"}, "level": {"type": "string"}}, "required": ["area", "level"]}}
+    ],
+    "prompt": "Slope SLP-99 just got 220 mm rain. Run failure model, compute factor of safety, and identify the landslide type.",
+    "gold_calls": [
+      {"name": "model_slope_failure", "arguments": {"slope_id": "SLP-99", "rainfall_mm": 220}},
+      {"name": "compute_factor_of_safety", "arguments": {"slope_id": "SLP-99"}},
+      {"name": "identify_landslide_type", "arguments": {"slope_id": "SLP-99"}}
+    ],
+    "difficulty": "medium"
+  },
+  {
+    "id": "fresh_par_038",
+    "function": [
+      {"name": "encode_minuscule_letterforms", "description": "Encode minuscule script in Unicode MUFI.", "parameters": {"type": "object", "properties": {"text": {"type": "string"}}, "required": ["text"]}},
+      {"name": "expand_abbreviations", "description": "Expand scribal abbreviations.", "parameters": {"type": "object", "properties": {"text": {"type": "string"}}, "required": ["text"]}},
+      {"name": "lookup_glossary_term", "description": "Look up medieval glossary term.", "parameters": {"type": "object", "properties": {"term": {"type": "string"}}, "required": ["term"]}},
+      {"name": "match_textual_witness", "description": "Match witness to stemma.", "parameters": {"type": "object", "properties": {"text_id": {"type": "string"}}, "required": ["text_id"]}}
+    ],
+    "prompt": "Take this minuscule transcription 'q̄ om̄s int̄ sciat': expand abbreviations and look up 'sciat'.",
+    "gold_calls": [
+      {"name": "expand_abbreviations", "arguments": {"text": "q̄ om̄s int̄ sciat"}},
+      {"name": "lookup_glossary_term", "arguments": {"term": "sciat"}}
+    ],
+    "difficulty": "medium"
+  },
+  {
+    "id": "fresh_par_039",
+    "function": [
+      {"name": "design_chill_block_pattern", "description": "Design chill block placement.", "parameters": {"type": "object", "properties": {"part_id": {"type": "string"}, "hotspots": {"type": "array", "items": {"type": "string"}}}, "required": ["part_id", "hotspots"]}},
+      {"name": "calc_shrinkage_compensation", "description": "Compute shrinkage compensation.", "parameters": {"type": "object", "properties": {"alloy": {"type": "string"}, "dim_mm": {"type": "number"}}, "required": ["alloy", "dim_mm"]}},
+      {"name": "select_core_binder", "description": "Select sand core binder type.", "parameters": {"type": "object", "properties": {"part_id": {"type": "string"}}, "required": ["part_id"]}},
+      {"name": "compute_chvorinov_constant", "description": "Compute Chvorinov solidification constant.", "parameters": {"type": "object", "properties": {"alloy": {"type": "string"}}, "required": ["alloy"]}}
+    ],
+    "prompt": "Aluminum casting P-7700, dim 240 mm, hotspots at flange and boss: design chill blocks, compute shrinkage compensation, and Chvorinov constant.",
+    "gold_calls": [
+      {"name": "design_chill_block_pattern", "arguments": {"part_id": "P-7700", "hotspots": ["flange", "boss"]}},
+      {"name": "calc_shrinkage_compensation", "arguments": {"alloy": "aluminum", "dim_mm": 240}},
+      {"name": "compute_chvorinov_constant", "arguments": {"alloy": "aluminum"}}
+    ],
+    "difficulty": "medium"
+  },
+  {
+    "id": "fresh_par_040",
+    "function": [
+      {"name": "deploy_motus_tower", "description": "Deploy a Motus tracking tower.", "parameters": {"type": "object", "properties": {"site": {"type": "string"}, "freq_mhz": {"type": "number"}}, "required": ["site", "freq_mhz"]}},
+      {"name": "tag_passerine_nanotag", "description": "Tag passerine with nanotag.", "parameters": {"type": "object", "properties": {"band_id": {"type": "string"}, "tag_freq": {"type": "number"}}, "required": ["band_id", "tag_freq"]}},
+      {"name": "track_stopover_duration", "description": "Track stopover duration.", "parameters": {"type": "object", "properties": {"band_id": {"type": "string"}}, "required": ["band_id"]}},
+      {"name": "fetch_motus_detection", "description": "Fetch Motus detections.", "parameters": {"type": "object", "properties": {"band_id": {"type": "string"}}, "required": ["band_id"]}}
+    ],
+    "prompt": "Deploy Motus tower at Long Point on 166.380 MHz, tag bird BX-91 with same freq nanotag, and start tracking stopover duration.",
+    "gold_calls": [
+      {"name": "deploy_motus_tower", "arguments": {"site": "Long Point", "freq_mhz": 166.380}},
+      {"name": "tag_passerine_nanotag", "arguments": {"band_id": "BX-91", "tag_freq": 166.380}},
+      {"name": "track_stopover_duration", "arguments": {"band_id": "BX-91"}}
+    ],
+    "difficulty": "medium"
+  },
+  {
+    "id": "fresh_par_041",
+    "function": [
+      {"name": "deploy_acoustic_recorder_ocean", "description": "Deploy underwater acoustic recorder.", "parameters": {"type": "object", "properties": {"site": {"type": "string"}, "depth_m": {"type": "number"}, "days": {"type": "integer"}}, "required": ["site", "depth_m", "days"]}},
+      {"name": "detect_cetacean_call", "description": "Detect cetacean vocalization in audio.", "parameters": {"type": "object", "properties": {"audio_uri": {"type": "string"}, "species": {"type": "string"}}, "required": ["audio_uri", "species"]}},
+      {"name": "log_breach_event", "description": "Log breach event.", "parameters": {"type": "object", "properties": {"species": {"type": "string"}, "lat": {"type": "number"}, "lon": {"type": "number"}}, "required": ["species", "lat", "lon"]}},
+      {"name": "estimate_pod_size", "description": "Estimate pod size from photos.", "parameters": {"type": "object", "properties": {"photo_uri": {"type": "string"}}, "required": ["photo_uri"]}}
+    ],
+    "prompt": "Deploy hydrophone at Stellwagen at 60 m for 14 days, then detect humpback calls in audio file aud-455.wav.",
+    "gold_calls": [
+      {"name": "deploy_acoustic_recorder_ocean", "arguments": {"site": "Stellwagen", "depth_m": 60, "days": 14}},
+      {"name": "detect_cetacean_call", "arguments": {"audio_uri": "aud-455.wav", "species": "humpback"}}
+    ],
+    "difficulty": "medium"
+  },
+  {
+    "id": "fresh_par_042",
+    "function": [
+      {"name": "test_dichroism_tourmaline", "description": "Test dichroism on tourmaline.", "parameters": {"type": "object", "properties": {"stone_id": {"type": "string"}}, "required": ["stone_id"]}},
+      {"name": "rgb_color_grade", "description": "Grade RGB color of gem.", "parameters": {"type": "object", "properties": {"stone_id": {"type": "string"}}, "required": ["stone_id"]}},
+      {"name": "carat_weight_balance", "description": "Weigh in carats.", "parameters": {"type": "object", "properties": {"stone_id": {"type": "string"}}, "required": ["stone_id"]}},
+      {"name": "issue_lab_report", "description": "Issue lab report.", "parameters": {"type": "object", "properties": {"stone_id": {"type": "string"}}, "required": ["stone_id"]}}
+    ],
+    "prompt": "Tourmaline TM-19: test dichroism, weigh, and grade RGB color.",
+    "gold_calls": [
+      {"name": "test_dichroism_tourmaline", "arguments": {"stone_id": "TM-19"}},
+      {"name": "carat_weight_balance", "arguments": {"stone_id": "TM-19"}},
+      {"name": "rgb_color_grade", "arguments": {"stone_id": "TM-19"}}
+    ],
+    "difficulty": "medium"
+  },
+  {
+    "id": "fresh_par_043",
+    "function": [
+      {"name": "extract_volcanic_tephra", "description": "Extract tephra layer for analysis.", "parameters": {"type": "object", "properties": {"site": {"type": "string"}, "depth_cm": {"type": "number"}}, "required": ["site", "depth_cm"]}},
+      {"name": "argon_argon_date", "description": "40Ar/39Ar date.", "parameter": {}, "parameters": {"type": "object", "properties": {"sample_id": {"type": "string"}}, "required": ["sample_id"]}},
+      {"name": "match_tephra_to_eruption", "description": "Match tephra layer to eruption.", "parameters": {"type": "object", "properties": {"sample_id": {"type": "string"}}, "required": ["sample_id"]}},
+      {"name": "compute_dispersal_axis", "description": "Compute tephra dispersal axis.", "parameters": {"type": "object", "properties": {"eruption_id": {"type": "string"}}, "required": ["eruption_id"]}}
+    ],
+    "prompt": "At Vesuvius site VS-3 at 88 cm depth: extract tephra sample TEPH-VS-3, run 40Ar/39Ar dating, and match to known eruption.",
+    "gold_calls": [
+      {"name": "extract_volcanic_tephra", "arguments": {"site": "VS-3", "depth_cm": 88}},
+      {"name": "argon_argon_date", "arguments": {"sample_id": "TEPH-VS-3"}},
+      {"name": "match_tephra_to_eruption", "arguments": {"sample_id": "TEPH-VS-3"}}
+    ],
+    "difficulty": "medium"
+  },
+  {
+    "id": "fresh_par_044",
+    "function": [
+      {"name": "reconstruct_lost_letterform", "description": "Reconstruct damaged letterform.", "parameters": {"type": "object", "properties": {"image_uri": {"type": "string"}, "script": {"type": "string"}}, "required": ["image_uri", "script"]}},
+      {"name": "compare_to_codex_variants", "description": "Compare to known codex variants.", "parameters": {"type": "object", "properties": {"folio_id": {"type": "string"}}, "required": ["folio_id"]}},
+      {"name": "build_stemma_codicum", "description": "Build stemma codicum.", "parameters": {"type": "object", "properties": {"witnesses": {"type": "array", "items": {"type": "string"}}}, "required": ["witnesses"]}},
+      {"name": "annotate_marginal_neumes", "description": "Annotate neumes.", "parameters": {"type": "object", "properties": {"folio_id": {"type": "string"}}, "required": ["folio_id"]}}
+    ],
+    "prompt": "Damaged folio MS-Laud-Gr-35 f.7v in uncial — reconstruct letterforms from image lz/lg35-7v.tif and compare against known codex variants.",
+    "gold_calls": [
+      {"name": "reconstruct_lost_letterform", "arguments": {"image_uri": "lz/lg35-7v.tif", "script": "uncial"}},
+      {"name": "compare_to_codex_variants", "arguments": {"folio_id": "MS-Laud-Gr-35 f.7v"}}
+    ],
+    "difficulty": "medium"
+  },
+  {
+    "id": "fresh_par_045",
+    "function": [
+      {"name": "centrifugal_cast_ring", "description": "Centrifugal cast a ring.", "parameters": {"type": "object", "properties": {"mold_id": {"type": "string"}, "rpm": {"type": "integer"}}, "required": ["mold_id", "rpm"]}},
+      {"name": "vacuum_cast_jewelry", "description": "Vacuum cast jewelry piece.", "parameters": {"type": "object", "properties": {"mold_id": {"type": "string"}, "vacuum_mbar": {"type": "number"}}, "required": ["mold_id", "vacuum_mbar"]}},
+      {"name": "polish_burr_finish", "description": "Polish with burr.", "parameters": {"type": "object", "properties": {"part_id": {"type": "string"}, "grade": {"type": "string"}}, "required": ["part_id", "grade"]}},
+      {"name": "stamp_hallmark", "description": "Stamp hallmark on jewelry.", "parameters": {"type": "object", "properties": {"part_id": {"type": "string"}, "hallmark": {"type": "string"}}, "required": ["part_id", "hallmark"]}}
+    ],
+    "prompt": "Centrifugal cast ring mold RM-22 at 450 rpm, polish with fine burr, and stamp 925 hallmark.",
+    "gold_calls": [
+      {"name": "centrifugal_cast_ring", "arguments": {"mold_id": "RM-22", "rpm": 450}},
+      {"name": "polish_burr_finish", "arguments": {"part_id": "RM-22", "grade": "fine"}},
+      {"name": "stamp_hallmark", "arguments": {"part_id": "RM-22", "hallmark": "925"}}
+    ],
+    "difficulty": "medium"
+  },
+  {
+    "id": "fresh_par_046",
+    "function": [
+      {"name": "deploy_camera_trap", "description": "Deploy camera trap.", "parameters": {"type": "object", "properties": {"site": {"type": "string"}, "sensitivity": {"type": "string"}}, "required": ["site", "sensitivity"]}},
+      {"name": "classify_capercaillie_drumming", "description": "Classify capercaillie drumming.", "parameters": {"type": "object", "properties": {"audio_uri": {"type": "string"}}, "required": ["audio_uri"]}},
+      {"name": "estimate_lek_attendance", "description": "Estimate lek attendance.", "parameters": {"type": "object", "properties": {"site": {"type": "string"}, "date": {"type": "string"}}, "required": ["site", "date"]}},
+      {"name": "log_dropping_sample", "description": "Log dropping sample.", "parameters": {"type": "object", "properties": {"sample_id": {"type": "string"}}, "required": ["sample_id"]}}
+    ],
+    "prompt": "Deploy camera trap with high sensitivity at lek site LEK-7 and estimate capercaillie lek attendance for 2026-04-12.",
+    "gold_calls": [
+      {"name": "deploy_camera_trap", "arguments": {"site": "LEK-7", "sensitivity": "high"}},
+      {"name": "estimate_lek_attendance", "arguments": {"site": "LEK-7", "date": "2026-04-12"}}
+    ],
+    "difficulty": "medium"
+  },
+  {
+    "id": "fresh_par_047",
+    "function": [
+      {"name": "deploy_argo_float", "description": "Deploy Argo float.", "parameters": {"type": "object", "properties": {"lat": {"type": "number"}, "lon": {"type": "number"}, "cycle_days": {"type": "integer"}}, "required": ["lat", "lon", "cycle_days"]}},
+      {"name": "fetch_temperature_profile", "description": "Fetch T profile.", "parameters": {"type": "object", "properties": {"float_id": {"type": "string"}}, "required": ["float_id"]}},
+      {"name": "fetch_salinity_profile", "description": "Fetch S profile.", "parameters": {"type": "object", "properties": {"float_id": {"type": "string"}}, "required": ["float_id"]}},
+      {"name": "compute_mixed_layer_depth", "description": "Compute MLD.", "parameters": {"type": "object", "properties": {"float_id": {"type": "string"}}, "required": ["float_id"]}}
+    ],
+    "prompt": "Deploy Argo float at lat -42.0 lon 145.5 with 10-day cycle. Then for float ARGO-7711 fetch T and S profiles.",
+    "gold_calls": [
+      {"name": "deploy_argo_float", "arguments": {"lat": -42.0, "lon": 145.5, "cycle_days": 10}},
+      {"name": "fetch_temperature_profile", "arguments": {"float_id": "ARGO-7711"}},
+      {"name": "fetch_salinity_profile", "arguments": {"float_id": "ARGO-7711"}}
+    ],
+    "difficulty": "medium"
+  },
+  {
+    "id": "fresh_par_048",
+    "function": [
+      {"name": "fire_assay_gold", "description": "Fire assay for gold content.", "parameters": {"type": "object", "properties": {"sample_id": {"type": "string"}, "mass_g": {"type": "number"}}, "required": ["sample_id", "mass_g"]}},
+      {"name": "compute_au_ag_ratio", "description": "Compute Au:Ag ratio.", "parameters": {"type": "object", "properties": {"sample_id": {"type": "string"}}, "required": ["sample_id"]}},
+      {"name": "estimate_ore_value", "description": "Estimate ore market value.", "parameters": {"type": "object", "properties": {"sample_id": {"type": "string"}, "ton_count": {"type": "number"}}, "required": ["sample_id", "ton_count"]}},
+      {"name": "log_sample_provenance", "description": "Log sample provenance.", "parameters": {"type": "object", "properties": {"sample_id": {"type": "string"}, "mine": {"type": "string"}}, "required": ["sample_id", "mine"]}}
+    ],
+    "prompt": "Run fire assay on 30 g of ore ORE-101 from Witwatersrand mine, compute Au:Ag ratio, and log provenance.",
+    "gold_calls": [
+      {"name": "fire_assay_gold", "arguments": {"sample_id": "ORE-101", "mass_g": 30}},
+      {"name": "compute_au_ag_ratio", "arguments": {"sample_id": "ORE-101"}},
+      {"name": "log_sample_provenance", "arguments": {"sample_id": "ORE-101", "mine": "Witwatersrand"}}
+    ],
+    "difficulty": "medium"
+  },
+  {
+    "id": "fresh_par_049",
+    "function": [
+      {"name": "compute_strike_dip", "description": "Compute strike and dip from outcrop.", "parameters": {"type": "object", "properties": {"outcrop_id": {"type": "string"}}, "required": ["outcrop_id"]}},
+      {"name": "identify_fault_type", "description": "Identify fault type.", "parameters": {"type": "object", "properties": {"outcrop_id": {"type": "string"}}, "required": ["outcrop_id"]}},
+      {"name": "plot_stereonet", "description": "Plot stereographic projection.", "parameters": {"type": "object", "properties": {"measurements": {"type": "array", "items": {"type": "object"}}}, "required": ["measurements"]}},
+      {"name": "calc_slip_vector", "description": "Compute slip vector.", "parameters": {"type": "object", "properties": {"outcrop_id": {"type": "string"}}, "required": ["outcrop_id"]}}
+    ],
+    "prompt": "Outcrop OC-72 (San Andreas trace): compute strike/dip, identify fault type, and calculate slip vector.",
+    "gold_calls": [
+      {"name": "compute_strike_dip", "arguments": {"outcrop_id": "OC-72"}},
+      {"name": "identify_fault_type", "arguments": {"outcrop_id": "OC-72"}},
+      {"name": "calc_slip_vector", "arguments": {"outcrop_id": "OC-72"}}
+    ],
+    "difficulty": "medium"
+  },
+  {
+    "id": "fresh_par_050",
+    "function": [
+      {"name": "decode_runic_inscription", "description": "Decode Elder Futhark runes.", "parameters": {"type": "object", "properties": {"text": {"type": "string"}}, "required": ["text"]}},
+      {"name": "identify_runestone_provenance", "description": "Identify runestone provenance.", "parameters": {"type": "object", "properties": {"stone_id": {"type": "string"}}, "required": ["stone_id"]}},
+      {"name": "compare_runic_styles", "description": "Compare runic carving styles.", "parameters": {"type": "object", "properties": {"stone_a": {"type": "string"}, "stone_b": {"type": "string"}}, "required": ["stone_a", "stone_b"]}},
+      {"name": "fetch_runestone_database", "description": "Fetch entry from Rundata.", "parameters": {"type": "object", "properties": {"stone_id": {"type": "string"}}, "required": ["stone_id"]}}
+    ],
+    "prompt": "Decode runic inscription 'ᚦᚢᛏᚱ ᚱᛁᛋᛏᛁ ᛋᛏᛁᚾ' and fetch Rundata entry for U-240.",
+    "gold_calls": [
+      {"name": "decode_runic_inscription", "arguments": {"text": "ᚦᚢᛏᚱ ᚱᛁᛋᛏᛁ ᛋᛏᛁᚾ"}},
+      {"name": "fetch_runestone_database", "arguments": {"stone_id": "U-240"}}
+    ],
+    "difficulty": "medium"
+  },
+  {
+    "id": "fresh_par_051",
+    "function": [
+      {"name": "sand_cast_engine_block", "description": "Sand cast an engine block.", "parameters": {"type": "object", "properties": {"part_id": {"type": "string"}, "alloy": {"type": "string"}, "weight_kg": {"type": "number"}}, "required": ["part_id", "alloy", "weight_kg"]}},
+      {"name": "machine_cylinder_bore", "description": "Machine cylinder bore.", "parameters": {"type": "object", "properties": {"part_id": {"type": "string"}, "bore_mm": {"type": "number"}}, "required": ["part_id", "bore_mm"]}},
+      {"name": "pressure_test_water_jacket", "description": "Pressure test water jacket.", "parameters": {"type": "object", "properties": {"part_id": {"type": "string"}, "bar": {"type": "number"}}, "required": ["part_id", "bar"]}},
+      {"name": "balance_crankshaft", "description": "Balance crankshaft.", "parameters": {"type": "object", "properties": {"part_id": {"type": "string"}}, "required": ["part_id"]}}
+    ],
+    "prompt": "Sand-cast engine block EB-77 from aluminum, 85 kg. Machine the cylinder bore to 92 mm, then pressure-test water jacket at 3.5 bar.",
+    "gold_calls": [
+      {"name": "sand_cast_engine_block", "arguments": {"part_id": "EB-77", "alloy": "aluminum", "weight_kg": 85}},
+      {"name": "machine_cylinder_bore", "arguments": {"part_id": "EB-77", "bore_mm": 92}},
+      {"name": "pressure_test_water_jacket", "arguments": {"part_id": "EB-77", "bar": 3.5}}
+    ],
+    "difficulty": "medium"
+  },
+  {
+    "id": "fresh_par_052",
+    "function": [
+      {"name": "ring_swallow_chick", "description": "Ring a swallow chick.", "parameters": {"type": "object", "properties": {"nest_id": {"type": "string"}, "ring_id": {"type": "string"}}, "required": ["nest_id", "ring_id"]}},
+      {"name": "measure_brood_patch", "description": "Measure brood patch.", "parameters": {"type": "object", "properties": {"band_id": {"type": "string"}}, "required": ["band_id"]}},
+      {"name": "log_brood_size", "description": "Log brood size.", "parameters": {"type": "object", "properties": {"nest_id": {"type": "string"}, "count": {"type": "integer"}}, "required": ["nest_id", "count"]}},
+      {"name": "estimate_age_by_plumage", "description": "Estimate age by plumage.", "parameters": {"type": "object", "properties": {"band_id": {"type": "string"}}, "required": ["band_id"]}}
+    ],
+    "prompt": "Nest SW-04 has 5 chicks. Ring chick with ring SW-04-A and log brood size.",
+    "gold_calls": [
+      {"name": "ring_swallow_chick", "arguments": {"nest_id": "SW-04", "ring_id": "SW-04-A"}},
+      {"name": "log_brood_size", "arguments": {"nest_id": "SW-04", "count": 5}}
+    ],
+    "difficulty": "medium"
+  },
+  {
+    "id": "fresh_par_053",
+    "function": [
+      {"name": "deploy_baited_remote_camera", "description": "Deploy BRUVS unit.", "parameters": {"type": "object", "properties": {"site": {"type": "string"}, "depth_m": {"type": "number"}, "soak_h": {"type": "number"}}, "required": ["site", "depth_m", "soak_h"]}},
+      {"name": "count_max_n_species", "description": "Count MaxN per species.", "parameters": {"type": "object", "properties": {"video_uri": {"type": "string"}}, "required": ["video_uri"]}},
+      {"name": "identify_reef_fish", "description": "Identify reef fish from video.", "parameters": {"type": "object", "properties": {"video_uri": {"type": "string"}}, "required": ["video_uri"]}},
+      {"name": "compute_diversity_index", "description": "Compute Shannon diversity.", "parameters": {"type": "object", "properties": {"site": {"type": "string"}}, "required": ["site"]}}
+    ],
+    "prompt": "Deploy BRUVS at Ningaloo at 18 m for 2 hours. Then for video N18-A1.mp4 compute MaxN per species and Shannon diversity at Ningaloo.",
+    "gold_calls": [
+      {"name": "deploy_baited_remote_camera", "arguments": {"site": "Ningaloo", "depth_m": 18, "soak_h": 2}},
+      {"name": "count_max_n_species", "arguments": {"video_uri": "N18-A1.mp4"}},
+      {"name": "compute_diversity_index", "arguments": {"site": "Ningaloo"}}
+    ],
+    "difficulty": "medium"
+  },
+  {
+    "id": "fresh_par_054",
+    "function": [
+      {"name": "test_birefringence_gem", "description": "Test optical birefringence.", "parameters": {"type": "object", "properties": {"stone_id": {"type": "string"}}, "required": ["stone_id"]}},
+      {"name": "test_pleochroism", "description": "Test pleochroism.", "parameters": {"type": "object", "properties": {"stone_id": {"type": "string"}}, "required": ["stone_id"]}},
+      {"name": "scan_inclusions_photomicro", "description": "Photomicroscopy of inclusions.", "parameter": {}, "parameters": {"type": "object", "properties": {"stone_id": {"type": "string"}, "magnification": {"type": "integer"}}, "required": ["stone_id", "magnification"]}},
+      {"name": "report_lab_grown_status", "description": "Detect lab-grown.", "parameters": {"type": "object", "properties": {"stone_id": {"type": "string"}}, "required": ["stone_id"]}}
+    ],
+    "prompt": "Stone SP-04 sapphire: birefringence test, pleochroism test, and 40x photomicroscopy of inclusions.",
+    "gold_calls": [
+      {"name": "test_birefringence_gem", "arguments": {"stone_id": "SP-04"}},
+      {"name": "test_pleochroism", "arguments": {"stone_id": "SP-04"}},
+      {"name": "scan_inclusions_photomicro", "arguments": {"stone_id": "SP-04", "magnification": 40}}
+    ],
+    "difficulty": "medium"
+  },
+  {
+    "id": "fresh_par_055",
+    "function": [
+      {"name": "model_dune_migration", "description": "Model barchan dune migration.", "parameters": {"type": "object", "properties": {"dune_id": {"type": "string"}, "wind_speed_ms": {"type": "number"}}, "required": ["dune_id", "wind_speed_ms"]}},
+      {"name": "measure_dune_slipface", "description": "Measure slipface angle.", "parameters": {"type": "object", "properties": {"dune_id": {"type": "string"}}, "required": ["dune_id"]}},
+      {"name": "sample_sand_grain_size", "description": "Sample sand grain size.", "parameters": {"type": "object", "properties": {"dune_id": {"type": "string"}}, "required": ["dune_id"]}},
+      {"name": "compute_aspect_ratio_dune", "description": "Compute aspect ratio.", "parameters": {"type": "object", "properties": {"dune_id": {"type": "string"}}, "required": ["dune_id"]}}
+    ],
+    "prompt": "Barchan dune BD-21 in Namib at 9 m/s wind: model migration, measure slipface, and compute aspect ratio.",
+    "gold_calls": [
+      {"name": "model_dune_migration", "arguments": {"dune_id": "BD-21", "wind_speed_ms": 9}},
+      {"name": "measure_dune_slipface", "arguments": {"dune_id": "BD-21"}},
+      {"name": "compute_aspect_ratio_dune", "arguments": {"dune_id": "BD-21"}}
+    ],
+    "difficulty": "medium"
+  },
+  {
+    "id": "fresh_par_056",
+    "function": [
+      {"name": "transcribe_carolingian_minuscule", "description": "Transcribe Carolingian minuscule.", "parameters": {"type": "object", "properties": {"image_uri": {"type": "string"}}, "required": ["image_uri"]}},
+      {"name": "compare_to_tours_scriptorium", "description": "Compare hand to Tours scriptorium.", "parameters": {"type": "object", "properties": {"folio_id": {"type": "string"}}, "required": ["folio_id"]}},
+      {"name": "date_quire_construction", "description": "Date quire construction.", "parameters": {"type": "object", "properties": {"manuscript_id": {"type": "string"}}, "required": ["manuscript_id"]}},
+      {"name": "extract_ruling_pattern", "description": "Extract ruling pattern.", "parameters": {"type": "object", "properties": {"folio_id": {"type": "string"}}, "required": ["folio_id"]}}
+    ],
+    "prompt": "Manuscript Bamberg-Bibl.1, folio 12r: transcribe the Carolingian minuscule from image bamb1-12r.tif and compare to the Tours scriptorium.",
+    "gold_calls": [
+      {"name": "transcribe_carolingian_minuscule", "arguments": {"image_uri": "bamb1-12r.tif"}},
+      {"name": "compare_to_tours_scriptorium", "arguments": {"folio_id": "Bamberg-Bibl.1 f.12r"}}
+    ],
+    "difficulty": "medium"
+  },
+  {
+    "id": "fresh_par_057",
+    "function": [
+      {"name": "spectrograph_metal_alloy", "description": "Spectrograph alloy composition.", "parameters": {"type": "object", "properties": {"sample_id": {"type": "string"}}, "required": ["sample_id"]}},
+      {"name": "tensile_test_specimen", "description": "Tensile test.", "parameters": {"type": "object", "properties": {"specimen_id": {"type": "string"}, "rate_mm_s": {"type": "number"}}, "required": ["specimen_id", "rate_mm_s"]}},
+      {"name": "compute_yield_strength", "description": "Compute yield strength from test.", "parameters": {"type": "object", "properties": {"specimen_id": {"type": "string"}}, "required": ["specimen_id"]}},
+      {"name": "log_lot_traceability", "description": "Log lot traceability.", "parameters": {"type": "object", "properties": {"specimen_id": {"type": "string"}, "lot": {"type": "string"}}, "required": ["specimen_id", "lot"]}}
+    ],
+    "prompt": "Lot 22-A, specimen SP-201: spectrograph composition, tensile test at 0.5 mm/s, and compute yield strength.",
+    "gold_calls": [
+      {"name": "spectrograph_metal_alloy", "arguments": {"sample_id": "SP-201"}},
+      {"name": "tensile_test_specimen", "arguments": {"specimen_id": "SP-201", "rate_mm_s": 0.5}},
+      {"name": "compute_yield_strength", "arguments": {"specimen_id": "SP-201"}}
+    ],
+    "difficulty": "medium"
+  },
+  {
+    "id": "fresh_par_058",
+    "function": [
+      {"name": "deploy_geophone_array", "description": "Deploy geophone array.", "parameters": {"type": "object", "properties": {"site": {"type": "string"}, "channels": {"type": "integer"}}, "required": ["site", "channels"]}},
+      {"name": "record_microseismic_event", "description": "Record microseismic event.", "parameters": {"type": "object", "properties": {"site": {"type": "string"}, "duration_min": {"type": "integer"}}, "required": ["site", "duration_min"]}},
+      {"name": "locate_hypocenter", "description": "Locate hypocenter.", "parameters": {"type": "object", "properties": {"event_id": {"type": "string"}}, "required": ["event_id"]}},
+      {"name": "compute_focal_mechanism", "description": "Compute focal mechanism.", "parameters": {"type": "object", "properties": {"event_id": {"type": "string"}}, "required": ["event_id"]}}
+    ],
+    "prompt": "Deploy 24-channel geophone array at Reykjanes, record microseismic for 60 min, then locate hypocenter of event RKN-225.",
+    "gold_calls": [
+      {"name": "deploy_geophone_array", "arguments": {"site": "Reykjanes", "channels": 24}},
+      {"name": "record_microseismic_event", "arguments": {"site": "Reykjanes", "duration_min": 60}},
+      {"name": "locate_hypocenter", "arguments": {"event_id": "RKN-225"}}
+    ],
+    "difficulty": "medium"
+  },
+  {
+    "id": "fresh_par_059",
+    "function": [
+      {"name": "decipher_linear_b", "description": "Decipher Linear B tablet.", "parameters": {"type": "object", "properties": {"tablet_id": {"type": "string"}}, "required": ["tablet_id"]}},
+      {"name": "identify_mycenaean_seal", "description": "Identify Mycenaean seal motif.", "parameters": {"type": "object", "properties": {"seal_id": {"type": "string"}}, "required": ["seal_id"]}},
+      {"name": "log_archive_entry", "description": "Log archive entry.", "parameters": {"type": "object", "properties": {"artefact_id": {"type": "string"}, "site": {"type": "string"}}, "required": ["artefact_id", "site"]}},
+      {"name": "match_palace_economy_record", "description": "Match palace economy record.", "parameters": {"type": "object", "properties": {"tablet_id": {"type": "string"}}, "required": ["tablet_id"]}}
+    ],
+    "prompt": "Decipher Linear B tablet PY Ta 707 and match to Pylos palace economy records.",
+    "gold_calls": [
+      {"name": "decipher_linear_b", "arguments": {"tablet_id": "PY Ta 707"}},
+      {"name": "match_palace_economy_record", "arguments": {"tablet_id": "PY Ta 707"}}
+    ],
+    "difficulty": "medium"
+  },
+  {
+    "id": "fresh_par_060",
+    "function": [
+      {"name": "die_cast_aluminum_pressure", "description": "High-pressure die-cast aluminum.", "parameters": {"type": "object", "properties": {"die_id": {"type": "string"}, "pressure_bar": {"type": "number"}}, "required": ["die_id", "pressure_bar"]}},
+      {"name": "trim_flash_press", "description": "Trim flash with press.", "parameters": {"type": "object", "properties": {"part_id": {"type": "string"}}, "required": ["part_id"]}},
+      {"name": "heat_treat_t6", "description": "T6 heat treatment.", "parameters": {"type": "object", "properties": {"part_id": {"type": "string"}}, "required": ["part_id"]}},
+      {"name": "ct_scan_internal_porosity", "description": "CT scan for porosity.", "parameters": {"type": "object", "properties": {"part_id": {"type": "string"}}, "required": ["part_id"]}}
+    ],
+    "prompt": "Die-cast part DC-09 at 900 bar, then trim flash, and CT-scan for porosity.",
+    "gold_calls": [
+      {"name": "die_cast_aluminum_pressure", "arguments": {"die_id": "DC-09", "pressure_bar": 900}},
+      {"name": "trim_flash_press", "arguments": {"part_id": "DC-09"}},
+      {"name": "ct_scan_internal_porosity", "arguments": {"part_id": "DC-09"}}
+    ],
+    "difficulty": "medium"
+  },
+  {
+    "id": "fresh_par_061",
+    "function": [
+      {"name": "deploy_radar_aeroecology", "description": "Deploy aeroecology radar.", "parameters": {"type": "object", "properties": {"site": {"type": "string"}, "elevation_deg": {"type": "number"}, "range_km": {"type": "number"}}, "required": ["site", "elevation_deg", "range_km"]}},
+      {"name": "classify_radar_echo", "description": "Classify radar echo (bird/insect/bat).", "parameters": {"type": "object", "properties": {"echo_id": {"type": "string"}}, "required": ["echo_id"]}},
+      {"name": "calc_migration_flux", "description": "Compute migration flux.", "parameters": {"type": "object", "properties": {"site": {"type": "string"}, "date": {"type": "string"}}, "required": ["site", "date"]}},
+      {"name": "altitude_distribution_birds", "description": "Compute altitude distribution.", "parameters": {"type": "object", "properties": {"site": {"type": "string"}, "date": {"type": "string"}}, "required": ["site", "date"]}}
+    ],
+    "prompt": "Deploy radar at Falsterbo at 4.5 deg elevation, 60 km range, then for 2026-05-09 compute migration flux and altitude distribution.",
+    "gold_calls": [
+      {"name": "deploy_radar_aeroecology", "arguments": {"site": "Falsterbo", "elevation_deg": 4.5, "range_km": 60}},
+      {"name": "calc_migration_flux", "arguments": {"site": "Falsterbo", "date": "2026-05-09"}},
+      {"name": "altitude_distribution_birds", "arguments": {"site": "Falsterbo", "date": "2026-05-09"}}
+    ],
+    "difficulty": "hard"
+  },
+  {
+    "id": "fresh_par_062",
+    "function": [
+      {"name": "schedule_underwater_glider_mission", "description": "Schedule underwater glider mission.", "parameters": {"type": "object", "properties": {"glider_id": {"type": "string"}, "waypoints": {"type": "array", "items": {"type": "object", "properties": {"lat": {"type": "number"}, "lon": {"type": "number"}}}}, "max_depth_m": {"type": "number"}, "duration_days": {"type": "integer"}}, "required": ["glider_id", "waypoints", "max_depth_m", "duration_days"]}},
+      {"name": "configure_sensor_payload", "description": "Configure sensor payload.", "parameters": {"type": "object", "properties": {"glider_id": {"type": "string"}, "sensors": {"type": "array", "items": {"type": "string"}}, "sample_rate_hz": {"type": "number"}}, "required": ["glider_id", "sensors", "sample_rate_hz"]}},
+      {"name": "set_iridium_transmission", "description": "Configure Iridium SBD transmission.", "parameters": {"type": "object", "properties": {"glider_id": {"type": "string"}, "interval_min": {"type": "integer"}}, "required": ["glider_id", "interval_min"]}},
+      {"name": "predict_loiter_battery", "description": "Predict loiter battery life.", "parameters": {"type": "object", "properties": {"glider_id": {"type": "string"}}, "required": ["glider_id"]}}
+    ],
+    "prompt": "Glider SG-661 mission: waypoints (lat 36.0 lon -10.0) to (lat 37.0 lon -11.5), max depth 1000 m, 21 days. Configure CTD+oxygen+chlorophyll sensors at 1 Hz and set Iridium every 30 min.",
+    "gold_calls": [
+      {"name": "schedule_underwater_glider_mission", "arguments": {"glider_id": "SG-661", "waypoints": [{"lat": 36.0, "lon": -10.0}, {"lat": 37.0, "lon": -11.5}], "max_depth_m": 1000, "duration_days": 21}},
+      {"name": "configure_sensor_payload", "arguments": {"glider_id": "SG-661", "sensors": ["CTD", "oxygen", "chlorophyll"], "sample_rate_hz": 1}},
+      {"name": "set_iridium_transmission", "arguments": {"glider_id": "SG-661", "interval_min": 30}}
+    ],
+    "difficulty": "hard"
+  },
+  {
+    "id": "fresh_par_063",
+    "function": [
+      {"name": "schedule_lost_wax_pour_batch", "description": "Schedule lost-wax pour batch.", "parameters": {"type": "object", "properties": {"batch_id": {"type": "string"}, "molds": {"type": "array", "items": {"type": "string"}}, "alloy": {"type": "string"}, "pour_temp_c": {"type": "number"}, "atmosphere": {"type": "string"}}, "required": ["batch_id", "molds", "alloy", "pour_temp_c", "atmosphere"]}},
+      {"name": "configure_kiln_ramp", "description": "Configure burnout kiln temperature ramp.", "parameters": {"type": "object", "properties": {"kiln_id": {"type": "string"}, "ramps": {"type": "array", "items": {"type": "object", "properties": {"temp_c": {"type": "number"}, "hold_min": {"type": "integer"}}}}}, "required": ["kiln_id", "ramps"]}},
+      {"name": "weigh_metal_charge", "description": "Weigh metal charge.", "parameters": {"type": "object", "properties": {"alloy": {"type": "string"}, "mass_g": {"type": "number"}}, "required": ["alloy", "mass_g"]}},
+      {"name": "post_pour_qc_inspect", "description": "Post-pour QC inspection.", "parameters": {"type": "object", "properties": {"batch_id": {"type": "string"}, "checklist": {"type": "array", "items": {"type": "string"}}}, "required": ["batch_id", "checklist"]}}
+    ],
+    "prompt": "Batch B-2026-19: lost-wax pour molds LW-A1, LW-A2, LW-A3 in 18k yellow gold at 1050 C in argon. Burnout kiln K-2 ramp: 200 C/30 min then 740 C/60 min then 540 C/120 min. Weigh 420 g of 18k yellow gold.",
+    "gold_calls": [
+      {"name": "configure_kiln_ramp", "arguments": {"kiln_id": "K-2", "ramps": [{"temp_c": 200, "hold_min": 30}, {"temp_c": 740, "hold_min": 60}, {"temp_c": 540, "hold_min": 120}]}},
+      {"name": "weigh_metal_charge", "arguments": {"alloy": "18k yellow gold", "mass_g": 420}},
+      {"name": "schedule_lost_wax_pour_batch", "arguments": {"batch_id": "B-2026-19", "molds": ["LW-A1", "LW-A2", "LW-A3"], "alloy": "18k yellow gold", "pour_temp_c": 1050, "atmosphere": "argon"}}
+    ],
+    "difficulty": "hard"
+  },
+  {
+    "id": "fresh_par_064",
+    "function": [
+      {"name": "build_textual_critical_apparatus", "description": "Build textual critical apparatus.", "parameters": {"type": "object", "properties": {"work_id": {"type": "string"}, "witnesses": {"type": "array", "items": {"type": "string"}}, "base_text_id": {"type": "string"}}, "required": ["work_id", "witnesses", "base_text_id"]}},
+      {"name": "collate_witnesses_lachmann", "description": "Collate witnesses (Lachmann method).", "parameters": {"type": "object", "properties": {"witnesses": {"type": "array", "items": {"type": "string"}}, "variant_units": {"type": "array", "items": {"type": "string"}}}, "required": ["witnesses", "variant_units"]}},
+      {"name": "compute_quentin_distances", "description": "Compute Quentin distances among witnesses.", "parameters": {"type": "object", "properties": {"witnesses": {"type": "array", "items": {"type": "string"}}}, "required": ["witnesses"]}},
+      {"name": "draw_stemma_diagram", "description": "Draw stemma diagram.", "parameters": {"type": "object", "properties": {"work_id": {"type": "string"}, "format": {"type": "string"}}, "required": ["work_id", "format"]}}
+    ],
+    "prompt": "For work TIBULLUS_LIBER_I, collate witnesses A,V,G,O with variant units lines 1.1, 1.5, 2.3, then compute Quentin distances and build critical apparatus over base text A.",
+    "gold_calls": [
+      {"name": "collate_witnesses_lachmann", "arguments": {"witnesses": ["A", "V", "G", "O"], "variant_units": ["1.1", "1.5", "2.3"]}},
+      {"name": "compute_quentin_distances", "arguments": {"witnesses": ["A", "V", "G", "O"]}},
+      {"name": "build_textual_critical_apparatus", "arguments": {"work_id": "TIBULLUS_LIBER_I", "witnesses": ["A", "V", "G", "O"], "base_text_id": "A"}}
+    ],
+    "difficulty": "hard"
+  },
+  {
+    "id": "fresh_par_065",
+    "function": [
+      {"name": "design_capture_recapture_study", "description": "Design capture-recapture study.", "parameters": {"type": "object", "properties": {"species": {"type": "string"}, "site": {"type": "string"}, "occasions": {"type": "integer"}, "method": {"type": "string"}}, "required": ["species", "site", "occasions", "method"]}},
+      {"name": "fit_cormack_jolly_seber", "description": "Fit CJS model.", "parameters": {"type": "object", "properties": {"data_uri": {"type": "string"}, "covariates": {"type": "array", "items": {"type": "string"}}}, "required": ["data_uri", "covariates"]}},
+      {"name": "estimate_survival_rate", "description": "Estimate survival rate.", "parameters": {"type": "object", "properties": {"model_id": {"type": "string"}, "age_class": {"type": "string"}}, "required": ["model_id", "age_class"]}},
+      {"name": "plot_population_trajectory", "description": "Plot population trajectory.", "parameters": {"type": "object", "properties": {"species": {"type": "string"}, "years": {"type": "array", "items": {"type": "integer"}}}, "required": ["species", "years"]}}
+    ],
+    "prompt": "Eurasian dipper at River Tweed: design CJS capture-recapture with 8 mist-net occasions, then fit model on data uri data/dipper-tweed.csv with covariates sex,age, then estimate adult survival rate from model CJS-DT-1.",
+    "gold_calls": [
+      {"name": "design_capture_recapture_study", "arguments": {"species": "Eurasian dipper", "site": "River Tweed", "occasions": 8, "method": "mist-net"}},
+      {"name": "fit_cormack_jolly_seber", "arguments": {"data_uri": "data/dipper-tweed.csv", "covariates": ["sex", "age"]}},
+      {"name": "estimate_survival_rate", "arguments": {"model_id": "CJS-DT-1", "age_class": "adult"}}
+    ],
+    "difficulty": "hard"
+  },
+  {
+    "id": "fresh_par_066",
+    "function": [
+      {"name": "design_gemstone_appraisal_workflow", "description": "Design gemstone appraisal workflow.", "parameters": {"type": "object", "properties": {"stone_id": {"type": "string"}, "stages": {"type": "array", "items": {"type": "string"}}, "instruments": {"type": "array", "items": {"type": "string"}}}, "required": ["stone_id", "stages", "instruments"]}},
+      {"name": "raman_spectroscopy_inclusion", "description": "Raman spectroscopy of inclusion.", "parameters": {"type": "object", "properties": {"stone_id": {"type": "string"}, "laser_nm": {"type": "integer"}, "exposure_s": {"type": "number"}}, "required": ["stone_id", "laser_nm", "exposure_s"]}},
+      {"name": "ftir_treatment_detect", "description": "FTIR for treatment detection.", "parameters": {"type": "object", "properties": {"stone_id": {"type": "string"}, "range_cm1": {"type": "array", "items": {"type": "number"}}}, "required": ["stone_id", "range_cm1"]}},
+      {"name": "issue_origin_certificate", "description": "Issue origin certificate.", "parameters": {"type": "object", "properties": {"stone_id": {"type": "string"}, "origin": {"type": "string"}, "confidence": {"type": "number"}}, "required": ["stone_id", "origin", "confidence"]}}
+    ],
+    "prompt": "Sapphire SP-7711: design appraisal workflow with stages RI/SG/UV/Raman/FTIR using polariscope, refractometer, Raman 532 nm, FTIR. Run Raman on inclusion at 532 nm, 30 s. Run FTIR scan 4000-400 cm-1.",
+    "gold_calls": [
+      {"name": "design_gemstone_appraisal_workflow", "arguments": {"stone_id": "SP-7711", "stages": ["RI", "SG", "UV", "Raman", "FTIR"], "instruments": ["polariscope", "refractometer", "Raman 532 nm", "FTIR"]}},
+      {"name": "raman_spectroscopy_inclusion", "arguments": {"stone_id": "SP-7711", "laser_nm": 532, "exposure_s": 30}},
+      {"name": "ftir_treatment_detect", "arguments": {"stone_id": "SP-7711", "range_cm1": [4000, 400]}}
+    ],
+    "difficulty": "hard"
+  },
+  {
+    "id": "fresh_par_067",
+    "function": [
+      {"name": "interpret_palynology_assemblage", "description": "Interpret palynology assemblage.", "parameters": {"type": "object", "properties": {"core_id": {"type": "string"}, "depths_cm": {"type": "array", "items": {"type": "number"}}}, "required": ["core_id", "depths_cm"]}},
+      {"name": "compute_pollen_zone_boundaries", "description": "Compute pollen zone boundaries (CONISS).", "parameters": {"type": "object", "properties": {"core_id": {"type": "string"}, "method": {"type": "string"}}, "required": ["core_id", "method"]}},
+      {"name": "calibrate_radiocarbon_age", "description": "Calibrate radiocarbon age with IntCal20.", "parameters": {"type": "object", "properties": {"sample_id": {"type": "string"}, "c14_age": {"type": "number"}, "curve": {"type": "string"}}, "required": ["sample_id", "c14_age", "curve"]}},
+      {"name": "plot_age_depth_model", "description": "Plot Bayesian age-depth model.", "parameters": {"type": "object", "properties": {"core_id": {"type": "string"}, "model": {"type": "string"}}, "required": ["core_id", "model"]}}
+    ],
+    "prompt": "Core BL-117 lake sediment: interpret palynology at depths 12, 24, 36, 48, 60 cm; compute pollen zones via CONISS; calibrate sample BL-117-C6 (c14 age 2840) with IntCal20.",
+    "gold_calls": [
+      {"name": "interpret_palynology_assemblage", "arguments": {"core_id": "BL-117", "depths_cm": [12, 24, 36, 48, 60]}},
+      {"name": "compute_pollen_zone_boundaries", "arguments": {"core_id": "BL-117", "method": "CONISS"}},
+      {"name": "calibrate_radiocarbon_age", "arguments": {"sample_id": "BL-117-C6", "c14_age": 2840, "curve": "IntCal20"}}
+    ],
+    "difficulty": "hard"
+  },
+  {
+    "id": "fresh_par_068",
+    "function": [
+      {"name": "schedule_ornithology_radar_calibration", "description": "Schedule radar calibration.", "parameters": {"type": "object", "properties": {"site": {"type": "string"}, "date": {"type": "string"}, "targets": {"type": "array", "items": {"type": "string"}}, "reference_rcs_m2": {"type": "number"}}, "required": ["site", "date", "targets", "reference_rcs_m2"]}},
+      {"name": "compute_doppler_velocity", "description": "Compute Doppler velocity from radar.", "parameters": {"type": "object", "properties": {"site": {"type": "string"}, "time_window": {"type": "array", "items": {"type": "string"}}}, "required": ["site", "time_window"]}},
+      {"name": "classify_flock_size", "description": "Classify flock size by echo strength.", "parameters": {"type": "object", "properties": {"echo_id": {"type": "string"}, "rcs_m2": {"type": "number"}}, "required": ["echo_id", "rcs_m2"]}},
+      {"name": "export_iso_movebank", "description": "Export tracks in Movebank format.", "parameters": {"type": "object", "properties": {"site": {"type": "string"}, "date": {"type": "string"}}, "required": ["site", "date"]}}
+    ],
+    "prompt": "At Eilat radar on 2026-04-22: schedule calibration with metal sphere and corner reflector, ref RCS 0.01 m2. Compute Doppler velocity for window 04:00 to 06:00, and export tracks to Movebank.",
+    "gold_calls": [
+      {"name": "schedule_ornithology_radar_calibration", "arguments": {"site": "Eilat", "date": "2026-04-22", "targets": ["metal sphere", "corner reflector"], "reference_rcs_m2": 0.01}},
+      {"name": "compute_doppler_velocity", "arguments": {"site": "Eilat", "time_window": ["04:00", "06:00"]}},
+      {"name": "export_iso_movebank", "arguments": {"site": "Eilat", "date": "2026-04-22"}}
+    ],
+    "difficulty": "hard"
+  },
+  {
+    "id": "fresh_par_069",
+    "function": [
+      {"name": "model_landslide_susceptibility", "description": "Model landslide susceptibility (logistic regression).", "parameters": {"type": "object", "properties": {"region": {"type": "string"}, "predictors": {"type": "array", "items": {"type": "string"}}, "training_data": {"type": "string"}}, "required": ["region", "predictors", "training_data"]}},
+      {"name": "compute_topographic_wetness_index", "description": "Compute TWI.", "parameters": {"type": "object", "properties": {"dem_uri": {"type": "string"}, "resolution_m": {"type": "integer"}}, "required": ["dem_uri", "resolution_m"]}},
+      {"name": "rainfall_threshold_curve", "description": "Fit rainfall threshold curve.", "parameters": {"type": "object", "properties": {"region": {"type": "string"}, "events": {"type": "array", "items": {"type": "object"}}}, "required": ["region", "events"]}},
+      {"name": "publish_hazard_map", "description": "Publish hazard map.", "parameters": {"type": "object", "properties": {"region": {"type": "string"}, "scenario": {"type": "string"}, "format": {"type": "string"}}, "required": ["region", "scenario", "format"]}}
+    ],
+    "prompt": "Cinque Terre landslide hazard: model susceptibility with predictors slope, lithology, land_cover, TWI on training data data/ct-inventory.csv. Compute TWI from DEM dem/ct-2m.tif at 2 m. Publish hazard map for scenario RP100 as GeoTIFF.",
+    "gold_calls": [
+      {"name": "compute_topographic_wetness_index", "arguments": {"dem_uri": "dem/ct-2m.tif", "resolution_m": 2}},
+      {"name": "model_landslide_susceptibility", "arguments": {"region": "Cinque Terre", "predictors": ["slope", "lithology", "land_cover", "TWI"], "training_data": "data/ct-inventory.csv"}},
+      {"name": "publish_hazard_map", "arguments": {"region": "Cinque Terre", "scenario": "RP100", "format": "GeoTIFF"}}
+    ],
+    "difficulty": "hard"
+  },
+  {
+    "id": "fresh_par_070",
+    "function": [
+      {"name": "design_palaeographic_chronotype_study", "description": "Design palaeographic chronotype study.", "parameters": {"type": "object", "properties": {"corpus": {"type": "string"}, "script": {"type": "string"}, "letterforms": {"type": "array", "items": {"type": "string"}}, "date_range": {"type": "array", "items": {"type": "integer"}}}, "required": ["corpus", "script", "letterforms", "date_range"]}},
+      {"name": "extract_glyph_features", "description": "Extract glyph features.", "parameters": {"type": "object", "properties": {"image_set_uri": {"type": "string"}, "features": {"type": "array", "items": {"type": "string"}}}, "required": ["image_set_uri", "features"]}},
+      {"name": "cluster_handwriting_styles", "description": "Cluster handwriting styles.", "parameters": {"type": "object", "properties": {"feature_uri": {"type": "string"}, "k": {"type": "integer"}, "method": {"type": "string"}}, "required": ["feature_uri", "k", "method"]}},
+      {"name": "date_manuscript_bayesian", "description": "Bayesian dating of manuscript.", "parameters": {"type": "object", "properties": {"manuscript_id": {"type": "string"}, "priors": {"type": "object"}}, "required": ["manuscript_id", "priors"]}}
+    ],
+    "prompt": "Beneventan script chronotype study: corpus Monte Cassino, script Beneventan, letterforms a, e, g, t, date range 900-1100. Extract features stroke-width, ascender-height, slant from images set img/mc-bnv. Then cluster handwriting features at feature_uri features/bnv.npy into k=5 via kmeans.",
+    "gold_calls": [
+      {"name": "design_palaeographic_chronotype_study", "arguments": {"corpus": "Monte Cassino", "script": "Beneventan", "letterforms": ["a", "e", "g", "t"], "date_range": [900, 1100]}},
+      {"name": "extract_glyph_features", "arguments": {"image_set_uri": "img/mc-bnv", "features": ["stroke-width", "ascender-height", "slant"]}},
+      {"name": "cluster_handwriting_styles", "arguments": {"feature_uri": "features/bnv.npy", "k": 5, "method": "kmeans"}}
+    ],
+    "difficulty": "hard"
+  },
+  {
+    "id": "fresh_par_071",
+    "function": [
+      {"name": "configure_continuous_casting_line", "description": "Configure continuous casting line.", "parameters": {"type": "object", "properties": {"line_id": {"type": "string"}, "alloy": {"type": "string"}, "casting_speed_m_min": {"type": "number"}, "mold_taper_pct": {"type": "number"}}, "required": ["line_id", "alloy", "casting_speed_m_min", "mold_taper_pct"]}},
+      {"name": "set_secondary_cooling_zones", "description": "Set secondary cooling zones.", "parameters": {"type": "object", "properties": {"line_id": {"type": "string"}, "zones": {"type": "array", "items": {"type": "object", "properties": {"zone": {"type": "integer"}, "water_l_min": {"type": "number"}}}}}, "required": ["line_id", "zones"]}},
+      {"name": "monitor_breakout_risk", "description": "Monitor breakout risk.", "parameters": {"type": "object", "properties": {"line_id": {"type": "string"}, "thermocouple_array": {"type": "string"}}, "required": ["line_id", "thermocouple_array"]}},
+      {"name": "log_heat_chemistry", "description": "Log heat chemistry.", "parameters": {"type": "object", "properties": {"heat_id": {"type": "string"}, "composition": {"type": "object"}}, "required": ["heat_id", "composition"]}}
+    ],
+    "prompt": "Line CCL-3 casting low-carbon steel at 1.2 m/min with 1.1% mold taper. Set zones 1=120, 2=85, 3=50 L/min. Monitor breakout via thermocouple array TC-ARR-3.",
+    "gold_calls": [
+      {"name": "configure_continuous_casting_line", "arguments": {"line_id": "CCL-3", "alloy": "low-carbon steel", "casting_speed_m_min": 1.2, "mold_taper_pct": 1.1}},
+      {"name": "set_secondary_cooling_zones", "arguments": {"line_id": "CCL-3", "zones": [{"zone": 1, "water_l_min": 120}, {"zone": 2, "water_l_min": 85}, {"zone": 3, "water_l_min": 50}]}},
+      {"name": "monitor_breakout_risk", "arguments": {"line_id": "CCL-3", "thermocouple_array": "TC-ARR-3"}}
+    ],
+    "difficulty": "hard"
+  },
+  {
+    "id": "fresh_par_072",
+    "function": [
+      {"name": "design_seabird_telemetry_study", "description": "Design seabird telemetry study.", "parameters": {"type": "object", "properties": {"species": {"type": "string"}, "colony": {"type": "string"}, "n_birds": {"type": "integer"}, "tag_type": {"type": "string"}}, "required": ["species", "colony", "n_birds", "tag_type"]}},
+      {"name": "fit_hidden_markov_movement", "description": "Fit HMM to movement.", "parameters": {"type": "object", "properties": {"track_uri": {"type": "string"}, "states": {"type": "integer"}, "covariates": {"type": "array", "items": {"type": "string"}}}, "required": ["track_uri", "states", "covariates"]}},
+      {"name": "identify_foraging_hotspot", "description": "Identify foraging hotspot.", "parameters": {"type": "object", "properties": {"colony": {"type": "string"}, "kernel": {"type": "string"}, "h_km": {"type": "number"}}, "required": ["colony", "kernel", "h_km"]}},
+      {"name": "model_marine_overlap_fishing", "description": "Model overlap with fishing fleets.", "parameters": {"type": "object", "properties": {"species": {"type": "string"}, "fishery": {"type": "string"}}, "required": ["species", "fishery"]}}
+    ],
+    "prompt": "Northern gannet colony at Bass Rock, design GPS telemetry study with 25 birds. Fit HMM with 3 states to tracks at tracks/gannet-br.csv using SST and bathymetry covariates. Identify foraging hotspots via fixed kernel with bandwidth 8 km.",
+    "gold_calls": [
+      {"name": "design_seabird_telemetry_study", "arguments": {"species": "northern gannet", "colony": "Bass Rock", "n_birds": 25, "tag_type": "GPS"}},
+      {"name": "fit_hidden_markov_movement", "arguments": {"track_uri": "tracks/gannet-br.csv", "states": 3, "covariates": ["SST", "bathymetry"]}},
+      {"name": "identify_foraging_hotspot", "arguments": {"colony": "Bass Rock", "kernel": "fixed", "h_km": 8}}
+    ],
+    "difficulty": "hard"
+  },
+  {
+    "id": "fresh_par_073",
+    "function": [
+      {"name": "design_speleothem_paleoclimate_record", "description": "Design speleothem paleoclimate record.", "parameters": {"type": "object", "properties": {"cave": {"type": "string"}, "stalagmite_id": {"type": "string"}, "proxies": {"type": "array", "items": {"type": "string"}}, "resolution_yr": {"type": "number"}}, "required": ["cave", "stalagmite_id", "proxies", "resolution_yr"]}},
+      {"name": "u_th_date_speleothem", "description": "U/Th date speleothem.", "parameters": {"type": "object", "properties": {"sample_id": {"type": "string"}, "subsample_mm": {"type": "number"}}, "required": ["sample_id", "subsample_mm"]}},
+      {"name": "measure_d18o_carbonate", "description": "Measure delta-18O of carbonate.", "parameters": {"type": "object", "properties": {"sample_id": {"type": "string"}, "instrument": {"type": "string"}}, "required": ["sample_id", "instrument"]}},
+      {"name": "reconstruct_paleotemperature", "description": "Reconstruct paleotemperature.", "parameters": {"type": "object", "properties": {"record_id": {"type": "string"}, "model": {"type": "string"}}, "required": ["record_id", "model"]}}
+    ],
+    "prompt": "Soreq Cave stalagmite SOR-12: design paleoclimate record with d18O and d13C proxies at 5-year resolution. U/Th date sample SOR-12-A at 0.5 mm subsample. Measure d18O on instrument MAT-253.",
+    "gold_calls": [
+      {"name": "design_speleothem_paleoclimate_record", "arguments": {"cave": "Soreq", "stalagmite_id": "SOR-12", "proxies": ["d18O", "d13C"], "resolution_yr": 5}},
+      {"name": "u_th_date_speleothem", "arguments": {"sample_id": "SOR-12-A", "subsample_mm": 0.5}},
+      {"name": "measure_d18o_carbonate", "arguments": {"sample_id": "SOR-12-A", "instrument": "MAT-253"}}
+    ],
+    "difficulty": "hard"
+  },
+  {
+    "id": "fresh_par_074",
+    "function": [
+      {"name": "register_papyrus_acquisition", "description": "Register papyrus acquisition.", "parameters": {"type": "object", "properties": {"papyrus_id": {"type": "string"}, "provenance": {"type": "string"}, "acquisition_date": {"type": "string"}, "language": {"type": "string"}}, "required": ["papyrus_id", "provenance", "acquisition_date", "language"]}},
+      {"name": "multispectral_image_papyrus", "description": "Multispectral image papyrus.", "parameters": {"type": "object", "properties": {"papyrus_id": {"type": "string"}, "wavelengths_nm": {"type": "array", "items": {"type": "integer"}}}, "required": ["papyrus_id", "wavelengths_nm"]}},
+      {"name": "transcribe_greek_majuscule", "description": "Transcribe Greek majuscule.", "parameter": {}, "parameters": {"type": "object", "properties": {"image_uri": {"type": "string"}, "diplomatic": {"type": "boolean"}}, "required": ["image_uri", "diplomatic"]}},
+      {"name": "publish_to_papyri_info", "description": "Publish to papyri.info.", "parameters": {"type": "object", "properties": {"papyrus_id": {"type": "string"}}, "required": ["papyrus_id"]}}
+    ],
+    "prompt": "Register papyrus P.Oxy.4444 from Oxyrhynchus acquired 2026-03-15 in Greek. Multispectral image at 365, 450, 700, 950 nm. Then diplomatic transcribe image scans/pox4444.tif.",
+    "gold_calls": [
+      {"name": "register_papyrus_acquisition", "arguments": {"papyrus_id": "P.Oxy.4444", "provenance": "Oxyrhynchus", "acquisition_date": "2026-03-15", "language": "Greek"}},
+      {"name": "multispectral_image_papyrus", "arguments": {"papyrus_id": "P.Oxy.4444", "wavelengths_nm": [365, 450, 700, 950]}},
+      {"name": "transcribe_greek_majuscule", "arguments": {"image_uri": "scans/pox4444.tif", "diplomatic": true}}
+    ],
+    "difficulty": "hard"
+  },
+  {
+    "id": "fresh_par_075",
+    "function": [
+      {"name": "design_anvil_forge_schedule", "description": "Design anvil forge schedule.", "parameters": {"type": "object", "properties": {"blade_id": {"type": "string"}, "alloy": {"type": "string"}, "passes": {"type": "array", "items": {"type": "object", "properties": {"temp_c": {"type": "number"}, "reduction_pct": {"type": "number"}}}}}, "required": ["blade_id", "alloy", "passes"]}},
+      {"name": "differential_hardening_clay", "description": "Apply differential hardening clay.", "parameters": {"type": "object", "properties": {"blade_id": {"type": "string"}, "edge_thickness_mm": {"type": "number"}, "spine_thickness_mm": {"type": "number"}}, "required": ["blade_id", "edge_thickness_mm", "spine_thickness_mm"]}},
+      {"name": "quench_blade_water", "description": "Water quench.", "parameters": {"type": "object", "properties": {"blade_id": {"type": "string"}, "water_temp_c": {"type": "number"}}, "required": ["blade_id", "water_temp_c"]}},
+      {"name": "polish_hamon_visualization", "description": "Polish to visualize hamon.", "parameters": {"type": "object", "properties": {"blade_id": {"type": "string"}, "stones": {"type": "array", "items": {"type": "string"}}}, "required": ["blade_id", "stones"]}}
+    ],
+    "prompt": "Tamahagane blade KAT-09: forge schedule 3 passes 1100 C/15%, 950 C/12%, 850 C/8%. Apply clay: edge 0.5 mm, spine 4 mm. Quench in 28 C water.",
+    "gold_calls": [
+      {"name": "design_anvil_forge_schedule", "arguments": {"blade_id": "KAT-09", "alloy": "tamahagane", "passes": [{"temp_c": 1100, "reduction_pct": 15}, {"temp_c": 950, "reduction_pct": 12}, {"temp_c": 850, "reduction_pct": 8}]}},
+      {"name": "differential_hardening_clay", "arguments": {"blade_id": "KAT-09", "edge_thickness_mm": 0.5, "spine_thickness_mm": 4}},
+      {"name": "quench_blade_water", "arguments": {"blade_id": "KAT-09", "water_temp_c": 28}}
+    ],
+    "difficulty": "hard"
+  },
+  {
+    "id": "fresh_par_076",
+    "function": [
+      {"name": "configure_passive_acoustic_monitoring", "description": "Configure PAM for marine mammals.", "parameters": {"type": "object", "properties": {"array_id": {"type": "string"}, "stations": {"type": "array", "items": {"type": "object", "properties": {"lat": {"type": "number"}, "lon": {"type": "number"}, "depth_m": {"type": "number"}}}}, "duty_cycle": {"type": "object"}}, "required": ["array_id", "stations", "duty_cycle"]}},
+      {"name": "train_species_detector_model", "description": "Train species detector model.", "parameters": {"type": "object", "properties": {"species": {"type": "string"}, "training_uri": {"type": "string"}, "architecture": {"type": "string"}, "epochs": {"type": "integer"}}, "required": ["species", "training_uri", "architecture", "epochs"]}},
+      {"name": "estimate_population_density_acoustic", "description": "Estimate density from PAM.", "parameters": {"type": "object", "properties": {"array_id": {"type": "string"}, "detection_function": {"type": "string"}}, "required": ["array_id", "detection_function"]}},
+      {"name": "map_acoustic_diversity_hotspot", "description": "Map acoustic diversity hotspots.", "parameters": {"type": "object", "properties": {"region": {"type": "string"}, "index": {"type": "string"}}, "required": ["region", "index"]}}
+    ],
+    "prompt": "PAM array PAM-MED-1: 3 stations (lat 36.0 lon 4.0 depth 80), (lat 36.5 lon 4.5 depth 120), (lat 37.0 lon 5.0 depth 200), duty cycle 10 min on / 50 min off. Train fin whale detector on data/fin-mediterranean.zip with ResNet18 for 40 epochs. Then estimate density with half-normal detection function.",
+    "gold_calls": [
+      {"name": "configure_passive_acoustic_monitoring", "arguments": {"array_id": "PAM-MED-1", "stations": [{"lat": 36.0, "lon": 4.0, "depth_m": 80}, {"lat": 36.5, "lon": 4.5, "depth_m": 120}, {"lat": 37.0, "lon": 5.0, "depth_m": 200}], "duty_cycle": {"on_min": 10, "off_min": 50}}},
+      {"name": "train_species_detector_model", "arguments": {"species": "fin whale", "training_uri": "data/fin-mediterranean.zip", "architecture": "ResNet18", "epochs": 40}},
+      {"name": "estimate_population_density_acoustic", "arguments": {"array_id": "PAM-MED-1", "detection_function": "half-normal"}}
+    ],
+    "difficulty": "hard"
+  },
+  {
+    "id": "fresh_par_077",
+    "function": [
+      {"name": "schedule_diamond_4c_pipeline", "description": "Schedule diamond 4C grading pipeline.", "parameters": {"type": "object", "properties": {"parcel_id": {"type": "string"}, "stones": {"type": "array", "items": {"type": "string"}}, "operators": {"type": "array", "items": {"type": "string"}}, "priority": {"type": "string"}}, "required": ["parcel_id", "stones", "operators", "priority"]}},
+      {"name": "laser_inscription_girdle", "description": "Laser inscribe girdle.", "parameters": {"type": "object", "properties": {"stone_id": {"type": "string"}, "text": {"type": "string"}, "depth_um": {"type": "number"}}, "required": ["stone_id", "text", "depth_um"]}},
+      {"name": "sarine_3d_scan", "description": "Sarine 3D scan.", "parameters": {"type": "object", "properties": {"stone_id": {"type": "string"}, "resolution_um": {"type": "number"}}, "required": ["stone_id", "resolution_um"]}},
+      {"name": "screen_synthetic_hpht", "description": "Screen for synthetic HPHT origin.", "parameters": {"type": "object", "properties": {"stone_id": {"type": "string"}}, "required": ["stone_id"]}}
+    ],
+    "prompt": "Parcel PCL-2026-04: stones D-1, D-2, D-3 for 4C grading by operators 'Anna' and 'Boris', priority rush. Sarine scan D-1 at 5 um resolution. Laser inscribe 'GIA-77711' on D-1 girdle at 4 um depth.",
+    "gold_calls": [
+      {"name": "schedule_diamond_4c_pipeline", "arguments": {"parcel_id": "PCL-2026-04", "stones": ["D-1", "D-2", "D-3"], "operators": ["Anna", "Boris"], "priority": "rush"}},
+      {"name": "sarine_3d_scan", "arguments": {"stone_id": "D-1", "resolution_um": 5}},
+      {"name": "laser_inscription_girdle", "arguments": {"stone_id": "D-1", "text": "GIA-77711", "depth_um": 4}}
+    ],
+    "difficulty": "hard"
+  },
+  {
+    "id": "fresh_par_078",
+    "function": [
+      {"name": "model_alluvial_fan_morphology", "description": "Model alluvial fan morphology.", "parameters": {"type": "object", "properties": {"site": {"type": "string"}, "catchment_area_km2": {"type": "number"}, "sediment_flux_m3_yr": {"type": "number"}, "slope_deg": {"type": "number"}}, "required": ["site", "catchment_area_km2", "sediment_flux_m3_yr", "slope_deg"]}},
+      {"name": "compute_avulsion_threshold", "description": "Compute avulsion threshold.", "parameters": {"type": "object", "properties": {"site": {"type": "string"}, "channel_aspect_ratio": {"type": "number"}}, "required": ["site", "channel_aspect_ratio"]}},
+      {"name": "date_fan_surface_osl", "description": "Date fan surface with OSL.", "parameters": {"type": "object", "properties": {"site": {"type": "string"}, "samples": {"type": "array", "items": {"type": "string"}}}, "required": ["site", "samples"]}},
+      {"name": "publish_geomorph_atlas", "description": "Publish geomorphic atlas.", "parameters": {"type": "object", "properties": {"region": {"type": "string"}, "format": {"type": "string"}}, "required": ["region", "format"]}}
+    ],
+    "prompt": "Alluvial fan ATAC-FAN-12 in Atacama: catchment 84 km2, sediment flux 6500 m3/yr, slope 4.2 deg. Compute avulsion threshold at channel aspect ratio 18. OSL date surface samples ATC-F12-S1, ATC-F12-S2, ATC-F12-S3.",
+    "gold_calls": [
+      {"name": "model_alluvial_fan_morphology", "arguments": {"site": "ATAC-FAN-12", "catchment_area_km2": 84, "sediment_flux_m3_yr": 6500, "slope_deg": 4.2}},
+      {"name": "compute_avulsion_threshold", "arguments": {"site": "ATAC-FAN-12", "channel_aspect_ratio": 18}},
+      {"name": "date_fan_surface_osl", "arguments": {"site": "ATAC-FAN-12", "samples": ["ATC-F12-S1", "ATC-F12-S2", "ATC-F12-S3"]}}
+    ],
+    "difficulty": "hard"
+  },
+  {
+    "id": "fresh_par_079",
+    "function": [
+      {"name": "schedule_eddl_codicology_survey", "description": "Schedule EDDL codicology survey.", "parameters": {"type": "object", "properties": {"library": {"type": "string"}, "shelfmarks": {"type": "array", "items": {"type": "string"}}, "features": {"type": "array", "items": {"type": "string"}}, "start_date": {"type": "string"}}, "required": ["library", "shelfmarks", "features", "start_date"]}},
+      {"name": "extract_quire_structure", "description": "Extract quire structure.", "parameters": {"type": "object", "properties": {"manuscript_id": {"type": "string"}}, "required": ["manuscript_id"]}},
+      {"name": "identify_binding_pattern", "description": "Identify binding pattern.", "parameters": {"type": "object", "properties": {"manuscript_id": {"type": "string"}, "style_period": {"type": "string"}}, "required": ["manuscript_id", "style_period"]}},
+      {"name": "compare_pricking_pattern", "description": "Compare pricking pattern.", "parameters": {"type": "object", "properties": {"manuscript_a": {"type": "string"}, "manuscript_b": {"type": "string"}}, "required": ["manuscript_a", "manuscript_b"]}}
+    ],
+    "prompt": "EDDL survey at British Library on shelfmarks Cotton Vitellius A.xv, Royal 8 D.xiii starting 2026-06-01, features quire-structure, ruling, binding, pricking. Extract quire structure of Cotton Vitellius A.xv, then identify its binding pattern as Romanesque.",
+    "gold_calls": [
+      {"name": "schedule_eddl_codicology_survey", "arguments": {"library": "British Library", "shelfmarks": ["Cotton Vitellius A.xv", "Royal 8 D.xiii"], "features": ["quire-structure", "ruling", "binding", "pricking"], "start_date": "2026-06-01"}},
+      {"name": "extract_quire_structure", "arguments": {"manuscript_id": "Cotton Vitellius A.xv"}},
+      {"name": "identify_binding_pattern", "arguments": {"manuscript_id": "Cotton Vitellius A.xv", "style_period": "Romanesque"}}
+    ],
+    "difficulty": "hard"
+  },
+  {
+    "id": "fresh_par_080",
+    "function": [
+      {"name": "schedule_bronze_casting_workshop", "description": "Schedule bronze casting workshop.", "parameters": {"type": "object", "properties": {"workshop_id": {"type": "string"}, "students": {"type": "integer"}, "modules": {"type": "array", "items": {"type": "string"}}, "duration_days": {"type": "integer"}}, "required": ["workshop_id", "students", "modules", "duration_days"]}},
+      {"name": "order_bronze_ingot_stock", "description": "Order bronze ingot stock.", "parameters": {"type": "object", "properties": {"alloy": {"type": "string"}, "kg": {"type": "number"}, "supplier": {"type": "string"}}, "required": ["alloy", "kg", "supplier"]}},
+      {"name": "configure_induction_furnace", "description": "Configure induction furnace.", "parameters": {"type": "object", "properties": {"furnace_id": {"type": "string"}, "max_temp_c": {"type": "number"}, "crucible_kg": {"type": "number"}}, "required": ["furnace_id", "max_temp_c", "crucible_kg"]}},
+      {"name": "issue_safety_briefing", "description": "Issue safety briefing.", "parameters": {"type": "object", "properties": {"workshop_id": {"type": "string"}, "topics": {"type": "array", "items": {"type": "string"}}}, "required": ["workshop_id", "topics"]}}
+    ],
+    "prompt": "Workshop WS-2026-FALL: 8 students, modules wax-modeling, lost-wax, finishing, 5 days. Order 40 kg of silicon bronze from Belmont. Configure furnace IF-2 to 1300 C max, 25 kg crucible.",
+    "gold_calls": [
+      {"name": "schedule_bronze_casting_workshop", "arguments": {"workshop_id": "WS-2026-FALL", "students": 8, "modules": ["wax-modeling", "lost-wax", "finishing"], "duration_days": 5}},
+      {"name": "order_bronze_ingot_stock", "arguments": {"alloy": "silicon bronze", "kg": 40, "supplier": "Belmont"}},
+      {"name": "configure_induction_furnace", "arguments": {"furnace_id": "IF-2", "max_temp_c": 1300, "crucible_kg": 25}}
+    ],
+    "difficulty": "hard"
+  }
+]
