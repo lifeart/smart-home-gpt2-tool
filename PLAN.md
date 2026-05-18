@@ -1129,3 +1129,62 @@ Skipped (not net-new or licence-incompatible): Hammer training data (= xLAM-60k 
 - **Sibling repo's `adapter_torch_EN_BFCL.npz` (707 KB, 8 classifier heads)** could be a future drop-in for a separate args-head on top of v6 — but transformers.js doesn't support custom heads, so this is a Python/ONNX-only avenue.
 
 
+---
+
+## Iter 19 — Research: why does this work + what could push it further
+
+Read-only survey + codebase audit, $0 spend.
+
+### A0. Architecture audit — zero changes vs default GPT-2
+
+Verified `training/train_hf_v{2..8}.py`: every version is `GPT2LMHeadModel.from_pretrained("openai-community/gpt2")` + `GPT2TokenizerFast`, with **only `tok.pad_token = tok.eos_token`** (runtime alias). No `resize_token_embeddings`, no new tokens, no `GPT2Config` override, no extra heads. Headlines come from **pure SFT on stock GPT-2** — 50,257 BPE, 12 layers, 768 d_model, tied embeddings, 1024 ctx, unchanged from 2019.
+
+### A. Why GPT-2 124M does well on tool-call
+
+1. **Tool-call is a low-entropy structured task.** "Small Models, Big Tasks" (arXiv 2504.19277): accuracy depends on schema adherence more than parameter count; SFT closes most of the LLM gap on single-turn calls. <https://arxiv.org/abs/2504.19277>
+2. **Branching factor per step is tiny.** After `{"name":"` ~100 names; after `"room":"` ~20 strings. GPT-2's 12 layers have plenty of capacity. JSONSchemaBench (arXiv 2501.10868) shows constrained decoding helps small models *more* than large ones. <https://arxiv.org/abs/2501.10868>
+3. **Domain prior > parameter prior at SFT 10k+.** Hammer (arXiv 2410.04587): Qwen2-1.5B + APIGen-60k beats Llama-3-8B-Instruct on BFCL. Same pattern one rung down. <https://arxiv.org/abs/2410.04587>
+4. **GPT-2 BPE handles JSON natively.** Brackets/colons/quotes are single tokens. Granite-FC (arXiv 2407.00121): small models emit JSON cleanly when trained on JSON. <https://arxiv.org/abs/2407.00121>
+5. **"No <1.5B competitive" was zero-shot only.** Octopus-V2 (arXiv 2404.01744): 98% with 2B Gemma + functional tokens; V3 trims under 1B. With domain SFT, structural priors saturate at 80-85% well below 1B. <https://arxiv.org/abs/2404.01744>
+
+### B. Load-bearing technical choices
+
+- **Wide-names mask (Iter 9.2, +4.33 pp exact)** — Hammer's "function masking": admit gold name when truncated prompt drops it.
+- **Retrieval pre-rank (Iter 4, +16.67 pp voice)** — Octopus-vs-RAG: strip 100-fn list to 3-5, lower branching at name-token.
+- **Data scale 1.2k → 26k** — biggest single lift (+28 pp), super-linear at small scale.
+- **Multi-domain training** (xLAM-irrelevance + Hermes + fresh_bench) — +16 pp cross-domain, no in-domain regression.
+- **Mixed prompt shapes (verified):** `build_v2_dataset.py` emits names-only arrays for irrelevance; `build_v6_dataset.py` emits full `{name, parameters}` JSON. The mix teaches both lexical-shortcut and schema-driven inference — a poor-man's Octopus functional-token compression without tokenizer surgery.
+
+All five are **generic for any small LM**. Porting to Qwen2.5-0.5B with the same stack should match or beat v6.
+
+### C. Untried techniques worth exploring
+
+| # | Technique | Reported Δ | Complexity | Cost | Worth? |
+|--:|---|---:|---|---:|---|
+| 1 | Granite multi-task curriculum (name-only / args-only / full) | **+8 pp args** (arXiv 2407.00121) | Low — data relabel | $1.5 | **YES — top** |
+| 2 | Functional tokens (Octopus-V2 `<func_N>`) | +20-30 pp name (arXiv 2404.01744) | High — tokenizer + ONNX | $1.5 | Defer |
+| 3 | DPO on arg-correctness pairs | +3-6 pp args (arXiv 2410.18890) | Med — TRL DPO | $2 | YES if 1 saturates |
+| 4 | Two-pass decoding (name → args) | +2-4 pp args | Low — `main.js` only | $0 | YES — cheap |
+| 5 | LoRA/DoRA per-domain adapters | +1-3 pp/dom | transformers.js can't multiplex | $2-3 | Skip |
+| 6 | Distillation from Llama-70B FC | +5-10 pp args (STAR) | High | $3-5 | Skip |
+| 7 | Custom heads (sibling's 8 classifiers) | 50% BFCL v4 | Custom ONNX op | $2 | Skip |
+| 8 | Few-shot exemplars in prompt | +2-3 pp args | Eats 200-300 of 1024 ctx | $0 | Marginal |
+| 9 | XGrammar CFG mask | <1 pp over our 99% | No JS port | $0 | Skip |
+| 10 | MoE 4×30M per domain | unknown | Bespoke arch | $5+ | Skip |
+
+### D. The ceiling
+
+- Octopus-V3 (<1B, functional tokens) hits 98% name — sub-1B has headroom on **name**.
+- "Small Models, Big Tasks" shows SLMs (270M-1.7B) hit a format-adherence wall near 70% exact on multi-arg. Our 55% at 124M is ~15 pp below.
+- The wall is **args, not names**: surveys report name 5-15 pp above args. v6 = 84/58/55 — fits exactly. Closing args (curriculum + DPO) is the only published path to lift exact without scaling.
+- Realistic 124M ceiling: **~88% name, ~70% args, ~65% exact** on a closed 100-fn domain. Beyond needs scale, functional-token surgery, or RL — none fit $12 + transformers.js.
+
+### Recommendation
+
+**(1) Granite multi-task curriculum → (2) Two-pass decoding.**
+
+1. **Curriculum (~$1.5, 2.5h HF Job).** Relabel v6's 20.6k into 50% full / 30% name-only / 20% args-only. The single published technique lifting args-acc on small models. With Iter 18's +11k data, projected v9 = 86 / 64 / 60 — clears the ≥60% gate.
+2. **Two-pass decoding (~$0).** After v9, ship name→args cascaded inference. +2-4 pp args, +30% latency. Pure `web/main.js`, no retrain.
+
+DPO arg-correctness pairs is next if curriculum saturates <65%. Functional tokens is the path past 70% but is major surgery — defer.
+
