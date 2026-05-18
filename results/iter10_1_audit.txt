@@ -1,0 +1,166 @@
+# Iter 10.1 audit
+function_descriptions.json: 107 entries
+tool_registry.json:         100 entries
+unique gold names in test (n=300):   109
+unique gold names in train (n=1200): 123
+
+## TEST: gold names absent from function_descriptions.json: 16
+  [misc] (16): activate_scene×7, cancel_alarm×4, list_active_devices×4, query_motion_sensor×4, query_smoke_alarm×4, schedule_routine×4, query_alarms×3, query_solar_production×3, generate_status_report×2, query_garage_door×2, cancel_reminder×1, cancel_timer×1, query_timers×1, query_water_leak×1, save_current_scene×1, snooze_alarm×1
+
+## TEST: gold names absent from tool_registry.json: 23
+  [misc] (23): activate_scene×7, query_power_usage×5, cancel_alarm×4, list_active_devices×4, query_motion_sensor×4, query_smoke_alarm×4, schedule_routine×4, set_alarm×4, set_reminder×4, query_alarms×3, query_battery_level×3, query_solar_production×3, set_timer×3, generate_status_report×2, query_garage_door×2, cancel_reminder×1, cancel_timer×1, query_timers×1, query_water_leak×1, query_water_meter×1, query_window_status×1, save_current_scene×1, snooze_alarm×1
+
+## TRAIN: gold names absent from function_descriptions.json: 16
+  activate_scene×20, schedule_routine×13, query_water_leak×10, query_motion_sensor×8, query_solar_production×7, cancel_reminder×6, query_garage_door×6, query_timers×6, save_current_scene×6, cancel_alarm×5, query_smoke_alarm×5, snooze_alarm×5, cancel_timer×4, query_alarms×4, generate_status_report×2, list_active_devices×2
+
+## TRAIN: gold names absent from tool_registry.json: 23
+  activate_scene×20, set_reminder×16, set_timer×16, set_alarm×15, schedule_routine×13, query_water_leak×10, query_window_status×10, query_battery_level×8, query_motion_sensor×8, query_solar_production×7, cancel_reminder×6, query_garage_door×6, query_power_usage×6, query_timers×6, query_water_meter×6, save_current_scene×6, cancel_alarm×5, query_smoke_alarm×5, snooze_alarm×5, cancel_timer×4, query_alarms×4, generate_status_report×2, list_active_devices×2
+
+## REGISTRY entries with no description: 0
+
+## DESCRIPTIONS not in registry: 7
+  query_battery_level, query_power_usage, query_water_meter, query_window_status, set_alarm, set_reminder, set_timer
+
+## TEST: gold names unknown to BOTH descriptions and registry: 16
+  [misc] activate_scene ×7
+  [misc] cancel_alarm ×4
+  [misc] cancel_reminder ×1
+  [misc] cancel_timer ×1
+  [misc] generate_status_report ×2
+  [misc] list_active_devices ×4
+  [misc] query_alarms ×3
+  [misc] query_garage_door ×2
+  [misc] query_motion_sensor ×4
+  [misc] query_smoke_alarm ×4
+  [misc] query_solar_production ×3
+  [misc] query_timers ×1
+  [misc] query_water_leak ×1
+  [misc] save_current_scene ×1
+  [misc] schedule_routine ×4
+  [misc] snooze_alarm ×1
+
+## SAMPLE QUERIES for test-missing-from-desc names (for description writing):
+
+  ### activate_scene (domain=misc, test×7, train×20)
+    [train] 'Activate the away scene.'
+            gold='{"name":"activate_scene","arguments":{"scene":"away"}}'
+    [train] 'Time to focus, activate focus scene.'
+            gold='{"name":"activate_scene","arguments":{"scene":"focus"}}'
+    [train] 'I need to concentrate on work.'
+            gold='{"name":"activate_scene","arguments":{"scene":"focus"}}'
+
+  ### cancel_alarm (domain=misc, test×4, train×5)
+    [train] 'Cancel all alarms between 5 and 7 AM tomorrow.'
+            gold='{"name":"cancel_alarm","arguments":{"day":"tomorrow","from":"05:00","to":"07:00"}}'
+    [train] 'Cancel my weekend alarm.'
+            gold='{"name":"cancel_alarm","arguments":{"days":["sat","sun"]}}'
+    [train] 'Cancel alarm at 8 AM.'
+            gold='{"name":"cancel_alarm","arguments":{"time":"08:00"}}'
+
+  ### list_active_devices (domain=misc, test×4, train×2)
+    [train] 'List active devices.'
+            gold='{"name":"list_active_devices","arguments":{}}'
+    [train] "The kids said they shut everything before bed — what's still drawing or reporting?"
+            gold='{"name":"list_active_devices","arguments":{}}'
+
+  ### query_motion_sensor (domain=misc, test×4, train×8)
+    [train] 'Is anyone moving around in the office area?'
+            gold='{"name":"query_motion_sensor","arguments":{"room":"office"}}'
+    [train] "The dog's been barking at the back gate, did the perimeter motion catch anything outside?"
+            gold='{"name":"query_motion_sensor","arguments":{"room":"patio"}}'
+    [train] 'Hallway motion sensor.'
+            gold='{"name":"query_motion_sensor","arguments":{"room":"hallway"}}'
+
+  ### query_smoke_alarm (domain=misc, test×4, train×5)
+    [train] 'Smoke alarm working?'
+            gold='{"name":"query_smoke_alarm","arguments":{}}'
+    [train] 'Check smoke detector.'
+            gold='{"name":"query_smoke_alarm","arguments":{}}'
+    [train] 'Are all smoke alarms in the house currently operational?'
+            gold='{"name":"query_smoke_alarm","arguments":{}}'
+
+  ### schedule_routine (domain=misc, test×4, train×13)
+    [train] 'Every Friday at 6 PM run dinner party scene and remind me 15 minutes earlier to start cooking.'
+            gold='{"name":"schedule_routine","arguments":{"scene":"dinner party","time":"18:00","days":["fri"],"pre_reminder":{"offset_minutes":-15,"message":"start cooking"}}}'
+    [train] 'Every Sunday at 10 PM activate bedtime scene and set an alarm for 6 AM Monday.'
+            gold='{"name":"schedule_routine","arguments":{"scene":"bedtime","time":"22:00","days":["sun"],"followup":{"set_alarm":{"time":"06:00","day":"mon"}}}}'
+    [train] 'Dinner party scene every Saturday at 7 PM.'
+            gold='{"name":"schedule_routine","arguments":{"scene":"dinner party","time":"19:00","days":["sat"]}}'
+
+  ### query_alarms (domain=misc, test×3, train×4)
+    [train] 'What alarms do I have set?'
+            gold='{"name":"query_alarms","arguments":{}}'
+    [train] 'Do I have any alarms tomorrow?'
+            gold='{"name":"query_alarms","arguments":{"day":"tomorrow"}}'
+    [train] 'List alarms set for any weekday before 8 AM.'
+            gold='{"name":"query_alarms","arguments":{"days":["mon","tue","wed","thu","fri"],"before":"08:00"}}'
+
+  ### query_solar_production (domain=misc, test×3, train×7)
+    [train] "Check this month's solar yield so far."
+            gold='{"name":"query_solar_production","arguments":{"period":"month"}}'
+    [train] 'How many watts are the panels pushing out right now?'
+            gold='{"name":"query_solar_production","arguments":{"period":"now"}}'
+    [train] 'End of month review: where do we stand on energy generation from the solar array this period?'
+            gold='{"name":"query_solar_production","arguments":{"period":"month"}}'
+
+  ### generate_status_report (domain=misc, test×2, train×2)
+    [train] 'Could you put together a snapshot of the whole house status?'
+            gold='{"name":"generate_status_report","arguments":{}}'
+    [train] 'Give me a status report.'
+            gold='{"name":"generate_status_report","arguments":{}}'
+
+  ### query_garage_door (domain=misc, test×2, train×6)
+    [train] 'Check garage door.'
+            gold='{"name":"query_garage_door","arguments":{}}'
+    [train] 'Garage door status?'
+            gold='{"name":"query_garage_door","arguments":{}}'
+    [train] 'Did the garage door close after I drove off this morning?'
+            gold='{"name":"query_garage_door","arguments":{}}'
+
+  ### cancel_reminder (domain=misc, test×1, train×6)
+    [train] 'Cancel all my reminders.'
+            gold='{"name":"cancel_reminder","arguments":{"all":true}}'
+    [train] 'Cancel my reminder about the dentist tomorrow.'
+            gold='{"name":"cancel_reminder","arguments":{"message":"dentist","day":"tomorrow"}}'
+    [train] 'Cancel my reminder about groceries.'
+            gold='{"name":"cancel_reminder","arguments":{"message":"groceries"}}'
+
+  ### cancel_timer (domain=misc, test×1, train×4)
+    [train] 'Kill the timer.'
+            gold='{"name":"cancel_timer","arguments":{}}'
+    [train] 'Cancel my pasta timer.'
+            gold='{"name":"cancel_timer","arguments":{"label":"pasta"}}'
+    [train] 'Cancel the timer.'
+            gold='{"name":"cancel_timer","arguments":{}}'
+
+  ### query_timers (domain=misc, test×1, train×6)
+    [train] 'Show active timers.'
+            gold='{"name":"query_timers","arguments":{}}'
+    [train] 'Which of my timers will finish in the next 5 minutes?'
+            gold='{"name":"query_timers","arguments":{"finishing_within_minutes":5}}'
+    [train] 'How long until my oven timer goes off?'
+            gold='{"name":"query_timers","arguments":{"label":"oven"}}'
+
+  ### query_water_leak (domain=misc, test×1, train×10)
+    [train] 'Smelled something musty near the boiler — anything tripping the floor sensors down there?'
+            gold='{"name":"query_water_leak","arguments":{"room":"basement"}}'
+    [train] 'Water leak status?'
+            gold='{"name":"query_water_leak","arguments":{}}'
+    [train] 'Any moisture being detected in the basement walls?'
+            gold='{"name":"query_water_leak","arguments":{"room":"basement"}}'
+
+  ### save_current_scene (domain=misc, test×1, train×6)
+    [train] 'Save current settings as cozy.'
+            gold='{"name":"save_current_scene","arguments":{"scene_name":"cozy"}}'
+    [train] 'Save this as my game night scene.'
+            gold='{"name":"save_current_scene","arguments":{"scene_name":"game night"}}'
+    [train] 'Save these lights as my movie scene.'
+            gold='{"name":"save_current_scene","arguments":{"scene_name":"movie"}}'
+
+  ### snooze_alarm (domain=misc, test×1, train×5)
+    [train] 'Snooze alarm for 5 more minutes.'
+            gold='{"name":"snooze_alarm","arguments":{"duration_minutes":5}}'
+    [train] 'Snooze the alarm.'
+            gold='{"name":"snooze_alarm","arguments":{}}'
+    [train] 'Snooze for 10 minutes.'
+            gold='{"name":"snooze_alarm","arguments":{"duration_minutes":10}}'
