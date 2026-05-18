@@ -60,6 +60,9 @@ ASSISTANT: &lt;functioncall&gt; </textarea>
           <label title="Restrict generated tokens to a JSON schema derived from the prompt's candidate list">
             <input id="constrained" type="checkbox" checked /> Constrained decoding (JSON schema)
           </label>
+          <label title="Within constrained mode: enforce per-arg-key types (enum value masking, numeric-no-quote, boolean). Iter 7.2.">
+            <input id="typedargs" type="checkbox" checked /> Typed args (enum/numeric)
+          </label>
           <label title="Re-rank the prompt's candidate list using MiniLM cosine similarity, keep top-K">
             <input id="retrieval" type="checkbox" checked /> Retrieval pre-rank (MiniLM, top-K)
           </label>

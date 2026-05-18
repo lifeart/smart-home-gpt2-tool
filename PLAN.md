@@ -575,7 +575,47 @@ String/enum/hallucinated-key:
 
 ---
 
-## Iteration 7.2 — Typed args masking (enum + numeric value constraints)  (in progress)
+## Iteration 7.2 — Typed args masking (enum + numeric value constraints)
+
+**Goal:** based on 7.1 diagnosis (wrongStr 37 / extra-key 34 / wrongNum 9), tighten `web/grammar.js`'s value-position validator so it refuses enum-incompatible and type-incompatible values during constrained decoding.
+
+**Implementation:**
+- `extractPromptSchemas(prompt)` — new helper that parses the prompt's tool list (both the JSON-Schema form with `"properties": {...}` + the simpler `"parameters": {"key": "type-string"}` form including pipe-alternation `"bake|broil|warm"`) and returns per-fn `{keys, types: Map<key, {type, enum?}>}`.
+- `buildSchemaConstraint(candidateNames, registry, {promptSchemas, typedArgs})` — extended to carry `paramTypes: Map<fn, Map<key, {type, enum?}>>` merged from prompt + registry (prompt wins for enum data; registry fills in keys when prompt entry has truncated schema).
+- `parseTypedValue(s, i, info)` — new value validator inside `isValidPrefix` when typed-args is on and the current key has type info:
+  - Enum: must open `"`, value must be (case-insensitive) prefix of one of the enum strings.
+  - Number/integer: must NOT open `"`; only `-`/digits/`.`.
+  - Boolean: prefix of `true`/`false`.
+  - String: must open `"`, free-form afterwards.
+- `web/bench.js`, `web/voice_bench.js`, `web/main.js` thread the `typedArgs` flag through. Default ON.
+- UI toggle "Typed args (enum/numeric)" added to `web/index.html`.
+
+**Sanity test on item 4 (`start_camera_recording`, gold `camera:"front door cam"` from enum):**
+- con (typedArgs=OFF): predicted `camera:"patio door"` — out of enum, args_ok=false.
+- con (typedArgs=ON):  predicted `camera:"front door cam"` — args_ok=true.
+
+**Results (n=300, v3 webgpu/fp32, baseline vs con — typed args ON):**
+
+| mode | name_acc | args_acc | exact_acc | json | mean ms/item |
+|---|---:|---:|---:|---:|---:|
+| baseline (no con, no ret) | **82.33%** | **54.67%** | **49.67%** | 99.67% | 713 |
+| con (typed args ON)       | 77.67%     | 51.33%     | 47.67%     | 97.67% | 741 |
+| Δ con vs baseline         | -4.66      | -3.33      | -2.00      |        |  +28 ms |
+
+**Δ from typed-args alone (con typed=OFF vs typed=ON, n=50 subset):**
+- typed=OFF: name 76% / args 50% / exact 46%.
+- typed=ON:  name 76% / args 52% / exact 48%.
+- Δ args = +2 pp, Δ exact = +2 pp. Single positive flip (start_camera_recording: patio door → front door cam). No negative flips.
+
+**Why `con` is still worse than `baseline`:** Phase 5a already documented this. The prompts ship a *truncated* tool list (the SYSTEM tools block is cut at ~4 kB during dataset prep), so `extractCandidateNames` sometimes parses a partial schema where required keys aren't visible. The constrained decoder then refuses those keys and the model produces `{}`. Typed-args (this iteration) is orthogonal to that bug — it tightens *value*-side errors but cannot widen *key*-side restrictions caused by upstream schema truncation. Two of the three largest 7.1 failure classes (`extra` 34 / `missing` 32) are the schema-truncation symptom; this iteration cannot fix those.
+
+**Status:** done. Cost: $0. Headline: typed args = +2 pp args lift on `con` (n=50), no negative flips, production default ON.
+
+**Artifacts:** `web/grammar.js`, `web/bench.js`, `web/voice_bench.js`, `web/main.js`, `web/index.html`; `results/iter72_baseline_con_typed_v3_n300.json`.
+
+---
+
+## Iteration 7.3 — Re-bench v3 typed-args + voice exact-match  (in progress)
 
 ---
 
@@ -598,4 +638,5 @@ String/enum/hallucinated-key:
 | 2026-05-18 | **Iter 6.2 partial (code shipped).** __NONE__ sentinel + score-threshold gating in `retrieval.js` / `bench.js`. Threshold sweep on 15 misc items: 0.20-0.35 all yield ret=26.7% (no harm, no help); 0.40 hurts (20%). Chosen threshold 0.30. Partial n=100 bench: base 82% / ret 67% / ret_con 67% (matches Phase 5a). Sentinel cannot lift `misc` because (a) the test set has no irrelevance items, (b) 16 of 27 unique misc gold names are absent from `function_descriptions.json` — retrieval cannot rank them. No-regression constraint preserved. Cost: $0. |
 | 2026-05-18 | **Iter 6.3 partial.** ASR alias query expansion (verb-substitution map: close→lock\|shut, open→unlock, unblock→unlock\|release, shut up→stop music\|mute, "a degree"→set thermostat). Mean-pool embeddings over alias-substituted query variants. n=30 voice (v3 webgpu/fp32, K=5, sentinel ON, constrained ON): no-alias acc **50.0%** / recall **83.3%**; with alias acc **53.3%** / recall **93.3%**. Δacc +3.33 pp, Δrecall +10.0 pp. Voice gate ≥55% **MISSED** by 1.67 pp. The 2 remaining recall misses are (i) "Unblock patio"→unlock_door needing a domain-object alias (patio→door), (ii) Whisper truncated to "Put the" (ASR-side). Cost: $0. |
 | 2026-05-18 | **Iter 7.1 done.** Args-aware scoring on v3 baseline (n=300, webgpu/fp32). **name 82.33% / args 54.67% / exact 49.67%**. Per-type args acc: string 75.2% (355) / number 62.5% (72) / boolean 66.7% / array 0/5 / object 0/2. By gold-arg-key-count: 0 keys 38.7% (empty-gold class), 1 key 68.2%, 2 keys 54.5%, 3+ keys 15.2%. Failures (98 name-ok-args-wrong): wrongStr 37, extra-key 34, missing-key 32, emptyGold 12, wrongNum 9. Cost: $0. |
+| 2026-05-18 | **Iter 7.2 done.** Typed-args masking (enum + numeric value validators) added to grammar.js + UI toggle (default ON). Multi-tool n=300: baseline 82.33/54.67/49.67% (name/args/exact); con-with-typed-args 77.67/51.33/47.67%. Δ typed-args ON vs OFF on con (n=50): +2 pp args, +2 pp exact, no negative flips. Constrained still trails baseline due to prompt schema truncation (Phase 5a finding); typed-args is orthogonal and helps a narrow enum-confusion class. Cost: $0. |
 

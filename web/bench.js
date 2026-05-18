@@ -11,6 +11,7 @@
 import { LogitsProcessorList } from '@huggingface/transformers';
 import {
   extractCandidateNames,
+  extractPromptSchemas,
   buildSchemaConstraint,
   JsonSchemaLogitsProcessor,
 } from './grammar.js';
@@ -205,7 +206,7 @@ function isValidJson(rawText) {
   return false;
 }
 
-async function runOne(model, tokenizer, prompt, { constrained, registry, max_new_tokens = 64 }) {
+async function runOne(model, tokenizer, prompt, { constrained, registry, max_new_tokens = 64, typedArgs = true }) {
   const inputs = await tokenizer(prompt, { return_tensors: 'pt' });
   const promptLength = inputs.input_ids.dims[1];
 
@@ -216,7 +217,8 @@ async function runOne(model, tokenizer, prompt, { constrained, registry, max_new
     if (cands.length === 0) {
       processor = null;
     } else {
-      const constraint = buildSchemaConstraint(cands, registry);
+      const promptSchemas = extractPromptSchemas(prompt);
+      const constraint = buildSchemaConstraint(cands, registry, { promptSchemas, typedArgs });
       const eosTokenId =
         tokenizer.eos_token_id ??
         (model.generation_config && model.generation_config.eos_token_id);
@@ -303,7 +305,7 @@ function gradePrediction(predName, item) {
 }
 
 // Run a single item across modes and return the row.
-async function runOneItem(item, idx, { modes, registry, max_new_tokens, topK, verbose, useSentinel, threshold }) {
+async function runOneItem(item, idx, { modes, registry, max_new_tokens, topK, verbose, useSentinel, threshold, typedArgs = true }) {
   const model = window._bench_model;
   const tokenizer = window._bench_tokenizer;
   const goldCall = parseGoldCall(item.gold);
@@ -343,7 +345,7 @@ async function runOneItem(item, idx, { modes, registry, max_new_tokens, topK, ve
     const promptForMode = useRet ? (retPrompt || item.prompt) : item.prompt;
     try {
       const out = await runOne(model, tokenizer, promptForMode, {
-        constrained: useCon, registry, max_new_tokens,
+        constrained: useCon, registry, max_new_tokens, typedArgs,
       });
       const name = extractPredictedName(out.text);
       const predCall = parsePredictedCall(out.text);
@@ -394,6 +396,7 @@ async function runBenchOnItems(items, {
   registry = null,
   useSentinel = true,
   threshold = 0.30,
+  typedArgs = true,
 } = {}) {
   const model = window._bench_model;
   const tokenizer = window._bench_tokenizer;
@@ -409,7 +412,7 @@ async function runBenchOnItems(items, {
   }
   const results = [];
   for (let i = 0; i < items.length; i++) {
-    const row = await runOneItem(items[i], i, { modes, registry, max_new_tokens, topK, verbose, useSentinel, threshold });
+    const row = await runOneItem(items[i], i, { modes, registry, max_new_tokens, topK, verbose, useSentinel, threshold, typedArgs });
     results.push(row);
   }
   return { results };
@@ -536,6 +539,7 @@ async function runBench({
   topK = 3,
   useSentinel = true,
   threshold = 0.30,
+  typedArgs = true,
 } = {}) {
   modes = modes || ALL_MODES;
   const { sample, registry } = await loadFixtures();
@@ -557,7 +561,7 @@ async function runBench({
   for (let i = 0; i < items.length; i++) {
     const item = items[i];
     if (verbose) console.log(`[${i + 1}/${items.length}] ${item.domain} | ${item.gold_name}`);
-    const row = await runOneItem(item, i, { modes, registry, max_new_tokens, topK, verbose, useSentinel, threshold });
+    const row = await runOneItem(item, i, { modes, registry, max_new_tokens, topK, verbose, useSentinel, threshold, typedArgs });
     results.push(row);
     window._partialBench.push(row);
   }
@@ -589,6 +593,7 @@ async function runFullBench({
   url = FULL_URL,
   useSentinel = true,
   threshold = 0.30,
+  typedArgs = true,
 } = {}) {
   const { sample: all, registry } = await loadFixtures(url);
   window._fullProgress = { done: 0, total: all.length, started: Date.now() };
@@ -600,7 +605,7 @@ async function runFullBench({
   for (let off = 0; off < all.length; off += chunkSize) {
     const slice = all.slice(off, off + chunkSize);
     const { results } = await runBenchOnItems(slice, {
-      modes, max_new_tokens, topK, verbose: false, registry, useSentinel, threshold,
+      modes, max_new_tokens, topK, verbose: false, registry, useSentinel, threshold, typedArgs,
     });
     // Re-index items so .i is global, not per-chunk.
     for (let k = 0; k < results.length; k++) {
@@ -624,7 +629,7 @@ window.runFullBench = runFullBench;
 window.aggregateFullBench = (results, modes = ALL_MODES) => aggregateResults(results, modes);
 window.aggregateArgs = (results, registry = null, modes = ALL_MODES) => aggregateArgs(results, registry, modes);
 window._bench = {
-  extractCandidateNames, buildSchemaConstraint,
+  extractCandidateNames, extractPromptSchemas, buildSchemaConstraint,
   parsePredictedCall, parseGoldCall, argsMatch, argValueType, aggregateArgs,
 };
 console.log('[bench] window.runBench / window.runFullBench ready.');

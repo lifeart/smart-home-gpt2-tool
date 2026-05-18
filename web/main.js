@@ -6,6 +6,7 @@ import {
 } from '@huggingface/transformers';
 import {
   extractCandidateNames,
+  extractPromptSchemas,
   buildSchemaConstraint,
   JsonSchemaLogitsProcessor,
 } from './grammar.js';
@@ -161,7 +162,9 @@ async function generate() {
     const cands = extractCandidateNames(prompt);
     if (cands.length > 0) {
       const registry = await getRegistry();
-      const constraint = buildSchemaConstraint(cands, registry);
+      const promptSchemas = extractPromptSchemas(prompt);
+      const typedArgs = $('typedargs') ? $('typedargs').checked : true;
+      const constraint = buildSchemaConstraint(cands, registry, { promptSchemas, typedArgs });
       const eosTokenId =
         tokenizer.eos_token_id ??
         (model.generation_config && model.generation_config.eos_token_id);
