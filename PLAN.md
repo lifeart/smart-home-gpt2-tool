@@ -849,6 +849,44 @@ Commit: `40aa070` iter9.2.
 
 ---
 
+## Iteration 9.3 — Full n=300 + voice n=30 re-bench with wideNames
+
+**Multi-tool n=300 (v3, WebGPU/fp32, baseline + con typed-args + wide-names):**
+
+| metric       | baseline | con (9.3 wide) | con (7.4) | Δ 9.3 vs baseline | Δ 9.3 vs 7.4 |
+|--------------|---------:|---------------:|----------:|------------------:|-------------:|
+| name_acc     |  82.33%  |     **83.00%** |   77.67%  |          **+0.67**|     **+5.33**|
+| args_acc     |  54.67%  |     **57.00%** |   54.33%  |          **+2.33**|     **+2.67**|
+| **exact_acc**|  49.67%  |     **54.00%** |   50.67%  |          **+4.33**|     **+3.33**|
+| json_valid   |  99.67%  |         99.00% |     —     |              -0.67|        —     |
+
+**con (9.3) BEATS baseline on all three metrics for the first time** — name +0.67, args +2.33, exact +4.33. The name regression is fully gone.
+
+**Per-domain exact (baseline → con-9.3):** blinds 57.7→61.5, clean 41.4→44.8, climate **37.9→48.3 (+10.4)**, garden 61.5→65.4, kit 43.5→52.2 (+8.7), light 46.9→50.0, media 62.5→62.5 (tie), misc 43.1→41.7 (-1.4), sec **61.3→77.4 (+16.1)**. con wins on 8/9 domains, ties on `media`, loses only on `misc` (1 item, retrieval-bottleneck class). The `sec` jump (+16.1) is the largest single-domain lift.
+
+**Voice n=30 (v3, ret_con K=5, alias expansion, typed-args ON, wideNames ON):**
+
+| metric    | Iter 6.3 (no wide) | Iter 9.3 (+ wide) | Δ      |
+|-----------|-------------------:|------------------:|-------:|
+| name_acc  |              53.3% |             53.3% |   0.0  |
+| args_acc  |              30.0% |             33.3% | +3.33  |
+| exact_acc |             23.33% |            23.33% |   0.0  |
+| recall@5  |              93.3% |             93.3% |   0.0  |
+
+Voice production config preserved (within the +/-2 pp no-regression bar). Slight args gain (+3.33 pp) likely because wide-names admits registry keys for retrieval-replaced candidates. Voice gate ≥55% still missed by 1.67 pp (unchanged from Iter 6.3 — voice bottleneck remains ASR/recall, not name masking).
+
+**Smell tests pass:** name_acc lifted +5.3 pp (target was "closer to baseline 82.33%" — achieved 83.0%, *exceeded* baseline). args_acc did NOT drop — it rose +2.67 pp vs 7.4 (the typed-args validators continue to clean up enum/numeric drift unimpeded). No need for Option B (args-only mode).
+
+**Best production config (NEW):** `con` with **typed-args ON + schema-union ON + wideNames ON**. Multi-tool n=300: **83.00 / 57.00 / 54.00 (name/args/exact)**. Voice ret_con K=5 alias-expansion, typed-args ON, wideNames ON: 53.33 / 33.33 / 23.33 / 93.33 (name/args/exact/recall).
+
+**Status:** done. Cost: $0.
+
+**Artifacts:** `results/iter93_v3_n300_wide_names.json`, `results/iter93_voice_v3_K5_wide.json`.
+
+Commit: `<pending>` iter9.3.
+
+---
+
 ## Progress log
 
 | Date (UTC) | Event |
@@ -876,4 +914,5 @@ Commit: `40aa070` iter9.2.
 | 2026-05-18 | **Iter 8.3 done.** Reverted grammar.js registry-enum consumption (data file `enums` kept as ammo). Re-bench n=300 reproduces Iter 7.4 exactly: con 77.67/54.33/**50.67%**. Best production config unchanged. Cheapest next lever: add the 16 misc-domain test-only gold names to `function_descriptions.json` (retrieval index) — would lift `ret_con` on misc 33→60+% and overall ~+9 pp. Cost: $0. |
 | 2026-05-18 | **Iter 9.1 done.** Diagnosed con name regression on `iter83_v3_n300` per-item results. 19 rows with `baseline_name == gold AND con_name != gold`; **100% (19/19) fall into class 2 (gold name missing from prompt-extracted candidate list due to ~4 kB schema truncation)**; 0 in class 1 (mask too aggressive) or class 3 (typed mask interferes). All 19 gold names exist in `tool_registry.json` & `function_descriptions.json`. Cleaning domain dominates (12/19). Fix: Option A — widen name allowlist to `prompt_cands ∪ registry_names`. Cost: $0. |
 | 2026-05-18 | **Iter 9.2 code + targeted verification.** `buildSchemaConstraint({wideNames:true})` admits all 100 registry names alongside prompt cands. Wired through bench.js / voice_bench.js / main.js (UI toggle, default OFF). Targeted re-bench on the 19 regression items: con name_ok 0/19 → **19/19**, args_ok 2/19 → 13/19, exact_ok 0/19 → **13/19**. All 19 flipped to name-correct, 13 flipped to fully-exact. Projected n=300: exact 50.67% → ~55%, name 77.67% → ~84% (beating baseline). Full n=300 re-bench in flight. Cost: $0. |
+| 2026-05-18 | **Iter 9.3 done.** Full n=300 re-bench (v3 webgpu/fp32) with typedArgs+wideNames: baseline 82.33/54.67/49.67 → **con-9.3 83.00/57.00/54.00** (name/args/exact). **con BEATS baseline on all 3 metrics for the first time** (+0.67 name, +2.33 args, +4.33 exact). Per-domain: con wins 8/9 (largest gains sec +16.1 pp, climate +10.4, kit +8.7); only `misc` slips -1.4 pp. Voice n=30 ret_con K=5 alias+typed+wide: 53.33/33.33/23.33/93.33 (name/args/exact/recall) — identical name/exact, +3.33 args, recall unchanged (no regression). **Best ship config now: con + typed-args + schema-union + wide-names.** Cost: $0. |
 

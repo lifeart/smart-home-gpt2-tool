@@ -63,8 +63,8 @@ ASSISTANT: &lt;functioncall&gt; </textarea>
           <label title="Within constrained mode: enforce per-arg-key types (enum value masking, numeric-no-quote, boolean). Iter 7.2.">
             <input id="typedargs" type="checkbox" checked /> Typed args (enum/numeric)
           </label>
-          <label title="Within constrained mode: widen the name-token mask to prompt cands ∪ registry names (recovers gold names truncated out of the prompt). Iter 9.2.">
-            <input id="widenames" type="checkbox" /> Wide names (registry ∪ prompt)
+          <label title="Within constrained mode: widen the name-token mask to prompt cands ∪ registry names (recovers gold names truncated out of the prompt). Iter 9.3 default ON — best ship config.">
+            <input id="widenames" type="checkbox" checked /> Wide names (registry ∪ prompt)
           </label>
           <label title="Re-rank the prompt's candidate list using MiniLM cosine similarity, keep top-K">
             <input id="retrieval" type="checkbox" checked /> Retrieval pre-rank (MiniLM, top-K)
