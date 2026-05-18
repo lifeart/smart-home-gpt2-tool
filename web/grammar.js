@@ -285,22 +285,21 @@ export function buildSchemaConstraint(candidateNames, registry, options = {}) {
       }
     }
     const regEntry = registry ? registry[n] : null;
-    if ((!keys || keys.length === 0) && regEntry && regEntry.params) {
-      // Use registry as a fallback for keys + types (no enum info).
-      keys = Object.keys(regEntry.params);
-      for (const k of keys) {
-        const rt = String(regEntry.params[k]).toLowerCase();
-        let t;
-        if (rt === 'integer' || rt === 'int') t = 'integer';
-        else if (rt === 'number' || rt === 'float') t = 'number';
-        else if (rt === 'boolean' || rt === 'bool') t = 'boolean';
-        else if (rt === 'string') t = 'string';
-        else t = rt;
-        if (!typesMap.has(k)) typesMap.set(k, { type: t, enum: null });
+    if (regEntry && regEntry.params) {
+      // Union with registry keys — prompts often truncate the schema mid-object
+      // (the SYSTEM tool list is cut at ~4 kB during dataset prep), so the
+      // prompt-derived `keys` may be a subset of the true schema. Add anything
+      // the registry knows about that the prompt didn't surface, and fill in
+      // registry-only types where the prompt had no info.
+      const regKeys = Object.keys(regEntry.params);
+      const hasReg = regKeys.length > 0;
+      if (!keys || keys.length === 0) {
+        keys = regKeys.slice(); // empty params is meaningful — force {} args
+      } else if (hasReg) {
+        const set = new Set(keys);
+        for (const k of regKeys) if (!set.has(k)) keys.push(k);
       }
-    } else if (regEntry && regEntry.params) {
-      // Merge: keep typesMap (enum from prompt) but fill registry-only types if missing.
-      for (const k of Object.keys(regEntry.params)) {
+      for (const k of regKeys) {
         if (!typesMap.has(k)) {
           const rt = String(regEntry.params[k]).toLowerCase();
           let t;

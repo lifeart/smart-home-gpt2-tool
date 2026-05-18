@@ -615,6 +615,51 @@ String/enum/hallucinated-key:
 
 ---
 
+## Iteration 7.4 — Schema union (prompt + registry) for constrained mode
+
+**Goal:** 7.3 left exact_acc at 49.67% (baseline) / 47.67% (con). Per the iter-7 spec, when exact_acc <60% we should look at the next most common failure class. Per-key renaming analysis (e.g. `intensity` vs `area`, `scene_name` vs `scene`) revealed only 3 cases of pure key-renaming in 98 args-wrong items — not worth a scorer fix.
+
+The bigger pattern: **`extra` (34) + `missing` (32) failures come from prompt schema truncation**, not from model confusion. The SYSTEM tool list in each prompt is cut at ~4 kB during dataset prep, so the in-prompt `properties` object often lacks the last 1-2 keys. Constrained mode was *only* using prompt-derived keys, so it forbade the missing-from-prompt keys even when the **registry has them**. The model could not emit `time`/`day` for `schedule_vacuum` even though the registry declares them. The fix: **take the union of prompt-derived keys and registry-declared keys** in `buildSchemaConstraint`.
+
+**Change:** `web/grammar.js::buildSchemaConstraint` now unions prompt+registry param keys (preserving prompt ordering, appending registry-only keys). It also fills in registry-declared types for keys the prompt didn't carry. Empty prompt + non-empty registry → use registry. Empty registry (or none) → use prompt-only.
+
+**Sanity test on item 9 (schedule_vacuum, gold `{time, day, intensity}`, prompt schema truncated to `{area, intensity}`):**
+- Before 7.4: con predicted `{}` (intensity-only constraint stripped time/day from the model).
+- After  7.4: con predicted `{area:"deep", time:"09:00", day:"weekdays"}` — has 3 keys, still wrong values, but no longer empty.
+
+**Results (n=300, v3 webgpu/fp32, con mode, typed args ON):**
+
+| metric | 7.2 con (no union) | 7.4 con (union) | Δ |
+|---|---:|---:|---:|
+| name_acc  | 77.67% | **77.67%** |  0.0 |
+| args_acc  | 51.33% | **54.33%** | +3.0 |
+| **exact_acc** | 47.67% | **50.67%** | **+3.0** |
+
+**con (union) now BEATS baseline on exact-match** (50.67% vs baseline 49.67%, +1.0 pp).
+
+Per-key-count breakdown (con union):
+| keys | 7.2 args_acc | 7.4 args_acc | Δ |
+|---:|---:|---:|---:|
+| 0  | 38.7% | **61.3%** | **+22.6** (empty-args enforcement now works on simple-array-only-in-prompt fns) |
+| 1  | 68.1% | 66.7% | -1.5 |
+| 2  | 54.5% | 48.5% | -6.0 (some misfires when model now has more keys to pick from) |
+| 3+ | 15.2% | 15.2% |  0.0 |
+
+The 0-keys win is the biggest single lever — 22.6 pp on the irrelevance class. The 2-keys regression suggests the model occasionally picks the wrong key from the wider union; a future refinement would weight prompt-keys more heavily, but the net is +3 pp exact.
+
+Per-type breakdown (con union vs baseline):
+| type | con union | baseline |
+|---|---:|---:|
+| string  | 73.0%  | 75.2% |
+| number  | 59.7%  | 62.5% |
+| boolean | 66.7%  | 66.7% |
+
+**Status:** done. Cost: $0.
+
+**Artifacts:** `web/grammar.js` (union logic); `results/iter74_con_union_v3_n300.json`.
+
+---
+
 ## Iteration 7.3 — Re-bench v3 typed-args + voice exact-match
 
 **Goal:** re-bench multi-tool (baseline vs con with typed-args) and voice (ret_con K=5 with typed-args) reporting name / args / exact metrics. Compare deltas.
@@ -674,4 +719,5 @@ The voice fixture upstream carries only `expected` (name). For iter 7.3 we annot
 | 2026-05-18 | **Iter 7.1 done.** Args-aware scoring on v3 baseline (n=300, webgpu/fp32). **name 82.33% / args 54.67% / exact 49.67%**. Per-type args acc: string 75.2% (355) / number 62.5% (72) / boolean 66.7% / array 0/5 / object 0/2. By gold-arg-key-count: 0 keys 38.7% (empty-gold class), 1 key 68.2%, 2 keys 54.5%, 3+ keys 15.2%. Failures (98 name-ok-args-wrong): wrongStr 37, extra-key 34, missing-key 32, emptyGold 12, wrongNum 9. Cost: $0. |
 | 2026-05-18 | **Iter 7.2 done.** Typed-args masking (enum + numeric value validators) added to grammar.js + UI toggle (default ON). Multi-tool n=300: baseline 82.33/54.67/49.67% (name/args/exact); con-with-typed-args 77.67/51.33/47.67%. Δ typed-args ON vs OFF on con (n=50): +2 pp args, +2 pp exact, no negative flips. Constrained still trails baseline due to prompt schema truncation (Phase 5a finding); typed-args is orthogonal and helps a narrow enum-confusion class. Cost: $0. |
 | 2026-05-18 | **Iter 7.3 done.** Re-bench v3 + voice exact-match. Multi-tool (n=300): same as 7.2 (baseline best 82.33/54.67/49.67%). Voice (n=30, ret_con K=5, typed-args ON, with hand-annotated gold_args): baseline name 23.33%/args 30.00%/exact 6.67%; **ret_con name 50.00%/args 30.00%/exact 23.33%**. Δ exact = +16.67 pp, +5 positive flips, 0 negative. Voice args bottleneck is ASR not value masking. Cost: $0. |
+| 2026-05-18 | **Iter 7.4 done.** Schema union (prompt keys ∪ registry keys) in buildSchemaConstraint. Multi-tool n=300 con: 77.67%/**54.33%**/**50.67%** (name/args/exact). vs baseline 82.33/54.67/49.67%: con union now **beats baseline on exact** by +1 pp. vs 7.2 con (no union): +3 pp args, +3 pp exact. 0-keys (empty-args) class went 38.7% → 61.3% (+22.6). Cost: $0. |
 
