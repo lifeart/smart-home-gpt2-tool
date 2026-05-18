@@ -1,0 +1,1802 @@
+[
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"switch_speaker_room\",\n  \"play_podcast\",\n  \"skip_track\",\n  \"play_music\"\n]\n\n\nUSER: Play twenty-two percent volume of the Joe Rogan Experience podcast in the living room.\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"play_podcast\",\"arguments\":{\"podcast\":\"Joe Rogan Experience\",\"room\":\"living room\",\"volume_pct\":22}}",
+    "gold_name": "play_podcast",
+    "domain": "media"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"set_timer\",\n  \"activate_scene\",\n  \"schedule_routine\",\n  \"query_water_leak\",\n  \"save_current_scene\"\n]\n\n\nUSER: Schedule a bedtime routine for tonight at 10pm with a 30 minute pre reminder\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"schedule_routine\",\"arguments\":{\"scene\":\"bedtime\",\"time\":\"10pm\",\"days\":[\"today\"],\"pre_reminder\":{\"minutes\":30}}}",
+    "gold_name": "schedule_routine",
+    "domain": "misc"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"lock_door\",\n  \"disarm_alarm_system\",\n  \"set_alarm_pin\",\n  \"start_camera_recording\",\n  \"query_alarm_status\"\n]\n\n\nUSER: Please lock the back door now.\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"lock_door\",\"arguments\":{\"door\":\"back door\"}}",
+    "gold_name": "lock_door",
+    "domain": "sec"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"set_alarm_pin\",\n  \"query_door_status\",\n  \"view_camera_stream\"\n]\n\n\nUSER: What is the status of the side door\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"query_door_status\",\"arguments\":{\"door\":\"side door\"}}",
+    "gold_name": "query_door_status",
+    "domain": "sec"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"cancel_alarm\",\n  \"query_timers\",\n  \"query_smoke_alarm\",\n  \"query_solar_production\"\n]\n\n\nUSER: Cancel all alarms for tomorrow\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"cancel_alarm\",\"arguments\":{\"day\":\"tomorrow\",\"all\":true}}",
+    "gold_name": "cancel_alarm",
+    "domain": "misc"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"set_ac_mode\",\n  \"set_humidity_target\",\n  \"schedule_climate_program\"\n]\n\n\nUSER: Set the living room air conditioner to heat mode.\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"set_ac_mode\",\"arguments\":{\"room\":\"living room\",\"mode\":\"heat\"}}",
+    "gold_name": "set_ac_mode",
+    "domain": "climate"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"cancel_alarm\",\n  \"save_current_scene\",\n  \"query_battery_level\",\n  \"set_timer\"\n]\n\n\nUSER: Cancel my 8am alarm for today and tomorrow from mon to thu\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"cancel_alarm\",\"arguments\":{\"time\":\"8am\",\"label\":\"my alarm\",\"day\":\"today\",\"days\":[\"today\",\"tomorrow\",\"mon\",\"tue\",\"wed\",\"thu\"],\"from\":\"mon\",\"to\":\"thu\"}}",
+    "gold_name": "cancel_alarm",
+    "domain": "misc"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"schedule_routine\",\n  \"query_power_usage\",\n  \"save_current_scene\"\n]\n\n\nUSER: Schedule dinner party routine for tomorrow at 7pm with a 30 minute reminder\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"schedule_routine\",\"arguments\":{\"scene\":\"dinner party\",\"days\":[\"tomorrow\"],\"time\":\"7pm\",\"pre_reminder\":{\"minutes\":30}}}",
+    "gold_name": "schedule_routine",
+    "domain": "misc"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"turn_on_outdoor_light\",\n  \"set_pool_heater\",\n  \"set_outdoor_speaker\",\n  \"set_outdoor_light_color\"\n]\n\n\nUSER: Heat the pool to twenty-two degrees\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"set_pool_heater\",\"arguments\":{\"temperature_c\":22,\"on\":true}}",
+    "gold_name": "set_pool_heater",
+    "domain": "garden"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"snooze_alarm\",\n  \"query_motion_sensor\",\n  \"set_timer\"\n]\n\n\nUSER: Snooze the alarm for twenty-two minutes\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"snooze_alarm\",\"arguments\":{\"duration_minutes\":22}}",
+    "gold_name": "snooze_alarm",
+    "domain": "misc"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"query_motion_sensor\",\n  \"set_timer\",\n  \"query_water_meter\",\n  \"set_alarm\"\n]\n\n\nUSER: Set alarm for tomorrow and thursday at 7am with wake me up label and turn on the coffee maker schedule\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"set_alarm\",\"arguments\":{\"time\":\"7am\",\"day\":\"tomorrow\",\"days\":[\"thursday\"],\"label\":\"wake me up\",\"schedules\":[\"turn on the coffee maker\"]}}",
+    "gold_name": "set_alarm",
+    "domain": "misc"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"stop_music\",\n  \"mute_audio\",\n  \"queue_song\",\n  \"set_tv_channel\"\n]\n\n\nUSER: Mute the audio in the living room now\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"mute_audio\",\"arguments\":{\"room\":\"living room\"}}",
+    "gold_name": "mute_audio",
+    "domain": "media"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"cancel_alarm\",\n  \"query_water_leak\",\n  \"generate_status_report\",\n  \"snooze_alarm\",\n  \"query_timers\"\n]\n\n\nUSER: Cancel my alarm for today and tomorrow from 8am to 9am\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"cancel_alarm\",\"arguments\":{\"day\":\"today\",\"days\":[\"today\",\"tomorrow\"],\"from\":\"8am\",\"to\":\"9am\"}}",
+    "gold_name": "cancel_alarm",
+    "domain": "misc"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"set_coffee_strength\",\n  \"set_oven_timer\",\n  \"start_dishwasher\"\n]\n\n\nUSER: Make my coffee stronger today\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"set_coffee_strength\",\"arguments\":{}}",
+    "gold_name": "set_coffee_strength",
+    "domain": "kit"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"set_light_color\",\n  \"turn_on_light\",\n  \"toggle_outlet\",\n  \"set_light_scene\"\n]\n\n\nUSER: Turn on the living room light to twenty-two percent brightness.\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"turn_on_light\",\"arguments\":{\"room\":\"living room\",\"brightness_pct\":22}}",
+    "gold_name": "turn_on_light",
+    "domain": "light"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"set_alarm\",\n  \"schedule_routine\",\n  \"save_current_scene\"\n]\n\n\nUSER: Set alarm for tomorrow and thursday at 7am with the label wake up\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"set_alarm\",\"arguments\":{\"time\":\"7am\",\"day\":\"tomorrow\",\"days\":[\"thu\"],\"label\":\"wake up\"}}",
+    "gold_name": "set_alarm",
+    "domain": "misc"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"query_battery_level\",\n  \"query_water_leak\",\n  \"snooze_alarm\",\n  \"query_timers\",\n  \"cancel_alarm\"\n]\n\n\nUSER: Snooze the alarm for 30 minutes\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"snooze_alarm\",\"arguments\":{\"duration_minutes\":30}}",
+    "gold_name": "snooze_alarm",
+    "domain": "misc"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"list_active_devices\",\n  \"query_battery_level\",\n  \"cancel_reminder\",\n  \"schedule_routine\"\n]\n\n\nUSER: Cancel all reminders containing dinner for today and tomorrow\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"cancel_reminder\",\"arguments\":{\"all\":true,\"contains\":\"dinner\",\"day\":\"today\",\"range\":\"today,tomorrow\"}}",
+    "gold_name": "cancel_reminder",
+    "domain": "misc"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"query_pool_temperature\",\n  \"turn_off_pool_cover\",\n  \"schedule_irrigation\",\n  \"turn_on_outdoor_light\"\n]\n\n\nUSER: Water the rose bed for twenty-two minutes at 11:00\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"schedule_irrigation\",\"arguments\":{\"zone\":\"rose bed\",\"time\":\"11:00\",\"duration_min\":22}}",
+    "gold_name": "schedule_irrigation",
+    "domain": "garden"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"switch_speaker_room\",\n  \"skip_track\",\n  \"play_radio_station\",\n  \"turn_on_tv\"\n]\n\n\nUSER: Play BBC Radio 1 in the living room at 50 percent volume.\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"play_radio_station\",\"arguments\":{\"station\":\"BBC Radio 1\",\"room\":\"living room\",\"volume_pct\":50}}",
+    "gold_name": "play_radio_station",
+    "domain": "media"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"cancel_reminder\",\n  \"query_solar_production\",\n  \"query_water_leak\"\n]\n\n\nUSER: Cancel all reminders for tomorrow that contain meeting\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"cancel_reminder\",\"arguments\":{\"day\":\"tomorrow\",\"all\":true,\"contains\":\"meeting\"}}",
+    "gold_name": "cancel_reminder",
+    "domain": "misc"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"close_window\",\n  \"retract_awning\",\n  \"extend_awning\",\n  \"close_skylight\"\n]\n\n\nUSER: Please close the window in the living room.\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"close_window\",\"arguments\":{\"room\":\"living room\"}}",
+    "gold_name": "close_window",
+    "domain": "blinds"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"play_radio_station\",\n  \"turn_on_tv\",\n  \"play_music\",\n  \"play_podcast\"\n]\n\n\nUSER: Play happy birthday song in the living room at 50 percent volume\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"play_music\",\"arguments\":{\"song\":\"happy birthday\",\"room\":\"living room\",\"volume_pct\":50}}",
+    "gold_name": "play_music",
+    "domain": "media"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"turn_on_tv\",\n  \"turn_off_tv\",\n  \"switch_speaker_room\"\n]\n\n\nUSER: Please turn off the tv in the living room now.\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"turn_off_tv\",\"arguments\":{\"room\":\"living room\"}}",
+    "gold_name": "turn_off_tv",
+    "domain": "media"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"query_light_state\",\n  \"blink_light\",\n  \"set_light_scene\"\n]\n\n\nUSER: Blink the living room light twenty-two times.\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"blink_light\",\"arguments\":{\"room\":\"living room\",\"times\":22}}",
+    "gold_name": "blink_light",
+    "domain": "light"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"dock_vacuum\",\n  \"schedule_vacuum\",\n  \"turn_on_air_purifier\"\n]\n\n\nUSER: Please dock the vacuum cleaner now to stop it and put it away for charging.\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"dock_vacuum\",\"arguments\":{}}",
+    "gold_name": "dock_vacuum",
+    "domain": "clean"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"query_battery_level\",\n  \"query_alarms\",\n  \"set_alarm\",\n  \"generate_status_report\"\n]\n\n\nUSER: Set alarm for tomorrow and thursday at 7am with wake up label and no conditions\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"set_alarm\",\"arguments\":{\"time\":\"7am\",\"day\":\"tomorrow\",\"days\":[\"thu\"],\"label\":\"wake up\",\"schedules\":[],\"condition\":null}}",
+    "gold_name": "set_alarm",
+    "domain": "misc"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"set_pool_heater\",\n  \"query_soil_moisture\",\n  \"turn_off_pool_cover\"\n]\n\n\nUSER: Turn off the pool cover now\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"turn_off_pool_cover\",\"arguments\":{}}",
+    "gold_name": "turn_off_pool_cover",
+    "domain": "garden"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"query_smoke_alarm\",\n  \"set_alarm\",\n  \"query_motion_sensor\",\n  \"schedule_routine\"\n]\n\n\nUSER: Set alarm for tomorrow at 7am with smoke alarm and label morning routine\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"set_alarm\",\"arguments\":{\"time\":\"7am\",\"day\":\"tomorrow\",\"label\":\"morning routine\",\"schedules\":[\"query_smoke_alarm\",\"set_alarm\",\"query_motion_sensor\",\"schedule_routine\"]}}",
+    "gold_name": "set_alarm",
+    "domain": "misc"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"start_camera_recording\",\n  \"unlock_door\",\n  \"arm_alarm_system\",\n  \"stop_camera_recording\",\n  \"lock_door\"\n]\n\n\nUSER: Please unlock the back door for me now\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"unlock_door\",\"arguments\":{\"door\":\"back door\"}}",
+    "gold_name": "unlock_door",
+    "domain": "sec"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"query_alarms\",\n  \"list_active_devices\",\n  \"activate_scene\",\n  \"set_alarm\"\n]\n\n\nUSER: What alarms are set for today, tomorrow, and after 8am but before 5pm?\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"query_alarms\",\"arguments\":{\"day\":\"today\",\"days\":[\"today\",\"tomorrow\"],\"after\":\"8am\",\"before\":\"5pm\"}}",
+    "gold_name": "query_alarms",
+    "domain": "misc"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"stop_microwave\",\n  \"start_microwave\",\n  \"start_coffee_brew\",\n  \"query_fridge_contents\"\n]\n\n\nUSER: What items are currently stored inside the fridge\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"query_fridge_contents\",\"arguments\":{}}",
+    "gold_name": "query_fridge_contents",
+    "domain": "kit"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"blink_light\",\n  \"query_light_state\",\n  \"turn_on_light\"\n]\n\n\nUSER: Turn on the living room light to 50 percent brightness\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"turn_on_light\",\"arguments\":{\"room\":\"living room\",\"brightness_pct\":50}}",
+    "gold_name": "turn_on_light",
+    "domain": "light"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"stop_mop\",\n  \"set_mop_water_level\",\n  \"start_mop\"\n]\n\n\nUSER: Please start mopping the bedroom floor with low water level.\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"start_mop\",\"arguments\":{\"area\":\"bedroom\",\"water_level\":\"low\"}}",
+    "gold_name": "start_mop",
+    "domain": "clean"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"query_alarms\",\n  \"set_alarm\",\n  \"set_reminder\"\n]\n\n\nUSER: Remind me to buy milk today in 30 minutes\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"set_reminder\",\"arguments\":{\"message\":\"buy milk\",\"day\":\"today\",\"in_minutes\":30}}",
+    "gold_name": "set_reminder",
+    "domain": "misc"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"set_outdoor_speaker\",\n  \"set_pool_pump\",\n  \"query_pool_temperature\",\n  \"set_garden_lawnmower\"\n]\n\n\nUSER: Turn on the outdoor speaker at volume twenty-two\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"set_outdoor_speaker\",\"arguments\":{\"on\":true,\"volume\":22}}",
+    "gold_name": "set_outdoor_speaker",
+    "domain": "garden"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"set_tv_volume\",\n  \"switch_speaker_room\",\n  \"turn_off_tv\",\n  \"play_radio_station\"\n]\n\n\nUSER: Play BBC Radio 1 in the living room at 50 percent volume\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"play_radio_station\",\"arguments\":{\"station\":\"BBC Radio 1\",\"room\":\"living room\",\"volume_pct\":50}}",
+    "gold_name": "play_radio_station",
+    "domain": "media"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"set_tv_volume\",\n  \"turn_on_tv\",\n  \"mute_audio\",\n  \"play_podcast\"\n]\n\n\nUSER: Play the Joe Rogan Experience podcast at twenty-two percent volume in the living room\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"play_podcast\",\"arguments\":{\"podcast\":\"Joe Rogan Experience\",\"room\":\"living room\",\"volume_pct\":22}}",
+    "gold_name": "play_podcast",
+    "domain": "media"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"turn_off_light\",\n  \"set_light_color\",\n  \"set_motion_sensitivity\",\n  \"turn_on_light\",\n  \"toggle_outlet\"\n]\n\n\nUSER: Set the living room light to warm white at 50% brightness.\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"set_light_color\",\"arguments\":{\"room\":\"living room\",\"color\":\"warm white\",\"brightness_pct\":50}}",
+    "gold_name": "set_light_color",
+    "domain": "light"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"cancel_reminder\",\n  \"snooze_alarm\",\n  \"cancel_timer\"\n]\n\n\nUSER: Cancel all reminders for tomorrow that contain meeting\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"cancel_reminder\",\"arguments\":{\"message\":null,\"day\":\"tomorrow\",\"all\":true,\"contains\":\"meeting\",\"range\":null}}",
+    "gold_name": "cancel_reminder",
+    "domain": "misc"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"disarm_alarm_system\",\n  \"lock_door\",\n  \"view_camera_stream\",\n  \"arm_alarm_system\",\n  \"query_alarm_status\"\n]\n\n\nUSER: I want to turn off the alarm system now\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"disarm_alarm_system\",\"arguments\":{}}",
+    "gold_name": "disarm_alarm_system",
+    "domain": "sec"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"query_smoke_alarm\",\n  \"generate_status_report\",\n  \"set_alarm\",\n  \"query_window_status\",\n  \"snooze_alarm\"\n]\n\n\nUSER: Snooze alarm for 10 minutes within 5 hours and turn off all alarms\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"snooze_alarm\",\"arguments\":{\"duration_minutes\":10,\"range_hours\":5,\"all\":true}}",
+    "gold_name": "snooze_alarm",
+    "domain": "misc"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"schedule_irrigation\",\n  \"turn_off_pool_cover\",\n  \"set_garden_lawnmower\",\n  \"set_pool_heater\"\n]\n\n\nUSER: Set the pool heater to twenty-two degrees Celsius\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"set_pool_heater\",\"arguments\":{\"temperature_c\":22,\"on\":true}}",
+    "gold_name": "set_pool_heater",
+    "domain": "garden"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"start_mop\",\n  \"stop_mop\",\n  \"turn_off_air_purifier\",\n  \"set_air_purifier_speed\",\n  \"schedule_vacuum\"\n]\n\n\nUSER: Start mopping the kitchen floor with high water level.\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"start_mop\",\"arguments\":{\"area\":\"kitchen\",\"water_level\":\"high\"}}",
+    "gold_name": "start_mop",
+    "domain": "clean"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"schedule_routine\",\n  \"query_motion_sensor\",\n  \"query_garage_door\"\n]\n\n\nUSER: Schedule dinner routine for today and tomorrow at 7pm with a 30 minute pre reminder\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"schedule_routine\",\"arguments\":{\"scene\":\"dinner\",\"days\":[\"today\",\"tomorrow\"],\"time\":\"7pm\",\"pre_reminder\":{\"minutes\":30}}}",
+    "gold_name": "schedule_routine",
+    "domain": "misc"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"query_window_status\",\n  \"set_timer\",\n  \"query_power_usage\",\n  \"set_reminder\"\n]\n\n\nUSER: Remind me to buy milk today in 30 minutes\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"set_reminder\",\"arguments\":{\"message\":\"buy milk\",\"day\":\"today\",\"in_minutes\":30}}",
+    "gold_name": "set_reminder",
+    "domain": "misc"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"query_timers\",\n  \"query_power_usage\",\n  \"query_water_meter\",\n  \"query_water_leak\"\n]\n\n\nUSER: What timers finish within twenty-two minutes\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"query_timers\",\"arguments\":{\"finishing_within_minutes\":22}}",
+    "gold_name": "query_timers",
+    "domain": "misc"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"query_alarms\",\n  \"query_water_leak\",\n  \"query_battery_level\",\n  \"set_timer\",\n  \"query_garage_door\"\n]\n\n\nUSER: Set a 30 minute timer for cooking labeled dinner with existing timers\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"set_timer\",\"arguments\":{\"duration_minutes\":30,\"label\":\"dinner\",\"timers\":[\"existing\"]}}",
+    "gold_name": "set_timer",
+    "domain": "misc"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"set_thermostat\",\n  \"toggle_dehumidifier\",\n  \"set_radiator_valve\"\n]\n\n\nUSER: Set the living room thermostat to 24 degrees celsius in heat mode.\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"set_thermostat\",\"arguments\":{\"room\":\"living room\",\"temperature_c\":24,\"mode\":\"heat\"}}",
+    "gold_name": "set_thermostat",
+    "domain": "climate"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"schedule_irrigation\",\n  \"set_garden_lawnmower\",\n  \"stop_irrigation_zone\",\n  \"query_pool_temperature\"\n]\n\n\nUSER: Water the rose bed at 11:00 for twenty-two minutes.\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"schedule_irrigation\",\"arguments\":{\"zone\":\"rose bed\",\"time\":\"11:00\",\"duration_min\":22}}",
+    "gold_name": "schedule_irrigation",
+    "domain": "garden"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"play_radio_station\",\n  \"set_volume\",\n  \"set_tv_volume\"\n]\n\n\nUSER: Set the tv volume to twenty-two in the living room.\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"set_tv_volume\",\"arguments\":{\"room\":\"living room\",\"volume_pct\":22}}",
+    "gold_name": "set_tv_volume",
+    "domain": "media"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"open_skylight\",\n  \"lower_blinds\",\n  \"raise_blinds\"\n]\n\n\nUSER: Raise the blinds in the living room to let sunlight in, not lower them.\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"raise_blinds\",\"arguments\":{\"room\":\"living room\"}}",
+    "gold_name": "raise_blinds",
+    "domain": "blinds"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"stop_irrigation_zone\",\n  \"schedule_irrigation\",\n  \"set_garden_lawnmower\"\n]\n\n\nUSER: Water the rose bed at 15:00 for twenty-two minutes\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"schedule_irrigation\",\"arguments\":{\"zone\":\"rose bed\",\"time\":\"15:00\",\"duration_min\":22}}",
+    "gold_name": "schedule_irrigation",
+    "domain": "garden"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"set_timer\",\n  \"cancel_alarm\",\n  \"query_water_leak\"\n]\n\n\nUSER: Set a 30-minute timer for cooking with existing timers\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"set_timer\",\"arguments\":{\"duration_minutes\":30,\"label\":\"cooking\",\"timers\":[\"oven\",\"stove\"]}}",
+    "gold_name": "set_timer",
+    "domain": "misc"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"stop_music\",\n  \"set_tv_channel\",\n  \"play_podcast\"\n]\n\n\nUSER: Play the Joe Rogan Experience podcast in the living room at volume twenty-two percent\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"play_podcast\",\"arguments\":{\"podcast\":\"Joe Rogan Experience\",\"room\":\"living room\",\"volume_pct\":22}}",
+    "gold_name": "play_podcast",
+    "domain": "media"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"empty_vacuum_bin\",\n  \"schedule_vacuum\",\n  \"stop_vacuum\",\n  \"dock_vacuum\"\n]\n\n\nUSER: Send the vacuum back to its docking station now\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"dock_vacuum\",\"arguments\":{}}",
+    "gold_name": "dock_vacuum",
+    "domain": "clean"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"arm_alarm_system\",\n  \"disarm_alarm_system\",\n  \"trigger_panic_alarm\"\n]\n\n\nUSER: I want to turn off the alarm system completely now\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"disarm_alarm_system\",\"arguments\":{}}",
+    "gold_name": "disarm_alarm_system",
+    "domain": "sec"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"turn_on_tv\",\n  \"set_volume\",\n  \"turn_off_tv\",\n  \"set_tv_volume\"\n]\n\n\nUSER: Please turn off the tv in the living room now\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"turn_off_tv\",\"arguments\":{\"room\":\"living room\"}}",
+    "gold_name": "turn_off_tv",
+    "domain": "media"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"set_coffee_strength\",\n  \"stop_microwave\",\n  \"set_oven_timer\"\n]\n\n\nUSER: Make my morning coffee stronger today\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"set_coffee_strength\",\"arguments\":{}}",
+    "gold_name": "set_coffee_strength",
+    "domain": "kit"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"schedule_routine\",\n  \"query_solar_production\",\n  \"cancel_reminder\",\n  \"query_smoke_alarm\"\n]\n\n\nUSER: Cancel all reminders for tomorrow that contain meeting\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"cancel_reminder\",\"arguments\":{\"all\":true,\"day\":\"tomorrow\",\"contains\":\"meeting\"}}",
+    "gold_name": "cancel_reminder",
+    "domain": "misc"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"cancel_alarm\",\n  \"set_alarm\",\n  \"schedule_routine\"\n]\n\n\nUSER: Cancel my alarm for today and tomorrow from 7am to 8am\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"cancel_alarm\",\"arguments\":{\"label\":\"my alarm\",\"day\":\"today\",\"days\":[\"today\",\"tomorrow\"],\"from\":\"7am\",\"to\":\"8am\"}}",
+    "gold_name": "cancel_alarm",
+    "domain": "misc"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"query_timers\",\n  \"query_window_status\",\n  \"query_garage_door\",\n  \"cancel_reminder\"\n]\n\n\nUSER: Cancel all reminders for tomorrow that contain meeting\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"cancel_reminder\",\"arguments\":{\"all\":true,\"day\":\"tomorrow\",\"contains\":\"meeting\"}}",
+    "gold_name": "cancel_reminder",
+    "domain": "misc"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"cancel_reminder\",\n  \"query_water_meter\",\n  \"schedule_routine\",\n  \"set_timer\"\n]\n\n\nUSER: Schedule dinner party scene for tomorrow at 7pm with a 30-minute pre-reminder\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"schedule_routine\",\"arguments\":{\"scene\":\"dinner party\",\"days\":[\"tomorrow\"],\"time\":\"7pm\",\"pre_reminder\":{\"duration\":\"30min\"}}}",
+    "gold_name": "schedule_routine",
+    "domain": "misc"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"set_reminder\",\n  \"query_motion_sensor\",\n  \"query_alarms\"\n]\n\n\nUSER: Remind me to buy milk today in 30 minutes and also tomorrow\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"set_reminder\",\"arguments\":{\"message\":\"buy milk\",\"days\":[\"today\",\"tomorrow\"],\"in_minutes\":30}}",
+    "gold_name": "set_reminder",
+    "domain": "misc"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"turn_on_pool_cover\",\n  \"query_pool_temperature\",\n  \"schedule_irrigation\",\n  \"turn_on_outdoor_light\"\n]\n\n\nUSER: Water the rose bed at 11:00 for 30 minutes.\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"schedule_irrigation\",\"arguments\":{\"zone\":\"rose bed\",\"time\":\"11:00\",\"duration_min\":30}}",
+    "gold_name": "schedule_irrigation",
+    "domain": "garden"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"set_light_color\",\n  \"blink_light\",\n  \"set_light_scene\"\n]\n\n\nUSER: Blink the living room light twenty-two times.\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"blink_light\",\"arguments\":{\"room\":\"living room\",\"times\":22}}",
+    "gold_name": "blink_light",
+    "domain": "light"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"set_pool_pump\",\n  \"set_outdoor_light_color\",\n  \"set_pool_heater\",\n  \"stop_irrigation_zone\",\n  \"query_soil_moisture\"\n]\n\n\nUSER: Turn on the pool pump at medium speed.\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"set_pool_pump\",\"arguments\":{\"on\":true,\"speed\":\"medium\"}}",
+    "gold_name": "set_pool_pump",
+    "domain": "garden"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"schedule_routine\",\n  \"query_smoke_alarm\",\n  \"activate_scene\"\n]\n\n\nUSER: Schedule cozy scene for tomorrow at 8pm with dinner steps and reminders\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"schedule_routine\",\"arguments\":{\"scene\":\"cozy\",\"days\":[\"tomorrow\"],\"time\":\"8pm\",\"steps\":[\"dinner\"],\"trigger\":\"tomorrow 8pm\",\"pre_reminder\":{\"time\":\"7:30pm\"}}}",
+    "gold_name": "schedule_routine",
+    "domain": "misc"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"play_music\",\n  \"stop_music\",\n  \"set_volume\",\n  \"pause_music\"\n]\n\n\nUSER: Pause the music in the living room now to take a call\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"pause_music\",\"arguments\":{\"room\":\"living room\"}}",
+    "gold_name": "pause_music",
+    "domain": "media"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"play_music\",\n  \"turn_off_tv\",\n  \"turn_on_tv\",\n  \"set_tv_volume\"\n]\n\n\nUSER: Please turn off the tv in the living room now\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"turn_off_tv\",\"arguments\":{\"room\":\"living room\"}}",
+    "gold_name": "turn_off_tv",
+    "domain": "media"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"generate_status_report\",\n  \"query_water_leak\",\n  \"query_smoke_alarm\",\n  \"set_timer\",\n  \"set_reminder\"\n]\n\n\nUSER: Remind me to buy milk today in 30 minutes with a message\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"set_reminder\",\"arguments\":{\"message\":\"buy milk\",\"time\":\"today\",\"in_minutes\":30,\"days\":[\"today\"]}}",
+    "gold_name": "set_reminder",
+    "domain": "misc"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"schedule_routine\",\n  \"set_alarm\",\n  \"query_water_leak\",\n  \"snooze_alarm\"\n]\n\n\nUSER: Snooze the alarm for 30 minutes and 2 hours range and all alarms\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"snooze_alarm\",\"arguments\":{\"duration_minutes\":30,\"range_hours\":2,\"all\":true}}",
+    "gold_name": "snooze_alarm",
+    "domain": "misc"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"start_camera_recording\",\n  \"unlock_door\",\n  \"lock_door\"\n]\n\n\nUSER: Please lock the front door now to secure the house.\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"lock_door\",\"arguments\":{\"door\":\"front door\"}}",
+    "gold_name": "lock_door",
+    "domain": "sec"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"query_power_usage\",\n  \"query_water_leak\",\n  \"cancel_reminder\",\n  \"query_solar_production\"\n]\n\n\nUSER: What is the power usage in the living room today\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"query_power_usage\",\"arguments\":{\"period\":\"today\",\"device\":\"living room\"}}",
+    "gold_name": "query_power_usage",
+    "domain": "misc"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"set_garden_lawnmower\",\n  \"schedule_irrigation\",\n  \"start_irrigation_zone\",\n  \"set_pool_pump\"\n]\n\n\nUSER: Water the rose bed for twenty-two minutes\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"start_irrigation_zone\",\"arguments\":{\"zone\":\"rose bed\",\"duration_min\":22}}",
+    "gold_name": "start_irrigation_zone",
+    "domain": "garden"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"set_garden_lawnmower\",\n  \"schedule_irrigation\",\n  \"set_outdoor_light_color\",\n  \"set_outdoor_speaker\"\n]\n\n\nUSER: Water the rose bed for twenty-two minutes at 11:00\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"schedule_irrigation\",\"arguments\":{\"zone\":\"rose bed\",\"time\":\"11:00\",\"duration_min\":22}}",
+    "gold_name": "schedule_irrigation",
+    "domain": "garden"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"play_music\",\n  \"stop_music\",\n  \"turn_on_tv\",\n  \"set_tv_volume\",\n  \"mute_audio\"\n]\n\n\nUSER: Play twenty-two percent volume in the living room with song happy birthday\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"play_music\",\"arguments\":{\"song\":\"happy birthday\",\"room\":\"living room\",\"volume_pct\":22}}",
+    "gold_name": "play_music",
+    "domain": "media"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"query_vacuum_battery\",\n  \"empty_vacuum_bin\",\n  \"stop_vacuum\",\n  \"stop_mop\",\n  \"start_mop\"\n]\n\n\nUSER: Stop the mop from cleaning the floor now\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"stop_mop\",\"arguments\":{}}",
+    "gold_name": "stop_mop",
+    "domain": "clean"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"schedule_vacuum\",\n  \"empty_vacuum_bin\",\n  \"query_air_quality\",\n  \"turn_off_air_purifier\"\n]\n\n\nUSER: Schedule vacuum to clean the living room deeply at 11:00 on weekdays.\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"schedule_vacuum\",\"arguments\":{\"area\":\"living room\",\"intensity\":\"deep\",\"time\":\"11:00\",\"day\":\"weekdays\"}}",
+    "gold_name": "schedule_vacuum",
+    "domain": "clean"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"open_skylight\",\n  \"close_curtains\",\n  \"raise_blinds\",\n  \"close_skylight\",\n  \"open_curtains\"\n]\n\n\nUSER: It's morning, open the curtains in the bedroom now.\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"open_curtains\",\"arguments\":{\"room\":\"bedroom\"}}",
+    "gold_name": "open_curtains",
+    "domain": "blinds"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"query_temperature\",\n  \"toggle_dehumidifier\",\n  \"set_radiator_valve\",\n  \"query_humidity\"\n]\n\n\nUSER: Set the living room radiator to twenty-two degrees\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"set_radiator_valve\",\"arguments\":{\"room\":\"living room\",\"level\":22}}",
+    "gold_name": "set_radiator_valve",
+    "domain": "climate"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"set_camera_motion_sensitivity\",\n  \"lock_door\",\n  \"query_door_status\",\n  \"view_camera_stream\"\n]\n\n\nUSER: What is the status of the patio door\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"query_door_status\",\"arguments\":{\"door\":\"patio door\"}}",
+    "gold_name": "query_door_status",
+    "domain": "sec"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"schedule_vacuum\",\n  \"set_air_purifier_speed\",\n  \"query_vacuum_battery\",\n  \"dock_vacuum\"\n]\n\n\nUSER: Send the vacuum back to its docking station to recharge\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"dock_vacuum\",\"arguments\":{}}",
+    "gold_name": "dock_vacuum",
+    "domain": "clean"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"query_power_usage\",\n  \"set_alarm\",\n  \"query_motion_sensor\",\n  \"snooze_alarm\"\n]\n\n\nUSER: Set alarm for tomorrow and mon at 7am with wake up label and no schedules if there is motion\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"set_alarm\",\"arguments\":{\"time\":\"7am\",\"day\":\"tomorrow\",\"days\":[\"mon\"],\"label\":\"wake up\",\"schedules\":[],\"condition\":\"if there is motion\"}}",
+    "gold_name": "set_alarm",
+    "domain": "misc"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"schedule_routine\",\n  \"query_timers\",\n  \"save_current_scene\",\n  \"snooze_alarm\"\n]\n\n\nUSER: Snooze alarm for 15 minutes and 3 hours range, affecting all\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"snooze_alarm\",\"arguments\":{\"duration_minutes\":15,\"range_hours\":3,\"all\":true}}",
+    "gold_name": "snooze_alarm",
+    "domain": "misc"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"set_thermostat\",\n  \"set_radiator_valve\",\n  \"set_humidity_target\",\n  \"toggle_dehumidifier\",\n  \"set_fan_speed\"\n]\n\n\nUSER: Set the living room thermostat to twenty-two degrees in heat mode.\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"set_thermostat\",\"arguments\":{\"room\":\"living room\",\"temperature_c\":22,\"mode\":\"heat\"}}",
+    "gold_name": "set_thermostat",
+    "domain": "climate"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"query_battery_level\",\n  \"cancel_reminder\",\n  \"query_solar_production\",\n  \"query_timers\"\n]\n\n\nUSER: Cancel all reminders containing meeting for today and tomorrow\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"cancel_reminder\",\"arguments\":{\"all\":true,\"contains\":\"meeting\",\"day\":\"today\",\"range\":\"today,tomorrow\"}}",
+    "gold_name": "cancel_reminder",
+    "domain": "misc"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"set_alarm_pin\",\n  \"disarm_alarm_system\",\n  \"arm_alarm_system\"\n]\n\n\nUSER: Arm the alarm system in away mode now\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"arm_alarm_system\",\"arguments\":{\"mode\":\"away\"}}",
+    "gold_name": "arm_alarm_system",
+    "domain": "sec"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"dock_vacuum\",\n  \"start_vacuum\",\n  \"schedule_vacuum\"\n]\n\n\nUSER: Stop the vacuum and send it back to its dock now.\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"dock_vacuum\",\"arguments\":{}}",
+    "gold_name": "dock_vacuum",
+    "domain": "clean"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"switch_speaker_room\",\n  \"pause_music\",\n  \"set_volume\",\n  \"play_radio_station\",\n  \"set_tv_volume\"\n]\n\n\nUSER: Move the speaker from the kitchen to the dining room\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"switch_speaker_room\",\"arguments\":{\"from_room\":\"kitchen\",\"to_room\":\"dining room\"}}",
+    "gold_name": "switch_speaker_room",
+    "domain": "media"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"snooze_alarm\",\n  \"query_motion_sensor\",\n  \"schedule_routine\",\n  \"cancel_reminder\"\n]\n\n\nUSER: Snooze the alarm for 30 minutes within a 2-hour range for all reminders.\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"snooze_alarm\",\"arguments\":{\"duration_minutes\":30,\"range_hours\":2,\"all\":true}}",
+    "gold_name": "snooze_alarm",
+    "domain": "misc"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"query_garage_door\",\n  \"query_solar_production\",\n  \"activate_scene\"\n]\n\n\nUSER: Switch to the cozy scene now\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"activate_scene\",\"arguments\":{\"scene\":\"cozy\"}}",
+    "gold_name": "activate_scene",
+    "domain": "misc"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"set_motion_sensitivity\",\n  \"blink_light\",\n  \"set_light_color\",\n  \"set_light_scene\"\n]\n\n\nUSER: Set the living room light to twenty-two percent brightness in warm white color\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"set_light_color\",\"arguments\":{\"room\":\"living room\",\"color\":\"warm white\",\"brightness_pct\":22}}",
+    "gold_name": "set_light_color",
+    "domain": "light"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"query_water_leak\",\n  \"snooze_alarm\",\n  \"query_battery_level\",\n  \"query_power_usage\"\n]\n\n\nUSER: Snooze the alarm for 30 minutes within a 2 hour range and for all alarms\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"snooze_alarm\",\"arguments\":{\"duration_minutes\":30,\"range_hours\":2,\"all\":true}}",
+    "gold_name": "snooze_alarm",
+    "domain": "misc"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"turn_off_air_purifier\",\n  \"dock_vacuum\",\n  \"start_vacuum\",\n  \"start_mop\",\n  \"set_air_purifier_speed\"\n]\n\n\nUSER: Set air purifier speed to high in the living room\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"set_air_purifier_speed\",\"arguments\":{\"area\":\"living room\",\"speed\":\"high\"}}",
+    "gold_name": "set_air_purifier_speed",
+    "domain": "clean"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"set_alarm\",\n  \"query_battery_level\",\n  \"snooze_alarm\",\n  \"set_timer\"\n]\n\n\nUSER: Snooze the alarm for 30 minutes within a 2 hour range and apply to all alarms\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"snooze_alarm\",\"arguments\":{\"duration_minutes\":30,\"range_hours\":2,\"all\":true}}",
+    "gold_name": "snooze_alarm",
+    "domain": "misc"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"snooze_alarm\",\n  \"set_alarm\",\n  \"cancel_reminder\",\n  \"cancel_alarm\",\n  \"generate_status_report\"\n]\n\n\nUSER: Cancel my alarm for today and tomorrow from 7am to 8am with label meeting\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"cancel_alarm\",\"arguments\":{\"day\":\"today\",\"days\":[\"today\",\"tomorrow\"],\"from\":\"7am\",\"to\":\"8am\",\"label\":\"meeting\"}}",
+    "gold_name": "cancel_alarm",
+    "domain": "misc"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"set_tv_volume\",\n  \"turn_on_tv\",\n  \"switch_speaker_room\",\n  \"skip_track\"\n]\n\n\nUSER: Set the living room TV volume to twenty-two percent\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"set_tv_volume\",\"arguments\":{\"room\":\"living room\",\"volume_pct\":22}}",
+    "gold_name": "set_tv_volume",
+    "domain": "media"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"query_door_status\",\n  \"arm_alarm_system\",\n  \"lock_door\",\n  \"disarm_alarm_system\"\n]\n\n\nUSER: Turn off the alarm system now\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"disarm_alarm_system\",\"arguments\":{}}",
+    "gold_name": "disarm_alarm_system",
+    "domain": "sec"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"query_window_status\",\n  \"set_reminder\",\n  \"activate_scene\",\n  \"query_battery_level\",\n  \"snooze_alarm\"\n]\n\n\nUSER: Remind me to pick up groceries today in 30 minutes with a message\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"set_reminder\",\"arguments\":{\"message\":\"pick up groceries\",\"time\":\"today\",\"in_minutes\":30,\"days\":[\"today\"]}}",
+    "gold_name": "set_reminder",
+    "domain": "misc"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"turn_off_air_purifier\",\n  \"dock_vacuum\",\n  \"turn_on_air_purifier\",\n  \"start_mop\"\n]\n\n\nUSER: Please turn off the air purifier in the kitchen now.\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"turn_off_air_purifier\",\"arguments\":{\"area\":\"kitchen\"}}",
+    "gold_name": "turn_off_air_purifier",
+    "domain": "clean"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"start_microwave\",\n  \"set_fridge_temperature\",\n  \"set_kitchen_lights\"\n]\n\n\nUSER: Can you turn on the kitchen lights?\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"set_kitchen_lights\",\"arguments\":{}}",
+    "gold_name": "set_kitchen_lights",
+    "domain": "kit"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"set_tv_input\",\n  \"stop_music\",\n  \"pause_music\",\n  \"play_radio_station\",\n  \"mute_audio\"\n]\n\n\nUSER: Play Classic Rock 101 in the living room at 50 percent volume\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"play_radio_station\",\"arguments\":{\"station\":\"Classic Rock 101\",\"room\":\"living room\",\"volume_pct\":50}}",
+    "gold_name": "play_radio_station",
+    "domain": "media"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"set_garden_lawnmower\",\n  \"stop_irrigation_zone\",\n  \"turn_on_outdoor_light\",\n  \"set_pool_heater\"\n]\n\n\nUSER: Stop watering the rose bed\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"stop_irrigation_zone\",\"arguments\":{\"zone\":\"rose bed\"}}",
+    "gold_name": "stop_irrigation_zone",
+    "domain": "garden"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"arm_alarm_system\",\n  \"disarm_alarm_system\",\n  \"view_camera_stream\"\n]\n\n\nUSER: Arm the alarm system while I am away from home\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"arm_alarm_system\",\"arguments\":{\"mode\":\"away\"}}",
+    "gold_name": "arm_alarm_system",
+    "domain": "sec"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"dock_vacuum\",\n  \"query_air_quality\",\n  \"stop_vacuum\",\n  \"schedule_vacuum\"\n]\n\n\nUSER: Please put the vacuum back to its dock station now to recharge.\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"dock_vacuum\",\"arguments\":{}}",
+    "gold_name": "dock_vacuum",
+    "domain": "clean"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"set_alarm\",\n  \"save_current_scene\",\n  \"query_motion_sensor\",\n  \"query_alarms\"\n]\n\n\nUSER: What are the alarms for tomorrow and Thursday?\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"query_alarms\",\"arguments\":{\"days\":[\"tomorrow\",\"thu\"]}}",
+    "gold_name": "query_alarms",
+    "domain": "misc"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"switch_speaker_room\",\n  \"play_radio_station\",\n  \"set_volume\",\n  \"play_music\"\n]\n\n\nUSER: Play Classic Rock 101 in the living room at 50 percent volume\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"play_radio_station\",\"arguments\":{\"station\":\"Classic Rock 101\",\"room\":\"living room\",\"volume_pct\":50}}",
+    "gold_name": "play_radio_station",
+    "domain": "media"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"query_power_usage\",\n  \"cancel_timer\",\n  \"query_water_leak\",\n  \"query_water_meter\",\n  \"schedule_routine\"\n]\n\n\nUSER: Schedule a dinner party routine for today and tomorrow at 6pm with a 30 minute pre reminder\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"schedule_routine\",\"arguments\":{\"scene\":\"dinner party\",\"days\":[\"today\",\"tomorrow\"],\"time\":\"6pm\",\"pre_reminder\":{\"time\":\"30 minutes\"}}}",
+    "gold_name": "schedule_routine",
+    "domain": "misc"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"set_timer\",\n  \"schedule_routine\",\n  \"query_garage_door\",\n  \"query_window_status\",\n  \"save_current_scene\"\n]\n\n\nUSER: Set a twenty-two minute timer for cooking.\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"set_timer\",\"arguments\":{\"duration_minutes\":22}}",
+    "gold_name": "set_timer",
+    "domain": "misc"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"close_window\",\n  \"close_skylight\",\n  \"set_blinds_position\",\n  \"close_curtains\",\n  \"set_blinds_angle\"\n]\n\n\nUSER: Please close the skylight in the bedroom now\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"close_skylight\",\"arguments\":{\"room\":\"bedroom\"}}",
+    "gold_name": "close_skylight",
+    "domain": "blinds"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"schedule_routine\",\n  \"query_power_usage\",\n  \"query_window_status\",\n  \"cancel_reminder\",\n  \"query_solar_production\"\n]\n\n\nUSER: Cancel my reminder for tomorrow\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"cancel_reminder\",\"arguments\":{\"day\":\"tomorrow\"}}",
+    "gold_name": "cancel_reminder",
+    "domain": "misc"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"set_radiator_valve\",\n  \"toggle_dehumidifier\",\n  \"set_fan_speed\",\n  \"set_thermostat\"\n]\n\n\nUSER: Set the living room thermostat to 20 degrees in heat mode.\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"set_thermostat\",\"arguments\":{\"room\":\"living room\",\"temperature_c\":20,\"mode\":\"heat\"}}",
+    "gold_name": "set_thermostat",
+    "domain": "climate"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"open_skylight\",\n  \"open_curtains\",\n  \"raise_blinds\",\n  \"lower_blinds\"\n]\n\n\nUSER: Please lower the blinds in the living room now\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"lower_blinds\",\"arguments\":{\"room\":\"living room\"}}",
+    "gold_name": "lower_blinds",
+    "domain": "blinds"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"set_pool_heater\",\n  \"turn_on_outdoor_light\",\n  \"schedule_irrigation\",\n  \"turn_off_outdoor_light\"\n]\n\n\nUSER: Set pool heater to twenty-two degrees Celsius\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"set_pool_heater\",\"arguments\":{\"temperature_c\":22,\"on\":true}}",
+    "gold_name": "set_pool_heater",
+    "domain": "garden"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"set_reminder\",\n  \"query_battery_level\",\n  \"query_water_leak\",\n  \"query_solar_production\",\n  \"query_garage_door\"\n]\n\n\nUSER: Remind me to buy milk today in 30 minutes and tomorrow\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"set_reminder\",\"arguments\":{\"message\":\"buy milk\",\"time\":\"now\",\"in_minutes\":30,\"days\":[\"today\",\"tomorrow\"]}}",
+    "gold_name": "set_reminder",
+    "domain": "misc"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"toggle_outlet\",\n  \"blink_light\",\n  \"dim_light\"\n]\n\n\nUSER: Turn on the coffee maker outlet in the living room\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"toggle_outlet\",\"arguments\":{\"room\":\"living room\",\"outlet_name\":\"coffee maker\",\"state\":\"on\"}}",
+    "gold_name": "toggle_outlet",
+    "domain": "light"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"turn_on_air_purifier\",\n  \"turn_off_air_purifier\",\n  \"stop_mop\"\n]\n\n\nUSER: Turn off the air purifier in the living room immediately.\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"turn_off_air_purifier\",\"arguments\":{\"area\":\"living room\"}}",
+    "gold_name": "turn_off_air_purifier",
+    "domain": "clean"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"toggle_humidifier\",\n  \"set_radiator_valve\",\n  \"query_temperature\",\n  \"set_humidity_target\"\n]\n\n\nUSER: Set the living room humidity to sixty percent\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"set_humidity_target\",\"arguments\":{\"room\":\"living room\",\"humidity_pct\":60}}",
+    "gold_name": "set_humidity_target",
+    "domain": "climate"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"query_soil_moisture\",\n  \"set_pool_pump\",\n  \"turn_on_pool_cover\",\n  \"turn_off_pool_cover\"\n]\n\n\nUSER: Turn on the pool pump at high speed today.\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"set_pool_pump\",\"arguments\":{\"on\":true,\"speed\":\"high\"}}",
+    "gold_name": "set_pool_pump",
+    "domain": "garden"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"query_light_state\",\n  \"set_light_temperature_k\",\n  \"turn_off_light\",\n  \"set_motion_sensitivity\",\n  \"set_light_color\"\n]\n\n\nUSER: Set living room light to warm white at 75% brightness\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"set_light_color\",\"arguments\":{\"room\":\"living room\",\"color\":\"warm white\",\"brightness_pct\":75}}",
+    "gold_name": "set_light_color",
+    "domain": "light"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"query_window_status\",\n  \"snooze_alarm\",\n  \"set_alarm\"\n]\n\n\nUSER: Snooze the alarm for twenty-two minutes\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"snooze_alarm\",\"arguments\":{\"duration_minutes\":22}}",
+    "gold_name": "snooze_alarm",
+    "domain": "misc"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"turn_on_light\",\n  \"set_light_scene\",\n  \"turn_off_light\",\n  \"set_light_color\",\n  \"dim_light\"\n]\n\n\nUSER: Turn off the living room lights now\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"turn_off_light\",\"arguments\":{\"room\":\"living room\"}}",
+    "gold_name": "turn_off_light",
+    "domain": "light"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"schedule_routine\",\n  \"cancel_alarm\",\n  \"snooze_alarm\",\n  \"query_battery_level\"\n]\n\n\nUSER: Schedule a bedtime routine for tomorrow at 10pm with lights off and thermostat to 20 degrees\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"schedule_routine\",\"arguments\":{\"scene\":\"bedtime\",\"time\":\"10pm\",\"days\":[\"tomorrow\"],\"trigger\":\"time\",\"steps\":[{\"action\":\"lights_off\"},{\"action\":\"thermostat\",\"value\":20}]}}",
+    "gold_name": "schedule_routine",
+    "domain": "misc"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"extend_awning\",\n  \"close_skylight\",\n  \"close_curtains\",\n  \"set_blinds_position\",\n  \"set_blinds_angle\"\n]\n\n\nUSER: Close the skylight in the bedroom now\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"close_skylight\",\"arguments\":{\"room\":\"bedroom\"}}",
+    "gold_name": "close_skylight",
+    "domain": "blinds"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"set_ac_mode\",\n  \"set_humidity_target\",\n  \"set_radiator_valve\",\n  \"toggle_humidifier\",\n  \"schedule_climate_program\"\n]\n\n\nUSER: Set the living room humidity to sixty percent\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"set_humidity_target\",\"arguments\":{\"room\":\"living room\",\"humidity_pct\":60}}",
+    "gold_name": "set_humidity_target",
+    "domain": "climate"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"query_humidity\",\n  \"schedule_climate_program\",\n  \"set_thermostat\"\n]\n\n\nUSER: Schedule the bedroom climate to comfort from 22:00 to 06:00\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"schedule_climate_program\",\"arguments\":{\"room\":\"bedroom\",\"program\":\"comfort\",\"start_time\":\"22:00\",\"end_time\":\"06:00\"}}",
+    "gold_name": "schedule_climate_program",
+    "domain": "climate"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"set_camera_motion_sensitivity\",\n  \"view_camera_stream\",\n  \"disarm_alarm_system\",\n  \"arm_alarm_system\"\n]\n\n\nUSER: Show me the backyard camera stream now\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"view_camera_stream\",\"arguments\":{\"camera\":\"backyard cam\"}}",
+    "gold_name": "view_camera_stream",
+    "domain": "sec"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"turn_on_air_purifier\",\n  \"schedule_vacuum\",\n  \"stop_mop\",\n  \"start_mop\"\n]\n\n\nUSER: Stop the mop that is currently cleaning the floor.\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"stop_mop\",\"arguments\":{}}",
+    "gold_name": "stop_mop",
+    "domain": "clean"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"start_vacuum\",\n  \"query_vacuum_battery\",\n  \"turn_on_air_purifier\",\n  \"stop_mop\",\n  \"start_mop\"\n]\n\n\nUSER: Start mopping the kitchen floor now and use high water level\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"start_mop\",\"arguments\":{\"area\":\"kitchen\",\"water_level\":\"high\"}}",
+    "gold_name": "start_mop",
+    "domain": "clean"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"query_water_meter\",\n  \"cancel_reminder\",\n  \"set_timer\",\n  \"save_current_scene\"\n]\n\n\nUSER: Cancel all reminders for tomorrow that contain meeting\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"cancel_reminder\",\"arguments\":{\"all\":true,\"day\":\"tomorrow\",\"contains\":\"meeting\"}}",
+    "gold_name": "cancel_reminder",
+    "domain": "misc"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"raise_blinds\",\n  \"extend_awning\",\n  \"lower_blinds\",\n  \"open_skylight\"\n]\n\n\nUSER: Please lower the blinds in the bedroom now\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"lower_blinds\",\"arguments\":{\"room\":\"bedroom\"}}",
+    "gold_name": "lower_blinds",
+    "domain": "blinds"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"set_thermostat\",\n  \"set_humidity_target\",\n  \"toggle_humidifier\"\n]\n\n\nUSER: Set the bedroom humidity to sixty percent\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"set_humidity_target\",\"arguments\":{\"room\":\"bedroom\",\"humidity_pct\":60}}",
+    "gold_name": "set_humidity_target",
+    "domain": "climate"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"set_tv_channel\",\n  \"turn_on_tv\",\n  \"mute_audio\",\n  \"set_volume\"\n]\n\n\nUSER: Set the volume to twenty-two in the living room\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"set_volume\",\"arguments\":{\"room\":\"living room\",\"volume_pct\":22}}",
+    "gold_name": "set_volume",
+    "domain": "media"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"query_soil_moisture\",\n  \"set_pool_pump\",\n  \"turn_on_outdoor_light\",\n  \"set_garden_lawnmower\"\n]\n\n\nUSER: What is the soil moisture in the rose bed\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"query_soil_moisture\",\"arguments\":{\"zone\":\"rose bed\"}}",
+    "gold_name": "query_soil_moisture",
+    "domain": "garden"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"query_alarm_status\",\n  \"lock_door\",\n  \"set_camera_motion_sensitivity\",\n  \"query_door_status\",\n  \"unlock_door\"\n]\n\n\nUSER: Unlock the front door now to let someone in.\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"unlock_door\",\"arguments\":{\"door\":\"front door\"}}",
+    "gold_name": "unlock_door",
+    "domain": "sec"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"set_blinds_angle\",\n  \"open_window\",\n  \"close_skylight\"\n]\n\n\nUSER: Set the blinds angle to twenty-two in the bedroom\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"set_blinds_angle\",\"arguments\":{\"room\":\"bedroom\",\"angle\":22}}",
+    "gold_name": "set_blinds_angle",
+    "domain": "blinds"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"close_window\",\n  \"open_window\",\n  \"retract_awning\",\n  \"lock_window\",\n  \"set_blinds_position\"\n]\n\n\nUSER: Set the living room blinds position to twenty-two\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"set_blinds_position\",\"arguments\":{\"room\":\"living room\",\"position\":22}}",
+    "gold_name": "set_blinds_position",
+    "domain": "blinds"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"set_light_temperature_k\",\n  \"toggle_outlet\",\n  \"turn_on_light\",\n  \"dim_light\"\n]\n\n\nUSER: Set the living room light to twenty-two hundred Kelvin\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"set_light_temperature_k\",\"arguments\":{\"room\":\"living room\",\"kelvin\":2200}}",
+    "gold_name": "set_light_temperature_k",
+    "domain": "light"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"turn_off_outdoor_light\",\n  \"set_pool_pump\",\n  \"set_outdoor_light_color\",\n  \"turn_on_pool_cover\",\n  \"start_irrigation_zone\"\n]\n\n\nUSER: Water the rose bed for twenty-two minutes\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"start_irrigation_zone\",\"arguments\":{\"zone\":\"rose bed\",\"duration_min\":22}}",
+    "gold_name": "start_irrigation_zone",
+    "domain": "garden"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"arm_alarm_system\",\n  \"disarm_alarm_system\",\n  \"query_door_status\"\n]\n\n\nUSER: Arm the alarm system when I am away from home\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"arm_alarm_system\",\"arguments\":{\"mode\":\"away\"}}",
+    "gold_name": "arm_alarm_system",
+    "domain": "sec"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"disarm_alarm_system\",\n  \"arm_alarm_system\",\n  \"view_camera_stream\",\n  \"query_door_status\",\n  \"lock_door\"\n]\n\n\nUSER: Please arm the alarm system and set it to away mode now\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"arm_alarm_system\",\"arguments\":{\"mode\":\"away\"}}",
+    "gold_name": "arm_alarm_system",
+    "domain": "sec"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"turn_on_light\",\n  \"dim_light\",\n  \"turn_off_light\",\n  \"set_light_scene\",\n  \"set_motion_sensitivity\"\n]\n\n\nUSER: Please turn off the light in the bedroom\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"turn_off_light\",\"arguments\":{\"room\":\"bedroom\"}}",
+    "gold_name": "turn_off_light",
+    "domain": "light"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"toggle_dehumidifier\",\n  \"set_radiator_valve\",\n  \"toggle_humidifier\",\n  \"set_humidity_target\"\n]\n\n\nUSER: Set humidity to forty-five percent in the living room\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"set_humidity_target\",\"arguments\":{\"room\":\"living room\",\"humidity_pct\":45}}",
+    "gold_name": "set_humidity_target",
+    "domain": "climate"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"set_pool_pump\",\n  \"query_soil_moisture\",\n  \"start_irrigation_zone\",\n  \"set_pool_heater\"\n]\n\n\nUSER: Set pool heater to twenty-two degrees Celsius\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"set_pool_heater\",\"arguments\":{\"temperature_c\":22,\"on\":true}}",
+    "gold_name": "set_pool_heater",
+    "domain": "garden"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"cancel_reminder\",\n  \"list_active_devices\",\n  \"activate_scene\",\n  \"query_power_usage\"\n]\n\n\nUSER: Activate the cozy scene for the evening\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"activate_scene\",\"arguments\":{\"scene\":\"cozy\"}}",
+    "gold_name": "activate_scene",
+    "domain": "misc"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"set_pool_pump\",\n  \"set_pool_heater\",\n  \"stop_irrigation_zone\",\n  \"query_soil_moisture\"\n]\n\n\nUSER: Set the pool heater to twenty-two degrees\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"set_pool_heater\",\"arguments\":{\"temperature_c\":22,\"on\":true}}",
+    "gold_name": "set_pool_heater",
+    "domain": "garden"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"query_window_status\",\n  \"cancel_reminder\",\n  \"schedule_routine\",\n  \"set_reminder\",\n  \"query_alarms\"\n]\n\n\nUSER: Check alarms for today and tomorrow before 8am and after 5pm.\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"query_alarms\",\"arguments\":{\"day\":\"today\",\"days\":[\"today\",\"tomorrow\"],\"before\":\"8am\",\"after\":\"5pm\"}}",
+    "gold_name": "query_alarms",
+    "domain": "misc"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"turn_on_light\",\n  \"toggle_outlet\",\n  \"turn_off_light\",\n  \"dim_light\",\n  \"set_light_temperature_k\"\n]\n\n\nUSER: Set the living room light to twenty-two hundred kelvin\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"set_light_temperature_k\",\"arguments\":{\"room\":\"living room\",\"kelvin\":2200}}",
+    "gold_name": "set_light_temperature_k",
+    "domain": "light"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"play_podcast\",\n  \"set_tv_channel\",\n  \"set_tv_input\"\n]\n\n\nUSER: Play the Joe Rogan Experience podcast in the living room at 50 percent volume.\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"play_podcast\",\"arguments\":{\"podcast\":\"Joe Rogan Experience\",\"room\":\"living room\",\"volume_pct\":50}}",
+    "gold_name": "play_podcast",
+    "domain": "media"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"switch_speaker_room\",\n  \"set_tv_volume\",\n  \"play_music\"\n]\n\n\nUSER: Play twenty-two percent volume of Happy Birthday in the living room\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"play_music\",\"arguments\":{\"song\":\"Happy Birthday\",\"room\":\"living room\",\"volume_pct\":22}}",
+    "gold_name": "play_music",
+    "domain": "media"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"set_humidity_target\",\n  \"set_thermostat\",\n  \"set_fan_speed\",\n  \"query_humidity\",\n  \"set_radiator_valve\"\n]\n\n\nUSER: Set the living room humidity to sixty percent\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"set_humidity_target\",\"arguments\":{\"room\":\"living room\",\"humidity_pct\":60}}",
+    "gold_name": "set_humidity_target",
+    "domain": "climate"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"skip_track\",\n  \"set_tv_channel\",\n  \"play_music\"\n]\n\n\nUSER: Play happy birthday song in the bedroom at 80 percent volume.\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"play_music\",\"arguments\":{\"song\":\"happy birthday\",\"room\":\"bedroom\",\"volume_pct\":80}}",
+    "gold_name": "play_music",
+    "domain": "media"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"stop_vacuum\",\n  \"stop_mop\",\n  \"start_vacuum\"\n]\n\n\nUSER: Please stop the vacuum cleaner immediately.\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"stop_vacuum\",\"arguments\":{}}",
+    "gold_name": "stop_vacuum",
+    "domain": "clean"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"set_alarm\",\n  \"set_reminder\",\n  \"query_garage_door\"\n]\n\n\nUSER: Remind me to take medicine today in 30 minutes with a message\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"set_reminder\",\"arguments\":{\"day\":\"today\",\"in_minutes\":30,\"message\":\"take medicine\"}}",
+    "gold_name": "set_reminder",
+    "domain": "misc"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"activate_scene\",\n  \"query_garage_door\",\n  \"snooze_alarm\",\n  \"set_reminder\",\n  \"set_timer\"\n]\n\n\nUSER: Set a timer for twenty-two minutes\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"set_timer\",\"arguments\":{\"duration_minutes\":22,\"label\":null,\"timers\":null}}",
+    "gold_name": "set_timer",
+    "domain": "misc"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"mute_audio\",\n  \"play_music\",\n  \"set_tv_volume\"\n]\n\n\nUSER: Set the living room tv volume to twenty-two\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"set_tv_volume\",\"arguments\":{\"room\":\"living room\",\"volume_pct\":22}}",
+    "gold_name": "set_tv_volume",
+    "domain": "media"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"stop_camera_recording\",\n  \"arm_alarm_system\",\n  \"start_camera_recording\",\n  \"trigger_panic_alarm\",\n  \"query_alarm_status\"\n]\n\n\nUSER: Start recording with the backyard camera now\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"start_camera_recording\",\"arguments\":{\"camera\":\"backyard cam\"}}",
+    "gold_name": "start_camera_recording",
+    "domain": "sec"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"set_light_scene\",\n  \"set_light_color\",\n  \"dim_light\",\n  \"blink_light\",\n  \"set_light_temperature_k\"\n]\n\n\nUSER: Blink the living room light twenty-two times.\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"blink_light\",\"arguments\":{\"room\":\"living room\",\"times\":22}}",
+    "gold_name": "blink_light",
+    "domain": "light"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"snooze_alarm\",\n  \"set_alarm\",\n  \"cancel_timer\"\n]\n\n\nUSER: Set alarm for tomorrow and thursday at 7am with wake up label and a schedule for exercise\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"set_alarm\",\"arguments\":{\"time\":\"7am\",\"day\":\"tomorrow\",\"days\":[\"thu\"],\"label\":\"wake up\",\"schedules\":[\"exercise\"]}}",
+    "gold_name": "set_alarm",
+    "domain": "misc"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"schedule_irrigation\",\n  \"set_outdoor_light_color\",\n  \"turn_off_outdoor_light\",\n  \"query_pool_temperature\"\n]\n\n\nUSER: Water the back lawn at 09:00 for twenty-two minutes\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"schedule_irrigation\",\"arguments\":{\"zone\":\"back lawn\",\"time\":\"09:00\",\"duration_min\":22}}",
+    "gold_name": "schedule_irrigation",
+    "domain": "garden"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"skip_track\",\n  \"turn_on_tv\",\n  \"play_music\",\n  \"switch_speaker_room\"\n]\n\n\nUSER: Play happy birthday song in the nursery at 50 percent volume.\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"play_music\",\"arguments\":{\"song\":\"happy birthday\",\"room\":\"nursery\",\"volume_pct\":50}}",
+    "gold_name": "play_music",
+    "domain": "media"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"snooze_alarm\",\n  \"cancel_alarm\",\n  \"schedule_routine\"\n]\n\n\nUSER: Snooze the alarm for 30 minutes and 2 hours range and all alarms\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"snooze_alarm\",\"arguments\":{\"duration_minutes\":30,\"range_hours\":2,\"all\":true}}",
+    "gold_name": "snooze_alarm",
+    "domain": "misc"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"set_pool_pump\",\n  \"start_irrigation_zone\",\n  \"set_outdoor_speaker\",\n  \"turn_off_pool_cover\",\n  \"turn_on_outdoor_light\"\n]\n\n\nUSER: Water the rose bed for 10 minutes.\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"start_irrigation_zone\",\"arguments\":{\"zone\":\"rose bed\",\"duration_min\":10}}",
+    "gold_name": "start_irrigation_zone",
+    "domain": "garden"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"set_timer\",\n  \"schedule_routine\",\n  \"set_reminder\"\n]\n\n\nUSER: Set reminder to buy milk today in 30 minutes with message don't forget\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"set_reminder\",\"arguments\":{\"message\":\"don't forget\",\"time\":\"today\",\"in_minutes\":30,\"days\":[\"today\"]}}",
+    "gold_name": "set_reminder",
+    "domain": "misc"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"set_reminder\",\n  \"query_smoke_alarm\",\n  \"cancel_timer\",\n  \"query_solar_production\",\n  \"set_timer\"\n]\n\n\nUSER: Set a 30-minute timer with label cooking and add it to my existing timers\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"set_timer\",\"arguments\":{\"duration_minutes\":30,\"label\":\"cooking\",\"timers\":[\"oven\",\"stove\"]}}",
+    "gold_name": "set_timer",
+    "domain": "misc"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"query_water_leak\",\n  \"set_reminder\",\n  \"cancel_reminder\",\n  \"list_active_devices\",\n  \"query_power_usage\"\n]\n\n\nUSER: Cancel all reminders for tomorrow that contain meeting\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"cancel_reminder\",\"arguments\":{\"message\":null,\"day\":\"tomorrow\",\"all\":true,\"contains\":\"meeting\",\"range\":null}}",
+    "gold_name": "cancel_reminder",
+    "domain": "misc"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"schedule_vacuum\",\n  \"empty_vacuum_bin\",\n  \"turn_on_air_purifier\",\n  \"set_air_purifier_speed\",\n  \"dock_vacuum\"\n]\n\n\nUSER: Schedule the vacuum to clean the living room at 09:00 on weekdays with deep intensity\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"schedule_vacuum\",\"arguments\":{\"area\":\"living room\",\"intensity\":\"deep\",\"time\":\"09:00\",\"day\":\"weekdays\"}}",
+    "gold_name": "schedule_vacuum",
+    "domain": "clean"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"stop_vacuum\",\n  \"start_vacuum\",\n  \"schedule_vacuum\",\n  \"query_vacuum_battery\"\n]\n\n\nUSER: Stop the vacuum cleaner immediately to prevent overheating.\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"stop_vacuum\",\"arguments\":{}}",
+    "gold_name": "stop_vacuum",
+    "domain": "clean"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"save_current_scene\",\n  \"cancel_alarm\",\n  \"query_alarms\",\n  \"activate_scene\"\n]\n\n\nUSER: Cancel my alarm for today and tomorrow from 8am to 9am\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"cancel_alarm\",\"arguments\":{\"day\":\"today\",\"days\":[\"today\",\"tomorrow\"],\"from\":\"8am\",\"to\":\"9am\"}}",
+    "gold_name": "cancel_alarm",
+    "domain": "misc"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"toggle_outlet\",\n  \"turn_off_light\",\n  \"turn_on_light\",\n  \"dim_light\",\n  \"blink_light\"\n]\n\n\nUSER: Set the living room light to twenty-two percent brightness\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"dim_light\",\"arguments\":{\"room\":\"living room\",\"brightness_pct\":22}}",
+    "gold_name": "dim_light",
+    "domain": "light"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"play_music\",\n  \"mute_audio\",\n  \"play_podcast\"\n]\n\n\nUSER: Play the Joe Rogan Experience podcast in the living room at 50% volume.\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"play_podcast\",\"arguments\":{\"podcast\":\"Joe Rogan Experience\",\"room\":\"living room\",\"volume_pct\":50}}",
+    "gold_name": "play_podcast",
+    "domain": "media"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"pause_music\",\n  \"play_music\",\n  \"switch_speaker_room\",\n  \"play_radio_station\"\n]\n\n\nUSER: Stop the music in the living room now\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"pause_music\",\"arguments\":{\"room\":\"living room\"}}",
+    "gold_name": "pause_music",
+    "domain": "media"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"pause_music\",\n  \"play_music\",\n  \"skip_track\",\n  \"set_tv_channel\"\n]\n\n\nUSER: Start playing my favorite song in the living room at full volume\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"play_music\",\"arguments\":{\"song\":\"favorite song\",\"room\":\"living room\",\"volume_pct\":100}}",
+    "gold_name": "play_music",
+    "domain": "media"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"switch_speaker_room\",\n  \"queue_song\",\n  \"play_radio_station\",\n  \"skip_track\"\n]\n\n\nUSER: Play BBC Radio 1 in the living room at 50 percent volume\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"play_radio_station\",\"arguments\":{\"station\":\"BBC Radio 1\",\"room\":\"living room\",\"volume_pct\":50}}",
+    "gold_name": "play_radio_station",
+    "domain": "media"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"start_vacuum\",\n  \"schedule_vacuum\",\n  \"dock_vacuum\",\n  \"stop_mop\"\n]\n\n\nUSER: Put the vacuum back to its dock now.\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"dock_vacuum\",\"arguments\":{}}",
+    "gold_name": "dock_vacuum",
+    "domain": "clean"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"open_skylight\",\n  \"set_blinds_angle\",\n  \"set_blinds_position\"\n]\n\n\nUSER: Set the blinds position to twenty-two in the office\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"set_blinds_position\",\"arguments\":{\"room\":\"office\",\"position\":22}}",
+    "gold_name": "set_blinds_position",
+    "domain": "blinds"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"query_timers\",\n  \"set_timer\",\n  \"query_window_status\",\n  \"set_alarm\"\n]\n\n\nUSER: Set a twenty-two minute timer for cooking\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"set_timer\",\"arguments\":{\"duration_minutes\":22}}",
+    "gold_name": "set_timer",
+    "domain": "misc"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"cancel_timer\",\n  \"query_alarms\",\n  \"save_current_scene\",\n  \"generate_status_report\"\n]\n\n\nUSER: What are the alarms for today, tomorrow, and Thursday, after 8am and before 5pm?\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"query_alarms\",\"arguments\":{\"day\":\"today\",\"days\":[\"tomorrow\",\"Thursday\"],\"after\":\"8am\",\"before\":\"5pm\"}}",
+    "gold_name": "query_alarms",
+    "domain": "misc"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"schedule_routine\",\n  \"query_window_status\",\n  \"set_reminder\",\n  \"snooze_alarm\"\n]\n\n\nUSER: What is the status of the windows in the bedroom\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"query_window_status\",\"arguments\":{\"room\":\"bedroom\"}}",
+    "gold_name": "query_window_status",
+    "domain": "misc"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"pause_music\",\n  \"set_volume\",\n  \"turn_on_tv\",\n  \"play_podcast\"\n]\n\n\nUSER: Play the Joe Rogan Experience podcast in the living room at 50 percent volume.\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"play_podcast\",\"arguments\":{\"podcast\":\"Joe Rogan Experience\",\"room\":\"living room\",\"volume_pct\":50}}",
+    "gold_name": "play_podcast",
+    "domain": "media"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"turn_off_tv\",\n  \"set_volume\",\n  \"switch_speaker_room\"\n]\n\n\nUSER: Set the volume to 50 percent in the living room\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"set_volume\",\"arguments\":{\"room\":\"living room\",\"volume_pct\":50}}",
+    "gold_name": "set_volume",
+    "domain": "media"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"query_garage_door\",\n  \"cancel_timer\",\n  \"cancel_alarm\",\n  \"query_water_meter\"\n]\n\n\nUSER: Cancel the alarm for tomorrow from 8am to 5pm and also today and Thursday\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"cancel_alarm\",\"arguments\":{\"day\":\"tomorrow\",\"from\":\"8am\",\"to\":\"5pm\",\"days\":[\"today\",\"thu\"]}}",
+    "gold_name": "cancel_alarm",
+    "domain": "misc"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"query_solar_production\",\n  \"set_timer\",\n  \"cancel_timer\",\n  \"query_alarms\"\n]\n\n\nUSER: What alarms are set for today, tomorrow, and Thursday, after 8am and before 5pm?\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"query_alarms\",\"arguments\":{\"day\":\"today\",\"days\":[\"tomorrow\",\"Thursday\"],\"after\":\"8am\",\"before\":\"5pm\"}}",
+    "gold_name": "query_alarms",
+    "domain": "misc"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"generate_status_report\",\n  \"query_water_meter\",\n  \"schedule_routine\"\n]\n\n\nUSER: Schedule cozy scene for today and tomorrow at 8pm with a 30 minute reminder\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"schedule_routine\",\"arguments\":{\"scene\":\"cozy\",\"days\":[\"today\",\"tomorrow\"],\"time\":\"8pm\",\"pre_reminder\":{\"time\":\"30 minutes\"}}}",
+    "gold_name": "schedule_routine",
+    "domain": "misc"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"stop_vacuum\",\n  \"stop_mop\",\n  \"turn_on_air_purifier\"\n]\n\n\nUSER: Stop the mop from cleaning the floor now\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"stop_mop\",\"arguments\":{}}",
+    "gold_name": "stop_mop",
+    "domain": "clean"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"close_curtains\",\n  \"set_blinds_position\",\n  \"raise_blinds\",\n  \"open_window\"\n]\n\n\nUSER: Set the blinds in the living room to twenty-two\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"set_blinds_position\",\"arguments\":{\"room\":\"living room\",\"position\":22}}",
+    "gold_name": "set_blinds_position",
+    "domain": "blinds"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"snooze_alarm\",\n  \"query_alarms\",\n  \"set_reminder\"\n]\n\n\nUSER: Remind me in twenty-two minutes to buy milk\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"set_reminder\",\"arguments\":{\"in_minutes\":22,\"message\":\"buy milk\"}}",
+    "gold_name": "set_reminder",
+    "domain": "misc"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"query_solar_production\",\n  \"snooze_alarm\",\n  \"cancel_alarm\",\n  \"query_garage_door\"\n]\n\n\nUSER: Cancel the alarm for tomorrow from 7am to 8am and also for today and Thursday\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"cancel_alarm\",\"arguments\":{\"day\":\"tomorrow\",\"from\":\"7am\",\"to\":\"8am\",\"days\":[\"today\",\"thu\"]}}",
+    "gold_name": "cancel_alarm",
+    "domain": "misc"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"query_vacuum_battery\",\n  \"dock_vacuum\",\n  \"schedule_vacuum\"\n]\n\n\nUSER: Schedule the vacuum to clean the living room at 10:00\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"schedule_vacuum\",\"arguments\":{\"area\":\"living room\",\"time\":\"10:00\"}}",
+    "gold_name": "schedule_vacuum",
+    "domain": "clean"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"generate_status_report\",\n  \"save_current_scene\",\n  \"set_alarm\"\n]\n\n\nUSER: Set alarm for tomorrow and thursday at 7am with wake up label and a condition of 20 degrees\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"set_alarm\",\"arguments\":{\"time\":\"7am\",\"day\":\"tomorrow\",\"days\":[\"thu\"],\"label\":\"wake up\",\"schedules\":[],\"condition\":\"20 degrees\"}}",
+    "gold_name": "set_alarm",
+    "domain": "misc"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"query_garage_door\",\n  \"query_motion_sensor\",\n  \"cancel_reminder\",\n  \"set_alarm\"\n]\n\n\nUSER: Set alarm for tomorrow and thursday at 7am with wake up label and no schedules and if motion detected\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"set_alarm\",\"arguments\":{\"time\":\"7am\",\"day\":\"tomorrow\",\"days\":[\"thu\"],\"label\":\"wake up\",\"schedules\":[],\"condition\":\"if motion detected\"}}",
+    "gold_name": "set_alarm",
+    "domain": "misc"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"turn_on_light\",\n  \"set_motion_sensitivity\",\n  \"set_light_scene\",\n  \"turn_off_light\"\n]\n\n\nUSER: Turn off the lights in the living room now.\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"turn_off_light\",\"arguments\":{\"room\":\"living room\"}}",
+    "gold_name": "turn_off_light",
+    "domain": "light"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"blink_light\",\n  \"query_light_state\",\n  \"dim_light\"\n]\n\n\nUSER: Blink the living room light twenty-two times.\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"blink_light\",\"arguments\":{\"room\":\"living room\",\"times\":22}}",
+    "gold_name": "blink_light",
+    "domain": "light"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"cancel_reminder\",\n  \"list_active_devices\",\n  \"schedule_routine\"\n]\n\n\nUSER: What devices are currently active in my home?\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"list_active_devices\",\"arguments\":{}}",
+    "gold_name": "list_active_devices",
+    "domain": "misc"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"open_curtains\",\n  \"set_blinds_angle\",\n  \"close_window\",\n  \"close_curtains\"\n]\n\n\nUSER: Please open the curtains in the bedroom now since they are currently closed.\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"open_curtains\",\"arguments\":{\"room\":\"bedroom\"}}",
+    "gold_name": "open_curtains",
+    "domain": "blinds"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"query_window_status\",\n  \"query_solar_production\",\n  \"query_power_usage\",\n  \"list_active_devices\"\n]\n\n\nUSER: What is the solar production for today\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"query_solar_production\",\"arguments\":{\"period\":\"today\"}}",
+    "gold_name": "query_solar_production",
+    "domain": "misc"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"query_motion_sensor\",\n  \"query_garage_door\",\n  \"set_timer\"\n]\n\n\nUSER: Set a twenty-two minute timer for cooking\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"set_timer\",\"arguments\":{\"duration_minutes\":22}}",
+    "gold_name": "set_timer",
+    "domain": "misc"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"set_tv_channel\",\n  \"play_podcast\",\n  \"switch_speaker_room\",\n  \"play_radio_station\"\n]\n\n\nUSER: Play BBC Radio 1 in the living room at 50 percent volume.\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"play_radio_station\",\"arguments\":{\"station\":\"BBC Radio 1\",\"room\":\"living room\",\"volume_pct\":50}}",
+    "gold_name": "play_radio_station",
+    "domain": "media"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"set_pool_heater\",\n  \"turn_off_pool_cover\",\n  \"set_outdoor_speaker\"\n]\n\n\nUSER: set pool heater to twenty-two degrees\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"set_pool_heater\",\"arguments\":{\"temperature_c\":22}}",
+    "gold_name": "set_pool_heater",
+    "domain": "garden"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"set_blinds_position\",\n  \"raise_blinds\",\n  \"lower_blinds\",\n  \"set_blinds_angle\"\n]\n\n\nUSER: Please lower the blinds in the bedroom now to block the sunlight.\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"lower_blinds\",\"arguments\":{\"room\":\"bedroom\"}}",
+    "gold_name": "lower_blinds",
+    "domain": "blinds"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"cancel_reminder\",\n  \"query_water_meter\",\n  \"set_timer\"\n]\n\n\nUSER: Set a 30-minute timer with label cooking and add to existing timers\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"set_timer\",\"arguments\":{\"duration_minutes\":30,\"label\":\"cooking\",\"timers\":[\"kitchen\",\"oven\"]}}",
+    "gold_name": "set_timer",
+    "domain": "misc"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"queue_song\",\n  \"play_podcast\",\n  \"skip_track\",\n  \"mute_audio\"\n]\n\n\nUSER: Play the Joe Rogan Experience podcast in the bedroom at 50% volume\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"play_podcast\",\"arguments\":{\"podcast\":\"Joe Rogan Experience\",\"room\":\"bedroom\",\"volume_pct\":50}}",
+    "gold_name": "play_podcast",
+    "domain": "media"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"stop_mop\",\n  \"stop_vacuum\",\n  \"start_vacuum\"\n]\n\n\nUSER: Start vacuuming the living room with deep intensity now\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"start_vacuum\",\"arguments\":{\"area\":\"living room\",\"intensity\":\"deep\"}}",
+    "gold_name": "start_vacuum",
+    "domain": "clean"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"turn_off_tv\",\n  \"queue_song\",\n  \"play_music\",\n  \"play_podcast\"\n]\n\n\nUSER: Play twenty-two percent volume of song happy in the living room\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"play_music\",\"arguments\":{\"song\":\"happy\",\"room\":\"living room\",\"volume_pct\":22}}",
+    "gold_name": "play_music",
+    "domain": "media"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"start_vacuum\",\n  \"stop_vacuum\",\n  \"set_air_purifier_speed\",\n  \"schedule_vacuum\"\n]\n\n\nUSER: Start vacuuming the bedroom now\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"start_vacuum\",\"arguments\":{\"area\":\"bedroom\"}}",
+    "gold_name": "start_vacuum",
+    "domain": "clean"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"lock_door\",\n  \"unlock_door\",\n  \"start_camera_recording\",\n  \"stop_camera_recording\",\n  \"trigger_panic_alarm\"\n]\n\n\nUSER: Start recording with the backyard camera now and not stop it.\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"start_camera_recording\",\"arguments\":{\"camera\":\"backyard cam\"}}",
+    "gold_name": "start_camera_recording",
+    "domain": "sec"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"save_current_scene\",\n  \"generate_status_report\",\n  \"set_timer\",\n  \"query_alarms\"\n]\n\n\nUSER: Set a 30 minute timer for cooking labeled dinner with existing timers\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"set_timer\",\"arguments\":{\"duration_minutes\":30,\"label\":\"dinner\",\"timers\":[\"cooking\"]}}",
+    "gold_name": "set_timer",
+    "domain": "misc"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"raise_blinds\",\n  \"open_curtains\",\n  \"close_curtains\",\n  \"lock_window\"\n]\n\n\nUSER: Please close the curtains in the bedroom now.\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"close_curtains\",\"arguments\":{\"room\":\"bedroom\"}}",
+    "gold_name": "close_curtains",
+    "domain": "blinds"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"query_humidity\",\n  \"set_ac_mode\",\n  \"toggle_humidifier\",\n  \"query_temperature\"\n]\n\n\nUSER: Switch the living room air conditioner to heat mode now.\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"set_ac_mode\",\"arguments\":{\"room\":\"living room\",\"mode\":\"heat\"}}",
+    "gold_name": "set_ac_mode",
+    "domain": "climate"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"stop_music\",\n  \"set_tv_channel\",\n  \"play_podcast\",\n  \"play_music\"\n]\n\n\nUSER: Play Happy Birthday in the living room at 50 percent volume.\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"play_music\",\"arguments\":{\"song\":\"Happy Birthday\",\"room\":\"living room\",\"volume_pct\":50}}",
+    "gold_name": "play_music",
+    "domain": "media"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"mute_audio\",\n  \"set_tv_channel\",\n  \"play_music\",\n  \"switch_speaker_room\"\n]\n\n\nUSER: Play happy birthday song in the living room at 80 percent volume.\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"play_music\",\"arguments\":{\"song\":\"happy birthday\",\"room\":\"living room\",\"volume_pct\":80}}",
+    "gold_name": "play_music",
+    "domain": "media"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"snooze_alarm\",\n  \"query_water_leak\",\n  \"query_window_status\",\n  \"list_active_devices\"\n]\n\n\nUSER: Snooze the alarm for 30 minutes and 2 hours range and all devices\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"snooze_alarm\",\"arguments\":{\"duration_minutes\":30,\"range_hours\":2,\"all\":true}}",
+    "gold_name": "snooze_alarm",
+    "domain": "misc"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"dim_light\",\n  \"query_light_state\",\n  \"toggle_outlet\",\n  \"set_light_color\",\n  \"set_motion_sensitivity\"\n]\n\n\nUSER: Set the living room light to warm white at 50 percent brightness\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"set_light_color\",\"arguments\":{\"room\":\"living room\",\"color\":\"warm white\",\"brightness_pct\":50}}",
+    "gold_name": "set_light_color",
+    "domain": "light"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"set_volume\",\n  \"queue_song\",\n  \"play_radio_station\",\n  \"turn_off_tv\",\n  \"turn_on_tv\"\n]\n\n\nUSER: Play BBC Radio 1 in the living room at 50 percent volume.\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"play_radio_station\",\"arguments\":{\"station\":\"BBC Radio 1\",\"room\":\"living room\",\"volume_pct\":50}}",
+    "gold_name": "play_radio_station",
+    "domain": "media"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"set_thermostat\",\n  \"set_ac_mode\",\n  \"set_radiator_valve\",\n  \"schedule_climate_program\"\n]\n\n\nUSER: Set the living room thermostat to twenty-two degrees in heat mode.\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"set_thermostat\",\"arguments\":{\"room\":\"living room\",\"temperature_c\":22,\"mode\":\"heat\"}}",
+    "gold_name": "set_thermostat",
+    "domain": "climate"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"turn_off_outdoor_light\",\n  \"set_pool_heater\",\n  \"set_pool_pump\",\n  \"schedule_irrigation\"\n]\n\n\nUSER: Set the pool heater to twenty-two degrees celsius\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"set_pool_heater\",\"arguments\":{\"temperature_c\":22}}",
+    "gold_name": "set_pool_heater",
+    "domain": "garden"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"cancel_reminder\",\n  \"query_motion_sensor\",\n  \"cancel_alarm\"\n]\n\n\nUSER: Cancel my alarm for today and tomorrow from 8am to 9am\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"cancel_alarm\",\"arguments\":{\"day\":\"today\",\"days\":[\"today\",\"tomorrow\"],\"from\":\"8am\",\"to\":\"9am\"}}",
+    "gold_name": "cancel_alarm",
+    "domain": "misc"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"set_thermostat\",\n  \"set_humidity_target\",\n  \"schedule_climate_program\"\n]\n\n\nUSER: Schedule the comfort program for the living room from 07:00 to 17:00.\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"schedule_climate_program\",\"arguments\":{\"room\":\"living room\",\"program\":\"comfort\",\"start_time\":\"07:00\",\"end_time\":\"17:00\"}}",
+    "gold_name": "schedule_climate_program",
+    "domain": "climate"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"extend_awning\",\n  \"open_window\",\n  \"close_skylight\",\n  \"retract_awning\"\n]\n\n\nUSER: Extend the awning in the living room for shade.\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"extend_awning\",\"arguments\":{\"room\":\"living room\"}}",
+    "gold_name": "extend_awning",
+    "domain": "blinds"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"stop_vacuum\",\n  \"dock_vacuum\",\n  \"start_vacuum\"\n]\n\n\nUSER: Start vacuuming the bedroom with normal intensity now\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"start_vacuum\",\"arguments\":{\"area\":\"bedroom\",\"intensity\":\"normal\"}}",
+    "gold_name": "start_vacuum",
+    "domain": "clean"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"lower_blinds\",\n  \"close_curtains\",\n  \"extend_awning\",\n  \"raise_blinds\"\n]\n\n\nUSER: Please raise the blinds in the living room now to let sunlight in\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"raise_blinds\",\"arguments\":{\"room\":\"living room\"}}",
+    "gold_name": "raise_blinds",
+    "domain": "blinds"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"trigger_panic_alarm\",\n  \"stop_camera_recording\",\n  \"start_camera_recording\"\n]\n\n\nUSER: Please stop recording with the backyard camera now\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"stop_camera_recording\",\"arguments\":{\"camera\":\"backyard cam\"}}",
+    "gold_name": "stop_camera_recording",
+    "domain": "sec"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"skip_track\",\n  \"set_volume\",\n  \"queue_song\",\n  \"turn_on_tv\"\n]\n\n\nUSER: Turn on the TV in the living room\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"turn_on_tv\",\"arguments\":{\"room\":\"living room\"}}",
+    "gold_name": "turn_on_tv",
+    "domain": "media"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"turn_off_outdoor_light\",\n  \"query_soil_moisture\",\n  \"schedule_irrigation\"\n]\n\n\nUSER: Irrigate the rose bed for twenty-two minutes at 11:00\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"schedule_irrigation\",\"arguments\":{\"zone\":\"rose bed\",\"time\":\"11:00\",\"duration_min\":22}}",
+    "gold_name": "schedule_irrigation",
+    "domain": "garden"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"generate_status_report\",\n  \"set_reminder\",\n  \"query_garage_door\",\n  \"query_battery_level\"\n]\n\n\nUSER: Remind me to buy milk today in 30 minutes\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"set_reminder\",\"arguments\":{\"message\":\"buy milk\",\"time\":\"today\",\"in_minutes\":30,\"days\":[\"today\"],\"day\":\"today\",\"offset_minutes\":30,\"relative_to\":\"now\",\"schedule\":\"one-time\"}}",
+    "gold_name": "set_reminder",
+    "domain": "misc"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"dim_light\",\n  \"blink_light\",\n  \"set_light_scene\",\n  \"turn_off_light\",\n  \"turn_on_light\"\n]\n\n\nUSER: Dim the living room light to twenty-two percent brightness\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"dim_light\",\"arguments\":{\"room\":\"living room\",\"brightness_pct\":22}}",
+    "gold_name": "dim_light",
+    "domain": "light"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"schedule_routine\",\n  \"query_smoke_alarm\",\n  \"cancel_alarm\"\n]\n\n\nUSER: Cancel my 8am alarm for today and tomorrow and set from Monday to Thursday\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"cancel_alarm\",\"arguments\":{\"time\":\"8am\",\"day\":\"today\",\"days\":[\"today\",\"tomorrow\",\"mon\",\"tue\",\"wed\",\"thu\"],\"from\":\"mon\",\"to\":\"thu\"}}",
+    "gold_name": "cancel_alarm",
+    "domain": "misc"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"set_blinds_position\",\n  \"close_skylight\",\n  \"close_curtains\",\n  \"raise_blinds\"\n]\n\n\nUSER: Set the blinds to twenty-two in the living room\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"set_blinds_position\",\"arguments\":{\"room\":\"living room\",\"position\":22}}",
+    "gold_name": "set_blinds_position",
+    "domain": "blinds"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"turn_on_tv\",\n  \"set_volume\",\n  \"queue_song\",\n  \"switch_speaker_room\",\n  \"play_podcast\"\n]\n\n\nUSER: Set the volume to twenty-two in the living room\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"set_volume\",\"arguments\":{\"room\":\"living room\",\"volume_pct\":22}}",
+    "gold_name": "set_volume",
+    "domain": "media"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"query_water_meter\",\n  \"set_timer\",\n  \"set_alarm\",\n  \"query_power_usage\"\n]\n\n\nUSER: Set alarm for tomorrow and thursday at 7am with wake up label and no condition\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"set_alarm\",\"arguments\":{\"time\":\"7am\",\"day\":\"tomorrow\",\"days\":[\"tomorrow\",\"thu\"],\"label\":\"wake up\",\"condition\":\"none\"}}",
+    "gold_name": "set_alarm",
+    "domain": "misc"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"toggle_outlet\",\n  \"turn_off_light\",\n  \"set_light_temperature_k\",\n  \"blink_light\",\n  \"dim_light\"\n]\n\n\nUSER: Dim the living room light to twenty-two percent brightness\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"dim_light\",\"arguments\":{\"room\":\"living room\",\"brightness_pct\":22}}",
+    "gold_name": "dim_light",
+    "domain": "light"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"set_tv_channel\",\n  \"skip_track\",\n  \"play_podcast\",\n  \"play_radio_station\"\n]\n\n\nUSER: Play NPR in the living room at 50 percent volume.\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"play_radio_station\",\"arguments\":{\"station\":\"NPR\",\"room\":\"living room\",\"volume_pct\":50}}",
+    "gold_name": "play_radio_station",
+    "domain": "media"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"set_thermostat\",\n  \"query_temperature\",\n  \"set_radiator_valve\"\n]\n\n\nUSER: Set the living room radiator valve to twenty-two\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"set_radiator_valve\",\"arguments\":{\"room\":\"living room\",\"level\":22}}",
+    "gold_name": "set_radiator_valve",
+    "domain": "climate"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"set_ac_mode\",\n  \"set_radiator_valve\",\n  \"toggle_humidifier\",\n  \"set_fan_speed\"\n]\n\n\nUSER: Turn on the humidifier in the living room\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"toggle_humidifier\",\"arguments\":{\"room\":\"living room\",\"state\":\"on\"}}",
+    "gold_name": "toggle_humidifier",
+    "domain": "climate"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"set_tv_channel\",\n  \"pause_music\",\n  \"set_tv_input\",\n  \"play_music\"\n]\n\n\nUSER: Play twenty-two percent volume of song happy in the living room\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"play_music\",\"arguments\":{\"song\":\"happy\",\"room\":\"living room\",\"volume_pct\":22}}",
+    "gold_name": "play_music",
+    "domain": "media"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"set_blinds_angle\",\n  \"retract_awning\",\n  \"lower_blinds\",\n  \"set_blinds_position\"\n]\n\n\nUSER: Lower the blinds in the living room\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"lower_blinds\",\"arguments\":{\"room\":\"living room\"}}",
+    "gold_name": "lower_blinds",
+    "domain": "blinds"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"queue_song\",\n  \"play_music\",\n  \"pause_music\"\n]\n\n\nUSER: Stop the music in the living room now\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"pause_music\",\"arguments\":{\"room\":\"living room\"}}",
+    "gold_name": "pause_music",
+    "domain": "media"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"schedule_climate_program\",\n  \"query_temperature\",\n  \"set_radiator_valve\",\n  \"toggle_dehumidifier\",\n  \"set_humidity_target\"\n]\n\n\nUSER: Schedule the comfort program in the bedroom from 22:00 to 06:00\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"schedule_climate_program\",\"arguments\":{\"room\":\"bedroom\",\"program\":\"comfort\",\"start_time\":\"22:00\",\"end_time\":\"06:00\"}}",
+    "gold_name": "schedule_climate_program",
+    "domain": "climate"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"save_current_scene\",\n  \"schedule_routine\",\n  \"query_timers\",\n  \"snooze_alarm\"\n]\n\n\nUSER: Schedule a bedtime routine for tomorrow at 10pm with lights off and alarm on\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"schedule_routine\",\"arguments\":{\"scene\":\"bedtime\",\"days\":[\"tomorrow\"],\"time\":\"10pm\",\"trigger\":\"at 10pm\",\"steps\":[\"lights off\",\"alarm on\"]}}",
+    "gold_name": "schedule_routine",
+    "domain": "misc"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"set_motion_sensitivity\",\n  \"set_light_temperature_k\",\n  \"set_light_color\"\n]\n\n\nUSER: Set living room light to twenty-two percent brightness and warm white color\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"set_light_color\",\"arguments\":{\"room\":\"living room\",\"color\":\"warm white\",\"brightness_pct\":22}}",
+    "gold_name": "set_light_color",
+    "domain": "light"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"start_coffee_brew\",\n  \"set_coffee_strength\",\n  \"stop_microwave\",\n  \"set_oven_timer\"\n]\n\n\nUSER: Stop the microwave now\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"stop_microwave\",\"arguments\":{}}",
+    "gold_name": "stop_microwave",
+    "domain": "kit"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"cancel_reminder\",\n  \"set_alarm\",\n  \"list_active_devices\",\n  \"snooze_alarm\",\n  \"query_water_meter\"\n]\n\n\nUSER: Set alarm for tomorrow and thursday at 8am with label wake up\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"set_alarm\",\"arguments\":{\"time\":\"8am\",\"day\":\"tomorrow\",\"days\":[\"thu\"],\"label\":\"wake up\"}}",
+    "gold_name": "set_alarm",
+    "domain": "misc"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"query_solar_production\",\n  \"query_timers\",\n  \"query_power_usage\",\n  \"cancel_reminder\"\n]\n\n\nUSER: Cancel all reminders for tomorrow that contain meeting\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"cancel_reminder\",\"arguments\":{\"all\":true,\"day\":\"tomorrow\",\"contains\":\"meeting\"}}",
+    "gold_name": "cancel_reminder",
+    "domain": "misc"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"set_timer\",\n  \"query_solar_production\",\n  \"cancel_reminder\",\n  \"query_water_leak\"\n]\n\n\nUSER: Cancel my reminders for tomorrow\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"cancel_reminder\",\"arguments\":{\"day\":\"tomorrow\"}}",
+    "gold_name": "cancel_reminder",
+    "domain": "misc"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"disarm_alarm_system\",\n  \"arm_alarm_system\",\n  \"stop_camera_recording\"\n]\n\n\nUSER: I want to turn off the alarm system now\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"disarm_alarm_system\",\"arguments\":{}}",
+    "gold_name": "disarm_alarm_system",
+    "domain": "sec"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"set_reminder\",\n  \"schedule_routine\",\n  \"cancel_timer\",\n  \"query_timers\"\n]\n\n\nUSER: Remind me in twenty-two minutes to buy milk\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"set_reminder\",\"arguments\":{\"in_minutes\":22}}",
+    "gold_name": "set_reminder",
+    "domain": "misc"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"skip_track\",\n  \"set_tv_volume\",\n  \"set_tv_channel\",\n  \"mute_audio\"\n]\n\n\nUSER: Set the tv volume to twenty-two in the living room\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"set_tv_volume\",\"arguments\":{\"room\":\"living room\",\"volume_pct\":22}}",
+    "gold_name": "set_tv_volume",
+    "domain": "media"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"query_solar_production\",\n  \"query_timers\",\n  \"cancel_alarm\",\n  \"cancel_timer\"\n]\n\n\nUSER: Cancel my 8am alarm for today and tomorrow\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"cancel_alarm\",\"arguments\":{\"time\":\"8am\",\"day\":\"today\",\"days\":[\"today\",\"tomorrow\"]}}",
+    "gold_name": "cancel_alarm",
+    "domain": "misc"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"preheat_oven\",\n  \"start_microwave\",\n  \"query_fridge_contents\",\n  \"start_coffee_brew\"\n]\n\n\nUSER: What food and drinks are currently inside the fridge?\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"query_fridge_contents\",\"arguments\":{}}",
+    "gold_name": "query_fridge_contents",
+    "domain": "kit"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"play_radio_station\",\n  \"turn_on_tv\",\n  \"set_tv_input\",\n  \"switch_speaker_room\"\n]\n\n\nUSER: Play NPR at twenty-two percent volume in the living room\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"play_radio_station\",\"arguments\":{\"station\":\"NPR\",\"room\":\"living room\",\"volume_pct\":22}}",
+    "gold_name": "play_radio_station",
+    "domain": "media"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"set_motion_sensitivity\",\n  \"blink_light\",\n  \"dim_light\",\n  \"set_light_color\"\n]\n\n\nUSER: Dim the living room lights to 50 percent brightness.\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"dim_light\",\"arguments\":{\"room\":\"living room\",\"brightness_pct\":50}}",
+    "gold_name": "dim_light",
+    "domain": "light"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"start_camera_recording\",\n  \"set_alarm_pin\",\n  \"set_camera_motion_sensitivity\",\n  \"lock_door\",\n  \"unlock_door\"\n]\n\n\nUSER: Please lock the side door now and do not unlock it.\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"lock_door\",\"arguments\":{\"door\":\"side door\"}}",
+    "gold_name": "lock_door",
+    "domain": "sec"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"set_reminder\",\n  \"query_power_usage\",\n  \"query_battery_level\",\n  \"query_garage_door\",\n  \"cancel_alarm\"\n]\n\n\nUSER: Cancel my alarm for today and tomorrow from 8am to 5pm and all other alarms too.\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"cancel_alarm\",\"arguments\":{\"day\":\"today\",\"days\":[\"today\",\"tomorrow\"],\"from\":\"8am\",\"to\":\"5pm\",\"all\":true}}",
+    "gold_name": "cancel_alarm",
+    "domain": "misc"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"raise_blinds\",\n  \"open_window\",\n  \"open_curtains\"\n]\n\n\nUSER: Raise the blinds in the living room please.\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"raise_blinds\",\"arguments\":{\"room\":\"living room\"}}",
+    "gold_name": "raise_blinds",
+    "domain": "blinds"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"query_garage_door\",\n  \"save_current_scene\",\n  \"cancel_alarm\",\n  \"snooze_alarm\"\n]\n\n\nUSER: Snooze the alarm for 30 minutes within a 2 hour range for all alarms.\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"snooze_alarm\",\"arguments\":{\"duration_minutes\":30,\"range_hours\":2,\"all\":true}}",
+    "gold_name": "snooze_alarm",
+    "domain": "misc"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"query_vacuum_battery\",\n  \"stop_vacuum\",\n  \"turn_on_air_purifier\",\n  \"set_mop_water_level\",\n  \"set_air_purifier_speed\"\n]\n\n\nUSER: Turn on the air purifier in the bedroom at medium speed.\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"turn_on_air_purifier\",\"arguments\":{\"area\":\"bedroom\",\"speed\":\"medium\"}}",
+    "gold_name": "turn_on_air_purifier",
+    "domain": "clean"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"raise_blinds\",\n  \"open_window\",\n  \"retract_awning\",\n  \"close_window\",\n  \"set_blinds_position\"\n]\n\n\nUSER: Please close the window in the bedroom now\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"close_window\",\"arguments\":{\"room\":\"bedroom\"}}",
+    "gold_name": "close_window",
+    "domain": "blinds"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"query_window_status\",\n  \"set_reminder\",\n  \"list_active_devices\",\n  \"query_motion_sensor\",\n  \"cancel_alarm\"\n]\n\n\nUSER: Cancel my 8am alarm for today and tomorrow from bedroom\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"cancel_alarm\",\"arguments\":{\"time\":\"8am\",\"label\":\"my alarm\",\"day\":\"today\",\"days\":[\"today\",\"tomorrow\"],\"from\":\"bedroom\"}}",
+    "gold_name": "cancel_alarm",
+    "domain": "misc"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"blink_light\",\n  \"toggle_outlet\",\n  \"query_light_state\"\n]\n\n\nUSER: Blink the light in the living room twenty-two times.\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"blink_light\",\"arguments\":{\"room\":\"living room\",\"times\":22}}",
+    "gold_name": "blink_light",
+    "domain": "light"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"snooze_alarm\",\n  \"set_reminder\",\n  \"query_garage_door\"\n]\n\n\nUSER: Snooze the alarm for 30 minutes\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"snooze_alarm\",\"arguments\":{\"duration_minutes\":30}}",
+    "gold_name": "snooze_alarm",
+    "domain": "misc"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"start_camera_recording\",\n  \"unlock_door\",\n  \"lock_door\"\n]\n\n\nUSER: Please unlock the side door now and not lock it\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"unlock_door\",\"arguments\":{\"door\":\"side door\"}}",
+    "gold_name": "unlock_door",
+    "domain": "sec"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"stop_camera_recording\",\n  \"unlock_door\",\n  \"disarm_alarm_system\"\n]\n\n\nUSER: Turn off the alarm system now\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"disarm_alarm_system\",\"arguments\":{}}",
+    "gold_name": "disarm_alarm_system",
+    "domain": "sec"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"play_podcast\",\n  \"mute_audio\",\n  \"stop_music\",\n  \"turn_off_tv\"\n]\n\n\nUSER: Play the Joe Rogan Experience podcast at twenty-two percent volume in the living room\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"play_podcast\",\"arguments\":{\"podcast\":\"Joe Rogan Experience\",\"room\":\"living room\",\"volume_pct\":22}}",
+    "gold_name": "play_podcast",
+    "domain": "media"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"arm_alarm_system\",\n  \"set_alarm_pin\",\n  \"disarm_alarm_system\"\n]\n\n\nUSER: I want to turn off the alarm system now\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"disarm_alarm_system\",\"arguments\":{}}",
+    "gold_name": "disarm_alarm_system",
+    "domain": "sec"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"play_music\",\n  \"set_tv_input\",\n  \"stop_music\"\n]\n\n\nUSER: Play happy birthday song in the living room at 50 percent volume.\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"play_music\",\"arguments\":{\"song\":\"happy birthday\",\"room\":\"living room\",\"volume_pct\":50}}",
+    "gold_name": "play_music",
+    "domain": "media"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"set_motion_sensitivity\",\n  \"turn_on_light\",\n  \"blink_light\",\n  \"toggle_outlet\"\n]\n\n\nUSER: Blink the light in the living room five times.\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"blink_light\",\"arguments\":{\"room\":\"living room\",\"times\":5}}",
+    "gold_name": "blink_light",
+    "domain": "light"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"schedule_climate_program\",\n  \"toggle_dehumidifier\",\n  \"toggle_humidifier\"\n]\n\n\nUSER: Schedule the climate program to comfort mode in the bedroom at 09:00\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"schedule_climate_program\",\"arguments\":{\"room\":\"bedroom\",\"program\":\"comfort\",\"start_time\":\"09:00\"}}",
+    "gold_name": "schedule_climate_program",
+    "domain": "climate"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"query_timers\",\n  \"query_smoke_alarm\",\n  \"query_motion_sensor\",\n  \"query_solar_production\"\n]\n\n\nUSER: What timers will finish within the next 30 minutes in the living room\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"query_timers\",\"arguments\":{\"label\":\"living room\",\"finishing_within_minutes\":30}}",
+    "gold_name": "query_timers",
+    "domain": "misc"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"query_humidity\",\n  \"schedule_climate_program\",\n  \"set_ac_mode\",\n  \"set_fan_speed\"\n]\n\n\nUSER: Turn the fan to medium speed in the living room\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"set_fan_speed\",\"arguments\":{\"room\":\"living room\",\"speed\":\"medium\"}}",
+    "gold_name": "set_fan_speed",
+    "domain": "climate"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"query_light_state\",\n  \"set_light_color\",\n  \"dim_light\",\n  \"turn_on_light\"\n]\n\n\nUSER: Turn on the living room light to twenty-two percent brightness\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"turn_on_light\",\"arguments\":{\"room\":\"living room\",\"brightness_pct\":22}}",
+    "gold_name": "turn_on_light",
+    "domain": "light"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"stop_irrigation_zone\",\n  \"turn_off_pool_cover\",\n  \"set_pool_heater\"\n]\n\n\nUSER: Turn on the pool heater to twenty-two degrees\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"set_pool_heater\",\"arguments\":{\"temperature_c\":22,\"on\":true}}",
+    "gold_name": "set_pool_heater",
+    "domain": "garden"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"query_door_status\",\n  \"set_alarm_pin\",\n  \"lock_door\",\n  \"set_camera_motion_sensitivity\",\n  \"unlock_door\"\n]\n\n\nUSER: Please unlock the front door now\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"unlock_door\",\"arguments\":{\"door\":\"front door\"}}",
+    "gold_name": "unlock_door",
+    "domain": "sec"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"query_light_state\",\n  \"set_light_temperature_k\",\n  \"dim_light\",\n  \"set_light_color\"\n]\n\n\nUSER: Dim the living room lights to twenty-two percent\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"dim_light\",\"arguments\":{\"room\":\"living room\",\"brightness_pct\":22}}",
+    "gold_name": "dim_light",
+    "domain": "light"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"set_fan_speed\",\n  \"toggle_humidifier\",\n  \"set_radiator_valve\",\n  \"set_thermostat\"\n]\n\n\nUSER: Set the living room thermostat to twenty-two degrees in heat mode.\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"set_thermostat\",\"arguments\":{\"room\":\"living room\",\"temperature_c\":22,\"mode\":\"heat\"}}",
+    "gold_name": "set_thermostat",
+    "domain": "climate"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"generate_status_report\",\n  \"snooze_alarm\",\n  \"query_battery_level\",\n  \"query_water_leak\"\n]\n\n\nUSER: Snooze the alarm for twenty-two minutes now\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"snooze_alarm\",\"arguments\":{\"duration_minutes\":22}}",
+    "gold_name": "snooze_alarm",
+    "domain": "misc"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"cancel_timer\",\n  \"cancel_alarm\",\n  \"query_alarms\",\n  \"query_motion_sensor\",\n  \"query_solar_production\"\n]\n\n\nUSER: Cancel my alarm for tomorrow from 8am to 9am labeled wake up\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"cancel_alarm\",\"arguments\":{\"day\":\"tomorrow\",\"from\":\"8am\",\"to\":\"9am\",\"label\":\"wake up\"}}",
+    "gold_name": "cancel_alarm",
+    "domain": "misc"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"set_reminder\",\n  \"cancel_timer\",\n  \"cancel_reminder\",\n  \"query_power_usage\"\n]\n\n\nUSER: Remind me to buy milk tomorrow at 5pm in 30 minutes\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"set_reminder\",\"arguments\":{\"message\":\"buy milk\",\"time\":\"5pm\",\"in_minutes\":30,\"days\":[\"tomorrow\"]}}",
+    "gold_name": "set_reminder",
+    "domain": "misc"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"set_garden_lawnmower\",\n  \"set_pool_heater\",\n  \"set_outdoor_speaker\"\n]\n\n\nUSER: Turn on the outdoor speaker with volume twenty-two\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"set_outdoor_speaker\",\"arguments\":{\"on\":true,\"volume\":22}}",
+    "gold_name": "set_outdoor_speaker",
+    "domain": "garden"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"pause_music\",\n  \"mute_audio\",\n  \"set_tv_channel\",\n  \"set_tv_input\"\n]\n\n\nUSER: Pause the music in the living room\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"pause_music\",\"arguments\":{\"room\":\"living room\"}}",
+    "gold_name": "pause_music",
+    "domain": "media"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"turn_on_tv\",\n  \"queue_song\",\n  \"play_music\",\n  \"set_volume\"\n]\n\n\nUSER: Turn up the volume to twenty-two in the living room\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"set_volume\",\"arguments\":{\"room\":\"living room\",\"volume_pct\":22}}",
+    "gold_name": "set_volume",
+    "domain": "media"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"stop_vacuum\",\n  \"set_air_purifier_speed\",\n  \"set_mop_water_level\",\n  \"start_vacuum\"\n]\n\n\nUSER: Please start vacuuming the living room with normal intensity now\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"start_vacuum\",\"arguments\":{\"area\":\"living room\",\"intensity\":\"normal\"}}",
+    "gold_name": "start_vacuum",
+    "domain": "clean"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"queue_song\",\n  \"play_podcast\",\n  \"stop_music\"\n]\n\n\nUSER: Play the Joe Rogan Experience podcast in the living room at a bit warmer to 22 volume\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"play_podcast\",\"arguments\":{\"podcast\":\"Joe Rogan Experience\",\"room\":\"living room\",\"volume_pct\":22}}",
+    "gold_name": "play_podcast",
+    "domain": "media"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"set_motion_sensitivity\",\n  \"turn_on_light\",\n  \"turn_off_light\",\n  \"dim_light\"\n]\n\n\nUSER: Turn off the lights in the bedroom now.\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"turn_off_light\",\"arguments\":{\"room\":\"bedroom\"}}",
+    "gold_name": "turn_off_light",
+    "domain": "light"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"schedule_vacuum\",\n  \"start_vacuum\",\n  \"stop_vacuum\",\n  \"turn_off_air_purifier\"\n]\n\n\nUSER: Please start vacuuming the living room now with a deep intensity\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"start_vacuum\",\"arguments\":{\"area\":\"living room\",\"intensity\":\"deep\"}}",
+    "gold_name": "start_vacuum",
+    "domain": "clean"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"turn_on_tv\",\n  \"stop_music\",\n  \"set_tv_channel\",\n  \"turn_off_tv\",\n  \"set_tv_volume\"\n]\n\n\nUSER: Change the TV channel in the living room to Cartoon Network\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"set_tv_channel\",\"arguments\":{\"room\":\"living room\",\"channel\":\"Cartoon Network\"}}",
+    "gold_name": "set_tv_channel",
+    "domain": "media"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"generate_status_report\",\n  \"query_solar_production\",\n  \"set_reminder\",\n  \"set_timer\"\n]\n\n\nUSER: Remind me to buy milk today in 30 minutes\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"set_reminder\",\"arguments\":{\"message\":\"buy milk\",\"time\":\"\",\"in_minutes\":30,\"days\":[\"today\"],\"day\":\"\",\"offset_minutes\":0,\"relative_to\":\"\",\"schedule\":\"\"}}",
+    "gold_name": "set_reminder",
+    "domain": "misc"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"schedule_routine\",\n  \"query_smoke_alarm\",\n  \"query_battery_level\",\n  \"cancel_reminder\",\n  \"set_alarm\"\n]\n\n\nUSER: Schedule a dinner party routine on Friday at 6pm with a 30-minute pre-reminder and lights on\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"schedule_routine\",\"arguments\":{\"scene\":\"dinner party\",\"days\":[\"fri\"],\"time\":\"18:00\",\"pre_reminder\":{\"minutes\":30,\"action\":\"notify\"},\"steps\":[{\"action\":\"turn on lights\"}]}}",
+    "gold_name": "schedule_routine",
+    "domain": "misc"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"stop_vacuum\",\n  \"start_mop\",\n  \"query_vacuum_battery\",\n  \"query_air_quality\",\n  \"start_vacuum\"\n]\n\n\nUSER: Start vacuuming the living room with deep intensity now\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"start_vacuum\",\"arguments\":{\"area\":\"living room\",\"intensity\":\"deep\"}}",
+    "gold_name": "start_vacuum",
+    "domain": "clean"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"query_door_status\",\n  \"set_alarm_pin\",\n  \"trigger_panic_alarm\",\n  \"disarm_alarm_system\",\n  \"arm_alarm_system\"\n]\n\n\nUSER: Turn off the alarm system to stop the sirens\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"disarm_alarm_system\",\"arguments\":{}}",
+    "gold_name": "disarm_alarm_system",
+    "domain": "sec"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"generate_status_report\",\n  \"query_battery_level\",\n  \"query_timers\",\n  \"set_alarm\"\n]\n\n\nUSER: Set alarm for tomorrow and thursday at 7am with wake up label and coffee schedule condition\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"set_alarm\",\"arguments\":{\"time\":\"7am\",\"day\":\"tomorrow\",\"days\":[\"tomorrow\",\"thursday\"],\"label\":\"wake up\",\"schedules\":[\"coffee\"],\"condition\":\"coffee\"}}",
+    "gold_name": "set_alarm",
+    "domain": "misc"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"turn_off_pool_cover\",\n  \"start_irrigation_zone\",\n  \"set_outdoor_speaker\",\n  \"query_pool_temperature\",\n  \"query_soil_moisture\"\n]\n\n\nUSER: Turn on the outdoor speaker at twenty-two volume\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"set_outdoor_speaker\",\"arguments\":{\"on\":true,\"volume\":22}}",
+    "gold_name": "set_outdoor_speaker",
+    "domain": "garden"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"query_solar_production\",\n  \"list_active_devices\",\n  \"set_alarm\",\n  \"set_reminder\",\n  \"query_window_status\"\n]\n\n\nUSER: Set alarm for tomorrow and thursday at 7am with reminder label wake up\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"set_alarm\",\"arguments\":{\"time\":\"7am\",\"day\":\"tomorrow\",\"days\":[\"thu\"],\"label\":\"wake up\"}}",
+    "gold_name": "set_alarm",
+    "domain": "misc"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"set_light_color\",\n  \"turn_off_light\",\n  \"query_light_state\"\n]\n\n\nUSER: Set living room light to twenty-two percent brightness in warm white\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"set_light_color\",\"arguments\":{\"room\":\"living room\",\"color\":\"warm white\",\"brightness_pct\":22}}",
+    "gold_name": "set_light_color",
+    "domain": "light"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"extend_awning\",\n  \"close_curtains\",\n  \"open_curtains\"\n]\n\n\nUSER: Extend the awning in the living room for shade\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"extend_awning\",\"arguments\":{\"room\":\"living room\"}}",
+    "gold_name": "extend_awning",
+    "domain": "blinds"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"unlock_door\",\n  \"disarm_alarm_system\",\n  \"lock_door\"\n]\n\n\nUSER: Please unlock the front door now to let my family in.\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"unlock_door\",\"arguments\":{\"door\":\"front door\"}}",
+    "gold_name": "unlock_door",
+    "domain": "sec"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"cancel_reminder\",\n  \"snooze_alarm\",\n  \"query_smoke_alarm\",\n  \"cancel_alarm\",\n  \"query_alarms\"\n]\n\n\nUSER: Cancel my alarm for tomorrow\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"cancel_alarm\",\"arguments\":{\"day\":\"tomorrow\"}}",
+    "gold_name": "cancel_alarm",
+    "domain": "misc"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"set_radiator_valve\",\n  \"schedule_climate_program\",\n  \"set_ac_mode\",\n  \"set_fan_speed\"\n]\n\n\nUSER: Set the living room radiator valve to twenty-two\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"set_radiator_valve\",\"arguments\":{\"room\":\"living room\",\"level\":22}}",
+    "gold_name": "set_radiator_valve",
+    "domain": "climate"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"query_soil_moisture\",\n  \"set_pool_heater\",\n  \"turn_on_pool_cover\"\n]\n\n\nUSER: Cover the pool for the night\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"turn_on_pool_cover\",\"arguments\":{}}",
+    "gold_name": "turn_on_pool_cover",
+    "domain": "garden"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"toggle_dehumidifier\",\n  \"query_humidity\",\n  \"query_temperature\",\n  \"schedule_climate_program\",\n  \"set_radiator_valve\"\n]\n\n\nUSER: Set the living room radiator to twenty-two degrees\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"set_radiator_valve\",\"arguments\":{\"room\":\"living room\",\"level\":22}}",
+    "gold_name": "set_radiator_valve",
+    "domain": "climate"
+  }
+]

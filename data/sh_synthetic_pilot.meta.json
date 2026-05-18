@@ -1,0 +1,19 @@
+{
+  "model": "meta-llama/Llama-3.3-70B-Instruct",
+  "attempts": 300,
+  "kept": 300,
+  "accept_rate": 1.0,
+  "bucket_counts": {
+    "multi_key": 100,
+    "numeric": 80,
+    "twin": 60,
+    "generic": 60
+  },
+  "drop_reasons": {},
+  "target_split": {
+    "multi_key": 100,
+    "numeric": 80,
+    "twin": 60,
+    "generic": 60
+  }
+}
