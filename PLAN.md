@@ -1074,3 +1074,58 @@ Cumulative v1→v6 in-domain name: 55.7 → 84.0 (+28.3 pp). Cross-domain: untes
 
 Total project spend: ~$10.30 of $12 (Iter 13 wasted $3.60 on duplicate jobs; net useful spend ~$6.70).
 
+---
+
+## Iter 18 — Research: more datasets + arg-extraction
+
+Read-only survey, ≤45 min, $0 spend. Iter 16 (v7 training, +500 Glaive) and Iter 17 (label refinement v8) are running in parallel — recommendations below target **v9**, after both land.
+
+### 1. Datasets table (prioritised)
+
+| # | Dataset | URL | License | Rows | Shape | Unique angle / fit |
+|--:|---|---|---|---:|---|---|
+| 1 | **acon96/Home-Assistant-Requests** | hf.co/datasets/acon96/Home-Assistant-Requests | **MIT (commercial OK)** | **35,796** (33.4k train / 2.4k test) | ShareGPT system+user+assistant, service calls `light.turn_on(brightness=…)`. Trivial regex → our `{prompt, gold, gold_name}` | **Smart-home native.** Covers cover/climate/fan/light/lock/media. Human-personas + noisy-prompt variants. Direct overlap with our 10 domains. |
+| 2 | **nvidia/Nemotron-Post-Training-Dataset-v1** (tool_calling subset) | hf.co/datasets/nvidia/Nemotron-Post-Training-Dataset-v1 | **Commercial OK** (NVIDIA OS) | 310,051 tool-calling | OpenAI tools+messages, single+multi-turn+multi-step | Largest single curated tool-call corpus released. Filter to single-turn smart-home-flavoured by regex on tool names (lights/thermostat/media). Untouched by us. |
+| 3 | **MadeAgents/XLAM-7.5k-Irrelevance** (extra) | hf.co/datasets/MadeAgents/XLAM-7.5k-Irrelevance | CC-BY-4.0 | 7,500 | tool-list + query → `[]` | We used 2,500 in v2. **5,000 untouched.** Cheapest refusal-class boost. |
+| 4 | argilla/apigen-function-calling (curated 60k+) | hf.co/datasets/argilla/apigen-function-calling | apache-2.0 | ~60k+7.5k | apigen-style | Argilla-cleaned superset of what Hammer trains on. Lexical de-dup vs our 3k ToolACE / 5k xLAM mined slice; expect ~30k novel. |
+| 5 | Salesforce/APIGen-MT-5k | hf.co/datasets/Salesforce/APIGen-MT-5k | **CC-BY-NC-4.0 (non-commercial only)** | 5,000 multi-turn | ShareGPT trajectories, retail+airline | Multi-turn quality is high but **license blocks our commercial demo**. Skip. |
+| 6 | gorilla-llm/Berkeley-Function-Calling-Leaderboard | hf.co/datasets/gorilla-llm/BFCL | Apache-2.0 | ~4k items (v3+v4 mix) | question + function docs | Eval set; tiny train value. Use for held-out generalisation eval only. |
+| 7 | glaiveai/glaive-function-calling-v2 | hf.co/datasets/glaiveai/glaive-function-calling-v2 | apache-2.0 | 113k | chat with `<functioncall>` tag — **our exact format** | Iter 16 only pulls 500. Headroom: 5–10k filtered single-turn. Trivial loader (same template). |
+
+Skipped (not net-new or licence-incompatible): Hammer training data (= xLAM-60k + irrelevance, already mined), API-Bank (314 dialogues only), ToolBench/OpenBMB (multi-step agent traces, format-mismatch heavy), alfworld/virtualhome (RL trajectories, not JSON tool calls), SmartThings/Matter docs (no public JSONL).
+
+### 2. Techniques table (sorted by feasibility × expected lift)
+
+| # | Technique | Source | Reported lift | Cost on our stack | Feasibility |
+|--:|---|---|---|---|---|
+| 1 | **Multi-task curriculum (Granite recipe): function-name + parameter-value-pair + next-best as separate SFT tasks in one mix** | arXiv 2407.00121 (Granite-20B, EMNLP'24) | Top of BFCL among 20B-class; arg-acc lifted ~+8 pp over single-task SFT | Pure data-side; 1 HF Job (~$1) | **High** — only requires reformatting existing rows into `<task>name</task>` / `<task>args</task>` instructions. No model change. |
+| 2 | **DPO on arg-correctness pairs** (chosen=gold args, rejected=v6 hallucinated args from bench) | Improving Small-Scale LLM FC (arXiv 2410.18890) | +3–6 pp args on small models | ~$1–2 HF Job (DPO is 2-3× SFT walltime) | Med — needs preference pairs from existing bench fail-cases. Free to mine. |
+| 3 | **Two-pass decoding** (decode `name` greedy → re-prompt with `name` resolved → decode `args`) | SimpleTool / general cascading | +2–4 pp args (args benefit from name conditioning) | **Free at training time; +1 forward pass at inference (~+30% latency)** | **High** — pure `web/main.js` change; fits transformers.js. |
+| 4 | XGrammar / Outlines CFG over current bytewise mask | XGrammar (arXiv 2411.15100) | up to +20 pp over unguided; vs our existing mask: marginal | XGrammar lacks JS port; would require WASM build | Low — we already have a hand-rolled mask with 99% JSON valid. |
+| 5 | Type-aware sampling (temp/top-k per arg type) | folklore on BFCL | +1–2 pp on number/enum slots | Free | High but small ceiling. |
+| 6 | Span prediction / dedicated arg-heads (adapter_torch_EN_BFCL style) | sibling repo `barometech/gpt2-tool-call` | Their adapter: 50% BFCL v4 with 8 heads | Needs new ONNX export path; transformers.js doesn't support custom heads cleanly | Low for browser. |
+| 7 | Few-shot args via retrieved exemplars in prompt | RAG-for-FC folklore | +2–3 pp args | Free at training; costs ~200 prompt tokens | Med — eats GPT-2's 1024 ctx already tight from tool list. |
+
+### 3. Concrete v9 recommendation
+
+**Combine top dataset × top technique:**
+
+- **Add ~6,000 rows from acon96/Home-Assistant-Requests** (filter to single-turn, regex `*.turn_on/off/set_*`, dedup vs our 1,200 SH gold names — expect ~5k novel) **+ ~5,000 filtered single-turn from Nemotron tool_calling subset** (regex on smart-home-ish tool names). Both MIT/commercial-OK, both untouched. v9 train ≈ 20,600 (v6) + 11,000 = **31.6k items**.
+- **Train v9 with Granite-style multi-task curriculum**: same rows, but 50% as standard SFT, 30% as "predict name only" prompts, 20% as "given name, predict args only" prompts. Forces the model to learn the arg-extraction sub-skill explicitly.
+
+**Expected delta** (interpolating from v3→v4→v6 deltas and Granite's reported +8 pp arg-acc lift):
+- In-domain name 84.0 → **86–87%** (+2–3 pp from HA-Requests' smart-home prior).
+- In-domain args 58.0 → **64–66%** (+6–8 pp from curriculum, largest contributor).
+- In-domain exact 55.3 → **60–62%** — **gate-breaking** (≥60% hypothesis from Iter 11 finally met).
+- Cross-domain 86 → 87–88% (slight lift from Nemotron breadth).
+- Cost: ~$1.50 (1 HF Job T4, ~2.5h). Budget headroom OK.
+
+### 4. Sharp findings
+
+- **acon96/Home-Assistant-Requests is the dataset we should have started with.** 35.8k MIT-licensed *smart-home-native* function-call rows — same domain as our 1,200 SH gold; we've spent 17 iterations augmenting around it. The community has been training Home-1B / Home-3B against it since 2024.
+- **APIGen-MT (Salesforce, 5k multi-turn) is CC-BY-NC** — every "best new function-call dataset" list cites it, but the licence kills it for our browser-deployable commercial demo. Real for a research baseline only.
+- **Nemotron-Post-Training tool-calling subset has 310k rows under a commercial-OK licence**, released Apr 2025. Practically unused outside Nemotron training. Largest currently-legal corpus.
+- **Granite's "multi-task curriculum" is the only published technique that lifts arg-acc specifically on small (≤20B) models** without changing the architecture. It's a free recipe — just relabel rows with sub-task headers. We've been treating SFT as one objective; splitting it is likely worth more than another 5k of mixed data.
+- **Sibling repo's `adapter_torch_EN_BFCL.npz` (707 KB, 8 classifier heads)** could be a future drop-in for a separate args-head on top of v6 — but transformers.js doesn't support custom heads, so this is a Python/ONNX-only avenue.
+
+
