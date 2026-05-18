@@ -1,0 +1,1112 @@
+[
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  {\n    \"name\": \"preheat_oven\",\n    \"description\": \"Preheat the oven to a target temperature with optional cooking mode.\",\n    \"parameters\": {\n      \"temperature_f\": \"int\",\n      \"mode\": \"bake|broil|convection|roast|warm\"\n    }\n  },\n  {\n    \"name\": \"set_coffee_strength\",\n    \"description\": \"Set the coffee brewing strength.\",\n    \"parameters\": {\n      \"strength\": \"weak|medium|strong\"\n    }\n  },\n  {\n    \"name\": \"stop_oven\",\n    \"description\": \"Turn off the oven immediately.\",\n    \"parameters\": {}\n  },\n  {\n    \"name\": \"set_fridge_temperature\",\n    \"description\": \"Set the refrigerator compartment target temperature.\",\n    \"parameters\": {\n      \"temperature_f\": \"int\"\n    }\n  }\n]\n\n\nUSER: The recipient says it's a Celsius, but I always need it lower for my oven.\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"preheat_oven\",\"arguments\":{\"temperature_f\":410,\"mode\":\"bake\"}}",
+    "gold_name": "preheat_oven",
+    "domain": "kit_noisy"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  {\n    \"name\": \"open_skylight\",\n    \"description\": \"Open the skylight window in a room.\",\n    \"parameters\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"room\": {\n          \"type\": \"string\",\n          \"description\": \"Room whose skylight to open.\"\n        }\n      },\n      \"required\": [\n        \"room\"\n      ]\n    }\n  },\n  {\n    \"name\": \"set_blinds_angle\",\n    \"description\": \"Tilt the blind slats to a specific angle in degrees (0=closed, 90=flat/open).\",\n    \"parameters\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"room\": {\n          \"type\": \"string\",\n          \"description\": \"Room whose blind slats to tilt.\"\n        },\n        \"angle\": {\n          \"type\": \"integer\",\n          \"description\": \"Slat angle 0-90 degrees.\"\n        }\n      },\n      \"required\": [\n        \"room\",\n        \"angle\"\n      ]\n    }\n  },\n  {\n    \"name\": \"set_blinds_position\",\n    \"description\": \"Set the blinds to a specific vertical position percentage (0=closed, 100=open).\",\n    \"parameters\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"room\": {\n          \"type\": \"string\",\n          \"description\": \"Room whose blinds to position.\"\n        },\n        \"position\": {\n          \"typ\n\n\nUSER: Angle the blinds in the sunroom to fifteen\u00b0 to keep the view but block the direct sun.\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\": \"set_blinds_angle\", \"arguments\": {\"room\": \"sunroom\", \"angle\": 15}}",
+    "gold_name": "set_blinds_angle",
+    "domain": "blinds_num"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"hsl_to_rgb\"\n]\n\n\nUSER: Determine the RGB equivalent of an HSL color with saturation 95, hue 270, and lightness 30.\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\": \"hsl_to_rgb\", \"arguments\": {\"s\": 95, \"h\": 270, \"l\": 30}}",
+    "gold_name": "hsl_to_rgb",
+    "domain": "xlam_sh"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"query_power_usage\",\n  \"schedule_routine\",\n  \"cancel_timer\",\n  \"query_window_status\"\n]\n\n\nUSER: Schedule bedtime routine at 10pm today and tomorrow with chill scene and turn off lights\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"schedule_routine\",\"arguments\":{\"scene\":\"bedtime\",\"time\":\"10pm\",\"days\":[\"today\",\"tomorrow\"],\"trigger\":\"turn off lights\"}}",
+    "gold_name": "schedule_routine",
+    "domain": "misc"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"schedule_vacuum\",\n  \"dock_vacuum\",\n  \"turn_off_air_purifier\",\n  \"set_mop_water_level\"\n]\n\n\nUSER: Stop cleaning and dock the vacuum now please\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"dock_vacuum\",\"arguments\":{}}",
+    "gold_name": "dock_vacuum",
+    "domain": "clean"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"find_max_subarray_sum\",\n  \"count_vowels\"\n]\n\n\nUSER: Check if 153 is the sum of the cubes of its digits and find the longest common prefix among 'prefix', 'preamble', and 'pretext'\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"none\",\"arguments\":{}}",
+    "gold_name": "none",
+    "domain": "irrelevant"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"query_smoke_alarm\",\n  \"query_water_leak\",\n  \"query_air_quality\"\n]\n\n\nUSER: Are there any leaks in the basement?\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"query_water_leak\",\"arguments\":{\"room\":\"basement\"}}",
+    "gold_name": "query_water_leak",
+    "domain": "misc"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  {\n    \"name\": \"stop_oven\",\n    \"description\": \"Turn off the oven immediately.\",\n    \"parameters\": {}\n  },\n  {\n    \"name\": \"set_coffee_strength\",\n    \"description\": \"Set the coffee brewing strength.\",\n    \"parameters\": {\n      \"strength\": \"weak|medium|strong\"\n    }\n  },\n  {\n    \"name\": \"start_microwave\",\n    \"description\": \"Run the microwave at a given power for a given duration in seconds.\",\n    \"parameters\": {\n      \"seconds\": \"int\",\n      \"power\": \"int 1-10\"\n    }\n  },\n  {\n    \"name\": \"start_coffee_brew\",\n    \"description\": \"Start brewing coffee in the coffee maker.\",\n    \"parameters\": {\n      \"cups\": \"int\"\n    }\n  }\n]\n\n\nUSER: Install the strength on the middle on the coffee maker.\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"set_coffee_strength\",\"arguments\":{\"strength\":\"medium\"}}",
+    "gold_name": "set_coffee_strength",
+    "domain": "kit_noisy"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"factorial\",\n  \"circle_area\"\n]\n\n\nUSER: How much would I have after investing $2000 at 4% interest compounded annually for 10 years, semi-annually for 20 years, and quarterly for 30 years?\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"none\",\"arguments\":{}}",
+    "gold_name": "none",
+    "domain": "irrelevant"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  {\n    \"name\": \"start_vacuum\",\n    \"description\": \"Start the robot vacuum in a specified area with chosen intensity.\",\n    \"parameters\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"area\": {\n          \"type\": \"string\",\n          \"enum\": [\n            \"whole house\",\n            \"living room\",\n            \"kitchen\",\n            \"bedroom\",\n            \"bathroom\",\n            \"hallway\",\n            \"dining room\",\n            \"office\",\n            \"kids room\"\n          ]\n        },\n        \"intensity\": {\n          \"type\": \"string\",\n          \"enum\": [\n            \"quick\",\n            \"normal\",\n            \"deep\",\n            \"eco\"\n          ]\n        }\n      },\n      \"required\": [\n        \"area\"\n      ]\n    }\n  },\n  {\n    \"name\": \"stop_vacuum\",\n    \"description\": \"Stop the running robot vacuum immediately.\",\n    \"parameters\": {\n      \"type\": \"object\",\n      \"properties\": {},\n      \"required\": []\n    }\n  },\n  {\n    \"name\": \"schedule_vacuum\",\n    \"description\": \"Schedule the robot vacuum for a recurring or future run.\",\n    \"parameters\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"area\": {\n          \"type\": \"string\"\n        },\n        \"intensity\": {\n          \"\n\n\nUSER: Schedule eco vacuum at 6pm in bedroom.\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"schedule_vacuum\",\"arguments\":{\"area\":\"bedroom\",\"time\":\"18:00\",\"intensity\":\"eco\"}}",
+    "gold_name": "schedule_vacuum",
+    "domain": "clean"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  {\n    \"name\": \"dim_light\",\n    \"description\": \"Dim or brighten lights to a target brightness percentage.\",\n    \"parameters\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"room\": {\n          \"type\": \"string\",\n          \"description\": \"Room where lights should be dimmed.\"\n        },\n        \"brightness_pct\": {\n          \"type\": \"integer\",\n          \"description\": \"Target brightness from 0 to 100.\"\n        }\n      },\n      \"required\": [\n        \"room\",\n        \"brightness_pct\"\n      ]\n    }\n  },\n  {\n    \"name\": \"set_light_scene\",\n    \"description\": \"Apply a named lighting scene in a room.\",\n    \"parameters\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"room\": {\n          \"type\": \"string\",\n          \"description\": \"Room to apply the scene in.\"\n        },\n        \"scene\": {\n          \"type\": \"string\",\n          \"description\": \"Scene name, e.g. movie, reading, party.\"\n        }\n      },\n      \"required\": [\n        \"room\",\n        \"scene\"\n      ]\n    }\n  },\n  {\n    \"name\": \"turn_off_light\",\n    \"description\": \"Turn off the lights in a specified room.\",\n    \"parameters\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"room\": {\n          \"type\": \"string\",\n\n\nUSER: Lower the living room to 42%.\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\": \"dim_light\", \"arguments\": {\"room\": \"living room\", \"brightness_pct\": 42}}",
+    "gold_name": "dim_light",
+    "domain": "light_num"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"query_water_meter\",\n  \"query_solar_production\",\n  \"generate_status_report\",\n  \"query_power_usage\"\n]\n\n\nUSER: Tell me that the home authorities are pulling in the last hour.\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"query_power_usage\",\"arguments\":{\"period\":\"hour\"}}",
+    "gold_name": "query_power_usage",
+    "domain": "misc_noisy"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  {\n    \"name\": \"set_ac_mode\",\n    \"description\": \"Set the air conditioner operating mode for a room.\",\n    \"parameters\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"room\": {\n          \"type\": \"string\"\n        },\n        \"mode\": {\n          \"type\": \"string\",\n          \"enum\": [\n            \"heat\",\n            \"cool\",\n            \"auto\",\n            \"eco\",\n            \"off\"\n          ]\n        }\n      },\n      \"required\": [\n        \"room\",\n        \"mode\"\n      ]\n    }\n  },\n  {\n    \"name\": \"set_thermostat\",\n    \"description\": \"Set the thermostat target temperature and mode for a room.\",\n    \"parameters\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"room\": {\n          \"type\": \"string\",\n          \"description\": \"Room name\"\n        },\n        \"temperature_c\": {\n          \"type\": \"number\",\n          \"description\": \"Target temperature in Celsius\"\n        },\n        \"mode\": {\n          \"type\": \"string\",\n          \"enum\": [\n            \"heat\",\n            \"cool\",\n            \"auto\",\n            \"eco\",\n            \"off\"\n          ],\n          \"description\": \"HVAC mode\"\n        }\n      },\n      \"required\": [\n        \"room\",\n        \"temperature_c\"\n      ]\n    }\n  },\n\n\nUSER: Set the hallway to seventy-five degrees Fahrenheit.\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"set_thermostat\",\"arguments\":{\"room\":\"hallway\",\"temperature_c\":23.9}}",
+    "gold_name": "set_thermostat",
+    "domain": "climate"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  {\n    \"name\": \"blink_light\",\n    \"description\": \"Blink the lights in a room to grab attention.\",\n    \"parameters\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"room\": {\n          \"type\": \"string\",\n          \"description\": \"Room where lights should blink.\"\n        },\n        \"times\": {\n          \"type\": \"integer\",\n          \"description\": \"Number of blinks.\"\n        }\n      },\n      \"required\": [\n        \"room\"\n      ]\n    }\n  },\n  {\n    \"name\": \"toggle_outlet\",\n    \"description\": \"Toggle a smart outlet (electrical switch) on or off.\",\n    \"parameters\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"room\": {\n          \"type\": \"string\",\n          \"description\": \"Room containing the outlet.\"\n        },\n        \"outlet_name\": {\n          \"type\": \"string\",\n          \"description\": \"Outlet label, e.g. coffee maker, fan, lamp.\"\n        },\n        \"state\": {\n          \"type\": \"string\",\n          \"description\": \"Target state: on or off.\"\n        }\n      },\n      \"required\": [\n        \"room\",\n        \"outlet_name\",\n        \"state\"\n      ]\n    }\n  },\n  {\n    \"name\": \"turn_off_light\",\n    \"description\": \"Turn off the lights in a specified room.\",\n    \"parameters\": {\n \n\n\nUSER: hallway floor lamp on, thanks.\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"toggle_outlet\",\"arguments\":{\"room\":\"hallway\",\"outlet_name\":\"floor lamp\",\"state\":\"on\"}}",
+    "gold_name": "toggle_outlet",
+    "domain": "light"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"list_specific_qr_code\",\n  \"convert_hsl\"\n]\n\n\nUSER: What are the conversions for an HSL color with hue 180, saturation 50, and lightness 75?\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\": \"convert_hsl\", \"arguments\": {\"s\": 50, \"h\": 180, \"l\": 75}}",
+    "gold_name": "convert_hsl",
+    "domain": "xlam_sh"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  {\n    \"name\": \"set_camera_motion_sensitivity\",\n    \"description\": \"Adjust motion-detection sensitivity for a camera.\",\n    \"parameters\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"camera\": {\n          \"type\": \"string\",\n          \"enum\": [\n            \"front door cam\",\n            \"backyard cam\",\n            \"driveway cam\",\n            \"living room cam\",\n            \"baby monitor\"\n          ]\n        },\n        \"level\": {\n          \"type\": \"string\",\n          \"enum\": [\n            \"low\",\n            \"medium\",\n            \"high\"\n          ]\n        }\n      },\n      \"required\": [\n        \"camera\",\n        \"level\"\n      ]\n    }\n  },\n  {\n    \"name\": \"query_alarm_status\",\n    \"description\": \"Check the current state of the alarm system.\",\n    \"parameters\": {\n      \"type\": \"object\",\n      \"properties\": {}\n    }\n  },\n  {\n    \"name\": \"lock_door\",\n    \"description\": \"Lock a specific door in the home.\",\n    \"parameters\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"door\": {\n          \"type\": \"string\",\n          \"enum\": [\n            \"front door\",\n            \"back door\",\n            \"garage door\",\n            \"patio door\",\n            \"side door\",\n            \"bas\n\n\nUSER: Front door, lock it.\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"lock_door\",\"arguments\":{\"door\":\"front door\"}}",
+    "gold_name": "lock_door",
+    "domain": "sec"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"activate_scene\",\n  \"schedule_routine\",\n  \"save_current_scene\"\n]\n\n\nUSER: Activate the magic scene.\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"activate_scene\",\"arguments\":{\"scene\":\"focus\"}}",
+    "gold_name": "activate_scene",
+    "domain": "misc_noisy"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  {\n    \"name\": \"set_tv_input\",\n    \"description\": \"Switch TV input source\",\n    \"parameters\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"room\": {\n          \"type\": \"string\"\n        },\n        \"input\": {\n          \"type\": \"string\"\n        }\n      },\n      \"required\": [\n        \"room\",\n        \"input\"\n      ]\n    }\n  },\n  {\n    \"name\": \"stop_music\",\n    \"description\": \"Stop music playback completely in a room\",\n    \"parameters\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"room\": {\n          \"type\": \"string\"\n        }\n      },\n      \"required\": [\n        \"room\"\n      ]\n    }\n  },\n  {\n    \"name\": \"play_radio_station\",\n    \"description\": \"Play a live radio station on the speaker\",\n    \"parameters\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"station\": {\n          \"type\": \"string\"\n        },\n        \"room\": {\n          \"type\": \"string\"\n        },\n        \"volume_pct\": {\n          \"type\": \"integer\"\n        }\n      },\n      \"required\": [\n        \"station\",\n        \"room\"\n      ]\n    }\n  },\n  {\n    \"name\": \"play_music\",\n    \"description\": \"Play a song, artist, or playlist on a speaker in a given room\",\n    \"parameters\": {\n      \"type\": \"object\",\n  \n\n\nUSER: Put on a space drape and a sheet in the living room.\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"play_music\",\"arguments\":{\"song\":\"cosmic drift playlist\",\"room\":\"living room\",\"volume_pct\":30}}",
+    "gold_name": "play_music",
+    "domain": "media_noisy"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"hsl_to_hex\"\n]\n\n\nUSER: Could you find the HEX equivalents for a bright yellow with H=60, S=1, L=0.8, and a muted gray with H=0, S=0, L=0.5?\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\": \"hsl_to_hex\", \"arguments\": {\"h\": 60, \"s\": 1, \"l\": 0.8}}",
+    "gold_name": "hsl_to_hex",
+    "domain": "xlam_sh"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"generate_status_report\",\n  \"query_solar_production\",\n  \"cancel_timer\",\n  \"list_active_devices\"\n]\n\n\nUSER: What devices are currently active in the house\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"list_active_devices\",\"arguments\":{}}",
+    "gold_name": "list_active_devices",
+    "domain": "misc"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  {\n    \"name\": \"set_tv_channel\",\n    \"description\": \"Change TV channel\",\n    \"parameters\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"room\": {\n          \"type\": \"string\"\n        },\n        \"channel\": {\n          \"type\": \"string\"\n        }\n      },\n      \"required\": [\n        \"room\",\n        \"channel\"\n      ]\n    }\n  },\n  {\n    \"name\": \"switch_speaker_room\",\n    \"description\": \"Move currently playing audio from one room to another\",\n    \"parameters\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"from_room\": {\n          \"type\": \"string\"\n        },\n        \"to_room\": {\n          \"type\": \"string\"\n        }\n      },\n      \"required\": [\n        \"from_room\",\n        \"to_room\"\n      ]\n    }\n  },\n  {\n    \"name\": \"turn_off_tv\",\n    \"description\": \"Power off the TV in a room\",\n    \"parameters\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"room\": {\n          \"type\": \"string\"\n        }\n      },\n      \"required\": [\n        \"room\"\n      ]\n    }\n  }\n]\n\n\nUSER: I'm going to fix the car, push the music of the living room to the speaker of the garage.\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"switch_speaker_room\",\"arguments\":{\"from_room\":\"living room\",\"to_room\":\"garage\"}}",
+    "gold_name": "switch_speaker_room",
+    "domain": "media_noisy"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  {\n    \"name\": \"query_soil_moisture\",\n    \"description\": \"Soil.\",\n    \"parameters\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"zone\": {\n          \"type\": \"string\"\n        }\n      },\n      \"required\": [\n        \"zone\"\n      ]\n    }\n  },\n  {\n    \"name\": \"start_irrigation_zone\",\n    \"description\": \"Water.\",\n    \"parameters\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"zone\": {\n          \"type\": \"string\"\n        }\n      },\n      \"required\": [\n        \"zone\"\n      ]\n    }\n  }\n]\n\n\nUSER: Check the soil moisture on the pink layer.\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"query_soil_moisture\",\"arguments\":{\"zone\":\"rose bed\"}}",
+    "gold_name": "query_soil_moisture",
+    "domain": "garden_noisy"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"autocomplete\",\n  \"bus_trolley_schedules\",\n  \"route_information\"\n]\n\n\nUSER: Can you find train stations near Munich?\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\": \"autocomplete\", \"arguments\": {\"query\": \"Munich\"}}",
+    "gold_name": "autocomplete",
+    "domain": "xlam_sh"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  {\n    \"name\": \"turn_off_tv\",\n    \"description\": \"Power off the TV in a room\",\n    \"parameters\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"room\": {\n          \"type\": \"string\"\n        }\n      },\n      \"required\": [\n        \"room\"\n      ]\n    }\n  },\n  {\n    \"name\": \"turn_on_tv\",\n    \"description\": \"Power on the TV in a room\",\n    \"parameters\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"room\": {\n          \"type\": \"string\"\n        }\n      },\n      \"required\": [\n        \"room\"\n      ]\n    }\n  },\n  {\n    \"name\": \"mute_audio\",\n    \"description\": \"Mute audio output in a room\",\n    \"parameters\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"room\": {\n          \"type\": \"string\"\n        }\n      },\n      \"required\": [\n        \"room\"\n      ]\n    }\n  },\n  {\n    \"name\": \"set_tv_volume\",\n    \"description\": \"Set TV volume to a percentage\",\n    \"parameters\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"room\": {\n          \"type\": \"string\"\n        },\n        \"volume_pct\": {\n          \"type\": \"integer\"\n        }\n      },\n      \"required\": [\n        \"room\",\n        \"volume_pct\"\n      ]\n    }\n  }\n]\n\n\nUSER: Turn off the kitchen TV, no one is watching.\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"turn_off_tv\",\"arguments\":{\"room\":\"kitchen\"}}",
+    "gold_name": "turn_off_tv",
+    "domain": "media"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"hsl_to_rgb\",\n  \"obtain_a_new_datacenter_proxy\",\n  \"check_if_text_contains_profanity\"\n]\n\n\nUSER: Can you convert the HSL color values of 50% saturation, 120 degrees hue, and 75% lightness to RGB?\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\": \"hsl_to_rgb\", \"arguments\": {\"s\": 50, \"h\": 120, \"l\": 75}}",
+    "gold_name": "hsl_to_rgb",
+    "domain": "xlam_sh"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"set_reminder\",\n  \"set_alarm\",\n  \"set_timer\"\n]\n\n\nUSER: Remind me to take the trash out at 8 PM.\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"set_reminder\",\"arguments\":{\"time\":\"20:00\",\"message\":\"take the trash out\"}}",
+    "gold_name": "set_reminder",
+    "domain": "misc"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"set_pool_heater\",\n  \"set_pool_pump\",\n  \"turn_on_outdoor_light\",\n  \"schedule_irrigation\",\n  \"start_irrigation_zone\"\n]\n\n\nUSER: Start irrigation for twenty-two minutes on the rose bed\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"start_irrigation_zone\",\"arguments\":{\"zone\":\"rose bed\",\"duration_min\":22}}",
+    "gold_name": "start_irrigation_zone",
+    "domain": "garden"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"gettotalactivedays\",\n  \"gettotalsolved\",\n  \"gettalks\",\n  \"radical_position\",\n  \"get_all_posts\",\n  \"memre_api_v1_study\",\n  \"today\",\n  \"getdefinition\"\n]\n\n\nUSER: Retrieve all posts from thefluentme API for page 2 with 20 posts per page, and find out what treasure is uncovered today.\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\": \"get_all_posts\", \"arguments\": {\"per_page\": 20, \"page\": 2}}",
+    "gold_name": "get_all_posts",
+    "domain": "xlam_sh"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"is_valid_ip_address\",\n  \"project_investment_growth\"\n]\n\n\nUSER: What is the ZIP code for the IP address 8.8.8.8? Is 2024 a leap year?\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"none\",\"arguments\":{}}",
+    "gold_name": "none",
+    "domain": "irrelevant"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  {\n    \"name\": \"open_skylight\",\n    \"description\": \"Open the skylight window in a room.\",\n    \"parameters\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"room\": {\n          \"type\": \"string\",\n          \"description\": \"Room whose skylight to open.\"\n        }\n      },\n      \"required\": [\n        \"room\"\n      ]\n    }\n  },\n  {\n    \"name\": \"set_blinds_position\",\n    \"description\": \"Set the blinds to a specific vertical position percentage (0=closed, 100=open).\",\n    \"parameters\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"room\": {\n          \"type\": \"string\",\n          \"description\": \"Room whose blinds to position.\"\n        },\n        \"position\": {\n          \"type\": \"integer\",\n          \"description\": \"Position 0-100.\"\n        }\n      },\n      \"required\": [\n        \"room\",\n        \"position\"\n      ]\n    }\n  },\n  {\n    \"name\": \"close_curtains\",\n    \"description\": \"Fully close the curtains in a room.\",\n    \"parameters\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"room\": {\n          \"type\": \"string\",\n          \"description\": \"Room whose curtains to close.\"\n        }\n      },\n      \"required\": [\n        \"room\"\n      ]\n    }\n  },\n  {\n    \"name\": \"open_w\n\n\nUSER: Put the gelosive in the bedroom.\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"set_blinds_position\",\"arguments\":{\"room\":\"master bedroom\",\"position\":95}}",
+    "gold_name": "set_blinds_position",
+    "domain": "blinds_noisy"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  {\n    \"name\": \"unlock_door\",\n    \"description\": \"Unlock a specific door.\",\n    \"parameters\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"door\": {\n          \"type\": \"string\",\n          \"enum\": [\n            \"front door\",\n            \"back door\",\n            \"garage door\",\n            \"patio door\",\n            \"side door\",\n            \"basement door\"\n          ]\n        }\n      },\n      \"required\": [\n        \"door\"\n      ]\n    }\n  },\n  {\n    \"name\": \"query_alarm_status\",\n    \"description\": \"Check the current state of the alarm system.\",\n    \"parameters\": {\n      \"type\": \"object\",\n      \"properties\": {}\n    }\n  },\n  {\n    \"name\": \"arm_alarm_system\",\n    \"description\": \"Arm the home alarm system in a given mode.\",\n    \"parameters\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"mode\": {\n          \"type\": \"string\",\n          \"enum\": [\n            \"away\",\n            \"stay\",\n            \"night\",\n            \"vacation\"\n          ]\n        }\n      },\n      \"required\": [\n        \"mode\"\n      ]\n    }\n  },\n  {\n    \"name\": \"lock_door\",\n    \"description\": \"Lock a specific door in the home.\",\n    \"parameters\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"do\n\n\nUSER: Bolt the garage door.\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"lock_door\",\"arguments\":{\"door\":\"garage door\"}}",
+    "gold_name": "lock_door",
+    "domain": "sec"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"retrieve_a_contract\",\n  \"get_zip_code_detail\",\n  \"search\",\n  \"get_a_specific_picture\"\n]\n\n\nUSER: Can you get demographic information for ZIP code 20002 and find a motivational picture with ID 'pic789'.\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\": \"get_zip_code_detail\", \"arguments\": {\"zip\": \"20002\"}}",
+    "gold_name": "get_zip_code_detail",
+    "domain": "xlam_sh"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  {\n    \"name\": \"open_window\",\n    \"description\": \"Open the window in a room.\",\n    \"parameters\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"room\": {\n          \"type\": \"string\",\n          \"description\": \"Room whose window to open.\"\n        }\n      },\n      \"required\": [\n        \"room\"\n      ]\n    }\n  },\n  {\n    \"name\": \"close_window\",\n    \"description\": \"Close the window in a room.\",\n    \"parameters\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"room\": {\n          \"type\": \"string\",\n          \"description\": \"Room whose window to close.\"\n        }\n      },\n      \"required\": [\n        \"room\"\n      ]\n    }\n  },\n  {\n    \"name\": \"close_skylight\",\n    \"description\": \"Close the skylight window in a room.\",\n    \"parameters\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"room\": {\n          \"type\": \"string\",\n          \"description\": \"Room whose skylight to close.\"\n        }\n      },\n      \"required\": [\n        \"room\"\n      ]\n    }\n  },\n  {\n    \"name\": \"retract_awning\",\n    \"description\": \"Retract (close) the awning over a room or outdoor area.\",\n    \"parameters\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"room\": {\n          \"type\": \"string\"\n\n\nUSER: Retract the awning over the bathroom.\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"retract_awning\",\"arguments\":{\"room\":\"bathroom\"}}",
+    "gold_name": "retract_awning",
+    "domain": "blinds"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"spellout\",\n  \"get\"\n]\n\n\nUSER: What are the synonyms for 'happy' in English and 'feliz' in Spanish?\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\": \"get\", \"arguments\": {\"language\": \"EN\", \"word\": \"happy\"}}",
+    "gold_name": "get",
+    "domain": "xlam_sh"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  {\n    \"name\": \"set_light_color\",\n    \"description\": \"Change the color of the lights in a room.\",\n    \"parameters\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"room\": {\n          \"type\": \"string\",\n          \"description\": \"Room whose light color changes.\"\n        },\n        \"color\": {\n          \"type\": \"string\",\n          \"description\": \"Target color, e.g. red, warm white.\"\n        },\n        \"brightness_pct\": {\n          \"type\": \"integer\",\n          \"description\": \"Optional brightness 0-100.\"\n        }\n      },\n      \"required\": [\n        \"room\",\n        \"color\"\n      ]\n    }\n  },\n  {\n    \"name\": \"query_light_state\",\n    \"description\": \"Query the current state of the lights in a room.\",\n    \"parameters\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"room\": {\n          \"type\": \"string\",\n          \"description\": \"Room to query.\"\n        }\n      },\n      \"required\": [\n        \"room\"\n      ]\n    }\n  },\n  {\n    \"name\": \"set_light_temperature_k\",\n    \"description\": \"Set the white color temperature of the lights in Kelvin.\",\n    \"parameters\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"room\": {\n          \"type\": \"string\",\n          \"description\": \"\n\n\nUSER: I want cyan light in the basement at 67%.\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\": \"set_light_color\", \"arguments\": {\"room\": \"basement\", \"color\": \"cyan\", \"brightness_pct\": 67}}",
+    "gold_name": "set_light_color",
+    "domain": "light_num"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"uniquestageimage\",\n  \"teammedia\",\n  \"leaguetotalteamevents\"\n]\n\n\nUSER: Fetch the list of near matches for the American Football team with ID 67890.\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"none\",\"arguments\":{}}",
+    "gold_name": "none",
+    "domain": "irrelevant"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n{\n  \"name\": \"calc_glass_thermal_shock_resistance\",\n  \"description\": \"Compute thermal shock resistance parameter R for an optical glass.\",\n  \"parameters\": {\n    \"type\": \"object\",\n    \"properties\": {\n      \"glass_code\": {\n        \"type\": \"string\",\n        \"description\": \"Glass code\"\n      },\n      \"tensile_strength_mpa\": {\n        \"type\": \"number\",\n        \"description\": \"Tensile strength\"\n      }\n    },\n    \"required\": [\n      \"glass_code\",\n      \"tensile_strength_mpa\"\n    ]\n  }\n}\n\n\nUSER: Compute R for fused silica with tensile strength 55 MPa.\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"calc_glass_thermal_shock_resistance\",\"arguments\":{\"glass_code\":\"fused silica\",\"tensile_strength_mpa\":55}}",
+    "gold_name": "calc_glass_thermal_shock_resistance",
+    "domain": "external_materials"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  {\n    \"name\": \"schedule_irrigation\",\n    \"description\": \"Schedule.\",\n    \"parameters\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"zone\": {\n          \"type\": \"string\"\n        },\n        \"time\": {\n          \"type\": \"string\"\n        },\n        \"duration_min\": {\n          \"type\": \"integer\"\n        }\n      },\n      \"required\": [\n        \"zone\",\n        \"time\"\n      ]\n    }\n  },\n  {\n    \"name\": \"start_irrigation_zone\",\n    \"description\": \"Start.\",\n    \"parameters\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"zone\": {\n          \"type\": \"string\"\n        }\n      },\n      \"required\": [\n        \"zone\"\n      ]\n    }\n  },\n  {\n    \"name\": \"query_soil_moisture\",\n    \"description\": \"Soil.\",\n    \"parameters\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"zone\": {\n          \"type\": \"string\"\n        }\n      },\n      \"required\": [\n        \"zone\"\n      ]\n    }\n  }\n]\n\n\nUSER: We're going on vacation Mon-Fri next week - set up the front lawn irrigation for every day at 6:00am for 22 min while we're gone.\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"schedule_irrigation\",\"arguments\":{\"zone\":\"front lawn\",\"time\":\"weekdays 06:00 next week\",\"duration_min\":22}}",
+    "gold_name": "schedule_irrigation",
+    "domain": "garden"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  {\n    \"name\": \"set_light_color\",\n    \"description\": \"Change the color of the lights in a room.\",\n    \"parameters\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"room\": {\n          \"type\": \"string\",\n          \"description\": \"Room whose light color changes.\"\n        },\n        \"color\": {\n          \"type\": \"string\",\n          \"description\": \"Target color, e.g. red, warm white.\"\n        },\n        \"brightness_pct\": {\n          \"type\": \"integer\",\n          \"description\": \"Optional brightness 0-100.\"\n        }\n      },\n      \"required\": [\n        \"room\",\n        \"color\"\n      ]\n    }\n  },\n  {\n    \"name\": \"query_light_state\",\n    \"description\": \"Query the current state of the lights in a room.\",\n    \"parameters\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"room\": {\n          \"type\": \"string\",\n          \"description\": \"Room to query.\"\n        }\n      },\n      \"required\": [\n        \"room\"\n      ]\n    }\n  },\n  {\n    \"name\": \"turn_off_light\",\n    \"description\": \"Turn off the lights in a specified room.\",\n    \"parameters\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"room\": {\n          \"type\": \"string\",\n          \"description\": \"Room where lights should \n\n\nUSER: The basement, daylight, please.\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"set_light_color\",\"arguments\":{\"room\":\"basement\",\"color\":\"daylight\"}}",
+    "gold_name": "set_light_color",
+    "domain": "light_noisy"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n{\n  \"name\": \"model_iconographic_diffusion\",\n  \"description\": \"Model the spatial diffusion of an iconographic motif across a corpus of dated artifacts using a Bayesian diffusion prior.\",\n  \"parameters\": {\n    \"type\": \"object\",\n    \"properties\": {\n      \"motif\": {\n        \"type\": \"string\",\n        \"description\": \"Iconographic motif\"\n      },\n      \"corpus_id\": {\n        \"type\": \"string\",\n        \"description\": \"Corpus identifier\"\n      },\n      \"diffusion_prior\": {\n        \"type\": \"string\",\n        \"description\": \"Diffusion prior model\"\n      },\n      \"century_range\": {\n        \"type\": \"string\",\n        \"description\": \"Century range, e.g. 4-7CE\"\n      }\n    },\n    \"required\": [\n      \"motif\",\n      \"corpus_id\",\n      \"diffusion_prior\",\n      \"century_range\"\n    ]\n  }\n}\n\n\nUSER: Model diffusion of the Daniel-in-the-lions'-den motif across corpus EARLYCHRIST-01 with Gaussian random walk prior, 3-6CE.\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"model_iconographic_diffusion\",\"arguments\":{\"motif\":\"Daniel-in-the-lions'-den\",\"corpus_id\":\"EARLYCHRIST-01\",\"diffusion_prior\":\"Gaussian random walk\",\"century_range\":\"3-6CE\"}}",
+    "gold_name": "model_iconographic_diffusion",
+    "domain": "external_culture"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n{\n  \"name\": \"log_apiary_swarm_capture\",\n  \"description\": \"Log a captured honeybee swarm at an apiary.\",\n  \"parameters\": {\n    \"type\": \"object\",\n    \"properties\": {\n      \"apiary_id\": {\n        \"type\": \"string\",\n        \"description\": \"Apiary identifier\"\n      },\n      \"estimated_population\": {\n        \"type\": \"integer\",\n        \"description\": \"Estimated bee population\"\n      },\n      \"queen_seen\": {\n        \"type\": \"boolean\",\n        \"description\": \"Whether the queen was visually confirmed\"\n      }\n    },\n    \"required\": [\n      \"apiary_id\",\n      \"estimated_population\",\n      \"queen_seen\"\n    ]\n  }\n}\n\n\nUSER: Log a swarm capture at apiary A-2, about 18000 bees, and yes I spotted the queen.\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"log_apiary_swarm_capture\",\"arguments\":{\"apiary_id\":\"A-2\",\"estimated_population\":18000,\"queen_seen\":true}}",
+    "gold_name": "log_apiary_swarm_capture",
+    "domain": "external_opus"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  {\n    \"name\": \"play_podcast\",\n    \"description\": \"Play a podcast episode on the speaker\",\n    \"parameters\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"podcast\": {\n          \"type\": \"string\"\n        },\n        \"room\": {\n          \"type\": \"string\"\n        },\n        \"volume_pct\": {\n          \"type\": \"integer\"\n        }\n      },\n      \"required\": [\n        \"podcast\",\n        \"room\"\n      ]\n    }\n  },\n  {\n    \"name\": \"queue_song\",\n    \"description\": \"Add a song to the playback queue without interrupting current playback\",\n    \"parameters\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"song\": {\n          \"type\": \"string\"\n        },\n        \"room\": {\n          \"type\": \"string\"\n        }\n      },\n      \"required\": [\n        \"song\",\n        \"room\"\n      ]\n    }\n  },\n  {\n    \"name\": \"play_music\",\n    \"description\": \"Play a song, artist, or playlist on a speaker in a given room\",\n    \"parameters\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"song\": {\n          \"type\": \"string\",\n          \"description\": \"Song title, artist, or playlist name\"\n        },\n        \"room\": {\n          \"type\": \"string\",\n          \"description\": \"Room where the speaker is loc\n\n\nUSER: Play Synthwave in the bedroom at midnight, quiet, approximately.\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"play_music\",\"arguments\":{\"song\":\"midnight synth wave\",\"room\":\"bedroom\",\"volume_pct\":20}}",
+    "gold_name": "play_music",
+    "domain": "media_noisy"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"polygon_area_shoelace\",\n  \"compound_interest\",\n  \"greatest_common_divisor\",\n  \"neuronal_activity_rate\",\n  \"light_travel_time\"\n]\n\n\nUSER: Determine the greatest common divisor of 105 and 28. Calculate the neuronal activity rate with a synaptic input rate of 1000 per second, a synaptic weight of 0.5, and a decay constant of 0.05.\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\": \"greatest_common_divisor\", \"arguments\": {\"a\": 105, \"b\": 28}}",
+    "gold_name": "greatest_common_divisor",
+    "domain": "xlam_sh"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"latest_articles\",\n  \"health\",\n  \"vivanews_detail\"\n]\n\n\nUSER: I need to get 30 climate change articles from the 'BBC Climate' source, excluding articles from 'The New York Times'. Can you provide that?\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"none\",\"arguments\":{}}",
+    "gold_name": "none",
+    "domain": "irrelevant"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  {\n    \"name\": \"play_music\",\n    \"description\": \"Play a song, artist, or playlist on a speaker in a given room\",\n    \"parameters\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"song\": {\n          \"type\": \"string\",\n          \"description\": \"Song title, artist, or playlist name\"\n        },\n        \"room\": {\n          \"type\": \"string\",\n          \"description\": \"Room where the speaker is located\"\n        },\n        \"volume_pct\": {\n          \"type\": \"integer\",\n          \"description\": \"Volume 0-100\"\n        }\n      },\n      \"required\": [\n        \"song\",\n        \"room\"\n      ]\n    }\n  },\n  {\n    \"name\": \"set_volume\",\n    \"description\": \"Set speaker volume to a specific percentage\",\n    \"parameters\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"room\": {\n          \"type\": \"string\"\n        },\n        \"volume_pct\": {\n          \"type\": \"integer\",\n          \"description\": \"0-100\"\n        }\n      },\n      \"required\": [\n        \"room\",\n        \"volume_pct\"\n      ]\n    }\n  },\n  {\n    \"name\": \"play_radio_station\",\n    \"description\": \"Play a live radio station on the speaker\",\n    \"parameters\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"station\": {\n          \n\n\nUSER: Play some upbeat workout music in the basement gym, crank it to 75.\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"play_music\",\"arguments\":{\"song\":\"upbeat workout music\",\"room\":\"basement gym\",\"volume_pct\":75}}",
+    "gold_name": "play_music",
+    "domain": "media"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"is_hotel_available\",\n  \"calculate_calorie_intake\",\n  \"predict_forest_area\"\n]\n\n\nUSER: Order 5 apples, 3 bananas, and 2 oranges from 'Palo Alto, CA' Safeway.\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"none\",\"arguments\":{}}",
+    "gold_name": "none",
+    "domain": "irrelevant"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  {\n    \"name\": \"start_irrigation_zone\",\n    \"description\": \"Water.\",\n    \"parameters\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"zone\": {\n          \"type\": \"string\"\n        },\n        \"duration_min\": {\n          \"type\": \"integer\"\n        }\n      },\n      \"required\": [\n        \"zone\"\n      ]\n    }\n  },\n  {\n    \"name\": \"stop_irrigation_zone\",\n    \"description\": \"Stop.\",\n    \"parameters\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"zone\": {\n          \"type\": \"string\"\n        }\n      },\n      \"required\": [\n        \"zone\"\n      ]\n    }\n  }\n]\n\n\nUSER: Sprinkle the vegetable garden for 8 minutes.\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"start_irrigation_zone\",\"arguments\":{\"zone\":\"vegetable garden\",\"duration_min\":8}}",
+    "gold_name": "start_irrigation_zone",
+    "domain": "garden"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"query_garage_door\",\n  \"query_temperature\",\n  \"query_smoke_alarm\",\n  \"query_humidity\"\n]\n\n\nUSER: I'd like to know how hot it is in the canteen now.\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"query_temperature\",\"arguments\":{\"room\":\"dining_room\"}}",
+    "gold_name": "query_temperature",
+    "domain": "misc_noisy"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"query_smoke_alarm\",\n  \"query_water_meter\",\n  \"list_active_devices\",\n  \"query_door_status\",\n  \"query_air_quality\"\n]\n\n\nUSER: air quality kitchen\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"query_air_quality\",\"arguments\":{\"room\":\"kitchen\"}}",
+    "gold_name": "query_air_quality",
+    "domain": "misc_noisy"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"query_air_quality\",\n  \"query_garage_door\",\n  \"generate_status_report\"\n]\n\n\nUSER: Could you put together a snapshot of the whole house status?\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"generate_status_report\",\"arguments\":{}}",
+    "gold_name": "generate_status_report",
+    "domain": "misc"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  {\n    \"name\": \"set_blinds_angle\",\n    \"description\": \"Tilt the blind slats to a specific angle in degrees (0=closed, 90=flat/open).\",\n    \"parameters\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"room\": {\n          \"type\": \"string\",\n          \"description\": \"Room whose blind slats to tilt.\"\n        },\n        \"angle\": {\n          \"type\": \"integer\",\n          \"description\": \"Slat angle 0-90 degrees.\"\n        }\n      },\n      \"required\": [\n        \"room\",\n        \"angle\"\n      ]\n    }\n  },\n  {\n    \"name\": \"open_curtains\",\n    \"description\": \"Fully open the curtains in a room.\",\n    \"parameters\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"room\": {\n          \"type\": \"string\",\n          \"description\": \"Room whose curtains to open.\"\n        }\n      },\n      \"required\": [\n        \"room\"\n      ]\n    }\n  },\n  {\n    \"name\": \"lower_blinds\",\n    \"description\": \"Fully lower (close) the blinds in a room.\",\n    \"parameters\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"room\": {\n          \"type\": \"string\",\n          \"description\": \"Room whose blinds to lower.\"\n        }\n      },\n      \"required\": [\n        \"room\"\n      ]\n    }\n  }\n]\n\n\nUSER: Set the slat angle in the sunroom to 50 degrees.\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"set_blinds_angle\",\"arguments\":{\"room\":\"sunroom\",\"angle\":50}}",
+    "gold_name": "set_blinds_angle",
+    "domain": "blinds"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"simulate_query_database\",\n  \"predict_forest_area\",\n  \"place_safeway_order\",\n  \"structural_analysis\"\n]\n\n\nUSER: Project the population of New York City 5 years from now with an annual growth rate of 1.5%.\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"none\",\"arguments\":{}}",
+    "gold_name": "none",
+    "domain": "irrelevant"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"v1_covid19\"\n]\n\n\nUSER: What information is available about the drug 'Ibuprofen'?\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"none\",\"arguments\":{}}",
+    "gold_name": "none",
+    "domain": "irrelevant"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  {\n    \"name\": \"play_podcast\",\n    \"description\": \"Play a podcast episode on the speaker\",\n    \"parameters\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"podcast\": {\n          \"type\": \"string\"\n        },\n        \"room\": {\n          \"type\": \"string\"\n        },\n        \"volume_pct\": {\n          \"type\": \"integer\"\n        }\n      },\n      \"required\": [\n        \"podcast\",\n        \"room\"\n      ]\n    }\n  },\n  {\n    \"name\": \"set_volume\",\n    \"description\": \"Set speaker volume to a specific percentage\",\n    \"parameters\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"room\": {\n          \"type\": \"string\"\n        },\n        \"volume_pct\": {\n          \"type\": \"integer\",\n          \"description\": \"0-100\"\n        }\n      },\n      \"required\": [\n        \"room\",\n        \"volume_pct\"\n      ]\n    }\n  },\n  {\n    \"name\": \"set_tv_volume\",\n    \"description\": \"Set TV volume to a percentage\",\n    \"parameters\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"room\": {\n          \"type\": \"string\"\n        },\n        \"volume_pct\": {\n          \"type\": \"integer\"\n        }\n      },\n      \"required\": [\n        \"room\",\n        \"volume_pct\"\n      ]\n    }\n  },\n  {\n    \"name\": \"set_tv_inpu\n\n\nUSER: Destroy the office, yes.\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"set_volume\",\"arguments\":{\"room\":\"office\",\"volume_pct\":45}}",
+    "gold_name": "set_volume",
+    "domain": "media_noisy"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"set_alarm\",\n  \"activate_scene\",\n  \"query_motion_sensor\"\n]\n\n\nUSER: Set alarm for tomorrow and thursday at 7am with wake up label and no schedules if it's sunny\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"set_alarm\",\"arguments\":{\"time\":\"7am\",\"day\":\"tomorrow\",\"days\":[\"thu\"],\"label\":\"wake up\",\"schedules\":[],\"condition\":\"sunny\"}}",
+    "gold_name": "set_alarm",
+    "domain": "misc"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  {\n    \"name\": \"query_light_state\",\n    \"description\": \"Query the current state of the lights in a room.\",\n    \"parameters\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"room\": {\n          \"type\": \"string\",\n          \"description\": \"Room to query.\"\n        }\n      },\n      \"required\": [\n        \"room\"\n      ]\n    }\n  },\n  {\n    \"name\": \"dim_light\",\n    \"description\": \"Dim or brighten lights to a target brightness percentage.\",\n    \"parameters\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"room\": {\n          \"type\": \"string\",\n          \"description\": \"Room where lights should be dimmed.\"\n        },\n        \"brightness_pct\": {\n          \"type\": \"integer\",\n          \"description\": \"Target brightness from 0 to 100.\"\n        }\n      },\n      \"required\": [\n        \"room\",\n        \"brightness_pct\"\n      ]\n    }\n  },\n  {\n    \"name\": \"set_motion_sensitivity\",\n    \"description\": \"Set motion-sensor sensitivity for automatic lighting in a room.\",\n    \"parameters\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"room\": {\n          \"type\": \"string\",\n          \"description\": \"Room of the motion sensor.\"\n        },\n        \"level\": {\n          \"type\": \"string\",\n\n\n\nUSER: Drop the children's room.\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"dim_light\",\"arguments\":{\"room\":\"kids room\",\"brightness_pct\":20}}",
+    "gold_name": "dim_light",
+    "domain": "light_noisy"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  {\n    \"name\": \"set_oven_timer\",\n    \"description\": \"Set a countdown timer on the oven in minutes.\",\n    \"parameters\": {\n      \"minutes\": \"int\"\n    }\n  },\n  {\n    \"name\": \"start_dishwasher\",\n    \"description\": \"Begin a dishwasher cycle with a chosen wash program.\",\n    \"parameters\": {\n      \"cycle\": \"normal|heavy|quick|eco|rinse\"\n    }\n  },\n  {\n    \"name\": \"pause_dishwasher\",\n    \"description\": \"Pause the currently running dishwasher cycle.\",\n    \"parameters\": {}\n  },\n  {\n    \"name\": \"start_microwave\",\n    \"description\": \"Run the microwave at a given power for a given duration in seconds.\",\n    \"parameters\": {\n      \"seconds\": \"int\",\n      \"power\": \"int 1-10\"\n    }\n  },\n  {\n    \"name\": \"query_oven_state\",\n    \"description\": \"Return the current oven status, temperature, and mode.\",\n    \"parameters\": {}\n  }\n]\n\n\nUSER: Set oven timer for 23 minutes.\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\": \"set_oven_timer\", \"arguments\": {\"minutes\": 23}}",
+    "gold_name": "set_oven_timer",
+    "domain": "kit_num"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  {\n    \"name\": \"stop_camera_recording\",\n    \"description\": \"Stop ongoing recording on a security camera.\",\n    \"parameters\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"camera\": {\n          \"type\": \"string\",\n          \"enum\": [\n            \"front door cam\",\n            \"backyard cam\",\n            \"driveway cam\",\n            \"living room cam\",\n            \"baby monitor\"\n          ]\n        }\n      },\n      \"required\": [\n        \"camera\"\n      ]\n    }\n  },\n  {\n    \"name\": \"arm_alarm_system\",\n    \"description\": \"Arm the home alarm system in a given mode.\",\n    \"parameters\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"mode\": {\n          \"type\": \"string\",\n          \"enum\": [\n            \"away\",\n            \"stay\",\n            \"night\",\n            \"vacation\"\n          ]\n        }\n      },\n      \"required\": [\n        \"mode\"\n      ]\n    }\n  },\n  {\n    \"name\": \"trigger_panic_alarm\",\n    \"description\": \"Trigger the emergency panic alarm and notify authorities.\",\n    \"parameters\": {\n      \"type\": \"object\",\n      \"properties\": {}\n    }\n  },\n  {\n    \"name\": \"lock_door\",\n    \"description\": \"Lock a specific door in the home.\",\n    \"parameters\": {\n      \"type\": \"object\n\n\nUSER: Emergency, sound the panic alarm now!\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"trigger_panic_alarm\",\"arguments\":{}}",
+    "gold_name": "trigger_panic_alarm",
+    "domain": "sec"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"feed_by_username\",\n  \"api_userinfo\",\n  \"advance_profile\",\n  \"tweet_details\",\n  \"following_by_username\",\n  \"get_media_download_link\"\n]\n\n\nUSER: Can you show me the trending challenges on TikTok right now? Also, what's the profile info for the user 'kimkardashian' on Instagram?\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"none\",\"arguments\":{}}",
+    "gold_name": "none",
+    "domain": "irrelevant"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"competitions_id\",\n  \"innings_cricket\",\n  \"tournamentdetailsbyid\",\n  \"get_all_predictions\"\n]\n\n\nUSER: I'm interested in the attribute overviews of a soccer player with ID 112233. Additionally, could you retrieve the standings for a specific stage in a motorsport competition with ID 445566?\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"none\",\"arguments\":{}}",
+    "gold_name": "none",
+    "domain": "irrelevant"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"protocol\",\n  \"get_equity_latest_data\",\n  \"tvl_protocol\",\n  \"recent_exchange_rates\",\n  \"stock_v2_get_risk_rating_breakdown\",\n  \"stock_company_overview\"\n]\n\n\nUSER: What are the historical TVL data for the Compound protocol?\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\": \"protocol\", \"arguments\": {\"protocol\": \"compound\"}}",
+    "gold_name": "protocol",
+    "domain": "xlam_sh"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  {\n    \"name\": \"toggle_outlet\",\n    \"description\": \"Toggle a smart outlet (electrical switch) on or off.\",\n    \"parameters\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"room\": {\n          \"type\": \"string\",\n          \"description\": \"Room containing the outlet.\"\n        },\n        \"outlet_name\": {\n          \"type\": \"string\",\n          \"description\": \"Outlet label, e.g. coffee maker, fan, lamp.\"\n        },\n        \"state\": {\n          \"type\": \"string\",\n          \"description\": \"Target state: on or off.\"\n        }\n      },\n      \"required\": [\n        \"room\",\n        \"outlet_name\",\n        \"state\"\n      ]\n    }\n  },\n  {\n    \"name\": \"set_light_scene\",\n    \"description\": \"Apply a named lighting scene in a room.\",\n    \"parameters\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"room\": {\n          \"type\": \"string\",\n          \"description\": \"Room to apply the scene in.\"\n        },\n        \"scene\": {\n          \"type\": \"string\",\n          \"description\": \"Scene name, e.g. movie, reading, party.\"\n        }\n      },\n      \"required\": [\n        \"room\",\n        \"scene\"\n      ]\n    }\n  },\n  {\n    \"name\": \"query_light_state\",\n    \"description\": \"Query the current state of th\n\n\nUSER: garden heater on, thanks.\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"toggle_outlet\",\"arguments\":{\"room\":\"garden\",\"outlet_name\":\"heater\",\"state\":\"on\"}}",
+    "gold_name": "toggle_outlet",
+    "domain": "light"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  {\n    \"name\": \"blink_light\",\n    \"description\": \"Blink the lights in a room to grab attention.\",\n    \"parameters\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"room\": {\n          \"type\": \"string\",\n          \"description\": \"Room where lights should blink.\"\n        },\n        \"times\": {\n          \"type\": \"integer\",\n          \"description\": \"Number of blinks.\"\n        }\n      },\n      \"required\": [\n        \"room\"\n      ]\n    }\n  },\n  {\n    \"name\": \"set_light_color\",\n    \"description\": \"Change the color of the lights in a room.\",\n    \"parameters\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"room\": {\n          \"type\": \"string\",\n          \"description\": \"Room whose light color changes.\"\n        },\n        \"color\": {\n          \"type\": \"string\",\n          \"description\": \"Target color, e.g. red, warm white.\"\n        },\n        \"brightness_pct\": {\n          \"type\": \"integer\",\n          \"description\": \"Optional brightness 0-100.\"\n        }\n      },\n      \"required\": [\n        \"room\",\n        \"color\"\n      ]\n    }\n  },\n  {\n    \"name\": \"toggle_outlet\",\n    \"description\": \"Toggle a smart outlet (electrical switch) on or off.\",\n    \"parameters\": {\n      \"type\": \"objec\n\n\nUSER: Switch the ring to the purple one.\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"set_light_color\",\"arguments\":{\"room\":\"porch\",\"color\":\"purple\"}}",
+    "gold_name": "set_light_color",
+    "domain": "light_noisy"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"generate_status_report\",\n  \"query_air_quality\",\n  \"query_humidity\",\n  \"list_active_devices\",\n  \"query_battery_level\"\n]\n\n\nUSER: Check the levels of the LOS and hard drives in the office.\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"query_air_quality\",\"arguments\":{\"room\":\"office\"}}",
+    "gold_name": "query_air_quality",
+    "domain": "misc_noisy"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"assess_diabetes_risk\",\n  \"place_safeway_order\",\n  \"reserve_hotel_room\"\n]\n\n\nUSER: Assess the diabetes risk for a lightly active person who weighs 200 lbs and is 70 inches tall. Also, place an order for 3 packs of cookies and 2 bottles of juice at the Safeway in Denver.\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\": \"assess_diabetes_risk\", \"arguments\": {\"weight_lbs\": 200, \"height_inches\": 70, \"activity\": \"lightly active\"}}",
+    "gold_name": "assess_diabetes_risk",
+    "domain": "xlam_sh"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  {\n    \"name\": \"close_skylight\",\n    \"description\": \"Close the skylight window in a room.\",\n    \"parameters\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"room\": {\n          \"type\": \"string\",\n          \"description\": \"Room whose skylight to close.\"\n        }\n      },\n      \"required\": [\n        \"room\"\n      ]\n    }\n  },\n  {\n    \"name\": \"lock_window\",\n    \"description\": \"Lock the window in a room for security.\",\n    \"parameters\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"room\": {\n          \"type\": \"string\",\n          \"description\": \"Room whose window to lock.\"\n        }\n      },\n      \"required\": [\n        \"room\"\n      ]\n    }\n  },\n  {\n    \"name\": \"set_blinds_position\",\n    \"description\": \"Set the blinds to a specific vertical position percentage (0=closed, 100=open).\",\n    \"parameters\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"room\": {\n          \"type\": \"string\",\n          \"description\": \"Room whose blinds to position.\"\n        },\n        \"position\": {\n          \"type\": \"integer\",\n          \"description\": \"Position 0-100.\"\n        }\n      },\n      \"required\": [\n        \"room\",\n        \"position\"\n      ]\n    }\n  }\n]\n\n\nUSER: Move the bedroom blinds to 20% open.\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"set_blinds_position\",\"arguments\":{\"room\":\"bedroom\",\"position\":20}}",
+    "gold_name": "set_blinds_position",
+    "domain": "blinds"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"query_garage_door\",\n  \"query_door_status\",\n  \"query_battery_level\"\n]\n\n\nUSER: Tell me if the patio sliding door is shut.\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"query_door_status\",\"arguments\":{\"door\":\"patio_door\"}}",
+    "gold_name": "query_door_status",
+    "domain": "misc"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  {\n    \"name\": \"set_oven_timer\",\n    \"description\": \"Set a countdown timer on the oven in minutes.\",\n    \"parameters\": {\n      \"minutes\": \"int\"\n    }\n  },\n  {\n    \"name\": \"stop_oven\",\n    \"description\": \"Turn off the oven immediately.\",\n    \"parameters\": {}\n  },\n  {\n    \"name\": \"set_fridge_temperature\",\n    \"description\": \"Set the refrigerator compartment target temperature.\",\n    \"parameters\": {\n      \"temperature_f\": \"int\"\n    }\n  },\n  {\n    \"name\": \"set_coffee_strength\",\n    \"description\": \"Set the coffee brewing strength.\",\n    \"parameters\": {\n      \"strength\": \"weak|medium|strong\"\n    }\n  }\n]\n\n\nUSER: Roast chicken needs 90 minutes total.\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"set_oven_timer\",\"arguments\":{\"minutes\":90}}",
+    "gold_name": "set_oven_timer",
+    "domain": "kit"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"set_air_purifier_speed\",\n  \"stop_vacuum\",\n  \"start_vacuum\",\n  \"empty_vacuum_bin\"\n]\n\n\nUSER: Start vacuuming the living room with a deep intensity now to clean it up after the party\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"start_vacuum\",\"arguments\":{\"area\":\"living room\",\"intensity\":\"deep\"}}",
+    "gold_name": "start_vacuum",
+    "domain": "clean"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"executives\",\n  \"type_parent_get_highest_rated_investments\",\n  \"logo\",\n  \"stock_get_net_income\"\n]\n\n\nUSER: Could you fetch the net income data for Microsoft Corp. (MSFT) and Amazon.com Inc. (AMZN) from the US and Australian stock markets respectively?\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\": \"stock_get_net_income\", \"arguments\": {\"symbol\": \"MSFT\", \"region\": \"US\"}}",
+    "gold_name": "stock_get_net_income",
+    "domain": "xlam_sh"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"get_role_ids\",\n  \"auto_complete\",\n  \"loginuser\"\n]\n\n\nUSER: Can you retrieve the role IDs for document 'ABC123' and suggest auto-complete options for 'apartment' in Spain?\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\": \"get_role_ids\", \"arguments\": {\"document_id\": \"ABC123\"}}",
+    "gold_name": "get_role_ids",
+    "domain": "xlam_sh"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"analyze_network_traffic\",\n  \"adjust_streaming_quality\"\n]\n\n\nUSER: During peak hours, my streaming service is facing issues with video buffering, and I suspect it's due to fluctuating network bandwidth. I'd like to analyze the network traffic specifically for the stream with ID \"abc12345\" during these peak hours to determine the actual bandwidth usage. Additionally, based on the results of the analysis, I want to adjust the streaming quality, if needed, for the same stream ID \"abc12345\". The current bandwidth conditions have previously shown an average of 4800 Kbps, peaking at 6200 Kbps, and dropping to a minimum of 3000 Kbps, so please use 2500 Kbps as the threshold for adjusting streaming quality. \n\nCould you perform an analysis of the network traffic for stream ID \"abc12345\" during peak hours, and based on the available bandwidth, adjust the streaming \u2026\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\": \"analyze_network_traffic\", \"arguments\": {\"stream_id\": \"abc12345\", \"time_range\": \"peak_hours\"}}",
+    "gold_name": "analyze_network_traffic",
+    "domain": "iot_aux_v4"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"get_trend_keyword\"\n]\n\n\nUSER: Retrieve popular keywords for 'health' in Spanish from Spain.\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"none\",\"arguments\":{}}",
+    "gold_name": "none",
+    "domain": "irrelevant"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"schedule_routine\",\n  \"save_current_scene\",\n  \"cancel_alarm\"\n]\n\n\nUSER: Cancel my 8am alarm for tomorrow\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"cancel_alarm\",\"arguments\":{\"time\":\"8am\",\"day\":\"tomorrow\"}}",
+    "gold_name": "cancel_alarm",
+    "domain": "misc"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"stock_get_five_yr_avg_div_yield\",\n  \"spac_calendar\"\n]\n\n\nUSER: Fetch the upcoming merger dates for SPACs.\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\": \"spac_calendar\", \"arguments\": {\"type\": \"merger\"}}",
+    "gold_name": "spac_calendar",
+    "domain": "xlam_sh"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"v1_hobbies\",\n  \"sources\",\n  \"get_wisdom_quotes_by_topic\"\n]\n\n\nUSER: Retrieve streaming sources in the 'US' region that are 'subscription' services.\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\": \"sources\", \"arguments\": {\"regions\": \"US\", \"types\": \"sub\"}}",
+    "gold_name": "sources",
+    "domain": "xlam_sh"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  {\n    \"name\": \"schedule_climate_program\",\n    \"description\": \"Schedule a climate program (named profile) for a room with start/end times.\",\n    \"parameters\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"room\": {\n          \"type\": \"string\"\n        },\n        \"program\": {\n          \"type\": \"string\",\n          \"description\": \"Program name e.g. night, away, comfort\"\n        },\n        \"start_time\": {\n          \"type\": \"string\",\n          \"description\": \"HH:MM\"\n        },\n        \"end_time\": {\n          \"type\": \"string\",\n          \"description\": \"HH:MM\"\n        }\n      },\n      \"required\": [\n        \"room\",\n        \"program\"\n      ]\n    }\n  },\n  {\n    \"name\": \"set_thermostat\",\n    \"description\": \"Set the thermostat target temperature and mode for a room.\",\n    \"parameters\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"room\": {\n          \"type\": \"string\",\n          \"description\": \"Room name\"\n        },\n        \"temperature_c\": {\n          \"type\": \"number\",\n          \"description\": \"Target temperature in Celsius\"\n        },\n        \"mode\": {\n          \"type\": \"string\",\n          \"enum\": [\n            \"heat\",\n            \"cool\",\n            \"auto\",\n            \"\n\n\nUSER: Set the sunroom to seventy degrees Fahrenheit.\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"set_thermostat\",\"arguments\":{\"room\":\"sunroom\",\"temperature_c\":21.1}}",
+    "gold_name": "set_thermostat",
+    "domain": "climate"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"shows_id\",\n  \"get_extra_character_details\",\n  \"title_seasons\"\n]\n\n\nUSER: I need the extra character details for character ID 'ce360' from the new girl series.\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\": \"get_extra_character_details\", \"arguments\": {\"is_id\": \"ce360\"}}",
+    "gold_name": "get_extra_character_details",
+    "domain": "xlam_sh"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"note_duration\",\n  \"create_histogram\"\n]\n\n\nUSER: Determine the duration between a 440 Hz note and a 523 Hz note at a tempo of 90 BPM, and plot a histogram for the ages of participants [25, 30, 35, 40, 45, 50, 55, 60] using 4 bins.\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\": \"note_duration\", \"arguments\": {\"freq1\": 440, \"freq2\": 523, \"bpm\": 90}}",
+    "gold_name": "note_duration",
+    "domain": "xlam_sh"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  {\n    \"name\": \"schedule_climate_program\",\n    \"description\": \"Schedule a climate program (named profile) for a room with start/end times.\",\n    \"parameters\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"room\": {\n          \"type\": \"string\"\n        },\n        \"program\": {\n          \"type\": \"string\",\n          \"description\": \"Program name e.g. night, away, comfort\"\n        },\n        \"start_time\": {\n          \"type\": \"string\",\n          \"description\": \"HH:MM\"\n        },\n        \"end_time\": {\n          \"type\": \"string\",\n          \"description\": \"HH:MM\"\n        }\n      },\n      \"required\": [\n        \"room\",\n        \"program\"\n      ]\n    }\n  },\n  {\n    \"name\": \"set_ac_mode\",\n    \"description\": \"Set the air conditioner operating mode for a room.\",\n    \"parameters\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"room\": {\n          \"type\": \"string\"\n        },\n        \"mode\": {\n          \"type\": \"string\",\n          \"enum\": [\n            \"heat\",\n            \"cool\",\n            \"auto\",\n            \"eco\",\n            \"off\"\n          ]\n        }\n      },\n      \"required\": [\n        \"room\",\n        \"mode\"\n      ]\n    }\n  },\n  {\n    \"name\": \"toggle_humidifier\",\n    \"descr\n\n\nUSER: Run the comfort profile in the master bedroom this evening \u2014 say 06:00 to 08:00.\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"schedule_climate_program\",\"arguments\":{\"room\":\"master bedroom\",\"program\":\"morning\",\"start_time\":\"06:00\",\"end_time\":\"08:00\"}}",
+    "gold_name": "schedule_climate_program",
+    "domain": "climate"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  {\n    \"name\": \"set_outdoor_light_color\",\n    \"description\": \"Set color of outdoor lights.\",\n    \"parameters\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"location\": {\n          \"type\": \"string\"\n        },\n        \"color\": {\n          \"type\": \"string\"\n        }\n      },\n      \"required\": [\n        \"location\",\n        \"color\"\n      ]\n    }\n  },\n  {\n    \"name\": \"turn_on_outdoor_light\",\n    \"description\": \"Turn on lights.\",\n    \"parameters\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"location\": {\n          \"type\": \"string\"\n        }\n      },\n      \"required\": [\n        \"location\"\n      ]\n    }\n  }\n]\n\n\nUSER: Make the patio blue.\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"set_outdoor_light_color\",\"arguments\":{\"location\":\"patio\",\"color\":\"blue\"}}",
+    "gold_name": "set_outdoor_light_color",
+    "domain": "garden_noisy"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  {\n    \"name\": \"start_vacuum\",\n    \"description\": \"Start the robot vacuum in a specified area with chosen intensity.\",\n    \"parameters\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"area\": {\n          \"type\": \"string\",\n          \"enum\": [\n            \"whole house\",\n            \"living room\",\n            \"kitchen\",\n            \"bedroom\",\n            \"bathroom\",\n            \"hallway\",\n            \"dining room\",\n            \"office\",\n            \"kids room\"\n          ]\n        },\n        \"intensity\": {\n          \"type\": \"string\",\n          \"enum\": [\n            \"quick\",\n            \"normal\",\n            \"deep\",\n            \"eco\"\n          ]\n        }\n      },\n      \"required\": [\n        \"area\"\n      ]\n    }\n  },\n  {\n    \"name\": \"stop_vacuum\",\n    \"description\": \"Stop the running robot vacuum immediately.\",\n    \"parameters\": {\n      \"type\": \"object\",\n      \"properties\": {},\n      \"required\": []\n    }\n  },\n  {\n    \"name\": \"schedule_vacuum\",\n    \"description\": \"Schedule the robot vacuum for a recurring or future run.\",\n    \"parameters\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"area\": {\n          \"type\": \"string\"\n        },\n        \"intensity\": {\n          \"\n\n\nUSER: Vacuum kitchen at 9pm tonight.\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"schedule_vacuum\",\"arguments\":{\"area\":\"kitchen\",\"time\":\"21:00\",\"day\":\"today\"}}",
+    "gold_name": "schedule_vacuum",
+    "domain": "clean"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  {\n    \"name\": \"set_light_scene\",\n    \"description\": \"Apply a named lighting scene in a room.\",\n    \"parameters\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"room\": {\n          \"type\": \"string\",\n          \"description\": \"Room to apply the scene in.\"\n        },\n        \"scene\": {\n          \"type\": \"string\",\n          \"description\": \"Scene name, e.g. movie, reading, party.\"\n        }\n      },\n      \"required\": [\n        \"room\",\n        \"scene\"\n      ]\n    }\n  },\n  {\n    \"name\": \"set_light_color\",\n    \"description\": \"Change the color of the lights in a room.\",\n    \"parameters\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"room\": {\n          \"type\": \"string\",\n          \"description\": \"Room whose light color changes.\"\n        },\n        \"color\": {\n          \"type\": \"string\",\n          \"description\": \"Target color, e.g. red, warm white.\"\n        },\n        \"brightness_pct\": {\n          \"type\": \"integer\",\n          \"description\": \"Optional brightness 0-100.\"\n        }\n      },\n      \"required\": [\n        \"room\",\n        \"color\"\n      ]\n    }\n  },\n  {\n    \"name\": \"set_light_temperature_k\",\n    \"description\": \"Set the white color temperature of the lights in Kelv\n\n\nUSER: Please, come to the kitchen.\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"set_light_color\",\"arguments\":{\"room\":\"kitchen\",\"color\":\"daylight\",\"brightness_pct\":65}}",
+    "gold_name": "set_light_color",
+    "domain": "light_noisy"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"v1_stars\",\n  \"carbonfootprintfrompublictransit\",\n  \"get_tamil_calendar_date\",\n  \"convert_planet_angle_to_planet_degree\"\n]\n\n\nUSER: What is the carbon footprint of a 500km national train journey?\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\": \"carbonfootprintfrompublictransit\", \"arguments\": {\"distance\": \"500\", \"type\": \"NationalTrain\"}}",
+    "gold_name": "carbonfootprintfrompublictransit",
+    "domain": "xlam_sh"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"get_role_ids\",\n  \"auto_complete\",\n  \"loginuser\"\n]\n\n\nUSER: Log in with 'guest' and 'guest123', then find auto-complete suggestions for 'flat' in Spain.\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\": \"loginuser\", \"arguments\": {\"username\": \"guest\", \"password\": \"guest123\"}}",
+    "gold_name": "loginuser",
+    "domain": "xlam_sh"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  {\n    \"name\": \"queue_song\",\n    \"description\": \"Add a song to the playback queue without interrupting current playback\",\n    \"parameters\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"song\": {\n          \"type\": \"string\"\n        },\n        \"room\": {\n          \"type\": \"string\"\n        }\n      },\n      \"required\": [\n        \"song\",\n        \"room\"\n      ]\n    }\n  },\n  {\n    \"name\": \"switch_speaker_room\",\n    \"description\": \"Move currently playing audio from one room to another\",\n    \"parameters\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"from_room\": {\n          \"type\": \"string\"\n        },\n        \"to_room\": {\n          \"type\": \"string\"\n        }\n      },\n      \"required\": [\n        \"from_room\",\n        \"to_room\"\n      ]\n    }\n  },\n  {\n    \"name\": \"turn_on_tv\",\n    \"description\": \"Power on the TV in a room\",\n    \"parameters\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"room\": {\n          \"type\": \"string\"\n        }\n      },\n      \"required\": [\n        \"room\"\n      ]\n    }\n  },\n  {\n    \"name\": \"turn_off_tv\",\n    \"description\": \"Power off the TV in a room\",\n    \"parameters\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"room\": {\n      \n\n\nUSER: Follow me, send the kitchen audio recording to the canteen so that I can continue listening to dinner.\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"switch_speaker_room\",\"arguments\":{\"from_room\":\"kitchen\",\"to_room\":\"dining room\"}}",
+    "gold_name": "switch_speaker_room",
+    "domain": "media_noisy"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  {\n    \"name\": \"set_garden_lawnmower\",\n    \"description\": \"Mower.\",\n    \"parameters\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"on\": {\n          \"type\": \"boolean\"\n        },\n        \"zone\": {\n          \"type\": \"string\"\n        }\n      },\n      \"required\": [\n        \"on\"\n      ]\n    }\n  },\n  {\n    \"name\": \"start_irrigation_zone\",\n    \"description\": \"Water.\",\n    \"parameters\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"zone\": {\n          \"type\": \"string\"\n        }\n      },\n      \"required\": [\n        \"zone\"\n      ]\n    }\n  }\n]\n\n\nUSER: Robomower, please, to hedge-graph area.\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"set_garden_lawnmower\",\"arguments\":{\"on\":true,\"zone\":\"hedge row\"}}",
+    "gold_name": "set_garden_lawnmower",
+    "domain": "garden_noisy"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"dns_lookup\",\n  \"postcodes\",\n  \"trending\",\n  \"consulta_estabelecimento\"\n]\n\n\nUSER: Lookup DNS for twitter.com, need PTR and NS records. Also, what about apple.com?\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\": \"dns_lookup\", \"arguments\": {\"domain\": \"twitter.com\", \"rtype\": \"PTR\"}}",
+    "gold_name": "dns_lookup",
+    "domain": "xlam_sh"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"get_by_origin\"\n]\n\n\nUSER: What plants are available from 'Asia'? Also, check for plants from 'Oceania'.\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\": \"get_by_origin\", \"arguments\": {\"origin\": \"Asia\"}}",
+    "gold_name": "get_by_origin",
+    "domain": "xlam_sh"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  {\n    \"name\": \"lock_window\",\n    \"description\": \"Lock the window in a room for security.\",\n    \"parameters\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"room\": {\n          \"type\": \"string\",\n          \"description\": \"Room whose window to lock.\"\n        }\n      },\n      \"required\": [\n        \"room\"\n      ]\n    }\n  },\n  {\n    \"name\": \"set_blinds_position\",\n    \"description\": \"Set the blinds to a specific vertical position percentage (0=closed, 100=open).\",\n    \"parameters\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"room\": {\n          \"type\": \"string\",\n          \"description\": \"Room whose blinds to position.\"\n        },\n        \"position\": {\n          \"type\": \"integer\",\n          \"description\": \"Position 0-100.\"\n        }\n      },\n      \"required\": [\n        \"room\",\n        \"position\"\n      ]\n    }\n  },\n  {\n    \"name\": \"raise_blinds\",\n    \"description\": \"Fully raise (open) the blinds in a room.\",\n    \"parameters\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"room\": {\n          \"type\": \"string\",\n          \"description\": \"Room whose blinds to raise.\"\n        }\n      },\n      \"required\": [\n        \"room\"\n      ]\n    }\n  },\n  {\n    \"name\": \"lower\n\n\nUSER: Adjust the blinds in the office to 57%.\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\": \"set_blinds_position\", \"arguments\": {\"room\": \"office\", \"position\": 57}}",
+    "gold_name": "set_blinds_position",
+    "domain": "blinds_num"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"is_valid_sudoku\",\n  \"note_duration\",\n  \"calculate_distance\",\n  \"polygon_area_shoelace\"\n]\n\n\nUSER: Calculate the duration between a note with frequency 440 Hz and another with 880 Hz at a tempo of 140 BPM.\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\": \"note_duration\", \"arguments\": {\"freq1\": 440, \"freq2\": 880, \"bpm\": 140}}",
+    "gold_name": "note_duration",
+    "domain": "xlam_sh"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  {\n    \"name\": \"close_curtains\",\n    \"description\": \"Fully close the curtains in a room.\",\n    \"parameters\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"room\": {\n          \"type\": \"string\",\n          \"description\": \"Room whose curtains to close.\"\n        }\n      },\n      \"required\": [\n        \"room\"\n      ]\n    }\n  },\n  {\n    \"name\": \"set_blinds_position\",\n    \"description\": \"Set the blinds to a specific vertical position percentage (0=closed, 100=open).\",\n    \"parameters\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"room\": {\n          \"type\": \"string\",\n          \"description\": \"Room whose blinds to position.\"\n        },\n        \"position\": {\n          \"type\": \"integer\",\n          \"description\": \"Position 0-100.\"\n        }\n      },\n      \"required\": [\n        \"room\",\n        \"position\"\n      ]\n    }\n  },\n  {\n    \"name\": \"raise_blinds\",\n    \"description\": \"Fully raise (open) the blinds in a room.\",\n    \"parameters\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"room\": {\n          \"type\": \"string\",\n          \"description\": \"Room whose blinds to raise.\"\n        }\n      },\n      \"required\": [\n        \"room\"\n      ]\n    }\n  },\n  {\n    \"name\": \"ope\n\n\nUSER: The sun is glaring in the nursery - drop the blinds to roughly 20 percent for me.\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"set_blinds_position\",\"arguments\":{\"room\":\"nursery\",\"position\":20}}",
+    "gold_name": "set_blinds_position",
+    "domain": "blinds"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"toggle_humidifier\",\n  \"query_temperature\",\n  \"set_thermostat\",\n  \"set_fan_speed\",\n  \"schedule_climate_program\"\n]\n\n\nUSER: Set the living room thermostat to twenty-two degrees in heat mode.\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"set_thermostat\",\"arguments\":{\"room\":\"living room\",\"temperature_c\":22,\"mode\":\"heat\"}}",
+    "gold_name": "set_thermostat",
+    "domain": "climate"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"sources\"\n]\n\n\nUSER: Fetch the learning resources from page 10 and the gun laws for Texas. Also, get the collection items data for 'BoredApeYachtClub'.\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"none\",\"arguments\":{}}",
+    "gold_name": "none",
+    "domain": "irrelevant"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"get_place_by_ip\",\n  \"measure_distance\",\n  \"get_elevation\"\n]\n\n\nUSER: What are the directions from Sydney Opera House to the Great Barrier Reef, including the distance and duration in kilometers?\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"none\",\"arguments\":{}}",
+    "gold_name": "none",
+    "domain": "irrelevant"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  {\n    \"name\": \"set_thermostat\",\n    \"description\": \"Set the thermostat target temperature and mode for a room.\",\n    \"parameters\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"room\": {\n          \"type\": \"string\",\n          \"description\": \"Room name\"\n        },\n        \"temperature_c\": {\n          \"type\": \"number\",\n          \"description\": \"Target temperature in Celsius\"\n        },\n        \"mode\": {\n          \"type\": \"string\",\n          \"enum\": [\n            \"heat\",\n            \"cool\",\n            \"auto\",\n            \"eco\",\n            \"off\"\n          ],\n          \"description\": \"HVAC mode\"\n        }\n      },\n      \"required\": [\n        \"room\",\n        \"temperature_c\"\n      ]\n    }\n  },\n  {\n    \"name\": \"set_humidity_target\",\n    \"description\": \"Set target relative humidity percentage for a room.\",\n    \"parameters\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"room\": {\n          \"type\": \"string\"\n        },\n        \"humidity_pct\": {\n          \"type\": \"integer\",\n          \"description\": \"Target humidity 0-100\"\n        }\n      },\n      \"required\": [\n        \"room\",\n        \"humidity_pct\"\n      ]\n    }\n  },\n  {\n    \"name\": \"query_temperature\",\n    \"description\n\n\nUSER: Make the kitchen on degrees.\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"set_thermostat\",\"arguments\":{\"room\":\"kitchen\",\"temperature_c\":25}}",
+    "gold_name": "set_thermostat",
+    "domain": "climate_noisy"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  {\n    \"name\": \"stop_music\",\n    \"description\": \"Stop music playback completely in a room\",\n    \"parameters\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"room\": {\n          \"type\": \"string\"\n        }\n      },\n      \"required\": [\n        \"room\"\n      ]\n    }\n  },\n  {\n    \"name\": \"pause_music\",\n    \"description\": \"Pause currently playing music in a room\",\n    \"parameters\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"room\": {\n          \"type\": \"string\"\n        }\n      },\n      \"required\": [\n        \"room\"\n      ]\n    }\n  },\n  {\n    \"name\": \"switch_speaker_room\",\n    \"description\": \"Move currently playing audio from one room to another\",\n    \"parameters\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"from_room\": {\n          \"type\": \"string\"\n        },\n        \"to_room\": {\n          \"type\": \"string\"\n        }\n      },\n      \"required\": [\n        \"from_room\",\n        \"to_room\"\n      ]\n    }\n  },\n  {\n    \"name\": \"play_music\",\n    \"description\": \"Play a song, artist, or playlist on a speaker in a given room\",\n    \"parameters\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"song\": {\n          \"type\": \"string\",\n          \"description\": \"Song \n\n\nUSER: Set the mood in the living room for summer cooling on the roof around.\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"play_music\",\"arguments\":{\"song\":\"summer rooftop chill\",\"room\":\"living room\",\"volume_pct\":40}}",
+    "gold_name": "play_music",
+    "domain": "media_noisy"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"get_by_climate\",\n  \"detail_info\",\n  \"get_all_kfc_locations_by_state_and_city\",\n  \"get_all_kfc_locations\"\n]\n\n\nUSER: Which plants are suitable for a subtropical climate? Additionally, find all KFC locations in Arizona, specifically in Phoenix on page 1.\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\": \"get_by_climate\", \"arguments\": {\"climate\": \"Subtropical\"}}",
+    "gold_name": "get_by_climate",
+    "domain": "xlam_sh"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  {\n    \"name\": \"open_window\",\n    \"description\": \"Open the window in a room.\",\n    \"parameters\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"room\": {\n          \"type\": \"string\",\n          \"description\": \"Room whose window to open.\"\n        }\n      },\n      \"required\": [\n        \"room\"\n      ]\n    }\n  },\n  {\n    \"name\": \"set_blinds_angle\",\n    \"description\": \"Tilt the blind slats to a specific angle in degrees (0=closed, 90=flat/open).\",\n    \"parameters\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"room\": {\n          \"type\": \"string\",\n          \"description\": \"Room whose blind slats to tilt.\"\n        },\n        \"angle\": {\n          \"type\": \"integer\",\n          \"description\": \"Slat angle 0-90 degrees.\"\n        }\n      },\n      \"required\": [\n        \"room\",\n        \"angle\"\n      ]\n    }\n  },\n  {\n    \"name\": \"lock_window\",\n    \"description\": \"Lock the window in a room for security.\",\n    \"parameters\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"room\": {\n          \"type\": \"string\",\n          \"description\": \"Room whose window to lock.\"\n        }\n      },\n      \"required\": [\n        \"room\"\n      ]\n    }\n  }\n]\n\n\nUSER: Tilt the sunroom slats at a 45 degree angle.\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"set_blinds_angle\",\"arguments\":{\"room\":\"sunroom\",\"angle\":45}}",
+    "gold_name": "set_blinds_angle",
+    "domain": "blinds"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"query_power_usage\",\n  \"query_air_quality\",\n  \"query_temperature\",\n  \"query_garage_door\",\n  \"query_solar_production\"\n]\n\n\nUSER: What temperature is the kitchen?\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"query_temperature\",\"arguments\":{\"room\":\"kitchen\"}}",
+    "gold_name": "query_temperature",
+    "domain": "misc_noisy"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  {\n    \"name\": \"mute_audio\",\n    \"description\": \"Mute audio output in a room\",\n    \"parameters\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"room\": {\n          \"type\": \"string\"\n        }\n      },\n      \"required\": [\n        \"room\"\n      ]\n    }\n  },\n  {\n    \"name\": \"pause_music\",\n    \"description\": \"Pause currently playing music in a room\",\n    \"parameters\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"room\": {\n          \"type\": \"string\"\n        }\n      },\n      \"required\": [\n        \"room\"\n      ]\n    }\n  },\n  {\n    \"name\": \"play_music\",\n    \"description\": \"Play a song, artist, or playlist on a speaker in a given room\",\n    \"parameters\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"song\": {\n          \"type\": \"string\",\n          \"description\": \"Song title, artist, or playlist name\"\n        },\n        \"room\": {\n          \"type\": \"string\",\n          \"description\": \"Room where the speaker is located\"\n        },\n        \"volume_pct\": {\n          \"type\": \"integer\",\n          \"description\": \"Volume 0-100\"\n        }\n      },\n      \"required\": [\n        \"song\",\n        \"room\"\n      ]\n    }\n  }\n]\n\n\nUSER: Play smooth jazz in the dining room.\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"play_music\",\"arguments\":{\"song\":\"smooth jazz\",\"room\":\"dining room\"}}",
+    "gold_name": "play_music",
+    "domain": "media"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"is_hotel_available\",\n  \"assess_diabetes_risk\",\n  \"reserve_hotel_room\"\n]\n\n\nUSER: Assess the diabetes risk for a 160 lbs, 65 inches tall very active person.\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\": \"assess_diabetes_risk\", \"arguments\": {\"weight_lbs\": 160, \"height_inches\": 65, \"activity\": \"very active\"}}",
+    "gold_name": "assess_diabetes_risk",
+    "domain": "xlam_sh"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"schedule_vacuum\",\n  \"turn_off_air_purifier\",\n  \"start_vacuum\",\n  \"turn_on_air_purifier\",\n  \"set_air_purifier_speed\"\n]\n\n\nUSER: Turn on the air purifier in the living room at high speed now\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"turn_on_air_purifier\",\"arguments\":{\"area\":\"living room\",\"speed\":\"high\"}}",
+    "gold_name": "turn_on_air_purifier",
+    "domain": "clean"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"integrate\",\n  \"count_bits\"\n]\n\n\nUSER: Check if 16, 25, and 30 are perfect squares. Also, what is the future value of an investment of $1000 at an annual interest rate of 5% over 10 years?\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"none\",\"arguments\":{}}",
+    "gold_name": "none",
+    "domain": "irrelevant"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  {\n    \"name\": \"set_garden_lawnmower\",\n    \"description\": \"Mower.\",\n    \"parameters\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"on\": {\n          \"type\": \"boolean\"\n        },\n        \"zone\": {\n          \"type\": \"string\"\n        }\n      },\n      \"required\": [\n        \"on\"\n      ]\n    }\n  },\n  {\n    \"name\": \"start_irrigation_zone\",\n    \"description\": \"Water.\",\n    \"parameters\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"zone\": {\n          \"type\": \"string\"\n        }\n      },\n      \"required\": [\n        \"zone\"\n      ]\n    }\n  }\n]\n\n\nUSER: Robomower to the hedge row area, please.\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"set_garden_lawnmower\",\"arguments\":{\"on\":true,\"zone\":\"hedge row\"}}",
+    "gold_name": "set_garden_lawnmower",
+    "domain": "garden"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"query_motion_sensor\",\n  \"list_active_devices\",\n  \"query_battery_level\"\n]\n\n\nUSER: Movement in the basement\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"query_motion_sensor\",\"arguments\":{\"room\":\"basement\"}}",
+    "gold_name": "query_motion_sensor",
+    "domain": "misc_noisy"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  {\n    \"name\": \"register_lacquer_layer\",\n    \"description\": \"Register a layer in a Japanese urushi lacquer piece\",\n    \"parameters\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"piece_id\": {\n          \"type\": \"string\"\n        },\n        \"layer_number\": {\n          \"type\": \"integer\"\n        }\n      },\n      \"required\": [\n        \"piece_id\",\n        \"layer_number\"\n      ]\n    }\n  },\n  {\n    \"name\": \"schedule_humidity_cure\",\n    \"description\": \"Schedule a humidity-controlled cure for urushi\",\n    \"parameters\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"piece_id\": {\n          \"type\": \"string\"\n        },\n        \"hours\": {\n          \"type\": \"integer\"\n        }\n      },\n      \"required\": [\n        \"piece_id\",\n        \"hours\"\n      ]\n    }\n  },\n  {\n    \"name\": \"apply_maki_e_pattern\",\n    \"description\": \"Apply a maki-e gold powder pattern over wet lacquer\",\n    \"parameters\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"piece_id\": {\n          \"type\": \"string\"\n        },\n        \"pattern\": {\n          \"type\": \"string\"\n        }\n      },\n      \"required\": [\n        \"piece_id\",\n        \"pattern\"\n      ]\n    }\n  }\n]\n\n\nUSER: My living room walls have small water stains near the ceiling. Should I worry?\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"none\",\"arguments\":{}}",
+    "gold_name": "none",
+    "domain": "external_irrelevance"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  {\n    \"name\": \"dim_light\",\n    \"description\": \"Dim or brighten lights to a target brightness percentage.\",\n    \"parameters\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"room\": {\n          \"type\": \"string\",\n          \"description\": \"Room where lights should be dimmed.\"\n        },\n        \"brightness_pct\": {\n          \"type\": \"integer\",\n          \"description\": \"Target brightness from 0 to 100.\"\n        }\n      },\n      \"required\": [\n        \"room\",\n        \"brightness_pct\"\n      ]\n    }\n  },\n  {\n    \"name\": \"turn_on_light\",\n    \"description\": \"Turn on the lights in a specified room.\",\n    \"parameters\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"room\": {\n          \"type\": \"string\",\n          \"description\": \"Room where lights should be turned on.\"\n        },\n        \"brightness_pct\": {\n          \"type\": \"integer\",\n          \"description\": \"Optional brightness 0-100.\"\n        }\n      },\n      \"required\": [\n        \"room\"\n      ]\n    }\n  },\n  {\n    \"name\": \"toggle_outlet\",\n    \"description\": \"Toggle a smart outlet (electrical switch) on or off.\",\n    \"parameters\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"room\": {\n          \"type\": \"string\",\n\n\nUSER: Could you set the hallway lights at 80% please?\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"dim_light\",\"arguments\":{\"room\":\"hallway\",\"brightness_pct\":80}}",
+    "gold_name": "dim_light",
+    "domain": "light"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"set_reminder\",\n  \"schedule_routine\",\n  \"set_alarm\",\n  \"set_timer\"\n]\n\n\nUSER: Remind me every Monday morning so I can pay for the rent.\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"set_reminder\",\"arguments\":{\"time\":\"09:00\",\"schedule\":\"first_mon_of_month\",\"message\":\"pay rent\"}}",
+    "gold_name": "set_reminder",
+    "domain": "misc_noisy"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  {\n    \"name\": \"pause_dishwasher\",\n    \"description\": \"Pause the currently running dishwasher cycle.\",\n    \"parameters\": {}\n  },\n  {\n    \"name\": \"set_oven_timer\",\n    \"description\": \"Set a countdown timer on the oven in minutes.\",\n    \"parameters\": {\n      \"minutes\": \"int\"\n    }\n  },\n  {\n    \"name\": \"query_oven_state\",\n    \"description\": \"Return the current oven status, temperature, and mode.\",\n    \"parameters\": {}\n  }\n]\n\n\nUSER: Show oven state.\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"query_oven_state\",\"arguments\":{}}",
+    "gold_name": "query_oven_state",
+    "domain": "kit"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  {\n    \"name\": \"set_garden_lawnmower\",\n    \"description\": \"Mower.\",\n    \"parameters\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"on\": {\n          \"type\": \"boolean\"\n        },\n        \"zone\": {\n          \"type\": \"string\"\n        }\n      },\n      \"required\": [\n        \"on\"\n      ]\n    }\n  },\n  {\n    \"name\": \"start_irrigation_zone\",\n    \"description\": \"Water.\",\n    \"parameters\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"zone\": {\n          \"type\": \"string\"\n        }\n      },\n      \"required\": [\n        \"zone\"\n      ]\n    }\n  }\n]\n\n\nUSER: Ask the gas-mower to make a front lawn today in the afternoon.\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"set_garden_lawnmower\",\"arguments\":{\"on\":true,\"zone\":\"front lawn\"}}",
+    "gold_name": "set_garden_lawnmower",
+    "domain": "garden_noisy"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"assess_diabetes_risk\",\n  \"predict_forest_area\",\n  \"predict_evolution_rate\"\n]\n\n\nUSER: Predict the evolutionary rate of the human species over 100 years using the Lamarck model.\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\": \"predict_evolution_rate\", \"arguments\": {\"species\": \"human\", \"years\": 100, \"model\": \"Lamarck\"}}",
+    "gold_name": "predict_evolution_rate",
+    "domain": "xlam_sh"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"card\",\n  \"random\",\n  \"specific_giveaway_details\",\n  \"roll\",\n  \"get_card_by_slug\"\n]\n\n\nUSER: Please fetch 3 random chess puzzles for me.\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\": \"random\", \"arguments\": {\"number_of_puzzles\": 3}}",
+    "gold_name": "random",
+    "domain": "xlam_sh"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  {\n    \"name\": \"query_soil_moisture\",\n    \"description\": \"Soil.\",\n    \"parameters\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"zone\": {\n          \"type\": \"string\"\n        }\n      },\n      \"required\": [\n        \"zone\"\n      ]\n    }\n  },\n  {\n    \"name\": \"set_garden_lawnmower\",\n    \"description\": \"Mower.\",\n    \"parameters\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"on\": {\n          \"type\": \"boolean\"\n        }\n      },\n      \"required\": [\n        \"on\"\n      ]\n    }\n  }\n]\n\n\nUSER: Check the Hedge Graph of soil moisture.\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"query_soil_moisture\",\"arguments\":{\"zone\":\"hedge row\"}}",
+    "gold_name": "query_soil_moisture",
+    "domain": "garden_noisy"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  {\n    \"name\": \"open_window\",\n    \"description\": \"Open the window in a room.\",\n    \"parameters\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"room\": {\n          \"type\": \"string\",\n          \"description\": \"Room whose window to open.\"\n        }\n      },\n      \"required\": [\n        \"room\"\n      ]\n    }\n  },\n  {\n    \"name\": \"open_skylight\",\n    \"description\": \"Open the skylight window in a room.\",\n    \"parameters\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"room\": {\n          \"type\": \"string\",\n          \"description\": \"Room whose skylight to open.\"\n        }\n      },\n      \"required\": [\n        \"room\"\n      ]\n    }\n  },\n  {\n    \"name\": \"set_blinds_angle\",\n    \"description\": \"Tilt the blind slats to a specific angle in degrees (0=closed, 90=flat/open).\",\n    \"parameters\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"room\": {\n          \"type\": \"string\",\n          \"description\": \"Room whose blind slats to tilt.\"\n        },\n        \"angle\": {\n          \"type\": \"integer\",\n          \"description\": \"Slat angle 0-90 degrees.\"\n        }\n      },\n      \"required\": [\n        \"room\",\n        \"angle\"\n      ]\n    }\n  },\n  {\n    \"name\": \"retract_awning\",\n    \"\n\n\nUSER: Open the hatch in the bedroom.\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"open_skylight\",\"arguments\":{\"room\":\"bedroom\"}}",
+    "gold_name": "open_skylight",
+    "domain": "blinds_noisy"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"final_velocity\",\n  \"batting_average\",\n  \"calculate_card_game_probability\"\n]\n\n\nUSER: What's the probability of rolling a 5 on a six-sided die three times in a row?\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"none\",\"arguments\":{}}",
+    "gold_name": "none",
+    "domain": "irrelevant"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"search\",\n  \"get_by_category\"\n]\n\n\nUSER: Provide a list of 'medicinal' and 'edible' plants.\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\": \"get_by_category\", \"arguments\": {\"category\": \"medicinal\"}}",
+    "gold_name": "get_by_category",
+    "domain": "xlam_sh"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  {\n    \"name\": \"start_vacuum\",\n    \"description\": \"Start the robot vacuum in a specified area with chosen intensity.\",\n    \"parameters\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"area\": {\n          \"type\": \"string\",\n          \"enum\": [\n            \"whole house\",\n            \"living room\",\n            \"kitchen\",\n            \"bedroom\",\n            \"bathroom\",\n            \"hallway\",\n            \"dining room\",\n            \"office\",\n            \"kids room\"\n          ]\n        },\n        \"intensity\": {\n          \"type\": \"string\",\n          \"enum\": [\n            \"quick\",\n            \"normal\",\n            \"deep\",\n            \"eco\"\n          ]\n        }\n      },\n      \"required\": [\n        \"area\"\n      ]\n    }\n  },\n  {\n    \"name\": \"stop_vacuum\",\n    \"description\": \"Stop the running robot vacuum immediately.\",\n    \"parameters\": {\n      \"type\": \"object\",\n      \"properties\": {},\n      \"required\": []\n    }\n  },\n  {\n    \"name\": \"schedule_vacuum\",\n    \"description\": \"Schedule the robot vacuum for a recurring or future run.\",\n    \"parameters\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"area\": {\n          \"type\": \"string\"\n        },\n        \"intensity\": {\n          \"\n\n\nUSER: Guests in 10 minutes, run the fastest possible vacuum in the dining room.\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"start_vacuum\",\"arguments\":{\"area\":\"dining room\",\"intensity\":\"quick\"}}",
+    "gold_name": "start_vacuum",
+    "domain": "clean"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  {\n    \"name\": \"start_vacuum\",\n    \"description\": \"Start the robot vacuum in a specified area with chosen intensity.\",\n    \"parameters\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"area\": {\n          \"type\": \"string\",\n          \"enum\": [\n            \"whole house\",\n            \"living room\",\n            \"kitchen\",\n            \"bedroom\",\n            \"bathroom\",\n            \"hallway\",\n            \"dining room\",\n            \"office\",\n            \"kids room\"\n          ]\n        },\n        \"intensity\": {\n          \"type\": \"string\",\n          \"enum\": [\n            \"quick\",\n            \"normal\",\n            \"deep\",\n            \"eco\"\n          ]\n        }\n      },\n      \"required\": [\n        \"area\"\n      ]\n    }\n  },\n  {\n    \"name\": \"stop_vacuum\",\n    \"description\": \"Stop the running robot vacuum immediately.\",\n    \"parameters\": {\n      \"type\": \"object\",\n      \"properties\": {},\n      \"required\": []\n    }\n  },\n  {\n    \"name\": \"schedule_vacuum\",\n    \"description\": \"Schedule the robot vacuum for a recurring or future run.\",\n    \"parameters\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"area\": {\n          \"type\": \"string\"\n        },\n        \"intensity\": {\n          \"\n\n\nUSER: Deep vacuum the hallway.\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"start_vacuum\",\"arguments\":{\"area\":\"hallway\",\"intensity\":\"deep\"}}",
+    "gold_name": "start_vacuum",
+    "domain": "clean"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  {\n    \"name\": \"turn_on_tv\",\n    \"description\": \"Power on the TV in a room\",\n    \"parameters\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"room\": {\n          \"type\": \"string\"\n        }\n      },\n      \"required\": [\n        \"room\"\n      ]\n    }\n  },\n  {\n    \"name\": \"queue_song\",\n    \"description\": \"Add a song to the playback queue without interrupting current playback\",\n    \"parameters\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"song\": {\n          \"type\": \"string\"\n        },\n        \"room\": {\n          \"type\": \"string\"\n        }\n      },\n      \"required\": [\n        \"song\",\n        \"room\"\n      ]\n    }\n  },\n  {\n    \"name\": \"turn_off_tv\",\n    \"description\": \"Power off the TV in a room\",\n    \"parameters\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"room\": {\n          \"type\": \"string\"\n        }\n      },\n      \"required\": [\n        \"room\"\n      ]\n    }\n  },\n  {\n    \"name\": \"set_volume\",\n    \"description\": \"Set speaker volume to a specific percentage\",\n    \"parameters\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"room\": {\n          \"type\": \"string\"\n        },\n        \"volume_pct\": {\n          \"type\": \"integer\",\n          \"description\n\n\nUSER: Check the garage.\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"set_volume\",\"arguments\":{\"room\":\"garage\",\"volume_pct\":90}}",
+    "gold_name": "set_volume",
+    "domain": "media_noisy"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"cancel_reminder\",\n  \"cancel_alarm\",\n  \"cancel_timer\",\n  \"snooze_alarm\"\n]\n\n\nUSER: Cancel all reminders containing the word 'meeting' for this week.\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"cancel_reminder\",\"arguments\":{\"contains\":\"meeting\",\"range\":\"this_week\"}}",
+    "gold_name": "cancel_reminder",
+    "domain": "misc"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"search_memes\"\n]\n\n\nUSER: Could you get me the genres of radio stations that are related to 'classical' music?\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"none\",\"arguments\":{}}",
+    "gold_name": "none",
+    "domain": "irrelevant"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"find_peak_element\",\n  \"std_deviation\",\n  \"independent_samples_t_test\",\n  \"light_travel_time\"\n]\n\n\nUSER: Find a peak element in the list [1, 3, 2, 1, 5] and calculate the standard deviation of the numbers [2.5, 3.5, 4.5, 5.5, 6.5].\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\": \"find_peak_element\", \"arguments\": {\"nums\": [1, 3, 2, 1, 5]}}",
+    "gold_name": "find_peak_element",
+    "domain": "xlam_sh"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"loginuser\",\n  \"live_room_bio\"\n]\n\n\nUSER: Can you fetch copyright-free images of 'cats' and 'dogs', and capture screenshots of 'https://www.example.com' and 'https://www.another-example.com'?\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"none\",\"arguments\":{}}",
+    "gold_name": "none",
+    "domain": "irrelevant"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"set_alarm\",\n  \"schedule_routine\",\n  \"set_reminder\"\n]\n\n\nUSER: Set a recurring alarm at 6 AM on weekdays.\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"set_alarm\",\"arguments\":{\"time\":\"06:00\",\"days\":[\"mon\",\"tue\",\"wed\",\"thu\",\"fri\"]}}",
+    "gold_name": "set_alarm",
+    "domain": "misc"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"get_ip_zipcode\",\n  \"geocode_city\"\n]\n\n\nUSER: Project the population of a town currently at 10,000 people to grow at an annual rate of 0.8% over the next 5 years.\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"none\",\"arguments\":{}}",
+    "gold_name": "none",
+    "domain": "irrelevant"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  {\n    \"name\": \"set_oven_timer\",\n    \"description\": \"Set a countdown timer on the oven in minutes.\",\n    \"parameters\": {\n      \"minutes\": \"int\"\n    }\n  },\n  {\n    \"name\": \"stop_microwave\",\n    \"description\": \"Stop the microwave immediately.\",\n    \"parameters\": {}\n  },\n  {\n    \"name\": \"start_dishwasher\",\n    \"description\": \"Begin a dishwasher cycle with a chosen wash program.\",\n    \"parameters\": {\n      \"cycle\": \"normal|heavy|quick|eco|rinse\"\n    }\n  }\n]\n\n\nUSER: Run the dishwasher on heavy.\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"start_dishwasher\",\"arguments\":{\"cycle\":\"heavy\"}}",
+    "gold_name": "start_dishwasher",
+    "domain": "kit"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  {\n    \"name\": \"disarm_alarm_system\",\n    \"description\": \"Disarm the home alarm system.\",\n    \"parameters\": {\n      \"type\": \"object\",\n      \"properties\": {}\n    }\n  },\n  {\n    \"name\": \"view_camera_stream\",\n    \"description\": \"Open a live video stream from a camera.\",\n    \"parameters\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"camera\": {\n          \"type\": \"string\",\n          \"enum\": [\n            \"front door cam\",\n            \"backyard cam\",\n            \"driveway cam\",\n            \"living room cam\",\n            \"baby monitor\"\n          ]\n        }\n      },\n      \"required\": [\n        \"camera\"\n      ]\n    }\n  },\n  {\n    \"name\": \"set_alarm_pin\",\n    \"description\": \"Change the alarm system PIN code.\",\n    \"parameters\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"new_pin\": {\n          \"type\": \"string\"\n        }\n      },\n      \"required\": [\n        \"new_pin\"\n      ]\n    }\n  }\n]\n\n\nUSER: Shut down the alarm please.\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"disarm_alarm_system\",\"arguments\":{}}",
+    "gold_name": "disarm_alarm_system",
+    "domain": "sec"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  {\n    \"name\": \"start_vacuum\",\n    \"description\": \"Start the robot vacuum in a specified area with chosen intensity.\",\n    \"parameters\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"area\": {\n          \"type\": \"string\",\n          \"enum\": [\n            \"whole house\",\n            \"living room\",\n            \"kitchen\",\n            \"bedroom\",\n            \"bathroom\",\n            \"hallway\",\n            \"dining room\",\n            \"office\",\n            \"kids room\"\n          ]\n        },\n        \"intensity\": {\n          \"type\": \"string\",\n          \"enum\": [\n            \"quick\",\n            \"normal\",\n            \"deep\",\n            \"eco\"\n          ]\n        }\n      },\n      \"required\": [\n        \"area\"\n      ]\n    }\n  },\n  {\n    \"name\": \"stop_vacuum\",\n    \"description\": \"Stop the running robot vacuum immediately.\",\n    \"parameters\": {\n      \"type\": \"object\",\n      \"properties\": {},\n      \"required\": []\n    }\n  },\n  {\n    \"name\": \"schedule_vacuum\",\n    \"description\": \"Schedule the robot vacuum for a recurring or future run.\",\n    \"parameters\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"area\": {\n          \"type\": \"string\"\n        },\n        \"intensity\": {\n          \"\n\n\nUSER: Start the environmental vacuum in the bedroom.\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"start_vacuum\",\"arguments\":{\"area\":\"bedroom\",\"intensity\":\"eco\"}}",
+    "gold_name": "start_vacuum",
+    "domain": "clean_noisy"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  {\n    \"name\": \"query_soil_moisture\",\n    \"description\": \"Soil.\",\n    \"parameters\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"zone\": {\n          \"type\": \"string\"\n        }\n      },\n      \"required\": [\n        \"zone\"\n      ]\n    }\n  },\n  {\n    \"name\": \"start_irrigation_zone\",\n    \"description\": \"Water.\",\n    \"parameters\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"zone\": {\n          \"type\": \"string\"\n        }\n      },\n      \"required\": [\n        \"zone\"\n      ]\n    }\n  },\n  {\n    \"name\": \"schedule_irrigation\",\n    \"description\": \"Schedule.\",\n    \"parameters\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"zone\": {\n          \"type\": \"string\"\n        },\n        \"time\": {\n          \"type\": \"string\"\n        }\n      },\n      \"required\": [\n        \"zone\",\n        \"time\"\n      ]\n    }\n  }\n]\n\n\nUSER: Before I commit to extra watering this week, get me the current moisture on the back lawn first.\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"query_soil_moisture\",\"arguments\":{\"zone\":\"back lawn\"}}",
+    "gold_name": "query_soil_moisture",
+    "domain": "garden"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  {\n    \"name\": \"set_coffee_strength\",\n    \"description\": \"Set the coffee brewing strength.\",\n    \"parameters\": {\n      \"strength\": \"weak|medium|strong\"\n    }\n  },\n  {\n    \"name\": \"stop_oven\",\n    \"description\": \"Turn off the oven immediately.\",\n    \"parameters\": {}\n  },\n  {\n    \"name\": \"set_oven_timer\",\n    \"description\": \"Set a countdown timer on the oven in minutes.\",\n    \"parameters\": {\n      \"minutes\": \"int\"\n    }\n  },\n  {\n    \"name\": \"start_microwave\",\n    \"description\": \"Run the microwave at a given power for a given duration in seconds.\",\n    \"parameters\": {\n      \"seconds\": \"int\",\n      \"power\": \"int 1-10\"\n    }\n  },\n  {\n    \"name\": \"pause_dishwasher\",\n    \"description\": \"Pause the currently running dishwasher cycle.\",\n    \"parameters\": {}\n  }\n]\n\n\nUSER: Na'Vi microwave\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"start_microwave\",\"arguments\":{\"seconds\":30,\"power\":8}}",
+    "gold_name": "start_microwave",
+    "domain": "kit_noisy"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"query_window_status\",\n  \"query_water_meter\",\n  \"query_power_usage\",\n  \"query_humidity\"\n]\n\n\nUSER: Could you pull the dampness reading in the kitchen?\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"query_humidity\",\"arguments\":{\"room\":\"kitchen\"}}",
+    "gold_name": "query_humidity",
+    "domain": "misc"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  {\n    \"name\": \"schedule_irrigation\",\n    \"description\": \"Schedule.\",\n    \"parameters\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"zone\": {\n          \"type\": \"string\"\n        },\n        \"time\": {\n          \"type\": \"string\"\n        },\n        \"duration_min\": {\n          \"type\": \"integer\"\n        }\n      },\n      \"required\": [\n        \"zone\",\n        \"time\"\n      ]\n    }\n  },\n  {\n    \"name\": \"query_soil_moisture\",\n    \"description\": \"Soil.\",\n    \"parameters\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"zone\": {\n          \"type\": \"string\"\n        }\n      },\n      \"required\": [\n        \"zone\"\n      ]\n    }\n  }\n]\n\n\nUSER: Plan the garden's decoration for the evening.\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"schedule_irrigation\",\"arguments\":{\"zone\":\"vegetable garden\",\"time\":\"tonight 21:00\",\"duration_min\":10}}",
+    "gold_name": "schedule_irrigation",
+    "domain": "garden_noisy"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  {\n    \"name\": \"start_vacuum\",\n    \"description\": \"Start the robot vacuum in a specified area with chosen intensity.\",\n    \"parameters\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"area\": {\n          \"type\": \"string\",\n          \"enum\": [\n            \"whole house\",\n            \"living room\",\n            \"kitchen\",\n            \"bedroom\",\n            \"bathroom\",\n            \"hallway\",\n            \"dining room\",\n            \"office\",\n            \"kids room\"\n          ]\n        },\n        \"intensity\": {\n          \"type\": \"string\",\n          \"enum\": [\n            \"quick\",\n            \"normal\",\n            \"deep\",\n            \"eco\"\n          ]\n        }\n      },\n      \"required\": [\n        \"area\"\n      ]\n    }\n  },\n  {\n    \"name\": \"stop_vacuum\",\n    \"description\": \"Stop the running robot vacuum immediately.\",\n    \"parameters\": {\n      \"type\": \"object\",\n      \"properties\": {},\n      \"required\": []\n    }\n  },\n  {\n    \"name\": \"schedule_vacuum\",\n    \"description\": \"Schedule the robot vacuum for a recurring or future run.\",\n    \"parameters\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"area\": {\n          \"type\": \"string\"\n        },\n        \"intensity\": {\n          \"\n\n\nUSER: Schedule eco vacuum at 6pm in bedroom.\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"schedule_vacuum\",\"arguments\":{\"area\":\"bedroom\",\"time\":\"18:00\",\"intensity\":\"eco\"}}",
+    "gold_name": "schedule_vacuum",
+    "domain": "clean"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"fixtures_by_team_by_season\",\n  \"schedules\"\n]\n\n\nUSER: Could you find the fixtures for the England rugby team in the 2021 season and the PGA Tour schedule for 2022?\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\": \"fixtures_by_team_by_season\", \"arguments\": {\"season_id\": 2021, \"team_id\": 789}}",
+    "gold_name": "fixtures_by_team_by_season",
+    "domain": "xlam_sh"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"upvote_riddle\",\n  \"fetch_latest\",\n  \"community_post_details\"\n]\n\n\nUSER: Retrieve details of YouTube community posts with IDs 'Post123' and 'Post456'.\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\": \"community_post_details\", \"arguments\": {\"is_id\": \"Post123\"}}",
+    "gold_name": "community_post_details",
+    "domain": "xlam_sh"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  {\n    \"name\": \"dim_light\",\n    \"description\": \"Dim or brighten lights to a target brightness percentage.\",\n    \"parameters\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"room\": {\n          \"type\": \"string\",\n          \"description\": \"Room where lights should be dimmed.\"\n        },\n        \"brightness_pct\": {\n          \"type\": \"integer\",\n          \"description\": \"Target brightness from 0 to 100.\"\n        }\n      },\n      \"required\": [\n        \"room\",\n        \"brightness_pct\"\n      ]\n    }\n  },\n  {\n    \"name\": \"set_light_scene\",\n    \"description\": \"Apply a named lighting scene in a room.\",\n    \"parameters\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"room\": {\n          \"type\": \"string\",\n          \"description\": \"Room to apply the scene in.\"\n        },\n        \"scene\": {\n          \"type\": \"string\",\n          \"description\": \"Scene name, e.g. movie, reading, party.\"\n        }\n      },\n      \"required\": [\n        \"room\",\n        \"scene\"\n      ]\n    }\n  },\n  {\n    \"name\": \"turn_on_light\",\n    \"description\": \"Turn on the lights in a specified room.\",\n    \"parameters\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"room\": {\n          \"type\": \"string\",\n \n\n\nUSER: Please put the bathroom on the dinner preset.\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"set_light_scene\",\"arguments\":{\"room\":\"bathroom\",\"scene\":\"dinner\"}}",
+    "gold_name": "set_light_scene",
+    "domain": "light"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  {\n    \"name\": \"set_tv_volume\",\n    \"description\": \"Set TV volume to a percentage\",\n    \"parameters\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"room\": {\n          \"type\": \"string\"\n        },\n        \"volume_pct\": {\n          \"type\": \"integer\"\n        }\n      },\n      \"required\": [\n        \"room\",\n        \"volume_pct\"\n      ]\n    }\n  },\n  {\n    \"name\": \"play_podcast\",\n    \"description\": \"Play a podcast episode on the speaker\",\n    \"parameters\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"podcast\": {\n          \"type\": \"string\"\n        },\n        \"room\": {\n          \"type\": \"string\"\n        },\n        \"volume_pct\": {\n          \"type\": \"integer\"\n        }\n      },\n      \"required\": [\n        \"podcast\",\n        \"room\"\n      ]\n    }\n  },\n  {\n    \"name\": \"switch_speaker_room\",\n    \"description\": \"Move currently playing audio from one room to another\",\n    \"parameters\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"from_room\": {\n          \"type\": \"string\"\n        },\n        \"to_room\": {\n          \"type\": \"string\"\n        }\n      },\n      \"required\": [\n        \"from_room\",\n        \"to_room\"\n      ]\n    }\n  },\n  {\n    \"name\": \"play_radio_station\",\n  \n\n\nUSER: Play the series in the bedroom.\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"play_podcast\",\"arguments\":{\"podcast\":\"Serial\",\"room\":\"bedroom\",\"volume_pct\":20}}",
+    "gold_name": "play_podcast",
+    "domain": "media_noisy"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"set_air_purifier_speed\",\n  \"query_vacuum_battery\",\n  \"stop_mop\",\n  \"start_mop\"\n]\n\n\nUSER: Stop the mop from cleaning the floor right now.\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"stop_mop\",\"arguments\":{}}",
+    "gold_name": "stop_mop",
+    "domain": "clean"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  {\n    \"name\": \"turn_off_light\",\n    \"description\": \"Turn off the lights in a specified room.\",\n    \"parameters\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"room\": {\n          \"type\": \"string\",\n          \"description\": \"Room where lights should be turned off.\"\n        }\n      },\n      \"required\": [\n        \"room\"\n      ]\n    }\n  },\n  {\n    \"name\": \"set_light_temperature_k\",\n    \"description\": \"Set the white color temperature of the lights in Kelvin.\",\n    \"parameters\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"room\": {\n          \"type\": \"string\",\n          \"description\": \"Room whose lights change temperature.\"\n        },\n        \"kelvin\": {\n          \"type\": \"integer\",\n          \"description\": \"Color temperature in Kelvin, e.g. 2700-6500.\"\n        }\n      },\n      \"required\": [\n        \"room\",\n        \"kelvin\"\n      ]\n    }\n  },\n  {\n    \"name\": \"query_light_state\",\n    \"description\": \"Query the current state of the lights in a room.\",\n    \"parameters\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"room\": {\n          \"type\": \"string\",\n          \"description\": \"Room to query.\"\n        }\n      },\n      \"required\": [\n        \"room\"\n      ]\n   \n\n\nUSER: Shut off basement lighting.\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"turn_off_light\",\"arguments\":{\"room\":\"basement\"}}",
+    "gold_name": "turn_off_light",
+    "domain": "light"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"get_hsn_tsn\",\n  \"get_by_latin_name\",\n  \"single_strain\",\n  \"get_sample_userprofile\"\n]\n\n\nUSER: What is the HSN/TSN for a 2020 Toyota Corolla?\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\": \"get_hsn_tsn\", \"arguments\": {\"query\": \"Toyota Corolla\", \"year\": 2020}}",
+    "gold_name": "get_hsn_tsn",
+    "domain": "xlam_sh"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  {\n    \"name\": \"start_vacuum\",\n    \"description\": \"Start the robot vacuum in a specified area with chosen intensity.\",\n    \"parameters\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"area\": {\n          \"type\": \"string\",\n          \"enum\": [\n            \"whole house\",\n            \"living room\",\n            \"kitchen\",\n            \"bedroom\",\n            \"bathroom\",\n            \"hallway\",\n            \"dining room\",\n            \"office\",\n            \"kids room\"\n          ]\n        },\n        \"intensity\": {\n          \"type\": \"string\",\n          \"enum\": [\n            \"quick\",\n            \"normal\",\n            \"deep\",\n            \"eco\"\n          ]\n        }\n      },\n      \"required\": [\n        \"area\"\n      ]\n    }\n  },\n  {\n    \"name\": \"stop_vacuum\",\n    \"description\": \"Stop the running robot vacuum immediately.\",\n    \"parameters\": {\n      \"type\": \"object\",\n      \"properties\": {},\n      \"required\": []\n    }\n  },\n  {\n    \"name\": \"schedule_vacuum\",\n    \"description\": \"Schedule the robot vacuum for a recurring or future run.\",\n    \"parameters\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"area\": {\n          \"type\": \"string\"\n        },\n        \"intensity\": {\n          \"\n\n\nUSER: Quickly vacuum the kitchen.\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"start_vacuum\",\"arguments\":{\"area\":\"kitchen\",\"intensity\":\"quick\"}}",
+    "gold_name": "start_vacuum",
+    "domain": "clean"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"set_timer\",\n  \"set_reminder\",\n  \"set_alarm\",\n  \"schedule_routine\"\n]\n\n\nUSER: We start with two timers. One minute for tea and pasta.\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"set_timer\",\"arguments\":{\"timers\":[{\"duration_minutes\":10,\"label\":\"tea\"},{\"duration_minutes\":25,\"label\":\"pasta\"}]}}",
+    "gold_name": "set_timer",
+    "domain": "misc_noisy"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"v1_hobbies\",\n  \"autocomplete_search\"\n]\n\n\nUSER: What are some random hobbies from the 'competition' category and who are some actors named 'Brad' in movies?\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\": \"v1_hobbies\", \"arguments\": {\"category\": \"competition\"}}",
+    "gold_name": "v1_hobbies",
+    "domain": "xlam_sh"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  {\n    \"name\": \"extend_awning\",\n    \"description\": \"Extend (deploy) the awning over a room or outdoor area.\",\n    \"parameters\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"room\": {\n          \"type\": \"string\",\n          \"description\": \"Area whose awning to extend.\"\n        }\n      },\n      \"required\": [\n        \"room\"\n      ]\n    }\n  },\n  {\n    \"name\": \"set_blinds_angle\",\n    \"description\": \"Tilt the blind slats to a specific angle in degrees (0=closed, 90=flat/open).\",\n    \"parameters\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"room\": {\n          \"type\": \"string\",\n          \"description\": \"Room whose blind slats to tilt.\"\n        },\n        \"angle\": {\n          \"type\": \"integer\",\n          \"description\": \"Slat angle 0-90 degrees.\"\n        }\n      },\n      \"required\": [\n        \"room\",\n        \"angle\"\n      ]\n    }\n  },\n  {\n    \"name\": \"close_curtains\",\n    \"description\": \"Fully close the curtains in a room.\",\n    \"parameters\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"room\": {\n          \"type\": \"string\",\n          \"description\": \"Room whose curtains to close.\"\n        }\n      },\n      \"required\": [\n        \"room\"\n      ]\n    }\n  },\n  {\n\n\n\nUSER: Make the sunroom blind slats horizontal.\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"set_blinds_angle\",\"arguments\":{\"room\":\"sunroom\",\"angle\":90}}",
+    "gold_name": "set_blinds_angle",
+    "domain": "blinds"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"toggle_outlet\",\n  \"turn_off_light\",\n  \"dim_light\",\n  \"set_light_scene\",\n  \"blink_light\"\n]\n\n\nUSER: Turn the coffee maker in the office on now\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"toggle_outlet\",\"arguments\":{\"room\":\"office\",\"outlet_name\":\"coffee maker\",\"state\":\"on\"}}",
+    "gold_name": "toggle_outlet",
+    "domain": "light"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"density\"\n]\n\n\nUSER: Calculate the density of a gas with a mass of 0.1 kg and a volume of 2 cubic meters.\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\": \"density\", \"arguments\": {\"mass\": 0.1, \"volume\": 2}}",
+    "gold_name": "density",
+    "domain": "xlam_sh"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  {\n    \"name\": \"unlock_door\",\n    \"description\": \"Unlock a specific door.\",\n    \"parameters\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"door\": {\n          \"type\": \"string\",\n          \"enum\": [\n            \"front door\",\n            \"back door\",\n            \"garage door\",\n            \"patio door\",\n            \"side door\",\n            \"basement door\"\n          ]\n        }\n      },\n      \"required\": [\n        \"door\"\n      ]\n    }\n  },\n  {\n    \"name\": \"lock_door\",\n    \"description\": \"Lock a specific door in the home.\",\n    \"parameters\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"door\": {\n          \"type\": \"string\",\n          \"enum\": [\n            \"front door\",\n            \"back door\",\n            \"garage door\",\n            \"patio door\",\n            \"side door\",\n            \"basement door\"\n          ]\n        }\n      },\n      \"required\": [\n        \"door\"\n      ]\n    }\n  },\n  {\n    \"name\": \"query_alarm_status\",\n    \"description\": \"Check the current state of the alarm system.\",\n    \"parameters\": {\n      \"type\": \"object\",\n      \"properties\": {}\n    }\n  }\n]\n\n\nUSER: Disengage the side door unlock.\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\": \"lock_door\", \"arguments\": {\"door\": \"side door\"}}",
+    "gold_name": "lock_door",
+    "domain": "sec_twin"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"get_train_data_mrt_id_id_get\",\n  \"us_de\",\n  \"engines\",\n  \"get_car_versions\"\n]\n\n\nUSER: Get vehicle bodies sorted by 'id' in descending order for a 2010 model.\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"none\",\"arguments\":{}}",
+    "gold_name": "none",
+    "domain": "irrelevant"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  {\n    \"name\": \"register_morse_operator\",\n    \"description\": \"Register a licensed amateur Morse code operator\",\n    \"parameters\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"callsign\": {\n          \"type\": \"string\"\n        },\n        \"wpm\": {\n          \"type\": \"integer\"\n        }\n      },\n      \"required\": [\n        \"callsign\",\n        \"wpm\"\n      ]\n    }\n  },\n  {\n    \"name\": \"score_fist_signature\",\n    \"description\": \"Score the rhythmic 'fist' signature of a Morse operator\",\n    \"parameters\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"audio_uri\": {\n          \"type\": \"string\"\n        }\n      },\n      \"required\": [\n        \"audio_uri\"\n      ]\n    }\n  }\n]\n\n\nUSER: How do I make my houseplant's leaves stop turning yellow?\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"none\",\"arguments\":{}}",
+    "gold_name": "none",
+    "domain": "external_irrelevance"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"cancel_timer\",\n  \"cancel_alarm\",\n  \"cancel_reminder\"\n]\n\n\nUSER: Stop the timer.\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"cancel_timer\",\"arguments\":{}}",
+    "gold_name": "cancel_timer",
+    "domain": "misc"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"bus_trolley_schedules\",\n  \"stays_properties_detail_photos\"\n]\n\n\nUSER: I need the detailed photos of the property with ID 'fr/le-chateau-de-loire' in French language.\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\": \"stays_properties_detail_photos\", \"arguments\": {\"language_code\": \"fr-fr\", \"id_detail\": \"fr/le-chateau-de-loire\"}}",
+    "gold_name": "stays_properties_detail_photos",
+    "domain": "xlam_sh"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"get_status_cat_image\",\n  \"text\",\n  \"series\"\n]\n\n\nUSER: Can you fetch the cat image for HTTP status code 404 and convert the phrase 'Lost in the Web' into fancy text?\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\": \"get_status_cat_image\", \"arguments\": {\"status\": \"404\"}}",
+    "gold_name": "get_status_cat_image",
+    "domain": "xlam_sh"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  {\n    \"name\": \"start_vacuum\",\n    \"description\": \"Start the robot vacuum in a specified area with chosen intensity.\",\n    \"parameters\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"area\": {\n          \"type\": \"string\",\n          \"enum\": [\n            \"whole house\",\n            \"living room\",\n            \"kitchen\",\n            \"bedroom\",\n            \"bathroom\",\n            \"hallway\",\n            \"dining room\",\n            \"office\",\n            \"kids room\"\n          ]\n        },\n        \"intensity\": {\n          \"type\": \"string\",\n          \"enum\": [\n            \"quick\",\n            \"normal\",\n            \"deep\",\n            \"eco\"\n          ]\n        }\n      },\n      \"required\": [\n        \"area\"\n      ]\n    }\n  },\n  {\n    \"name\": \"stop_vacuum\",\n    \"description\": \"Stop the running robot vacuum immediately.\",\n    \"parameters\": {\n      \"type\": \"object\",\n      \"properties\": {},\n      \"required\": []\n    }\n  },\n  {\n    \"name\": \"schedule_vacuum\",\n    \"description\": \"Schedule the robot vacuum for a recurring or future run.\",\n    \"parameters\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"area\": {\n          \"type\": \"string\"\n        },\n        \"intensity\": {\n          \"\n\n\nUSER: Set vacuum to run at 3pm tomorrow.\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"schedule_vacuum\",\"arguments\":{\"time\":\"15:00\",\"day\":\"tomorrow\"}}",
+    "gold_name": "schedule_vacuum",
+    "domain": "clean"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  {\n    \"name\": \"start_vacuum\",\n    \"description\": \"Start the robot vacuum in a specified area with chosen intensity.\",\n    \"parameters\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"area\": {\n          \"type\": \"string\",\n          \"enum\": [\n            \"whole house\",\n            \"living room\",\n            \"kitchen\",\n            \"bedroom\",\n            \"bathroom\",\n            \"hallway\",\n            \"dining room\",\n            \"office\",\n            \"kids room\"\n          ]\n        },\n        \"intensity\": {\n          \"type\": \"string\",\n          \"enum\": [\n            \"quick\",\n            \"normal\",\n            \"deep\",\n            \"eco\"\n          ]\n        }\n      },\n      \"required\": [\n        \"area\"\n      ]\n    }\n  },\n  {\n    \"name\": \"stop_vacuum\",\n    \"description\": \"Stop the running robot vacuum immediately.\",\n    \"parameters\": {\n      \"type\": \"object\",\n      \"properties\": {},\n      \"required\": []\n    }\n  },\n  {\n    \"name\": \"schedule_vacuum\",\n    \"description\": \"Schedule the robot vacuum for a recurring or future run.\",\n    \"parameters\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"area\": {\n          \"type\": \"string\"\n        },\n        \"intensity\": {\n          \"\n\n\nUSER: Pet hair everywhere on the rug, do an extra-thorough vacuum of the kids room.\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"start_vacuum\",\"arguments\":{\"area\":\"kids room\",\"intensity\":\"deep\"}}",
+    "gold_name": "start_vacuum",
+    "domain": "clean"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  {\n    \"name\": \"start_microwave\",\n    \"description\": \"Run the microwave at a given power for a given duration in seconds.\",\n    \"parameters\": {\n      \"seconds\": \"int\",\n      \"power\": \"int 1-10\"\n    }\n  },\n  {\n    \"name\": \"set_fridge_temperature\",\n    \"description\": \"Set the refrigerator compartment target temperature.\",\n    \"parameters\": {\n      \"temperature_f\": \"int\"\n    }\n  },\n  {\n    \"name\": \"set_kitchen_lights\",\n    \"description\": \"Adjust kitchen overhead lighting brightness/state.\",\n    \"parameters\": {\n      \"brightness\": \"int 0-100\",\n      \"state\": \"on|off\"\n    }\n  },\n  {\n    \"name\": \"stop_oven\",\n    \"description\": \"Turn off the oven immediately.\",\n    \"parameters\": {}\n  },\n  {\n    \"name\": \"set_oven_timer\",\n    \"description\": \"Set a countdown timer on the oven in minutes.\",\n    \"parameters\": {\n      \"minutes\": \"int\"\n    }\n  }\n]\n\n\nUSER: Turn off the oven.\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"stop_oven\",\"arguments\":{}}",
+    "gold_name": "stop_oven",
+    "domain": "kit"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"stock_v2_get_short_interest\",\n  \"symbols_get_option_expirations\"\n]\n\n\nUSER: Suggest some tickers similar to GOOG.\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"none\",\"arguments\":{}}",
+    "gold_name": "none",
+    "domain": "irrelevant"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"music_metadata\",\n  \"soundcloud\",\n  \"tweet_details\",\n  \"get_quotes_by_source\",\n  \"user_feed_video_posts_v2\",\n  \"get_user_favorite_videos\",\n  \"user_info\",\n  \"motivation_quote\"\n]\n\n\nUSER: Fetch the favorite videos of user 'voyagel' from TikTok. Also, get quotes from the source 'Albert Einstein'.\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\": \"get_user_favorite_videos\", \"arguments\": {\"unique_id\": \"voyagel\"}}",
+    "gold_name": "get_user_favorite_videos",
+    "domain": "xlam_sh"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"cancel_alarm\",\n  \"cancel_timer\",\n  \"cancel_reminder\"\n]\n\n\nUSER: Delete the alarm in the morning.\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"cancel_alarm\",\"arguments\":{\"time\":\"09:00\"}}",
+    "gold_name": "cancel_alarm",
+    "domain": "misc_noisy"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  {\n    \"name\": \"set_light_color\",\n    \"description\": \"Change the color of the lights in a room.\",\n    \"parameters\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"room\": {\n          \"type\": \"string\",\n          \"description\": \"Room whose light color changes.\"\n        },\n        \"color\": {\n          \"type\": \"string\",\n          \"description\": \"Target color, e.g. red, warm white.\"\n        },\n        \"brightness_pct\": {\n          \"type\": \"integer\",\n          \"description\": \"Optional brightness 0-100.\"\n        }\n      },\n      \"required\": [\n        \"room\",\n        \"color\"\n      ]\n    }\n  },\n  {\n    \"name\": \"query_light_state\",\n    \"description\": \"Query the current state of the lights in a room.\",\n    \"parameters\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"room\": {\n          \"type\": \"string\",\n          \"description\": \"Room to query.\"\n        }\n      },\n      \"required\": [\n        \"room\"\n      ]\n    }\n  },\n  {\n    \"name\": \"set_light_temperature_k\",\n    \"description\": \"Set the white color temperature of the lights in Kelvin.\",\n    \"parameters\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"room\": {\n          \"type\": \"string\",\n          \"description\": \"\n\n\nUSER: I want cyan light in the basement at 62%.\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\": \"set_light_color\", \"arguments\": {\"room\": \"basement\", \"color\": \"cyan\", \"brightness_pct\": 62}}",
+    "gold_name": "set_light_color",
+    "domain": "light_num"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  {\n    \"name\": \"set_radiator_valve\",\n    \"description\": \"Set the radiator thermostatic valve level (0=closed, 5=max).\",\n    \"parameters\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"room\": {\n          \"type\": \"string\"\n        },\n        \"level\": {\n          \"type\": \"integer\",\n          \"description\": \"Valve level 0-5\"\n        }\n      },\n      \"required\": [\n        \"room\",\n        \"level\"\n      ]\n    }\n  },\n  {\n    \"name\": \"query_temperature\",\n    \"description\": \"Query the current temperature reading of a room.\",\n    \"parameters\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"room\": {\n          \"type\": \"string\"\n        }\n      },\n      \"required\": [\n        \"room\"\n      ]\n    }\n  },\n  {\n    \"name\": \"set_humidity_target\",\n    \"description\": \"Set target relative humidity percentage for a room.\",\n    \"parameters\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"room\": {\n          \"type\": \"string\"\n        },\n        \"humidity_pct\": {\n          \"type\": \"integer\",\n          \"description\": \"Target humidity 0-100\"\n        }\n      },\n      \"required\": [\n        \"room\",\n        \"humidity_pct\"\n      ]\n    }\n  },\n  {\n    \"name\": \"set_thermostat\",\n    \"descrip\n\n\nUSER: Bring the moisture to the office, for convenience.\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"set_humidity_target\",\"arguments\":{\"room\":\"office\",\"humidity_pct\":50}}",
+    "gold_name": "set_humidity_target",
+    "domain": "climate_noisy"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"schedule_routine\",\n  \"activate_scene\",\n  \"set_reminder\",\n  \"save_current_scene\"\n]\n\n\nUSER: Activate the focus in working days in the morning and turn it off at noon.\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"schedule_routine\",\"arguments\":{\"scene\":\"focus\",\"time\":\"09:00\",\"end_time\":\"12:00\",\"days\":[\"mon\",\"tue\",\"wed\",\"thu\",\"fri\"]}}",
+    "gold_name": "schedule_routine",
+    "domain": "misc_noisy"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  {\n    \"name\": \"turn_on_tv\",\n    \"description\": \"Power on the TV in a room\",\n    \"parameters\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"room\": {\n          \"type\": \"string\"\n        }\n      },\n      \"required\": [\n        \"room\"\n      ]\n    }\n  },\n  {\n    \"name\": \"play_music\",\n    \"description\": \"Play a song, artist, or playlist on a speaker in a given room\",\n    \"parameters\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"song\": {\n          \"type\": \"string\",\n          \"description\": \"Song title, artist, or playlist name\"\n        },\n        \"room\": {\n          \"type\": \"string\",\n          \"description\": \"Room where the speaker is located\"\n        },\n        \"volume_pct\": {\n          \"type\": \"integer\",\n          \"description\": \"Volume 0-100\"\n        }\n      },\n      \"required\": [\n        \"song\",\n        \"room\"\n      ]\n    }\n  },\n  {\n    \"name\": \"switch_speaker_room\",\n    \"description\": \"Move currently playing audio from one room to another\",\n    \"parameters\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"from_room\": {\n          \"type\": \"string\"\n        },\n        \"to_room\": {\n          \"type\": \"string\"\n        }\n      },\n      \"required\": [\n      \n\n\nUSER: Play morning coffee jazz in the kitchen at 25 percent.\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"play_music\",\"arguments\":{\"song\":\"morning coffee jazz\",\"room\":\"kitchen\",\"volume_pct\":25}}",
+    "gold_name": "play_music",
+    "domain": "media"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  {\n    \"name\": \"set_motion_sensitivity\",\n    \"description\": \"Set motion-sensor sensitivity for automatic lighting in a room.\",\n    \"parameters\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"room\": {\n          \"type\": \"string\",\n          \"description\": \"Room of the motion sensor.\"\n        },\n        \"level\": {\n          \"type\": \"string\",\n          \"description\": \"Sensitivity level: low, medium, high.\"\n        }\n      },\n      \"required\": [\n        \"room\",\n        \"level\"\n      ]\n    }\n  },\n  {\n    \"name\": \"set_light_temperature_k\",\n    \"description\": \"Set the white color temperature of the lights in Kelvin.\",\n    \"parameters\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"room\": {\n          \"type\": \"string\",\n          \"description\": \"Room whose lights change temperature.\"\n        },\n        \"kelvin\": {\n          \"type\": \"integer\",\n          \"description\": \"Color temperature in Kelvin, e.g. 2700-6500.\"\n        }\n      },\n      \"required\": [\n        \"room\",\n        \"kelvin\"\n      ]\n    }\n  },\n  {\n    \"name\": \"set_light_scene\",\n    \"description\": \"Apply a named lighting scene in a room.\",\n    \"parameters\": {\n      \"type\": \"object\",\n      \"properties\": {\n      \n\n\nUSER: Activate the party scene in the office.\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"set_light_scene\",\"arguments\":{\"room\":\"office\",\"scene\":\"party\"}}",
+    "gold_name": "set_light_scene",
+    "domain": "light"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"treeequivalent\",\n  \"v1_stars\",\n  \"airports_by_keyword\",\n  \"get_range_of_verses\"\n]\n\n\nUSER: Fetch details of stars with a minimum distance of 100 light years and a maximum apparent magnitude of 2.\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\": \"v1_stars\", \"arguments\": {\"min_distance_light_year\": 100, \"max_apparent_magnitude\": 2}}",
+    "gold_name": "v1_stars",
+    "domain": "xlam_sh"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"cosine_similarity\",\n  \"note_duration\",\n  \"max_points_on_line\",\n  \"convert_cooking_measurements\",\n  \"find_longest_palindromic_substring\",\n  \"is_power\",\n  \"california_alimony\"\n]\n\n\nUSER: Find the cosine similarity between vectors [0.8, 0.2, 0.1] and [0.3, 0.4, 0.5]. Also, determine if 64 is a power of 4.\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\": \"cosine_similarity\", \"arguments\": {\"vector_a\": [0.8, 0.2, 0.1], \"vector_b\": [0.3, 0.4, 0.5]}}",
+    "gold_name": "cosine_similarity",
+    "domain": "xlam_sh"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"neuronal_activity_rate\",\n  \"calculate_standard_deviation\"\n]\n\n\nUSER: Calculate the roots of the quadratic equation with coefficients a=2, b=4, and c=-6. Also, check if the number 23 is a prime number.\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"none\",\"arguments\":{}}",
+    "gold_name": "none",
+    "domain": "irrelevant"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  {\n    \"name\": \"schedule_climate_program\",\n    \"description\": \"Schedule a climate program (named profile) for a room with start/end times.\",\n    \"parameters\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"room\": {\n          \"type\": \"string\"\n        },\n        \"program\": {\n          \"type\": \"string\",\n          \"description\": \"Program name e.g. night, away, comfort\"\n        },\n        \"start_time\": {\n          \"type\": \"string\",\n          \"description\": \"HH:MM\"\n        },\n        \"end_time\": {\n          \"type\": \"string\",\n          \"description\": \"HH:MM\"\n        }\n      },\n      \"required\": [\n        \"room\",\n        \"program\"\n      ]\n    }\n  },\n  {\n    \"name\": \"query_temperature\",\n    \"description\": \"Query the current temperature reading of a room.\",\n    \"parameters\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"room\": {\n          \"type\": \"string\"\n        }\n      },\n      \"required\": [\n        \"room\"\n      ]\n    }\n  },\n  {\n    \"name\": \"set_fan_speed\",\n    \"description\": \"Set the HVAC fan speed for a room.\",\n    \"parameters\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"room\": {\n          \"type\": \"string\"\n        },\n        \"speed\": {\n          \"typ\n\n\nUSER: I want the bedroom to be in night mode for the night, Doc.\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"schedule_climate_program\",\"arguments\":{\"room\":\"bedroom\",\"program\":\"comfort\",\"start_time\":\"19:00\",\"end_time\":\"23:00\"}}",
+    "gold_name": "schedule_climate_program",
+    "domain": "climate_noisy"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"compound_interest\",\n  \"average\",\n  \"trapezoidal_integration\",\n  \"is_valid_palindrome\"\n]\n\n\nUSER: If an object has an initial velocity of 10 m/s and an acceleration of 3 m/s^2, what will its velocity be after 4 seconds?\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"none\",\"arguments\":{}}",
+    "gold_name": "none",
+    "domain": "irrelevant"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  {\n    \"name\": \"query_temperature\",\n    \"description\": \"Query the current temperature reading of a room.\",\n    \"parameters\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"room\": {\n          \"type\": \"string\"\n        }\n      },\n      \"required\": [\n        \"room\"\n      ]\n    }\n  },\n  {\n    \"name\": \"toggle_humidifier\",\n    \"description\": \"Turn the humidifier on or off in a room.\",\n    \"parameters\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"room\": {\n          \"type\": \"string\"\n        },\n        \"state\": {\n          \"type\": \"string\",\n          \"enum\": [\n            \"on\",\n            \"off\"\n          ]\n        }\n      },\n      \"required\": [\n        \"room\",\n        \"state\"\n      ]\n    }\n  },\n  {\n    \"name\": \"set_thermostat\",\n    \"description\": \"Set the thermostat target temperature and mode for a room.\",\n    \"parameters\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"room\": {\n          \"type\": \"string\",\n          \"description\": \"Room name\"\n        },\n        \"temperature_c\": {\n          \"type\": \"number\",\n          \"description\": \"Target temperature in Celsius\"\n        },\n        \"mode\": {\n          \"type\": \"string\",\n          \"enum\": [\n            \"he\n\n\nUSER: Make the bathroom to the degrees.\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"set_thermostat\",\"arguments\":{\"room\":\"bathroom\",\"temperature_c\":19}}",
+    "gold_name": "set_thermostat",
+    "domain": "climate_noisy"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"set_reminder\",\n  \"set_alarm\",\n  \"set_timer\"\n]\n\n\nUSER: Remind me to turn the laundry over in a minute.\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"set_reminder\",\"arguments\":{\"in_minutes\":45,\"message\":\"flip the laundry\"}}",
+    "gold_name": "set_reminder",
+    "domain": "misc_noisy"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  {\n    \"name\": \"start_dishwasher\",\n    \"description\": \"Begin a dishwasher cycle with a chosen wash program.\",\n    \"parameters\": {\n      \"cycle\": \"normal|heavy|quick|eco|rinse\"\n    }\n  },\n  {\n    \"name\": \"set_fridge_temperature\",\n    \"description\": \"Set the refrigerator compartment target temperature.\",\n    \"parameters\": {\n      \"temperature_f\": \"int\"\n    }\n  },\n  {\n    \"name\": \"preheat_oven\",\n    \"description\": \"Preheat the oven to a target temperature with optional cooking mode.\",\n    \"parameters\": {\n      \"temperature_f\": \"int\",\n      \"mode\": \"bake|broil|convection|roast|warm\"\n    }\n  }\n]\n\n\nUSER: The energy-saving machine is washed in one night.\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"start_dishwasher\",\"arguments\":{\"cycle\":\"eco\"}}",
+    "gold_name": "start_dishwasher",
+    "domain": "kit_noisy"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"binance_charts\"\n]\n\n\nUSER: I'm interested in the price forecast for Apple's stock 'AAPL' and the piercing line signals on page 1. Also, could you sort exchanges by their 7-day volume in ascending order?\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"none\",\"arguments\":{}}",
+    "gold_name": "none",
+    "domain": "irrelevant"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"cities_v2_get_measurements\",\n  \"gethospitalsbyname\"\n]\n\n\nUSER: Locate hospitals named 'Regional' in the U.S.\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\": \"gethospitalsbyname\", \"arguments\": {\"name\": \"Regional\"}}",
+    "gold_name": "gethospitalsbyname",
+    "domain": "xlam_sh"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  {\n    \"name\": \"schedule_irrigation\",\n    \"description\": \"Schedule.\",\n    \"parameters\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"zone\": {\n          \"type\": \"string\"\n        },\n        \"time\": {\n          \"type\": \"string\"\n        },\n        \"duration_min\": {\n          \"type\": \"integer\"\n        }\n      },\n      \"required\": [\n        \"zone\",\n        \"time\"\n      ]\n    }\n  },\n  {\n    \"name\": \"set_outdoor_light_color\",\n    \"description\": \"Color.\",\n    \"parameters\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"location\": {\n          \"type\": \"string\"\n        },\n        \"color\": {\n          \"type\": \"string\"\n        }\n      },\n      \"required\": [\n        \"location\",\n        \"color\"\n      ]\n    }\n  }\n]\n\n\nUSER: Citrus water is poured every morning.\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"schedule_irrigation\",\"arguments\":{\"zone\":\"citrus trees\",\"time\":\"every other day 05:30\",\"duration_min\":15}}",
+    "gold_name": "schedule_irrigation",
+    "domain": "garden_noisy"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  {\n    \"name\": \"lock_window\",\n    \"description\": \"Lock the window in a room for security.\",\n    \"parameters\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"room\": {\n          \"type\": \"string\",\n          \"description\": \"Room whose window to lock.\"\n        }\n      },\n      \"required\": [\n        \"room\"\n      ]\n    }\n  },\n  {\n    \"name\": \"open_curtains\",\n    \"description\": \"Fully open the curtains in a room.\",\n    \"parameters\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"room\": {\n          \"type\": \"string\",\n          \"description\": \"Room whose curtains to open.\"\n        }\n      },\n      \"required\": [\n        \"room\"\n      ]\n    }\n  },\n  {\n    \"name\": \"close_curtains\",\n    \"description\": \"Fully close the curtains in a room.\",\n    \"parameters\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"room\": {\n          \"type\": \"string\",\n          \"description\": \"Room whose curtains to close.\"\n        }\n      },\n      \"required\": [\n        \"room\"\n      ]\n    }\n  },\n  {\n    \"name\": \"lower_blinds\",\n    \"description\": \"Fully lower (close) the blinds in a room.\",\n    \"parameters\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"room\": {\n          \"type\": \"st\n\n\nUSER: Sun's right in my eyes in the kitchen \u2014 drop the blinds all the way.\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"lower_blinds\",\"arguments\":{\"room\":\"kitchen\"}}",
+    "gold_name": "lower_blinds",
+    "domain": "blinds"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  {\n    \"name\": \"blink_light\",\n    \"description\": \"Blink the lights in a room to grab attention.\",\n    \"parameters\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"room\": {\n          \"type\": \"string\",\n          \"description\": \"Room where lights should blink.\"\n        },\n        \"times\": {\n          \"type\": \"integer\",\n          \"description\": \"Number of blinks.\"\n        }\n      },\n      \"required\": [\n        \"room\"\n      ]\n    }\n  },\n  {\n    \"name\": \"query_light_state\",\n    \"description\": \"Query the current state of the lights in a room.\",\n    \"parameters\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"room\": {\n          \"type\": \"string\",\n          \"description\": \"Room to query.\"\n        }\n      },\n      \"required\": [\n        \"room\"\n      ]\n    }\n  },\n  {\n    \"name\": \"toggle_outlet\",\n    \"description\": \"Toggle a smart outlet (electrical switch) on or off.\",\n    \"parameters\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"room\": {\n          \"type\": \"string\",\n          \"description\": \"Room containing the outlet.\"\n        },\n        \"outlet_name\": {\n          \"type\": \"string\",\n          \"description\": \"Outlet label, e.g. coffee maker, fan, lamp.\"\n      \n\n\nUSER: Tell me about the state of the attic.\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"query_light_state\",\"arguments\":{\"room\":\"attic\"}}",
+    "gold_name": "query_light_state",
+    "domain": "light_noisy"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  {\n    \"name\": \"start_vacuum\",\n    \"description\": \"Start the robot vacuum in a specified area with chosen intensity.\",\n    \"parameters\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"area\": {\n          \"type\": \"string\",\n          \"enum\": [\n            \"whole house\",\n            \"living room\",\n            \"kitchen\",\n            \"bedroom\",\n            \"bathroom\",\n            \"hallway\",\n            \"dining room\",\n            \"office\",\n            \"kids room\"\n          ]\n        },\n        \"intensity\": {\n          \"type\": \"string\",\n          \"enum\": [\n            \"quick\",\n            \"normal\",\n            \"deep\",\n            \"eco\"\n          ]\n        }\n      },\n      \"required\": [\n        \"area\"\n      ]\n    }\n  },\n  {\n    \"name\": \"stop_vacuum\",\n    \"description\": \"Stop the running robot vacuum immediately.\",\n    \"parameters\": {\n      \"type\": \"object\",\n      \"properties\": {},\n      \"required\": []\n    }\n  },\n  {\n    \"name\": \"schedule_vacuum\",\n    \"description\": \"Schedule the robot vacuum for a recurring or future run.\",\n    \"parameters\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"area\": {\n          \"type\": \"string\"\n        },\n        \"intensity\": {\n          \"\n\n\nUSER: Vacuum bath every Friday.\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"schedule_vacuum\",\"arguments\":{\"area\":\"bathroom\",\"time\":\"15:00\",\"day\":\"Friday\"}}",
+    "gold_name": "schedule_vacuum",
+    "domain": "clean_noisy"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  {\n    \"name\": \"close_curtains\",\n    \"description\": \"Fully close the curtains in a room.\",\n    \"parameters\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"room\": {\n          \"type\": \"string\",\n          \"description\": \"Room whose curtains to close.\"\n        }\n      },\n      \"required\": [\n        \"room\"\n      ]\n    }\n  },\n  {\n    \"name\": \"open_window\",\n    \"description\": \"Open the window in a room.\",\n    \"parameters\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"room\": {\n          \"type\": \"string\",\n          \"description\": \"Room whose window to open.\"\n        }\n      },\n      \"required\": [\n        \"room\"\n      ]\n    }\n  },\n  {\n    \"name\": \"set_blinds_position\",\n    \"description\": \"Set the blinds to a specific vertical position percentage (0=closed, 100=open).\",\n    \"parameters\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"room\": {\n          \"type\": \"string\",\n          \"description\": \"Room whose blinds to position.\"\n        },\n        \"position\": {\n          \"type\": \"integer\",\n          \"description\": \"Position 0-100.\"\n        }\n      },\n      \"required\": [\n        \"room\",\n        \"position\"\n      ]\n    }\n  }\n]\n\n\nUSER: Open the window in the dining room.\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"open_window\",\"arguments\":{\"room\":\"dining room\"}}",
+    "gold_name": "open_window",
+    "domain": "blinds_noisy"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  {\n    \"name\": \"schedule_irrigation\",\n    \"description\": \"Schedule.\",\n    \"parameters\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"zone\": {\n          \"type\": \"string\"\n        },\n        \"time\": {\n          \"type\": \"string\"\n        },\n        \"duration_min\": {\n          \"type\": \"integer\"\n        }\n      },\n      \"required\": [\n        \"zone\",\n        \"time\"\n      ]\n    }\n  },\n  {\n    \"name\": \"turn_on_outdoor_light\",\n    \"description\": \"On.\",\n    \"parameters\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"location\": {\n          \"type\": \"string\"\n        }\n      },\n      \"required\": [\n        \"location\"\n      ]\n    }\n  }\n]\n\n\nUSER: Plan an evening soak for the rose bed at 8pm for fourteen min.\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\": \"schedule_irrigation\", \"arguments\": {\"zone\": \"rose bed\", \"time\": \"today 20:00\", \"duration_min\": 14}}",
+    "gold_name": "schedule_irrigation",
+    "domain": "garden_num"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  {\n    \"name\": \"set_pool_heater\",\n    \"description\": \"Heater.\",\n    \"parameters\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"temperature_c\": {\n          \"type\": \"number\"\n        },\n        \"on\": {\n          \"type\": \"boolean\"\n        }\n      },\n      \"required\": [\n        \"temperature_c\"\n      ]\n    }\n  },\n  {\n    \"name\": \"query_pool_temperature\",\n    \"description\": \"Temp.\",\n    \"parameters\": {\n      \"type\": \"object\",\n      \"properties\": {},\n      \"required\": []\n    }\n  }\n]\n\n\nUSER: Bring the pool to the cold one, it was too warm.\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"set_pool_heater\",\"arguments\":{\"temperature_c\":24}}",
+    "gold_name": "set_pool_heater",
+    "domain": "garden_noisy"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"current\",\n  \"rapidapigethourlyforecastbylocationname\",\n  \"v1_weather\"\n]\n\n\nUSER: Retrieve the current air quality conditions for Berlin, Germany.\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"none\",\"arguments\":{}}",
+    "gold_name": "none",
+    "domain": "irrelevant"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"create_campaign\"\n]\n\n\nUSER: I am currently overseeing the marketing strategy for our new \"Eco-Friendly Water Bottle\" and require an organized plan for launching advertising campaigns tailored to specific demographics on online platforms. We have determined two primary target demographics: young adults and professionals. For young adults, we aim to allocate a budget of $5,000 for advertising on Instagram and Snapchat from July 1st to July 15th. Additionally, the professional group should see our campaign on LinkedIn and Twitter with an $8,000 budget over the same period. We have developed a series of ads that need to be scheduled for release on set dates during the campaign duration. Please utilize the function to create and schedule these advertising campaigns with precise allocation of budgets, platforms, and ad \u2026\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\": \"create_campaign\", \"arguments\": {\"product_name\": \"Eco-Friendly Water Bottle\", \"campaign_details\": [{\"demographic\": \"young adults\", \"platforms\": [\"Instagram\", \"Snapchat\"], \"budget\": 5000, \"start_date\": \"2023-07-01\", \"end_date\": \"2023-07-15\", \"ad_schedule\": [{\"ad_name\": \"EcoLaunch Day\", \"release_date\": \"2023-07-01\"}, {\"ad_name\": \"EcoHydrate Promo\", \"release_date\": \"2023-07-05\"}, {\"ad_name\": \"EcoWeekend Special\", \"release_date\": \"2023-07-08\"}]}]}}",
+    "gold_name": "create_campaign",
+    "domain": "iot_aux_v4"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  {\n    \"name\": \"set_oven_timer\",\n    \"description\": \"Set a countdown timer on the oven in minutes.\",\n    \"parameters\": {\n      \"minutes\": \"int\"\n    }\n  },\n  {\n    \"name\": \"stop_microwave\",\n    \"description\": \"Stop the microwave immediately.\",\n    \"parameters\": {}\n  },\n  {\n    \"name\": \"start_coffee_brew\",\n    \"description\": \"Start brewing coffee in the coffee maker.\",\n    \"parameters\": {\n      \"cups\": \"int\"\n    }\n  }\n]\n\n\nUSER: Brew coffee, 3 cups.\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\": \"start_coffee_brew\", \"arguments\": {\"cups\": 3}}",
+    "gold_name": "start_coffee_brew",
+    "domain": "kit_num"
+  },
+  {
+    "prompt": "SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -\n[\n  \"toggle_dehumidifier\",\n  \"query_temperature\",\n  \"set_humidity_target\"\n]\n\n\nUSER: Set the humidity in the living room to 60 percent\n\n\nASSISTANT: <functioncall> ",
+    "gold": "{\"name\":\"set_humidity_target\",\"arguments\":{\"room\":\"living room\",\"humidity_pct\":60}}",
+    "gold_name": "set_humidity_target",
+    "domain": "climate"
+  }
+]

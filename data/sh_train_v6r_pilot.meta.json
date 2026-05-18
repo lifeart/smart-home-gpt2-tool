@@ -1,0 +1,353 @@
+{
+  "input": "data/sh_train_v6.json",
+  "input_count": 20600,
+  "processed": 200,
+  "kept_after_refine": 185,
+  "buckets": {
+    "KEEP": 135,
+    "FIX": 29,
+    "DROP": 36,
+    "SKIP": 0
+  },
+  "percentages": {
+    "KEEP": 67.5,
+    "FIX": 14.5,
+    "DROP": 18.0,
+    "SKIP": 0.0
+  },
+  "elapsed_sec": 79,
+  "model": "meta-llama/Llama-3.3-70B-Instruct",
+  "concurrency": 10,
+  "seed": 42,
+  "applied_actions": {
+    "drop_applied": 15,
+    "fix_disabled": 24,
+    "keep": 135,
+    "drop_softened_to_keep": 21,
+    "fix_keys_diverge": 5
+  },
+  "fix_samples": [
+    {
+      "user_query": "The recipient says it's a Celsius, but I always need it lower for my oven.",
+      "cand_names": [
+        "preheat_oven",
+        "set_coffee_strength",
+        "stop_oven",
+        "set_fridge_temperature"
+      ],
+      "gold_name": "preheat_oven",
+      "old_args": {
+        "temperature_f": 410,
+        "mode": "bake"
+      },
+      "new_args": {
+        "temperature_f": null,
+        "mode": "bake"
+      },
+      "reason": "The query mentions needing the temperature lower, but does not specify a temperature, contradicting the annotator's temperature value.",
+      "applied": "fix_disabled"
+    },
+    {
+      "user_query": "Set the hallway to seventy-five degrees Fahrenheit.",
+      "cand_names": [
+        "set_ac_mode",
+        "set_thermostat"
+      ],
+      "gold_name": "set_thermostat",
+      "old_args": {
+        "room": "hallway",
+        "temperature_c": 23.9
+      },
+      "new_args": {
+        "room": "hallway",
+        "temperature_c": 23.9
+      },
+      "reason": "Temperature in Fahrenheit is given as 75, which is equivalent to 23.9 degrees Celsius, so the annotator's argument is correct, but the original temperature should be converted to Celsius for consistency, however since 75 Fahrenheit is indeed 23.9 Celsius, no change is needed but the reason for checking is that the user query specified Fahrenheit.",
+      "applied": "fix_disabled"
+    },
+    {
+      "user_query": "Could you find the HEX equivalents for a bright yellow with H=60, S=1, L=0.8, and a muted gray with H=0, S=0, L=0.5?",
+      "cand_names": [
+        "hsl_to_hex"
+      ],
+      "gold_name": "hsl_to_hex",
+      "old_args": {
+        "h": 60,
+        "s": 1,
+        "l": 0.8
+      },
+      "new_args": {
+        "h": 60,
+        "s": 1,
+        "l": 0.8,
+        "h2": 0,
+        "s2": 0,
+        "l2": 0.5
+      },
+      "reason": "The annotator's arguments only include one color, but the query asks for two colors.",
+      "applied": "fix_keys_diverge"
+    },
+    {
+      "user_query": "Check the soil moisture on the pink layer.",
+      "cand_names": [
+        "query_soil_moisture",
+        "start_irrigation_zone"
+      ],
+      "gold_name": "query_soil_moisture",
+      "old_args": {
+        "zone": "rose bed"
+      },
+      "new_args": {
+        "zone": "pink layer"
+      },
+      "reason": "The annotator's argument 'rose bed' does not match the user's query 'pink layer'.",
+      "applied": "fix_disabled"
+    },
+    {
+      "user_query": "Can you find train stations near Munich?",
+      "cand_names": [
+        "autocomplete",
+        "bus_trolley_schedules",
+        "route_information"
+      ],
+      "gold_name": "autocomplete",
+      "old_args": {
+        "query": "Munich"
+      },
+      "new_args": {
+        "query": "train stations near Munich"
+      },
+      "reason": "The annotator's function name 'autocomplete' does not match the query's intent to find specific locations.",
+      "applied": "fix_disabled"
+    },
+    {
+      "user_query": "Can you get demographic information for ZIP code 20002 and find a motivational picture with ID 'pic789'.",
+      "cand_names": [
+        "retrieve_a_contract",
+        "get_zip_code_detail",
+        "search",
+        "get_a_specific_picture"
+      ],
+      "gold_name": "get_zip_code_detail",
+      "old_args": {
+        "zip": "20002"
+      },
+      "new_args": {
+        "zip": "20002",
+        "picture_id": "pic789"
+      },
+      "reason": "The annotator picked get_zip_code_detail but the query also asks for a motivational picture.",
+      "applied": "fix_keys_diverge"
+    },
+    {
+      "user_query": "What are the synonyms for 'happy' in English and 'feliz' in Spanish?",
+      "cand_names": [
+        "spellout",
+        "get"
+      ],
+      "gold_name": "get",
+      "old_args": {
+        "language": "EN",
+        "word": "happy"
+      },
+      "new_args": {
+        "language": "ES",
+        "word": "feliz"
+      },
+      "reason": "The annotator's arguments do not match the query, which asks for synonyms in both English and Spanish, but the arguments only specify English and the word \"happy\".",
+      "applied": "fix_disabled"
+    },
+    {
+      "user_query": "I'd like to know how hot it is in the canteen now.",
+      "cand_names": [
+        "query_garage_door",
+        "query_temperature",
+        "query_smoke_alarm",
+        "query_humidity"
+      ],
+      "gold_name": "query_temperature",
+      "old_args": {
+        "room": "dining_room"
+      },
+      "new_args": {
+        "room": "canteen"
+      },
+      "reason": "The annotator's argument value for \"room\" does not match the room mentioned in the user's query.",
+      "applied": "fix_disabled"
+    },
+    {
+      "user_query": "What are the historical TVL data for the Compound protocol?",
+      "cand_names": [
+        "protocol",
+        "get_equity_latest_data",
+        "tvl_protocol",
+        "recent_exchange_rates",
+        "stock_v2_get_risk_rating_breakdown",
+        "stock_company_overview"
+      ],
+      "gold_name": "protocol",
+      "old_args": {
+        "protocol": "compound"
+      },
+      "new_args": {
+        "protocol": "compound",
+        "data_type": "tvl",
+        "time_frame": "historical"
+      },
+      "reason": "The annotator picked the wrong function, it should be tvl_protocol instead of protocol.",
+      "applied": "fix_keys_diverge"
+    },
+    {
+      "user_query": "Could you fetch the net income data for Microsoft Corp. (MSFT) and Amazon.com Inc. (AMZN) from the US and Australian stock markets respectively?",
+      "cand_names": [
+        "executives",
+        "type_parent_get_highest_rated_investments",
+        "logo",
+        "stock_get_net_income"
+      ],
+      "gold_name": "stock_get_net_income",
+      "old_args": {
+        "symbol": "MSFT",
+        "region": "US"
+      },
+      "new_args": {
+        "symbol": "MSFT,AMZN",
+        "region": "US,AU"
+      },
+      "reason": "The query asks for data on two companies from different regions, but the annotator's arguments only include one symbol and region.",
+      "applied": "fix_disabled"
+    }
+  ],
+  "drop_samples": [
+    {
+      "user_query": "Smoke from the outside. Turn on the air purifier in the children's room upstairs.",
+      "cand_names": [
+        "start_vacuum",
+        "stop_vacuum",
+        "schedule_vacuum"
+      ],
+      "gold_name": "turn_on_air_purifier",
+      "gold_args": {
+        "area": "kids room",
+        "speed": "high"
+      },
+      "reason": "The query doesn't match any of the candidate functions, which are all related to vacuuming, but the query is about turning on an air purifier."
+    },
+    {
+      "user_query": "It's stuffy in the master bedroom, target humidity 40%.",
+      "cand_names": [
+        "set_thermostat",
+        "schedule_climate_program"
+      ],
+      "gold_name": "set_humidity_target",
+      "gold_args": {
+        "room": "master bedroom",
+        "humidity_pct": 40
+      },
+      "reason": "The query is about humidity, but the available candidates are about thermostat and climate program scheduling, not directly about setting humidity."
+    },
+    {
+      "user_query": "Vacuum almost dead, send it back to charge.",
+      "cand_names": [
+        "start_vacuum",
+        "stop_vacuum",
+        "schedule_vacuum"
+      ],
+      "gold_name": "dock_vacuum",
+      "gold_args": {},
+      "reason": "The annotator picked 'dock_vacuum' which is not in the candidate functions, and the query doesn't match any of the provided candidates."
+    },
+    {
+      "user_query": "Last time the battery was low, look again.",
+      "cand_names": [
+        "start_vacuum",
+        "stop_vacuum",
+        "schedule_vacuum"
+      ],
+      "gold_name": "query_vacuum_battery",
+      "gold_args": {},
+      "reason": "The query \"Last time the battery was low, look again\" does not match any of the provided candidate functions."
+    },
+    {
+      "user_query": "Close the yasli.",
+      "cand_names": [
+        "close_curtains",
+        "extend_awning",
+        "open_window",
+        "open_skylight"
+      ],
+      "gold_name": "close_skylight",
+      "gold_args": {
+        "room": "nursery"
+      },
+      "reason": "The query \"Close the yasli\" does not match any of the provided candidate functions."
+    },
+    {
+      "user_query": "Vacuum is making weird noise, send it home.",
+      "cand_names": [
+        "start_vacuum",
+        "stop_vacuum",
+        "schedule_vacuum"
+      ],
+      "gold_name": "dock_vacuum",
+      "gold_args": {},
+      "reason": "The annotator picked 'dock_vacuum' which is not in the candidate functions, and the query doesn't match any of the provided candidates."
+    },
+    {
+      "user_query": "Get my attention in the bedroom.",
+      "cand_names": [
+        "set_motion_sensitivity",
+        "toggle_outlet",
+        "set_light_temperature_k"
+      ],
+      "gold_name": "blink_light",
+      "gold_args": {
+        "room": "bedroom",
+        "times": 5
+      },
+      "reason": "The annotator picked a function 'blink_light' which is not in the candidate list, and the query doesn't justify any of the listed functions."
+    },
+    {
+      "user_query": "open the window in the nursery.",
+      "cand_names": [
+        "close_skylight",
+        "retract_awning",
+        "close_window",
+        "raise_blinds"
+      ],
+      "gold_name": "open_window",
+      "gold_args": {
+        "room": "nursery"
+      },
+      "reason": "The query \"open the window in the nursery\" does not match any of the provided candidate functions."
+    },
+    {
+      "user_query": "Put the gel into the bathtub.",
+      "cand_names": [
+        "lower_blinds",
+        "close_skylight",
+        "set_blinds_angle"
+      ],
+      "gold_name": "set_blinds_position",
+      "gold_args": {
+        "room": "bathroom",
+        "position": 85
+      },
+      "reason": "The query \"Put the gel into the bathtub\" does not relate to any of the candidate functions."
+    },
+    {
+      "user_query": "Go to the corridor, please.",
+      "cand_names": [
+        "toggle_dehumidifier",
+        "set_humidity_target",
+        "schedule_climate_program"
+      ],
+      "gold_name": "set_thermostat",
+      "gold_args": {
+        "room": "hallway",
+        "temperature_c": 23.9
+      },
+      "reason": "The query \"Go to the corridor, please\" does not relate to any of the candidate functions."
+    }
+  ]
+}
