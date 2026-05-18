@@ -16,6 +16,7 @@ import {
   rewriteCandidateList,
   getOrBuildIndex,
 } from './retrieval.js';
+import { PRESETS } from './presets.js';
 import './bench.js';
 import './voice_bench.js';
 
@@ -253,5 +254,14 @@ window._retrieval = {
   rewriteCandidateList,
   getOrBuildIndex,
 };
+
+// Preset selector — replace prompt with a per-domain SFT template.
+const presetEl = $('preset');
+if (presetEl) {
+  presetEl.addEventListener('change', () => {
+    const p = PRESETS[presetEl.value];
+    if (p) $('prompt').value = p;
+  });
+}
 
 setStatus(detectWebGPU() ? 'WebGPU available · click Load' : 'WebGPU NOT available · WASM only');
