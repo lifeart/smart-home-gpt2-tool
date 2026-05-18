@@ -1,0 +1,273 @@
+Downloading tokenizers (3.1MiB)
+Downloading cuda-bindings (6.0MiB)
+Downloading nvidia-cudnn-cu13 (349.2MiB)
+Downloading nvidia-nccl-cu13 (196.4MiB)
+Downloading nvidia-cufft (204.2MiB)
+Downloading nvidia-cusolver (191.6MiB)
+Downloading nvidia-cufile (1.2MiB)
+Downloading torch (507.6MiB)
+Downloading transformers (10.1MiB)
+Downloading nvidia-cusparse (139.2MiB)
+Downloading nvidia-cublas (403.5MiB)
+Downloading nvidia-nvjitlink (38.8MiB)
+Downloading numpy (15.9MiB)
+Downloading nvidia-cuda-cupti (10.2MiB)
+Downloading sympy (6.0MiB)
+Downloading hf-xet (4.3MiB)
+Downloading networkx (2.0MiB)
+Downloading pygments (1.2MiB)
+Downloading setuptools (1.0MiB)
+Downloading nvidia-cusparselt-cu13 (162.3MiB)
+Downloading nvidia-cuda-runtime (2.1MiB)
+Downloading nvidia-nvshmem-cu13 (57.6MiB)
+Downloading triton (192.1MiB)
+Downloading nvidia-cuda-nvrtc (86.0MiB)
+Downloading nvidia-curand (56.8MiB)
+ Downloaded nvidia-cufile
+ Downloaded nvidia-cuda-runtime
+ Downloaded pygments
+ Downloaded tokenizers
+ Downloaded setuptools
+ Downloaded networkx
+ Downloaded hf-xet
+ Downloaded cuda-bindings
+ Downloaded nvidia-cuda-cupti
+ Downloaded numpy
+ Downloaded sympy
+ Downloaded nvidia-nvjitlink
+ Downloaded nvidia-curand
+ Downloaded nvidia-nvshmem-cu13
+ Downloaded transformers
+ Downloaded nvidia-cuda-nvrtc
+ Downloaded nvidia-cusparse
+ Downloaded nvidia-cusparselt-cu13
+ Downloaded nvidia-cusolver
+ Downloaded nvidia-nccl-cu13
+ Downloaded nvidia-cufft
+ Downloaded triton
+ Downloaded nvidia-cudnn-cu13
+ Downloaded nvidia-cublas
+ Downloaded torch
+Installed 53 packages in 415ms
+
+sh_test.json:   0%|          | 0.00/393k [00:00<?, ?B/s][Ash_test.json: 100%|██████████| 393k/393k [00:00<00:00, 60.7MB/s]
+[test] 300 held-out items
+[device] cuda
+
+[load] lifeart/smart-home-gpt2
+
+tokenizer_config.json:   0%|          | 0.00/326 [00:00<?, ?B/s][Atokenizer_config.json: 100%|██████████| 326/326 [00:00<00:00, 1.65MB/s]
+
+tokenizer.json:   0%|          | 0.00/3.56M [00:00<?, ?B/s][Atokenizer.json: 100%|██████████| 3.56M/3.56M [00:00<00:00, 54.0MB/s]
+
+config.json:   0%|          | 0.00/962 [00:00<?, ?B/s][Aconfig.json: 100%|██████████| 962/962 [00:00<00:00, 4.86MB/s]
+
+model.safetensors:   0%|          | 0.00/498M [00:00<?, ?B/s][A
+model.safetensors:  13%|█▎        | 67.0M/498M [00:02<00:14, 29.5MB/s][Amodel.safetensors: 100%|██████████| 498M/498M [00:03<00:00, 155MB/s]  
+
+Loading weights:   0%|          | 0/148 [00:00<?, ?it/s][ALoading weights: 100%|██████████| 148/148 [00:00<00:00, 4890.47it/s]
+
+generation_config.json:   0%|          | 0.00/153 [00:00<?, ?B/s][Ageneration_config.json: 100%|██████████| 153/153 [00:00<00:00, 723kB/s]
+[transformers] We strongly recommend passing in an `attention_mask` since your input_ids may be padded. See https://huggingface.co/docs/transformers/troubleshooting#incorrect-output-when-padding-tokens-arent-masked.
+You may ignore this warning if your `pad_token_id` (50256) is identical to the `bos_token_id` (50256), `eos_token_id` (50256), or the `sep_token_id` (None), and your input is not padded.
+  [25/300] acc=64.0%  t=77s
+  [50/300] acc=54.0%  t=147s
+  [75/300] acc=57.3%  t=220s
+  [100/300] acc=55.0%  t=294s
+  [125/300] acc=55.2%  t=371s
+  [150/300] acc=56.7%  t=433s
+  [175/300] acc=58.3%  t=502s
+  [200/300] acc=56.5%  t=566s
+  [225/300] acc=56.9%  t=630s
+  [250/300] acc=56.8%  t=692s
+  [275/300] acc=55.6%  t=757s
+  [300/300] acc=55.7%  t=829s
+
+=== lifeart/smart-home-gpt2 ===
+  Accuracy: 167/300 = 55.7%
+  Time: 829s  (2.76s/q)
+  By domain:
+    blinds     16/26 = 61.5%
+    clean      11/29 = 37.9%
+    climate    18/29 = 62.1%
+    garden     19/26 = 73.1%
+    kit        16/23 = 69.6%
+    light      8/32 = 25.0%
+    media      18/32 = 56.2%
+    misc       44/72 = 61.1%
+    sec        17/31 = 54.8%
+
+[load] lifeart/smart-home-gpt2-v2
+
+tokenizer_config.json:   0%|          | 0.00/326 [00:00<?, ?B/s][Atokenizer_config.json: 100%|██████████| 326/326 [00:00<00:00, 1.83MB/s]
+
+tokenizer.json:   0%|          | 0.00/3.56M [00:00<?, ?B/s][Atokenizer.json: 100%|██████████| 3.56M/3.56M [00:00<00:00, 18.1MB/s]
+
+config.json:   0%|          | 0.00/962 [00:00<?, ?B/s][Aconfig.json: 100%|██████████| 962/962 [00:00<00:00, 5.11MB/s]
+
+model.safetensors:   0%|          | 0.00/498M [00:00<?, ?B/s][A
+model.safetensors:  13%|█▎        | 67.1M/498M [00:02<00:12, 33.4MB/s][Amodel.safetensors: 100%|██████████| 498M/498M [00:02<00:00, 193MB/s]  
+
+Loading weights:   0%|          | 0/148 [00:00<?, ?it/s][ALoading weights: 100%|██████████| 148/148 [00:00<00:00, 4361.33it/s]
+
+generation_config.json:   0%|          | 0.00/153 [00:00<?, ?B/s][Ageneration_config.json: 100%|██████████| 153/153 [00:00<00:00, 607kB/s]
+  [25/300] acc=88.0%  t=47s
+  [50/300] acc=78.0%  t=95s
+  [75/300] acc=77.3%  t=139s
+  [100/300] acc=78.0%  t=187s
+  [125/300] acc=80.8%  t=233s
+  [150/300] acc=82.0%  t=272s
+  [175/300] acc=82.9%  t=320s
+  [200/300] acc=81.5%  t=366s
+  [225/300] acc=81.3%  t=405s
+  [250/300] acc=81.6%  t=447s
+  [275/300] acc=80.4%  t=484s
+  [300/300] acc=80.3%  t=531s
+
+=== lifeart/smart-home-gpt2-v2 ===
+  Accuracy: 241/300 = 80.3%
+  Time: 531s  (1.77s/q)
+  By domain:
+    blinds     18/26 = 69.2%
+    clean      26/29 = 89.7%
+    climate    27/29 = 93.1%
+    garden     25/26 = 96.2%
+    kit        19/23 = 82.6%
+    light      21/32 = 65.6%
+    media      25/32 = 78.1%
+    misc       55/72 = 76.4%
+    sec        25/31 = 80.6%
+
+[load] lifeart/smart-home-gpt2-v3
+
+tokenizer_config.json:   0%|          | 0.00/326 [00:00<?, ?B/s][Atokenizer_config.json: 100%|██████████| 326/326 [00:00<00:00, 1.62MB/s]
+
+tokenizer.json:   0%|          | 0.00/3.56M [00:00<?, ?B/s][Atokenizer.json: 100%|██████████| 3.56M/3.56M [00:00<00:00, 46.6MB/s]
+
+config.json:   0%|          | 0.00/962 [00:00<?, ?B/s][Aconfig.json: 100%|██████████| 962/962 [00:00<00:00, 5.38MB/s]
+
+model.safetensors:   0%|          | 0.00/498M [00:00<?, ?B/s][A
+model.safetensors:  67%|██████▋   | 335M/498M [00:03<00:01, 103MB/s][Amodel.safetensors: 100%|██████████| 498M/498M [00:03<00:00, 145MB/s]
+
+Loading weights:   0%|          | 0/148 [00:00<?, ?it/s][ALoading weights: 100%|██████████| 148/148 [00:00<00:00, 4341.78it/s]
+
+generation_config.json:   0%|          | 0.00/153 [00:00<?, ?B/s][Ageneration_config.json: 100%|██████████| 153/153 [00:00<00:00, 836kB/s]
+  [25/300] acc=88.0%  t=56s
+  [50/300] acc=78.0%  t=113s
+  [75/300] acc=80.0%  t=168s
+  [100/300] acc=82.0%  t=229s
+  [125/300] acc=84.0%  t=287s
+  [150/300] acc=85.3%  t=334s
+  [175/300] acc=84.6%  t=391s
+  [200/300] acc=84.0%  t=445s
+  [225/300] acc=83.1%  t=490s
+  [250/300] acc=83.6%  t=541s
+  [275/300] acc=82.2%  t=589s
+  [300/300] acc=82.3%  t=644s
+
+=== lifeart/smart-home-gpt2-v3 ===
+  Accuracy: 247/300 = 82.3%
+  Time: 644s  (2.15s/q)
+  By domain:
+    blinds     18/26 = 69.2%
+    clean      24/29 = 82.8%
+    climate    28/29 = 96.6%
+    garden     25/26 = 96.2%
+    kit        19/23 = 82.6%
+    light      22/32 = 68.8%
+    media      26/32 = 81.2%
+    misc       60/72 = 83.3%
+    sec        25/31 = 80.6%
+
+[load] lifeart/smart-home-gpt2-v4
+
+tokenizer_config.json:   0%|          | 0.00/326 [00:00<?, ?B/s][Atokenizer_config.json: 100%|██████████| 326/326 [00:00<00:00, 1.79MB/s]
+
+tokenizer.json:   0%|          | 0.00/3.56M [00:00<?, ?B/s][Atokenizer.json: 100%|██████████| 3.56M/3.56M [00:00<00:00, 52.5MB/s]
+
+config.json:   0%|          | 0.00/962 [00:00<?, ?B/s][Aconfig.json: 100%|██████████| 962/962 [00:00<00:00, 5.27MB/s]
+
+model.safetensors:   0%|          | 0.00/498M [00:00<?, ?B/s][A
+model.safetensors:  13%|█▎        | 67.0M/498M [00:02<00:12, 33.3MB/s][A
+model.safetensors: 100%|██████████| 498M/498M [00:03<00:00, 153MB/s]  [Amodel.safetensors: 100%|██████████| 498M/498M [00:03<00:00, 134MB/s]
+
+Loading weights:   0%|          | 0/148 [00:00<?, ?it/s][ALoading weights: 100%|██████████| 148/148 [00:00<00:00, 4372.33it/s]
+
+generation_config.json:   0%|          | 0.00/153 [00:00<?, ?B/s][Ageneration_config.json: 100%|██████████| 153/153 [00:00<00:00, 856kB/s]
+  [25/300] acc=96.0%  t=57s
+  [50/300] acc=82.0%  t=116s
+  [75/300] acc=84.0%  t=172s
+  [100/300] acc=85.0%  t=229s
+  [125/300] acc=87.2%  t=282s
+  [150/300] acc=86.7%  t=338s
+  [175/300] acc=87.4%  t=395s
+  [200/300] acc=86.0%  t=454s
+  [225/300] acc=84.9%  t=502s
+  [250/300] acc=84.8%  t=556s
+  [275/300] acc=83.6%  t=594s
+  [300/300] acc=83.3%  t=662s
+
+=== lifeart/smart-home-gpt2-v4 ===
+  Accuracy: 250/300 = 83.3%
+  Time: 662s  (2.21s/q)
+  By domain:
+    blinds     19/26 = 73.1%
+    clean      23/29 = 79.3%
+    climate    28/29 = 96.6%
+    garden     25/26 = 96.2%
+    kit        20/23 = 87.0%
+    light      26/32 = 81.2%
+    media      25/32 = 78.1%
+    misc       60/72 = 83.3%
+    sec        24/31 = 77.4%
+
+[load] lifeart/smart-home-gpt2-v5
+
+tokenizer_config.json:   0%|          | 0.00/326 [00:00<?, ?B/s][Atokenizer_config.json: 100%|██████████| 326/326 [00:00<00:00, 1.82MB/s]
+
+tokenizer.json:   0%|          | 0.00/3.56M [00:00<?, ?B/s][Atokenizer.json: 100%|██████████| 3.56M/3.56M [00:00<00:00, 81.6MB/s]
+
+config.json:   0%|          | 0.00/962 [00:00<?, ?B/s][Aconfig.json: 100%|██████████| 962/962 [00:00<00:00, 5.31MB/s]
+
+model.safetensors:   0%|          | 0.00/498M [00:00<?, ?B/s][A
+model.safetensors:  67%|██████▋   | 335M/498M [00:02<00:01, 148MB/s][Amodel.safetensors: 100%|██████████| 498M/498M [00:02<00:00, 168MB/s]
+
+Loading weights:   0%|          | 0/148 [00:00<?, ?it/s][ALoading weights: 100%|██████████| 148/148 [00:00<00:00, 4289.84it/s]
+
+generation_config.json:   0%|          | 0.00/153 [00:00<?, ?B/s][Ageneration_config.json: 100%|██████████| 153/153 [00:00<00:00, 880kB/s]
+  [25/300] acc=96.0%  t=52s
+  [50/300] acc=82.0%  t=107s
+  [75/300] acc=85.3%  t=155s
+  [100/300] acc=85.0%  t=205s
+  [125/300] acc=87.2%  t=257s
+  [150/300] acc=87.3%  t=298s
+  [175/300] acc=87.4%  t=351s
+  [200/300] acc=86.0%  t=400s
+  [225/300] acc=84.9%  t=441s
+  [250/300] acc=85.6%  t=488s
+  [275/300] acc=84.4%  t=526s
+  [300/300] acc=84.3%  t=577s
+
+=== lifeart/smart-home-gpt2-v5 ===
+  Accuracy: 253/300 = 84.3%
+  Time: 577s  (1.92s/q)
+  By domain:
+    blinds     19/26 = 73.1%
+    clean      25/29 = 86.2%
+    climate    28/29 = 96.6%
+    garden     25/26 = 96.2%
+    kit        20/23 = 87.0%
+    light      25/32 = 78.1%
+    media      26/32 = 81.2%
+    misc       61/72 = 84.7%
+    sec        24/31 = 77.4%
+
+
+===== SUMMARY =====
+  lifeart/smart-home-gpt2                    55.7%  (167/300)
+  lifeart/smart-home-gpt2-v2                 80.3%  (241/300)
+  lifeart/smart-home-gpt2-v3                 82.3%  (247/300)
+  lifeart/smart-home-gpt2-v4                 83.3%  (250/300)
+  lifeart/smart-home-gpt2-v5                 84.3%  (253/300)
+[save] wrote bench_results.json
+[push] results -> lifeart/smart-home-sft-v2

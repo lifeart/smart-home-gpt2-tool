@@ -1,0 +1,879 @@
+{
+  "results": [
+    {
+      "repo": "lifeart/smart-home-gpt2",
+      "acc": 0.5566666666666666,
+      "n": 300,
+      "correct": 167,
+      "by_domain": {
+        "misc": {
+          "correct": 44,
+          "total": 72
+        },
+        "clean": {
+          "correct": 11,
+          "total": 29
+        },
+        "light": {
+          "correct": 8,
+          "total": 32
+        },
+        "sec": {
+          "correct": 17,
+          "total": 31
+        },
+        "kit": {
+          "correct": 16,
+          "total": 23
+        },
+        "blinds": {
+          "correct": 16,
+          "total": 26
+        },
+        "media": {
+          "correct": 18,
+          "total": 32
+        },
+        "garden": {
+          "correct": 19,
+          "total": 26
+        },
+        "climate": {
+          "correct": 18,
+          "total": 29
+        }
+      },
+      "elapsed_s": 792.3909814357758,
+      "samples": [
+        {
+          "i": 0,
+          "domain": "misc",
+          "gold_name": "activate_scene",
+          "pred": "activate_scene",
+          "raw": "{\"name\":\"activate_scene\",\"arguments\":{\"scene\":\"focus_scene\"}}The U.S. Department of Justice has filed a lawsuit against the company that owns the National Football League's Dallas Cowboys, alleging th",
+          "ok": true
+        },
+        {
+          "i": 1,
+          "domain": "clean",
+          "gold_name": "query_vacuum_battery",
+          "pred": "check_vacuum",
+          "raw": "{\"name\":\"check_vacuum\",\"arguments\":{\"area\":\"vacuum battery\",\"intensity\":\"normal\"}}The following is a list of the most popular and popular websites for the following topics:",
+          "ok": false
+        },
+        {
+          "i": 2,
+          "domain": "clean",
+          "gold_name": "schedule_vacuum",
+          "pred": "schedule_vacuum",
+          "raw": "{\"name\":\"schedule_vacuum\",\"arguments\":{\"area\":\"full house\",\"intensity\":\"deep\"}}The following is a list of the most popular and popular websites for the following topics:",
+          "ok": true
+        },
+        {
+          "i": 3,
+          "domain": "light",
+          "gold_name": "toggle_outlet",
+          "pred": "set_motion_sensitivity",
+          "raw": "{\"name\":\"set_motion_sensitivity\",\"arguments\":{\"room\":\"dining room\"}}The first time I saw the movie \"The Last Jedi\" I was so excited. It was so beautiful. I was so excited to see the movie. I was so ex",
+          "ok": false
+        },
+        {
+          "i": 4,
+          "domain": "sec",
+          "gold_name": "start_camera_recording",
+          "pred": "query_alarm_status",
+          "raw": "{\"name\":\"query_alarm_status\",\"arguments\":{\"door\":\"pontrol porch\"}}The first time I saw the movie \"The Last Jedi\" I was so excited. It was so beautiful. I was so excited to see the movie. I was so exci",
+          "ok": false
+        },
+        {
+          "i": 5,
+          "domain": "kit",
+          "gold_name": "preheat_oven",
+          "pred": "set_oven_timer",
+          "raw": "{\"name\":\"set_oven_timer\",\"arguments\":{\"minutes\":200}}The first time I saw the movie \"The Last Jedi\" I was so excited. It was so beautiful. I was so excited to see the movie. I was so excited to see th",
+          "ok": false
+        },
+        {
+          "i": 6,
+          "domain": "sec",
+          "gold_name": "view_camera_stream",
+          "pred": "view_camera_stream",
+          "raw": "{\"name\":\"view_camera_stream\",\"arguments\":{\"camera\":\"front door cam\"}}The U.S. Department of Justice has launched an investigation into the use of a private email account by former Secretary of State H",
+          "ok": true
+        },
+        {
+          "i": 7,
+          "domain": "sec",
+          "gold_name": "unlock_door",
+          "pred": "release_door",
+          "raw": "{\"name\":\"release_door\",\"arguments\":{\"door\":\"back door\"}}The first time I saw the movie \"The Last Jedi\" I was so excited. It was so beautiful. I was so excited to see the movie. I was so excited to see",
+          "ok": false
+        },
+        {
+          "i": 15,
+          "domain": "light",
+          "gold_name": "turn_on_light",
+          "pred": "set_light_scene",
+          "raw": "{\"name\":\"set_light_scene\",\"arguments\":{\"room\":\"bathroom\",\"brightness_pct\":0}}The first time I saw the movie \"The Last Jedi\" I was so excited. It was so beautiful. I was so excited to see the movie. I ",
+          "ok": false
+        },
+        {
+          "i": 16,
+          "domain": "garden",
+          "gold_name": "set_outdoor_light_color",
+          "pred": "turn_on_outdoor_light",
+          "raw": "{\"name\":\"turn_on_outdoor_light\",\"arguments\":{\"location\":\"pryon\"}}The first time I saw the movie \"The Last Jedi\" I was so excited. It was so beautiful. I was so excited to see the movie. I was so excit",
+          "ok": false
+        },
+        {
+          "i": 19,
+          "domain": "misc",
+          "gold_name": "query_battery_level",
+          "pred": "query_solar_production",
+          "raw": "{\"name\":\"query_solar_production\",\"arguments\":{\"room\":\"front door\"}}The U.S. Department of Justice has filed a lawsuit against the National Security Agency (NSA) over the NSA's bulk collection of phone",
+          "ok": false
+        },
+        {
+          "i": 20,
+          "domain": "sec",
+          "gold_name": "unlock_door",
+          "pred": "query_alarm_status",
+          "raw": "{\"name\":\"query_alarm_status\",\"arguments\":{\"door\":\"back door\"}}The first time I saw the movie \"The Last Jedi\" I was so excited. It was so beautiful. I was so excited to see the movie. I was so excited ",
+          "ok": false
+        },
+        {
+          "i": 27,
+          "domain": "light",
+          "gold_name": "dim_light",
+          "pred": "blink_light",
+          "raw": "{\"name\":\"blink_light\",\"arguments\":{\"room\":\"garage\",\"brightness_pct\":90}}The U.S. Department of Justice has filed a lawsuit against the National Security Agency (NSA) over the NSA's bulk collection of ",
+          "ok": false
+        },
+        {
+          "i": 28,
+          "domain": "clean",
+          "gold_name": "query_air_quality",
+          "pred": "start_vacuum",
+          "raw": "{\"name\":\"start_vacuum\",\"arguments\":{\"area\":\"kids room\",\"intensity\":\"air quality\"}}The following is a list of the most popular and popular websites for the following topics:",
+          "ok": false
+        },
+        {
+          "i": 29,
+          "domain": "light",
+          "gold_name": "blink_light",
+          "pred": "flash_light",
+          "raw": "{\"name\":\"flash_light\",\"arguments\":{\"room\":\"kids room\",\"brightness_pct\":4}}The U.S. Department of Justice has filed a lawsuit against the company that owns the National Football League's Baltimore Rave",
+          "ok": false
+        },
+        {
+          "i": 30,
+          "domain": "climate",
+          "gold_name": "toggle_humidifier",
+          "pred": "set_humidifier",
+          "raw": "{\"name\":\"set_humidifier\",\"arguments\":{\"room\":\"hallway\",\"mode\":\"on\"}}The U.S. Department of Justice has launched an investigation into the use of a private email server to conduct government business.",
+          "ok": false
+        }
+      ]
+    },
+    {
+      "repo": "lifeart/smart-home-gpt2-v2",
+      "acc": 0.8033333333333333,
+      "n": 300,
+      "correct": 241,
+      "by_domain": {
+        "misc": {
+          "correct": 55,
+          "total": 72
+        },
+        "clean": {
+          "correct": 26,
+          "total": 29
+        },
+        "light": {
+          "correct": 21,
+          "total": 32
+        },
+        "sec": {
+          "correct": 25,
+          "total": 31
+        },
+        "kit": {
+          "correct": 19,
+          "total": 23
+        },
+        "blinds": {
+          "correct": 18,
+          "total": 26
+        },
+        "media": {
+          "correct": 25,
+          "total": 32
+        },
+        "garden": {
+          "correct": 25,
+          "total": 26
+        },
+        "climate": {
+          "correct": 27,
+          "total": 29
+        }
+      },
+      "elapsed_s": 507.05271100997925,
+      "samples": [
+        {
+          "i": 0,
+          "domain": "misc",
+          "gold_name": "activate_scene",
+          "pred": "activate_scene",
+          "raw": "{\"name\":\"activate_scene\",\"arguments\":{\"scene\":\"focus\"}}The following is a list of the most popular and popular games in the world.",
+          "ok": true
+        },
+        {
+          "i": 1,
+          "domain": "clean",
+          "gold_name": "query_vacuum_battery",
+          "pred": "query_vacuum_battery",
+          "raw": "{\"name\":\"query_vacuum_battery\",\"arguments\":{\"area\":\"vacuum battery\"}}The following is a list of the most popular and popular websites for the following:",
+          "ok": true
+        },
+        {
+          "i": 2,
+          "domain": "clean",
+          "gold_name": "schedule_vacuum",
+          "pred": "schedule_vacuum",
+          "raw": "{\"name\":\"schedule_vacuum\",\"arguments\":{\"area\":\"whole house\",\"time\":\"07:30\",\"day\":\"weekdays\"}}The following is a list of the most popular and popular websites for the following:",
+          "ok": true
+        },
+        {
+          "i": 3,
+          "domain": "light",
+          "gold_name": "toggle_outlet",
+          "pred": "toggle_outlet",
+          "raw": "{\"name\":\"toggle_outlet\",\"arguments\":{\"room\":\"dining room\",\"outlet_name\":\"thermostat\",\"state\":\"on\"}}The following is a list of the most popular and popular websites for the following:",
+          "ok": true
+        },
+        {
+          "i": 4,
+          "domain": "sec",
+          "gold_name": "start_camera_recording",
+          "pred": "query_alarm_status",
+          "raw": "{\"name\":\"query_alarm_status\",\"arguments\":{\"camera\":\"porch\",\"scene\":\"past porch\"}}The following is a list of the most popular and popular websites for the following:",
+          "ok": false
+        },
+        {
+          "i": 5,
+          "domain": "kit",
+          "gold_name": "preheat_oven",
+          "pred": "preheat_oven",
+          "raw": "{\"name\":\"preheat_oven\",\"arguments\":{\"temperature_f\":200,\"mode\":\"bake\"}}The following is a list of the most popular and popular mods for the game.",
+          "ok": true
+        },
+        {
+          "i": 6,
+          "domain": "sec",
+          "gold_name": "view_camera_stream",
+          "pred": "view_camera_stream",
+          "raw": "{\"name\":\"view_camera_stream\",\"arguments\":{\"camera\":\"front door cam\"}}The following is a list of the most popular and popular websites for the iPhone.",
+          "ok": true
+        },
+        {
+          "i": 7,
+          "domain": "sec",
+          "gold_name": "unlock_door",
+          "pred": "unlock_door",
+          "raw": "{\"name\":\"unlock_door\",\"arguments\":{\"door\":\"back door\"}}The following is a list of the most popular and popular websites for the following:",
+          "ok": true
+        },
+        {
+          "i": 15,
+          "domain": "light",
+          "gold_name": "turn_on_light",
+          "pred": "set_light_scene",
+          "raw": "{\"name\":\"set_light_scene\",\"arguments\":{\"room\":\"bathroom\",\"scene\":\"lights\"}}The following is a list of the most popular and popular websites for the following:",
+          "ok": false
+        },
+        {
+          "i": 20,
+          "domain": "sec",
+          "gold_name": "unlock_door",
+          "pred": "query_door_status",
+          "raw": "{\"name\":\"query_door_status\",\"arguments\":{\"door\":\"back door\"}}The following is a list of the most popular and popular websites for the iPhone.",
+          "ok": false
+        },
+        {
+          "i": 34,
+          "domain": "media",
+          "gold_name": "set_tv_channel",
+          "pred": "set_tv_input",
+          "raw": "{\"name\":\"set_tv_input\",\"arguments\":{\"room\":\"living room\",\"input\":\"ESPN\",\"channel\":\"live\"}}The following is a list of the most popular and popular websites for the iPhone.",
+          "ok": false
+        },
+        {
+          "i": 35,
+          "domain": "blinds",
+          "gold_name": "extend_awning",
+          "pred": "retract_awning",
+          "raw": "{\"name\":\"retract_awning\",\"arguments\":{\"room\":\"bathroom\"}}The following is a list of the most popular and popular websites for the iPhone.",
+          "ok": false
+        },
+        {
+          "i": 37,
+          "domain": "sec",
+          "gold_name": "query_door_status",
+          "pred": "query_door_name",
+          "raw": "{\"name\":\"query_door_name\",\"arguments\":{\"door\":\"basement door\"}}The following is a list of the most popular and popular websites for the iPhone.",
+          "ok": false
+        },
+        {
+          "i": 39,
+          "domain": "climate",
+          "gold_name": "schedule_climate_program",
+          "pred": "set_thermostat",
+          "raw": "{\"name\":\"set_thermostat\",\"arguments\":{\"room\":\"master bedroom\",\"level\":\"night\"}}The following is a list of the most popular and popular websites for the following:",
+          "ok": false
+        },
+        {
+          "i": 40,
+          "domain": "blinds",
+          "gold_name": "close_curtains",
+          "pred": "set_blinds_position",
+          "raw": "{\"name\":\"set_blinds_position\",\"arguments\":{\"room\":\"office\",\"position\":20}}The following is a list of the most popular and popular websites for the iPhone.",
+          "ok": false
+        },
+        {
+          "i": 41,
+          "domain": "misc",
+          "gold_name": "query_motion_sensor",
+          "pred": "query_smoke_alarm",
+          "raw": "{\"name\":\"query_smoke_alarm\",\"arguments\":{\"room\":\"garage\"}}The following is a list of the most common errors that occur when you try to use the \"set_device_name\" command.",
+          "ok": false
+        }
+      ]
+    },
+    {
+      "repo": "lifeart/smart-home-gpt2-v3",
+      "acc": 0.8233333333333334,
+      "n": 300,
+      "correct": 247,
+      "by_domain": {
+        "misc": {
+          "correct": 60,
+          "total": 72
+        },
+        "clean": {
+          "correct": 24,
+          "total": 29
+        },
+        "light": {
+          "correct": 22,
+          "total": 32
+        },
+        "sec": {
+          "correct": 25,
+          "total": 31
+        },
+        "kit": {
+          "correct": 19,
+          "total": 23
+        },
+        "blinds": {
+          "correct": 18,
+          "total": 26
+        },
+        "media": {
+          "correct": 26,
+          "total": 32
+        },
+        "garden": {
+          "correct": 25,
+          "total": 26
+        },
+        "climate": {
+          "correct": 28,
+          "total": 29
+        }
+      },
+      "elapsed_s": 622.4757800102234,
+      "samples": [
+        {
+          "i": 0,
+          "domain": "misc",
+          "gold_name": "activate_scene",
+          "pred": "activate_scene",
+          "raw": "{\"name\":\"activate_scene\",\"arguments\":{\"scene\":\"focus\"}}The following is a list of the most popular and popular websites that are currently being used by the public.",
+          "ok": true
+        },
+        {
+          "i": 1,
+          "domain": "clean",
+          "gold_name": "query_vacuum_battery",
+          "pred": "query_vacuum_battery",
+          "raw": "{\"name\":\"query_vacuum_battery\",\"arguments\":{}}The following is a list of the most popular and popular websites that are used by the majority of the population.",
+          "ok": true
+        },
+        {
+          "i": 2,
+          "domain": "clean",
+          "gold_name": "schedule_vacuum",
+          "pred": "start_vacuum",
+          "raw": "{\"name\":\"start_vacuum\",\"arguments\":{\"area\":\"whole house\",\"intensity\":\"deep\"}}The following is a list of the most popular and popular websites that are currently being used by the \"nursery\" to provide ",
+          "ok": false
+        },
+        {
+          "i": 3,
+          "domain": "light",
+          "gold_name": "toggle_outlet",
+          "pred": "toggle_outlet",
+          "raw": "{\"name\":\"toggle_outlet\",\"arguments\":{\"room\":\"dining room\",\"outlet_name\":\"thermostat\",\"state\":\"on\"}}The following is a list of the most popular and popular websites that are used by the majority of the",
+          "ok": true
+        },
+        {
+          "i": 4,
+          "domain": "sec",
+          "gold_name": "start_camera_recording",
+          "pred": "start_camera_recording",
+          "raw": "{\"name\":\"start_camera_recording\",\"arguments\":{\"camera\":\"patio door\"}}The following is a list of the most popular and popular websites that are currently being used by the \"nursery\" to \"save money\" and",
+          "ok": true
+        },
+        {
+          "i": 5,
+          "domain": "kit",
+          "gold_name": "preheat_oven",
+          "pred": "preheat_oven",
+          "raw": "{\"name\":\"preheat_oven\",\"arguments\":{\"temperature_f\":200,\"mode\":\"broil\"}}The following is a list of the most popular and popular websites that are currently being used by the \"nursery\" community.",
+          "ok": true
+        },
+        {
+          "i": 6,
+          "domain": "sec",
+          "gold_name": "view_camera_stream",
+          "pred": "view_camera_stream",
+          "raw": "{\"name\":\"view_camera_stream\",\"arguments\":{\"camera\":\"front door cam\"}}The following is a list of the most popular and popular websites that are used by the majority of the population.",
+          "ok": true
+        },
+        {
+          "i": 7,
+          "domain": "sec",
+          "gold_name": "unlock_door",
+          "pred": "unlock_door",
+          "raw": "{\"name\":\"unlock_door\",\"arguments\":{\"door\":\"back door\"}}The following is a list of the most popular and popular websites that are used by the majority of the population.",
+          "ok": true
+        },
+        {
+          "i": 11,
+          "domain": "media",
+          "gold_name": "play_music",
+          "pred": "set_tv_input",
+          "raw": "{\"name\":\"set_tv_input\",\"arguments\":{\"room\":\"basement gym\",\"input\":\"anthemic pump\",\"channel\":\"morning workout\"}}The following is a list of the most popular and popular websites that are currently being",
+          "ok": false
+        },
+        {
+          "i": 20,
+          "domain": "sec",
+          "gold_name": "unlock_door",
+          "pred": "query_door_status",
+          "raw": "{\"name\":\"query_door_status\",\"arguments\":{\"door\":\"back door\"}}The following is a list of the most popular and popular websites that are currently being used by the \"nursery\" community.",
+          "ok": false
+        },
+        {
+          "i": 34,
+          "domain": "media",
+          "gold_name": "set_tv_channel",
+          "pred": "set_tv_input",
+          "raw": "{\"name\":\"set_tv_input\",\"arguments\":{\"room\":\"living room\",\"input\":\"ESPN\",\"channel\":\"ESPN\"}}The following is a list of the most popular and popular websites that are used by the majority of the populati",
+          "ok": false
+        },
+        {
+          "i": 35,
+          "domain": "blinds",
+          "gold_name": "extend_awning",
+          "pred": "retract_awning",
+          "raw": "{\"name\":\"retract_awning\",\"arguments\":{\"room\":\"bathroom\"}}The following is a list of the most popular and popular websites that are currently being used by the \"nursery\" in the United States.",
+          "ok": false
+        },
+        {
+          "i": 37,
+          "domain": "sec",
+          "gold_name": "query_door_status",
+          "pred": "query_door_location",
+          "raw": "{\"name\":\"query_door_location\",\"arguments\":{\"door\":\"basement door\"}}The following is a list of the most popular and popular websites that are used by the majority of the population.",
+          "ok": false
+        },
+        {
+          "i": 39,
+          "domain": "climate",
+          "gold_name": "schedule_climate_program",
+          "pred": "set_thermostat",
+          "raw": "{\"name\":\"set_thermostat\",\"arguments\":{\"room\":\"master bedroom\",\"temperature_c\":23.3}}The following is a list of the most popular and popular websites that are currently being used by the \"nursery\" comm",
+          "ok": false
+        },
+        {
+          "i": 40,
+          "domain": "blinds",
+          "gold_name": "close_curtains",
+          "pred": "set_blinds_position",
+          "raw": "{\"name\":\"set_blinds_position\",\"arguments\":{\"room\":\"office\",\"position\":50}}The following is a list of the most popular and popular websites that are used by the majority of the population.",
+          "ok": false
+        },
+        {
+          "i": 43,
+          "domain": "sec",
+          "gold_name": "view_camera_stream",
+          "pred": "query_living_room_cam",
+          "raw": "{\"name\":\"query_living_room_cam\",\"arguments\":{\"camera\":\"living room cam\"}}The following is a list of the most popular and popular websites that are used by the majority of the population.",
+          "ok": false
+        }
+      ]
+    },
+    {
+      "repo": "lifeart/smart-home-gpt2-v4",
+      "acc": 0.8333333333333334,
+      "n": 300,
+      "correct": 250,
+      "by_domain": {
+        "misc": {
+          "correct": 60,
+          "total": 72
+        },
+        "clean": {
+          "correct": 23,
+          "total": 29
+        },
+        "light": {
+          "correct": 26,
+          "total": 32
+        },
+        "sec": {
+          "correct": 24,
+          "total": 31
+        },
+        "kit": {
+          "correct": 20,
+          "total": 23
+        },
+        "blinds": {
+          "correct": 19,
+          "total": 26
+        },
+        "media": {
+          "correct": 25,
+          "total": 32
+        },
+        "garden": {
+          "correct": 25,
+          "total": 26
+        },
+        "climate": {
+          "correct": 28,
+          "total": 29
+        }
+      },
+      "elapsed_s": 648.210108757019,
+      "samples": [
+        {
+          "i": 0,
+          "domain": "misc",
+          "gold_name": "activate_scene",
+          "pred": "activate_scene",
+          "raw": "{\"name\":\"activate_scene\",\"arguments\":{\"scene\":\"focus\"}}The following is a list of the top 10 most popular games of all time.",
+          "ok": true
+        },
+        {
+          "i": 1,
+          "domain": "clean",
+          "gold_name": "query_vacuum_battery",
+          "pred": "query_vacuum_battery",
+          "raw": "{\"name\":\"query_vacuum_battery\",\"arguments\":{}}The latest report from the US Department of Energy shows that the US is the world's largest solar power producer, with the US generating 1.3 gigawatts of ",
+          "ok": true
+        },
+        {
+          "i": 2,
+          "domain": "clean",
+          "gold_name": "schedule_vacuum",
+          "pred": "schedule_vacuum",
+          "raw": "{\"name\":\"schedule_vacuum\",\"arguments\":{\"area\":\"whole house\",\"time\":\"07:30\",\"day\":\"weekdays\"}}The following is a list of the top 10 most popular websites for the purpose of ranking the top 10 websites ",
+          "ok": true
+        },
+        {
+          "i": 3,
+          "domain": "light",
+          "gold_name": "toggle_outlet",
+          "pred": "toggle_outlet",
+          "raw": "{\"name\":\"toggle_outlet\",\"arguments\":{\"room\":\"dining room\",\"outlet_name\":\"thermostat\",\"state\":\"on\"}}The latest issue of the New York Times Magazine features a new look at the world of the \"new\" and \"ne",
+          "ok": true
+        },
+        {
+          "i": 4,
+          "domain": "sec",
+          "gold_name": "start_camera_recording",
+          "pred": "start_camera_recording",
+          "raw": "{\"name\":\"start_camera_recording\",\"arguments\":{\"camera\":\"porch cam\"}}The latest issue of the New York Times Magazine features a new look at the world of the \"dinosaur\" and the \"dinosaur\" culture.",
+          "ok": true
+        },
+        {
+          "i": 5,
+          "domain": "kit",
+          "gold_name": "preheat_oven",
+          "pred": "preheat_oven",
+          "raw": "{\"name\":\"preheat_oven\",\"arguments\":{\"temperature_f\":200,\"mode\":\"convection\"}}The following is a list of the top 10 most popular memes.",
+          "ok": true
+        },
+        {
+          "i": 6,
+          "domain": "sec",
+          "gold_name": "view_camera_stream",
+          "pred": "view_camera_stream",
+          "raw": "{\"name\":\"view_camera_stream\",\"arguments\":{\"camera\":\"front door cam\"}}The latest report from the US Department of Agriculture shows that the US is the world's largest producer of genetically modified o",
+          "ok": true
+        },
+        {
+          "i": 7,
+          "domain": "sec",
+          "gold_name": "unlock_door",
+          "pred": "unlock_door",
+          "raw": "{\"name\":\"unlock_door\",\"arguments\":{\"door\":\"back door\"}}The following is a list of the top 10 most popular memes.",
+          "ok": true
+        },
+        {
+          "i": 20,
+          "domain": "sec",
+          "gold_name": "unlock_door",
+          "pred": "query_door_status",
+          "raw": "{\"name\":\"query_door_status\",\"arguments\":{\"door\":\"back door\"}}The following is a list of the top 10 most popular memes.",
+          "ok": false
+        },
+        {
+          "i": 34,
+          "domain": "media",
+          "gold_name": "set_tv_channel",
+          "pred": "set_tv_input",
+          "raw": "{\"name\":\"set_tv_input\",\"arguments\":{\"room\":\"living room\",\"input\":\"ESPN\"}}The latest report from the US Department of Homeland Security shows that the number of Americans who have been killed by the go",
+          "ok": false
+        },
+        {
+          "i": 35,
+          "domain": "blinds",
+          "gold_name": "extend_awning",
+          "pred": "retract_awning",
+          "raw": "{\"name\":\"retract_awning\",\"arguments\":{\"room\":\"bathroom\"}}The following is a list of the top 10 most popular memes.",
+          "ok": false
+        },
+        {
+          "i": 37,
+          "domain": "sec",
+          "gold_name": "query_door_status",
+          "pred": "query_door_name",
+          "raw": "{\"name\":\"query_door_name\",\"arguments\":{\"door\":\"basement door\"}}The latest report from the US Department of Agriculture shows that the US is the world's largest producer of genetically modified organis",
+          "ok": false
+        },
+        {
+          "i": 39,
+          "domain": "climate",
+          "gold_name": "schedule_climate_program",
+          "pred": "set_thermostat",
+          "raw": "{\"name\":\"set_thermostat\",\"arguments\":{\"room\":\"master bedroom\",\"temperature_c\":23.3}}The latest report from the US Department of Agriculture shows that the US is the world's largest producer of genetic",
+          "ok": false
+        },
+        {
+          "i": 40,
+          "domain": "blinds",
+          "gold_name": "close_curtains",
+          "pred": "set_blinds_position",
+          "raw": "{\"name\":\"set_blinds_position\",\"arguments\":{\"room\":\"office\",\"position\":50}}The following is a list of the top 10 most popular memes.",
+          "ok": false
+        },
+        {
+          "i": 43,
+          "domain": "sec",
+          "gold_name": "view_camera_stream",
+          "pred": "query_living_room_cam",
+          "raw": "{\"name\":\"query_living_room_cam\",\"arguments\":{\"camera\":\"living room cam\"}}The latest report from the US Department of Agriculture shows that the US is the world's largest producer of genetically modifi",
+          "ok": false
+        },
+        {
+          "i": 44,
+          "domain": "media",
+          "gold_name": "set_tv_channel",
+          "pred": "turn_off_tv",
+          "raw": "{\"name\":\"turn_off_tv\",\"arguments\":{\"room\":\"living room\"}}The following is a list of the top 10 most popular websites for the purpose of ranking the top 10 websites for the purpose of ranking the top 1",
+          "ok": false
+        }
+      ]
+    },
+    {
+      "repo": "lifeart/smart-home-gpt2-v5",
+      "acc": 0.8433333333333334,
+      "n": 300,
+      "correct": 253,
+      "by_domain": {
+        "misc": {
+          "correct": 61,
+          "total": 72
+        },
+        "clean": {
+          "correct": 25,
+          "total": 29
+        },
+        "light": {
+          "correct": 25,
+          "total": 32
+        },
+        "sec": {
+          "correct": 24,
+          "total": 31
+        },
+        "kit": {
+          "correct": 20,
+          "total": 23
+        },
+        "blinds": {
+          "correct": 19,
+          "total": 26
+        },
+        "media": {
+          "correct": 26,
+          "total": 32
+        },
+        "garden": {
+          "correct": 25,
+          "total": 26
+        },
+        "climate": {
+          "correct": 28,
+          "total": 29
+        }
+      },
+      "elapsed_s": 561.9263377189636,
+      "samples": [
+        {
+          "i": 0,
+          "domain": "misc",
+          "gold_name": "activate_scene",
+          "pred": "activate_scene",
+          "raw": "{\"name\":\"activate_scene\",\"arguments\":{\"scene\":\"focus\"}}The following is a list of the most popular and popular games in the world.",
+          "ok": true
+        },
+        {
+          "i": 1,
+          "domain": "clean",
+          "gold_name": "query_vacuum_battery",
+          "pred": "query_vacuum_battery",
+          "raw": "{\"name\":\"query_vacuum_battery\",\"arguments\":{}}The latest installment of the \"The Walking Dead\" series is set to premiere next week.",
+          "ok": true
+        },
+        {
+          "i": 2,
+          "domain": "clean",
+          "gold_name": "schedule_vacuum",
+          "pred": "schedule_vacuum",
+          "raw": "{\"name\":\"schedule_vacuum\",\"arguments\":{\"area\":\"whole house\",\"time\":\"07:30\",\"day\":\"weekdays\"}}The following is a list of the top 10 most popular websites for the most popular search terms.",
+          "ok": true
+        },
+        {
+          "i": 3,
+          "domain": "light",
+          "gold_name": "toggle_outlet",
+          "pred": "toggle_outlet",
+          "raw": "{\"name\":\"toggle_outlet\",\"arguments\":{\"room\":\"dining room\",\"outlet_name\":\"thermostat\",\"state\":\"on\"}}The latest installment of the \"The Walking Dead\" series is set to premiere next week, and the show is",
+          "ok": true
+        },
+        {
+          "i": 4,
+          "domain": "sec",
+          "gold_name": "start_camera_recording",
+          "pred": "start_camera_recording",
+          "raw": "{\"name\":\"start_camera_recording\",\"arguments\":{\"camera\":\"backyard cam\"}}The latest installment of the \"The Walking Dead\" series is set to premiere next week, and the show is set to be the first to feat",
+          "ok": true
+        },
+        {
+          "i": 5,
+          "domain": "kit",
+          "gold_name": "preheat_oven",
+          "pred": "preheat_oven",
+          "raw": "{\"name\":\"preheat_oven\",\"arguments\":{\"temperature_f\":200,\"mode\":\"convection\"}}The following is a list of the top 10 most popular websites for the most popular search terms.",
+          "ok": true
+        },
+        {
+          "i": 6,
+          "domain": "sec",
+          "gold_name": "view_camera_stream",
+          "pred": "view_camera_stream",
+          "raw": "{\"name\":\"view_camera_stream\",\"arguments\":{\"camera\":\"front door cam\"}}The following is a list of the top 10 most popular websites for the most popular search terms.",
+          "ok": true
+        },
+        {
+          "i": 7,
+          "domain": "sec",
+          "gold_name": "unlock_door",
+          "pred": "unlock_door",
+          "raw": "{\"name\":\"unlock_door\",\"arguments\":{\"door\":\"back door\"}}The following is a list of the most popular and popular games in the genre.",
+          "ok": true
+        },
+        {
+          "i": 20,
+          "domain": "sec",
+          "gold_name": "unlock_door",
+          "pred": "query_door_status",
+          "raw": "{\"name\":\"query_door_status\",\"arguments\":{\"door\":\"back door\"}}The following is a list of the top 10 most popular websites for the most popular search terms.",
+          "ok": false
+        },
+        {
+          "i": 34,
+          "domain": "media",
+          "gold_name": "set_tv_channel",
+          "pred": "set_tv_input",
+          "raw": "{\"name\":\"set_tv_input\",\"arguments\":{\"room\":\"living room\",\"input\":\"ESPN\",\"room\":\"living room\"}}The following is a list of the most popular and popular websites for the iPhone 6.",
+          "ok": false
+        },
+        {
+          "i": 35,
+          "domain": "blinds",
+          "gold_name": "extend_awning",
+          "pred": "retract_awning",
+          "raw": "{\"name\":\"retract_awning\",\"arguments\":{\"room\":\"bathroom\"}}The following is a list of the top 10 most popular websites for the week of the 20th of July.",
+          "ok": false
+        },
+        {
+          "i": 37,
+          "domain": "sec",
+          "gold_name": "query_door_status",
+          "pred": "query_door_name",
+          "raw": "{\"name\":\"query_door_name\",\"arguments\":{\"door\":\"basement door\"}}The following is a list of the top 10 most popular websites for the most popular search terms.",
+          "ok": false
+        },
+        {
+          "i": 39,
+          "domain": "climate",
+          "gold_name": "schedule_climate_program",
+          "pred": "set_thermostat",
+          "raw": "{\"name\":\"set_thermostat\",\"arguments\":{\"room\":\"master bedroom\",\"temperature_c\":19.6}}The following is a list of the top 10 most popular websites for the most popular search terms.",
+          "ok": false
+        },
+        {
+          "i": 40,
+          "domain": "blinds",
+          "gold_name": "close_curtains",
+          "pred": "set_blinds_position",
+          "raw": "{\"name\":\"set_blinds_position\",\"arguments\":{\"room\":\"office\",\"position\":5}}The following is a list of the top 10 most popular websites for the week of the 20th of July.",
+          "ok": false
+        },
+        {
+          "i": 43,
+          "domain": "sec",
+          "gold_name": "view_camera_stream",
+          "pred": "query_living_room_cam",
+          "raw": "{\"name\":\"query_living_room_cam\",\"arguments\":{\"camera\":\"living room cam\"}}The latest installment of the \"The Walking Dead\" series is set to premiere next week, and the show is set to be the first to fe",
+          "ok": false
+        },
+        {
+          "i": 44,
+          "domain": "media",
+          "gold_name": "set_tv_channel",
+          "pred": "turn_off_tv",
+          "raw": "{\"name\":\"turn_off_tv\",\"arguments\":{\"room\":\"living room\"}}The following is a list of the most popular and popular websites for the iPhone 6.",
+          "ok": false
+        }
+      ]
+    }
+  ]
+}
