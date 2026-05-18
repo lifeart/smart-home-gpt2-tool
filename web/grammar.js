@@ -299,12 +299,12 @@ export function buildSchemaConstraint(candidateNames, registry, options = {}) {
         const set = new Set(keys);
         for (const k of regKeys) if (!set.has(k)) keys.push(k);
       }
-      // Iter 8.1: registry may carry mined `enums: {param: [v1,...]}` for
-      // string-typed params. Use those enums regardless of whether the prompt
-      // surfaced the key — the registry is the authoritative enum source for
-      // keys that the prompt schema didn't enumerate. (Prompt enums still win
-      // when present, since prompt-schema is set above before this block.)
-      const regEnums = regEntry.enums || null;
+      // Iter 8.3: do NOT consume registry `enums` here. The mined enums under-
+      // cover the test set on some open-ish params (podcast/station/scene/
+      // start_time/end_time), and applying them as masks forces the model
+      // away from out-of-pool gold values. Iter 8.2 measured -2.67 pp exact
+      // vs Iter 7.4 — reverted. Registry `enums` field is kept as documentation
+      // / future ammo but is not currently fed to the typed-args mask.
       for (const k of regKeys) {
         if (!typesMap.has(k)) {
           const rt = String(regEntry.params[k]).toLowerCase();
@@ -314,18 +314,7 @@ export function buildSchemaConstraint(candidateNames, registry, options = {}) {
           else if (rt === 'boolean' || rt === 'bool') t = 'boolean';
           else if (rt === 'string') t = 'string';
           else t = rt;
-          const regEnum = (regEnums && Array.isArray(regEnums[k]) && regEnums[k].length)
-            ? regEnums[k].slice()
-            : null;
-          typesMap.set(k, { type: t, enum: regEnum });
-        } else {
-          // Prompt-derived entry exists. If prompt did NOT carry an enum but
-          // registry has one, fill it in from the registry. (Prompt enum wins
-          // when both are present.)
-          const cur = typesMap.get(k);
-          if ((!cur.enum || !cur.enum.length) && regEnums && Array.isArray(regEnums[k]) && regEnums[k].length) {
-            typesMap.set(k, { type: cur.type, enum: regEnums[k].slice() });
-          }
+          typesMap.set(k, { type: t, enum: null });
         }
       }
     }

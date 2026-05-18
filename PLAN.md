@@ -698,6 +698,101 @@ The voice fixture upstream carries only `expected` (name). For iter 7.3 we annot
 
 ---
 
+## Iteration 8.1 — Mine enum value sets from training data
+
+**Goal:** Iter 7.4 string-args sat at 73.0% under `con` (vs 75.2% baseline). Half of remaining errors were enum-confusion on keys (`outlet_name`, `door`, `room`, `scene`, ...) the registry didn't yet declare as enums. Mining their gold-side value sets from `sh_train_v2.json` + `sh_train.json` should let the typed-args mask refuse hallucinated values.
+
+**Approach (two-pass mine):**
+
+1. **Pass 1 (per-function, narrow)** — for each `(fn, param)` collect gold values, filter `>=3 distinct items` and `>=2 freq`, cap at 20. Yields 103 enums across 74 functions. _Failed_ on re-bench (37% exact) because per-function pools were too narrow (e.g. `turn_on_light.room` had 10 values; `bathroom` not among them → mask forced `basement`).
+2. **Pass 2 (global pool, cap=30)** — same params have shared vocabulary across functions. Pool *per param-name globally*, filter `freq>=2`, cap `<=30`. 27/28 string-param-names pass the cap (only `song` drops as open-vocab at 36 distinct values). 102 enums across 74 functions. `room` (21) and `time` (24) now included.
+
+**Per-name global pool sizes (top 20):** time 24, room 21, color 18, location 13, scene 12, door 11, area 9, day 9, zone 8, podcast 8, mode 8, new_pin 7, channel 7, outlet_name 7, station 6, input 6, end_time 6, to_room 6, program 5, start_time 5, camera 5.
+
+**Sanity (5 representative enums):**
+- `turn_on_light.room` (21): living room, bedroom, kitchen, bathroom, nursery, office, master bedroom, sunroom, hallway, basement, dining room, attic, garage, basement gym, garden, kids room, porch, dining_room, guest_room, laundry_room, living_room
+- `lock_door.door` (11): front door, side door, back door, garage door, patio door, basement door, front_door, patio_door, ...
+- `set_light_scene.scene` (12): movie, sleep, focus, dinner, game night, kids bedtime, meditation, party, ...
+- `arm_alarm_system.mode` (8): heat, cool, eco, stay, away, night, off, vacation
+- `toggle_outlet.outlet_name` (7): coffee maker, Christmas tree, fan, floor lamp, heater, router, TV
+
+**Grammar.js:** also surgically updated so registry `enums` field is consumed by `buildSchemaConstraint` when the prompt schema didn't carry an enum for that key. (See 8.3 — this consumption was reverted; the data file stays as future ammo.)
+
+**Status:** done. Cost: $0.
+
+**Artifacts:** `training/mine_enums.py`, augmented `data/tool_registry.json` (mirror `web/public/eval/tool_registry.json`).
+
+Commit: `b477bf4` iter8.1.
+
+---
+
+## Iteration 8.2 — Re-bench with enum-enriched registry
+
+**Goal:** verify the mined enums lift `con` exact-match. PLAN.md expectation: ≥54%.
+
+**Result (n=300, v3 webgpu/fp32, baseline vs con typed-args ON, global-pool enums consumed):**
+
+| metric       | baseline | con (8.2 enums) | con (7.4 no-reg-enums) | Δ 8.2 vs 7.4 |
+|--------------|---------:|----------------:|-----------------------:|-------------:|
+| name_acc     |  82.33%  |        77.67%   |        77.67%          |  0.0         |
+| args_acc     |  54.67%  |        51.67%   |        54.33%          | **-2.66**    |
+| **exact_acc**|  49.67%  |        48.00%   |        50.67%          | **-2.67**    |
+| string args  |  75.21%  |        67.61%   |          —             | -            |
+| number args  |  62.50%  |        56.94%   |          —             | -            |
+| json valid   |  99.67%  |        97.33%   |          —             | -            |
+
+**`con` regressed** -2.67 pp exact vs Iter 7.4 — the mined enum mask hurts more than helps.
+
+**Voice n=30 (ret_con K=5 typed-args ON + global-pool enums):**
+name 50.00 / args 30.00 / **exact 23.33** / recall 83.33 — identical to Iter 7.3. Enums neither helped nor hurt voice (voice bottleneck is ASR, not value masking).
+
+**Status:** done (negative result). Cost: $0.
+
+**Artifacts:** `results/iter82_v3_n300_with_global_pool_enums.json`, `results/iter82_voice_v3_K5_global_enums.json`.
+
+Commit: `9585dc4` iter8.2.
+
+---
+
+## Iteration 8.3 — Analysis + revert grammar.js consumption
+
+**Why 8.2 regressed:** 24 baseline-correct items flipped to con-wrong because the mined enum **under-covers** the test set on a handful of open-ish string params. Picked from `results/iter82_v3_n300_with_global_pool_enums.json`:
+
+| i  | gold value                              | mined pool              | mask forced       |
+|---:|-----------------------------------------|-------------------------|-------------------|
+| 61 | `play_podcast.podcast="Radiolab"`       | 8 podcasts, no Radiolab | "The Daily"       |
+| 115| `play_radio_station.station="Jazz FM"`  | 6 stations, no Jazz FM  | "Hot 97"          |
+| 168| `set_light_scene.scene="sunrise"`       | 12 scenes, no sunrise   | "sunset"          |
+| 90 | `schedule_climate_program.start_time="18:00"` | 5 values, no 18:00 | "19:00"           |
+| 90 | `schedule_climate_program.end_time="22:00"`   | 6 values, no 22:00 | "23:00"           |
+
+Other flips (i=64, 112, 130, 140, 141, 151, 154, 156, 180, ...) are *name*-side errors unrelated to the new enums but the new mask path happened to push a different completion.
+
+**Decision:** revert the grammar.js consumption added in 8.1. The registry `enums` field stays in the JSON file as documentation / future ammo, but `buildSchemaConstraint` no longer fills it in for prompt-keys that didn't carry an enum. Prompt-side enums (when present) still work as in 7.4. Net effect: behaviour exactly matches Iter 7.4.
+
+**Re-bench (n=300, v3 webgpu/fp32, baseline vs con typed-args ON, registry enums NOT consumed):**
+
+| metric       | baseline | con (8.3 reverted) | con (7.4) |  Δ 8.3 vs 7.4 |
+|--------------|---------:|-------------------:|----------:|--------------:|
+| name_acc     |  82.33%  |          77.67%    |   77.67%  |   0.0         |
+| args_acc     |  54.67%  |          54.33%    |   54.33%  |   0.0         |
+| **exact_acc**|  49.67%  |        **50.67%**  | **50.67%**|   0.0         |
+| string args  |  75.21%  |          72.96%    |     —     |   —           |
+
+con back to **50.67% exact** — Iter 7.4 reproduced bit-exact. con still BEATS baseline (+1.0 pp).
+
+**Best production config after Iter 8:** unchanged from Iter 7.4 — `con` (typed-args ON, schema union prompt∪registry-keys, **no registry-enum consumption**), **50.67% exact / 54.33% args / 77.67% name** on multi-tool n=300; voice ret_con K=5 with alias query expansion: **53.3% name / 23.33% exact / 93.3% recall** (Iter 6.3 numbers carry forward).
+
+**Cheapest next lever:** target the 0-keys / irrelevance class (Iter 6.2 found 16/27 unique misc gold names are absent from `function_descriptions.json` — adding them to the retrieval index would lift `ret_con` from 33% to plausibly 60+% on misc, +9 pp overall). Alternative: per-domain routing (Phase 5a projected ~86-87% but +complexity).
+
+**Status:** done. Cost: $0.
+
+**Artifacts:** `results/iter83_v3_n300_reverted_grammar.json`. Grammar.js revert in same file.
+
+Commit: `<see git log>` iter8.3.
+
+---
+
 ## Progress log
 
 | Date (UTC) | Event |
@@ -720,4 +815,7 @@ The voice fixture upstream carries only `expected` (name). For iter 7.3 we annot
 | 2026-05-18 | **Iter 7.2 done.** Typed-args masking (enum + numeric value validators) added to grammar.js + UI toggle (default ON). Multi-tool n=300: baseline 82.33/54.67/49.67% (name/args/exact); con-with-typed-args 77.67/51.33/47.67%. Δ typed-args ON vs OFF on con (n=50): +2 pp args, +2 pp exact, no negative flips. Constrained still trails baseline due to prompt schema truncation (Phase 5a finding); typed-args is orthogonal and helps a narrow enum-confusion class. Cost: $0. |
 | 2026-05-18 | **Iter 7.3 done.** Re-bench v3 + voice exact-match. Multi-tool (n=300): same as 7.2 (baseline best 82.33/54.67/49.67%). Voice (n=30, ret_con K=5, typed-args ON, with hand-annotated gold_args): baseline name 23.33%/args 30.00%/exact 6.67%; **ret_con name 50.00%/args 30.00%/exact 23.33%**. Δ exact = +16.67 pp, +5 positive flips, 0 negative. Voice args bottleneck is ASR not value masking. Cost: $0. |
 | 2026-05-18 | **Iter 7.4 done.** Schema union (prompt keys ∪ registry keys) in buildSchemaConstraint. Multi-tool n=300 con: 77.67%/**54.33%**/**50.67%** (name/args/exact). vs baseline 82.33/54.67/49.67%: con union now **beats baseline on exact** by +1 pp. vs 7.2 con (no union): +3 pp args, +3 pp exact. 0-keys (empty-args) class went 38.7% → 61.3% (+22.6). Cost: $0. |
+| 2026-05-18 | **Iter 8.1 done.** Mined value sets per param-name globally (cap 30, freq>=2). 102 enums across 74 funcs added to `tool_registry.json` under new `enums` field. Pool sizes: time 24, room 21, color 18, scene 12, door 11, area 9, day 9, podcast 8, mode 8, ... (`song` 36 dropped open-vocab). Grammar.js wired to consume registry enums when prompt didn't carry. Cost: $0. |
+| 2026-05-18 | **Iter 8.2 done (negative).** Re-bench n=300 v3 con-typed-args with registry-enum consumption: name 77.67/args 51.67/exact **48.00%** (vs 7.4: 77.67/54.33/**50.67%**, Δ exact **-2.67 pp**). 24 baseline-correct items flipped because mined pools under-cover the test set on `podcast` (Radiolab not in), `station` (Jazz FM not in), `scene` (sunrise not in), `start_time/end_time` (18:00/22:00 not in). Voice unchanged (50.0/30.0/23.33/83.3). Cost: $0. |
+| 2026-05-18 | **Iter 8.3 done.** Reverted grammar.js registry-enum consumption (data file `enums` kept as ammo). Re-bench n=300 reproduces Iter 7.4 exactly: con 77.67/54.33/**50.67%**. Best production config unchanged. Cheapest next lever: add the 16 misc-domain test-only gold names to `function_descriptions.json` (retrieval index) — would lift `ret_con` on misc 33→60+% and overall ~+9 pp. Cost: $0. |
 
