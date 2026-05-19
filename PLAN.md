@@ -1339,3 +1339,94 @@ cross-domain checkpoint and acknowledge in-domain ceiling at ~57-58% exact-match
 on 124M GPT-2.
 
 **Project loop closed at iter20 unless user requests iter21 fix-loop.**
+
+## Iter 21 — Selective Granite v10 (rejected)
+
+v10 = v6r×3 (Granite on SH only) + non-SH×1 + HA×1 + Nemotron×1 = 56689 rows.
+Train l40sx1 bf16 ep1. HF in-domain regressed further (worse than v9). v10
+removed from contention; not browser-benched.
+
+## Iter 22 — Two parallel hypotheses tested
+
+### Hypothesis A: v9 + polish stack beats v5 + polish (browser bench)
+
+Browser bench v9, n=300, webgpu/fp32, typedArgs=true, wideNames=true, 17.1 min:
+
+| Mode      | name  | args  | exact | json  |
+|-----------|-------|-------|-------|-------|
+| baseline  | 81.0% | 20.7% | 17.0% | 100%  |
+| **con**   | 82.0% | 59.3% | **56.3%** | 99.7% |
+| ret       | 72.3% | 13.0% | 10.7% | 100%  |
+| ret_con   | 72.7% | 50.0% | 44.3% | 96.3% |
+
+`gold_in_topK = 89.7%` (retrieval recall good).
+
+Per-domain exact (con): sec 71, garden 77, blinds 62, media 63, light 59,
+kit 57, misc 50, climate 48, **clean 31** (Granite curriculum's vacuum
+regression confirmed on browser too).
+
+**Verdict A: FAILED.** 56.3% exact < 60% gate, AND -1.0 pp vs v5's 57.33%.
+v9 is NOT the new ship config for the gate metric.
+
+### Hypothesis B: pure data scaling (no Granite) lifts v6
+
+v11 = v6 (20600) + HA (2021) + Nemotron (4958) = 27579 rows, single variant.
+Train l40sx1 bf16 batch 8 ep1, 11.9 min. Job `6a0c084be7940de6ee6cf7bd`.
+
+HF in-domain (n=300, name-only via regex):
+- v6  84.0%
+- **v11 79.0%** (-5.0 pp regression)
+
+v11 per-domain: light 69 (-9), misc 78 (-7), clean 79 (-7), sec 71 (-6),
+blinds 69 (-4), kit 83 (-4), climate 93 (-4), garden 96 (=), media 78 (=).
+Hurt 7/9 domains.
+
+HF cross-domain (n=100 fresh_bench):
+- v6  86.0%
+- v9  91.0% (still champion)
+- **v11 86.0%** (=v6, no improvement)
+
+**Verdict B: FAILED.** Pure data scaling did NOT help. Implication: HA+Nemotron
+data itself dilutes in-domain prior; v9's cross-domain win came from Granite
+curriculum *applied to* that data, not the data alone.
+
+### Final ship-config table
+
+| Goal                    | Ship config           | Metric         |
+|-------------------------|-----------------------|----------------|
+| Highest browser exact   | v5 + con              | 57.3% exact    |
+| Best in-domain HF name  | v6                    | 84.0%          |
+| Best cross-domain (OOD) | v9 + con              | 91.0%          |
+
+The **60% browser-exact gate is unreached** on GPT-2 124M with any tested
+config. Best is v5 at 57.3% — within 2.7 pp but not over.
+
+### Cost (iter 22)
+- v11 dataset build (local): $0
+- v11 train l40sx1 11.9 min: ~$0.30
+- v11 HF in-domain bench t4 ~10 min: ~$0.05
+- v11+v9 HF cross bench t4 ~10 min: ~$0.05
+- Browser bench v9: $0
+- (Cancelled duplicate t4 jobs: 4 jobs × ~30 sec scheduling = ~$0.01)
+- **Iter 22 total: ~$0.45.** Well within $1 cap.
+- **Cumulative project spend: ~$13.30** (Iter 1-21: ~$12.85 + Iter 22: $0.45).
+
+### Project verdict
+
+Both Iter 22 hypotheses FAILED. Combined with Iter 20/21 results, all
+investigated levers for crossing the 60% browser-exact gate on 124M GPT-2
+have been exhausted:
+- Synthetic data scaling (v2, v3, v4, v5): plateau at 55-57% exact
+- fresh_bench universal mix (v6): in-domain win, no exact lift
+- ToolACE/xLAM/Glaive breadth (v7): regressed cross-domain
+- Llama-70B label refinement (v8): noise floor removal, no args lift
+- Granite 3-way curriculum + external (v9): cross-domain win, in-domain regression
+- Selective Granite SH-only (v10): worse than v9
+- Pure data scaling no Granite (v11): in-domain regression, flat cross-domain
+
+The 60% exact gate is a ceiling for 124M GPT-2 on this task. Next step
+for a serious gate crossing would require a larger base model (GPT-2 medium
+355M or modern 0.5-1B base), which is out of scope at the established
+~$13 project budget.
+
+**Project closed.** Final ship configs documented above per use case.
