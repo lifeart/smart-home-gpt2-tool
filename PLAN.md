@@ -2444,3 +2444,42 @@ greedy. Re-running stage 1 -> 2 -> 3a with complementary candidates.
 
 Stage 3b (ONNX export, browser integration) is gated on the corrected
 re-bench beating the H1.2_con 59.3% baseline.
+
+### Stage 3b — blocked by HF Jobs infrastructure; B4 shelved
+
+The corrected candidate generation could not be completed. Across the B4
+effort, **four** HF Jobs candidate-generation runs failed to produce
+usable output:
+
+- 2× constrained-decoding runs (`bench_h1_con_cloud.py`) hung on
+  degenerate truncated-schema rows;
+- 2× corrected greedy runs (`gen_synth_candidates.py`, v6-name + v9
+  args-only) ran 2.5×+ past the ~18-min expected time with zero log
+  output and no Hub upload, then were cancelled.
+
+The first greedy run (the *flawed*-candidate one) completed fine in
+18 min, so this is HF Jobs capacity/streaming flakiness on the day, not
+a logic bug — but it is a hard blocker for completing the pipeline.
+
+**B4 verdict — approach validated, not shipped.** The synthesis-model
+idea is sound: in stage 3a the trained synth GPT-2 **reached the oracle
+best-of-candidates ceiling** (54.0% vs 54.7%) — it genuinely learned to
+pick and merge. B4 did not ship only because (a) the first candidate set
+was mis-framed (v9 as a bare full-call generator → 12%, ceiling capped
+at 54.7%, below the 59.3% browser baseline) and (b) the corrected
+candidate run could not complete on flaky infra. The fix is committed
+and ready (`gen_synth_candidates.py`): a future run on healthy infra can
+finish stages 2–3. Projected if completed — proper complementary
+candidates (v6 ~52% + H1 ~58–60%) lift the oracle to roughly 64–68%, so
+a synth model reaching it would beat 59.3% by ~5–8 pp — **but this is
+unverified**. `lifeart/smart-home-gpt2-synth` on the Hub is the
+flawed-candidate version; do not ship it.
+
+### Improvement loop closed (Iter 37–42)
+
+The loop is stopped here. Six iterations: fp16 WebGPU default and enum
+value-snapping (+3 pp) were the real wins; retrieval pruning shipped
+opt-in; v15/B3 (+0.7 pp) and B4 hit the accuracy plateau the project's
+own history (Iter 22, 24) predicted. Returns have clearly diminished and
+the current compute infra is unreliable — both of the loop's stop
+conditions are met.

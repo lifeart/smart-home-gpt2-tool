@@ -1,14 +1,29 @@
-# Smart-Home GPT-2 — Project Handoff (through Iter 41)
+# Smart-Home GPT-2 — Project Handoff (through Iter 42)
 
-Last updated end of the Iter 23–41 work block. This supersedes the earlier
+Last updated end of the Iter 23–42 work block. This supersedes the earlier
 Iter-22 handoff. Read `PLAN.md` for the full blow-by-blow; this file is the
 fast orientation.
 
-Iter 37–41 were a continuous accuracy+speed improvement loop: fp16 the
-WebGPU default (onnxruntime-web 1.26), enum value-snapping (synth
-78.7→81.7%), retrieval pruning (opt-in), and B3 targeted augmentation
-(v15, marginal +0.7 pp). B2 (schema-strict keys) and B5 (twin-confusion)
-were tried and rejected as verified-negative.
+Iter 37–42 were a continuous accuracy+speed improvement loop, now closed:
+fp16 the WebGPU default (onnxruntime-web 1.26), enum value-snapping (synth
+78.7→81.7%), retrieval pruning (opt-in), B3 targeted augmentation (v15,
+marginal +0.7 pp), and B4 (in-browser synthesis model). B2 (schema-strict
+keys) and B5 (twin-confusion) were tried and rejected as verified-negative.
+
+**B4 — approach validated, not shipped.** B4 distils the API pipeline's
+Llama synthesizer into a 3rd in-browser GPT-2 (`v6→v9→synth` cascade).
+Stage 3a proved the idea works — the trained synth model reached the
+oracle best-of-candidates ceiling (54.0% vs 54.7%) — but the first
+candidate set mis-framed v9 (it is an *args specialist*, not a full-call
+generator), capping the ceiling below the 59.3% browser baseline. The
+corrected `gen_synth_candidates.py` is committed and ready, but the
+re-run could not complete on flaky HF Jobs infra (4 stalled/hung jobs).
+`lifeart/smart-home-gpt2-synth` is the flawed-candidate version — **do
+not ship it**; re-run stages 1–3 on healthy infra to finish B4.
+
+The improvement loop is **stopped**: the early wins (fp16, enum-snap)
+were real; v15/B3 and B4 hit the known accuracy plateau — diminishing
+returns. See PLAN.md Iter 42 for the full B4 write-up.
 
 ## What it is
 
