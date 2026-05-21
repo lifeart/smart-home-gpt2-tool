@@ -264,17 +264,19 @@ def main() -> None:
         print(f"  {r['tag']:<6} {r['name_acc']*100:7.1f}% {r['args_acc']*100:7.1f}% "
               f"{r['exact_acc']*100:7.1f}%   {r['elapsed_s']:.0f}s")
 
-    out = Path("onnx_dtype_bench.json")
+    # model-specific filename so benching a new model never clobbers an
+    # earlier model's dtype results on the Hub
+    out = Path(f"onnx_dtype_bench_{MODEL_REPO.split('/')[-1]}.json")
     out.write_text(json.dumps({"model": MODEL_REPO, "n": len(test), "results": results}, indent=2))
     print(f"\n[save] {out}")
     if os.environ.get("HF_TOKEN") or os.environ.get("HUGGING_FACE_HUB_TOKEN"):
         try:
             HfApi().upload_file(
-                path_or_fileobj=str(out), path_in_repo="onnx_dtype_bench.json",
+                path_or_fileobj=str(out), path_in_repo=out.name,
                 repo_id=DATA_REPO, repo_type="dataset",
                 commit_message="ONNX fp32/fp16/q8 accuracy bench on sh_test",
             )
-            print(f"[push] -> {DATA_REPO}/onnx_dtype_bench.json")
+            print(f"[push] -> {DATA_REPO}/{out.name}")
         except Exception as e:
             print(f"[push] failed: {e}")
 

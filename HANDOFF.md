@@ -69,11 +69,13 @@ long rows). Result: the short-prompt tax is erased (+2.3 pp over v9) and
 long-context accuracy is genuinely high. The Iter 35 "−1.8 pp per 2×
 stretch" tax was an artifact of whole-table interpolation, not inherent.
 
-### ONNX dtype accuracy (v9, n=300)
+### ONNX dtype accuracy (n=300)
 
-fp16 ≈ fp32 (lossless, half the download); q8 loses ~3 pp name accuracy.
-Raw-greedy args/exact numbers are too brittle to compare — use name acc.
-Full data: `lifeart/smart-home-sft-v2/onnx_dtype_bench.json`.
+fp16 is **lossless** vs fp32; q8 loses ~3 pp name accuracy. Confirmed on
+both models — v9: fp16/fp32 both 81.0% name; v14-ctx4096: fp16/fp32 both
+83.3% name, q8 80.0%. Raw-greedy args/exact numbers are too brittle to
+compare (q8 nonsensically scores them *higher*) — use name accuracy. Data:
+`lifeart/smart-home-sft-v2/onnx_dtype_bench{,_smart-home-gpt2-v14-ctx4096}.json`.
 
 ## The browser demo (`web/`) — current state
 
