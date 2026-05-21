@@ -1,8 +1,14 @@
-# Smart-Home GPT-2 — Project Handoff (through Iter 36)
+# Smart-Home GPT-2 — Project Handoff (through Iter 41)
 
-Last updated end of the Iter 23–36 work block. This supersedes the earlier
+Last updated end of the Iter 23–41 work block. This supersedes the earlier
 Iter-22 handoff. Read `PLAN.md` for the full blow-by-blow; this file is the
 fast orientation.
+
+Iter 37–41 were a continuous accuracy+speed improvement loop: fp16 the
+WebGPU default (onnxruntime-web 1.26), enum value-snapping (synth
+78.7→81.7%), retrieval pruning (opt-in), and B3 targeted augmentation
+(v15, marginal +0.7 pp). B2 (schema-strict keys) and B5 (twin-confusion)
+were tried and rejected as verified-negative.
 
 ## What it is
 
@@ -17,7 +23,7 @@ position-embedding table size.
 |---|---|
 | Code | `/Users/lifeart/Repos/gpt-tool` · GitHub `lifeart/smart-home-gpt2-tool` |
 | Iteration log | `PLAN.md` (~2100 lines — every iteration, numbers, verdicts) |
-| Models | HF Hub `lifeart/smart-home-gpt2-v{1..11}`, `-v6r-args[-v2]`, `-v12-ctx2048`, `-v13-ctx4096`, `-v14-ctx4096` |
+| Models | HF Hub `lifeart/smart-home-gpt2-v{1..11}`, `-v6r-args[-v2]`, `-v12-ctx2048`, `-v13-ctx4096`, `-v14-ctx4096` (ship), `-v15` (Iter 41, marginal) |
 | Datasets + results | HF Hub `lifeart/smart-home-sft-v2` (dataset repo) |
 | Browser demo | `web/` (Vite + transformers.js) — `cd web && npm run dev` → http://localhost:5173/ |
 | Training/bench scripts | `training/` |
