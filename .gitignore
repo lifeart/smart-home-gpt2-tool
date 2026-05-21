@@ -31,3 +31,5 @@ data/sh_train_v6r_args.json
 data/sh_train_v7_additions_r.raw.json
 data/sh_train_v14_long.json
 data/sh_train_v15.json
+data/sh_synth_src.json
+data/sh_train_synth.json

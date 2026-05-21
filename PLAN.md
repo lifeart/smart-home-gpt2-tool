@@ -2377,3 +2377,40 @@ doesn't justify swapping v15 in for v9 in the pipeline. v15 is pushed
 ### Files (iter 41)
 - `training/build_v15_targeted.py` — failure-driven targeted data generator.
 - `training/train_hf_v15.py` — continued-finetune-from-v9 SFT script.
+
+## Iter 42 — improvement loop: B4 in-browser synthesis model (synth cascade)
+
+Loop iteration 7. B4 (accuracy report idea, chosen by the user): distill
+the API pipeline's Llama synthesizer into a 3rd in-browser GPT-2. The API
+pipeline runs v6/v9 candidates → a Llama synthesizer that picks/merges/
+corrects → 81.7%. The browser had no synthesizer (H1.2_con cascade, 59.3%
+exact-match). B4 adds a `synth` GPT-2 trained to do the synthesis job — on
+**true gold**, so its ceiling is the data, not the Llama teacher — making
+the browser cascade v6 → v9 → **synth**, fully offline.
+
+### Stage 1 — candidate generation (`gen_synth_candidates.py`)
+v6 + v9 greedy `model.generate` over 2,500 clean full-schema source rows
+(`sh_synth_src.json`) → per-row candidate calls. First built on
+constrained decoding (`bench_h1_con_cloud.py`) — it hung twice on
+degenerate rows and was unmonitorable; replaced with plain KV-cached
+greedy decode: ~18 min, robust, v6 parsed 96.2%, v9 98.2%.
+→ `b4_synth_candidates.json`.
+
+### Stage 2 — distillation set + training
+`build_synth_distill.py` turns each row into a synth example: the prompt
+gets a CANDIDATES evidence block (v6 call + v9 call, labelled) inserted
+right before the ASSISTANT marker — so left-truncation on long schemas
+always keeps the evidence. Target = the true gold call. 2,500 rows.
+Notable: a raw candidate already exactly matches gold only **40.9%** of
+the time — the synth model has to genuinely correct, not just copy.
+`train_hf_synth.py` continues the fine-tune from v9 (3 epochs, lr 3e-5,
+L40s) → `lifeart/smart-home-gpt2-synth`.
+
+### Files (iter 42)
+- `training/gen_synth_candidates.py` — fast greedy candidate generator.
+- `training/build_synth_distill.py` — distillation-set builder.
+- `training/train_hf_synth.py` — synth model SFT (continued from v9).
+- `training/bench_h1_con_cloud.py` — `TEST_FILE` / `RESULT_FILE` env vars.
+
+Stage 3 (ONNX export, browser cascade integration, browser-only bench)
+follows below once the synth model finishes training.

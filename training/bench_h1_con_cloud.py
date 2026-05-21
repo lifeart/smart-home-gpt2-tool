@@ -829,8 +829,9 @@ def main() -> None:
         print(f"[cuda] {torch.cuda.get_device_name(0)}  "
               f"mem={torch.cuda.get_device_properties(0).total_memory/1e9:.1f} GB")
 
-    print(f"[data] sh_test.json + tool_registry.json from {DATA_REPO}")
-    test = fetch_dataset_json("sh_test.json")
+    test_file = os.environ.get("TEST_FILE", "sh_test.json")
+    print(f"[data] {test_file} + tool_registry.json from {DATA_REPO}")
+    test = fetch_dataset_json(test_file)
     registry = fetch_dataset_json("tool_registry.json")
     if LIMIT and LIMIT < len(test):
         test = test[:LIMIT]
@@ -952,10 +953,10 @@ def main() -> None:
             api = HfApi()
             api.upload_file(
                 path_or_fileobj=str(out_path),
-                path_in_repo="iter23_h1_con_results.json",
+                path_in_repo=os.environ.get("RESULT_FILE", "iter23_h1_con_results.json"),
                 repo_id=DATA_REPO,
                 repo_type="dataset",
-                commit_message="iter23 H1.2 constrained bench (v6+v9)",
+                commit_message="H1.2 constrained candidates (v6+v9)",
             )
             print(f"[push] -> {DATA_REPO}")
         except Exception as e:
