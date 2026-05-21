@@ -2412,5 +2412,35 @@ L40s) → `lifeart/smart-home-gpt2-synth`.
 - `training/train_hf_synth.py` — synth model SFT (continued from v9).
 - `training/bench_h1_con_cloud.py` — `TEST_FILE` / `RESULT_FILE` env vars.
 
-Stage 3 (ONNX export, browser cascade integration, browser-only bench)
-follows below once the synth model finishes training.
+### Stage 3a — value bench (`bench_synth_cloud.py`) — exposed a candidate flaw
+
+Before ONNX-exporting and wiring three models into the browser, benched
+whether the synth model adds value. Raw parsed-dict exact-match,
+sh_test.json n=300:
+
+| Condition | Exact-match |
+|---|---|
+| v6 greedy full-call (candidate A) | 52.0% |
+| v9 greedy full-call (candidate B) | **12.0%** |
+| oracle best-of(v6, v9) | 54.7% |
+| synth (v6->v9->synth) | 54.0% |
+
+The synth model did its job — it **reached the oracle ceiling** (54.0 vs
+54.7) — but the ceiling was only 54.7% because **candidate B was broken**.
+v9 scored 12% because it is an *arguments specialist*: the H1.2_con
+cascade always prompts it with `build_args_only_prompt` (function name
+hinted, "output the arguments only"). Run as a bare full-call generator
+it is near-useless, so the synth model was trained on one decent
+candidate + one noise candidate — synthesis had nothing to synthesize.
+
+**Root cause, not a dead end.** `gen_synth_candidates.py` was corrected:
+candidate A stays v6's greedy full call; candidate B is now v6's name +
+v9 args-only (the genuine H1 cascade output), all via robust KV-cached
+greedy. Re-running stage 1 -> 2 -> 3a with complementary candidates.
+
+### Files (iter 42, stage 3a)
+- `training/bench_synth_cloud.py` — v6/v9/oracle/synth value bench.
+- `training/gen_synth_candidates.py` — corrected candidate B framing.
+
+Stage 3b (ONNX export, browser integration) is gated on the corrected
+re-bench beating the H1.2_con 59.3% baseline.
