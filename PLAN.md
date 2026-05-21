@@ -2285,3 +2285,29 @@ synthesizer got semantically right (underscore room forms, "gym" vs
 - `training/bench_h1p11_synth.py` — `cscore` enum-snaps via the registry.
 
 Next: port `snap_enums` to `web/canon.js` so the browser config benefits.
+
+## Iter 39 — improvement loop: enum-snap in the browser; B2 rejected
+
+Loop iteration 3.
+
+**B2 (schema-strict key enforcement) — verified negative, dropped.** The
+accuracy report's idea: drop predicted argument keys not in the function's
+`tool_registry.json` `params`. Re-scoring the cached synth-v2 BEST run with
+prediction-side key-stripping: **81.67% → 76.67% (−5 pp), 15 regressions,
+0 gains.** Root cause: `tool_registry.json`'s `params` are *incomplete* —
+25 gold argument keys across the test set are absent from their function's
+`params`, so a whitelist strips correct keys. B2's "low risk" assumed a
+complete schema; it isn't. Not shipped. ($0, caught by verification.)
+
+**Shipped: enum value-snapping ported to the browser.** Iter 38's
+`snap_enums` was Python-only (synthesis pipeline). Ported to `web/canon.js`
+(`snapEnums`, `snapEnumValue`, `canonicalizeCall`) and wired into
+`main.js` `renderParsedCall` — the demo's "Parsed tool call" now enum-snaps
+predicted values using the tool registry, so the browser-native config
+gets the same normalization. The JS port was node-tested for equivalence
+with the Python (`gym` → `basement gym`, `living_room` → `living room`)
+and smoke-tested in-browser (WebGPU/fp16). $0.
+
+### Files (iter 39)
+- `web/canon.js` — `snapEnums` / `snapEnumValue` / `canonicalizeCall`.
+- `web/main.js` — `renderParsedCall` is async, enum-snaps via the registry.

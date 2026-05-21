@@ -18,7 +18,7 @@ import {
 } from './retrieval.js';
 import { PRESETS, PRESET_LIST } from './presets.js';
 import { MODEL_CARDS, TOGGLE_HELP, BENCH_LEGEND, FOOTER, DTYPE_NOTES } from './help.js';
-import { canonicalizeArgs } from './canon.js';
+import { canonicalizeCall } from './canon.js';
 import { startRecording, stopRecording, isRecording, transcribe } from './voice.js';
 import './bench.js';
 import './voice_bench.js';
@@ -248,7 +248,7 @@ async function generate() {
   // Parse the generated tool call and show a canonicalized version. This is
   // a pure browser-side post-process (training/canon.py port) — normalizes
   // value formats (12h→24h time, day plural, float rounding). No API.
-  renderParsedCall(outEl.textContent);
+  await renderParsedCall(outEl.textContent);
 
   setStatus('done');
   runBtn.disabled = false;
@@ -292,7 +292,10 @@ function escapeHtml(s) {
 }
 
 // Render the parsed + canonicalized tool call under the raw output.
-function renderParsedCall(rawText) {
+// Async because enum-snapping (Iter 38) needs the tool registry, which is
+// lazy-fetched. If the registry can't load, snapping is skipped — value
+// canonicalization still runs.
+async function renderParsedCall(rawText) {
   const el = $('synth-out');
   if (!el) return;
   const call = parseToolCall(rawText);
@@ -300,13 +303,22 @@ function renderParsedCall(rawText) {
     el.innerHTML = '<div class="synth-card synth-err">Could not parse a valid tool call from the output.</div>';
     return;
   }
-  const canon = { name: call.name, arguments: canonicalizeArgs(call.arguments) };
+  let registry = null;
+  try {
+    registry = await getRegistry();
+  } catch (e) {
+    console.warn('[canon] registry unavailable, skipping enum-snap:', e);
+  }
+  const canon = {
+    name: call.name,
+    arguments: canonicalizeCall(call.name, call.arguments, registry),
+  };
   const same = JSON.stringify(call.arguments) === JSON.stringify(canon.arguments);
   el.innerHTML = `
     <div class="synth-card">
       <div class="synth-title">Parsed tool call</div>
       <div class="synth-final"><code>${escapeHtml(canon.name)}</code> ${escapeHtml(JSON.stringify(canon.arguments))}</div>
-      ${same ? '' : '<div class="synth-sub">↑ argument values canonicalized (time → 24h, day → singular, numbers rounded)</div>'}
+      ${same ? '' : '<div class="synth-sub">↑ argument values normalized (enum-snapped, time → 24h, day → singular, numbers rounded)</div>'}
     </div>`;
 }
 

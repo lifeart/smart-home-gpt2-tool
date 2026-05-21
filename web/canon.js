@@ -86,3 +86,46 @@ export function canonicalizeArgs(args) {
   }
   return out;
 }
+
+// --- Enum value snapping (JS port of canon.py snap_enums, Iter 38) -------
+// Snap a predicted argument value to its tool_registry enum member:
+// "gym" -> "basement gym", "living_room" -> "living room". Verified +3 pp
+// on the synthesis pipeline (PLAN.md Iter 38). Three conservative levels —
+// case-insensitive exact, underscore/space-insensitive, unique substring.
+
+function loose(s) {
+  return s.trim().toLowerCase().replace(/[\s_]+/g, ' ');
+}
+
+export function snapEnumValue(v, enumList) {
+  if (typeof v !== 'string' || !Array.isArray(enumList) || enumList.length === 0) {
+    return v;
+  }
+  const lv = loose(v);
+  for (const e of enumList) {
+    if (typeof e === 'string' && loose(e) === lv) return e;
+  }
+  const subs = enumList.filter(
+    (e) => typeof e === 'string' && (loose(e).includes(lv) || lv.includes(loose(e))),
+  );
+  return subs.length === 1 ? subs[0] : v;
+}
+
+export function snapEnums(name, args, registry) {
+  if (!args || typeof args !== 'object' || Array.isArray(args)) return {};
+  let enums = {};
+  if (typeof name === 'string' && registry && typeof registry === 'object') {
+    enums = (registry[name] || {}).enums || {};
+  }
+  const out = {};
+  for (const [k, v] of Object.entries(args)) {
+    out[k] = k in enums ? snapEnumValue(v, enums[k]) : v;
+  }
+  return out;
+}
+
+// Full prediction post-process: enum-snap (if a registry is given) then
+// value canonicalization.
+export function canonicalizeCall(name, args, registry) {
+  return canonicalizeArgs(registry ? snapEnums(name, args, registry) : args);
+}
