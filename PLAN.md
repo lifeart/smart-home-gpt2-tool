@@ -2346,3 +2346,34 @@ is node-unit-tested (correct filtering, prompt shrink, clean no-ops).
 - `web/main.js` — retrieval toggle prunes schemas instead of names-only.
 - `web/index.html` — retrieval-K default 3 → 8.
 - `training/verify_retrieval_recall.py` — MiniLM recall@K verification.
+
+## Iter 41 — improvement loop: B3 targeted augmentation (v15) — marginal
+
+Loop iteration 6. B3 (accuracy report idea #6): failure-driven targeted
+augmentation. v15 = v9 continued one epoch on `sh_train_v15` — v9's full
+78k curriculum + 2,633×3 targeted rows teaching implication-style
+inference (`build_v15_targeted.py`): climate mode ("it's freezing"→heat),
+light state ("kill the lights"→off), awning/curtain polarity ("deploy
+the awning"→extend). Additive — never replacing v9 data (the Iter-24 trap).
+
+**Bench** (`bench_hf.py`, name accuracy, n=300 `sh_test`):
+
+| Model | Name acc | climate | light | blinds | misc |
+|---|---|---|---|---|---|
+| v9  | 81.0% (243) | 93.1% | 75.0% | 69.2% | 86.1% |
+| v15 | 81.7% (245) | 96.6% | 78.1% | 73.1% | 84.7% |
+
+**Verdict — marginal +0.7 pp.** The targeted domains moved exactly as
+designed: climate +3.5, light +3.1, blinds +3.9 — the failure-driven data
+hit its mark. But misc regressed −1.4 pp and ate most of the gain; net is
++2 rows, within noise. This is the near-plateau the project's own history
+predicted (Iter 22 "data scaling did NOT help"; Iter 24 v6r-args
+*regressed*). The failure-driven + additive framing avoided an outright
+regression and genuinely lifted the three targeted domains — but the net
+doesn't justify swapping v15 in for v9 in the pipeline. v15 is pushed
+(`lifeart/smart-home-gpt2-v15`) and kept as a reference. Cost: ~$3 train +
+~$0.15 bench.
+
+### Files (iter 41)
+- `training/build_v15_targeted.py` — failure-driven targeted data generator.
+- `training/train_hf_v15.py` — continued-finetune-from-v9 SFT script.
