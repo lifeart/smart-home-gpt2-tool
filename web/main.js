@@ -16,12 +16,18 @@ import {
   rewriteCandidateList,
   getOrBuildIndex,
 } from './retrieval.js';
-import { PRESETS } from './presets.js';
-import { MODEL_CARDS, TOGGLE_HELP, BENCH_LEGEND, FOOTER } from './help.js';
+import { PRESETS, PRESET_LIST } from './presets.js';
+import { MODEL_CARDS, TOGGLE_HELP, BENCH_LEGEND, FOOTER, DTYPE_NOTES } from './help.js';
+import { canonicalizeArgs } from './canon.js';
+import { startRecording, stopRecording, isRecording, transcribe } from './voice.js';
 import './bench.js';
 import './voice_bench.js';
 
+// Model resolution: transformers.js probes the local path first
+// (web/public/models/<id>) and, if it isn't there, downloads from the HF Hub.
+// Both flags on = "use local if present, else fetch from Hugging Face".
 env.allowLocalModels = true;
+env.allowRemoteModels = true;
 env.localModelPath = '/models/';
 
 // Lazy-loaded tool registry (for constrained decoding).
@@ -54,13 +60,10 @@ function detectWebGPU() {
 }
 
 async function load() {
-  let model_id = $('model').value;
+  const model_id = $('model').value;
   const device = $('device').value;
   const dtype = $('dtype').value;
-  const isLocal = model_id.startsWith('local:');
-  if (isLocal) model_id = model_id.slice('local:'.length);
-  env.allowRemoteModels = !isLocal;
-  const key = `${(isLocal ? 'local:' : '') + model_id}|${device}|${dtype}`;
+  const key = `${model_id}|${device}|${dtype}`;
   if (key === loadedKey) {
     setStatus('already loaded');
     return;
@@ -241,8 +244,70 @@ async function generate() {
     );
   }
   benchEl.textContent = lines.join('\n');
+
+  // Parse the generated tool call and show a canonicalized version. This is
+  // a pure browser-side post-process (training/canon.py port) — normalizes
+  // value formats (12h→24h time, day plural, float rounding). No API.
+  renderParsedCall(outEl.textContent);
+
   setStatus('done');
   runBtn.disabled = false;
+}
+
+// Extract the first balanced {...} JSON object, parse to {name, arguments}.
+function parseToolCall(text) {
+  if (!text) return null;
+  const start = text.indexOf('{');
+  if (start === -1) return null;
+  let depth = 0, inStr = false, esc = false;
+  for (let i = start; i < text.length; i++) {
+    const c = text[i];
+    if (esc) { esc = false; continue; }
+    if (c === '\\' && inStr) { esc = true; continue; }
+    if (c === '"') { inStr = !inStr; continue; }
+    if (inStr) continue;
+    if (c === '{') depth++;
+    else if (c === '}') {
+      depth--;
+      if (depth === 0) {
+        try {
+          const obj = JSON.parse(text.slice(start, i + 1));
+          if (obj && typeof obj === 'object') {
+            return {
+              name: typeof obj.name === 'string' ? obj.name : null,
+              arguments: (obj.arguments && typeof obj.arguments === 'object') ? obj.arguments : {},
+            };
+          }
+        } catch { /* not valid JSON yet */ }
+        return null;
+      }
+    }
+  }
+  return null;
+}
+
+function escapeHtml(s) {
+  return String(s).replace(/[&<>"]/g, (c) =>
+    ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+}
+
+// Render the parsed + canonicalized tool call under the raw output.
+function renderParsedCall(rawText) {
+  const el = $('synth-out');
+  if (!el) return;
+  const call = parseToolCall(rawText);
+  if (!call || !call.name) {
+    el.innerHTML = '<div class="synth-card synth-err">Could not parse a valid tool call from the output.</div>';
+    return;
+  }
+  const canon = { name: call.name, arguments: canonicalizeArgs(call.arguments) };
+  const same = JSON.stringify(call.arguments) === JSON.stringify(canon.arguments);
+  el.innerHTML = `
+    <div class="synth-card">
+      <div class="synth-title">Parsed tool call</div>
+      <div class="synth-final"><code>${escapeHtml(canon.name)}</code> ${escapeHtml(JSON.stringify(canon.arguments))}</div>
+      ${same ? '' : '<div class="synth-sub">↑ argument values canonicalized (time → 24h, day → singular, numbers rounded)</div>'}
+    </div>`;
 }
 
 loadBtn.addEventListener('click', load);
@@ -256,12 +321,103 @@ window._retrieval = {
   getOrBuildIndex,
 };
 
-// Preset selector — replace prompt with a per-domain SFT template.
+// Preset selector — populate from PRESET_LIST (grouped by category),
+// then on change replace the prompt with the selected realistic command.
 const presetEl = $('preset');
 if (presetEl) {
+  const byCat = {};
+  for (const p of PRESET_LIST) {
+    (byCat[p.category] = byCat[p.category] || []).push(p);
+  }
+  for (const [cat, items] of Object.entries(byCat)) {
+    const group = document.createElement('optgroup');
+    group.label = cat;
+    for (const p of items) {
+      const opt = document.createElement('option');
+      opt.value = p.id;
+      opt.textContent = `"${p.query}"`;
+      group.appendChild(opt);
+    }
+    presetEl.appendChild(group);
+  }
   presetEl.addEventListener('change', () => {
     const p = PRESETS[presetEl.value];
     if (p) $('prompt').value = p;
+  });
+  // Open the demo on a real rich-schema example so the format is visible.
+  if (PRESET_LIST.length) {
+    const first = PRESET_LIST[0];
+    $('prompt').value = PRESETS[first.id];
+    presetEl.value = first.id;
+  }
+}
+
+// Replace the USER command inside the current prompt, keeping the SYSTEM
+// function list and the ASSISTANT marker intact.
+function setUserQuery(query) {
+  const el = $('prompt');
+  if (!el) return;
+  let p = el.value;
+  const uIdx = p.indexOf('USER:');
+  const aIdx = p.indexOf('ASSISTANT:', uIdx >= 0 ? uIdx : 0);
+  if (uIdx >= 0 && aIdx > uIdx) {
+    el.value = p.slice(0, uIdx) + 'USER: ' + query + '\n\n\n' + p.slice(aIdx);
+  } else {
+    el.value = p + '\n\n\nUSER: ' + query + '\n\n\nASSISTANT: <functioncall> ';
+  }
+}
+
+// 🎤 voice input — record, transcribe in-browser with Whisper, inject text.
+const micBtn = $('mic');
+const voiceStatus = $('voice-status');
+if (micBtn) {
+  micBtn.addEventListener('click', async () => {
+    if (!isRecording()) {
+      try {
+        await startRecording();
+        micBtn.textContent = '⏹ Stop & transcribe';
+        micBtn.classList.add('recording');
+        if (voiceStatus) voiceStatus.textContent = 'recording… say a command, then click stop';
+      } catch (e) {
+        if (voiceStatus) voiceStatus.textContent = `mic unavailable: ${e.message}`;
+      }
+      return;
+    }
+    // Currently recording → stop and transcribe.
+    micBtn.disabled = true;
+    micBtn.classList.remove('recording');
+    micBtn.textContent = '🎤 Speak a command';
+    try {
+      if (voiceStatus) voiceStatus.textContent = 'transcribing…';
+      const blob = await stopRecording();
+      const text = await transcribe(blob, {
+        progressCb: (pr) => {
+          if (pr.status === 'progress' && voiceStatus) {
+            voiceStatus.textContent =
+              `loading Whisper · ${pr.file} ${(pr.progress ?? 0).toFixed(0)}%`;
+          }
+        },
+      });
+      if (text) {
+        setUserQuery(text);
+        if (model && tokenizer) {
+          // Heard a command and a model is ready → run it automatically.
+          if (voiceStatus) voiceStatus.textContent = `heard: "${text}" — generating…`;
+          micBtn.disabled = false;
+          await generate();
+          if (voiceStatus) voiceStatus.textContent = `heard: "${text}"`;
+        } else if (voiceStatus) {
+          voiceStatus.textContent = `heard: "${text}" — click “Load model”, then Generate`;
+        }
+      } else if (voiceStatus) {
+        voiceStatus.textContent = 'no speech detected — try again';
+      }
+    } catch (e) {
+      console.error('voice transcription failed:', e);
+      if (voiceStatus) voiceStatus.textContent = `transcription failed: ${e.message}`;
+    } finally {
+      micBtn.disabled = false;
+    }
   });
 }
 
@@ -281,6 +437,20 @@ function renderModelInfo() {
 if (modelEl) {
   modelEl.addEventListener('change', renderModelInfo);
   renderModelInfo();
+}
+
+// Dtype dropdown — show a live one-line explanation of the selected weight
+// precision (download size + quality + backend support).
+const dtypeEl = $('dtype');
+const dtypeInfoEl = $('dtype-info');
+function renderDtypeInfo() {
+  if (!dtypeInfoEl || !dtypeEl) return;
+  const note = DTYPE_NOTES[dtypeEl.value];
+  dtypeInfoEl.textContent = note || '';
+}
+if (dtypeEl) {
+  dtypeEl.addEventListener('change', renderDtypeInfo);
+  renderDtypeInfo();
 }
 
 // Per-toggle info: attach a (i) icon next to each toggle that expands a help <div>.

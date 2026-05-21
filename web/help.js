@@ -4,6 +4,22 @@
 // shipped bench. If you re-bench, update the numbers here too.
 
 export const MODEL_CARDS = {
+  'lifeart/smart-home-gpt2-v14-ctx4096': {
+    title: 'smart-home-gpt2-v14-ctx4096 — 4096-token context, GPT-2 124M',
+    body: [
+      'Reads the candidate function schemas in the prompt and emits a JSON tool call — 4096-token window, so dozens of full tool schemas fit at once.',
+      'Name accuracy: 83.3% on short prompts, 89–94% on 1500–3500-token prompts — beats v9 at every length (v9 collapses once a prompt exceeds its 1024 window).',
+      'Block-preserving position-table extension: short prompts keep v9’s exact native embeddings, so there is no short-prompt accuracy tax. ONNX fp32 / fp16 / q8 · fully in-browser via transformers.js + WebGPU.',
+    ],
+  },
+  'lifeart/smart-home-gpt2-v9': {
+    title: 'smart-home-gpt2-v9 — GPT-2 124M fine-tuned for tool-calling (1024 ctx)',
+    body: [
+      'Reads the candidate function schemas in the prompt and emits a JSON tool call.',
+      'Loads from this site if cached locally, otherwise streams from the Hugging Face Hub.',
+      '1024-token context — fine for short prompts; use v14-ctx4096 for long tool lists.',
+    ],
+  },
   'local:smart-home-gpt2': {
     title: 'v1 SFT (local) — first browser-shippable checkpoint',
     body: [
@@ -129,7 +145,7 @@ export const TOGGLE_HELP = {
 // Below-bench legend explaining each printed metric.
 // Format: [key, description, good-range].
 export const BENCH_LEGEND = [
-  ['prompt tokens', 'BPE tokens fed in. Typical SH prompt is 60-90 tokens; over 1024 wraps GPT-2`s ctx.', 'good: 60-300'],
+  ['prompt tokens', 'BPE tokens fed in. Rich-schema prompts run 300-700; v14-ctx4096 handles up to 4096 (v9 caps at 1024).', 'good: 60-3500'],
   ['new tokens',    'Tokens generated this run. Capped by the "max new tokens" input. A valid functioncall is usually 20-60.', 'good: 20-60'],
   ['time-to-first', 'Latency from generate-start to first decoded token.', 'good: <1 s WebGPU · 3-8 s WASM'],
   ['total',         'End-to-end wall time including first-token + streaming + finalization.', ''],
@@ -143,13 +159,18 @@ export const BENCH_LEGEND = [
 // Footer copy.
 export const FOOTER = {
   blurb:
-    'Browser demo of GPT-2 124M fine-tuned for smart-home tool-calling. Runs fully in-tab via WebGPU + transformers.js — no server inference.',
+    'Browser demo of GPT-2 124M fine-tuned for smart-home tool-calling. Tool call AND speech recognition run fully in-tab via WebGPU + transformers.js — no server inference.',
   links: [
-    { label: 'GitHub repo',     href: 'https://github.com/lifeart/smart-home-gpt2-tool', kind: 'code' },
-    { label: 'HF · v3 (best)',  href: 'https://huggingface.co/lifeart/smart-home-gpt2-v3', kind: 'model' },
-    { label: 'HF · v2',         href: 'https://huggingface.co/lifeart/smart-home-gpt2-v2', kind: 'model' },
-    { label: 'HF · v1',         href: 'https://huggingface.co/lifeart/smart-home-gpt2', kind: 'model' },
-    { label: 'HF · v4 (Iter 11)', href: 'https://huggingface.co/lifeart/smart-home-gpt2-v4', kind: 'model', probe: true },
+    { label: 'GitHub repo',          href: 'https://github.com/lifeart/smart-home-gpt2-tool', kind: 'code' },
+    { label: 'Model · Hugging Face', href: 'https://huggingface.co/lifeart/smart-home-gpt2-v9', kind: 'model' },
+    { label: 'Whisper (voice)',      href: 'https://huggingface.co/Xenova/whisper-base', kind: 'model' },
   ],
-  meta: 'GPT-2 124M · ONNX fp32/fp16/q8/q4 · transformers.js v3 · MIT license on code; Apache-2.0 on model weights.',
+  meta: 'GPT-2 124M · ONNX fp32/fp16/q8 · transformers.js v3 · voice via Whisper-base · MIT license on code; Apache-2.0 on model weights.',
+};
+
+// Per-dtype explanation — shown live under the Dtype selector.
+export const DTYPE_NOTES = {
+  fp32: 'fp32 — full 32-bit precision. Largest download (~650 MB), reference quality. Runs on WebGPU and WASM.',
+  fp16: 'fp16 — 16-bit half precision. ~325 MB, WebGPU only. Quality ≈ fp32 with half the download — the best pick on WebGPU.',
+  q8: 'q8 — 8-bit integer-quantized weights. ~400 MB, the most compatible option for WASM / CPU and low-memory devices, at a small precision trade-off.',
 };

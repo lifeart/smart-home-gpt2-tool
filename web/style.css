@@ -148,3 +148,73 @@ pre {
   .config, .row { gap: 0.5rem; }
   .toggle-help { font-size: 0.72rem; }
 }
+
+/* --- Synthesis pipeline (Iter 32 best setup) --- */
+
+.synth-row {
+  flex-wrap: wrap;
+  padding: 0.6rem;
+  margin-top: 0.6rem;
+  border: 1px solid rgba(127, 127, 127, 0.4);
+  border-radius: 6px;
+  background: rgba(120, 110, 200, 0.08);
+}
+.synth-row > label { flex-direction: row; align-items: center; gap: 0.35rem; }
+
+.synth-card {
+  margin-top: 0.75rem;
+  padding: 0.85rem;
+  border: 1px solid rgba(120, 110, 200, 0.55);
+  border-radius: 6px;
+  background: rgba(120, 110, 200, 0.09);
+}
+.synth-title { font-weight: 700; font-size: 0.92rem; }
+.synth-sub { font-size: 0.76rem; opacity: 0.75; margin: 0.2rem 0 0.6rem; }
+.synth-section {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  opacity: 0.6;
+  margin: 0.6rem 0 0.25rem;
+}
+.synth-cand { font-size: 0.82rem; padding: 0.15rem 0; }
+.synth-src {
+  display: inline-block;
+  min-width: 8.5em;
+  font-size: 0.72rem;
+  opacity: 0.7;
+}
+.synth-final {
+  font-size: 0.95rem;
+  padding: 0.5rem 0.6rem;
+  border-radius: 4px;
+  background: rgba(80, 180, 120, 0.16);
+  border: 1px solid rgba(80, 180, 120, 0.5);
+}
+.synth-final code, .synth-cand code { font-weight: 700; }
+.synth-err {
+  background: rgba(220, 120, 80, 0.12);
+  border-color: rgba(220, 120, 80, 0.55);
+}
+
+/* --- Voice input (in-browser Whisper) --- */
+.voice-row { align-items: center; }
+#mic {
+  font: inherit;
+  padding: 0.4rem 0.8rem;
+  border: 1px solid #888;
+  border-radius: 4px;
+  cursor: pointer;
+}
+#mic.recording {
+  border-color: #d24;
+  background: rgba(220, 40, 70, 0.18);
+  animation: mic-pulse 1.1s ease-in-out infinite;
+}
+@keyframes mic-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(220, 40, 70, 0.5); }
+  50%      { box-shadow: 0 0 0 6px rgba(220, 40, 70, 0); }
+}
+
+/* Dtype explainer — secondary info, slightly dimmer than the model card. */
+.dtype-info { opacity: 0.82; }

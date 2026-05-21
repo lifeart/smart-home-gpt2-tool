@@ -14,19 +14,8 @@
         <label>
           Model
           <select id="model">
-            <option value="local:smart-home-gpt2-v9">smart-home-gpt2-v9 · FT (local) · Iter 20 (Granite curriculum + HA + Nemotron, L40s bf16 ep2)</option>
-            <option value="local:smart-home-gpt2-v8">smart-home-gpt2-v8 · FT (local) · Iter 17 (Llama-70B label refine, L40s bf16 ep2)</option>
-            <option value="local:smart-home-gpt2-v7">smart-home-gpt2-v7 · FT (local) · Iter 16 (ToolACE + xLAM + Glaive, L40s bf16 ep2)</option>
-            <option value="local:smart-home-gpt2-v6">smart-home-gpt2-v6 · FT (local) · Iter 15 (fresh_bench mix)</option>
-            <option value="local:smart-home-gpt2-v5">smart-home-gpt2-v5 · FT (local) · Iter 13 (HF synthetic)</option>
-            <option value="local:smart-home-gpt2-v4">smart-home-gpt2-v4 · FT (local) · Iter 11</option>
-            <option value="local:smart-home-gpt2-v3">smart-home-gpt2-v3 · FT (local) · best</option>
-            <option value="local:smart-home-gpt2-v2">smart-home-gpt2-v2 · FT (local) · may not be downloaded</option>
-            <option value="local:smart-home-gpt2">smart-home-gpt2 · FT (local) · v1</option>
-            <option value="lifeart/smart-home-gpt2-v3">lifeart/smart-home-gpt2-v3 · FT (HF Hub)</option>
-            <option value="lifeart/smart-home-gpt2-v2">lifeart/smart-home-gpt2-v2 · FT (HF Hub)</option>
-            <option value="lifeart/smart-home-gpt2">lifeart/smart-home-gpt2 · FT (HF Hub) · v1</option>
-            <option value="Xenova/gpt2">Xenova/gpt2 · base (HF) · no FT</option>
+            <option value="lifeart/smart-home-gpt2-v14-ctx4096" selected>smart-home-gpt2-v14-ctx4096 · 4096-token context · Hugging Face Hub</option>
+            <option value="lifeart/smart-home-gpt2-v9">smart-home-gpt2-v9 · 1024-token context · loads locally</option>
           </select>
         </label>
         <label>
@@ -42,33 +31,26 @@
             <option value="fp32">fp32</option>
             <option value="fp16">fp16 (WebGPU)</option>
             <option value="q8">q8 (int8)</option>
-            <option value="q4">q4 (int4)</option>
           </select>
         </label>
         <button id="load">Load model</button>
         <span id="status">idle</span>
         <div id="model-info" class="info-card" role="status" aria-live="polite"></div>
+        <div id="dtype-info" class="info-card dtype-info" role="status" aria-live="polite"></div>
       </section>
 
       <section>
         <div class="row" style="margin-bottom:0.5rem">
-          <label>Preset
+          <label>Try a realistic command
             <select id="preset">
-              <option value="" disabled selected>— pick a preset —</option>
-              <option value="lighting">Lighting · "dim the bedroom light to 30 percent"</option>
-              <option value="climate">Climate · "set the sunroom thermostat to 21°"</option>
-              <option value="media">Media · "play Kind of Blue at 30 percent"</option>
-              <option value="security">Security · "make sure the patio door is locked"</option>
-              <option value="kitchen">Kitchen · "run the microwave for 60 seconds"</option>
-              <option value="blinds">Blinds · "lower the bedroom blinds to halfway"</option>
-              <option value="clean">Clean · "start vacuuming the living room"</option>
-              <option value="garden">Garden · "water the front lawn for 15 minutes"</option>
-              <option value="sensors">Sensors · "is anyone moving around in the office?"</option>
-              <option value="timers">Timers · "wake me at 7am on weekdays"</option>
-              <option value="mixed">Mixed (10 fns) · "activate goodnight scene + thermostat 19"</option>
+              <option value="" disabled selected>— pick an example command —</option>
             </select>
           </label>
-          <span style="font-size:0.75rem;opacity:0.7;align-self:end;padding-bottom:0.5rem">↑ pick a preset, or edit the prompt below directly. With Retrieval ON, the function list is auto-replaced by MiniLM top-K — the prompt's list is only used when retrieval is off.</span>
+          <span style="font-size:0.75rem;opacity:0.7;align-self:end;padding-bottom:0.5rem">↑ pick a real end-user phrasing, or edit the prompt below. These are casual commands (implied rooms, vague values, questions) for validating the assistant on lifelike input.</span>
+        </div>
+        <div class="row voice-row" style="margin-bottom:0.5rem">
+          <button id="mic" type="button" title="Record a spoken command. Whisper transcribes it in-browser (no server, no API) and drops it into the USER line below.">🎤 Speak a command</button>
+          <span id="voice-status" style="font-size:0.78rem;opacity:0.78;align-self:center"></span>
         </div>
         <label for="prompt">Prompt (SYSTEM + candidate functions + USER command)</label>
         <textarea id="prompt" rows="8">SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -
@@ -97,8 +79,8 @@ ASSISTANT: &lt;functioncall&gt; </textarea>
           <label title="Within constrained mode: widen the name-token mask to prompt cands ∪ registry names (recovers gold names truncated out of the prompt). Iter 9.3 default ON — best ship config.">
             <input id="widenames" type="checkbox" checked /> Wide names (registry ∪ prompt)
           </label>
-          <label title="Re-rank the prompt's candidate list using MiniLM cosine similarity, keep top-K">
-            <input id="retrieval" type="checkbox" checked /> Retrieval pre-rank (MiniLM, top-K)
+          <label title="Re-rank the prompt's candidate list using MiniLM cosine similarity, keep top-K. Off by default so the demo uses the full tool schemas in the prompt; turn on to simulate a large tool registry.">
+            <input id="retrieval" type="checkbox" /> Retrieval pre-rank (MiniLM, top-K)
           </label>
           <label title="Number of functions kept after retrieval">
             K <input id="topk" type="number" value="3" min="1" max="10" style="width:3em" />
@@ -110,6 +92,7 @@ ASSISTANT: &lt;functioncall&gt; </textarea>
       <section>
         <h2>Output</h2>
         <pre id="out"></pre>
+        <div id="synth-out"></div>
         <h2>Bench</h2>
         <pre id="bench"></pre>
       </section>
