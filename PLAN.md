@@ -2311,3 +2311,38 @@ and smoke-tested in-browser (WebGPU/fp16). $0.
 ### Files (iter 39)
 - `web/canon.js` — `snapEnums` / `snapEnumValue` / `canonicalizeCall`.
 - `web/main.js` — `renderParsedCall` is async, enum-snaps via the registry.
+
+## Iter 40 — improvement loop: retrieval pruning (schema-preserving, opt-in)
+
+Loop iteration 5, speed track. The speed report's idea #3: shrink a long
+rich-schema prompt's prefill by keeping only the most relevant candidate
+schemas.
+
+`web/retrieval.js` gains `pruneSchemas(prompt, keepNames)` — a SCHEMA-
+PRESERVING prune: it drops candidate entries whose name isn't retrieved
+but keeps the FULL typed schema of each survivor (unlike the old
+`rewriteCandidateList`, which collapsed to a names-only list and lost the
+typed-arg info v14 needs). The demo's retrieval toggle now uses it; default
+K bumped 3 → 8.
+
+**Recall verified** (`verify_retrieval_recall.py` — replicates the browser's
+MiniLM retrieval + `buildFunctionIndex` text recipe, no browser, $0):
+
+| top-K | gold-in-top-K |
+|---|---|
+| 6  | 93.7% |
+| 8  | 95.3% |
+| 10 | 96.3% |
+| 12 | 97.0% |
+
+So pruning is a genuine speed/accuracy **trade**, not a free win — at
+top-8 it drops the gold for ~4.7% of queries. Therefore it ships **opt-in,
+default-OFF** (an upgrade to the existing retrieval toggle) rather than the
+silent auto-prune first prototyped — no silent accuracy cost. `pruneSchemas`
+is node-unit-tested (correct filtering, prompt shrink, clean no-ops).
+
+### Files (iter 40)
+- `web/retrieval.js` — `pruneSchemas` (schema-preserving prune).
+- `web/main.js` — retrieval toggle prunes schemas instead of names-only.
+- `web/index.html` — retrieval-K default 3 → 8.
+- `training/verify_retrieval_recall.py` — MiniLM recall@K verification.

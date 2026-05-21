@@ -286,6 +286,41 @@ export async function retrieveTopK(query, indexVecs, names, k = 5, threshold = 0
  * @param {string[]} newNames
  * @returns {string} rewritten prompt
  */
+/**
+ * Schema-preserving prune (Iter 40, speed). Unlike `rewriteCandidateList`
+ * (which replaces the candidate block with a names-only array), this keeps
+ * the FULL schema objects — only DROPS the ones whose name is not in
+ * `keepNames`. The model still sees typed params/enums for the survivors,
+ * so argument accuracy is preserved while the prompt shrinks.
+ *
+ * Used to cut the prefill cost of long rich-schema prompts: a 13-schema
+ * ~3000-token prompt pruned to the top-8 retrieved schemas is ~1800 tokens.
+ * Returns the prompt unchanged if the block can't be parsed, is already
+ * small, or pruning would drop everything.
+ *
+ * @param {string} prompt
+ * @param {string[]} keepNames  function names to retain (e.g. retrieval top-K)
+ * @returns {string}
+ */
+export function pruneSchemas(prompt, keepNames) {
+  const m = prompt.match(/required -\s*\n([\s\S]*?)\n\n\nUSER:/);
+  if (!m) return prompt;
+  let arr;
+  try {
+    arr = JSON.parse(m[1]);
+  } catch (e) {
+    console.warn('[prune] candidate array not JSON, skipping:', e?.message || e);
+    return prompt;
+  }
+  if (!Array.isArray(arr) || arr.length === 0) return prompt;
+  const keep = new Set(keepNames);
+  const pruned = arr.filter((e) =>
+    keep.has(typeof e === 'string' ? e : (e && e.name)),
+  );
+  if (pruned.length === 0 || pruned.length >= arr.length) return prompt;
+  return prompt.replace(m[1], () => JSON.stringify(pruned, null, 2));
+}
+
 export function rewriteCandidateList(prompt, newNames) {
   // Match the same block as extractCandidateNames does.
   const re = /Use them if required -\s*\n(\[[\s\S]*?)(?=\n\nUSER:|\nUSER:|\n\n)/;

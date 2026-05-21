@@ -14,6 +14,7 @@ import {
   extractUserQuery,
   topKForQuery,
   rewriteCandidateList,
+  pruneSchemas,
   getOrBuildIndex,
 } from './retrieval.js';
 import { PRESETS, PRESET_LIST } from './presets.js';
@@ -131,19 +132,26 @@ async function generate() {
   benchEl.textContent = '';
   setStatus('generating…');
 
-  // Retrieval pre-rank: rewrite the candidate list inside the prompt.
+  // Retrieval pre-rank (opt-in toggle): keep only the top-K most relevant
+  // candidate schemas, dropping the rest. Iter 40 made this SCHEMA-PRESERVING
+  // — `pruneSchemas` keeps the full typed schema of each survivor (better
+  // arguments) instead of collapsing to a names-only list. It is a genuine
+  // speed/accuracy trade and stays opt-in + default-OFF: the gold function
+  // lands in the MiniLM top-8 for ~95% of queries (top-12: ~97%), so
+  // pruning can drop the answer — see training/verify_retrieval_recall.py.
   let retrievalInfo = 'retrieval: OFF';
   if (retrievalOn) {
     try {
       const userQuery = extractUserQuery(prompt);
       if (userQuery) {
+        const before = prompt.length;
         const { topNames, topScores } = await topKForQuery(userQuery, topK);
         const origCands = extractCandidateNames(prompt);
         const goldInTopK = origCands.length > 0
           ? origCands.some(n => topNames.includes(n))
           : null;
-        prompt = rewriteCandidateList(prompt, topNames);
-        retrievalInfo = `retrieval: top-${topK} = [${topNames.join(', ')}]  score(top1)=${topScores[0]?.toFixed(3) ?? 'n/a'}`;
+        prompt = pruneSchemas(prompt, topNames);
+        retrievalInfo = `retrieval: pruned to top-${topK} [${topNames.join(', ')}]  ${before}→${prompt.length} chars  score(top1)=${topScores[0]?.toFixed(3) ?? 'n/a'}`;
         if (goldInTopK !== null) {
           retrievalInfo += `  orig-cands-in-topK: ${origCands.filter(n => topNames.includes(n)).length}/${origCands.length}`;
         }
