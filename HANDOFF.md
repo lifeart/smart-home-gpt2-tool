@@ -71,10 +71,20 @@ stretch" tax was an artifact of whole-table interpolation, not inherent.
 
 ### ONNX dtype accuracy (n=300)
 
-fp16 is **lossless** vs fp32; q8 loses ~3 pp name accuracy. Confirmed on
-both models — v9: fp16/fp32 both 81.0% name; v14-ctx4096: fp16/fp32 both
-83.3% name, q8 80.0%. Raw-greedy args/exact numbers are too brittle to
-compare (q8 nonsensically scores them *higher*) — use name accuracy. Data:
+fp16 is **lossless** vs fp32 (v9 and v14 both score fp16 == fp32 on name
+accuracy; v14 = 83.3%). q8 loses ~3 pp (v14 q8 80.0%). **fp16 is the
+browser default on WebGPU** — half the download (~330 MB vs ~660 MB),
+~50% less GPU memory, same accuracy.
+
+Gotcha (Iter 37): fp16-on-WebGPU needs **onnxruntime-web ≥1.26**
+(transformers.js ≥4.2). On older builds the WebGPU fp16 path garbled output
+— GPT-2's LayerNorm variance `(x-mean)^2` reaches ~9.3e6, overflowing
+fp16's 65504 ceiling. `export_onnx.py` now keeps the LayerNorm/gelu ops in
+fp32 (`op_block_list`) so the fp16 ONNX is numerically sound; WASM has no
+fp16 kernels and uses fp32.
+
+Raw-greedy args/exact bench numbers are too brittle to compare (q8
+nonsensically scores them *higher*) — use name accuracy. Data:
 `lifeart/smart-home-sft-v2/onnx_dtype_bench{,_smart-home-gpt2-v14-ctx4096}.json`.
 
 ## The browser demo (`web/`) — current state
@@ -99,9 +109,8 @@ Fully in-browser, no server inference. What it does now:
 - **Value canonicalization** (`web/canon.js`): JS port of
   `training/canon.py` — normalizes predicted arg values (12h→24h time, day
   plural, float rounding). Shown as the "Parsed tool call".
-- **Dtype dropdown:** fp32/fp16/q8 (q4 removed — no ONNX file), with live
-  per-dtype explanation. Retrieval pre-rank defaults OFF so presets
-  exercise the full schemas.
+- **Dtype dropdown:** fp16 (default on WebGPU) / fp32 / q8. Retrieval
+  pre-rank defaults OFF so presets exercise the full schemas.
 - Constrained decoding / typed-args / wide-names: `web/grammar.js`
   (`JsonSchemaLogitsProcessor`), all default ON.
 
@@ -144,7 +153,10 @@ synthesis work lives in `training/` only.
    whole-table interpolation looked like an inherent "1.8 pp per 2×"
    stretch tax; Iter 36 (v14) showed that was an artifact and erased it.
    Pair it with real long-context training data (schema-padded prompts).
-5. fp16 ONNX is lossless vs fp32; q8 costs ~3 pp.
+5. fp16 ONNX is lossless vs fp32 and is the browser default (half the
+   download). Needs onnxruntime-web ≥1.26 — GPT-2's LayerNorm variance
+   overflows fp16 otherwise; `export_onnx.py` keeps LayerNorm/gelu in fp32.
+   q8 costs ~3 pp.
 6. Rejected this session: H2/H2' rerank (name-bound), v6r-args retrain
    (SH-only data lost cross-domain), synth voting, 2-pass refinement,
    dual-picker, stronger emitter models. All documented in PLAN.md.

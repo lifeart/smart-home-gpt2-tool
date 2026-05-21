@@ -170,7 +170,7 @@ export const FOOTER = {
 
 // Per-dtype explanation — shown live under the Dtype selector.
 export const DTYPE_NOTES = {
-  fp32: 'fp32 — full 32-bit precision. Largest download (~650 MB), reference quality. Runs on WebGPU and WASM.',
-  fp16: 'fp16 — 16-bit half precision. ~325 MB, WebGPU only. Quality ≈ fp32 with half the download — the best pick on WebGPU.',
-  q8: 'q8 — 8-bit integer-quantized weights. ~400 MB, the most compatible option for WASM / CPU and low-memory devices, at a small precision trade-off.',
+  fp16: 'fp16 — 16-bit half precision. ~330 MB (half of fp32), same accuracy. The default on WebGPU. Needs onnxruntime-web ≥1.26 (transformers.js 4.2+) — older builds garble fp16 on WebGPU.',
+  fp32: 'fp32 — full 32-bit precision. ~650 MB, reference quality. Use on WASM (no fp16 kernels there) or to compare.',
+  q8: 'q8 — 8-bit integer-quantized weights. ~400 MB, smaller download at a ~3 pp name-accuracy trade-off.',
 };

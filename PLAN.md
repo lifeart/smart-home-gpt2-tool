@@ -2212,3 +2212,49 @@ v13 for long" split is retired.
   `sh_test_long.json`; results `iter36_ctx_long_bench.json`.
 - Model: `lifeart/smart-home-gpt2-v14-ctx4096` — safetensors + ONNX
   (fp32/fp16/q8). Shipped as the browser demo's default model.
+
+## Iter 37 — improvement loop; fp16 on WebGPU fixed (onnxruntime-web bump)
+
+First iteration of the continuous accuracy+speed improvement loop. Picked
+the speed report's #1 idea — make fp16 the browser default (the dtype bench
+had shown fp16 == fp32, 83.3% name acc on v14). It broke, got root-caused,
+and got fixed.
+
+1. **Symptom.** In-browser (WebGPU), fp16 v14-ctx4096 generated degenerate
+   all-spaces output. The Iter 36.2 dtype bench missed it: its CUDA
+   provider failed to load (`libcublasLt.so.12` absent) so it fell back to
+   the CPU EP, which runs fp16 *weights* with fp32 *compute* — no fault.
+2. **Root cause** (`diag_fp16_overflow.py` + `diag_fp16_graph.py`): NOT the
+   activations (peak ~3050, well under fp16's 65504). The overflow is the
+   *intra-LayerNorm* intermediate `(x-mean)^2` ≈ 9.3e6 (residual stream
+   peaks ~3050, squared) — 140× past the fp16 ceiling. GPT-2's LayerNorm is
+   exported as primitive ops (ReduceMean/Sub/Pow/Sqrt/Div), all converted
+   to fp16 → variance Inf → normalized output 0 → garbage.
+3. **Fix 1** — `export_onnx.py` `op_block_list`: keep the reduction / norm /
+   activation ops (ReduceMean, Pow, Sqrt, Div, Add, Sub, Mul, Tanh) in
+   fp32; only the weight-heavy Gemm/MatMul stay fp16, so the file-size win
+   holds. Re-exported and verified in the graph (877 fp32 intermediates).
+4. That alone still failed in-browser, and a full trace showed no remaining
+   op over fp16 range — so the culprit was the **runtime**: onnxruntime-web
+   1.22.0-dev (April 2025, bundled by transformers.js 3.8.1) mishandles the
+   fp16 graph on WebGPU.
+5. **Fix 2** — bumped `@huggingface/transformers` 3.8.1 → 4.2.0, which
+   bundles **onnxruntime-web 1.26.0-dev**. fp16 then works end-to-end.
+
+**Verified in-browser (WebGPU/fp16):** short prompt → correct
+`dim_light {room: "living room", brightness_pct: 20}`; 3005-token prompt →
+correct `dim_light {room: "bedroom", brightness_pct: 30}`; `lock_door`
+preset correct. ~26–44 tok/s; loads in ~1.4 s from cache on revisit.
+
+**Outcome:** fp16 is the browser default on WebGPU — ~330 MB download
+(half of fp32's ~660 MB), same accuracy (fp16 weights lossless), ~50% less
+GPU memory. WASM falls back to fp32 (no fp16 kernels there). The
+transformers.js 4.x bump is also a free WebGPU-runtime upgrade for every
+dtype. Cost: $0 (one cpu-upgrade re-export ≈ $0.05).
+
+### Files (iter 37)
+- `training/diag_fp16_overflow.py`, `training/diag_fp16_graph.py` — fp16
+  overflow diagnostics (activation-magnitude trace + ONNX graph inspector).
+- `training/export_onnx.py` — `op_block_list` keeps LayerNorm/gelu fp32.
+- `web/`: `@huggingface/transformers` 4.2.0 (onnxruntime-web 1.26); fp16 is
+  the WebGPU default in `index.html`/`main.js`/`help.js`.

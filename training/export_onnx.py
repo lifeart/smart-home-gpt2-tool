@@ -131,10 +131,26 @@ def export_fp16(fp32_path: Path, dest: Path) -> Path:
     #   "Attempting to get index by a name which does not exist:
     #   InsertedPrecisionFreeCast_/transformer/ln_f/Constant_output_0 for node:
     #   /transformer/h.0/ln_1/Mul/SimplifiedLayerNormFusion".
+    #
+    # op_block_list — keep reduction / norm / activation ops in fp32. GPT-2's
+    # LayerNorm is exported as primitive ops (ReduceMean/Sub/Pow/Add/Sqrt/Div);
+    # its variance intermediate (x-mean)^2 reaches ~9.3e6 on v14 (the residual
+    # stream peaks ~3050, and 3050^2 ~ 9.3e6) — 140x past fp16's 65504 ceiling.
+    # Left in fp16 it saturates to +Inf -> variance Inf -> normalized output 0
+    # -> the model degenerates to all-spaces garbage under genuine fp16 compute
+    # (WebGPU). gelu_new's x^3 (Pow) overflows the same way. Keeping these
+    # elementwise ops in fp32 fixes it; the weight-heavy Gemm/MatMul/Gather
+    # stay fp16, so the file-size and speed win is preserved. (Iter 37.)
+    keep_fp32 = ["ReduceMean", "Pow", "Sqrt", "Div", "Add", "Sub", "Mul", "Tanh"]
+    op_block_list = sorted(
+        set(list(getattr(float16, "DEFAULT_OP_BLOCK_LIST", [])) + keep_fp32)
+    )
+    print(f"[fp16] op_block_list keeps {keep_fp32} in fp32")
     model_fp16 = float16.convert_float_to_float16(
         model,
         keep_io_types=True,
         disable_shape_infer=disable_shape_infer,
+        op_block_list=op_block_list,
     )
 
     # Re-toposort so any inserted Cast nodes sit before their consumers.

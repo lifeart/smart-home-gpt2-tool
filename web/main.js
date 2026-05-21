@@ -583,4 +583,21 @@ function renderFooter() {
 }
 renderFooter();
 
-setStatus(detectWebGPU() ? 'WebGPU available · click Load' : 'WebGPU NOT available · WASM only');
+// Backend-aware dtype default: fp16 on WebGPU — half the download / GPU
+// memory at the same accuracy as fp32 (fp16 weights are lossless; the
+// WebGPU fp16 compute path is correct on onnxruntime-web >=1.26, which
+// transformers.js 4.2 bundles — older builds produced garbage, see
+// Iter 37). onnxruntime-web's WASM EP has no fp16 kernels, so when WebGPU
+// is unavailable fall back to device=wasm + dtype=fp32.
+if (!detectWebGPU()) {
+  if ($('device')) $('device').value = 'wasm';
+  if (dtypeEl) {
+    dtypeEl.value = 'fp32';
+    renderDtypeInfo();
+  }
+}
+setStatus(
+  detectWebGPU()
+    ? 'WebGPU available · fp16 default · click Load'
+    : 'WebGPU NOT available · WASM/fp32 · click Load',
+);
