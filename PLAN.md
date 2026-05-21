@@ -2258,3 +2258,30 @@ dtype. Cost: $0 (one cpu-upgrade re-export ≈ $0.05).
 - `training/export_onnx.py` — `op_block_list` keeps LayerNorm/gelu fp32.
 - `web/`: `@huggingface/transformers` 4.2.0 (onnxruntime-web 1.26); fp16 is
   the WebGPU default in `index.html`/`main.js`/`help.js`.
+
+## Iter 38 — improvement loop: enum value-snapping (+3 pp synth)
+
+Loop iteration 2. Accuracy report idea B1 (the deterministic half): snap a
+predicted argument value to its `tool_registry.json` enum member before
+scoring — "gym" → "basement gym", "living_room" → "living room".
+
+`canon.py` gains `snap_enums(name, args, registry)` + `canonicalize_call`:
+three conservative levels — case-insensitive exact, underscore/space-
+insensitive (also picks the enum's canonical spelling), and unique
+substring containment. No fuzzy / edit-distance matching (over-correction
+risk). `bench_h1p11_synth.py`'s `cscore` now enum-snaps both sides.
+
+Verified deterministically by re-scoring the cached synth-v2 BEST run
+(`verify_enum_snap.py` — no model, no API, $0): synth exact
+**78.67% → 81.67%** (+3.00 pp, n=300), 9 rows gained, 0 regressions. The
+78.67% baseline reproduces the canonical project figure exactly, so the
+measurement is sound. The 9 recovered rows are value-format misses the
+synthesizer got semantically right (underscore room forms, "gym" vs
+"basement gym").
+
+### Files (iter 38)
+- `training/canon.py` — `snap_enums`, `snap_enum_value`, `canonicalize_call`.
+- `training/verify_enum_snap.py` — deterministic re-score verification.
+- `training/bench_h1p11_synth.py` — `cscore` enum-snaps via the registry.
+
+Next: port `snap_enums` to `web/canon.js` so the browser config benefits.

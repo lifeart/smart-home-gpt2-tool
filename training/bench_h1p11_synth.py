@@ -35,7 +35,7 @@ import requests
 from bench_common import aggregate, args_match, load_hf_token, load_test, parse_call, parse_gold, print_summary
 from bench_h2_rerank import parse_user_and_candidates
 from bench_h1p5_picker_v2 import _registry_schema_str, build_picker_msg_v2, llama_pick_v2, REGISTRY_PATH
-from canon import canonicalize_args
+from canon import canonicalize_args, canonicalize_call
 
 
 ROUTER_URL = "https://router.huggingface.co/v1/chat/completions"
@@ -125,10 +125,17 @@ def llama_synth(token, msg) -> Optional[dict]:
     return None
 
 
-def cscore(name, args, gold_str):
+def cscore(name, args, gold_str, registry=None):
+    """Score a call. With `registry`, argument values are enum-snapped to
+    their registry enum before comparison (Iter 38, +3 pp — "gym" ->
+    "basement gym", "living_room" -> "living room"). Both sides are snapped
+    + canonicalized, so it measures enum-class equality."""
     gold = parse_gold(gold_str)
     name_ok = name == gold["name"] and gold["name"] is not None
-    a_ok = args_match(canonicalize_args(args or {}), canonicalize_args(gold["arguments"]))
+    a_ok = args_match(
+        canonicalize_call(name, args or {}, registry),
+        canonicalize_call(gold["name"], gold["arguments"], registry),
+    )
     return name_ok, a_ok, name_ok and a_ok
 
 
@@ -194,7 +201,7 @@ def main():
         if not c:
             r["synth_name_ok"] = r["synth_args_ok"] = r["synth_exact_ok"] = False
             continue
-        no, ao, eo = cscore(c.get("name"), c.get("arguments") or {}, r["gold"])
+        no, ao, eo = cscore(c.get("name"), c.get("arguments") or {}, r["gold"], registry)
         r["synth_name_ok"] = no
         r["synth_args_ok"] = ao
         r["synth_exact_ok"] = eo
@@ -208,7 +215,7 @@ def main():
     # Recompute canon candidate scores
     for r in rows:
         for lbl, c in candidates_of(r):
-            _, _, eo = cscore(c["name"], c["arguments"], r["gold"])
+            _, _, eo = cscore(c["name"], c["arguments"], r["gold"], registry)
             r[f"cc_{lbl}_exact_ok"] = eo
     oracle4 = sum(
         1 for r in rows

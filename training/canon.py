@@ -128,6 +128,72 @@ def canonicalize_args(args: Any) -> dict:
     return {k: canonicalize_value(k, v) for k, v in args.items()}
 
 
+# ---------------------------------------------------------------------------
+# Iter 37 — enum value snapping.
+#
+# The accuracy report (Iter 37) found the synthesizer's top remaining failure
+# mode is argument *values* that are semantically right but in a surface form
+# the dataset's enum doesn't use: "gym" vs "basement gym", "living_room" vs
+# "living room". `tool_registry.json` carries the legal enum for each typed
+# argument; snapping a predicted value to its enum member fixes these without
+# touching the scorer. Conservative — three levels, no fuzzy/edit-distance
+# matching, and only snaps when the target is unambiguous.
+# ---------------------------------------------------------------------------
+
+def _loose(s: str) -> str:
+    """case- + underscore/space-insensitive key for enum comparison."""
+    return re.sub(r"[\s_]+", " ", s.strip().lower())
+
+
+def snap_enum_value(v: Any, enum: list) -> Any:
+    """Snap one value to its closest enum member, or return it unchanged.
+
+    Level 1+2: exact match ignoring case and underscore/space — also picks
+      the enum's *canonical* spelling (e.g. 'living_room' -> 'living room'
+      when both forms are listed; the first listed wins, deterministically).
+    Level 3: unique substring containment ('gym' -> 'basement gym').
+    No fuzzy/edit-distance matching — too risky to over-correct.
+    """
+    if not isinstance(v, str) or not enum:
+        return v
+    lv = _loose(v)
+    for e in enum:                       # level 1+2
+        if isinstance(e, str) and _loose(e) == lv:
+            return e
+    subs = [
+        e for e in enum
+        if isinstance(e, str) and (lv in _loose(e) or _loose(e) in lv)
+    ]
+    if len(subs) == 1:                   # level 3 — only if unambiguous
+        return subs[0]
+    return v
+
+
+def snap_enums(name: Any, args: Any, registry: dict) -> dict:
+    """Snap every enum-typed argument value of call `name` to its registry
+    enum. Non-enum keys, unknown functions, and non-string values pass
+    through untouched."""
+    if not isinstance(args, dict):
+        return {}
+    enums = {}
+    if isinstance(name, str) and isinstance(registry, dict):
+        enums = (registry.get(name) or {}).get("enums") or {}
+    out = {}
+    for k, v in args.items():
+        if k in enums:
+            out[k] = snap_enum_value(v, enums[k])
+        else:
+            out[k] = v
+    return out
+
+
+def canonicalize_call(name: Any, args: Any, registry: dict | None = None) -> dict:
+    """Full post-process for a predicted call's arguments: enum-snap (if a
+    registry is given) then value canonicalization."""
+    a = snap_enums(name, args, registry) if registry else args
+    return canonicalize_args(a)
+
+
 if __name__ == "__main__":
     # Self-test against the hard-floor examples from Iter 28 analysis.
     assert canonicalize_time_string("3 PM") == "15:00", canonicalize_time_string("3 PM")
@@ -152,4 +218,16 @@ if __name__ == "__main__":
     assert canonicalize_value("day", "weekdays") == "weekdays"
     assert canonicalize_value("day", "daily") == "daily"
     assert canonicalize_value("label", "Mondays") == "Mondays"  # not a day key
+    # Enum snapping.
+    _room = ["living room", "bedroom", "basement gym", "living_room"]
+    assert snap_enum_value("Living Room", _room) == "living room"   # case
+    assert snap_enum_value("living_room", _room) == "living room"   # underscore
+    assert snap_enum_value("gym", _room) == "basement gym"          # substring
+    assert snap_enum_value("bedroom", _room) == "bedroom"           # exact
+    assert snap_enum_value("garage", _room) == "garage"             # no match
+    _reg = {"dim_light": {"enums": {"room": _room}}}
+    assert snap_enums("dim_light", {"room": "gym", "brightness_pct": 30}, _reg) == {
+        "room": "basement gym", "brightness_pct": 30
+    }
+    assert snap_enums("unknown_fn", {"room": "gym"}, _reg) == {"room": "gym"}
     print("OK: canon.py self-test pass")

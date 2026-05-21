@@ -34,7 +34,8 @@ without changing the model — by composition, not a better single decoder:
 | v5 + con (Iter 22 prior ship) | 57.3% | single decoder |
 | H1.2_con (v6 name + v9 args, clean-gate) | 59.3% | **browser-native, no external API** |
 | H1.3_con (+ 2-way Llama pick) | 61.3% | needs Llama API |
-| **synth v2 (BEST)** | **78.7%** | GPT-2 candidates → Llama-3.3-70B synthesis + canon |
+| synth v2 (Iter 32) | 78.7% | GPT-2 candidates → Llama-3.3-70B synthesis + canon |
+| **synth v2 + enum-snap (BEST)** | **81.7%** | + Iter 38 enum value-snapping |
 | oracle ceiling | 87.3% | upper bound |
 
 **The core finding:** the 124M plateau was a *single-decoder* ceiling, not
@@ -122,7 +123,8 @@ synthesis work lives in `training/` only.
 
 - `bench_common.py` — shared exact-match scorer (port of `web/bench.js`).
 - `grammar.py` — Python port of `web/grammar.js` constrained decoder.
-- `canon.py` — value canonicalization.
+- `canon.py` — value canonicalization + enum value-snapping (`snap_enums`,
+  `canonicalize_call`). `verify_enum_snap.py` measures the snap gain.
 - `bench_h1_two_stage.py`, `bench_h1_con.py`, `bench_h1_con_cloud.py` —
   two-stage decode (H1 / H1.2).
 - `bench_h1p3..h1p13*.py` — the picker → synthesis iteration scripts.
@@ -147,6 +149,9 @@ synthesis work lives in `training/` only.
 2. **Synthesis beats selection.** A picker can't exceed the oracle;
    Llama synthesizing from GPT-2 candidates can merge/fix → 78.7%.
 3. Value canonicalization (time/day/float formats) = +2.7 pp oracle, free.
+   Enum value-snapping (Iter 38, `canon.snap_enums` — predicted value →
+   registry enum member) = a further +3.0 pp on synth (78.7→81.7%), free,
+   0 regressions.
 4. Context extension: **block-preserving** wpe is the right way. Keep the
    native 0-1023 rows verbatim (frozen, `weight_decay=0`) and only
    interpolate the tail — short prompts then pay zero tax. Iter 35's
