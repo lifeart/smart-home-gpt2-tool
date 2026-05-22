@@ -7,7 +7,7 @@ sdk: static
 app_file: index.html
 pinned: false
 license: mit
-short_description: GPT-2 124M turns smart-home commands into JSON tool calls, 100% in-browser via WebGPU.
+short_description: GPT-2 124M → smart-home JSON tool calls, in-browser
 ---
 
 # Smart-Home GPT-2 · in-browser tool-calling demo
