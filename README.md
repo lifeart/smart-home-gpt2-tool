@@ -181,8 +181,6 @@ npm run dev
 
 ### Ограничения
 
-Честно, без приукрашивания:
-
 - **Потолок 124M-модели реален.** Один декодер упирается в ~57% exact-match / ~84% name-accuracy. Каскад v6→v9 поднимает до 59.3% в браузере; 81.7% достигается только синтез-пайплайном с внешней Llama-70B. Это не масштабируется одним лишь дообучением — `PLAN.md` неоднократно показывает, что наращивание данных не помогает (Iter 22, 24, 41).
 - **Синтез-пайплайн (81.7%) не работает в браузере** — ему нужен внешний Llama-эндпойнт, что противоречит условию «только браузер». В браузере доступен каскад на 59.3%.
 - **B4 (in-browser синтез-модель) валидирована, но не зашипана.** Идея третьей GPT-2-модели синтеза подтвердилась (обученная модель достигла oracle-потолка кандидатов), но первый набор кандидатов неверно «раскадрировал» v9, и финальную перепрогонку не удалось завершить на нестабильной HF Jobs инфраструктуре. Подробности — `HANDOFF.md` и `PLAN.md`, Iter 42.
@@ -326,8 +324,6 @@ Heavy compute ran on HF Jobs (`hf jobs uv run --flavor {t4-small|l40sx1|cpu-upgr
 **4. Shrink / speed up.** The browser already offers fp16 (default) and q8. For CPU inference, quantization options are covered in [`QUANTIZATION.md`](QUANTIZATION.md).
 
 ### Limitations
-
-Honest, not oversold:
 
 - **The 124M ceiling is real.** A single decoder plateaus at ~57% exact-match / ~84% name accuracy. The v6→v9 cascade lifts that to 59.3% in-browser; 81.7% is only reached by the synthesis pipeline with an external Llama-70B. It does not scale with fine-tuning alone — `PLAN.md` repeatedly shows that adding data does not help (Iter 22, 24, 41).
 - **The synthesis pipeline (81.7%) does not run in the browser** — it needs an external Llama endpoint, which conflicts with the browser-only constraint. The browser config is the 59.3% cascade.

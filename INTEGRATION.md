@@ -1,7 +1,7 @@
 # Smart-Home GPT-2 — Integration Guide
 
 Practical paths to plug the smart-home GPT-2 124M model into real smart-home
-stacks. No fluff, no marketing.
+stacks.
 
 > **Try it first, no install:**
 > [GitHub Pages demo](https://lifeart.github.io/smart-home-gpt2-tool/) ·
