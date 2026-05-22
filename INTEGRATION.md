@@ -1,6 +1,20 @@
 # Smart-Home GPT-2 — Integration Guide
 
-Practical paths to plug `smart_home_v2.pt` (GPT-2 124M FT, 475 MB, ~25 s/command on x86 CPU) into real smart-home stacks and run it on small hardware. No fluff, no marketing.
+Practical paths to plug the smart-home GPT-2 124M model into real smart-home
+stacks. No fluff, no marketing.
+
+> **Try it first, no install:**
+> [GitHub Pages demo](https://lifeart.github.io/smart-home-gpt2-tool/) ·
+> [Hugging Face Space](https://huggingface.co/spaces/lifeart/smart-home-gpt2-tool)
+
+**What this guide covers.** The primary deployment of this project is
+**in-browser** (WebGPU + transformers.js, see the [README](README.md) and
+[`TUTORIAL.md`](TUTORIAL.md)). Whichever way you run the model — in the browser
+or as a server-side process — its output is the same: one JSON tool call per
+command. This guide is about the part *after* the model: mapping that JSON onto
+a real smart-home platform, plus notes on running it on small hardware. The
+platform wiring below is deployment-agnostic — the glue functions take the JSON
+and call your stack.
 
 The model emits one JSON object per command, e.g.:
 
@@ -8,7 +22,12 @@ The model emits one JSON object per command, e.g.:
 {"name": "turn_on_light", "arguments": {"room": "kitchen", "brightness_pct": 80}}
 ```
 
-Your job is to map the `name` → a platform call and pass `arguments` as the payload. Below: how to do that for six common stacks, then Pi feasibility, then one recommended stack.
+Your job is to map the `name` → a platform call and pass `arguments` as the payload. Below: how to do that for six common stacks, then small-hardware feasibility, then one recommended stack.
+
+> Latency note: the in-browser config runs through WebGPU at ~26–44 tok/s and
+> loads in ~1.4 s from cache (Iter 37). The CPU latency figures further down
+> (~25 s/command) refer to running the PyTorch model on a CPU-only box without
+> a GPU — they are a worst case, not the browser experience.
 
 ---
 
@@ -61,7 +80,7 @@ def call_ha(tool_json: dict):
 
 Caveats:
 - Entity IDs in HA do not always follow `domain.room`. You must either rename HA entities to match the model's `room` slot, or maintain an explicit lookup table.
-- 100-function registry overshoots HA's flat service model. Many of our tools (`blink_light`, `set_light_scene`) need to be lowered to a sequence of `light.turn_on` calls.
+- The function registry (`data/tool_registry.json`, 123 schemas) overshoots HA's flat service model. Many tools (`blink_light`, `set_light_scene`) need to be lowered to a sequence of `light.turn_on` calls.
 
 **Pattern B — Custom Conversation Agent.** Subclass `homeassistant.components.conversation.AbstractConversationAgent.async_process()`, call the model, synthesise an `IntentResponse`. Installed via HACS or `custom_components/gpt2_smart_home/__init__.py`. You get HA's UI, voice button and history for free.
 
@@ -205,6 +224,10 @@ This is what you actually want if you are building from scratch: one Mosquitto b
 
 ## 2. Raspberry Pi feasibility
 
+> This section covers running the **PyTorch model server-side on a Pi**. If you
+> only need the demo, a modern browser with WebGPU on the Pi (or any client)
+> runs the in-browser config with no server at all — see the [README](README.md).
+
 End-to-end stack memory budget (idle, after weights are loaded):
 
 | Component | RAM |
@@ -258,10 +281,12 @@ One box, one weekend, usable result:
 - Raspberry Pi OS Bookworm 64-bit (PipeWire default)
 - Python 3.11
 - `torch==2.4.0` CPU wheel for aarch64
-- `faster-whisper==1.0.3` with `model="small"`, `compute_type="int8"`, `language="ru"`, `task="translate"`
-- GPT-2: `smart_home_v2.pt` quantised to int8 dynamic at load:
+- `faster-whisper==1.0.3` with `model="small"`, `compute_type="int8"`, `task="translate"` (any language → English)
+- GPT-2: a smart-home checkpoint (`lifeart/smart-home-gpt2-v9` from the HF Hub,
+  re-materialized to a PyTorch model) quantised to int8 dynamic at load:
   ```python
-  model = torch.load("smart_home_v2.pt", map_location="cpu")
+  from transformers import GPT2LMHeadModel
+  model = GPT2LMHeadModel.from_pretrained("lifeart/smart-home-gpt2-v9")
   model = torch.ao.quantization.quantize_dynamic(
       model, {torch.nn.Linear}, dtype=torch.qint8)
   ```
@@ -290,13 +315,21 @@ One box, one weekend, usable result:
 - **Total: ~900 MB on a 8 GB Pi** — 7 GB free for HA Core if you add it later.
 
 **Honest expected accuracy**
-- README baseline: 47% RU voice end-to-end with Whisper-medium. With Whisper-small you lose another ~8 pp → **~38–42% on Pi 5 voice**. Fuzzy match on tool name is mandatory.
-- For better than 50%, drop GPT-2 and run a 1–4B model in `llama.cpp` (Qwen2.5-3B-Instruct Q4_0 fits in 2.5 GB, gives ~90%+ on this task per public BFCL-style evals, but bumps latency to ~40–60 s on Pi 5 — same trade-off the README mentions).
+- Text exact-match (name + args) on `sh_test.json`: the single-decoder
+  config is ~57% and the browser-native v6→v9 cascade is 59.3% (see
+  `HANDOFF.md`). The 81.7% figure is the synthesis pipeline and needs an
+  external Llama API — it is not a local-only number. Voice adds ASR error
+  on top: Whisper-small has a higher WER than the default browser
+  `Xenova/whisper-base`, so expect a further drop on a Pi voice setup.
+- For materially higher accuracy, drop GPT-2 and run a 1–4B model in
+  `llama.cpp` (Qwen2.5-3B-Instruct Q4_0 fits in ~2.5 GB) — but that bumps
+  latency to ~40–60 s on a Pi 5. The 124M ceiling is real; see the README's
+  Limitations section.
 
 **What this stack will not do**
-- Real-time conversation. 24 s/command — fine for lights/blinds/thermostat, painful for queries.
-- Multi-turn context. GPT-2 was SFT'd one-shot → one-shot. No history.
-- Reliable Russian without fuzzy match. Always keep the 100-name matcher in the loop.
+- Real-time conversation. ~24 s/command on a CPU-only Pi — fine for lights/blinds/thermostat, painful for queries. (The in-browser WebGPU config is far faster — ~26–44 tok/s.)
+- Multi-turn context. The model was SFT'd one-shot → one-shot. No history.
+- Reach the 81.7% synthesis-pipeline number without an external Llama endpoint.
 
 **When to graduate**
 - More accuracy: swap GPT-2 → Qwen2.5-3B Q4_0 on the same Pi 5. Same wiring, ~2× the latency, ~2× the accuracy.
@@ -316,7 +349,8 @@ from openwakeword.model import Model as WW
 
 ww  = WW(wakeword_models=["hey_tekhno.onnx"])
 stt = WhisperModel("small", device="cpu", compute_type="int8")
-gpt = torch.load("smart_home_v2.pt", map_location="cpu")
+from transformers import GPT2LMHeadModel
+gpt = GPT2LMHeadModel.from_pretrained("lifeart/smart-home-gpt2-v9")
 gpt = torch.ao.quantization.quantize_dynamic(gpt, {torch.nn.Linear}, dtype=torch.qint8)
 gpt.eval()
 
@@ -328,9 +362,9 @@ while True:
     # record 4s, transcribe RU→EN, run GPT-2, publish
     a = sd.rec(int(4*16000), 16000, 1, dtype='int16'); sd.wait()
     sf.write("/tmp/cmd.wav", a, 16000)
-    segs,_ = stt.transcribe("/tmp/cmd.wav", language="ru", task="translate")
+    segs,_ = stt.transcribe("/tmp/cmd.wav", task="translate")  # any language → English
     en = " ".join(s.text for s in segs).strip()
-    tj = gpt_to_json(en)   # see src/voice_pipeline.py
+    tj = gpt_to_json(en)   # run the model, parse the JSON tool call
     publish.single(f"home/{tj['arguments']['room']}/cmd",
                    json.dumps(tj), hostname="localhost")
 ```

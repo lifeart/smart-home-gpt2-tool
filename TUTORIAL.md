@@ -1,173 +1,152 @@
 # Туториал / Tutorial
 
-## 🇷🇺 С нуля до работающего голосового агента (30 минут)
+> **Живая демонстрация (ничего ставить не нужно):**
+> [GitHub Pages](https://lifeart.github.io/smart-home-gpt2-tool/) ·
+> [Hugging Face Space](https://huggingface.co/spaces/lifeart/smart-home-gpt2-tool)
+>
+> **Live demo (nothing to install):**
+> [GitHub Pages](https://lifeart.github.io/smart-home-gpt2-tool/) ·
+> [Hugging Face Space](https://huggingface.co/spaces/lifeart/smart-home-gpt2-tool)
 
-### Шаг 1. Подготовка окружения
+Если вам нужен только готовый результат — откройте ссылки выше: модель запускается
+целиком в браузере через WebGPU, сервера нет. Туториал ниже — для тех, кто хочет
+запустить демонстрацию локально и расширить её под себя.
 
-```bash
-# Linux/WSL2/macOS. На голой Windows проще через WSL2.
-git clone https://github.com/barometech/smart-home-gpt2
-cd smart-home-gpt2
-
-# Git LFS должен быть установлен заранее (https://git-lfs.com)
-git lfs install
-git lfs pull            # подтянет 475 МБ smart_home_v2.pt
-
-# Python 3.11+ в venv
-python3 -m venv .venv
-source .venv/bin/activate
-pip install torch==2.4.0+cpu --index-url https://download.pytorch.org/whl/cpu
-pip install faster-whisper soundfile omegaconf tokenizers safetensors huggingface-hub
-```
-
-### Шаг 2. Базовый GPT-2 (одноразово)
-
-Первый запуск любого скрипта сам подтянет `openai-community/gpt2` (~520 МБ) в `weights/base_gpt2/`. Или вручную:
-
-```bash
-huggingface-cli download openai-community/gpt2 --local-dir weights/base_gpt2
-```
-
-### Шаг 3. Простой текстовый тест
-
-```bash
-python src/bench.py
-```
-
-Прогоняет 300 held-out команд из `data/sh_test.json` через `weights/smart_home_v2.pt` и печатает accuracy. На 4 ядрах CPU занимает ~2 часа. Ожидаемый результат: **~72% overall**.
-
-Если хочется быстро глянуть что работает, отредактируй `bench.py` строку `items = json.load(...)` → `items = json.load(...)[:30]` — займёт 15 минут.
-
-### Шаг 4. Голосовой пайплайн
-
-```bash
-python src/voice_pipeline.py
-```
-
-Скрипт:
-1. Скачает silero TTS (~50 МБ) и faster-whisper medium (~770 МБ) при первом запуске.
-2. Озвучит 30 русских команд через silero.
-3. Распознает их через Whisper translate-mode (RU речь → EN текст).
-4. Прогонит каждую через GPT-2 → JSON tool call.
-5. Применит fuzzy match (если модель галлюцинирует имя — подтянет к ближайшему в registry).
-6. Распечатает result + сохранит `results/voice_pipeline_results.json`.
-
-Ожидаемый результат: **~47% accuracy**, ~30 сек/команда на CPU.
-
-### Шаг 5. Свой микрофон
-
-Замени блок `synth_ru` в `voice_pipeline.py` на запись с микрофона:
-
-```python
-import sounddevice as sd, soundfile as sf
-def record_command(out_path, duration=5):
-    audio = sd.rec(int(duration * 16000), samplerate=16000, channels=1, dtype="float32")
-    sd.wait()
-    sf.write(str(out_path), audio, 16000)
-
-# вместо synth_ru(tts, ru_text, TMP_WAV):
-record_command(TMP_WAV, duration=5)
-```
-
-Установи: `pip install sounddevice`.
-
-### Шаг 6. Свой набор функций
-
-Открой `src/voice_pipeline.py` → `TOOL_REGISTRY` (12 функций по умолчанию). Замени на нужные:
-
-```python
-TOOL_REGISTRY = {
-    "my_turn_on_light": {"params": {"room": "string", "brightness": "integer"}},
-    "my_send_telegram": {"params": {"chat_id": "string", "text": "string"}},
-    # ...
-}
-```
-
-Если функция близка к тем, что в датасете (например `set_light_color`), модель попадёт сразу. Если совсем новая — нужен дообуч (см. ниже).
-
-### Шаг 7. Подключение к Home Assistant
-
-См. отдельный документ `INTEGRATION.md` — там готовый код для Home Assistant REST API, Zigbee2MQTT, ESPHome, HomeKit, MQTT.
-
-Минимальный пример (Home Assistant):
-
-```python
-import requests
-HA_URL = "http://homeassistant.local:8123"
-HA_TOKEN = "YOUR_LONG_LIVED_TOKEN"
-
-def execute(call):
-    if call["name"] == "turn_on_light":
-        requests.post(
-            f"{HA_URL}/api/services/light/turn_on",
-            headers={"Authorization": f"Bearer {HA_TOKEN}"},
-            json={"entity_id": f"light.{call['arguments']['room'].replace(' ','_')}"},
-        )
-```
-
-### Шаг 8. Расширение датасета
-
-Если нужны функции, которых нет в наших 100:
-
-1. Сгенерируй ~200 примеров через любую LLM (см. промпт-шаблон в `src/build_sft_v2.py`).
-2. Положи в `data/sh_my_domain.json` (формат `{"id", "function": [{spec},...], "prompt", "gold_name", "gold_args"}`).
-3. Запусти `python src/build_sft_v2.py` (склеит с существующими в `sh_train.json`).
-4. Запусти `python src/train.py` (2-3 часа CPU).
+If you just want the running result, open the links above — the model runs entirely
+in the browser via WebGPU, no server. The tutorial below is for running the demo
+locally and extending it.
 
 ---
 
-## 🇬🇧 Zero to working voice agent (30 min)
+## 🇷🇺 Запуск браузерной демонстрации локально
 
-### Step 1. Environment
-
-```bash
-git clone https://github.com/barometech/smart-home-gpt2
-cd smart-home-gpt2
-
-git lfs install && git lfs pull   # pulls 475 MB smart_home_v2.pt
-
-python3 -m venv .venv && source .venv/bin/activate
-pip install torch==2.4.0+cpu --index-url https://download.pytorch.org/whl/cpu
-pip install faster-whisper soundfile omegaconf tokenizers safetensors huggingface-hub
-```
-
-### Step 2. Base GPT-2 (once)
-
-First run of any script auto-downloads `openai-community/gpt2` to `weights/base_gpt2/`. Manual: `huggingface-cli download openai-community/gpt2 --local-dir weights/base_gpt2`.
-
-### Step 3. Text bench
+### Шаг 1. Клонирование
 
 ```bash
-python src/bench.py        # 300 held-out items, ~2h CPU, target ~72%
+git clone https://github.com/lifeart/smart-home-gpt2-tool
+cd smart-home-gpt2-tool
 ```
 
-For quick sanity, edit `items = ...[:30]` — 15 min.
+### Шаг 2. Запуск demo (`web/`)
 
-### Step 4. Voice pipeline
+Демонстрация — это Vite + transformers.js приложение. Нужен Node.js 18+.
 
 ```bash
-python src/voice_pipeline.py
+cd web
+npm install
+npm run dev        # → http://localhost:5173/
 ```
 
-Downloads silero TTS + faster-whisper medium on first run. Runs 30 Russian commands end-to-end. Expected: ~47% accuracy, ~30s/command CPU.
+При первом запуске браузер один раз скачает веса модели с HF Hub
+(`lifeart/smart-home-gpt2-v14-ctx4096`, fp16 ≈ 330 МБ) и закэширует их.
+Инференс идёт через WebGPU прямо в браузере — никакого сервера.
 
-### Step 5. Your microphone
+### Шаг 3. Пресеты
 
-Replace `synth_ru` block with `sounddevice` recording (snippet in Russian section above).
+В интерфейсе есть готовые пресеты (`web/presets.js`): 32 коротких команды
+(по 3 функции-кандидата) и категория «Long context (v14)» с полными схемами
+на ~3000 токенов. Выберите пресет → **Generate** → внизу появится
+«Parsed tool call» — финальный JSON-вызов.
 
-### Step 6. Your tools
+### Шаг 4. Голосовой ввод
 
-Edit `TOOL_REGISTRY` in `voice_pipeline.py`. Names close to existing ones (e.g. `set_light_color`) work out of the box. Brand-new names need re-SFT.
+Нажмите кнопку микрофона. Whisper (`Xenova/whisper-base`) запускается прямо в
+браузере, транскрибирует речь (`task: 'translate'` — любой из 99 языков сразу
+в English) и подставляет текст в промпт с авто-Generate. Никакого API.
 
-### Step 7. Home Assistant
+### Шаг 5. Переключатели
 
-See `INTEGRATION.md` for HA, Zigbee2MQTT, ESPHome, HomeKit, MQTT recipes.
+- **dtype:** fp16 (дефолт на WebGPU) / fp32 / q8. fp16 = fp32 по точности,
+  но вдвое меньше скачивать. q8 теряет ~3 pp.
+- **Constrained decoding / typed-args** — гарантируют валидный типизированный JSON.
+- **Retrieval** — опционально, по умолчанию выключен; ранжирует функции-кандидаты
+  через MiniLM (компромисс «скорость↔точность»).
 
-### Step 8. Extending the dataset
+### Шаг 6. Свой набор функций
 
-1. Generate ~200 items in same format (see `src/build_sft_v2.py` for schema).
-2. Drop into `data/sh_<your_domain>.json`.
-3. `python src/build_sft_v2.py && python src/train.py` (~2-3h CPU).
+Схемы функций живут в `web/tool_schemas.js` (123 схемы) и `data/tool_registry.json`.
+Добавьте свою схему в том же формате и используйте её в пресете. Имена, близкие к
+тем, что модель уже знает, работают сразу. Совсем новые функции требуют дообучения
+(скрипты в `training/`).
+
+### Шаг 7. Подключение к Home Assistant и др.
+
+См. [`INTEGRATION.md`](INTEGRATION.md) — готовые рецепты для Home Assistant,
+Zigbee2MQTT, ESPHome, HomeKit, Tuya, generic MQTT. Модель выдаёт
+`{"name": ..., "arguments": {...}}`; ваша задача — смапить `name` на вызов платформы.
+
+### Шаг 8. Воспроизведение бенчмарков
+
+Все цифры проекта — в [`HANDOFF.md`](HANDOFF.md) и [`PLAN.md`](PLAN.md).
+Браузерные бенчи лежат в `web/bench.js` / `web/voice_bench.js`; скрипты
+тренировки и серверных бенчей — в `training/`. Тяжёлые прогоны запускались на
+HF Jobs (`hf jobs uv run --flavor t4-small --secrets HF_TOKEN --detach`).
+
+---
+
+## 🇬🇧 Running the browser demo locally
+
+### Step 1. Clone
+
+```bash
+git clone https://github.com/lifeart/smart-home-gpt2-tool
+cd smart-home-gpt2-tool
+```
+
+### Step 2. Run the demo (`web/`)
+
+The demo is a Vite + transformers.js app. Needs Node.js 18+.
+
+```bash
+cd web
+npm install
+npm run dev        # → http://localhost:5173/
+```
+
+On first run the browser downloads the model weights once from the HF Hub
+(`lifeart/smart-home-gpt2-v14-ctx4096`, fp16 ≈ 330 MB) and caches them.
+Inference runs through WebGPU in the browser — no server.
+
+### Step 3. Presets
+
+The UI ships presets (`web/presets.js`): 32 short commands (3 candidate
+functions each) and a "Long context (v14)" category with ~3000-token full
+schemas. Pick a preset → **Generate** → the "Parsed tool call" at the bottom
+is the final JSON call.
+
+### Step 4. Voice input
+
+Click the microphone button. Whisper (`Xenova/whisper-base`) runs in the
+browser, transcribes speech (`task: 'translate'` — any of 99 languages straight
+to English) and injects the text into the prompt with auto-Generate. No API.
+
+### Step 5. Toggles
+
+- **dtype:** fp16 (default on WebGPU) / fp32 / q8. fp16 == fp32 on accuracy
+  but half the download. q8 costs ~3 pp.
+- **Constrained decoding / typed-args** — guarantee valid typed JSON.
+- **Retrieval** — optional, default OFF; ranks candidate functions via MiniLM
+  (a speed/accuracy trade-off).
+
+### Step 6. Your own functions
+
+Function schemas live in `web/tool_schemas.js` (123 schemas) and
+`data/tool_registry.json`. Add yours in the same format and use it in a preset.
+Names close to what the model already knows work out of the box; brand-new
+functions need re-training (scripts in `training/`).
+
+### Step 7. Home Assistant and others
+
+See [`INTEGRATION.md`](INTEGRATION.md) for ready recipes — Home Assistant,
+Zigbee2MQTT, ESPHome, HomeKit, Tuya, generic MQTT. The model emits
+`{"name": ..., "arguments": {...}}`; your job is to map `name` to a platform call.
+
+### Step 8. Reproducing benchmarks
+
+Every project number is in [`HANDOFF.md`](HANDOFF.md) and [`PLAN.md`](PLAN.md).
+Browser benches are in `web/bench.js` / `web/voice_bench.js`; training and
+server-side bench scripts are in `training/`. Heavy runs used HF Jobs
+(`hf jobs uv run --flavor t4-small --secrets HF_TOKEN --detach`).
 
 ---
 
@@ -175,9 +154,8 @@ See `INTEGRATION.md` for HA, Zigbee2MQTT, ESPHome, HomeKit, MQTT recipes.
 
 | симптом / symptom | причина / cause | фикс / fix |
 |---|---|---|
-| `ModuleNotFoundError: faster_whisper` | `pip install faster-whisper` |
-| Whisper-medium качает 770 МБ долго | первый запуск; кэшируется | подождать |
-| `model.load_state_dict` mismatch | base_gpt2 неполный | `rm -rf weights/base_gpt2 && rerun` |
-| `start_vacuum_cleaner` not in registry | модель галлюцинирует | fuzzy match уже включён, проверь `pred_name_raw` |
-| inference > 60s/команда | слабый CPU или Whisper-large | переключись на `WhisperModel("small")` |
-| Voice 0% accuracy | TOOL_REGISTRY пустой | заполни словарём |
+| Модель выдаёт пробелы под fp16 / garbled fp16 output | старый onnxruntime-web | нужен transformers.js ≥4.2 (onnxruntime-web ≥1.26) |
+| `404` на `/models/...` в браузере / 404 on `/models/` | Vite SPA-fallback | `vite.config.js` плагин `models404` уже это чинит |
+| WebGPU недоступен / WebGPU unavailable | старый браузер | актуальный Chrome/Edge; иначе демо падает на WASM-fp32 |
+| Долгая первая загрузка / slow first load | веса (~330 МБ fp16) качаются один раз | подождать; дальше из кэша (~1.4 с) |
+| Голос не транскрибирует / voice not transcribing | нет доступа к микрофону | разрешить микрофон для localhost |

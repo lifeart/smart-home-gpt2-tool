@@ -1,10 +1,28 @@
-# Quantization Plan for smart-home-gpt2 (GPT-2 124M, CPU)
+# Quantization Plan for smart-home-gpt2 (GPT-2 124M)
 
-**Target model:** `weights/gpt2_ft_final.pt` — full fine-tune of HF GPT-2 124M, FP32 state dict, ~475 MB on disk.
-**Current latency:** 25–35 s per command on a 4-core x86 CPU (single user, batch=1, greedy ~30–60 new tokens).
-**Goal:** ship faster inference for an English-text → JSON tool-call task without giving up the 71.7% text accuracy / 92% in-domain accuracy reported in the repo.
+> **What actually shipped.** The project's primary deployment is in-browser
+> (WebGPU + transformers.js). The shipped quantization there is **ONNX fp16**,
+> the WebGPU default — it is *lossless* vs fp32 on name accuracy (v14 = 83.3%
+> on both) while halving the download (~330 MB vs ~660 MB) and using ~50% less
+> GPU memory. The browser also offers **q8**, which costs ~3 pp (v14 q8 =
+> 80.0%, n=300). fp16 on WebGPU needs onnxruntime-web ≥1.26; `export_onnx.py`
+> keeps LayerNorm/gelu ops in fp32 so the fp16 graph stays numerically sound.
+> See `HANDOFF.md` (ONNX dtype section) and `PLAN.md` Iter 37.
+>
+> The document below is the **CPU / server-side** quantization analysis — still
+> valid if you run the PyTorch model on a CPU-only box. It predates the
+> in-browser ONNX work; treat fp16/q8 ONNX as the answer for the browser and
+> the options below as the answer for a CPU server or a Raspberry Pi.
 
-All numbers below are sourced from published benchmarks (HF, ONNX Runtime, llama.cpp, dev.to GPT-2 INT8 article). Where a number is a projection rather than a measurement, it is marked **(estimated)**.
+**Target model:** a full fine-tune of HF GPT-2 124M, FP32, ~475 MB on disk
+(the HF Hub checkpoints under `lifeart/`, e.g. `smart-home-gpt2-v9`).
+**Current latency:** 25–35 s per command on a 4-core x86 CPU **with no GPU**
+(single user, batch=1, greedy ~30–60 new tokens). The in-browser WebGPU config
+is far faster (~26–44 tok/s).
+**Goal:** ship faster CPU inference for an English-text → JSON tool-call task
+without giving up tool-call accuracy.
+
+All numbers below are sourced from published benchmarks (HF, ONNX Runtime, llama.cpp, dev.to GPT-2 INT8 article). Where a number is a projection rather than a measurement, it is marked **(estimated)**. Project accuracy figures are in `HANDOFF.md` / `PLAN.md`.
 
 ---
 
@@ -32,7 +50,7 @@ All numbers below are sourced from published benchmarks (HF, ONNX Runtime, llama
 **Theory.** TorchInductor fuses ops and emits optimized C++/OpenMP kernels; AOT Inductor produces a standalone `.so`. Size unchanged. Speed 1.3–1.7× on CPU **(estimated)** — wins come from removing per-token Python overhead. No quality loss. PyTorch 2.4 built-in. **Difficulty 2/5**, but stacks poorly with HF `generate()` KV-cache loops.
 
 ### 1.8 Pruning + quantization combo
-**Theory.** Magnitude- or movement-prune ~30–50% of weights to zero, then INT8 quantize. On dense INT8 the size stays the same; sparse CPU kernels for transformers are immature, expect no speedup on commodity x86. Quality unpredictable on a 1500-example fine-tune — pruning eats the very signal you trained. **Difficulty 5/5**, worst ROI here.
+**Theory.** Magnitude- or movement-prune ~30–50% of weights to zero, then INT8 quantize. On dense INT8 the size stays the same; sparse CPU kernels for transformers are immature, expect no speedup on commodity x86. Quality unpredictable on a domain-specific fine-tune — pruning eats the very signal you trained. **Difficulty 5/5**, worst ROI here.
 
 ---
 
@@ -61,9 +79,9 @@ Sources: dev.to GPT-2 INT8 study (+22%), MS Azure HF×ORT INT8 blog (3×, 6× w/
 **Ship two builds.** The model is 124M and the workload is short JSON outputs, so the right call is:
 
 1. **Quick win (today):** `torch.quantize_dynamic` INT8 → cuts size 475→180 MB, latency 25–35 s → ~18–25 s. Zero risk to the tool-call task.
-2. **Real win (next iteration):** convert to GGUF Q5_K_M and serve via `llama-cpp-python`. Expect 25–35 s → **5–8 s** on the same 4-core x86 CPU, with the 92% in-domain accuracy preserved within ~1 pp.
+2. **Real win (next iteration):** convert to GGUF Q5_K_M and serve via `llama-cpp-python`. Expect 25–35 s → **5–8 s** on the same 4-core x86 CPU, with tool-call accuracy preserved within ~1–2 pp of the FP32 baseline.
 
-Skip GPTQ/AWQ. Their CPU story is weak and their 4-bit quality story on a 124M model is uncertain. Skip pruning — it eats the very fine-tune signal you trained on 1500 SFT items.
+Skip GPTQ/AWQ. Their CPU story is weak and their 4-bit quality story on a 124M model is uncertain. Skip pruning — it eats the very fine-tune signal you trained on.
 
 ### 3.1 Runnable snippet — dynamic INT8 (ship today)
 
@@ -102,7 +120,7 @@ model.load_state_dict(torch.load("weights/gpt2_ft_int8.pt", map_location="cpu"))
 
 **Expected end size:** ~180 MB.
 **Expected latency:** 18–25 s per command on the same 4-core CPU.
-**Risks:** for very short generations the per-token Python/`generate()` overhead dominates; the speedup may land closer to 1.2× than 1.5×. Tool-call accuracy drop expected <1 pp; rerun `src/bench.py` to confirm against the 71.7% / 92% baselines before shipping.
+**Risks:** for very short generations the per-token Python/`generate()` overhead dominates; the speedup may land closer to 1.2× than 1.5×. Tool-call accuracy drop expected <1 pp; re-run a held-out bench (`sh_test.json`, n=300; see `training/`) to confirm against the FP32 baseline before shipping.
 
 ### 3.2 Runnable plan — GGUF Q5_K_M (ship next)
 
@@ -146,7 +164,7 @@ print(out["choices"][0]["text"])
 **Risks specific to the tool-call task:**
 - JSON closing-brace failures: 4-bit quantization can shift low-probability tokens; mitigate with `temperature=0` + grammar-constrained decoding (llama.cpp GBNF) to force valid JSON.
 - 100-name function fuzzy-match still corrects single-token hallucinations — keep the fuzzy matcher in the pipeline.
-- Re-run `src/bench.py` adapted to the llama-cpp-python call against the 300 held-out items; reject the build if overall accuracy drops by more than 3 pp from the FP32 baseline.
+- Re-run a held-out bench (`sh_test.json`, n=300) adapted to the llama-cpp-python call; reject the build if overall accuracy drops by more than 3 pp from the FP32 baseline.
 
 ---
 
@@ -180,4 +198,4 @@ Raspberry Pi 4 (Cortex-A72, 4 cores, no VNNI, no AVX) and Pi 5 (Cortex-A76, ~2×
 3. **Skip:** GPTQ, AWQ, bitsandbytes, pruning. Either wrong tool for CPU or wrong tool for a 124M model.
 4. **Pi target:** GGUF Q4_K_M + GBNF JSON grammar + greedy decode. Pi 4 ~6–9 s/cmd, Pi 5 ~2.5–4 s/cmd (both estimated).
 
-**Validation gate before shipping any quantized build:** rerun `src/bench.py` against the 300 held-out items and reject if overall accuracy drops more than 3 pp from the FP32 baseline (71.7% text / 92% in-domain).
+**Validation gate before shipping any quantized build:** re-run a held-out bench against the 300 `sh_test.json` items and reject if exact-match (name + args) drops more than 3 pp from the FP32 baseline. For the browser path, fp16 ONNX is already lossless and is the shipped default — see the note at the top of this document.

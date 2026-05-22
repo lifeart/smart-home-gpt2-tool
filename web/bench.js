@@ -23,10 +23,11 @@ import {
   retrieveTopK,
   NONE_SENTINEL,
 } from './retrieval.js';
+import { asset } from './paths.js';
 
-const SAMPLE_URL = '/eval/sh_test_sample.json';
-const FULL_URL = '/eval/sh_test.json';
-const REGISTRY_URL = '/eval/tool_registry.json';
+const SAMPLE_URL = asset('eval/sh_test_sample.json');
+const FULL_URL = asset('eval/sh_test.json');
+const REGISTRY_URL = asset('eval/tool_registry.json');
 
 let _sample = null;
 let _full = null;

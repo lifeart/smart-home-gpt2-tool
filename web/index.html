@@ -3,57 +3,146 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Smart-Home GPT-2 · WebGPU</title>
+    <meta name="color-scheme" content="light dark" />
+    <meta
+      name="description"
+      content="GPT-2 124M fine-tuned to turn natural-language smart-home commands into JSON tool calls — runs 100% in your browser via WebGPU. No server, no API."
+    />
+    <title>Smart-Home GPT-2 · in-browser tool-calling demo</title>
+    <!--
+      Cross-origin isolation drop-in (coi-serviceworker). WebGPU works without
+      it, but WASM multi-threading needs SharedArrayBuffer, which needs COOP/COEP
+      headers. Static hosts (GitHub Pages) can't set headers, so this service
+      worker injects them. It self-resolves its own registration URL via
+      document.currentScript.src, so it works under any base path. Harmless in
+      local dev — vite already sets the headers, so the SW just passes through.
+    -->
+    <script src="coi-serviceworker.js"></script>
     <link rel="stylesheet" href="/style.css" />
   </head>
   <body>
-    <main>
-      <h1>Smart-Home GPT-2 · WebGPU</h1>
+    <div class="page">
+      <!-- ===================== HEADER ===================== -->
+      <header class="site-header">
+        <div class="brand">
+          <span class="brand-mark" aria-hidden="true">⌂</span>
+          <div class="brand-text">
+            <h1>Smart-Home GPT-2</h1>
+            <p class="brand-tag">Natural language → JSON tool calls, in your browser</p>
+          </div>
+        </div>
+        <button id="theme-toggle" class="theme-toggle" type="button" title="Toggle light / dark theme" aria-label="Toggle theme">
+          <span class="theme-icon">◐</span>
+        </button>
+      </header>
 
-      <section class="config">
-        <label>
-          Model
-          <select id="model">
-            <option value="lifeart/smart-home-gpt2-v14-ctx4096" selected>smart-home-gpt2-v14-ctx4096 · 4096-token context · Hugging Face Hub</option>
-            <option value="lifeart/smart-home-gpt2-v9">smart-home-gpt2-v9 · 1024-token context · loads locally</option>
+      <!-- ===================== INTRO ===================== -->
+      <section class="intro">
+        <p>
+          This is a <strong>124M-parameter GPT-2</strong> fine-tuned to read a smart-home
+          command and emit the matching <strong>structured tool call</strong>. The model
+          <em>and</em> the optional speech recognition run <strong>entirely in your
+          browser</strong> via WebGPU — no server, no API, nothing leaves your device.
+        </p>
+        <ol class="intro-steps">
+          <li><span class="step-n">1</span> Pick an example command (or speak / type your own)</li>
+          <li><span class="step-n">2</span> Load the model — first run streams ~330&nbsp;MB from the Hugging Face Hub</li>
+          <li><span class="step-n">3</span> Hit <strong>Generate</strong> and watch it produce the JSON tool call</li>
+        </ol>
+      </section>
+
+      <!-- ===================== STEP 1 · COMMAND ===================== -->
+      <section class="card step-card">
+        <div class="card-head">
+          <span class="step-badge">1</span>
+          <h2>Choose a command</h2>
+        </div>
+
+        <div class="field">
+          <label for="preset">Try a realistic command</label>
+          <select id="preset">
+            <option value="" disabled selected>— pick an example command —</option>
           </select>
-        </label>
-        <label>
-          Backend
-          <select id="device">
-            <option value="webgpu">WebGPU</option>
-            <option value="wasm">WASM (CPU)</option>
-          </select>
-        </label>
-        <label>
-          Dtype
-          <select id="dtype">
-            <option value="fp16" selected>fp16 (WebGPU · default)</option>
-            <option value="fp32">fp32</option>
-            <option value="q8">q8 (int8)</option>
-          </select>
-        </label>
-        <button id="load">Load model</button>
-        <span id="status">idle</span>
+          <p class="hint">
+            Casual, lifelike phrasings — implied rooms, vague values, questions —
+            for validating the assistant on real end-user input. Or edit the prompt
+            in <strong>Advanced</strong> below.
+          </p>
+        </div>
+
+        <div class="voice-block">
+          <button id="mic" class="btn btn-ghost" type="button"
+            title="Record a spoken command. Whisper transcribes it in-browser (no server, no API) and drops it into the prompt.">
+            <span class="mic-icon" aria-hidden="true">🎤</span>
+            <span class="mic-label">Speak a command</span>
+          </button>
+          <span id="voice-status" class="voice-status" role="status" aria-live="polite"></span>
+        </div>
+      </section>
+
+      <!-- ===================== STEP 2 · MODEL ===================== -->
+      <section class="card step-card">
+        <div class="card-head">
+          <span class="step-badge">2</span>
+          <h2>Load the model</h2>
+        </div>
+
+        <div class="config-grid">
+          <div class="field">
+            <label for="model">Model</label>
+            <select id="model">
+              <option value="lifeart/smart-home-gpt2-v14-ctx4096" selected>
+                v14 · 4096-token context (default)
+              </option>
+              <option value="lifeart/smart-home-gpt2-v9">
+                v9 · 1024-token context
+              </option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="device">Backend</label>
+            <select id="device">
+              <option value="webgpu">WebGPU (fast)</option>
+              <option value="wasm">WASM / CPU</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="dtype">Precision</label>
+            <select id="dtype">
+              <option value="fp16" selected>fp16 — default</option>
+              <option value="fp32">fp32 — reference</option>
+              <option value="q8">q8 — smallest</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="load-row">
+          <button id="load" class="btn btn-primary">Load model</button>
+          <span id="status" class="status-pill" role="status" aria-live="polite">idle</span>
+        </div>
+
         <div id="model-info" class="info-card" role="status" aria-live="polite"></div>
         <div id="dtype-info" class="info-card dtype-info" role="status" aria-live="polite"></div>
       </section>
 
-      <section>
-        <div class="row" style="margin-bottom:0.5rem">
-          <label>Try a realistic command
-            <select id="preset">
-              <option value="" disabled selected>— pick an example command —</option>
-            </select>
-          </label>
-          <span style="font-size:0.75rem;opacity:0.7;align-self:end;padding-bottom:0.5rem">↑ pick a real end-user phrasing, or edit the prompt below. These are casual commands (implied rooms, vague values, questions) for validating the assistant on lifelike input.</span>
+      <!-- ===================== STEP 3 · GENERATE ===================== -->
+      <section class="card step-card">
+        <div class="card-head">
+          <span class="step-badge">3</span>
+          <h2>Generate the tool call</h2>
         </div>
-        <div class="row voice-row" style="margin-bottom:0.5rem">
-          <button id="mic" type="button" title="Record a spoken command. Whisper transcribes it in-browser (no server, no API) and drops it into the USER line below.">🎤 Speak a command</button>
-          <span id="voice-status" style="font-size:0.78rem;opacity:0.78;align-self:center"></span>
-        </div>
-        <label for="prompt">Prompt (SYSTEM + candidate functions + USER command)</label>
-        <textarea id="prompt" rows="8">SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -
+
+        <!-- Advanced: full prompt + decoding toggles, collapsed by default -->
+        <details class="advanced" id="advanced">
+          <summary>
+            <span class="adv-icon" aria-hidden="true">⚙</span>
+            <span class="adv-title">Advanced — prompt &amp; decoding options</span>
+            <span class="adv-chevron" aria-hidden="true">▸</span>
+          </summary>
+          <div class="advanced-body">
+            <div class="field">
+              <label for="prompt">Prompt (SYSTEM + candidate functions + USER command)</label>
+              <textarea id="prompt" rows="8" spellcheck="false">SYSTEM: You are a helpful assistant with access to the following functions. Use them if required -
 [
   "turn_on_light",
   "turn_off_light",
@@ -67,36 +156,79 @@ USER: Dim the bedroom light to 30 percent.
 
 
 ASSISTANT: &lt;functioncall&gt; </textarea>
-        <div class="row">
-          <label>max new tokens <input id="max" type="number" value="80" min="8" max="256" /></label>
-          <label>temperature <input id="temp" type="number" value="0.0" step="0.1" min="0" max="2" /></label>
-          <label title="Restrict generated tokens to a JSON schema derived from the prompt's candidate list">
-            <input id="constrained" type="checkbox" checked /> Constrained decoding (JSON schema)
-          </label>
-          <label title="Within constrained mode: enforce per-arg-key types (enum value masking, numeric-no-quote, boolean). Iter 7.2.">
-            <input id="typedargs" type="checkbox" checked /> Typed args (enum/numeric)
-          </label>
-          <label title="Within constrained mode: widen the name-token mask to prompt cands ∪ registry names (recovers gold names truncated out of the prompt). Iter 9.3 default ON — best ship config.">
-            <input id="widenames" type="checkbox" checked /> Wide names (registry ∪ prompt)
-          </label>
-          <label title="Re-rank the prompt's candidate list using MiniLM cosine similarity, keep top-K. Off by default so the demo uses the full tool schemas in the prompt; turn on to simulate a large tool registry.">
-            <input id="retrieval" type="checkbox" /> Retrieval pre-rank (MiniLM, top-K)
-          </label>
-          <label title="Number of functions kept after retrieval">
-            K <input id="topk" type="number" value="8" min="1" max="10" style="width:3em" />
-          </label>
-          <button id="run" disabled>Generate</button>
+              <p class="hint">
+                The preset picker above rewrites this automatically. Edit it directly
+                to test custom tool lists or phrasings.
+              </p>
+            </div>
+
+            <div class="adv-grid">
+              <div class="field field-inline">
+                <label for="max">Max new tokens</label>
+                <input id="max" type="number" value="80" min="8" max="256" />
+              </div>
+              <div class="field field-inline">
+                <label for="temp">Temperature</label>
+                <input id="temp" type="number" value="0.0" step="0.1" min="0" max="2" />
+              </div>
+            </div>
+
+            <div class="toggles">
+              <label class="toggle" title="Restrict generated tokens to a JSON schema derived from the prompt's candidate list">
+                <input id="constrained" type="checkbox" checked />
+                <span class="toggle-text">Constrained decoding (JSON schema)</span>
+              </label>
+              <label class="toggle" title="Within constrained mode: enforce per-arg-key types (enum value masking, numeric-no-quote, boolean). Iter 7.2.">
+                <input id="typedargs" type="checkbox" checked />
+                <span class="toggle-text">Typed args (enum / numeric)</span>
+              </label>
+              <label class="toggle" title="Within constrained mode: widen the name-token mask to prompt cands ∪ registry names (recovers gold names truncated out of the prompt). Iter 9.3 default ON — best ship config.">
+                <input id="widenames" type="checkbox" checked />
+                <span class="toggle-text">Wide names (registry ∪ prompt)</span>
+              </label>
+              <label class="toggle" title="Re-rank the prompt's candidate list using MiniLM cosine similarity, keep top-K. Off by default so the demo uses the full tool schemas in the prompt; turn on to simulate a large tool registry.">
+                <input id="retrieval" type="checkbox" />
+                <span class="toggle-text">Retrieval pre-rank (MiniLM, top-K)</span>
+              </label>
+              <label class="toggle toggle-k" title="Number of functions kept after retrieval">
+                <span class="toggle-text">K</span>
+                <input id="topk" type="number" value="8" min="1" max="10" />
+              </label>
+            </div>
+          </div>
+        </details>
+
+        <div class="generate-row">
+          <button id="run" class="btn btn-primary btn-generate" disabled>
+            <span class="run-label">Generate</span>
+          </button>
+          <span class="generate-hint">Load a model first ↑</span>
+        </div>
+
+        <!-- Result -->
+        <div id="result" class="result" hidden>
+          <div id="synth-out"></div>
+          <details class="raw-output">
+            <summary>Raw model output</summary>
+            <pre id="out"></pre>
+          </details>
         </div>
       </section>
 
-      <section>
-        <h2>Output</h2>
-        <pre id="out"></pre>
-        <div id="synth-out"></div>
-        <h2>Bench</h2>
-        <pre id="bench"></pre>
+      <!-- ===================== BENCH ===================== -->
+      <section class="card bench-card">
+        <details id="bench-panel">
+          <summary>
+            <span class="adv-icon" aria-hidden="true">📊</span>
+            <span class="adv-title">Benchmark &amp; timing details</span>
+            <span class="adv-chevron" aria-hidden="true">▸</span>
+          </summary>
+          <div class="bench-body">
+            <pre id="bench" class="bench-pre">Run a generation to see prompt tokens, throughput and grammar overhead.</pre>
+          </div>
+        </details>
       </section>
-    </main>
+    </div>
     <script type="module" src="/main.js"></script>
   </body>
 </html>

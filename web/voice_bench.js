@@ -22,10 +22,11 @@ import {
   cosineTopK,
   NONE_SENTINEL,
 } from './retrieval.js';
+import { asset } from './paths.js';
 
-const VOICE_URL = '/eval/voice_pipeline_results.json';
-const TEST_URL = '/eval/sh_test.json';
-const REGISTRY_URL = '/eval/tool_registry.json';
+const VOICE_URL = asset('eval/voice_pipeline_results.json');
+const TEST_URL = asset('eval/sh_test.json');
+const REGISTRY_URL = asset('eval/tool_registry.json');
 
 // Manual gold-args map for the 30 voice fixture items, keyed by i (0..29).
 // Derived from the RU input — the canonical argument values a correct system

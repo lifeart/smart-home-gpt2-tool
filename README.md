@@ -1,6 +1,22 @@
 # 🏠 Smart-Home GPT-2
 
-**Голосовое управление умным домом на GPT-2 124M. CPU. Offline. Без облака.**
+**Превращает команды для умного дома на естественном языке в JSON tool-call'ы — 124M-моделью, целиком в браузере, без сервера и без облака.**
+
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
+[![Live demo — GitHub Pages](https://img.shields.io/badge/demo-GitHub%20Pages-2ea44f)](https://lifeart.github.io/smart-home-gpt2-tool/)
+[![Live demo — HF Space](https://img.shields.io/badge/demo-HuggingFace%20Space-ffce00)](https://huggingface.co/spaces/lifeart/smart-home-gpt2-tool)
+[![Models on HF Hub](https://img.shields.io/badge/models-HF%20Hub-blue)](https://huggingface.co/lifeart)
+
+## ▶️ Live demo / Живая демонстрация
+
+Запускается полностью у вас в браузере через WebGPU — модель скачивается с HF Hub один раз и кэшируется. Сервера для инференса нет.
+
+- **GitHub Pages:** <https://lifeart.github.io/smart-home-gpt2-tool/>
+- **Hugging Face Space:** <https://huggingface.co/spaces/lifeart/smart-home-gpt2-tool>
+
+Есть встроенные пресеты, голосовой ввод (Whisper в браузере) и переключатель точности (fp16 / fp32 / q8).
+
+---
 
 ## 🇷🇺 Описание
 
@@ -8,194 +24,171 @@
   - [Что это](#что-это)
   - [Архитектура](#архитектура)
   - [Бенчмарки](#бенчмарки)
+  - [Браузерная демонстрация](#браузерная-демонстрация)
   - [Голосовой пайплайн](#голосовой-пайплайн)
   - [Воспроизведение](#воспроизведение)
   - [Расширение под себя](#расширение-под-себя)
-  - [Файлы](#файлы)
   - [Ограничения](#ограничения)
 - **Дополнительные документы:**
-  - [TUTORIAL.md](TUTORIAL.md) — 8 шагов от клонирования до своего микрофона
+  - [TUTORIAL.md](TUTORIAL.md) — от клонирования до собственного набора функций
   - [INTEGRATION.md](INTEGRATION.md) — подключение к Home Assistant, Zigbee2MQTT, ESPHome, HomeKit, MQTT
-  - [QUANTIZATION.md](QUANTIZATION.md) — как ужать веса до 125 МБ и ускорить в 3-5×
+  - [QUANTIZATION.md](QUANTIZATION.md) — варианты квантизации модели для CPU
+  - [HANDOFF.md](HANDOFF.md) / [PLAN.md](PLAN.md) — полный лог итераций (источник всех цифр)
 - 🇬🇧 [English description below ↓](#english)
 
 ---
 
 ### Что это
 
-GPT-2 124M (OpenAI, 2019), дообученный на **1500 multi-tool примеров умного дома**. Понимает английские команды → выдаёт JSON tool call. Через локальную связку Whisper + опциональный переводчик принимает русскую речь.
-
-**Пайплайн:**
+GPT-2 124M (OpenAI, 2019) — архитектура заморожена, не меняется — дообученная превращать команды умного дома на естественном языке в JSON tool-call'ы:
 
 ```
-Русская речь (микрофон / WAV)
-  ↓ Silero TTS / faster-whisper STT (translate-mode)
-Английский текст
-  ↓ GPT-2 smart_home_v2 (124M, 475 MB)
-JSON: {"name": "turn_on_light", "arguments": {"room": "kitchen"}}
-  ↓ эмулятор / реальное устройство
-Состояние обновлено
+"dim the living room lights to 20%"
+  ↓ GPT-2 124M (smart-home fine-tune)
+{"name": "dim_light", "arguments": {"room": "living room", "brightness_pct": 20}}
 ```
 
-Всё локально. Никаких облачных API. CPU-only.
+Главная особенность — модель работает **целиком в браузере** через WebGPU + transformers.js (ONNX). Нет сервера, нет облачного API, нет отправки данных наружу. Веса один раз стримятся с HF Hub и кэшируются.
+
+Это исследовательский проект, и его история — намеренно честная, включая отрицательные результаты. Ключевой вывод: у модели на 124M параметров есть **реальный потолок точности**, и выигрыши пришли не от модели побольше, а от композиции и трюков с декодированием. Все цифры ниже взяты из [`HANDOFF.md`](HANDOFF.md) и [`PLAN.md`](PLAN.md) и не приукрашены.
 
 ---
 
 ### Архитектура
 
-| компонент | назначение | размер |
-|---|---|---:|
-| **silero TTS** (RU) | синтез русской речи для генерации тестов | ~50 МБ |
-| **faster-whisper medium** | STT + перевод RU→EN за один шаг (`task="translate"`) | ~770 МБ |
-| **GPT-2 + Full FT** (наше) | English → JSON tool call | 475 МБ |
-| Fuzzy matcher | пост-обработка имени tool: ближайшее в registry | <1 КБ |
+Базовый GPT-2 124M ни разу не меняли по архитектуре. Менялись только данные, трюки декодирования и (Iter 34–36) размер таблицы позиционных эмбеддингов.
 
-GPT-2 учили на 1500 SFT items от 10 параллельных агентов Claude Opus 4.7 в 10 доменах: lighting / climate / security / media / kitchen / garden / blinds / cleaning / timers / sensors. **100 уникальных function names**, 3-5 кандидатов в каждом промпте (модель выбирает один).
+**1. Каскад v6→v9 (браузерный, без внешнего API).** Один декодер на 124M упирается в потолок ~57% exact-match. Обойти его удалось *композицией*, а не более крупной моделью:
+
+- **v6** генерирует имя функции;
+- **v9** — специалист по аргументам: ему подсказывают имя и просят выдать только аргументы;
+- clean-gate выбирает финальный вызов.
+
+Так получается каскад `H1.2_con` — **59.3% exact-match** (имя + аргументы), полностью в браузере.
+
+**2. Constrained decoding** (`web/grammar.js`) — `JsonSchemaLogitsProcessor` гарантирует синтаксически валидный JSON и аргументы правильного типа по схеме функции. Включён по умолчанию.
+
+**3. Enum value-snapping** (`web/canon.js`) — предсказанное значение аргумента подтягивается к ближайшему enum-члену из `tool_registry.json` (`"gym"` → `"basement gym"`, `"living_room"` → `"living room"`). Только консервативные правила (точное совпадение без учёта регистра, пробел/подчёркивание, уникальное вхождение подстроки), без fuzzy-матчинга. На синтез-пайплайне это дало +3.0 pp бесплатно, 0 регрессий.
+
+**4. Retrieval-прунинг** (`web/retrieval.js`, опционально, по умолчанию выключен) — MiniLM ранжирует кандидатов-функции и оставляет в промпте top-K *с полными типизированными схемами*. Это компромисс «скорость↔точность» (на top-8 теряет нужную функцию для ~4.7% запросов), поэтому он opt-in.
+
+**5. Длинный контекст — `v14-ctx4096`.** Окно расширено с 1024 до 4096 токенов методом *block-preserving* расширения таблицы `wpe`: строки 0–1023 берутся из v9 дословно (и заморожены при дообучении, `weight_decay=0`), строки 1024–4095 интерполируются. Это убрало «налог» на короткие промпты, который был у наивной интерполяции всей таблицы (v13). `v14-ctx4096` — текущая ship-модель.
+
+**6. fp16 — дефолт на WebGPU.** fp16-веса по точности неотличимы от fp32 (одинаковый name-accuracy), но скачивание вдвое меньше (~330 МБ против ~660 МБ) и ~50% меньше GPU-памяти. q8 теряет ~3 pp. WASM-бэкенд использует fp32 (под WASM нет fp16-ядер).
+
+**API-сайд пайплайн (не в браузере).** Для исследований есть пайплайн `v6→v9→синтез`: GPT-2-кандидаты отдаются Llama-3.3-70B, которая *синтезирует* финальный вызов, затем канонизация значений. Это даёт **81.7%** — но требует внешнего Llama-API, поэтому в браузер не входит (конфликт с условием «только браузер»). Подробности — `PLAN.md`, Iter 26–33, 38.
 
 ---
 
 ### Бенчмарки
 
-**1. Multi-tool selection (300 held-out items из датасета):**
+Все числа — из [`HANDOFF.md`](HANDOFF.md) / [`PLAN.md`](PLAN.md).
 
+**Tool-calling accuracy (exact-match = имя + аргументы, n=300, `sh_test.json`):**
+
+| Конфигурация | Exact | Примечание |
+|---|---:|---|
+| v5 + constrained (Iter 22, прежний ship) | 57.3% | один декодер |
+| **H1.2_con — каскад v6→v9** | **59.3%** | **браузерный, без внешнего API** |
+| H1.3_con (+ 2-way Llama-пик) | 61.3% | нужен Llama-API |
+| synth v2 (Iter 32) | 78.7% | GPT-2-кандидаты → синтез Llama-3.3-70B + канонизация |
+| **synth v2 + enum-snap (лучший)** | **81.7%** | + enum value-snapping (Iter 38) |
+| oracle ceiling | 87.3% | верхняя граница |
+
+Главный вывод: потолок ~57% — это потолок *одного декодера*, а не потолок знаний. Дообученные GPT-2 знают домен; Llama-70B рассуждает, но без подсказки набирает всего ~53% (не знает инвентарь функций). В композиции — GPT-2 выдаёт кандидатов, Llama их синтезирует — получается 78.7%, а с enum-snap 81.7%.
+
+**Контекстное окно — name-accuracy по длине промпта** (`bench_ctx_long.py`, `sh_test_long.json`):
+
+| Модель | Окно | короткий | 1500 ток | 2500 ток | 3500 ток |
+|---|---:|---:|---:|---:|---:|
+| v9 | 1024 | 81.0% | 58.7% | 32.6% | 20.9% |
+| v13-ctx4096 | 4096 | 77.3% | 86.0% | 81.4% | 75.0% |
+| **v14-ctx4096** | 4096 | **83.3%** | **93.6%** | **90.7%** | **89.5%** |
+
+`v14-ctx4096` — лучшая модель и на коротких, и на длинных промптах; она вытесняет и v9, и v13.
+
+**ONNX dtype (n=300):** fp16 по name-accuracy совпадает с fp32 (v14 = 83.3% на обоих); q8 — 80.0% (~−3 pp).
+
+---
+
+### Браузерная демонстрация
+
+Каталог `web/` — Vite + transformers.js. Инференс целиком в браузере, сервера нет.
+
+- **Модель:** по умолчанию `lifeart/smart-home-gpt2-v14-ctx4096` (4096-токенное окно, стримится с HF Hub); v9 доступна как локально-ориентированный 1024-токенный вариант.
+- **Пресеты** (`web/presets.js` + `web/tool_schemas.js`): 32 коротких реалистичных команды (по 3 функции-кандидата, ~648 токенов) плюс категория «Long context (v14)» — пресеты с 13 полными схемами (~3000 токенов), которые задействуют окно 4096. `tool_schemas.js` содержит 123 схемы функций.
+- **Голос** (`web/voice.js`): Whisper в браузере (`Xenova/whisper-base`, transformers.js) — микрофон → транскрипция (`task: translate`, любой язык → English) → вставка в промпт → авто-Generate. Без API.
+- **Канонизация значений** (`web/canon.js`): JS-порт `training/canon.py` — нормализует время (12ч→24ч), дни, округление float, и делает enum value-snapping. Показывается как «Parsed tool call».
+- **Переключатель dtype:** fp16 (дефолт на WebGPU) / fp32 / q8.
+- **Constrained decoding / typed-args / retrieval** — переключатели в интерфейсе.
+
+Запуск локально:
+
+```bash
+cd web
+npm install
+npm run dev    # → http://localhost:5173/
 ```
-overall: 215/300 = 71.7%
-
-by domain:
-  garden     96.2%
-  climate    86.2%
-  misc       77.8%
-  kitchen    73.9%
-  security   71.0%
-  blinds     69.2%
-  media      68.8%
-  cleaning   55.2%
-  lighting   43.8%
-```
-
-**2. Voice end-to-end (30 русских голосовых команд):**
-
-```
-RU speech → Whisper translate → English → GPT-2 → tool call
-
-Результат: 14/30 = 46.7% (с fuzzy match)
-                7/30 = 23.3% (без fuzzy)
-
-Разбивка по времени (на команду):
-  TTS:   ~0.5 c
-  STT:   ~5 c (Whisper medium на CPU)
-  GPT-2: ~25 c
-  всего: ~30 c
-```
-
-**Падение 71.7% → 46.7% при переходе на голос** обусловлено:
-- Whisper иногда заменяет слова: "гостиной" → "hotel", "21 градус" → "a degree"
-- GPT-2 124M путает похожие функции: turn_on vs turn_off, query_temperature vs set_thermostat
 
 ---
 
 ### Голосовой пайплайн
 
-```python
-from faster_whisper import WhisperModel
-import torch, json, re
+В браузерной демонстрации (`web/voice.js`) голос обрабатывается полностью локально через transformers.js Whisper:
 
-# 1. STT с переводом (Whisper делает RU→EN за один шаг)
-stt = WhisperModel("medium", device="cpu", compute_type="int8")
-segments, info = stt.transcribe("command.wav", language="ru", task="translate")
-en_text = " ".join(s.text for s in segments).strip()
-# e.g. "Turn on the light in the kitchen"
-
-# 2. GPT-2 smart-home → JSON
-# (см. src/voice_pipeline.py для полного кода)
+```
+Речь (микрофон, любой из 99 языков)
+  ↓ Whisper (Xenova/whisper-base), task: 'translate'
+English-текст
+  ↓ GPT-2 smart-home (каскад v6→v9, в браузере)
+JSON tool call
 ```
 
-Хочешь под другой язык? Whisper понимает 99 языков. Поменяй `language="ru"` на `"de"`, `"fr"`, `"es"`, etc. Перевод в English работает из коробки.
+`task: 'translate'` означает, что речь на любом языке транскрибируется сразу в English — менять язык не нужно. Никакого облака, никаких API.
 
 ---
 
 ### Воспроизведение
 
+**Браузерная демонстрация (рекомендуется):**
+
 ```bash
-git clone https://github.com/barometech/smart-home-gpt2
-cd smart-home-gpt2
-git lfs pull   # 475 МБ — модель
-
-# зависимости
-pip install torch==2.4.0+cpu --index-url https://download.pytorch.org/whl/cpu
-pip install faster-whisper soundfile omegaconf transformers
-
-# базовая GPT-2 (подтянется автоматически при первом запуске)
-
-# тренировка с нуля (~2 ч CPU):
-python src/train.py
-
-# бенч на 300 held-out:
-python src/bench.py
-
-# голосовой end-to-end (30 русских команд):
-python src/voice_pipeline.py
+git clone https://github.com/lifeart/smart-home-gpt2-tool
+cd smart-home-gpt2-tool/web
+npm install
+npm run dev
 ```
+
+**Воспроизвести headline-число (synth v2 = 78.7% → 81.7% с enum-snap):**
+артефакты constrained-бенча лежат в датасет-репозитории `lifeart/smart-home-sft-v2`. Пайплайн синтеза:
+`training/bench_h1_con_cloud.py` (HF Jobs t4) генерирует base+H1-кандидатов, затем `training/bench_h1p11_synth.py` добавляет эмиссию Llama и синтез (бесплатный HF Inference router, нужен `HF_TOKEN`); `training/verify_enum_snap.py` детерминированно проверяет прибавку enum-snap.
+
+Тяжёлые вычисления запускались на HF Jobs (`hf jobs uv run --flavor {t4-small|l40sx1|cpu-upgrade} --secrets HF_TOKEN --detach`). Суммарный бюджет проекта — около **$27**.
 
 ---
 
 ### Расширение под себя
 
-**1. Подключение к реальному дому.** См. `INTEGRATION.md`. Готовые рецепты для:
-- Home Assistant (REST + Conversation Agent)
-- Zigbee2MQTT (MQTT publish)
-- ESPHome (native API)
-- Apple HomeKit (через HAP-python / homebridge)
-- Tuya Cloud
-- Generic MQTT
+**1. Подключение к реальному дому.** См. [`INTEGRATION.md`](INTEGRATION.md) — рецепты для Home Assistant, Zigbee2MQTT, ESPHome, Apple HomeKit, Tuya и generic MQTT. Модель выдаёт `{"name": ..., "arguments": {...}}`; ваша задача — смапить `name` на вызов платформы.
 
-**2. Свои функции.** Открой `src/voice_pipeline.py` → `TOOL_REGISTRY`. 12 функций по умолчанию, всего в датасете 100 уникальных имён. Близкие к существующим (`set_light_color`, `play_radio_station`) — работают сразу. Совсем новые — нужен дообуч (см. Шаг 8 в `TUTORIAL.md`).
+**2. Свои функции.** Схемы функций живут в `web/tool_schemas.js` и `data/tool_registry.json`. Имена, близкие к уже знакомым модели, работают сразу. Совсем новые функции требуют дообучения (`training/`).
 
-**3. Свой язык.** Whisper понимает 99 языков. В `src/voice_pipeline.py` найди `stt_translate(stt, TMP_WAV, source_lang="ru")` и поменяй `"ru"` на `"de"`/`"fr"`/`"es"`/etc. Перевод в English — встроенный.
+**3. Свой язык.** Whisper понимает 99 языков; `task: 'translate'` переводит любую речь в English автоматически — менять ничего не нужно.
 
-**4. Уменьшить модель.** См. `QUANTIZATION.md`. С `torch.quantization` dynamic int8 модель ужимается до **~125 МБ** и ускоряется в **3-5×** на CPU. Один Python-скрипт, без переобучения.
-
-**5. Raspberry Pi.** См. `INTEGRATION.md` раздел Pi. Pi 4 (4GB) с int8 квантованием — рабочая конфигурация. Wake-word через openwakeword + Whisper-small + квантованный GPT-2.
-
-**6. Расширение датасета.** Если нужны новые функции — генерим ещё items через любой LLM (промпт-шаблон в `src/build_sft_v2.py`), кладём в `data/sh_<domain>.json`, прогоняем `build_sft_v2.py` + `train.py`. Цикл ~3 часа CPU.
-
----
-
-### Файлы
-
-```
-src/
-  train.py              — SFT GPT-2 на 1200 multi-tool items, ~2 ч CPU
-  bench.py              — оценка на 300 held-out
-  voice_pipeline.py     — end-to-end: TTS → STT/translate → GPT-2 → JSON
-  build_sft_v2.py       — собирает 1500 sh_*.json в train/test split
-  build_tool_registry.py — извлекает 100 уникальных tool specs из датасета
-  gen_synthetic_demo.py  — генератор 500 template-based примеров (демо)
-
-data/
-  sh_lighting.json sh_climate.json sh_security.json sh_media.json
-  sh_kitchen.json sh_garden.json sh_blinds.json sh_cleaning.json
-  sh_timers.json sh_sensors.json     — по 150 items, всего 1500
-  sh_train.json (1200) sh_test.json (300) — split для SFT
-  tool_registry.json — все 100 уникальных функций с параметрами
-
-weights/
-  smart_home_v2.pt      — 475 МБ через Git LFS, full FT GPT-2 124M
-
-results/
-  bench_v2_results.json — сырой результат на 300 held-out
-  voice_pipeline_results.json — сырой результат на 30 голосовых тестах
-```
+**4. Уменьшить / ускорить.** В браузере уже есть fp16 (дефолт) и q8. Для CPU-инференса варианты квантизации разобраны в [`QUANTIZATION.md`](QUANTIZATION.md).
 
 ---
 
 ### Ограничения
 
-- **GPT-2 124M потолок:** 72% на чистом English, 47% на голосе. Для production нужна модель побольше (Qwen 4B → 95%+).
-- **Whisper-medium:** иногда заменяет слова на похожие. Whisper-large качественнее, но медленнее (~15 с на CPU).
-- **Только смарт-дом домен:** модель забыла остальные tool-call задачи после SFT. Если нужен универсальный, бери `barometech/gpt2-tool-call` (общий).
-- **Inference 25-35 с на команду CPU:** для real-time нужен GPU или модель поменьше.
-- **Tool registry 100 функций:** для обширного дома хватит. Если функций больше — нужно расширять SFT.
+Честно, без приукрашивания:
+
+- **Потолок 124M-модели реален.** Один декодер упирается в ~57% exact-match / ~84% name-accuracy. Каскад v6→v9 поднимает до 59.3% в браузере; 81.7% достигается только синтез-пайплайном с внешней Llama-70B. Это не масштабируется одним лишь дообучением — `PLAN.md` неоднократно показывает, что наращивание данных не помогает (Iter 22, 24, 41).
+- **Синтез-пайплайн (81.7%) не работает в браузере** — ему нужен внешний Llama-эндпойнт, что противоречит условию «только браузер». В браузере доступен каскад на 59.3%.
+- **B4 (in-browser синтез-модель) валидирована, но не зашипана.** Идея третьей GPT-2-модели синтеза подтвердилась (обученная модель достигла oracle-потолка кандидатов), но первый набор кандидатов неверно «раскадрировал» v9, и финальную перепрогонку не удалось завершить на нестабильной HF Jobs инфраструктуре. Подробности — `HANDOFF.md` и `PLAN.md`, Iter 42.
+- **Только домен умного дома.** После дообучения модель специализирована под smart-home tool-calling.
+- **Domain misc — самый слабый** (~57% в синтез-пайплайне).
+- **fp16 на WebGPU требует onnxruntime-web ≥1.26** (transformers.js ≥4.2): на старых сборках LayerNorm-дисперсия GPT-2 переполняет fp16. `export_onnx.py` держит LayerNorm/gelu в fp32.
 
 ---
 
@@ -203,114 +196,157 @@ results/
 
 ## 🇬🇧 English
 
-**Voice-controlled smart home on GPT-2 124M. CPU. Offline. No cloud.**
+**Turns natural-language smart-home commands into JSON tool calls — with a 124M model, entirely in the browser, no server and no cloud.**
 
-### What
+### What it is
 
-GPT-2 124M (OpenAI, 2019), fine-tuned on **1500 multi-tool smart-home examples**. Takes English commands → emits JSON tool call. Accepts Russian (and 99 other languages) speech via local Whisper translate-mode.
-
-**Pipeline:**
+GPT-2 124M (OpenAI, 2019) — architecture frozen, never changed — fine-tuned to turn natural-language smart-home commands into JSON tool calls:
 
 ```
-Russian/any-language speech (mic / WAV)
-  ↓ Silero TTS (test only) / faster-whisper translate-mode
-English text
-  ↓ GPT-2 smart_home_v2 (124M, 475 MB)
-JSON: {"name": "turn_on_light", "arguments": {"room": "kitchen"}}
-  ↓ emulator / real device
-State updated
+"dim the living room lights to 20%"
+  ↓ GPT-2 124M (smart-home fine-tune)
+{"name": "dim_light", "arguments": {"room": "living room", "brightness_pct": 20}}
 ```
 
-All local. No cloud APIs. CPU-only.
+The defining feature: it runs **100% in the browser** via WebGPU + transformers.js (ONNX). No server, no cloud API, no data leaving the device. Weights stream once from the HF Hub and are cached.
+
+This is a research project, and its history is deliberately honest, negative results included. The core finding: a 124M-parameter model has a **real accuracy ceiling**, and the gains came not from a bigger model but from composition and decoding tricks. Every number below is sourced from [`HANDOFF.md`](HANDOFF.md) / [`PLAN.md`](PLAN.md) and is not oversold.
 
 ### Architecture
 
-| component | role | size |
-|---|---|---:|
-| silero TTS (RU) | speech synth for test generation | ~50 MB |
-| faster-whisper medium | STT + translate in one pass | ~770 MB |
-| GPT-2 + Full FT (ours) | English → JSON tool call | 475 MB |
-| Fuzzy matcher | snap hallucinated names to nearest in registry | <1 KB |
+The base GPT-2 124M is never changed architecturally. Only data, decoding tricks and (Iter 34–36) the position-embedding table size changed.
 
-Trained on 1500 SFT items from 10 parallel Claude Opus 4.7 agents covering 10 domains: lighting / climate / security / media / kitchen / garden / blinds / cleaning / timers / sensors. **100 unique function names**, 3-5 candidate functions per prompt.
+**1. The v6→v9 cascade (browser-native, no external API).** A single 124M decoder plateaus at ~57% exact-match. That ceiling was broken by *composition*, not a bigger model:
+
+- **v6** generates the function name;
+- **v9** is an *arguments specialist* — given the name as a hint, it emits arguments only;
+- a clean-gate picks the final call.
+
+This is the `H1.2_con` cascade — **59.3% exact-match** (name + args), fully in the browser.
+
+**2. Constrained decoding** (`web/grammar.js`) — a `JsonSchemaLogitsProcessor` guarantees syntactically valid JSON with correctly typed arguments per the function schema. On by default.
+
+**3. Enum value-snapping** (`web/canon.js`) — a predicted argument value is snapped to the nearest enum member from `tool_registry.json` (`"gym"` → `"basement gym"`, `"living_room"` → `"living room"`). Only conservative rules (case-insensitive exact, space/underscore-insensitive, unique substring containment); no fuzzy matching. On the synthesis pipeline this added +3.0 pp for free, 0 regressions.
+
+**4. Retrieval pruning** (`web/retrieval.js`, optional, default OFF) — MiniLM ranks the candidate functions and keeps the top-K *with full typed schemas* in the prompt. It is a genuine speed/accuracy *trade* (at top-8 it drops the gold function for ~4.7% of queries), so it ships opt-in.
+
+**5. Long context — `v14-ctx4096`.** The window was extended 1024→4096 tokens via *block-preserving* extension of the `wpe` table: rows 0–1023 are v9's verbatim (and frozen during SFT, `weight_decay=0`), rows 1024–4095 interpolated. This erased the short-prompt tax that whole-table interpolation (v13) suffered. `v14-ctx4096` is the current ship model.
+
+**6. fp16 — the WebGPU default.** fp16 weights are lossless vs fp32 (identical name accuracy) but the download is half (~330 MB vs ~660 MB) and uses ~50% less GPU memory. q8 costs ~3 pp. The WASM backend uses fp32 (no fp16 kernels under WASM).
+
+**API-side pipeline (not in-browser).** For research there is a `v6→v9→synth` pipeline: GPT-2 candidates are handed to Llama-3.3-70B, which *synthesizes* the final call, followed by value canonicalization. This reaches **81.7%** — but it needs an external Llama API, so it is not part of the browser app (conflicts with the browser-only constraint). See `PLAN.md` Iter 26–33, 38.
 
 ### Benchmarks
 
-**1. Multi-tool selection (300 held-out items):**
+All numbers from [`HANDOFF.md`](HANDOFF.md) / [`PLAN.md`](PLAN.md).
+
+**Tool-calling accuracy (exact-match = name + args, n=300, `sh_test.json`):**
+
+| Config | Exact | Notes |
+|---|---:|---|
+| v5 + constrained (Iter 22, prior ship) | 57.3% | single decoder |
+| **H1.2_con — v6→v9 cascade** | **59.3%** | **browser-native, no external API** |
+| H1.3_con (+ 2-way Llama pick) | 61.3% | needs Llama API |
+| synth v2 (Iter 32) | 78.7% | GPT-2 candidates → Llama-3.3-70B synthesis + canon |
+| **synth v2 + enum-snap (best)** | **81.7%** | + enum value-snapping (Iter 38) |
+| oracle ceiling | 87.3% | upper bound |
+
+The core finding: the ~57% plateau is a *single-decoder* ceiling, not a knowledge ceiling. The fine-tuned GPT-2 models know the domain; Llama-70B reasons but scores only ~53% unprompted (it doesn't know the function inventory). Composed — GPT-2 emits candidates, Llama synthesizes — it reaches 78.7%, and 81.7% with enum-snap.
+
+**Context window — name accuracy by prompt length** (`bench_ctx_long.py`, `sh_test_long.json`):
+
+| Model | Window | short | 1500 tok | 2500 tok | 3500 tok |
+|---|---:|---:|---:|---:|---:|
+| v9 | 1024 | 81.0% | 58.7% | 32.6% | 20.9% |
+| v13-ctx4096 | 4096 | 77.3% | 86.0% | 81.4% | 75.0% |
+| **v14-ctx4096** | 4096 | **83.3%** | **93.6%** | **90.7%** | **89.5%** |
+
+`v14-ctx4096` is the best model at every length — it supersedes both v9 and v13.
+
+**ONNX dtype (n=300):** fp16 matches fp32 on name accuracy (v14 = 83.3% on both); q8 = 80.0% (~−3 pp).
+
+### Browser demo
+
+The `web/` directory — Vite + transformers.js. All inference runs in the browser, no server.
+
+- **Model:** defaults to `lifeart/smart-home-gpt2-v14-ctx4096` (4096-token window, streamed from the HF Hub); v9 is selectable as the local-first 1024-token option.
+- **Presets** (`web/presets.js` + `web/tool_schemas.js`): 32 short realistic commands (3 candidate functions each, ~648 tokens) plus a "Long context (v14)" category — presets with 13 full schemas (~3000 tokens) that exercise the 4096 window. `tool_schemas.js` holds 123 function schemas.
+- **Voice** (`web/voice.js`): in-browser Whisper (`Xenova/whisper-base`, transformers.js) — mic → transcribe (`task: translate`, any language → English) → inject into the prompt → auto-Generate. No API.
+- **Value canonicalization** (`web/canon.js`): a JS port of `training/canon.py` — normalizes time (12h→24h), day plurals, float rounding, and does enum value-snapping. Shown as the "Parsed tool call".
+- **Dtype dropdown:** fp16 (default on WebGPU) / fp32 / q8.
+- **Constrained decoding / typed-args / retrieval** — toggles in the UI.
+
+Run locally:
+
+```bash
+cd web
+npm install
+npm run dev    # → http://localhost:5173/
+```
+
+### Voice pipeline
+
+In the browser demo (`web/voice.js`) voice is handled entirely locally via transformers.js Whisper:
 
 ```
-overall: 215/300 = 71.7%
-
-by domain:
-  garden     96.2%
-  climate    86.2%
-  misc       77.8%
-  kitchen    73.9%
-  security   71.0%
-  blinds     69.2%
-  media      68.8%
-  cleaning   55.2%
-  lighting   43.8%
+Speech (mic, any of 99 languages)
+  ↓ Whisper (Xenova/whisper-base), task: 'translate'
+English text
+  ↓ GPT-2 smart-home (v6→v9 cascade, in-browser)
+JSON tool call
 ```
 
-**2. Voice end-to-end (30 Russian voice commands):**
-
-```
-RU speech → Whisper translate → English → GPT-2 → tool call
-
-Result: 14/30 = 46.7% (with fuzzy match)
-         7/30 = 23.3% (without fuzzy match)
-
-Latency per command:
-  TTS:   ~0.5 s
-  STT:   ~5 s (Whisper-medium on CPU)
-  GPT-2: ~25 s
-  total: ~30 s
-```
-
-**Drop 71.7% → 46.7% on voice** is due to:
-- Whisper occasionally replaces words ("гостиной" / living room → "hotel")
-- GPT-2 124M confuses similar functions (turn_on vs turn_off, query_temperature vs set_thermostat)
+`task: 'translate'` means speech in any language is transcribed straight to English — no language switch needed. No cloud, no API.
 
 ### Reproduce
 
+**Browser demo (recommended):**
+
 ```bash
-git clone https://github.com/barometech/smart-home-gpt2
-cd smart-home-gpt2
-git lfs pull
-
-pip install torch==2.4.0+cpu --index-url https://download.pytorch.org/whl/cpu
-pip install faster-whisper soundfile omegaconf transformers
-
-python src/train.py             # ~2h CPU
-python src/bench.py             # multi-tool eval on 300 held-out
-python src/voice_pipeline.py    # 30 Russian voice commands end-to-end
+git clone https://github.com/lifeart/smart-home-gpt2-tool
+cd smart-home-gpt2-tool/web
+npm install
+npm run dev
 ```
 
-### Multi-language
+**Reproduce the headline number (synth v2 = 78.7% → 81.7% with enum-snap):**
+the constrained-bench artifacts live in the dataset repo `lifeart/smart-home-sft-v2`. The synthesis pipeline:
+`training/bench_h1_con_cloud.py` (HF Jobs t4) produces base+H1 candidates, then `training/bench_h1p11_synth.py` adds Llama emission + synthesis (free HF Inference router, needs `HF_TOKEN`); `training/verify_enum_snap.py` deterministically verifies the enum-snap gain.
 
-Whisper handles 99 languages. Change `language="ru"` to `"de"` / `"fr"` / `"es"` / etc. in `src/voice_pipeline.py` — translation to English is built-in.
+Heavy compute ran on HF Jobs (`hf jobs uv run --flavor {t4-small|l40sx1|cpu-upgrade} --secrets HF_TOKEN --detach`). Cumulative project spend is about **$27**.
+
+### Extending it
+
+**1. Connect to a real home.** See [`INTEGRATION.md`](INTEGRATION.md) — recipes for Home Assistant, Zigbee2MQTT, ESPHome, Apple HomeKit, Tuya and generic MQTT. The model emits `{"name": ..., "arguments": {...}}`; your job is to map `name` to a platform call.
+
+**2. Your own functions.** Function schemas live in `web/tool_schemas.js` and `data/tool_registry.json`. Names close to what the model already knows work right away. Brand-new functions need re-training (`training/`).
+
+**3. Your language.** Whisper handles 99 languages; `task: 'translate'` translates any speech to English automatically — nothing to change.
+
+**4. Shrink / speed up.** The browser already offers fp16 (default) and q8. For CPU inference, quantization options are covered in [`QUANTIZATION.md`](QUANTIZATION.md).
 
 ### Limitations
 
-- **GPT-2 124M ceiling:** 72% on clean English, 47% via voice. For production use a 4B+ model.
-- **Whisper-medium:** sometimes substitutes similar words. Whisper-large is better but ~3× slower on CPU.
-- **Smart-home only:** model forgot general tool-calling after SFT. For universal tool calling use [`barometech/gpt2-tool-call`](https://github.com/barometech/gpt2-tool-call).
-- **Inference 25-35 s/command on CPU:** for real-time use GPU or a smaller model.
-- **100-function registry:** sufficient for most homes; extend SFT for more.
+Honest, not oversold:
+
+- **The 124M ceiling is real.** A single decoder plateaus at ~57% exact-match / ~84% name accuracy. The v6→v9 cascade lifts that to 59.3% in-browser; 81.7% is only reached by the synthesis pipeline with an external Llama-70B. It does not scale with fine-tuning alone — `PLAN.md` repeatedly shows that adding data does not help (Iter 22, 24, 41).
+- **The synthesis pipeline (81.7%) does not run in the browser** — it needs an external Llama endpoint, which conflicts with the browser-only constraint. The browser config is the 59.3% cascade.
+- **B4 (an in-browser synthesis model) is validated but not shipped.** A third synthesis GPT-2 was proven viable (the trained model reached the oracle best-of-candidates ceiling), but the first candidate set mis-framed v9 and the corrected re-run could not finish on flaky HF Jobs infra. See `HANDOFF.md` and `PLAN.md` Iter 42.
+- **Smart-home domain only.** After fine-tuning the model is specialized for smart-home tool-calling.
+- **The misc domain is the weakest** (~57% in the synthesis pipeline).
+- **fp16 on WebGPU needs onnxruntime-web ≥1.26** (transformers.js ≥4.2): on older builds GPT-2's LayerNorm variance overflows fp16. `export_onnx.py` keeps LayerNorm/gelu in fp32.
 
 ### License
 
-MIT. Dataset of 1500 items is open-source — fork freely.
+MIT — see [LICENSE](LICENSE). Fork freely.
 
 ### Citation
 
 ```
 @misc{popovich_smart_home_gpt2_2026,
-  title  = {Smart-Home GPT-2: Voice-controlled local agent on 124M params},
+  title  = {Smart-Home GPT-2: in-browser tool-calling on a 124M model},
   author = {Popovich, Pavel D.},
   year   = {2026},
-  note   = {Also known as "Tekhnozhrets" (Техножнец). GitHub: barometech},
-  url    = {https://github.com/barometech/smart-home-gpt2}
+  url    = {https://github.com/lifeart/smart-home-gpt2-tool}
 }
 ```

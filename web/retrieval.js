@@ -11,6 +11,7 @@
 // WASM if the WebGPU pipeline fails to materialize for this model.
 
 import { pipeline, env } from '@huggingface/transformers';
+import { asset } from './paths.js';
 
 // Don't reuse env.localModelPath from main.js for the encoder — we want to
 // fetch MiniLM from the HF Hub, not from /models/.
@@ -170,8 +171,8 @@ const NONE_SENTINEL_TEXT =
 export async function getOrBuildIndex() {
   if (_indexCache && _indexCache.vecs) return _indexCache;
   const [descriptions, registry] = await Promise.all([
-    fetch('/eval/function_descriptions.json').then(r => r.json()),
-    fetch('/eval/tool_registry.json').then(r => r.json()),
+    fetch(asset('eval/function_descriptions.json')).then(r => r.json()),
+    fetch(asset('eval/tool_registry.json')).then(r => r.json()),
   ]);
   const { names, texts } = buildFunctionIndex(descriptions, registry);
   // Append the synthetic NONE sentinel.

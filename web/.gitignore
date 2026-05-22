@@ -1,3 +1,5 @@
 node_modules
 dist
 .DS_Store
+# Models-free mirror of public/ generated at build time (see vite.config.js)
+public-build

@@ -21,21 +21,25 @@ import { PRESETS, PRESET_LIST } from './presets.js';
 import { MODEL_CARDS, TOGGLE_HELP, BENCH_LEGEND, FOOTER, DTYPE_NOTES } from './help.js';
 import { canonicalizeCall } from './canon.js';
 import { startRecording, stopRecording, isRecording, transcribe } from './voice.js';
+import { asset, LOCAL_MODEL_PATH } from './paths.js';
 import './bench.js';
 import './voice_bench.js';
 
 // Model resolution: transformers.js probes the local path first
 // (web/public/models/<id>) and, if it isn't there, downloads from the HF Hub.
 // Both flags on = "use local if present, else fetch from Hugging Face".
+// `LOCAL_MODEL_PATH` carries the deployment base prefix so the probe URL is
+// correct under both '/' and '/smart-home-gpt2-tool/'. On the deployed build
+// `public/models/` is absent, so the probe 404s and the Hub fallback kicks in.
 env.allowLocalModels = true;
 env.allowRemoteModels = true;
-env.localModelPath = '/models/';
+env.localModelPath = LOCAL_MODEL_PATH;
 
 // Lazy-loaded tool registry (for constrained decoding).
 let toolRegistry = null;
 async function getRegistry() {
   if (!toolRegistry) {
-    toolRegistry = await fetch('/eval/tool_registry.json').then(r => r.json());
+    toolRegistry = await fetch(asset('eval/tool_registry.json')).then(r => r.json());
   }
   return toolRegistry;
 }
@@ -51,8 +55,13 @@ let tokenizer = null;
 let model = null;
 let loadedKey = '';
 
-function setStatus(text) {
+// Update the status pill text + colour state. `kind` ∈ idle|busy|ok|err.
+function setStatus(text, kind = 'idle') {
   statusEl.textContent = text;
+  statusEl.classList.remove('is-busy', 'is-ok', 'is-err');
+  if (kind === 'busy') statusEl.classList.add('is-busy');
+  else if (kind === 'ok') statusEl.classList.add('is-ok');
+  else if (kind === 'err') statusEl.classList.add('is-err');
   console.log('[status]', text);
 }
 
@@ -66,24 +75,24 @@ async function load() {
   const dtype = $('dtype').value;
   const key = `${model_id}|${device}|${dtype}`;
   if (key === loadedKey) {
-    setStatus('already loaded');
+    setStatus('already loaded · ready', 'ok');
     return;
   }
 
   if (device === 'webgpu' && !detectWebGPU()) {
-    setStatus('WebGPU not available in this browser');
+    setStatus('WebGPU not available in this browser', 'err');
     return;
   }
 
   loadBtn.disabled = true;
   runBtn.disabled = true;
-  setStatus(`loading ${model_id} (${device}/${dtype})…`);
+  setStatus(`loading ${device}/${dtype}…`, 'busy');
   const t0 = performance.now();
   try {
     tokenizer = await AutoTokenizer.from_pretrained(model_id, {
       progress_callback: (p) => {
         if (p.status === 'progress') {
-          setStatus(`tokenizer ${p.file} ${(p.progress ?? 0).toFixed(0)}%`);
+          setStatus(`tokenizer ${p.file} ${(p.progress ?? 0).toFixed(0)}%`, 'busy');
         }
       },
     });
@@ -98,6 +107,7 @@ async function load() {
               1024 /
               1024
             ).toFixed(1)} MB)`,
+            'busy',
           );
         }
       },
@@ -107,13 +117,25 @@ async function load() {
     window._bench_model = model;
     window._bench_tokenizer = tokenizer;
     const dt = ((performance.now() - t0) / 1000).toFixed(2);
-    setStatus(`loaded in ${dt}s · ${device}/${dtype}`);
+    setStatus(`loaded in ${dt}s · ${device}/${dtype} · ready`, 'ok');
     runBtn.disabled = false;
+    setGenerateReady(true);
   } catch (e) {
     console.error(e);
-    setStatus(`load failed: ${e.message}`);
+    setStatus(`load failed: ${e.message}`, 'err');
   } finally {
     loadBtn.disabled = false;
+  }
+}
+
+// Toggle the "Generate" button's ready state + the hint next to it.
+function setGenerateReady(ready) {
+  const hint = document.querySelector('.generate-hint');
+  if (hint) {
+    hint.textContent = ready
+      ? 'Model ready — pick a command and Generate'
+      : 'Load a model first ↑';
+    hint.style.color = ready ? 'var(--ok)' : '';
   }
 }
 
@@ -128,9 +150,17 @@ async function generate() {
   const topK = Math.max(1, Math.min(10, parseInt($('topk').value, 10) || 3));
 
   runBtn.disabled = true;
+  runBtn.classList.add('is-generating');
   outEl.textContent = '';
   benchEl.textContent = '';
-  setStatus('generating…');
+  const resultEl = $('result');
+  if (resultEl) resultEl.hidden = false;
+  const synthEl = $('synth-out');
+  if (synthEl) {
+    synthEl.innerHTML =
+      '<div class="synth-card"><div class="synth-body synth-json">generating…</div></div>';
+  }
+  setStatus('generating…', 'busy');
 
   // Retrieval pre-rank (opt-in toggle): keep only the top-K most relevant
   // candidate schemas, dropping the rest. Iter 40 made this SCHEMA-PRESERVING
@@ -258,8 +288,9 @@ async function generate() {
   // value formats (12h→24h time, day plural, float rounding). No API.
   await renderParsedCall(outEl.textContent);
 
-  setStatus('done');
+  setStatus(`done · ${tps.toFixed(0)} tok/s`, 'ok');
   runBtn.disabled = false;
+  runBtn.classList.remove('is-generating');
 }
 
 // Extract the first balanced {...} JSON object, parse to {name, arguments}.
@@ -299,6 +330,44 @@ function escapeHtml(s) {
     ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
 }
 
+// Pretty-print a JSON value to a syntax-highlighted HTML string. Tokens get
+// .tok-* classes coloured by style.css. Pure formatting — operates on the
+// already-parsed object so it can never inject markup from model output.
+function highlightJson(value, indent = 0) {
+  const pad = '  '.repeat(indent);
+  const padIn = '  '.repeat(indent + 1);
+  const punc = (c) => `<span class="tok-punc">${c}</span>`;
+  if (value === null) return '<span class="tok-null">null</span>';
+  if (typeof value === 'boolean')
+    return `<span class="tok-bool">${value}</span>`;
+  if (typeof value === 'number')
+    return `<span class="tok-num">${escapeHtml(String(value))}</span>`;
+  if (typeof value === 'string')
+    return `<span class="tok-str">"${escapeHtml(value)}"</span>`;
+  if (Array.isArray(value)) {
+    if (value.length === 0) return punc('[]');
+    const items = value
+      .map((v) => padIn + highlightJson(v, indent + 1))
+      .join(punc(',') + '\n');
+    return punc('[') + '\n' + items + '\n' + pad + punc(']');
+  }
+  if (typeof value === 'object') {
+    const keys = Object.keys(value);
+    if (keys.length === 0) return punc('{}');
+    const rows = keys
+      .map(
+        (k) =>
+          padIn +
+          `<span class="tok-key">"${escapeHtml(k)}"</span>` +
+          punc(': ') +
+          highlightJson(value[k], indent + 1),
+      )
+      .join(punc(',') + '\n');
+    return punc('{') + '\n' + rows + '\n' + pad + punc('}');
+  }
+  return escapeHtml(String(value));
+}
+
 // Render the parsed + canonicalized tool call under the raw output.
 // Async because enum-snapping (Iter 38) needs the tool registry, which is
 // lazy-fetched. If the registry can't load, snapping is skipped — value
@@ -308,7 +377,13 @@ async function renderParsedCall(rawText) {
   if (!el) return;
   const call = parseToolCall(rawText);
   if (!call || !call.name) {
-    el.innerHTML = '<div class="synth-card synth-err">Could not parse a valid tool call from the output.</div>';
+    el.innerHTML = `
+      <div class="synth-card synth-err">
+        <div class="synth-card-head">
+          <span class="synth-title">No tool call</span>
+        </div>
+        <div class="synth-errmsg">Could not parse a valid tool call from the output. Try the “Raw model output” panel below, or pick a different command.</div>
+      </div>`;
     return;
   }
   let registry = null;
@@ -322,12 +397,45 @@ async function renderParsedCall(rawText) {
     arguments: canonicalizeCall(call.name, call.arguments, registry),
   };
   const same = JSON.stringify(call.arguments) === JSON.stringify(canon.arguments);
+  const callObj = { name: canon.name, arguments: canon.arguments };
+  const pretty = JSON.stringify(callObj, null, 2);
+
   el.innerHTML = `
     <div class="synth-card">
-      <div class="synth-title">Parsed tool call</div>
-      <div class="synth-final"><code>${escapeHtml(canon.name)}</code> ${escapeHtml(JSON.stringify(canon.arguments))}</div>
-      ${same ? '' : '<div class="synth-sub">↑ argument values normalized (enum-snapped, time → 24h, day → singular, numbers rounded)</div>'}
+      <div class="synth-card-head">
+        <span class="synth-title">Parsed tool call</span>
+        <div style="display:flex;align-items:center;gap:0.5rem">
+          <span class="synth-fn-pill">${escapeHtml(canon.name)}()</span>
+          <button class="copy-btn" type="button" id="copy-call">⧉ Copy JSON</button>
+        </div>
+      </div>
+      <div class="synth-body">
+        <pre class="synth-json">${highlightJson(callObj)}</pre>
+        ${
+          same
+            ? ''
+            : '<p class="synth-note">argument values normalized — enum-snapped, time → 24h, day → singular, numbers rounded</p>'
+        }
+      </div>
     </div>`;
+
+  const copyBtn = $('copy-call');
+  if (copyBtn) {
+    copyBtn.addEventListener('click', async () => {
+      try {
+        await navigator.clipboard.writeText(pretty);
+        copyBtn.textContent = '✓ Copied';
+        copyBtn.classList.add('copied');
+        setTimeout(() => {
+          copyBtn.textContent = '⧉ Copy JSON';
+          copyBtn.classList.remove('copied');
+        }, 1600);
+      } catch (e) {
+        console.error('clipboard write failed:', e);
+        copyBtn.textContent = 'copy failed';
+      }
+    });
+  }
 }
 
 loadBtn.addEventListener('click', load);
@@ -473,41 +581,14 @@ if (dtypeEl) {
   renderDtypeInfo();
 }
 
-// Per-toggle info: attach a (i) icon next to each toggle that expands a help <div>.
+// Per-toggle info: attach an (i) icon to each toggle that expands a help panel.
+// Each toggle is a <label class="toggle"> in the Advanced section; the help
+// panel is inserted right after its label inside the .toggles grid.
 function attachToggleHelp() {
-  // Find the toggle row by anchoring on the constrained checkbox.
-  const anchor = $('constrained');
-  const toggleRow = anchor ? anchor.closest('.row') : null;
-  if (!toggleRow) return;
-
-  // Master "Show all help" / "Hide all help" link above the row.
-  if (!document.getElementById('help-master')) {
-    const wrap = document.createElement('div');
-    wrap.id = 'help-master';
-    const link = document.createElement('button');
-    link.type = 'button';
-    link.className = 'help-master-btn';
-    link.textContent = 'ⓘ Show option help';
-    let shown = false;
-    link.addEventListener('click', (e) => {
-      e.preventDefault();
-      shown = !shown;
-      for (const panel of document.querySelectorAll('.toggle-help')) {
-        panel.hidden = !shown;
-      }
-      for (const b of document.querySelectorAll('.help-toggle')) {
-        b.setAttribute('aria-expanded', String(shown));
-      }
-      link.textContent = shown ? 'ⓘ Hide option help' : 'ⓘ Show option help';
-    });
-    wrap.appendChild(link);
-    toggleRow.before(wrap);
-  }
-
   for (const [id, help] of Object.entries(TOGGLE_HELP)) {
     const input = $(id);
     if (!input) continue;
-    const parentLabel = input.closest('label');
+    const parentLabel = input.closest('label.toggle') || input.closest('label');
     if (!parentLabel) continue;
     if (parentLabel.querySelector('.help-toggle')) continue; // idempotent
     const btn = document.createElement('button');
@@ -526,10 +607,9 @@ function attachToggleHelp() {
       <div><span class="th-tag">When</span> ${help.when}</div>
       <div><span class="th-tag">Effect</span> ${help.effect}</div>
     `;
-    // Insert after the toggle row's parent section so it can span full width.
     parentLabel.after(panel);
     const togglePanel = (e) => {
-      // Prevent the click bubbling to the parent <label> from toggling the checkbox.
+      // Stop the click bubbling to the <label> (which would flip the checkbox).
       if (e) { e.preventDefault(); e.stopPropagation(); }
       panel.hidden = !panel.hidden;
       btn.setAttribute('aria-expanded', String(!panel.hidden));
@@ -573,7 +653,7 @@ function renderFooter() {
     <p class="links">${links}</p>
     <p class="meta">${FOOTER.meta}</p>
   `;
-  document.querySelector('main').appendChild(footer);
+  (document.querySelector('.page') || document.body).appendChild(footer);
 
   // Optimistically probe any link flagged `probe: true` (e.g. v4 which may
   // not be uploaded to HF yet). If the HEAD request fails / 404s, append a
@@ -618,6 +698,33 @@ if (!detectWebGPU()) {
 }
 setStatus(
   detectWebGPU()
-    ? 'WebGPU available · fp16 default · click Load'
-    : 'WebGPU NOT available · WASM/fp32 · click Load',
+    ? 'WebGPU ready · click Load model'
+    : 'WASM fallback · click Load model',
+  detectWebGPU() ? 'idle' : 'err',
 );
+
+// --- Theme toggle ----------------------------------------------------------
+// Persist an explicit light/dark choice in localStorage. Absent a choice the
+// page follows the OS via the prefers-color-scheme block in style.css.
+(function initTheme() {
+  const root = document.documentElement;
+  const btn = $('theme-toggle');
+  const KEY = 'sh-gpt2-theme';
+  const saved = (() => {
+    try { return localStorage.getItem(KEY); } catch { return null; }
+  })();
+  if (saved === 'light' || saved === 'dark') {
+    root.setAttribute('data-theme', saved);
+  }
+  if (!btn) return;
+  btn.addEventListener('click', () => {
+    const prefersDark =
+      window.matchMedia &&
+      window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const current =
+      root.getAttribute('data-theme') || (prefersDark ? 'dark' : 'light');
+    const next = current === 'dark' ? 'light' : 'dark';
+    root.setAttribute('data-theme', next);
+    try { localStorage.setItem(KEY, next); } catch { /* storage blocked — non-fatal */ }
+  });
+})();
