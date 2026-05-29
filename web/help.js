@@ -162,7 +162,7 @@ export const FOOTER = {
     'Browser demo of GPT-2 124M fine-tuned for smart-home tool-calling. Tool call AND speech recognition run fully in-tab via WebGPU + transformers.js — no server inference.',
   links: [
     { label: 'GitHub repo',          href: 'https://github.com/lifeart/smart-home-gpt2-tool', kind: 'code' },
-    { label: 'Model · Hugging Face', href: 'https://huggingface.co/lifeart/smart-home-gpt2-v9', kind: 'model' },
+    { label: 'Model · Hugging Face', href: 'https://huggingface.co/lifeart/smart-home-gpt2-v14-ctx4096', kind: 'model' },
     { label: 'Whisper (voice)',      href: 'https://huggingface.co/Xenova/whisper-base', kind: 'model' },
   ],
   meta: 'GPT-2 124M · ONNX fp32/fp16/q8 · transformers.js v3 · voice via Whisper-base · MIT license on code; Apache-2.0 on model weights.',
