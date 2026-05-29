@@ -10,22 +10,33 @@ license: mit
 short_description: GPT-2 124M → smart-home JSON tool calls, in-browser
 ---
 
-# Smart-Home GPT-2 · in-browser tool-calling demo
+# 🏠 Smart-Home GPT-2 · in-browser tool-calling
 
-A 124M-parameter GPT-2, fine-tuned to read a natural-language smart-home
-command and emit the matching **structured JSON tool call**. The model — and
-the optional Whisper speech recognition — run **entirely in your browser** via
-WebGPU + [transformers.js](https://github.com/huggingface/transformers.js).
-No server, no API, nothing leaves your device.
+**Turn natural-language smart-home commands into structured JSON tool calls — with a
+124M model that runs entirely in your browser. No server, no cloud, nothing leaves your device.**
 
-- Models: [`lifeart/smart-home-gpt2-v14-ctx4096`](https://huggingface.co/lifeart/smart-home-gpt2-v14-ctx4096)
-  (4096-ctx, default) and [`lifeart/smart-home-gpt2-v9`](https://huggingface.co/lifeart/smart-home-gpt2-v9)
-  (1024-ctx). Streamed from the Hub on first load (~330 MB fp16), then cached
-  by the browser.
-- Source: <https://github.com/lifeart/smart-home-gpt2-tool>
+```
+"dim the living room lights to 20%"
+   ↓  GPT-2 124M (smart-home fine-tune, in your browser)
+{ "name": "dim_light", "arguments": { "room": "living room", "brightness_pct": 20 } }
+```
 
-This Space hosts only the static front-end build (a few MB). The model weights
-are fetched from the Hugging Face Hub at runtime.
+- 🔒 **Private** — the model and the optional Whisper speech recognition run 100% in-browser
+  via WebGPU + [transformers.js](https://github.com/huggingface/transformers.js). Weights stream
+  once from the Hub, then cache. No API.
+- 🎙️ **Voice in 99 languages** — speak a command, get the tool call.
+- 🧩 **Always-valid JSON** — constrained decoding keeps the output schema-correct.
+- 📚 **123 functions**, 4096-token context for long tool lists.
+
+**Models** (streamed on first load, ~330 MB fp16, then cached):
+[`lifeart/smart-home-gpt2-v14-ctx4096`](https://huggingface.co/lifeart/smart-home-gpt2-v14-ctx4096)
+(default, 4096-ctx) · [`lifeart/smart-home-gpt2-v9`](https://huggingface.co/lifeart/smart-home-gpt2-v9)
+(1024-ctx).
+
+**Source & docs:** <https://github.com/lifeart/smart-home-gpt2-tool>
+
+This Space hosts only the static front-end build (a few MB); the model weights are fetched
+from the Hugging Face Hub at runtime.
 
 <!--
 =============================================================================
