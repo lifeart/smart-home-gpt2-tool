@@ -7,6 +7,9 @@
 [![Live demo — HF Space](https://img.shields.io/badge/demo-HuggingFace%20Space-ffce00)](https://huggingface.co/spaces/lifeart/smart-home-gpt2-tool)
 [![Models on HF Hub](https://img.shields.io/badge/models-HF%20Hub-blue)](https://huggingface.co/lifeart)
 
+> 🍴 **Fork / Форк.** Builds on **[barometech/smart-home-gpt2](https://github.com/barometech/smart-home-gpt2)** by **Pavel D. Popovich** (barometech) — the original GPT-2 smart-home fine-tune, dataset and training pipeline. This repo continues that work (in-browser inference, the v6→v9 cascade, voice). See [Acknowledgments](#acknowledgments).
+> Продолжает **[barometech/smart-home-gpt2](https://github.com/barometech/smart-home-gpt2)** от **Pavel D. Popovich** (barometech): исходный smart-home fine-tune GPT-2, датасет и пайплайн обучения.
+
 ## ▶️ Live demo / Живая демонстрация
 
 Запускается полностью у вас в браузере через WebGPU — модель скачивается с HF Hub один раз и кэшируется. Сервера для инференса нет.
@@ -346,3 +349,9 @@ MIT — see [LICENSE](LICENSE). Fork freely.
   url    = {https://github.com/lifeart/smart-home-gpt2-tool}
 }
 ```
+
+### Acknowledgments
+
+This project is a fork of **[barometech/smart-home-gpt2](https://github.com/barometech/smart-home-gpt2)** by **Pavel D. Popovich** (barometech / Tekhnozhrets) — the original GPT-2 smart-home fine-tune, dataset and training pipeline, released under the MIT License (see [LICENSE](LICENSE)). The upstream repository is linked as a git remote in this fork.
+
+Проект — форк **[barometech/smart-home-gpt2](https://github.com/barometech/smart-home-gpt2)** от **Pavel D. Popovich** (barometech / Tekhnozhrets): исходный smart-home fine-tune GPT-2, датасет и пайплайн обучения (лицензия MIT, см. [LICENSE](LICENSE)). Апстрим подключён как git-remote в этом форке.
